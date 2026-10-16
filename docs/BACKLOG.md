@@ -44,3 +44,7 @@ Se usará API directa de OpenAI con LangChain. Modelo y prueba de conectividad p
 ## Avance de infraestructura
 
 Configuración Compose de API, PostgreSQL y Redis preparada, pendiente de ejecución y validación en Docker Desktop. Próxima tarea: comprobar servicios y crear modelos/migraciones. El cliente React y la capa de persistencia siguen pendientes.
+
+## Verificación manual recibida
+
+La autora aportó evidencia de API/PostgreSQL/Redis healthy, SELECT 1 y PONG. Infraestructura básica arrancada; próximo avance: modelos, migraciones y conexión real de FastAPI a PostgreSQL. Ver REPORTE_QA.md.

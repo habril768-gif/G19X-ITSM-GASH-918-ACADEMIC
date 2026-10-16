@@ -25,3 +25,5 @@ Endpoint público de disponibilidad en `backend/app/api/health.py`, aplicación 
 ## Configuración de infraestructura
 
 compose.yaml, backend/Dockerfile y backend/.dockerignore preparan el entorno local reproducible de API, PostgreSQL y Redis. Relacionado con arquitectura, desarrollo y entrega. Las comprobaciones ejecutables están en infra/README.md; resultados pendientes por falta de Docker. Esto no acredita conexión real ni cumplimiento de RF-2 o RF-3.
+
+Infraestructura: cuatro evidencias manuales recibidas y verificadas visualmente; rutas y límites en REPORTE_QA.md. La comprobación de servicios no completa RF-2 ni RF-3.

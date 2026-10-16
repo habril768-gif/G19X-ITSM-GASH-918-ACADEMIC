@@ -30,3 +30,16 @@ Revisión estática: API con contexto backend, instalación por requirements, Po
 **Pendiente:** validación real de `docker compose config --quiet`, construcción de imagen Linux, arranque de servicios, GET /health, SELECT 1 y PONG. Docker no está disponible como comando. No hay un resultado de contenedores aprobado. La validación automática YAML tampoco se ejecutó por ausencia de los parsers consultados.
 
 Ejecutar los pasos de infra/README.md y guardar las evidencias indicadas en docs/evidencias/README.md. No reutilizar el resultado de pruebas ASGI como evidencia de Docker.
+
+## Evidencias recibidas el 15 de octubre de 2026 — Verificación manual
+
+La autora ejecutó los comandos en su equipo y proporcionó las capturas siguientes. Se inspeccionaron visualmente; no son ejecuciones nuevas del asistente. Esta evidencia complementa las limitaciones históricas descritas arriba.
+
+| Comprobación | Resultado observado | Evidencia |
+| --- | --- | --- |
+| GET /health desde navegador | HTTP 200 y JSON status ok, service plurione-api | [Captura](evidencias/01-api-health-200.png) |
+| Construcción y arranque Compose | Imagen API construida; API, PostgreSQL y Redis healthy | [Captura](evidencias/02-compose-servicios.png) |
+| PostgreSQL SELECT 1 | Una fila con valor 1 | [Captura](evidencias/03-postgres-select.png) |
+| Redis PING | PONG | [Captura](evidencias/04-redis-ping.png) |
+
+La captura HTTP no permite distinguir por sí sola entre el arranque nativo y Docker. La captura Compose sí acredita la comprobación de salud del contenedor API. No se acredita aún conexión de la aplicación con PostgreSQL o Redis, persistencia tras reinicio, migraciones, autenticación o flujos del MVP.

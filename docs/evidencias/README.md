@@ -1,12 +1,10 @@
-# Evidencias verificables
+# Evidencias verificadas
 
-Guardar capturas y salidas sin secretos. Cada evidencia debe indicar en REPORTE_QA.md su fecha, entorno y resultado.
+Capturas proporcionadas por la autora e inspeccionadas el 15 de octubre de 2026:
 
-Pendientes de captura por la autora:
+- [01-api-health-200.png](01-api-health-200.png): respuesta HTTP real 200 y JSON de disponibilidad.
+- [02-compose-servicios.png](02-compose-servicios.png): construcción y servicios API, PostgreSQL y Redis healthy.
+- [03-postgres-select.png](03-postgres-select.png): SELECT 1, una fila.
+- [04-redis-ping.png](04-redis-ping.png): respuesta PONG.
 
-- 01-api-health-200.png: respuesta real de GET /health, código 200 y JSON.
-- 02-compose-servicios.png: estado de API, PostgreSQL y Redis.
-- 03-postgres-select.png: SELECT 1.
-- 04-redis-ping.png: PONG.
-
-Esta lista no afirma que las capturas existan ni que las comprobaciones estén aprobadas.
+Alcance y limitaciones en [REPORTE_QA.md](../REPORTE_QA.md). No contienen contraseñas visibles. Las capturas no acreditan funcionalidades del MVP aún pendientes.

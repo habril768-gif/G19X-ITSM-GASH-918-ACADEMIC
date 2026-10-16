@@ -66,3 +66,11 @@
 **Propósito:** identificar instalaciones necesarias antes de ejecutar Compose.
 **Validación:** comandos de ubicación y versión: Git, VS Code, Python 3.11.0, Node 24.13.1 y npm 11.8.0 disponibles. Docker ausente. WSL y listado de aplicaciones Store no pudieron verificarse por acceso denegado. Power BI no localizado en rutas habituales.
 **Resultado:** inventario en HERRAMIENTAS.md; sin instalaciones ni cambios al sistema. Pendiente Docker Desktop y comprobación manual de WSL 2. Power BI puede prepararse posteriormente.
+
+## 15 de octubre de 2026 — Evidencia de servicios locales
+
+**Propósito:** documentar las comprobaciones manuales de infraestructura realizadas por la autora.
+**Cambios:** cuatro capturas incorporadas a docs/evidencias, índice actualizado y resultados vinculados en REPORTE_QA.md. Se actualiza el estado de infraestructura en backlog y entregables.
+**Validación:** inspección visual de HTTP 200, servicios healthy, SELECT 1 y PONG. No se observaron credenciales en las capturas. No se ejecutaron nuevas pruebas de servicios desde el asistente.
+**Resultado:** arranque básico de contenedores y respuestas de servicios acreditados por evidencia manual.
+**Pendientes:** esquema de datos, migraciones y conexión real desde FastAPI; pruebas de persistencia y permisos.
