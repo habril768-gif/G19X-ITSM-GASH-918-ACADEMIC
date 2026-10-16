@@ -1,59 +1,67 @@
-# Decisiones iniciales
+# Decisiones iniciales
+
+- Base funcional: PRD 1.6 recibido el 15 de octubre de 2026. La autora autoriza iniciar el desarrollo sin aprobación de terceros.
+- Monorepositorio con backend FastAPI y frontend React separados.
+- Incidencias confidenciales visibles solo para Admin RH, conforme al PRD vigente.
+- Primera entrega de Git: documentación y estructura. No se presenta como MVP funcional.
+- Credenciales exclusivamente locales; `.env` se excluye de Git.
+- Las versiones anteriores del PRD no se convierten en commits retrospectivos.
+
+## 15 de octubre de 2026 — Proveedor de IA
+
+La autora elige la API directa de OpenAI, conforme a la plataforma mostrada en su captura. La integración prevista será desde el backend con LangChain; no se utilizará Azure OpenAI Service en este MVP. Se conserva el descriptivo académico original como referencia, documentando esta diferencia.
+
+La elección no acredita conectividad: aún no se ha realizado una llamada de prueba ni seleccionado el modelo. Las credenciales se configuran localmente mediante OPENAI_API_KEY; nunca se incluyen en el frontend ni en Git. La implementación y evaluación se registrarán en avances posteriores.
+
+## 15 de octubre de 2026 — API inicial
+
+- FastAPI con Uvicorn, aplicación creada mediante fábrica para facilitar pruebas aisladas.
+- `/health` es disponibilidad del proceso (liveness), sin acceso a datos ni llamadas externas. Las comprobaciones de dependencias se incorporarán al integrar PostgreSQL y Redis.
+- Entorno virtual del backend y dependencias fijadas. No se modifica el Python global ni el .env.
+- CI de backend incluida; su ejecución remota deberá verificarse tras publicar el commit.
+- Referencias: https://fastapi.tiangolo.com/deployment/manually/ y https://fastapi.tiangolo.com/reference/testclient/ .
+
+## 15 de octubre de 2026 — Entorno Compose local
+
+- API con Python 3.11 slim y usuario sin privilegios; solo código y dependencias de ejecución dentro de la imagen.
+- PostgreSQL 17 y Redis 7.4 con volúmenes nombrados; sin publicación de puertos de datos al host. API publicada solo en 127.0.0.1.
+- Compose espera healthchecks antes de arrancar API; no implica integración de persistencia todavía.
+- Contraseña PostgreSQL obligatoria mediante variable local; no se copia .env a la imagen ni se inyectan claves OpenAI innecesarias.
+- Imágenes fijadas por línea de versión; no se afirma reproducibilidad binaria por digest. Configuración local, no de producción.
+
+## 15 de octubre de 2026 — Persistencia inicial
+
+- SQLAlchemy síncrono con Psycopg 3 y Alembic. Ruta de DB síncrona en FastAPI para no bloquear directamente el bucle asíncrono.
+- Conexión diferida; /health no necesita configuración. /health/db comprueba conexión y revisión 0001, con respuesta genérica sin detalles de error.
+- Migraciones explícitas, DDL congelado y catálogos en revisión inicial. No se crean tablas al iniciar API. No se cargan usuarios reales ni seeds de personas en esta entrega.
+- Historial admite affected_user_id y actor nullable para eventos del sistema. Reglas de permisos, auditoría atómica y privilegios de producción quedan en próximos avances.
+
+## 15 de octubre de 2026 — Fixtures de usuarios
+
+Carga explícita, sin endpoint web y sin contraseñas. Dos departamentos DEMO y seis usuarios con identidades ficticias, en transacción. UUID estables, sin actualizar registros existentes. No es un comando de administración real ni evita Entra ID. Los eventos de auditoría de cuentas reales se implementarán con su servicio administrativo; estos fixtures solo preparan datos de QA.
+
+## 15 de octubre de 2026 — Autenticación propia autorizada
+
+La autora decide no utilizar Entra ID en el MVP por falta de acceso y consentimiento. Esta decisión sustituye la planificación anterior de SSO sin modificar los registros Azure ya creados. PRD vigente 1.7 en Markdown; Word 1.6 queda histórico.
+
+Implementación: Argon2id mediante pwdlib, sesiones opacas aleatorias de 256 bits y digest SHA-256 en base, expiración fija de una hora, revocación por logout/cambio de contraseña, validación de cuenta/departamento activo. Se elige sesión revocable en lugar de JWT para simplificar revocación inmediata sin claves de firma.
+
+No hay registro público. Bootstrap por operador con getpass; altas por Admin RH y recuperación inicial por operador. Se mantienen IDs internos, campos externos opcionales y posibilidad futura de vinculación verificada. No hay vinculación automática por correo. Migración 0002 sin eliminación de datos. Detalles y límites en AUTENTICACION.md.
+
+## 15 de octubre de 2026 — Consolidación PRD 1.8
+
+Se reorganiza el PRD por reglas, RF-1 a RF-8, modelo objetivo, seguridad, QA y plan. Se conserva autenticación local y Word 1.6 como histórico. El estado vigente del backlog y trazabilidad sustituye sus listas acumuladas; la cronología permanece en bitácora y Git.
+
+Decisiones funcionales para implementar: ámbitos PERSONA/ENTORNO; afectados condicionales; participantes y exclusión de gestores involucrados; confidencialidad automática ante Supervisor/Admin implicado; bandera classification_valid sin borrar actor/fecha; revalidación antes de resolver; retroceso protector excepcional a PENDIENTE si no hay responsable independiente. Requieren migración futura; no se modifica 0001/0002.
+
+IA: solo texto simulado mínimo revisado, sin confidenciales; OMITIDA como estado de trabajo, con atención manual. Conjunto final 50 casos con categoría y prioridad, metas iniciales explícitas; 20 casos previos solo smoke test. No se garantiza anonimización ni cumplimiento legal para datos reales. Retención de demo hasta cierre de evaluación +30 días por operador; plazos reales pendientes antes de uso productivo.
+
+Correo: solo eventos del MVP; SLA/vencimientos fuera. RF-7 administración y RF-8 panel separados. Cronograma por diez hitos sin inventar fecha límite o capacidad semanal. Nombres técnicos existentes conservados con glosario.
 
-- Base funcional: PRD 1.6 recibido el 15 de octubre de 2026. La autora autoriza iniciar el desarrollo sin aprobación de terceros.
-- Monorepositorio con backend FastAPI y frontend React separados.
-- Incidencias confidenciales visibles solo para Admin RH, conforme al PRD vigente.
-- Primera entrega de Git: documentación y estructura. No se presenta como MVP funcional.
-- Credenciales exclusivamente locales; `.env` se excluye de Git.
-- Las versiones anteriores del PRD no se convierten en commits retrospectivos.
+## 15 de octubre de 2026 — PRD 1.9
 
-## 15 de octubre de 2026 — Proveedor de IA
+Se conserva restricción preventiva al declarar a un gestor: validación previa por el señalado expondría el reporte. La declaración debe ser dentro del ámbito, justificada y revisada por un administrador independiente; no desactiva cuentas. Si falta revisor puede retrasarse el caso. El procedimiento para provisionar un administrador adicional es requisito pendiente, no funcionalidad del bootstrap actual.
 
-La autora elige la API directa de OpenAI, conforme a la plataforma mostrada en su captura. La integración prevista será desde el backend con LangChain; no se utilizará Azure OpenAI Service en este MVP. Se conserva el descriptivo académico original como referencia, documentando esta diferencia.
+Power BI excluye confidenciales y relaciones pendientes; celdas requieren cinco casos distintos (y cinco afectados si son personales), con supresión complementaria y sin datos ocultos importados. El reportante recibe solo acuse; no seguimiento de confidenciales. Reportes exclusivamente como testigo fuera del MVP, sin canal alternativo implementado. API y pantalla son necesarias para RF-7.
 
-La elección no acredita conectividad: aún no se ha realizado una llamada de prueba ni seleccionado el modelo. Las credenciales se configuran localmente mediante OPENAI_API_KEY; nunca se incluyen en el frontend ni en Git. La implementación y evaluación se registrarán en avances posteriores.
-
-## 15 de octubre de 2026 — API inicial
-
-- FastAPI con Uvicorn, aplicación creada mediante fábrica para facilitar pruebas aisladas.
-- `/health` es disponibilidad del proceso (liveness), sin acceso a datos ni llamadas externas. Las comprobaciones de dependencias se incorporarán al integrar PostgreSQL y Redis.
-- Entorno virtual del backend y dependencias fijadas. No se modifica el Python global ni el .env.
-- CI de backend incluida; su ejecución remota deberá verificarse tras publicar el commit.
-- Referencias: https://fastapi.tiangolo.com/deployment/manually/ y https://fastapi.tiangolo.com/reference/testclient/ .
-
-## 15 de octubre de 2026 — Entorno Compose local
-
-- API con Python 3.11 slim y usuario sin privilegios; solo código y dependencias de ejecución dentro de la imagen.
-- PostgreSQL 17 y Redis 7.4 con volúmenes nombrados; sin publicación de puertos de datos al host. API publicada solo en 127.0.0.1.
-- Compose espera healthchecks antes de arrancar API; no implica integración de persistencia todavía.
-- Contraseña PostgreSQL obligatoria mediante variable local; no se copia .env a la imagen ni se inyectan claves OpenAI innecesarias.
-- Imágenes fijadas por línea de versión; no se afirma reproducibilidad binaria por digest. Configuración local, no de producción.
-
-## 15 de octubre de 2026 — Persistencia inicial
-
-- SQLAlchemy síncrono con Psycopg 3 y Alembic. Ruta de DB síncrona en FastAPI para no bloquear directamente el bucle asíncrono.
-- Conexión diferida; /health no necesita configuración. /health/db comprueba conexión y revisión 0001, con respuesta genérica sin detalles de error.
-- Migraciones explícitas, DDL congelado y catálogos en revisión inicial. No se crean tablas al iniciar API. No se cargan usuarios reales ni seeds de personas en esta entrega.
-- Historial admite affected_user_id y actor nullable para eventos del sistema. Reglas de permisos, auditoría atómica y privilegios de producción quedan en próximos avances.
-
-## 15 de octubre de 2026 — Fixtures de usuarios
-
-Carga explícita, sin endpoint web y sin contraseñas. Dos departamentos DEMO y seis usuarios con identidades ficticias, en transacción. UUID estables, sin actualizar registros existentes. No es un comando de administración real ni evita Entra ID. Los eventos de auditoría de cuentas reales se implementarán con su servicio administrativo; estos fixtures solo preparan datos de QA.
-
-## 15 de octubre de 2026 — Autenticación propia autorizada
-
-La autora decide no utilizar Entra ID en el MVP por falta de acceso y consentimiento. Esta decisión sustituye la planificación anterior de SSO sin modificar los registros Azure ya creados. PRD vigente 1.7 en Markdown; Word 1.6 queda histórico.
-
-Implementación: Argon2id mediante pwdlib, sesiones opacas aleatorias de 256 bits y digest SHA-256 en base, expiración fija de una hora, revocación por logout/cambio de contraseña, validación de cuenta/departamento activo. Se elige sesión revocable en lugar de JWT para simplificar revocación inmediata sin claves de firma.
-
-No hay registro público. Bootstrap por operador con getpass; altas por Admin RH y recuperación inicial por operador. Se mantienen IDs internos, campos externos opcionales y posibilidad futura de vinculación verificada. No hay vinculación automática por correo. Migración 0002 sin eliminación de datos. Detalles y límites en AUTENTICACION.md.
-
-## 15 de octubre de 2026 — Consolidación PRD 1.8
-
-Se reorganiza el PRD por reglas, RF-1 a RF-8, modelo objetivo, seguridad, QA y plan. Se conserva autenticación local y Word 1.6 como histórico. El estado vigente del backlog y trazabilidad sustituye sus listas acumuladas; la cronología permanece en bitácora y Git.
-
-Decisiones funcionales para implementar: ámbitos PERSONA/ENTORNO; afectados condicionales; participantes y exclusión de gestores involucrados; confidencialidad automática ante Supervisor/Admin implicado; bandera classification_valid sin borrar actor/fecha; revalidación antes de resolver; retroceso protector excepcional a PENDIENTE si no hay responsable independiente. Requieren migración futura; no se modifica 0001/0002.
-
-IA: solo texto simulado mínimo revisado, sin confidenciales; OMITIDA como estado de trabajo, con atención manual. Conjunto final 50 casos con categoría y prioridad, metas iniciales explícitas; 20 casos previos solo smoke test. No se garantiza anonimización ni cumplimiento legal para datos reales. Retención de demo hasta cierre de evaluación +30 días por operador; plazos reales pendientes antes de uso productivo.
-
-Correo: solo eventos del MVP; SLA/vencimientos fuera. RF-7 administración y RF-8 panel separados. Cronograma por diez hitos sin inventar fecha límite o capacidad semanal. Nombres técnicos existentes conservados con glosario.
+Se elimina promesa de estimaciones no hechas y se prioriza flujo núcleo antes de integraciones, manteniendo IA/correo/Power BI en entrega final. Se corrige «smoke test histórico»: 20 casos fueron solo planificados. La IA puede abstenerse y requiere validación humana. La revisión jurídica de uso real queda como condición explícita, sin afirmar ley aplicable o cumplimiento no verificados.
