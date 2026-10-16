@@ -7,7 +7,7 @@ Plataforma Inteligente de Gestión de Incidencias Laborales para PluriOne S.A. d
 
 ## Estado actual
 
-Repositorio inicial: requisitos y planificación documentados. La funcionalidad del MVP está pendiente de implementación. El PRD 1.6 es la base de desarrollo elegida por la autora.
+Repositorio inicial: requisitos, planificación y estructura de carpetas documentados. La funcionalidad del MVP está pendiente de implementación. El PRD 1.6 es la base de desarrollo elegida por la autora.
 
 ## Alcance
 
@@ -20,6 +20,11 @@ Tecnologías previstas: React, FastAPI, PostgreSQL, Redis, Microsoft Entra ID, O
 - [PRD vigente](docs/PRD.md)
 - [Documento Word recibido](docs/PRD_PluriOne_v1.6.docx)
 - [Plan de desarrollo y criterios de término](docs/BACKLOG.md)
+- [Decisiones iniciales](docs/DECISIONES.md)
+
+## Estructura
+
+`backend/` contiene las capas previstas de FastAPI; `frontend/`, las vistas React; `infra/`, el despliegue por implementar. La estructura todavía no es una aplicación ejecutable.
 
 ## Configuración
 
