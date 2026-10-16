@@ -21,6 +21,9 @@ Tecnologías previstas: React, FastAPI, PostgreSQL, Redis, Microsoft Entra ID, O
 - [Documento Word recibido](docs/PRD_PluriOne_v1.6.docx)
 - [Plan de desarrollo y criterios de término](docs/BACKLOG.md)
 - [Decisiones iniciales](docs/DECISIONES.md)
+- [Entregables de residencia](docs/ENTREGABLES.md)
+- [Bitácora de avances](docs/BITACORA.md)
+- [Trazabilidad de requisitos](docs/TRAZABILIDAD.md)
 
 ## Estructura
 
