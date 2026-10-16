@@ -90,3 +90,11 @@
 **Validación:** tres pruebas nuevas de fixtures aprobadas en SQLite (repetición y conservación de bajas, roles ausentes y reversión). La suite completa se intentó ejecutar, pero se bloqueó en la prueba ASGI existente test_health_contract; se interrumpió sin atribuirle éxito. La ejecución detallada confirmó ese punto de bloqueo. No se cambió código HTTP en este avance.
 **Resultado:** evidencias manuales de migración y conexión documentadas; carga DEMO implementada. No se ejecutó la carga PostgreSQL desde el asistente.
 **Pendientes:** ejecutar carga en terminal de la autora, obtener evidencia 07, revisar bloqueo local de TestClient y validar suite en CI. Autenticación Entra y diez incidencias simuladas pendientes.
+
+## 15 de octubre de 2026 — Validación manual de fixtures DEMO
+
+**Propósito:** registrar carga inicial y repetición de datos simulados.
+**Cambios:** evidencias 07 y 08 incorporadas; reporte QA, índice, backlog, entregables y trazabilidad actualizados.
+**Validación:** inspección visual de 2 departamentos y 6 usuarios creados; segunda ejecución con contadores 0/0. Comandos ejecutados por la autora en Docker; no por el asistente.
+**Resultado:** carga PostgreSQL y repetición sin duplicados acreditadas mediante evidencia manual.
+**Pendientes:** autenticación Entra ID, diez incidencias ficticias y revisión del bloqueo de la suite HTTP. No se considera terminado el MVP ni la autenticación por tener usuarios DEMO.

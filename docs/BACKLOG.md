@@ -56,3 +56,7 @@ Hito 3 en curso: modelos, migración 0001 y catálogos implementados. Pendiente 
 ## Migración validada y fixtures preparados
 
 Evidencia manual confirma migración 0001, alineación del esquema y conexión HTTP de la API a PostgreSQL. Usuarios/departamentos simulados implementados con carga explícita; ejecución PostgreSQL pendiente. Los casos de prueba y autenticación siguen pendientes.
+
+## Fixtures validados en PostgreSQL
+
+Evidencias 07/08 confirman carga de dos departamentos y seis usuarios y repetición sin duplicados. Del hito de datos sigue pendiente preparar los diez casos ficticios cuando exista su creación auditada. Próximo avance funcional: autenticación y autorización; requiere configurar aplicación/tenant Entra ID para validación real.

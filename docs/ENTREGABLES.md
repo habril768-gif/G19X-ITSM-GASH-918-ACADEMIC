@@ -8,7 +8,7 @@ Fuente: sección 7 del Descriptivo de Proyecto proporcionado por la autora. Esta
 | 2. Propuesta | Propuesta técnica | PROPUESTA_TECNICA.md | Pendiente; reglas iniciales en PRD |
 | 3. Arquitectura | Documento de arquitectura | ARQUITECTURA.md | Pendiente; stack y estructura inicial definidos |
 | 4. Planificación | Plan del proyecto | BACKLOG.md y cronograma en PRD.md | Inicial; seguimiento por completar |
-| 5. Desarrollo | Sistema funcional | ../backend, ../frontend, ../infra | API y esquema inicial implementados; migración y conexión verificadas manualmente; carga de usuarios DEMO pendiente; Compose verificado manualmente; flujos MVP pendientes |
+| 5. Desarrollo | Sistema funcional | ../backend, ../frontend, ../infra | API y esquema inicial implementados; migración y conexión verificadas manualmente; carga DEMO y repetición verificadas manualmente; Compose verificado manualmente; flujos MVP pendientes |
 | 6. Pruebas | Reporte QA | REPORTE_QA.md | Reporte de validación inicial en REPORTE_QA.md; QA del MVP pendiente |
 | 7. Documentación | Manual técnico y manual de usuario | MANUAL_TECNICO.md y MANUAL_USUARIO.md | Manual técnico inicial disponible; manual de usuario pendiente |
 | 8. Mantenimiento | Plan de mantenimiento y soporte multinivel | PLAN_MANTENIMIENTO.md | Pendiente |

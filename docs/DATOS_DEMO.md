@@ -26,7 +26,7 @@ Primera ejecución: departamentos_creados=2 y usuarios_creados=6. Al repetir sin
 
 La carga usa una transacción, no actualiza cuentas existentes ni las reactiva. Si faltan roles o existe un conflicto, revierte toda la ejecución y devuelve un mensaje sin credenciales. Los UUID son deterministas para repetir la carga. Un conflicto no se resuelve borrando datos: revisar la base seleccionada y reportar el error.
 
-Guardar la salida como docs/evidencias/07-usuarios-demo.png. Hasta recibirla, la ejecución PostgreSQL queda pendiente.
+Guardar la salida como docs/evidencias/07-usuarios-demo.png. La ejecución PostgreSQL y su repetición están verificadas mediante las evidencias 07 y 08; ver REPORTE_QA.md.
 
 ## Diferencia respecto a autenticación
 

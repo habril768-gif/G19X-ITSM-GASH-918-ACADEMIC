@@ -35,3 +35,5 @@ RF-1: users con unicidad tenant_id/external_id, rol y departamento; autenticaci�
 Implementaci처n: backend/app/models/__init__.py; backend/app/core/database.py; migraci처n 0001. Verificaci처n: tests/test_database.py y pruebas PostgreSQL optativas en tests/test_postgres.py. Aplicaci처n real y evidencia /health/db pendientes; ver REPORTE_QA.md.
 
 Persistencia: evidencias 05 y 06 confirman revisi처n 0001 y conexi처n real. Fixtures QA: app/seed_demo.py y tests/test_seed_demo.py preparan seis usuarios y dos departamentos; no implementan RF-1 ni cuentas SSO.
+
+Fixtures QA: carga manual PostgreSQL y repetici처n verificadas en evidencias 07/08. Datos de prueba disponibles para pr처ximos servicios; no implica cumplimiento de autenticaci처n RF-1.

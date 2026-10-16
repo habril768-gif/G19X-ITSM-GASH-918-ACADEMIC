@@ -67,3 +67,12 @@ Esto completa la validación manual pendiente de la migración; las dos pruebas 
 Comando: backend/.venv/Scripts/python.exe -m pytest -q backend/tests/test_seed_demo.py. Resultado: **3 passed in 1.35s**. SQLite solo para las tablas auxiliares: roles, departamentos y users. Se verificó repetición sin duplicados, conservación de is_active=False y reversión de transacción.
 
 El intento de suite completa no terminó: se bloqueó en la prueba ASGI preexistente test_api.py::test_health_contract, confirmado con ejecución detallada; ambos intentos se interrumpieron. No se afirma una regresión completa aprobada. La carga DEMO en PostgreSQL y ejecución de CI siguen pendientes. Las ocho pruebas aprobadas del avance anterior permanecen como resultado histórico, no una ejecución nueva.
+
+## Evidencias de carga DEMO recibidas el 15 de octubre de 2026
+
+Se inspeccionaron las capturas proporcionadas por la autora, sin ejecutar nuevamente la carga desde el asistente.
+
+- [07-usuarios-demo.png](evidencias/07-usuarios-demo.png): contenedores healthy y carga completada con departamentos_creados=2, usuarios_creados=6.
+- [08-usuarios-demo-sin-duplicados.png](evidencias/08-usuarios-demo-sin-duplicados.png): segunda ejecución completada con ambos contadores en 0.
+
+Resultado: carga inicial en PostgreSQL y repetición sin inserciones adicionales verificadas manualmente. No acredita autenticación SSO, permisos de negocio, conservación de cambios en PostgreSQL ni pruebas automáticas de integración pendientes. No hay credenciales visibles en estas capturas.
