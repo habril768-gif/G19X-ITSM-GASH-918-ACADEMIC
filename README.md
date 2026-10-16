@@ -29,7 +29,7 @@ Tecnologías previstas: React, FastAPI, PostgreSQL, Redis, Microsoft Entra ID, O
 
 ## Estructura
 
-`backend/` contiene las capas previstas de FastAPI; `frontend/`, las vistas React; `infra/`, el despliegue por implementar. El backend tiene un punto de entrada ejecutable; frontend e infraestructura siguen pendientes.
+`backend/` contiene las capas previstas de FastAPI; `frontend/`, las vistas React; `infra/`, el despliegue por implementar. El backend tiene un punto de entrada ejecutable; frontend sigue pendiente; la configuración Docker de API, PostgreSQL y Redis está preparada, pendiente de ejecución.
 
 ## Ejecutar la API
 
@@ -42,3 +42,7 @@ Copiar `.env.example` a `.env` y completar las variables locales cuando se imple
 ## Trabajo en Git
 
 Crear commits pequeños al completar cambios verificables. Cada mensaje debe describir el avance real. Las revisiones del PRD se registran cuando se modifica su contenido; no se generan commits retrospectivos para aparentar actividad. No hacer commits vacíos para cumplir una frecuencia.
+
+## Arranque con contenedores
+
+Consultar [el entorno Docker](infra/README.md). Completar POSTGRES_PASSWORD en .env y ejecutar desde la raíz `docker compose up -d --build --wait`. La API aún no utiliza PostgreSQL o Redis; los servicios preparan la siguiente etapa de persistencia.

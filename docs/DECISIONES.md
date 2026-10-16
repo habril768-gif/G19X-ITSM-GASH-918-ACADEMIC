@@ -20,3 +20,11 @@ La elección no acredita conectividad: aún no se ha realizado una llamada de pr
 - Entorno virtual del backend y dependencias fijadas. No se modifica el Python global ni el .env.
 - CI de backend incluida; su ejecución remota deberá verificarse tras publicar el commit.
 - Referencias: https://fastapi.tiangolo.com/deployment/manually/ y https://fastapi.tiangolo.com/reference/testclient/ .
+
+## 15 de octubre de 2026 — Entorno Compose local
+
+- API con Python 3.11 slim y usuario sin privilegios; solo código y dependencias de ejecución dentro de la imagen.
+- PostgreSQL 17 y Redis 7.4 con volúmenes nombrados; sin publicación de puertos de datos al host. API publicada solo en 127.0.0.1.
+- Compose espera healthchecks antes de arrancar API; no implica integración de persistencia todavía.
+- Contraseña PostgreSQL obligatoria mediante variable local; no se copia .env a la imagen ni se inyectan claves OpenAI innecesarias.
+- Imágenes fijadas por línea de versión; no se afirma reproducibilidad binaria por digest. Configuración local, no de producción.

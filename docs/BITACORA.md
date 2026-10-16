@@ -48,3 +48,15 @@
 **Resultado:** API inicial disponible como código ejecutable con instrucciones. Servidor de comprobación detenido al terminar. La CI está preparada, pero su ejecución remota no está confirmada.
 
 **Pendientes:** cliente React, Docker Compose, PostgreSQL/Redis, modelos y migraciones, autenticación, flujos de incidencias e integraciones. No se realizaron llamadas a OpenAI ni se modificó .env.
+
+## 15 de octubre de 2026 — Entorno de contenedores
+
+**Propósito:** preparar ejecución local conjunta de API, PostgreSQL y Redis, como base para persistencia.
+
+**Cambios:** compose.yaml en la raíz, Dockerfile y .dockerignore del backend, instrucciones en infra/README.md, variable opcional API_PORT, guía de evidencias y actualización de manual, backlog y trazabilidad. .env no se leyó ni modificó.
+
+**Validación:** revisión estática de rutas de construcción, comandos, variables, healthchecks, volúmenes y publicación exclusiva en loopback para API. git diff --check. Docker no está disponible; no se ejecutaron build, compose config ni contenedores. Los parsers YAML consultados tampoco están instalados; no se afirma validación sintáctica automática.
+
+**Resultado:** configuración preparada y documentada, ejecución pendiente. No se considera probada la integración de servicios.
+
+**Pendientes:** instalar/iniciar Docker Desktop, completar contraseña local, ejecutar comprobaciones documentadas y conservar evidencia. Después implementar modelos, migraciones y acceso real a datos.

@@ -21,3 +21,7 @@ RF-3: proveedor seleccionado por la autora: API directa de OpenAI. Modelo, conex
 ## Infraestructura de API inicial
 
 Endpoint público de disponibilidad en `backend/app/api/health.py`, aplicación en `backend/app/main.py` y pruebas en `backend/tests/test_api.py`. Es una base técnica y no implica cumplimiento de RF-1 a RF-6. Resultados reales en REPORTE_QA.md.
+
+## Configuración de infraestructura
+
+compose.yaml, backend/Dockerfile y backend/.dockerignore preparan el entorno local reproducible de API, PostgreSQL y Redis. Relacionado con arquitectura, desarrollo y entrega. Las comprobaciones ejecutables están en infra/README.md; resultados pendientes por falta de Docker. Esto no acredita conexión real ni cumplimiento de RF-2 o RF-3.

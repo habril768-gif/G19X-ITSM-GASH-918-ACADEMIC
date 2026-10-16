@@ -19,3 +19,7 @@ La fábrica create_app registra el router de sistema. La ruta de salud no devuel
 ## Verificación y soporte inicial
 
 Ejecutar las pruebas según backend/README.md. Registrar salidas y fallos sanitizados en REPORTE_QA.md. Si el puerto 8000 está ocupado, elegir otro puerto. Si faltan módulos, instalar las dependencias con el Python del entorno virtual. Docker, migraciones, respaldo y procedimientos de producción quedan pendientes de sus respectivas implementaciones.
+
+## Entorno de contenedores
+
+El archivo compose.yaml define API, PostgreSQL y Redis. Consultar [arranque y verificación](../infra/README.md). Está preparado, pendiente de ejecución en Docker Desktop. La API recibe variables de conexión, pero todavía no las utiliza. PostgreSQL y Redis no publican puertos; para SQL y ping se usa docker compose exec. No se ha implementado esquema de datos ni worker.

@@ -40,3 +40,7 @@ Los hitos pueden requerir varios commits. Se registra solo trabajo realizado, co
 ## Proveedor IA definido
 
 Se usará API directa de OpenAI con LangChain. Modelo y prueba de conectividad pendientes. Véase DECISIONES.md.
+
+## Avance de infraestructura
+
+Configuración Compose de API, PostgreSQL y Redis preparada, pendiente de ejecución y validación en Docker Desktop. Próxima tarea: comprobar servicios y crear modelos/migraciones. El cliente React y la capa de persistencia siguen pendientes.

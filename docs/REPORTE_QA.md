@@ -22,3 +22,11 @@ La descarga directa mediante pip fue bloqueada por el entorno. Se descargaron ru
 ## Límites de esta validación
 
 No se probaron autenticación, incidencias, PostgreSQL, Redis, Docker, IA, correo, rendimiento ni frontend. Docker no está disponible como comando en este entorno. La prueba de /docs verifica HTML, no un renderizado visual de Swagger UI en navegador. Este reporte no acredita el MVP completo.
+
+## 15 de octubre de 2026 — Configuración Compose
+
+Revisión estática: API con contexto backend, instalación por requirements, PostgreSQL/Redis sin ports, contraseña requerida, healthchecks y volúmenes nombrados. .env y entorno virtual excluidos de Git y del contexto de construcción.
+
+**Pendiente:** validación real de `docker compose config --quiet`, construcción de imagen Linux, arranque de servicios, GET /health, SELECT 1 y PONG. Docker no está disponible como comando. No hay un resultado de contenedores aprobado. La validación automática YAML tampoco se ejecutó por ausencia de los parsers consultados.
+
+Ejecutar los pasos de infra/README.md y guardar las evidencias indicadas en docs/evidencias/README.md. No reutilizar el resultado de pruebas ASGI como evidencia de Docker.
