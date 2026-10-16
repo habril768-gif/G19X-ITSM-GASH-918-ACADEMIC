@@ -43,3 +43,13 @@ La autora ejecutó los comandos en su equipo y proporcionó las capturas siguien
 | Redis PING | PONG | [Captura](evidencias/04-redis-ping.png) |
 
 La captura HTTP no permite distinguir por sí sola entre el arranque nativo y Docker. La captura Compose sí acredita la comprobación de salud del contenedor API. No se acredita aún conexión de la aplicación con PostgreSQL o Redis, persistencia tras reinicio, migraciones, autenticación o flujos del MVP.
+
+## 15 de octubre de 2026 — Capa de datos inicial
+
+Resultado local: **8 passed, 2 skipped, 1 warning**. Comando: backend/.venv/Scripts/python.exe -m pytest -q backend/tests.
+
+Pruebas nuevas aprobadas: manejo de caracteres reservados en contraseña sin URL concatenada; respuesta genérica 503 con liveness operativo; respuesta 200 con dependencia simulada; compilación de esquema PostgreSQL con JSONB/fechas y restricciones; generación offline de migración y catálogos. Las tres pruebas HTTP anteriores siguen aprobadas. pip check: sin conflictos.
+
+Las dos pruebas PostgreSQL (esquema/catálogos e identidad Entra única) se omiten sin RUN_DB_TESTS=1. No se presentan como aprobadas. La CI ahora prepara PostgreSQL aislado, aplica migración dos veces, comprueba alineación de modelos y ejecuta integración; no se ha observado su resultado remoto.
+
+Docker instalado localizado, pero conexión al pipe dockerDesktopLinuxEngine denegada para el asistente. Migración real, alembic check y /health/db contra PostgreSQL quedan pendientes. Prueba HTTP 200 nueva usa dependencia simulada y no acredita conexión real. Instrucciones en DATOS.md.

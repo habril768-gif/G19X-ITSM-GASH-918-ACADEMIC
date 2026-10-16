@@ -8,7 +8,7 @@ Docker Desktop con motor Linux y Docker Compose v2. Debe estar iniciado. No se i
 
 Desde la raíz del proyecto, si todavía no existe `.env`, copiar `.env.example` a `.env`. Si ya existe, conservarlo y agregar solo las variables faltantes. Completar localmente `POSTGRES_PASSWORD` con una contraseña propia y no compartirla. No es necesaria una clave de OpenAI para esta entrega.
 
-Variables usadas ahora: POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD y API_PORT (opcional, por defecto 8000). DATABASE_URL sigue reservada para la capa de persistencia; no se utiliza aún. Compose proporciona a la API las variables de conexión individuales; la API todavía no conecta a esos servicios.
+Variables usadas ahora: POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD y API_PORT (opcional, por defecto 8000). DATABASE_URL sigue reservada para la capa de persistencia; no se utiliza aún. Compose proporciona a la API las variables de conexión individuales; /health/db comprueba conexión PostgreSQL; Redis sigue pendiente.
 
 ## Comprobar y arrancar
 
@@ -34,7 +34,7 @@ docker compose exec postgres sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -
 docker compose exec redis redis-cli ping
 ```
 
-Se espera PostgreSQL aceptando conexiones, una fila con valor 1 y Redis PONG. La API solo acredita disponibilidad HTTP: todavía no hay modelos, migraciones ni integración de persistencia. La comprobación de PostgreSQL comprueba servicio; la prueba SELECT comprueba ejecución SQL local en el contenedor.
+Se espera PostgreSQL aceptando conexiones, una fila con valor 1 y Redis PONG. /health acredita disponibilidad HTTP. El nuevo /health/db comprueba conexión y revisión 0001 después de aplicar la migración; ver docs/DATOS.md. La comprobación de PostgreSQL comprueba servicio; la prueba SELECT comprueba ejecución SQL local en el contenedor.
 
 ## Detener y volver a arrancar
 

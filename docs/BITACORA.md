@@ -74,3 +74,11 @@
 **Validación:** inspección visual de HTTP 200, servicios healthy, SELECT 1 y PONG. No se observaron credenciales en las capturas. No se ejecutaron nuevas pruebas de servicios desde el asistente.
 **Resultado:** arranque básico de contenedores y respuestas de servicios acreditados por evidencia manual.
 **Pendientes:** esquema de datos, migraciones y conexión real desde FastAPI; pruebas de persistencia y permisos.
+
+## 15 de octubre de 2026 — Modelos y primera migración
+
+**Propósito:** iniciar persistencia conforme al PRD, separando disponibilidad HTTP y disponibilidad de base de datos.
+**Cambios:** SQLAlchemy, Psycopg y Alembic; siete modelos; migración 0001 con tres roles y cinco categorías; conexión diferida; /health/db; inclusión de migraciones en imagen; documentación DATOS.md y CI PostgreSQL. No se cargaron credenciales reales ni se modificó .env.
+**Validación:** ocho pruebas aprobadas, dos de integración omitidas; una advertencia de TestClient ya conocida. pip check sin conflictos. Alembic upgrade head --sql generado sin credenciales. Se corrigió path_separator para soportar rutas Windows con espacios. Docker localizado en instalación por usuario; acceso al pipe del motor denegado en este entorno.
+**Resultado:** modelos, migración y endpoint implementados. Migración real aún no aplicada por el asistente; CI remota pendiente.
+**Pendientes:** aplicar upgrade head desde terminal autorizada, comprobar alembic check y GET /health/db; después usuarios simulados, autenticación y flujos de incidencias.

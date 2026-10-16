@@ -23,3 +23,7 @@ Ejecutar las pruebas según backend/README.md. Registrar salidas y fallos saniti
 ## Entorno de contenedores
 
 El archivo compose.yaml define API, PostgreSQL y Redis. Consultar [arranque y verificación](../infra/README.md). Está preparado, pendiente de ejecución en Docker Desktop. La API recibe variables de conexión, pero todavía no las utiliza. PostgreSQL y Redis no publican puertos; para SQL y ping se usa docker compose exec. No se ha implementado esquema de datos ni worker.
+
+## Conexión y migraciones
+
+API 0.2.0 incorpora SQLAlchemy, Psycopg, Alembic y /health/db. Consultar DATOS.md para esquema, configuración, instalación y validación. El entorno Docker debe reconstruir la imagen antes de ejecutar la migración. La revisión requerida por readiness es 0001 y debe actualizarse con nuevas revisiones futuras. El endpoint no devuelve detalles de conexión. La API todavía no ofrece operaciones de incidencias.

@@ -8,3 +8,5 @@ Capturas proporcionadas por la autora e inspeccionadas el 15 de octubre de 2026:
 - [04-redis-ping.png](04-redis-ping.png): respuesta PONG.
 
 Alcance y limitaciones en [REPORTE_QA.md](../REPORTE_QA.md). No contienen contraseñas visibles. Las capturas no acreditan funcionalidades del MVP aún pendientes.
+
+Próximas evidencias pendientes: 05-migracion-inicial.png (upgrade/current/check) y 06-api-db-health-200.png (conexión real y revisión).

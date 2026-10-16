@@ -48,3 +48,7 @@ Configuración Compose de API, PostgreSQL y Redis preparada, pendiente de ejecuc
 ## Verificación manual recibida
 
 La autora aportó evidencia de API/PostgreSQL/Redis healthy, SELECT 1 y PONG. Infraestructura básica arrancada; próximo avance: modelos, migraciones y conexión real de FastAPI a PostgreSQL. Ver REPORTE_QA.md.
+
+## Modelos y migración inicial
+
+Hito 3 en curso: modelos, migración 0001 y catálogos implementados. Pendiente aplicación real, validación PostgreSQL y usuarios/departamentos simulados. Ocho pruebas locales aprobadas; dos de integración omitidas. El hito no se marca completado todavía.

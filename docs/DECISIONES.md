@@ -28,3 +28,10 @@ La elección no acredita conectividad: aún no se ha realizado una llamada de pr
 - Compose espera healthchecks antes de arrancar API; no implica integración de persistencia todavía.
 - Contraseña PostgreSQL obligatoria mediante variable local; no se copia .env a la imagen ni se inyectan claves OpenAI innecesarias.
 - Imágenes fijadas por línea de versión; no se afirma reproducibilidad binaria por digest. Configuración local, no de producción.
+
+## 15 de octubre de 2026 — Persistencia inicial
+
+- SQLAlchemy síncrono con Psycopg 3 y Alembic. Ruta de DB síncrona en FastAPI para no bloquear directamente el bucle asíncrono.
+- Conexión diferida; /health no necesita configuración. /health/db comprueba conexión y revisión 0001, con respuesta genérica sin detalles de error.
+- Migraciones explícitas, DDL congelado y catálogos en revisión inicial. No se crean tablas al iniciar API. No se cargan usuarios reales ni seeds de personas en esta entrega.
+- Historial admite affected_user_id y actor nullable para eventos del sistema. Reglas de permisos, auditoría atómica y privilegios de producción quedan en próximos avances.

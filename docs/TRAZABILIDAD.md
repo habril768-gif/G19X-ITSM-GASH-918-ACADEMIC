@@ -27,3 +27,9 @@ Endpoint público de disponibilidad en `backend/app/api/health.py`, aplicación 
 compose.yaml, backend/Dockerfile y backend/.dockerignore preparan el entorno local reproducible de API, PostgreSQL y Redis. Relacionado con arquitectura, desarrollo y entrega. Las comprobaciones ejecutables están en infra/README.md; resultados pendientes por falta de Docker. Esto no acredita conexión real ni cumplimiento de RF-2 o RF-3.
 
 Infraestructura: cuatro evidencias manuales recibidas y verificadas visualmente; rutas y límites en REPORTE_QA.md. La comprobación de servicios no completa RF-2 ni RF-3.
+
+## Persistencia inicial
+
+RF-1: users con unicidad tenant_id/external_id, rol y departamento; autenticación pendiente. RF-2/RF-4: modelo incidencias e historial; operaciones y permisos pendientes. RF-3: campos IA y validación, sin integración externa. RF-6: fechas de ciclo y departamento histórico para futuras vistas.
+
+Implementación: backend/app/models/__init__.py; backend/app/core/database.py; migración 0001. Verificación: tests/test_database.py y pruebas PostgreSQL optativas en tests/test_postgres.py. Aplicación real y evidencia /health/db pendientes; ver REPORTE_QA.md.

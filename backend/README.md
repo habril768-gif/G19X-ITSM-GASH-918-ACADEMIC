@@ -48,7 +48,7 @@ backend/.venv/Scripts/python.exe -m pytest -q backend/tests
 
 ## Alcance actual
 
-`/health` es una comprobación pública del proceso HTTP y no prueba disponibilidad de base de datos, Redis o IA. No requiere ni lee `.env`; no realiza llamadas externas. Las rutas de negocio y Entra ID aún no están implementadas. El servidor local usa HTTP; HTTPS deberá configurarse antes de un despliegue externo. No se exponen datos de empleados.
+`/health` es una comprobación pública del proceso HTTP y no prueba disponibilidad de base de datos, Redis o IA. No requiere ni lee `.env`; no realiza llamadas externas. Las rutas de negocio y Entra ID aún no están implementadas. `/health/db` sí requiere PostgreSQL y revisión 0001; ver docs/DATOS.md. El servidor local usa HTTP; HTTPS deberá configurarse antes de un despliegue externo. No se exponen datos de empleados.
 
 La página `/docs` usa recursos Swagger UI alojados en una CDN; para visualizarla completamente se requiere conexión del navegador. `/openapi.json` se sirve localmente.
 
@@ -60,3 +60,7 @@ La página `/docs` usa recursos Swagger UI alojados en una CDN; para visualizarl
 - `tests/test_api.py`: contrato HTTP y documentación.
 
 Dependencias de ejecución en `requirements.txt`; pruebas en `requirements-dev.txt`. Las versiones transitivas se fijan para reproducir la instalación. Consultar el reporte QA y la bitácora antes de dar por cumplido un requisito del MVP.
+
+## Migraciones
+
+Consultar [diseño de datos](../docs/DATOS.md). La API no crea tablas automáticamente. En Docker: `docker compose exec api python -m alembic upgrade head`, desde la raíz del repositorio.
