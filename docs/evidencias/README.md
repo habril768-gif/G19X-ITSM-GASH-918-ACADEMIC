@@ -15,3 +15,5 @@ Evidencias adicionales verificadas: [05-migracion-inicial.png](05-migracion-inic
 - [08-usuarios-demo-sin-duplicados.png](08-usuarios-demo-sin-duplicados.png): repetición, 0 departamentos y 0 usuarios nuevos.
 
 Ambas capturas fueron inspeccionadas y documentadas en REPORTE_QA.md.
+
+Autenticación local: siguientes evidencias pendientes 09-migracion-auth-local.png, 10-auth-me.png y 11-logout-sesion-revocada.png. No guardar contraseñas, tokens, cuadros Authorize ni encabezados Authorization en capturas. Instrucciones en AUTENTICACION.md.

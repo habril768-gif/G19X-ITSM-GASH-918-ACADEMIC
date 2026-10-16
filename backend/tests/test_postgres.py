@@ -1,4 +1,4 @@
-"""Integración optativa: usar solo una base de pruebas previamente migrada."""
+"""IntegraciÃ³n optativa: usar solo una base de pruebas previamente migrada."""
 import os
 import pytest
 from sqlalchemy import inspect, text
@@ -12,13 +12,13 @@ def test_migrated_database_and_catalogs():
     engine = get_engine()
     assert {"users", "incidencias", "historial_incidencias", "departamentos"} <= set(inspect(engine).get_table_names())
     with engine.connect() as c:
-        assert c.execute(text("SELECT version_num FROM alembic_version")).scalar_one() == "0001"
+        assert c.execute(text("SELECT version_num FROM alembic_version")).scalar_one() == "0002"
         assert c.execute(text("SELECT count(*) FROM roles")).scalar_one() == 3
         assert c.execute(text("SELECT count(*) FROM categorias_incidencia")).scalar_one() == 5
 
 
 def test_entra_identity_is_unique():
-    # Transacción revertida siempre; identificadores ficticios, sin datos personales.
+    # TransacciÃ³n revertida siempre; identificadores ficticios, sin datos personales.
     engine = get_engine()
     with engine.connect() as c:
         tx = c.begin()

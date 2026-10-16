@@ -7,13 +7,13 @@ Plataforma Inteligente de Gestión de Incidencias Laborales para PluriOne S.A. d
 
 ## Estado actual
 
-API FastAPI con `/health`, `/health/db`, `/docs` y `/openapi.json`; modelos y migración PostgreSQL inicial verificados manualmente. El flujo de incidencias, autenticación, base de datos, frontend e IA siguen pendientes. El PRD 1.6 es la base de desarrollo elegida por la autora.
+API FastAPI con `/health`, `/health/db`, `/docs` y `/openapi.json`; modelos y migración PostgreSQL inicial verificados manualmente. Autenticación local implementada y probada en SQLite/HTTP; migración 0002 y prueba manual en PostgreSQL pendientes. Incidencias, frontend e IA siguen pendientes. PRD vigente: 1.7.
 
 ## Alcance
 
 Registro y seguimiento de incidencias, acceso por roles y departamento, confidencialidad, clasificación asistida por IA con validación humana, auditoría, correo y analítica agregada.
 
-Tecnologías previstas: React, FastAPI, PostgreSQL, Redis, Microsoft Entra ID, OpenAI con LangChain, Docker y Power BI Desktop.
+Tecnologías previstas: React, FastAPI, PostgreSQL, Redis, autenticación local FastAPI, OpenAI con LangChain, Docker y Power BI Desktop.
 
 ## Documentación
 
@@ -54,3 +54,7 @@ Seguir [migración y validación PostgreSQL](docs/DATOS.md).
 ## Datos simulados
 
 Consultar [carga de usuarios de QA](docs/DATOS_DEMO.md). Requiere confirmación explícita y no habilita inicio de sesión.
+
+## Autenticación local
+
+API 0.3.0 y PRD 1.7. Se sustituye Entra ID por correo y contraseña, Argon2id y sesiones revocables. Aplicar migración 0002 y crear el primer Admin RH siguiendo [AUTENTICACION.md](docs/AUTENTICACION.md). La copia Word del PRD 1.6 es histórica; el PRD Markdown es vigente.

@@ -31,3 +31,7 @@ API 0.2.0 incorpora SQLAlchemy, Psycopg, Alembic y /health/db. Consultar DATOS.m
 ## Fixtures de QA
 
 Seguir DATOS_DEMO.md para carga explícita, repetible y transaccional de cuentas ficticias. No permite iniciar sesión. Migración y conexión PostgreSQL están verificadas por evidencia manual en REPORTE_QA.md.
+
+## API 0.3.0: autenticación propia
+
+Esta actualización sustituye las referencias anteriores a Entra ID. Ver AUTENTICACION.md para migración 0002, primer administrador, inicio/cierre de sesión, alta de usuarios y restablecimiento. El token es opaco y solo su digest se almacena en PostgreSQL; no requiere secreto JWT. La contraseña se introduce por getpass para comandos de operación.

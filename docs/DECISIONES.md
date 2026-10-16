@@ -39,3 +39,11 @@ La elección no acredita conectividad: aún no se ha realizado una llamada de pr
 ## 15 de octubre de 2026 — Fixtures de usuarios
 
 Carga explícita, sin endpoint web y sin contraseñas. Dos departamentos DEMO y seis usuarios con identidades ficticias, en transacción. UUID estables, sin actualizar registros existentes. No es un comando de administración real ni evita Entra ID. Los eventos de auditoría de cuentas reales se implementarán con su servicio administrativo; estos fixtures solo preparan datos de QA.
+
+## 15 de octubre de 2026 — Autenticación propia autorizada
+
+La autora decide no utilizar Entra ID en el MVP por falta de acceso y consentimiento. Esta decisión sustituye la planificación anterior de SSO sin modificar los registros Azure ya creados. PRD vigente 1.7 en Markdown; Word 1.6 queda histórico.
+
+Implementación: Argon2id mediante pwdlib, sesiones opacas aleatorias de 256 bits y digest SHA-256 en base, expiración fija de una hora, revocación por logout/cambio de contraseña, validación de cuenta/departamento activo. Se elige sesión revocable en lugar de JWT para simplificar revocación inmediata sin claves de firma.
+
+No hay registro público. Bootstrap por operador con getpass; altas por Admin RH y recuperación inicial por operador. Se mantienen IDs internos, campos externos opcionales y posibilidad futura de vinculación verificada. No hay vinculación automática por correo. Migración 0002 sin eliminación de datos. Detalles y límites en AUTENTICACION.md.

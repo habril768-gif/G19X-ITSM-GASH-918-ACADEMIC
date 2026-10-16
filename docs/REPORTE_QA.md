@@ -76,3 +76,11 @@ Se inspeccionaron las capturas proporcionadas por la autora, sin ejecutar nuevam
 - [08-usuarios-demo-sin-duplicados.png](evidencias/08-usuarios-demo-sin-duplicados.png): segunda ejecución completada con ambos contadores en 0.
 
 Resultado: carga inicial en PostgreSQL y repetición sin inserciones adicionales verificadas manualmente. No acredita autenticación SSO, permisos de negocio, conservación de cambios en PostgreSQL ni pruebas automáticas de integración pendientes. No hay credenciales visibles en estas capturas.
+
+## Autenticación local — 15 de octubre de 2026
+
+Suite actual: **20 passed, 2 skipped, 1 warning in 12.72s**. Comando desde raíz: backend/.venv/Scripts/python.exe -m pytest -q backend/tests. Las dos omitidas requieren PostgreSQL de pruebas. La advertencia de TestClient/httpx sigue pendiente de migración de herramienta; no hay fallos. La suite completa sí terminó en esta ejecución.
+
+Pruebas de autenticación en tests/test_auth.py: hash Argon2id; token almacenado solo como digest; errores indistinguibles de cuenta/contraseña; cinco intentos bloquean 15 minutos; logout, expiración y desactivación; empleado sin permiso administrativo; cambio de contraseña revoca todas las sesiones; política de longitud; flujo HTTP login/me/logout y no devolución de secretos en validaciones; alta administrativa auditada sin exponer hash y rechazo de duplicado. SQLite se usa con variantes JSON de los modelos; no sustituye validación PostgreSQL de concurrencia/migración.
+
+Migration offline 0001→0002 compilada sin credenciales; conserva esquema y añade tablas e índice de correo. pip check sin conflictos. Pendientes: aplicación real en PostgreSQL, alembic check y pruebas manuales de autenticación Docker, bootstrap interactivo y ejecución CI. Los resultados manuales de 0001 permanecen como evidencia histórica. No se presentan como verificación de 0002.

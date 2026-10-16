@@ -1,4 +1,4 @@
-# PRD PluriOne 1.6
+# PRD PluriOne 1.7
 
 Base de desarrollo elegida por la autora. No requiere aprobación de terceros para iniciar el proyecto. La copia Word conserva el documento recibido; esta versión Markdown elimina las condiciones de aprobación que ya no aplican.
 
@@ -10,7 +10,7 @@ Documento de requisitos del producto
 
 | Empresa | PluriOne S.A. de C.V. (Develop Talent & Technology) |
 | --- | --- |
-| Versión | 1.6  |
+| Versión | 1.7 |
 | Fecha | 15 de octubre de 2026 |
 | Autora | Gilian Abril Sánchez Hernández |
 
@@ -26,7 +26,7 @@ Desarrollar una plataforma HRTech para PluriOne S.A. de C.V. que automatice la g
 | Clasificación automática por IA (Categoría/Prioridad). | App móvil nativa (iOS/Android). |
 | Notificaciones automatizadas de alertas. | Chatbots para empleados finales. |
 | Panel administrativo y analítica (Power BI). | Gestión de nómina o pagos. |
-| Autenticación con Microsoft Entra ID. | Eliminación física y lógica de incidencias. |
+| Autenticación local con correo y contraseña. | Eliminación física y lógica de incidencias. |
 
 3. Stack Tecnológico
 
@@ -40,7 +40,7 @@ Base de Datos: PostgreSQL (Almacenamiento de incidencias, usuarios e historial).
 
 Cache/Colas: Redis (Cola asíncrona para clasificación IA y caché de sesiones).
 
-Seguridad: Microsoft Entra ID (Autenticación SSO/OIDC).
+Seguridad: autenticación propia FastAPI, Argon2id y sesiones revocables.
 
 Infraestructura: Docker y GitHub Actions (CI/CD).
 
@@ -116,25 +116,18 @@ Admin RH: Todos los casos (incluyendo confidenciales).
 
 7. Requisitos Funcionales (RF) con Criterios de Aceptación
 
-RF-1: Autenticación SSO (Microsoft Entra ID)
+RF-1: Autenticación local en FastAPI
 
-Descripción: Inicio de sesión único usando OIDC/OAuth2.
+Inicio de sesión con correo y contraseña. Usuarios creados por Admin RH; sin registro público. El primer administrador se crea mediante comando del operador del servidor con contraseña interactiva.
 
-Lógica de Validación:
+- Contraseñas entre 12 y 128 caracteres, hash Argon2id con sal individual; nunca texto plano ni valores fijos de demostración.
+- Correo único sin distinguir mayúsculas. Usuarios y departamentos deben estar activos. Roles y departamentos se consultan en la base, no se aceptan desde el token.
+- Sesiones de una hora con token opaco aleatorio de 256 bits enviado como Bearer. La base almacena solo su digest SHA-256, expiración y revocación. No se usan JWT en este MVP.
+- Logout revoca la sesión actual. Cambio o restablecimiento de contraseña revoca todas las sesiones del usuario. Recuperación inicial mediante operador autorizado; recuperación por correo fuera de esta entrega.
+- Cinco fallos consecutivos por correo bloquean intentos durante 15 minutos. El mensaje de login no distingue cuenta inexistente, desactivada o contraseña incorrecta.
+- No se requiere tenant ni credenciales Microsoft. Los campos externos quedan opcionales y no se utilizan para autenticación local; el ID interno conserva las relaciones de incidencias.
 
-Validar firma JWT contra llaves públicas de Azure AD.
-
-Verificar emisores (iss), audiencia (aud) y vigencia (exp).
-
-Extraer oid y tid del token validado. Persistir oid en external_id y tid en tenant_id, con restricción única sobre ambos.
-
-Buscar usuario por tenant_id y external_id. Solo se aceptan tokens del tenant empresarial configurado. Si el usuario no está registrado o está inactivo, se deniega acceso. Para el MVP, Admin RH administra una lista autorizada manual; la sincronización automática queda fuera del alcance.
-
-Verificar is_active = TRUE en BD local.
-
-Desactivación: Admin RH debe actualizar is_active al dar de baja a un usuario y la API lo comprueba en cada solicitud. No se presupone revocación inmediata por una baja solo en Entra ID. La operación de baja registra actor y fecha; si hay casos activos asignados, exige reasignarlos a usuarios activos autorizados.
-
-Criterio de Aceptación: Un token válido pero con un oid no registrado o con usuario inactivo en BD es rechazado con error 403.
+Criterios de aceptación: credenciales válidas de cuenta activa permiten consultar /auth/me; credenciales incorrectas son rechazadas; cuentas sin rol Admin RH no pueden crear usuarios; logout, expiración y cambio de contraseña invalidan las sesiones correspondientes. La configuración debe verificarse también en PostgreSQL y en entorno HTTPS antes de despliegue externo.
 
 RF-2: Registro de Incidencias
 
@@ -216,7 +209,7 @@ Concordancia operativa de IA: porcentaje de casos con sugerencia válida y decis
 
 Reglas generales de notificación: verificar de nuevo el permiso del destinatario justo antes del envío. Si perdió acceso, omitir el correo. Deduplicar destinatarios y eventos; registrar intentos y reintentar como máximo tres veces ante fallos transitorios. Después, dejar el fallo para revisión de Admin RH. El correo no incluye descripciones, resoluciones ni datos personales.
 
-Gestión de usuarios del MVP: solo Admin RH puede dar de alta usuarios previamente identificados en Entra ID, asignar roles y departamentos, desactivar y reasignar casos. Se realiza mediante comandos administrativos documentados y auditados; no se exige una pantalla adicional. El primer Admin RH se provisiona con un comando de instalación. Nunca se aceptan roles enviados por el cliente como fuente de autorización.
+Gestión de usuarios del MVP: primer Admin RH mediante comando interactivo del operador; altas posteriores por API restringida a Admin RH, auditadas y sin registro público. Restablecimiento de contraseña mediante operador autorizado. Gestión completa de departamentos, cambios de rol y bajas con reasignación de casos se implementarán en sus servicios.
 
 8. Estructura de Base de Datos (PostgreSQL)
 
@@ -272,7 +265,7 @@ Power BI: solo Admin RH y Gerencia reciben el archivo. La extracción utiliza vi
 
 9. Requisitos No Funcionales (RNF)
 
-RNF-1: Seguridad: Comunicación HTTPS obligatoria. Tokens JWT validados criptográficamente.
+RNF-1: Seguridad: Comunicación HTTPS obligatoria. Tokens de sesión aleatorios validados mediante digest, expiración, revocación y usuario activo en cada solicitud protegida.
 
 RNF-2: Rendimiento: clasificación IA y correos se ejecutan en segundo plano mediante cola Redis y un proceso worker. Para lectura, creación y actualización simples, p95 de API inferior a 200 ms en Docker local con 10 usuarios simultáneos y datos simulados. Se excluye la duración de servicios externos; la aceptación del trabajo en cola sí forma parte de la respuesta de creación. El informe registra hardware, volumen de datos, duración, errores y latencias.
 
@@ -286,7 +279,7 @@ Cola IA: máximo tres intentos ante fallos transitorios; después marcar ai_stat
 
 | Semana | Actividad Principal | Entregable |
 | --- | --- | --- |
-| 1 | Setup Infraestructura (Docker, Postgres, Redis) y Auth (Entra ID con OID). | Repo Git con Docker Compose funcional y Login básico seguro. |
+| 1 | Setup Infraestructura (Docker, Postgres, Redis) y autenticación local FastAPI. | Repo Git con Docker Compose funcional y Login local seguro. |
 | 2 | Backend Core: CRUD Incidencias, Lógica de Roles/Permisos y Confidencialidad. | Endpoints protegidos funcionando con filtros de seguridad. |
 | 3 | Integración IA (LangChain + OpenAI), Cola Redis, Manejo de Errores y Auditoría. | Endpoint /analizar asíncrono y tabla de historial completa. |
 | 4 | Frontend React: Formularios, Dashboard y Visualización de IA. | UI completa conectada al backend. |
@@ -303,4 +296,10 @@ Archivo .env.example (Control de Versiones): Se entregará una plantilla en el r
 
 Documentación en README.md: Instrucciones claras sobre cómo configurar el entorno local.
 
-Control de versión 1.6: consolida reglas de confidencialidad, asignación, edición, baja de usuarios, reapertura, evaluación de IA y reportes. Sustituye la versión 1.5 como base de desarrollo. No incorpora consulta del reportante a casos confidenciales.
+Control de versión 1.7: la autora decide sustituir Entra ID por autenticación propia en FastAPI. Se mantienen roles, confidencialidad y trazabilidad. La copia Word 1.6 se conserva como referencia histórica; este PRD Markdown es la versión vigente.
+
+## Cambio de autenticación autorizado
+
+Decisión de la autora del 15 de octubre de 2026: Entra ID fuera del MVP por falta de acceso administrativo y credenciales disponibles. Se implementa autenticación local; una integración futura requerirá vinculación verificada, sin unir cuentas automáticamente por correo. Detalles operativos en AUTENTICACION.md.
+
+Entidades nuevas: local_credentials (user_id, password_hash, updated_at), auth_sessions (token_hash, user_id, created_at, expires_at, revoked_at), login_throttle (email, failures, locked_until). No se incorpora autenticación simulada para acceder a la aplicación.

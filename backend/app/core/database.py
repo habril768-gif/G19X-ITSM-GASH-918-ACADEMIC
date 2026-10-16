@@ -1,4 +1,4 @@
-"""Conexión PostgreSQL diferida; no carga archivos .env ni imprime secretos."""
+"""ConexiÃ³n PostgreSQL diferida; no carga archivos .env ni imprime secretos."""
 import os
 from functools import lru_cache
 
@@ -36,6 +36,6 @@ def database_ready() -> bool:
         with get_engine().connect() as connection:
             connection.execute(text("SELECT 1"))
             revision = connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one()
-            return revision == "0001"
+            return revision == "0002"
     except (SQLAlchemyError, ValueError):
         return False

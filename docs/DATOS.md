@@ -1,3 +1,5 @@
+> Actualización vigente: esquema 0002 y autenticación local; consultar AUTENTICACION.md. La descripción de 0001 que sigue documenta el esquema inicial.
+
 # Diseño de datos e instalación del esquema inicial
 
 ## Alcance

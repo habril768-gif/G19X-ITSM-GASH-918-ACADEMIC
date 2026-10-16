@@ -98,3 +98,11 @@
 **Validación:** inspección visual de 2 departamentos y 6 usuarios creados; segunda ejecución con contadores 0/0. Comandos ejecutados por la autora en Docker; no por el asistente.
 **Resultado:** carga PostgreSQL y repetición sin duplicados acreditadas mediante evidencia manual.
 **Pendientes:** autenticación Entra ID, diez incidencias ficticias y revisión del bloqueo de la suite HTTP. No se considera terminado el MVP ni la autenticación por tener usuarios DEMO.
+
+## 15 de octubre de 2026 — Autenticación local
+
+**Propósito:** sustituir la dependencia de Entra ID, por decisión explícita de la autora, conservando roles y datos.
+**Cambios:** PRD 1.7; credenciales Argon2id; sesiones revocables con digest; migración 0002; login, me, logout, cambio de contraseña y alta restringida; bootstrap/restablecimiento interactivos. Variables Entra retiradas de la plantilla sin modificar .env. Guía AUTENTICACION.md y trazabilidad actualizadas.
+**Validación:** suite completa: 20 passed, 2 skipped, 1 warning en 12.72 segundos. Incluye hash Argon2id, normalización, rechazo genérico, bloqueo de intentos, expiración, logout, cuenta inactiva, revocación al cambiar contraseña, permisos de alta y redacción de secretos en errores HTTP. Se corrigió uso inicial incompatible de la API de pwdlib mediante verify_and_update. pip check sin conflictos y migración offline generada.
+**Resultado:** API 0.3.0 implementada; suite local completada, superando el bloqueo observado en el avance anterior. No se ejecutó migración 0002 ni login real en PostgreSQL desde el asistente.
+**Pendientes:** aplicar 0002 en Docker, provisionar primer administrador y verificar manualmente login/me/logout. CI remota no confirmada. Interfaz React, gestión completa de usuarios, incidencias y recuperación por correo pendientes.

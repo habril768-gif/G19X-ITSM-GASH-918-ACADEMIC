@@ -37,3 +37,7 @@ Implementación: backend/app/models/__init__.py; backend/app/core/database.py; m
 Persistencia: evidencias 05 y 06 confirman revisión 0001 y conexión real. Fixtures QA: app/seed_demo.py y tests/test_seed_demo.py preparan seis usuarios y dos departamentos; no implementan RF-1 ni cuentas SSO.
 
 Fixtures QA: carga manual PostgreSQL y repetición verificadas en evidencias 07/08. Datos de prueba disponibles para próximos servicios; no implica cumplimiento de autenticación RF-1.
+
+## RF-1 actualizado — PRD 1.7
+
+Autenticación propia sustituye Entra ID por decisión de la autora. Implementación: core/security.py, api/auth.py, manage_users.py, modelos de credenciales/sesiones/intentos y migración 0002. Verificación: tests/test_auth.py; resultados en REPORTE_QA.md. Validación PostgreSQL real de 0002 pendiente. Los campos externos son opcionales, no intervienen en login. RF-2 a RF-6 siguen sin completar por disponer de autenticación.

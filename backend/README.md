@@ -1,17 +1,17 @@
 # Backend PluriOne
 
-API inicial FastAPI. Requiere Python 3.11 o posterior; versión de referencia: Python 3.11.
+API inicial FastAPI. Requiere Python 3.11 o posterior; versiÃ³n de referencia: Python 3.11.
 
-## Instalación en Windows PowerShell
+## InstalaciÃ³n en Windows PowerShell
 
-Desde la raíz del repositorio:
+Desde la raÃ­z del repositorio:
 
 ```powershell
 python -m venv backend/.venv
 backend/.venv/Scripts/python.exe -m pip install -r backend/requirements-dev.txt
 ```
 
-No es necesario activar el entorno ni cambiar la política de ejecución de PowerShell. Para ejecutar sin herramientas de prueba se puede instalar solo `backend/requirements.txt`.
+No es necesario activar el entorno ni cambiar la polÃ­tica de ejecuciÃ³n de PowerShell. Para ejecutar sin herramientas de prueba se puede instalar solo `backend/requirements.txt`.
 
 ## Ejecutar
 
@@ -30,7 +30,7 @@ Respuesta esperada de `/health`:
 {"status":"ok","service":"plurione-api"}
 ```
 
-Detener con Ctrl+C. Si el puerto está ocupado, usar `--port 8001` y ajustar la URL. `/` no tiene ruta: su 404 es esperado.
+Detener con Ctrl+C. Si el puerto estÃ¡ ocupado, usar `--port 8001` y ajustar la URL. `/` no tiene ruta: su 404 es esperado.
 
 ## Ejecutar pruebas
 
@@ -40,7 +40,7 @@ Desde `backend/`:
 .venv/Scripts/python.exe -m pytest -q
 ```
 
-Desde la raíz del repositorio:
+Desde la raÃ­z del repositorio:
 
 ```powershell
 backend/.venv/Scripts/python.exe -m pytest -q backend/tests
@@ -48,19 +48,23 @@ backend/.venv/Scripts/python.exe -m pytest -q backend/tests
 
 ## Alcance actual
 
-`/health` es una comprobación pública del proceso HTTP y no prueba disponibilidad de base de datos, Redis o IA. No requiere ni lee `.env`; no realiza llamadas externas. Las rutas de negocio y Entra ID aún no están implementadas. `/health/db` sí requiere PostgreSQL y revisión 0001; ver docs/DATOS.md. El servidor local usa HTTP; HTTPS deberá configurarse antes de un despliegue externo. No se exponen datos de empleados.
+`/health` es una comprobaciÃ³n pÃºblica del proceso HTTP y no prueba disponibilidad de base de datos, Redis o IA. No requiere ni lee `.env`; no realiza llamadas externas. Las rutas de negocio y autenticaciÃ³n externa no se implementarÃ¡n en el MVP. `/health/db` sÃ­ requiere PostgreSQL y revisiÃ³n 0002; ver docs/DATOS.md. El servidor local usa HTTP; HTTPS deberÃ¡ configurarse antes de un despliegue externo. No se exponen datos de empleados.
 
-La página `/docs` usa recursos Swagger UI alojados en una CDN; para visualizarla completamente se requiere conexión del navegador. `/openapi.json` se sirve localmente.
+La pÃ¡gina `/docs` usa recursos Swagger UI alojados en una CDN; para visualizarla completamente se requiere conexiÃ³n del navegador. `/openapi.json` se sirve localmente.
 
-## Organización
+## OrganizaciÃ³n
 
-- `app/main.py`: creación de aplicación y registro de rutas.
+- `app/main.py`: creaciÃ³n de aplicaciÃ³n y registro de rutas.
 - `app/api/health.py`: endpoint y contrato de respuesta.
 - `app/core`, `app/models`, `app/services`: capas previstas para siguientes entregas.
-- `tests/test_api.py`: contrato HTTP y documentación.
+- `tests/test_api.py`: contrato HTTP y documentaciÃ³n.
 
-Dependencias de ejecución en `requirements.txt`; pruebas en `requirements-dev.txt`. Las versiones transitivas se fijan para reproducir la instalación. Consultar el reporte QA y la bitácora antes de dar por cumplido un requisito del MVP.
+Dependencias de ejecuciÃ³n en `requirements.txt`; pruebas en `requirements-dev.txt`. Las versiones transitivas se fijan para reproducir la instalaciÃ³n. Consultar el reporte QA y la bitÃ¡cora antes de dar por cumplido un requisito del MVP.
 
 ## Migraciones
 
-Consultar [diseño de datos](../docs/DATOS.md). La API no crea tablas automáticamente. En Docker: `docker compose exec api python -m alembic upgrade head`, desde la raíz del repositorio.
+Consultar [diseÃ±o de datos](../docs/DATOS.md). La API no crea tablas automÃ¡ticamente. En Docker: `docker compose exec api python -m alembic upgrade head`, desde la raÃ­z del repositorio.
+
+## Sesiones locales
+
+Ver [AUTENTICACION.md](../docs/AUTENTICACION.md): migraciÃ³n 0002, bootstrap interactivo, login, /auth/me, logout y cambio de contraseÃ±a. La API no necesita variables Entra ni claves de firma JWT.

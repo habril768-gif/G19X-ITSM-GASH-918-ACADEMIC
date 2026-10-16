@@ -1,8 +1,8 @@
-"""Esquema inicial PostgreSQL; reglas de autorización se implementan en servicios."""
+"""Esquema inicial PostgreSQL; reglas de autorizaciÃ³n se implementan en servicios."""
 from datetime import date, datetime
 from uuid import UUID, uuid4
 
-from sqlalchemy import Boolean, CheckConstraint, Date, DateTime, ForeignKey, Index, Integer, String, Text, UniqueConstraint, Uuid, func
+from sqlalchemy import JSON, Boolean, CheckConstraint, Date, DateTime, ForeignKey, Index, Integer, String, Text, UniqueConstraint, Uuid, func, column
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -26,11 +26,15 @@ class Department(Base):
 
 class User(Base):
     __tablename__ = "users"
-    __table_args__ = (UniqueConstraint("tenant_id", "external_id", name="uq_users_entra"),)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "external_id", name="uq_users_entra"),
+        CheckConstraint("(tenant_id IS NULL) = (external_id IS NULL)", name="ck_users_identity_pair"),
+        Index("uq_users_email_lower", func.lower(column("email")), unique=True),
+    )
     id: Mapped[UUID] = mapped_column(Uuid, primary_key=True, default=uuid4)
     email: Mapped[str] = mapped_column(String(320))
-    external_id: Mapped[UUID] = mapped_column(Uuid)
-    tenant_id: Mapped[UUID] = mapped_column(Uuid)
+    external_id: Mapped[UUID | None] = mapped_column(Uuid)
+    tenant_id: Mapped[UUID | None] = mapped_column(Uuid)
     nombre_completo: Mapped[str] = mapped_column(String(200))
     departamento_id: Mapped[UUID] = mapped_column(ForeignKey("departamentos.id"), index=True)
     rol_id: Mapped[int] = mapped_column(ForeignKey("roles.id"))
@@ -64,7 +68,7 @@ class Incident(Base):
     status: Mapped[str] = mapped_column(String(20), server_default="PENDIENTE")
     priority: Mapped[int | None] = mapped_column(Integer)
     category_id: Mapped[int | None] = mapped_column(ForeignKey("categorias_incidencia.id"))
-    ai_suggestion: Mapped[dict | None] = mapped_column(JSONB)
+    ai_suggestion: Mapped[dict | None] = mapped_column(JSONB().with_variant(JSON(), "sqlite"))
     ai_error: Mapped[str | None] = mapped_column(Text)
     ai_status: Mapped[str] = mapped_column(String(20), server_default="PENDIENTE")
     validated_by: Mapped[UUID | None] = mapped_column(ForeignKey("users.id"))
@@ -92,5 +96,28 @@ class AuditEvent(Base):
     affected_user_id: Mapped[UUID | None] = mapped_column(ForeignKey("users.id"))
     usuario_id: Mapped[UUID | None] = mapped_column(ForeignKey("users.id"))
     accion: Mapped[str] = mapped_column(String(40))
-    detalle: Mapped[dict] = mapped_column(JSONB)
+    detalle: Mapped[dict] = mapped_column(JSONB().with_variant(JSON(), "sqlite"))
     fecha: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class LocalCredential(Base):
+    __tablename__ = "local_credentials"
+    user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"), primary_key=True)
+    password_hash: Mapped[str] = mapped_column(Text)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+
+class AuthSession(Base):
+    __tablename__ = "auth_sessions"
+    token_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"), index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class LoginThrottle(Base):
+    __tablename__ = "login_throttle"
+    email: Mapped[str] = mapped_column(String(320), primary_key=True)
+    failures: Mapped[int] = mapped_column(Integer, server_default="0")
+    locked_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
