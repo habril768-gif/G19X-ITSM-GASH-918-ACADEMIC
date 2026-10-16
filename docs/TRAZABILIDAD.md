@@ -33,3 +33,5 @@ Infraestructura: cuatro evidencias manuales recibidas y verificadas visualmente;
 RF-1: users con unicidad tenant_id/external_id, rol y departamento; autenticación pendiente. RF-2/RF-4: modelo incidencias e historial; operaciones y permisos pendientes. RF-3: campos IA y validación, sin integración externa. RF-6: fechas de ciclo y departamento histórico para futuras vistas.
 
 Implementación: backend/app/models/__init__.py; backend/app/core/database.py; migración 0001. Verificación: tests/test_database.py y pruebas PostgreSQL optativas en tests/test_postgres.py. Aplicación real y evidencia /health/db pendientes; ver REPORTE_QA.md.
+
+Persistencia: evidencias 05 y 06 confirman revisión 0001 y conexión real. Fixtures QA: app/seed_demo.py y tests/test_seed_demo.py preparan seis usuarios y dos departamentos; no implementan RF-1 ni cuentas SSO.

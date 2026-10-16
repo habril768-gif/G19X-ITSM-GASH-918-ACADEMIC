@@ -7,7 +7,7 @@ Plataforma Inteligente de Gestión de Incidencias Laborales para PluriOne S.A. d
 
 ## Estado actual
 
-API FastAPI con `/health`, `/health/db`, `/docs` y `/openapi.json`; modelos y migración PostgreSQL inicial implementados, aplicación real pendiente. El flujo de incidencias, autenticación, base de datos, frontend e IA siguen pendientes. El PRD 1.6 es la base de desarrollo elegida por la autora.
+API FastAPI con `/health`, `/health/db`, `/docs` y `/openapi.json`; modelos y migración PostgreSQL inicial verificados manualmente. El flujo de incidencias, autenticación, base de datos, frontend e IA siguen pendientes. El PRD 1.6 es la base de desarrollo elegida por la autora.
 
 ## Alcance
 
@@ -50,3 +50,7 @@ Consultar [el entorno Docker](infra/README.md). Completar POSTGRES_PASSWORD en .
 ## Esquema de datos
 
 Seguir [migración y validación PostgreSQL](docs/DATOS.md).
+
+## Datos simulados
+
+Consultar [carga de usuarios de QA](docs/DATOS_DEMO.md). Requiere confirmación explícita y no habilita inicio de sesión.

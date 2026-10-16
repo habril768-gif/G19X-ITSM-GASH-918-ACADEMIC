@@ -82,3 +82,11 @@
 **Validación:** ocho pruebas aprobadas, dos de integración omitidas; una advertencia de TestClient ya conocida. pip check sin conflictos. Alembic upgrade head --sql generado sin credenciales. Se corrigió path_separator para soportar rutas Windows con espacios. Docker localizado en instalación por usuario; acceso al pipe del motor denegado en este entorno.
 **Resultado:** modelos, migración y endpoint implementados. Migración real aún no aplicada por el asistente; CI remota pendiente.
 **Pendientes:** aplicar upgrade head desde terminal autorizada, comprobar alembic check y GET /health/db; después usuarios simulados, autenticación y flujos de incidencias.
+
+## 15 de octubre de 2026 — Evidencias de migración y usuarios simulados
+
+**Propósito:** cerrar la evidencia de conexión y preparar datos para pruebas de roles.
+**Cambios:** capturas 05/06 verificadas y extensión PNG corregida; comando app.seed_demo con confirmación explícita; dos departamentos y seis usuarios ficticios; guía DATOS_DEMO.md y seguimiento actualizado.
+**Validación:** tres pruebas nuevas de fixtures aprobadas en SQLite (repetición y conservación de bajas, roles ausentes y reversión). La suite completa se intentó ejecutar, pero se bloqueó en la prueba ASGI existente test_health_contract; se interrumpió sin atribuirle éxito. La ejecución detallada confirmó ese punto de bloqueo. No se cambió código HTTP en este avance.
+**Resultado:** evidencias manuales de migración y conexión documentadas; carga DEMO implementada. No se ejecutó la carga PostgreSQL desde el asistente.
+**Pendientes:** ejecutar carga en terminal de la autora, obtener evidencia 07, revisar bloqueo local de TestClient y validar suite en CI. Autenticación Entra y diez incidencias simuladas pendientes.

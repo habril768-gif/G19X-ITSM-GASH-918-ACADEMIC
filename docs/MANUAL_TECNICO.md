@@ -27,3 +27,7 @@ El archivo compose.yaml define API, PostgreSQL y Redis. Consultar [arranque y ve
 ## Conexión y migraciones
 
 API 0.2.0 incorpora SQLAlchemy, Psycopg, Alembic y /health/db. Consultar DATOS.md para esquema, configuración, instalación y validación. El entorno Docker debe reconstruir la imagen antes de ejecutar la migración. La revisión requerida por readiness es 0001 y debe actualizarse con nuevas revisiones futuras. El endpoint no devuelve detalles de conexión. La API todavía no ofrece operaciones de incidencias.
+
+## Fixtures de QA
+
+Seguir DATOS_DEMO.md para carga explícita, repetible y transaccional de cuentas ficticias. No permite iniciar sesión. Migración y conexión PostgreSQL están verificadas por evidencia manual en REPORTE_QA.md.

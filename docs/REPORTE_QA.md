@@ -53,3 +53,17 @@ Pruebas nuevas aprobadas: manejo de caracteres reservados en contraseña sin URL
 Las dos pruebas PostgreSQL (esquema/catálogos e identidad Entra única) se omiten sin RUN_DB_TESTS=1. No se presentan como aprobadas. La CI ahora prepara PostgreSQL aislado, aplica migración dos veces, comprueba alineación de modelos y ejecuta integración; no se ha observado su resultado remoto.
 
 Docker instalado localizado, pero conexión al pipe dockerDesktopLinuxEngine denegada para el asistente. Migración real, alembic check y /health/db contra PostgreSQL quedan pendientes. Prueba HTTP 200 nueva usa dependencia simulada y no acredita conexión real. Instrucciones en DATOS.md.
+
+## Evidencias de migración y conexión recibidas el 15 de octubre de 2026
+
+Inspección visual de [05-migracion-inicial.png](evidencias/05-migracion-inicial.png): tres contenedores healthy, revisión 0001 (head) y «No new upgrade operations detected». La autora aplicó y verificó la migración en su equipo.
+
+Inspección de [06-api-db-health-200.png](evidencias/06-api-db-health-200.png): API 0.2.0, GET /health/db, HTTP 200, status ok y database postgresql. Acredita conexión real desde la API y revisión esperada; no son resultados simulados. Los archivos recibidos eran PNG sin extensión y se renombraron sin alterar contenido.
+
+Esto completa la validación manual pendiente de la migración; las dos pruebas automáticas PostgreSQL de la suite no se consideran ejecutadas por estas capturas.
+
+## Fixtures DEMO
+
+Comando: backend/.venv/Scripts/python.exe -m pytest -q backend/tests/test_seed_demo.py. Resultado: **3 passed in 1.35s**. SQLite solo para las tablas auxiliares: roles, departamentos y users. Se verificó repetición sin duplicados, conservación de is_active=False y reversión de transacción.
+
+El intento de suite completa no terminó: se bloqueó en la prueba ASGI preexistente test_api.py::test_health_contract, confirmado con ejecución detallada; ambos intentos se interrumpieron. No se afirma una regresión completa aprobada. La carga DEMO en PostgreSQL y ejecución de CI siguen pendientes. Las ocho pruebas aprobadas del avance anterior permanecen como resultado histórico, no una ejecución nueva.

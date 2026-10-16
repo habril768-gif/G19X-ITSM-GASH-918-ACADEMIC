@@ -52,3 +52,7 @@ La autora aportó evidencia de API/PostgreSQL/Redis healthy, SELECT 1 y PONG. In
 ## Modelos y migración inicial
 
 Hito 3 en curso: modelos, migración 0001 y catálogos implementados. Pendiente aplicación real, validación PostgreSQL y usuarios/departamentos simulados. Ocho pruebas locales aprobadas; dos de integración omitidas. El hito no se marca completado todavía.
+
+## Migración validada y fixtures preparados
+
+Evidencia manual confirma migración 0001, alineación del esquema y conexión HTTP de la API a PostgreSQL. Usuarios/departamentos simulados implementados con carga explícita; ejecución PostgreSQL pendiente. Los casos de prueba y autenticación siguen pendientes.
