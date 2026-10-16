@@ -246,3 +246,11 @@
 **Validación:** 34 pruebas aprobadas, 3 PostgreSQL omitidas, 1 advertencia; pip check sin conflictos; SQL offline compilado. Revisión documental y diff sin espacios accidentales. Sin cambios a .env ni datos del motor Docker.
 **Resultado:** estructura implementada; aplicación real 0003 pendiente. Endpoints, autorización por expediente, auditoría transaccional de casos, recusa e IA siguen pendientes de servicios.
 **Pendientes:** aplicar 0003, verificar revision/alineación y health/db; conservar evidencias 12/13. Después implementar servicios protegidos y registro auditado.
+
+## 16 de octubre de 2026 — Evidencias 12 y 13
+
+**Propósito:** registrar la verificación manual de la migración 0003.
+**Cambio:** evidencias enlazadas al QA y estado de backlog/trazabilidad actualizado.
+**Validación:** inspección de revisión 0003, esquema sin cambios pendientes y GET /health/db HTTP 200. Ejecución realizada por la autora.
+**Resultado:** migración y conexión real acreditadas. Sin nuevas pruebas funcionales ejecutadas en este avance.
+**Pendientes:** servicios de autorización por expediente, creación/consulta auditadas y pruebas entre roles y departamentos. Las tres pruebas automáticas PostgreSQL siguen sin resultado observado.

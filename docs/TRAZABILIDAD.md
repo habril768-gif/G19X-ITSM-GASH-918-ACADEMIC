@@ -95,3 +95,5 @@ Todos son criterios previstos; no se han ejecutado ni se presentan como pruebas 
 ## 16 de octubre de 2026 — Esquema 0003
 
 RF-2/RF-3/RF-4: modelos y migración 0003 incorporan ámbitos, participantes/revisión, bandera y omisión IA. Pruebas en test_incident_schema.py; preservación de datos PostgreSQL prevista en test_postgres.py. No hay endpoints de casos ni autorización por objeto: AC-02/03 tienen cobertura de estructura parcial; AC-04/05/06/11/12 aún requieren servicios. Aplicación PostgreSQL de 0003 pendiente.
+
+0003: validación manual de aplicación/alineación y conexión acreditada en evidencias 12/13. RF-2/RF-4 siguen pendientes de servicios y autorización; las capturas no sustituyen pruebas de conservación de casos previos ni pruebas automáticas PostgreSQL.

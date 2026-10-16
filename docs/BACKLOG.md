@@ -88,3 +88,7 @@ Antes de implementar incidencias: validar participantes y recusa mediante estado
 ## 16 de octubre de 2026 — Esquema de incidencias
 
 0003 implementada para ámbitos/participantes/clasificación y control IA; aplicación real pendiente. Evidencias 09–11 acreditan manualmente 0002, consulta autenticada y rechazo 401 posterior, no la nueva revisión. Próximo paso tras validar 0003: servicios de autorización por objeto y registro auditado, antes del formulario React.
+
+## 16 de octubre de 2026 — 0003 verificada
+
+Evidencias 12/13 confirman migración 0003, alembic check sin diferencias y conexión HTTP 200. El siguiente avance es implementar autorización por objeto y registro/listado/detalle de incidencias, con auditoría y pruebas de ámbitos, departamentos y conflicto de interés. No hay todavía endpoints de casos aceptados.

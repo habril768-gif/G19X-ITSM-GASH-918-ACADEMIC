@@ -196,3 +196,9 @@ Cobertura nueva: combinaciones ámbito/afectado, categoría de entorno, vigencia
 Nueva prueba PostgreSQL preparada: esquema QA transaccional aislado, dos casos previos y aplicación 0003 para verificar preservación y creación ENTORNO. No fue ejecutada aquí. Aplicación real 0003, alembic check y readiness continúan pendientes de terminal Docker autorizada; no se afirman por pasar SQLite.
 
 Evidencias 09–11 inspeccionadas: revisión 0002/alineación, respuesta autenticada 200 con ADMIN_RH y 401 posterior con sesión inválida/expirada. La captura 10 guardada era la vista previa alterada; se reemplazó por la redacción determinística preparada desde el original (bloque opaco, sin alterar otros píxeles). No se reproduce ningún token. El 401 es consistente con logout reportado por la autora; su captura aislada también podría corresponder a expiración, por lo que no demuestra por sí sola causalidad exclusiva de logout.
+
+## 16 de octubre de 2026 — Validación manual de 0003
+
+Capturas aportadas por la autora e inspeccionadas visualmente: [12-migracion-incidencias.png](evidencias/12-migracion-incidencias.png) muestra servicios healthy, revisión 0003 (head) y «No new upgrade operations detected»; [13-db-health-0003.png](evidencias/13-db-health-0003.png) muestra GET /health/db, HTTP 200 y status ok/database postgresql. No se observan tokens en las capturas.
+
+Resultado: actualización y alineación del esquema y conexión desde API verificadas manualmente. No acredita por sí sola preservación con casos previos poblados, pruebas automáticas PostgreSQL omitidas, ni endpoints y permisos de incidencias todavía pendientes. No se ejecutaron comandos Docker desde el asistente en este registro.

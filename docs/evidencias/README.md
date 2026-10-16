@@ -19,3 +19,8 @@ Ambas capturas fueron inspeccionadas y documentadas en REPORTE_QA.md.
 Autenticación local: siguientes evidencias pendientes 09-migracion-auth-local.png, 10-auth-me.png y 11-logout-sesion-revocada.png. No guardar contraseñas, tokens, cuadros Authorize ni encabezados Authorization en capturas. Instrucciones en AUTENTICACION.md.
 
 09–11: migración 0002, usuario autenticado y rechazo de sesión posterior verificados visualmente. La captura 10 conserva únicamente la versión redactada a partir del original, con bloque sensible opaco. Próximas evidencias pendientes: 12-migracion-incidencias.png y 13-db-health-0003.png.
+
+- [12-migracion-incidencias.png](12-migracion-incidencias.png): revisión 0003 y esquema alineado.
+- [13-db-health-0003.png](13-db-health-0003.png): conexión real PostgreSQL con HTTP 200.
+
+Ambas inspeccionadas el 16 de octubre de 2026; limitaciones en REPORTE_QA.md.
