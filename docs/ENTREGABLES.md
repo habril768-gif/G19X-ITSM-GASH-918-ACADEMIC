@@ -21,6 +21,6 @@ Las rutas previstas no implican archivos ya creados. Los documentos se elaborar�
 
 Cada entrada de bitácora registra propósito, cambio, validación, resultado y pendientes. Las evidencias pueden ser código, comandos y salidas sanitizadas, reportes de pruebas, capturas sin datos sensibles y commits. Git conserva autor y fecha; no sustituye actas ni evidencia de actividades con personas.
 
-## Diferencia por resolver
+## Diferencia documentada
 
-El descriptivo enumera Azure OpenAI Service; el PRD enumera API de OpenAI. Antes de integrar IA se definirá proveedor y disponibilidad de cuenta, y se actualizarán arquitectura, PRD, variables y manual. No se ha contratado ni configurado ninguno.
+El descriptivo enumera Azure OpenAI Service. El 15 de octubre de 2026 la autora eligió la API directa de OpenAI, consistente con el PRD. Decisión registrada en DECISIONES.md. La conexión, el modelo y la integración siguen pendientes; no se ha realizado una llamada de prueba.

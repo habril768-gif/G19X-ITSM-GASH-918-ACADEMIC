@@ -36,3 +36,7 @@ Los siguientes hitos se completan en orden. Estado inicial: pendientes.
 9. `test: validar flujos y reproducibilidad de entrega`
 
 Los hitos pueden requerir varios commits. Se registra solo trabajo realizado, con su validación y limitaciones.
+
+## Proveedor IA definido
+
+Se usará API directa de OpenAI con LangChain. Modelo y prueba de conectividad pendientes. Véase DECISIONES.md.

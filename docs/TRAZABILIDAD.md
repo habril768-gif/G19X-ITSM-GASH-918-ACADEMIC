@@ -15,3 +15,5 @@ Base funcional: docs/PRD.md. Base académica: matriz docs/ENTREGABLES.md.
 | RNF-2 Rendimiento | API y colas | p95 < 200 ms, 10 usuarios, condiciones documentadas | Pendiente |
 
 Al implementar se añadirán rutas de archivos, nombres de pruebas y resultados reales. Esta tabla no equivale a pruebas aprobadas.
+
+RF-3: proveedor seleccionado por la autora: API directa de OpenAI. Modelo, conexión e implementación pendientes.

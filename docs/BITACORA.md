@@ -24,3 +24,15 @@
 - Cambios y evidencia identificable.
 - Validación ejecutada, resultado y limitaciones.
 - Estado de entregables, pendientes y referencia del commit cuando esté disponible.
+
+## 15 de octubre de 2026 — Selección del proveedor de IA
+
+**Propósito:** resolver la diferencia entre el descriptivo y el PRD.
+
+**Cambio:** la autora seleccionó la API directa de OpenAI mediante la captura compartida. Se actualizaron DECISIONES.md, ENTREGABLES.md, BACKLOG.md y TRAZABILIDAD.md. El PRD ya identifica ese proveedor y no requiere cambiar por esta decisión.
+
+**Validación:** comprobación de coherencia documental y de la variable OPENAI_API_KEY en .env.example. No se leyó .env ni se probaron credenciales o servicios externos.
+
+**Resultado:** proveedor definido; no hay integración ejecutada.
+
+**Pendientes:** implementar backend, seleccionar modelo, configurar credenciales localmente y probar con datos simulados.
