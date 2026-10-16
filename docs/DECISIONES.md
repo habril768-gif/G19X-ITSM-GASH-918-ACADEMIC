@@ -128,3 +128,7 @@ Se elimina promesa de estimaciones no hechas y se prioriza flujo núcleo antes d
 ## 16 de octubre de 2026 — Migración 0003
 
 Cambios aditivos sin editar migraciones previas. Casos existentes quedan PERSONA; departamento reportado toma el histórico, no el actual. Bandera preserva solo validaciones con metadatos previos completos. Categoría Riesgos conserva ID 4 del catálogo inicial. Revisión de participantes restringida por integridad de campos y sin autorrevisión; autorización global y auditoría requieren servicios futuros. Valores booleanos se declaran como expresiones SQL true/false para comportamiento consistente en SQLite/PostgreSQL. No hay downgrade automático.
+
+## 16 de octubre de 2026 — Registro y autorización SQL
+
+Predicado único para listar/contar/consultar, con exclusión de gestores involucrados y protección dinámica por roles de participantes/afectado. No exponer existencia vía ID: 404 para ausentes/no autorizados. Creación devuelve acuse, no expediente. Auditoría y participantes se guardan con el caso o se revierten juntos. Historial para empleado solo cronología sin actor/copias; motivos de participantes solo gestores autorizados. Máximo técnico 20 participantes por petición. No cambia el esquema ni implementa todavía todo el ciclo.

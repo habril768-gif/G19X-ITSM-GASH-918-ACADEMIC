@@ -358,3 +358,7 @@ Entra ID no es dependencia ni bloqueo activo. Una integración futura implica un
 - **Sesión opaca:** token aleatorio revocable; no JWT ni identidad Microsoft.
 
 La versión 1.9 precisa revisión independiente de participantes, supresión de agregados, consecuencias de confidencialidad, exclusión de reportes de testigos, prioridades de entrega, administración por API/pantalla y abstención IA. Corrige la referencia errónea a pruebas históricas no ejecutadas. No cambia código ni aplica migraciones. Las diferencias funcionales necesitan implementación y pruebas posteriores, registradas en BACKLOG.md.
+
+### Estado técnico de la entrega 0.5.0
+
+Registro y consultas backend de RF-2/RF-8 implementados parcialmente, con auditoría y acceso; sin edición ni ciclo completo. Campo participants limita a 20 entradas por petición como control técnico contra incorporación masiva. El empleado consulta cronología, sin detalles históricos que incluyan terceros; participantes detallados solo para gestores autorizados. No equivale a aceptación final; ver INCIDENCIAS.md y TRAZABILIDAD.md.

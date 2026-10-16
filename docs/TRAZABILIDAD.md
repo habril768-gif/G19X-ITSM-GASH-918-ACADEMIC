@@ -97,3 +97,7 @@ Todos son criterios previstos; no se han ejecutado ni se presentan como pruebas 
 RF-2/RF-3/RF-4: modelos y migración 0003 incorporan ámbitos, participantes/revisión, bandera y omisión IA. Pruebas en test_incident_schema.py; preservación de datos PostgreSQL prevista en test_postgres.py. No hay endpoints de casos ni autorización por objeto: AC-02/03 tienen cobertura de estructura parcial; AC-04/05/06/11/12 aún requieren servicios. Aplicación PostgreSQL de 0003 pendiente.
 
 0003: validación manual de aplicación/alineación y conexión acreditada en evidencias 12/13. RF-2/RF-4 siguen pendientes de servicios y autorización; las capturas no sustituyen pruebas de conservación de casos previos ni pruebas automáticas PostgreSQL.
+
+## 16 de octubre de 2026 — Endpoints iniciales de incidencias
+
+RF-2: api/incidents.py y services/incidents.py implementan registro con ámbitos y auditoría. Reglas de acceso/recusa y confidencialidad se aplican a lectura SQL y acuse. RF-8: opciones/listado/detalle/historial backend, sin React. Tests/test_incidents.py cubre AC-02, parte de AC-04/05/10/11/14 y rollback; no implica RF completos. Cambios de estado/participantes, provisión de RH independiente e integraciones pendientes. Resultados y limitaciones en REPORTE_QA.md.

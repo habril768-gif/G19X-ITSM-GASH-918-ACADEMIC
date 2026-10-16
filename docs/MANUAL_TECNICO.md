@@ -39,3 +39,7 @@ Esta actualización sustituye las referencias anteriores a Entra ID. Ver AUTENTI
 ## API 0.4.0 y esquema 0003
 
 Actualizar según DATOS.md, sin repetir alta del administrador. Readiness exige 0003, liveness no depende de DB. La migración no publica nuevos endpoints de casos ni ejecuta IA.
+
+## API 0.5.0 — Incidencias iniciales
+
+Consultar INCIDENCIAS.md para rutas, contrato y validación manual. Requiere esquema 0003 y sesión válida; basta reconstruir imagen, no repetir bootstrap. No hay estados de negocio mutables todavía. La auditoría inicial se realiza dentro de la transacción. Un fallo SQL devuelve 503 genérico sin consulta ni credenciales.

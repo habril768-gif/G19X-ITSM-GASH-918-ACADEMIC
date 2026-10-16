@@ -132,3 +132,7 @@ La revisión 1.9 refuerza privacidad de agregados, revisión independiente de pa
 ## Actualización de esquema 0003
 
 API 0.4.0 prepara ámbitos PERSONA/ENTORNO, participantes y clasificación vigente. Aplicar la nueva migración siguiendo [DATOS.md](docs/DATOS.md). Las cuentas existentes se conservan; no repetir bootstrap. No existen aún endpoints de incidencias.
+
+## Registro y consultas de incidencias
+
+API 0.5.0 añade rutas /incidents sobre esquema 0003, sin migración adicional. Seguir [INCIDENCIAS.md](docs/INCIDENCIAS.md) para registrar y consultar con sesión local, datos DEMO y auditoría. Asignación/transiciones, frontend e integraciones siguen pendientes.

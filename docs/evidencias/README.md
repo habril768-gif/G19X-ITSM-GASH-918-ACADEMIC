@@ -24,3 +24,5 @@ Autenticación local: siguientes evidencias pendientes 09-migracion-auth-local.p
 - [13-db-health-0003.png](13-db-health-0003.png): conexión real PostgreSQL con HTTP 200.
 
 Ambas inspeccionadas el 16 de octubre de 2026; limitaciones en REPORTE_QA.md.
+
+Próximas evidencias previstas: 14-registro-incidencia-201.png y 15-listado-incidencias-200.png, solo Server response con datos simulados y sin token/Curl.

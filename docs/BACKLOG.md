@@ -92,3 +92,7 @@ Antes de implementar incidencias: validar participantes y recusa mediante estado
 ## 16 de octubre de 2026 — 0003 verificada
 
 Evidencias 12/13 confirman migración 0003, alembic check sin diferencias y conexión HTTP 200. El siguiente avance es implementar autorización por objeto y registro/listado/detalle de incidencias, con auditoría y pruebas de ámbitos, departamentos y conflicto de interés. No hay todavía endpoints de casos aceptados.
+
+## 16 de octubre de 2026 — Registro y consultas
+
+RF-2 parcial: alta PERSONA/ENTORNO auditada, confidencialidad preventiva y declaración de participantes. RF-8 backend parcial: opciones, listado con filtros/paginación, detalle, participantes e historial restringidos. API 0.5.0 mantiene esquema 0003. Validación manual PostgreSQL de estos endpoints pendiente. Siguiente: validación/edición y asignación/transiciones auditadas; frontend e integraciones no están terminados.

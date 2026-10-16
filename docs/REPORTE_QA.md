@@ -202,3 +202,13 @@ Evidencias 09–11 inspeccionadas: revisión 0002/alineación, respuesta autenti
 Capturas aportadas por la autora e inspeccionadas visualmente: [12-migracion-incidencias.png](evidencias/12-migracion-incidencias.png) muestra servicios healthy, revisión 0003 (head) y «No new upgrade operations detected»; [13-db-health-0003.png](evidencias/13-db-health-0003.png) muestra GET /health/db, HTTP 200 y status ok/database postgresql. No se observan tokens en las capturas.
 
 Resultado: actualización y alineación del esquema y conexión desde API verificadas manualmente. No acredita por sí sola preservación con casos previos poblados, pruebas automáticas PostgreSQL omitidas, ni endpoints y permisos de incidencias todavía pendientes. No se ejecutaron comandos Docker desde el asistente en este registro.
+
+## 16 de octubre de 2026 — Registro y consultas API 0.5.0
+
+Suite completa: **45 passed, 3 skipped, 1 warning in 8.67s**. Comando: backend/.venv/Scripts/python.exe -m pytest -q backend/tests. La advertencia TestClient/httpx es conocida; las tres pruebas PostgreSQL siguen omitidas sin RUN_DB_TESTS. pip check sin conflictos.
+
+Once pruebas nuevas en tests/test_incidents.py: registro y cronología reducida; registro de tercero/autor falsificado rechazado; riesgo sin víctima y límites; IDOR y conteos; acuse confidencial sin expediente; Admin RH declarado sin acceso y gestor independiente con acceso; supervisor afectado y promoción dinámica; participantes fuera de ámbito/duplicados; creación por supervisor/admin; rollback ante auditoría fallida; opciones, comodines literales, filtros/paginación y textos vacíos.
+
+Las pruebas HTTP usan SQLite con FK y sustituyen solo current_user por actores ficticios. No acreditan una sesión real PostgreSQL de estos endpoints ni todo el ciclo. La suite de autenticación existente sí se ejecutó junto con ellas. El primer intento HTTP fue interrumpido por bloqueo del entorno; se concedieron sockets locales y la ejecución final terminó.
+
+Pendientes: reconstruir Docker, prueba manual de opciones/registro/listado/detalle con Admin RH, evidencias 14/15. No hay nueva migración: se mantiene 0003. Asignación, transición, revisión de participantes, frontend, IA y correo no se presentan como implementados.

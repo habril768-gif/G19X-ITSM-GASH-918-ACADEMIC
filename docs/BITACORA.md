@@ -254,3 +254,11 @@
 **Validación:** inspección de revisión 0003, esquema sin cambios pendientes y GET /health/db HTTP 200. Ejecución realizada por la autora.
 **Resultado:** migración y conexión real acreditadas. Sin nuevas pruebas funcionales ejecutadas en este avance.
 **Pendientes:** servicios de autorización por expediente, creación/consulta auditadas y pruebas entre roles y departamentos. Las tres pruebas automáticas PostgreSQL siguen sin resultado observado.
+
+## 16 de octubre de 2026 — Registro y lectura protegidos
+
+**Propósito:** comenzar gestión funcional de casos conforme al PRD 1.9.
+**Cambios:** API 0.5.0; POST/GET /incidents, opciones, detalle, participantes e historial; autorización SQL común por rol/ámbito/conflicto, acuse seguro y auditoría transaccional. Guía INCIDENCIAS.md y seguimiento actualizados. Sin cambios a .env, esquema o cuentas.
+**Validación:** 45 pruebas aprobadas, 3 PostgreSQL omitidas, 1 advertencia; pip check sin conflictos. Once casos nuevos comprueban acceso y rollback. Pruebas SQLite/HTTP con identidades simuladas; no se ejecutaron comandos Docker desde el asistente.
+**Resultado:** registro/listados/detalle backend parcial implementado. Validación manual PostgreSQL de endpoints pendiente.
+**Pendientes:** reconstruir imagen y obtener evidencias 14/15. Luego validación/edición, asignación y transiciones auditadas; API completa de administración y frontend pendientes.
