@@ -1,0 +1,23 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.coverage
+# Frontend
+node_modules/
+dist/
+coverage/
+# Editors and OS
+.vscode/
+.idea/
+desktop.ini
+Thumbs.db
+~$*.docx
+# Local data
+*.log
+.pgdata/
