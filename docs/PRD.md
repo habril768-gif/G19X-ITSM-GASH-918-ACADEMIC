@@ -1,305 +1,314 @@
-# PRD PluriOne 1.7
+# PRD PluriOne 1.8
 
-Base de desarrollo elegida por la autora. No requiere aprobación de terceros para iniciar el proyecto. La copia Word conserva el documento recibido; esta versión Markdown elimina las condiciones de aprobación que ya no aplican.
+Plataforma Inteligente de Gestión de Incidencias Laborales para PluriOne S.A. de C.V.
 
-PRODUCT REQUIREMENTS DOCUMENT (PRD)
-
-Plataforma Inteligente de Gestión de Incidencias Laborales
-
-Documento de requisitos del producto
-
-| Empresa | PluriOne S.A. de C.V. (Develop Talent & Technology) |
+| Dato | Valor |
 | --- | --- |
-| Versión | 1.7 |
-| Fecha | 15 de octubre de 2026 |
+| Clave | G19X-ITSM-GASH-918-ACADEMIC |
 | Autora | Gilian Abril Sánchez Hernández |
+| Fecha de consolidación | 15 de octubre de 2026 |
+| Versión | 1.8 — base de desarrollo |
+| Autenticación | Local en FastAPI |
+| Fuente vigente | Este archivo PRD.md |
 
-1. Visión del Producto
+Este documento consolida las reglas del MVP. Describe comportamiento requerido, no certifica funcionalidad implementada. El estado real y sus evidencias se consultan en [TRAZABILIDAD.md](TRAZABILIDAD.md), [BACKLOG.md](BACKLOG.md) y [REPORTE_QA.md](REPORTE_QA.md). La copia Word 1.6 es histórica; las versiones previas de este texto se conservan en Git. No se exige aprobación de terceros para desarrollar.
 
-Desarrollar una plataforma HRTech para PluriOne S.A. de C.V. que automatice la gestión de incidencias laborales mediante Inteligencia Artificial (OpenAI + LangChain), garantizando la confidencialidad desde el origen, trazabilidad humana y eficiencia operativa.
+## Índice
 
-2. Alcance del Proyecto (MVP)
+- [1. Objetivo y alcance](#1-objetivo-y-alcance)
+- [2. Actores y permisos](#2-actores-y-permisos)
+- [3. Reglas de negocio](#3-reglas-de-negocio)
+- [4. Requisitos funcionales](#4-requisitos-funcionales)
+- [5. Arquitectura y tecnologías](#5-arquitectura-y-tecnologías)
+- [6. Modelo de datos objetivo](#6-modelo-de-datos-objetivo)
+- [7. Seguridad y datos](#7-seguridad-y-datos)
+- [8. Requisitos no funcionales](#8-requisitos-no-funcionales)
+- [9. Evaluación y aceptación](#9-evaluación-y-aceptación)
+- [10. Plan de entrega](#10-plan-de-entrega)
+- [11. Supuestos dependencias y riesgos](#11-supuestos-dependencias-y-riesgos)
+- [12. Glosario y cambios](#12-glosario-y-cambios)
 
-| In-Scope (Fase 1) | Out-of-Scope (Fase 2+) |
+## 1. Objetivo y alcance
+
+Registrar, clasificar y dar seguimiento a incidencias, con decisiones humanas auditables y acceso restringido. El MVP académico se demuestra exclusivamente con datos simulados. No se ha medido todavía una mejora operativa real; se evaluarán funcionamiento y métricas técnicas.
+
+| Dentro del MVP | Fuera del MVP |
 | --- | --- |
-| Registro y seguimiento de incidencias laborales. | Integración nativa con Nómina. |
-| Clasificación automática por IA (Categoría/Prioridad). | App móvil nativa (iOS/Android). |
-| Notificaciones automatizadas de alertas. | Chatbots para empleados finales. |
-| Panel administrativo y analítica (Power BI). | Gestión de nómina o pagos. |
-| Autenticación local con correo y contraseña. | Eliminación física y lógica de incidencias. |
+| Autenticación local; cuentas administradas por Admin RH | Entra ID, MFA y registro público |
+| Incidencias personales y riesgos generales | Nómina, pagos y procedimientos legales automatizados |
+| Clasificación asistida y validación humana | Decisiones disciplinarias automáticas y chatbots |
+| Panel React, filtros y detalle | Aplicaciones móviles nativas |
+| Correo por eventos | SLA, vencimientos, escalamiento por tiempo y alertas periódicas |
+| Analítica agregada Power BI Desktop | Dashboard de Power BI con expedientes individuales |
+| Historial, manuales, QA y plan de soporte | Uso de datos laborales reales y despliegue productivo |
 
-3. Stack Tecnológico
+No se permite eliminar incidencias mediante la aplicación. Los errores de registro se resuelven administrativamente con motivo, siguiendo el ciclo normal.
 
-Frontend: React.js (Interfaz de usuario y dashboards).
+## 2. Actores y permisos
 
-Backend: Python con FastAPI (API REST y lógica de negocio).
+- **Empleado:** registra hechos personales o riesgos de su departamento y consulta sus casos personales no confidenciales.
+- **Supervisor:** registra y gestiona casos de su departamento cuando no sean confidenciales y no esté involucrado.
+- **Admin RH:** administra cuentas y gestiona casos, incluidos confidenciales, excepto aquellos en los que esté involucrado.
+- **Gerencia:** recibe reportes agregados; no es un rol de acceso a expedientes en el MVP.
+- **Operador del servidor:** provisiona el primer administrador, restablece contraseñas y realiza mantenimiento. No se presume que pueda atender expedientes mediante la aplicación.
 
-Inteligencia Artificial: LangChain + OpenAI API (Clasificación de texto y sugerencias).
+Los permisos requieren cuenta y departamento activos y se aplican en la API, no solo ocultando botones. Estar asignado nunca otorga acceso que contradiga estas reglas.
 
-Base de Datos: PostgreSQL (Almacenamiento de incidencias, usuarios e historial).
+| Operación | Empleado | Supervisor | Admin RH no involucrado |
+| --- | --- | --- | --- |
+| Crear personal | Afectado = él mismo | Afectado de su departamento | Cualquier afectado |
+| Crear riesgo general | Su departamento | Su departamento | Cualquier departamento |
+| Consultar personal no confidencial | Si es el afectado | Departamento actual del afectado | Sí |
+| Consultar riesgo general no confidencial | Solo si lo creó y sigue en ese departamento | Departamento reportado | Sí |
+| Consultar confidencial | No, incluso si reportó | No | Sí |
+| Validar, asignar, resolver | No | Caso visible sin conflicto | Sí |
+| Cerrar, reabrir o retirar confidencialidad | No | No | Sí |
+| Administrar cuentas y departamentos | No | No | Sí, con restricciones de RF-7 |
 
-Cache/Colas: Redis (Cola asíncrona para clasificación IA y caché de sesiones).
+## 3. Reglas de negocio
 
-Seguridad: autenticación propia FastAPI, Argon2id y sesiones revocables.
+### 3.1 Categorías y prioridad
 
-Infraestructura: Docker y GitHub Actions (CI/CD).
-
-Analítica: Power BI Desktop (Visualización de KPIs).
-
-4. Catálogo de Categorías y Prioridades
-
-| Categoría | Definición | Ejemplo |
+| Categoría | Definición | Ejemplo simulado |
 | --- | --- | --- |
-| Ausencias | Faltas injustificadas, retardos recurrentes o permisos no autorizados. | "El empleado faltó 3 días sin avisar." |
-| Conflictos | Problemas interpersonales entre compañeros o con superiores. | "Discusión verbal por uso de recursos compartidos." |
-| Incumplimientos | Violación de políticas internas o normas de conducta. | "Uso indebido de equipo de cómputo en horario laboral." |
-| Riesgos | Condiciones inseguras en el entorno laboral. | "Piso mojado sin señalización en pasillo principal." |
-| Solicitudes Administrativas | Trámites internos que requieren seguimiento de RRHH. | "Solicitud de constancia laboral para trámite bancario." |
+| Ausencias | Faltas, retardos y permisos no autorizados | Ausencia sin aviso |
+| Conflictos | Problemas interpersonales | Discusión por recursos compartidos |
+| Incumplimientos | Violaciones de políticas internas | Uso indebido de equipo |
+| Riesgos | Condiciones inseguras o accidentes menores | Piso mojado sin señalización |
+| Solicitudes Administrativas | Trámites que requieren seguimiento | Solicitud de constancia |
 
-Niveles de Prioridad:
+Prioridad Alta: amenaza inmediata de seguridad, conflicto activo con riesgo de daño o plazo explícito con consecuencia grave. Media: impacto operativo que requiere atención pronta sin amenaza inmediata. Baja: situación sin urgencia identificada. Ante ambigüedad, el responsable humano determina prioridad y registra justificación. Una categoría no determina automáticamente su prioridad. Estas prioridades no constituyen SLA ni reemplazan canales de emergencia.
 
-Alta: Riesgo inminente de seguridad, conflicto activo o impacto legal.
+### 3.2 Persona, entorno y participantes
 
-Media: Afecta la operación diaria o requiere intervención pronta.
+`scope` distingue PERSONA y ENTORNO. PERSONA requiere `affected_employee_id`; ENTORNO exige que sea nulo y solo admite categoría Riesgos. En ENTORNO es obligatorio `reported_department_id`.
 
-Baja: Trámite administrativo o situación menor sin urgencia.
+Un empleado reporta un conflicto que le afecta seleccionándose como afectado y declarando a otros participantes; no registra una incidencia personal exclusivamente sobre un tercero. Los hechos sobre terceros que no le afectan se canalizan a RH, fuera del formulario personal. Un riesgo físico sin víctima se registra como ENTORNO; no se inventa un empleado afectado.
 
-5. Ciclo de Vida de la Incidencia (Estados y Transiciones)
+El departamento reportado de PERSONA se obtiene del afectado al registrar. `department_id_at_creation` es la copia inmutable de ese departamento; en ENTORNO es copia del departamento reportado. Sirve para analítica histórica. La visibilidad personal utiliza el departamento actual del afectado; la de ENTORNO, el departamento reportado. Los cambios de departamento requieren revisar asignaciones que pierdan autorización.
 
-Se define un flujo lineal con opción de reapertura controlada. La clasificación oficial (category_id) se valida antes de entrar a revisión.
+Los participantes declarados se guardan por ID en una relación aparte; el afectado cuenta siempre como involucrado. El reportante no cuenta como involucrado por el solo hecho de registrar. Los participantes se declaran dentro del ámbito autorizado; RH puede completarlos con auditoría. Las restricciones se recalculan cuando cambian participantes o roles.
 
-| Estado | Descripción |
+### 3.3 Confidencialidad y conflicto de interés
+
+Cualquier rol puede solicitar confidencialidad al crear. Mientras sea confidencial, el reportante pierde acceso; el formulario lo explica antes de guardar.
+
+Un caso que involucre a un Supervisor o Admin RH pasa automáticamente a confidencial y exige atención por un Admin RH no involucrado. Una persona involucrada con privilegios de gestión no puede consultar, asignar, clasificar, resolver, cerrar, reabrir ni modificar restricciones de su caso. No basta ocultar el botón. No se excluye a un empleado de sus casos personales no confidenciales por ser el afectado.
+
+Si no hay Admin RH activo e independiente, el caso queda PENDIENTE y restringido, sin responsable, hasta disponer de uno. El operador podrá provisionar una cuenta independiente mediante el procedimiento administrativo, sin otorgar acceso al involucrado ni autoasignar el caso. No se garantiza resolución mientras falte ese responsable.
+
+Solo Admin RH no involucrado puede cambiar confidencialidad de un caso existente. En EN_REVISION, pasar a confidencial exige reasignar atómicamente a un Admin RH activo e independiente; si no existe, se devuelve a PENDIENTE, conserva historial y queda sin responsable. Este retroceso solo se admite para protección de acceso, con motivo obligatorio. En RESUELTA/CERRADA se exige reapertura antes del cambio.
+
+Retirar confidencialidad exige motivo y no puede hacerse mientras siga involucrado un Supervisor/Admin RH. La corrección de participantes también exige motivo y auditoría; nunca puede realizarla el involucrado. El acceso no se restaura por haber empezado RH a atender el caso, sino por cambiar válidamente la restricción.
+
+### 3.4 Estados y validez de clasificación
+
+Se usan exclusivamente PENDIENTE, EN_REVISION, RESUELTA y CERRADA.
+
+| Transición | Actor autorizado | Condiciones |
+| --- | --- | --- |
+| PENDIENTE → EN_REVISION | Supervisor autorizado o Admin RH independiente | Responsable activo y autorizado; categoría/prioridad; validación vigente; registrar inicio del ciclo |
+| EN_REVISION → RESUELTA | Supervisor autorizado o Admin RH independiente | Validación vigente; resolución no vacía; registrar resolved_at |
+| RESUELTA → CERRADA | Admin RH independiente | Registrar closed_at |
+| RESUELTA/CERRADA → EN_REVISION | Admin RH independiente | Motivo; responsable activo autorizado; archivar ciclo; limpiar resolución y fechas finales; actualizar inicio |
+| EN_REVISION → PENDIENTE | Admin RH independiente | Solo protección por confidencialidad sin responsable elegible; motivo e historial; desasignación atómica |
+
+`classification_valid` inicia en FALSE y es la fuente explícita de vigencia. `validated_by` y `validated_at` identifican la última validación y no se borran al invalidarla. Editar descripción o cambiar la categoría/prioridad oficial pone la bandera en falso; confirmar validación la vuelve verdadera y actualiza actor/fecha. La validación confirma categoría y prioridad juntas. La corrección y su confirmación pueden ser una sola operación auditada.
+
+Un caso EN_REVISION puede permanecer allí con bandera falsa tras una edición, pero no puede resolverse hasta revalidar. Solo se exige validación vigente al entrar inicialmente en revisión y al resolver. La sugerencia IA original no se sustituye ni relanza automáticamente al editar; se avisa que corresponde al texto anterior.
+
+La reapertura archiva resolución y fechas anteriores, conserva clasificación si sigue vigente y registra cada ciclo. Cualquier cambio posterior de descripción requiere revalidación. Todos los cambios de estado, responsable, validación y acceso se guardan en una transacción con el evento de auditoría.
+
+## 4. Requisitos funcionales
+
+### RF-1 Autenticación local
+
+Correo único sin distinguir mayúsculas, contraseña de 12–128 caracteres con Argon2id, cuenta/departamento activos, sin registro público. Primer Admin RH mediante comando interactivo del operador. Sesión opaca de 256 bits, digest SHA-256 en base, una hora de vigencia. Roles se consultan en base. Logout revoca sesión actual; cambio/restablecimiento de contraseña revoca todas. Cinco fallos por correo bloquean 15 minutos con respuesta genérica. Recuperación inicial por operador, no por correo.
+
+**Aceptación:** login válido permite /auth/me; contraseña incorrecta, expiración y logout rechazan acceso; cuenta desactivada pierde acceso; ningún hash aparece en respuestas. No se requieren credenciales Microsoft ni JWT.
+
+### RF-2 Registro y edición
+
+Formulario: título, descripción, fecha del evento, ámbito, afectado cuando aplique, departamento cuando aplique, participantes y solicitud de confidencialidad. El servidor obtiene autor, departamento histórico y estado PENDIENTE. Aplica reglas de actores y conflicto antes de devolver datos. La respuesta de creación confidencial no expone el expediente a quien perdió acceso; solo confirma recepción.
+
+Solo gestores autorizados editan título/descripción en PENDIENTE o EN_REVISION, conservando valores anteriores. RESUELTA/CERRADA requieren reapertura. No hay eliminación ni estado ANULADA.
+
+**Aceptación:** rechazar ámbito/afectado incompatibles, registros fuera de departamento y cambios no autorizados; permitir riesgo sin víctima; la edición invalida clasificación; los errores se resuelven con motivo «Registro creado por error; sin acción correctiva» siguiendo el flujo normal.
+
+### RF-3 Clasificación IA y validación humana
+
+OpenAI mediante LangChain y worker Redis. El MVP procesa solo textos simulados, no confidenciales y revisados para no incluir identificadores personales. No se envía automáticamente la descripción original: un gestor autorizado confirma un `ai_input_text` simulado y mínimo antes de encolar. Los casos confidenciales, conflictos de interés y textos no elegibles se clasifican manualmente, con `ai_status=OMITIDA` y motivo.
+
+Antes de enviar, el worker vuelve a comprobar elegibilidad y permisos. Si el caso se volvió confidencial, cancela el envío. Si la petición externa ya salió, no se puede retirar; se registra el hecho y se descarta la respuesta para uso operativo. No se puede afirmar confidencialidad retroactiva sobre información ya enviada.
+
+La IA devuelve categoría, prioridad y sugerencia estructuradas. Validar contra catálogo y esquema; rechazar instrucciones incrustadas como órdenes de sistema. No ejecuta acciones, correos ni decisiones disciplinarias. Guardar la primera respuesta válida y la versión del texto enviado, modelo y versión de prompt, sin claves.
+
+Hasta tres intentos ante fallos transitorios; si falla, marcar FALLIDA y permitir clasificación manual. Respuesta tardía nunca cambia decisión humana. PENDIENTE, COMPLETADA, FALLIDA y OMITIDA describen el trabajo IA, no el estado del caso.
+
+**Aceptación:** UI muestra sugerencia y decisión por separado; validación explícita actualiza bandera/actor/fecha; caso confidencial no inicia una llamada; una falla no impide atención manual; auditoría conserva correcciones.
+
+### RF-4 Asignación y ciclo
+
+Gestores solo asignan a usuarios activos autorizados y no involucrados. Cumplir matriz de transiciones; no basta ser responsable para acceder. Registrar cada ciclo y evitar actualizaciones concurrentes que omitan validación o acceso.
+
+**Aceptación:** rechazar saltos, responsable sin acceso y resolución sin revalidación; reapertura conserva historia; protección por confidencialidad nunca deja un supervisor como responsable de un caso restringido.
+
+### RF-5 Correo por eventos
+
+Eventos: creación hacia RH elegible sin asignado; asignación/reasignación al nuevo responsable; resolución al reportante y afectado si pueden consultar; reapertura al responsable. Verificar acceso e independencia justo antes de enviar; deduplicar destinatarios/eventos. Sin destinatario autorizado, registrar omisión. Un caso confidencial nunca notifica al reportante o afectado sin permiso.
+
+Asunto con ID de caso y cuerpo con enlace; sin nombres, descripción o resolución. En desarrollo usar SMTP de pruebas con buzón capturador, sin correo real. Configuración por variables; servicio concreto configurable. Correos asíncronos, hasta tres reintentos transitorios; fallo final visible a RH autorizado. No bloquea creación.
+
+**Aceptación:** comprobar eventos, exclusiones por acceso, deduplicación, reintentos y fallo sin revertir el caso. No se prometen alertas por vencimiento ni SLA.
+
+### RF-6 Analítica agregada
+
+Power BI Desktop de uso Admin RH y Gerencia. Importación solo desde vistas agregadas con cuenta de lectura; sin registros individuales, nombres, emails, texto de casos o resoluciones. Agrupar por mes, categoría y departamento histórico. Actualización manual con fecha de corte visible. Casos confidenciales solo contribuyen a agregados sin texto ni identificadores; no usar filtros que revelen expedientes individuales.
+
+- **Volumen:** contar IDs únicos por fecha de creación y dimensiones.
+- **Resolución del último ciclo:** promedio en horas de resolved_at − cycle_start_at para casos cuyo último ciclo esté resuelto/cerrado; excluir ciclos abiertos. Consultas históricas usan ciclos archivados.
+- **Reapertura:** población = casos con al menos una resolución en el periodo; numerador = IDs de esa población reabiertos después de la primera resolución del periodo hasta fecha de corte; cada ID una vez. Denominador cero: «Sin datos».
+- **Concordancia operativa:** coincidencia de categoría sugerida y humana en casos con ambas; excluir IA omitida/fallida y contarlas aparte. No equivale a precisión contra referencia.
+
+**Aceptación:** fórmulas con conjuntos conocidos, ciclos múltiples y población vacía; modelo Power BI sin datos prohibidos. No sustituye al panel de expedientes React.
+
+### RF-7 Administración de usuarios y departamentos
+
+Admin RH crea cuentas y asigna roles/departamentos. No hay registro público ni contraseña común de seed. Registrar altas, cambios, bajas y restablecimientos sin guardar contraseñas en auditoría. Cambiar rol/departamento o desactivar exige revisar casos asignados y reasignar si se pierde acceso. Revocar sesiones al cambiar privilegios o credencial. Impedir dejar el sistema sin Admin RH activo con acceso local.
+
+Bootstrap y recuperación por operador quedan separados de las operaciones de RH. Las cuentas DEMO no pueden iniciar sesión hasta asignarles contraseña explícitamente. Usuarios externos futuros solo por vinculación verificada, sin unificación automática por email.
+
+**Aceptación:** empleado/supervisor reciben 403 en administración; duplicado de correo recibe conflicto; baja impide acceso; cambio no deja casos sin responsable indebidamente y queda auditado. La gestión completa aún debe implementarse.
+
+### RF-8 Panel operativo React
+
+Pantallas: login, listado de casos, registro, detalle con historial y validación, administración RH. Listado paginado (20 por defecto, máximo 100), orden por creación descendente y filtros por estado, prioridad, categoría, responsable y rango de creación. Búsqueda por ID y título dentro del conjunto autorizado; no búsqueda libre de textos confidenciales fuera del expediente.
+
+Detalle: información, participantes según acceso, responsable, sugerencia IA cuando exista, decisión oficial, vigencia, resolución e historial. Botones según estado/rol, sin sustituir controles API. Estados de carga, vacío, error, IA omitida/fallida y sesión expirada. Bandeja RH sin responsable y contadores operativos respetan las mismas restricciones.
+
+**Aceptación:** datos ajenos no aparecen en filas, conteos, búsquedas o filtros; paginación consistente; deep link sin autorización rechazado; logout elimina token de memoria y vuelve a login. El token no se guarda en URL ni almacenamiento persistente del navegador.
+
+## 5. Arquitectura y tecnologías
+
+| Componente | Tecnología y responsabilidad |
 | --- | --- |
-| PENDIENTE | Pendiente de completar validación de clasificación y asignación. |
-| EN_REVISION | Asignada a un responsable para análisis y resolución. |
-| RESUELTA | Caso cerrado internamente, esperando confirmación final. |
-| CERRADA | Finalizada administrativamente. Solo admite reapertura. |
+| Cliente | React; panel y consumo de API |
+| API | Python/FastAPI; autorización y transacciones |
+| Persistencia | PostgreSQL, SQLAlchemy, Psycopg; Alembic para migraciones |
+| Identidad | Argon2id y sesiones en PostgreSQL |
+| Trabajo asíncrono | Redis y worker para IA/correo; librería de tareas por decidir antes de implementar |
+| Clasificación | API directa OpenAI con LangChain; modelo por evaluar |
+| Correo | SMTP configurable; capturador de pruebas en desarrollo |
+| Analítica | Power BI Desktop y vistas agregadas |
+| Ejecución | Docker Compose local y GitHub Actions para verificaciones |
 
-Matriz de Transiciones y Reglas:
+Redis no almacena las sesiones de autenticación actuales. No se presenta la configuración de CI como despliegue continuo ya implementado. APIs de negocio, worker y frontend se implementan por hitos del backlog.
 
-| Transición | Quién puede ejecutarla | Condiciones Obligatorias |
+## 6. Modelo de datos objetivo
+
+Los nombres técnicos existentes se conservan para no renombrar columnas sin necesidad. Nombres de interfaz en español. UUID para entidades operativas; catálogos con ID entero; fechas operativas UTC con zona horaria.
+
+| Entidad | Campos y reglas |
+| --- | --- |
+| roles | id, nombre: ADMIN_RH, SUPERVISOR, EMPLEADO |
+| departamentos | id, nombre único, is_active |
+| users | id estable, email único sin mayúsculas, nombre_completo, departamento_id, rol_id, is_active; tenant_id/external_id opcionales y emparejados, reservados para identidad futura |
+| local_credentials | user_id, password_hash Argon2id, updated_at |
+| auth_sessions | token_hash, user_id, created_at, expires_at, revoked_at |
+| login_throttle | email normalizado, failures, locked_until |
+| categorias_incidencia | id, nombre, descripcion; cinco categorías |
+| incidencias | id, titulo, descripcion, incident_date, scope, reported_department_id, department_id_at_creation, created_by, affected_employee_id nullable según scope, assigned_to nullable en PENDIENTE, status, priority nullable inicialmente, category_id nullable inicialmente, classification_valid, validated_by, validated_at, is_confidential, ai_status, ai_input_text, ai_input_reviewed_by/at, ai_suggestion, ai_error, ai_skip_reason, ai_model, ai_prompt_version, resolution_text, cycle_start_at, resolved_at, closed_at, reopening_reason, created_at, updated_at |
+| incident_involved_users | incidencia_id, user_id; pareja única; participantes declarados para conflicto de interés |
+| historial_incidencias | id, incidencia_id nullable, affected_user_id nullable, usuario_id nullable para sistema, accion, detalle JSONB con valores anteriores/nuevos, fecha; exigir al menos un destino |
+
+Acciones de auditoría: CREADO, ESTADO_CAMBIADO, ASIGNADO, REAPERTURA, VALIDACION_IA, CAMBIO_CONFIDENCIALIDAD, CONTENIDO_EDITADO, USUARIO_ACTUALIZADO. Los detalles distinguen operaciones específicas y ciclos; no contienen contraseñas, tokens o claves. USUARIO_ACTUALIZADO usa affected_user_id sin forzar incidencia_id. El nombre usuario_id significa actor, no siempre el usuario modificado.
+
+La historia de ciclos se conserva completa en eventos de transición con inicio y fechas finales. Historial inmutable mediante servicios y privilegios de aplicación separados de migración antes de entrega externa.
+
+**Diferencia con el código actual:** 0001 y 0002 no se reescriben. scope, reported_department_id, participantes, classification_valid y campos adicionales de control IA todavía requieren una migración futura y servicios. El esquema actual exige afectado y no permite OMITIDA; no debe afirmarse que ya soporta este modelo objetivo. La migración deberá rellenar casos existentes como PERSONA y obtener su departamento histórico, sin pérdida de datos.
+
+## 7. Seguridad y datos
+
+### 7.1 Uso permitido y minimización
+
+Solo datos simulados en el MVP académico y pruebas. No introducir expedientes reales, información médica ni identificadores reales en la IA. Casos confidenciales o con conflicto de interés: clasificación manual, sin envío externo. Credenciales solo en .env local excluido de Git; variables de ejemplo sin secretos. No registrar tokens, contraseñas ni cuerpos de login en logs/capturas.
+
+La revisión del texto antes de IA no garantiza anonimización de datos reales. El uso real queda bloqueado hasta definir base de tratamiento, información a las personas, responsables, proveedores, conservación y medidas aplicables con los responsables de la organización. Este PRD no acredita cumplimiento legal ni fija una retención obligatoria para expedientes reales.
+
+### 7.2 Conservación y acceso operativo
+
+Datos de demostración: conservar hasta cierre de la evaluación académica y hasta 30 días después; luego el operador elimina la base de demostración o la sustituye por un conjunto limpio mediante procedimiento documentado. No es eliminación desde la aplicación. Si la institución exige otro plazo para evidencia académica, registrar el ajuste antes de esa limpieza. Capturas del repositorio solo con datos simulados; no incluir bases ni respaldos en Git.
+
+Sesiones expiradas/revocadas e intentos antiguos: planificar limpieza técnica tras 30 días, preservando únicamente eventos necesarios sin secretos. Hasta implementar limpieza no afirmar que se ejecuta automáticamente. Respaldos de pruebas con el mismo plazo y acceso restringido al operador. Retención productiva y ejercicio de derechos quedan como condición previa al uso real, no como funcionalidad terminada.
+
+## 8. Requisitos no funcionales
+
+- **RNF-1 Seguridad:** HTTPS para acceso externo; HTTP solo en loopback local. Validar sesión y autorización por objeto en cada solicitud protegida. Sin secretos en logs, respuestas o repositorio. Limitación global de tráfico y revisión de privilegios antes de exposición pública; bloqueo por cuenta ya definido en RF-1.
+- **RNF-2 Rendimiento:** p95 de operaciones simples de lectura/creación/actualización inferior a 200 ms, con 10 usuarios simultáneos en Docker local, 100 incidencias simuladas y prueba sostenida de 5 minutos tras calentamiento. Excluir duración de servicios externos; incluir encolado en creación. Registrar hardware, errores y resultados. No se acredita hasta medir.
+- **RNF-3 Reproducibilidad:** arranque documentado, migraciones desde base vacía y actualización sin pérdida de datos, dependencias fijadas, .env.example, Docker y CI. Declarar resultados locales y remotos por separado.
+- **RNF-4 Trazabilidad:** cambios de negocio y evento de auditoría en misma transacción. Rechazo sin efectos parciales. Copias previas de descripción, clasificación y ciclos recuperables por usuarios autorizados.
+- **RNF-5 Operación:** manuales de instalación/uso, plan de soporte y recuperación probado con datos simulados antes de entrega. No se presupone alta disponibilidad ni escalabilidad por usar Docker.
+
+## 9. Evaluación y aceptación
+
+### 9.1 IA
+
+Conjunto inicial de evaluación: 50 casos simulados, 10 por categoría; al menos 10 de prioridad Alta, 10 Media y 10 Baja. Etiquetas de referencia y justificación fijadas antes de ejecutar; casos distintos de ejemplos de prompt. Registrar modelo, prompt, fecha, respuestas válidas/fallidas y matriz de confusión por categoría y prioridad.
+
+Metas de ingeniería iniciales, no garantías estadísticas: al menos 45/50 categorías correctas y 40/50 prioridades correctas. Revisión obligatoria de todos los falsos negativos de prioridad Alta; cualquier Alta etiquetada que salga Baja debe corregirse y reevaluarse antes de aceptar la sugerencia de prioridad. No se ajusta la referencia para mejorar la puntuación. Si se usa el conjunto para ajustar el prompt, se prepara otro conjunto independiente antes de la aceptación final.
+
+Los 20 casos anteriores quedan como smoke test histórico, sin sustituir esta evaluación. Si no se cumplen metas, la gestión manual sigue operativa, pero RF-3 no se marca aceptado. Evaluar también omisión de confidenciales, JSON inválido, cola fallida, duplicación y respuesta tardía.
+
+### 9.2 Flujos y pruebas
+
+Validar autenticación, roles, IDOR, departamentos, riesgos sin víctima, conflictos sobre Supervisor y Admin RH, falta de gestor independiente, cambio de participantes, confidencialidad y notificaciones. Probar edición con clasificación inválida, revalidación, transiciones, reaperturas múltiples, concurrencia y rollback. Diez incidencias simuladas de demostración se crean mediante el servicio auditado; los fixtures no eluden reglas.
+
+Cada RF requiere evidencia en REPORTE_QA.md y trazabilidad al código/prueba. No marcar aprobado por existencia de pantalla o captura de ejemplo. Aceptación global: RF-1 a RF-8 implementados y verificados, sin fallos pendientes de acceso o pérdida de datos, instalación reproducible y documentos académicos completos.
+
+## 10. Plan de entrega
+
+El cronograma de seis semanas anterior se reemplaza por secuencia de hitos con estimación revisable de esfuerzo. No se ha comunicado una fecha límite definitiva ni disponibilidad semanal; no se inventan fechas de término. Fecha de arranque documentada: 15 de octubre de 2026. Antes de comprometer calendario, registrar fecha límite y horas disponibles en BACKLOG.md.
+
+| Orden | Hito del backlog | Entregables académicos relacionados |
 | --- | --- | --- |
-| PENDIENTE → EN_REVISION | Admin RH o Supervisor autorizado | assigned_to activo y autorizado, category_id, priority, validated_by y validated_at definidos. Registrar cycle_start_at al entrar. |
-| EN_REVISION → RESUELTA | Admin RH o Supervisor autorizado | resolution_text obligatorio. El sistema registra resolved_at. |
-| RESUELTA → CERRADA | Admin RH | El sistema registra closed_at. |
-| RESUELTA/CERRADA → EN_REVISION | Admin RH | Motivo obligatorio y responsable activo autorizado. Archivar ciclo previo, limpiar resolución y fechas de cierre; actualizar cycle_start_at. |
-
-Nota sobre reapertura: Antes de cambiar a EN_REVISION, se archivan en historial los valores de cycle_start_at, resolution_text, resolved_at y closed_at del ciclo anterior. Se limpian resolution_text, resolved_at y closed_at; cycle_start_at toma la fecha de reapertura. Se exige motivo y responsable activo con acceso al caso. La operación completa es atómica.
-
-6. Reglas de Confidencialidad y Visibilidad
-
-Confidencialidad desde el Origen:
-
-Al crear una incidencia, cualquier rol puede marcar "Solicitar Confidencialidad".
-
-Política explícita: Al solicitar confidencialidad, is_confidential pasa a TRUE desde el registro. Solo Admin RH puede consultar el caso. El reportante pierde acceso mientras se mantenga la marca, aunque RH ya esté atendiendo el caso. El formulario informa esta consecuencia antes del envío. Retirar la marca restablece únicamente el acceso que corresponda al rol y al empleado afectado.
-
-Cambio a Confidencial (Edición):
-
-Solo Admin RH puede marcar como confidencial un caso existente. Si assigned_to es un Supervisor y el caso está EN_REVISION, debe seleccionar un Admin RH activo en la misma operación; el cambio de confidencialidad y la reasignación son atómicos. En PENDIENTE puede quedar sin responsable en la bandeja de RH. En RESUELTA o CERRADA se requiere reapertura para cambiar confidencialidad o asignación. La marca inicial al crear está permitida para todos los roles.
-
-Retirar Confidencialidad:
-
-Solo Admin RH puede quitar la marca.
-
-Requiere motivo obligatorio registrado en el historial.
-
-Al retirar la marca, el caso vuelve a ser visible para Supervisores/Empleados según sus reglas estándar.
-
-Reglas de visibilidad por rol: cada usuario debe satisfacer la regla correspondiente a su rol. Las mismas restricciones se aplican en listados, consulta por ID, búsquedas, cambios y notificaciones.
-
-Empleado: affected_employee_id = user_id e is_confidential = FALSE. Se usa el empleado afectado, no necesariamente created_by.
-
-Supervisor: el departamento actual del empleado afectado coincide con el del supervisor e is_confidential = FALSE. Los cambios de departamento actualizan el acceso; se auditan y exigen revisar responsables que pierdan autorización.
-
-Admin RH: Todos los casos (incluyendo confidenciales).
-
-7. Requisitos Funcionales (RF) con Criterios de Aceptación
-
-RF-1: Autenticación local en FastAPI
-
-Inicio de sesión con correo y contraseña. Usuarios creados por Admin RH; sin registro público. El primer administrador se crea mediante comando del operador del servidor con contraseña interactiva.
-
-- Contraseñas entre 12 y 128 caracteres, hash Argon2id con sal individual; nunca texto plano ni valores fijos de demostración.
-- Correo único sin distinguir mayúsculas. Usuarios y departamentos deben estar activos. Roles y departamentos se consultan en la base, no se aceptan desde el token.
-- Sesiones de una hora con token opaco aleatorio de 256 bits enviado como Bearer. La base almacena solo su digest SHA-256, expiración y revocación. No se usan JWT en este MVP.
-- Logout revoca la sesión actual. Cambio o restablecimiento de contraseña revoca todas las sesiones del usuario. Recuperación inicial mediante operador autorizado; recuperación por correo fuera de esta entrega.
-- Cinco fallos consecutivos por correo bloquean intentos durante 15 minutos. El mensaje de login no distingue cuenta inexistente, desactivada o contraseña incorrecta.
-- No se requiere tenant ni credenciales Microsoft. Los campos externos quedan opcionales y no se utilizan para autenticación local; el ID interno conserva las relaciones de incidencias.
-
-Criterios de aceptación: credenciales válidas de cuenta activa permiten consultar /auth/me; credenciales incorrectas son rechazadas; cuentas sin rol Admin RH no pueden crear usuarios; logout, expiración y cambio de contraseña invalidan las sesiones correspondientes. La configuración debe verificarse también en PostgreSQL y en entorno HTTPS antes de despliegue externo.
-
-RF-2: Registro de Incidencias
-
-Descripción: Formulario para crear incidencias.
-
-Restricciones por Rol:
-
-Empleado: Solo puede registrar sobre sí mismo (affected_employee_id = user_id).
-
-Supervisor: Puede registrar sobre empleados de su propio departamento.
-
-Admin RH: Puede registrar sobre cualquier empleado.
-
-Edición: Solo Admin RH y Supervisores autorizados pueden editar título y descripción en PENDIENTE o EN_REVISION; el Supervisor únicamente en casos no confidenciales de su departamento. El Empleado no puede editar tras crear. Cada edición guarda actor, fecha y valores anteriores/nuevos en el historial. Se conserva así el contenido original. En RESUELTA o CERRADA no se permite editar contenido, clasificación, prioridad, asignación o confidencialidad sin reapertura.
-
-Eliminación: No se permite eliminación física ni lógica de incidencias. Los registros creados por error siguen el flujo normal: asignación y clasificación, resolución con texto «Registro creado por error; sin acción correctiva» y cierre por Admin RH. Las correcciones conservan historial; no se incorpora un estado ANULADA.
-
-Criterio de Aceptación: La API rechaza (403) intentos de crear incidencias fuera del ámbito autorizado del rol.
-
-RF-3: Clasificación IA y Validación Humana
-
-Descripción: Envío de texto a OpenAI vía LangChain (cola Redis).
-
-Permisos de edición: Solo Admin RH y Supervisores autorizados pueden validar o cambiar category_id y priority en PENDIENTE o EN_REVISION. Los Supervisores solo acceden a casos no confidenciales de su departamento. RESUELTA y CERRADA requieren reapertura para cambiar la clasificación.
-
-Manejo de Errores: Si la IA falla, se registra ai_error. El usuario autorizado puede ingresar manualmente categoría y prioridad para continuar.
-
-Trazabilidad: ai_suggestion conserva la primera respuesta válida de IA para el texto original analizado. Se registran validated_by y validated_at tanto al aceptar como al corregir o clasificar manualmente por falla. Las respuestas tardías nunca sobrescriben valores humanos. Una edición posterior de descripción no relanza ni sustituye la sugerencia original; invalida la validación previa y exige nueva validación manual antes de resolver. Todos los cambios conservan auditoría.
-
-Criterio de Aceptación: El dashboard muestra la sugerencia de IA vs. la decisión final. Se permite guardar cambios manuales si la IA falló.
-
-RF-4: Asignación y Gestión de Casos
-
-Descripción: Flujo de trabajo para responsables.
-
-Reglas:
-
-Quién asigna: Admin RH (todos) y Supervisores (solo su depto).
-
-A quién: Usuarios con rol Admin RH o Supervisor que tengan permiso de ver el caso.
-
-Obligatoriedad: Para cambiar de PENDIENTE a EN_REVISION, assigned_to es obligatorio.
-
-Criterio de Aceptación: La API rechaza la asignación si el usuario seleccionado no tiene permisos sobre la incidencia.
-
-RF-5: Notificaciones Automatizadas
-
-Eventos:
-
-Creación de incidencia (Notifica a Admins si no hay asignado).
-
-Asignación/Reasignación: Notifica al nuevo assigned_to.
-
-Cambio de estado a RESUELTA (Notifica a created_by y affected_employee solo si tienen permiso de ver).
-
-Reapertura (Notifica a assigned_to actual).
-
-Contenido: Asunto: "Incidencia #[ID] Actualizada". Cuerpo: Enlace directo al caso.
-
-Errores: Si el correo falla, se registra en log pero no bloquea la operación.
-
-RF-6: Analítica (Power BI)
-
-Acceso: El archivo .pbix es de uso exclusivo de Admin RH y Gerencia.
-
-Datos Permitidos: Para el MVP, el reporte se limita a datos agregados: Conteo de incidencias, Promedios de tiempo, Categorías, Departamentos. Prohibido: Nombres de empleados, descripciones de texto libre, resoluciones textuales o correos electrónicos.
-
-KPIs Clave:
-
-Total de incidencias por categoría/mes.
-
-Tiempo promedio de resolución del último ciclo: promedio de (resolved_at - cycle_start_at), expresado en horas, para casos cuyo último ciclo esté resuelto o cerrado. Los ciclos actualmente abiertos no se incluyen. El historial conserva los ciclos previos para consultas históricas.
-
-Evaluación inicial de IA: comparar ai_suggestion.category_id con la etiqueta de referencia definida antes de ejecutar cada uno de los 20 casos simulados. Se exige un mínimo de 18 aciertos de 20 (90 %, superior al 85 %). La validación humana posterior no modifica la referencia de esta prueba.
-
-Tasa de reapertura: seleccionar casos con al menos una resolución en el periodo y contar cada ID una sola vez. Numerador: casos de esa población reabiertos después de su primera resolución dentro del periodo y hasta la fecha de corte. Denominador: total de casos de esa población. Resultado = numerador / denominador × 100. Si el denominador es cero, mostrar «Sin datos». Calcular con eventos históricos, no solo con las fechas actuales.
-
-Concordancia operativa de IA: porcentaje de casos con sugerencia válida y decisión humana validada en que ambas categorías coinciden. Se informa por separado de la evaluación etiquetada; los casos sin sugerencia válida se excluyen y se contabilizan aparte.
-
-Reglas generales de notificación: verificar de nuevo el permiso del destinatario justo antes del envío. Si perdió acceso, omitir el correo. Deduplicar destinatarios y eventos; registrar intentos y reintentar como máximo tres veces ante fallos transitorios. Después, dejar el fallo para revisión de Admin RH. El correo no incluye descripciones, resoluciones ni datos personales.
-
-Gestión de usuarios del MVP: primer Admin RH mediante comando interactivo del operador; altas posteriores por API restringida a Admin RH, auditadas y sin registro público. Restablecimiento de contraseña mediante operador autorizado. Gestión completa de departamentos, cambios de rol y bajas con reasignación de casos se implementarán en sus servicios.
-
-8. Estructura de Base de Datos (PostgreSQL)
-
-users: id, email, external_id (UUID oid), tenant_id (UUID tid), nombre_completo, departamento_id (FK departamentos), rol_id (FK roles), is_active. Unicidad: (tenant_id, external_id).
-
-roles: id, nombre (ADMIN_RH, SUPERVISOR, EMPLEADO).
-
-categorias_incidencia: id, nombre, descripcion.
-
-incidencias:
-
-id, titulo, descripcion
-
-incident_date (Date)
-
-created_at, updated_at (Timestamp)
-
-status (Enum: PENDIENTE, EN_REVISION, RESUELTA, CERRADA)
-
-priority (Integer: 1=Baja, 2=Media, 3=Alta)
-
-category_id (FK categorias_incidencia) -> Oficial
-
-ai_suggestion (JSONB) -> Original IA
-
-ai_error (Text) -> Mensaje de error si falla
-
-validated_by (FK users), validated_at (Timestamp)
-
-resolution_text (Text) -> Obligatorio al resolver
-
-resolved_at, closed_at (Timestamp)
-
-cycle_start_at (Timestamp) -> Fecha de entrada a EN_REVISION actual
-
-reopening_reason (Text) -> Obligatorio al reabrir
-
-is_confidential (Boolean, Default False)
-
-created_by (FK users), affected_employee_id (FK users), assigned_to (FK users)
-
-historial_incidencias:
-
-id, incidencia_id (FK), usuario_id (FK), accion (CREADO, ESTADO_CAMBIADO, ASIGNADO, REAPERTURA, VALIDACION_IA, CAMBIO_CONFIDENCIALIDAD), detalle (JSONB con cambios previos/nuevos), fecha.
-
-Departamentos: id, nombre, is_active. Los usuarios se vinculan por departamento_id. El departamento usado para seguridad es el actual del empleado afectado; los reportes por departamento del evento utilizan department_id_at_creation, guardado al registrar la incidencia.
-
-Campos y restricciones adicionales de incidencias: department_id_at_creation (FK departamentos), ai_status (PENDIENTE, COMPLETADA, FALLIDA) y clasificación/validación inicialmente nullable. EN_REVISION exige responsable activo, category_id, priority, validated_by y validated_at. Priority solo admite 1, 2 o 3. created_by se obtiene de la identidad autenticada. Fechas operativas en UTC con zona horaria; incident_date conserva la fecha del evento.
-
-Historial ampliado: agregar acciones CONTENIDO_EDITADO y USUARIO_ACTUALIZADO según la entidad auditada. Los eventos de transición guardan estado anterior/nuevo, responsable, inicio de ciclo y fechas de resolución/cierre. Los eventos de cambio de contenido y clasificación conservan valores anteriores/nuevos. El historial es de solo lectura para usuarios de aplicación.
-
-Power BI: solo Admin RH y Gerencia reciben el archivo. La extracción utiliza vistas agregadas con cuenta de servicio de solo lectura; el modelo no importa registros individuales ni campos prohibidos. Actualización manual antes de cada entrega del reporte, mostrando fecha de corte. Gerencia es destinataria de reportes, no un nuevo rol de la aplicación.
-
-9. Requisitos No Funcionales (RNF)
-
-RNF-1: Seguridad: Comunicación HTTPS obligatoria. Tokens de sesión aleatorios validados mediante digest, expiración, revocación y usuario activo en cada solicitud protegida.
-
-RNF-2: Rendimiento: clasificación IA y correos se ejecutan en segundo plano mediante cola Redis y un proceso worker. Para lectura, creación y actualización simples, p95 de API inferior a 200 ms en Docker local con 10 usuarios simultáneos y datos simulados. Se excluye la duración de servicios externos; la aceptación del trabajo en cola sí forma parte de la respuesta de creación. El informe registra hardware, volumen de datos, duración, errores y latencias.
-
-RNF-3: Pruebas: Se utilizarán datos simulados (Mock Data) para QA. Pruebas de aceptación deben incluir: transiciones inválidas, acceso directo por ID (IDOR), creación en nombre de terceros, fallas de IA y notificaciones confidenciales.
-
-QA de aceptación: verificar creación válida y rechazos por rol; accesos por ID y departamento; pérdida de acceso al marcar confidencial; reasignación atómica; protección de casos cerrados; todas las transiciones válidas e inválidas; historial de cada ciclo; edición auditada y revalidación; falla y respuesta tardía de IA; baja de usuarios; permisos y deduplicación de correos; fórmulas con denominador cero; y prueba de carga. Los 20 casos de IA usan datos simulados etiquetados antes de la ejecución y cubren las cinco categorías.
-
-Cola IA: máximo tres intentos ante fallos transitorios; después marcar ai_status = FALLIDA y permitir clasificación manual. Un JSON inválido no se presenta como clasificación válida. No se generan respuestas simuladas fuera de QA. La API confirma creación sin esperar a OpenAI; la interfaz muestra pendiente, completada o fallida.
-
-10. Cronograma Detallado (Semanas)
-
-| Semana | Actividad Principal | Entregable |
+| 1 | Requisitos y propuesta | Detección de necesidades, propuesta técnica |
+| 2 | Arquitectura, estructura y entorno | Documento de arquitectura, plan del proyecto |
+| 3 | Esquema, migraciones y datos simulados | Desarrollo y evidencia técnica |
+| 4 | Autenticación, usuarios y permisos | Desarrollo y QA de acceso |
+| 5 | Registro, consultas y panel React | Desarrollo funcional |
+| 6 | Ciclo, confidencialidad y auditoría | Desarrollo y QA funcional |
+| 7 | IA asíncrona y evaluación | Desarrollo y reporte IA |
+| 8 | Correo por eventos | Integración y reporte QA |
+| 9 | Analítica y reportes | Reporte Power BI y validación |
+| 10 | QA integral y entrega | Manuales, mantenimiento, capacitación real e informe final |
+
+Los hitos de código no equivalen uno a uno a las diez actividades académicas: documentación se mantiene en todos; mantenimiento, capacitación y cierre se concretan al entregar. Estado real en BACKLOG.md. No se inventan entrevistas, capacitaciones, firmas ni evaluaciones.
+
+## 11. Supuestos dependencias y riesgos
+
+| Tipo | Condición | Tratamiento |
 | --- | --- | --- |
-| 1 | Setup Infraestructura (Docker, Postgres, Redis) y autenticación local FastAPI. | Repo Git con Docker Compose funcional y Login local seguro. |
-| 2 | Backend Core: CRUD Incidencias, Lógica de Roles/Permisos y Confidencialidad. | Endpoints protegidos funcionando con filtros de seguridad. |
-| 3 | Integración IA (LangChain + OpenAI), Cola Redis, Manejo de Errores y Auditoría. | Endpoint /analizar asíncrono y tabla de historial completa. |
-| 4 | Frontend React: Formularios, Dashboard y Visualización de IA. | UI completa conectada al backend. |
-| 5 | Power BI Desktop: Modelado de datos, KPIs y Notificaciones (Email Service). | Archivo .pbix y servicio de emails configurado. |
-| 6 | QA Integral: Pruebas de permisos, confidencialidad, historial y documentación. | Reporte de pruebas y Manuales de Usuario. |
+| Dependencia | Docker y terminal autorizada para el motor | Algunos comandos los ejecuta la autora; conservar evidencia |
+| Dependencia | API OpenAI, modelo y crédito disponible | Seleccionar modelo antes de RF-3; modo manual ante falla |
+| Dependencia | SMTP de pruebas y Power BI Desktop | Preparar antes de RF-5/RF-6 |
+| Supuesto | Datos simulados y responsables independientes disponibles | Si falta gestor elegible, caso restringido pendiente |
+| Riesgo | Alcance excesivo para una desarrolladora | Priorizar flujo completo manual, luego IA/correo/analítica; no ocultar funciones pendientes |
+| Riesgo | Texto sensible enviado fuera | Solo texto simulado revisado; confidenciales omitidos; sin uso real hasta revisar tratamiento |
+| Riesgo | Deriva entre PRD, código y Word | PRD.md fuente única; trazabilidad distingue objetivo/implementado |
+| Riesgo | Conflicto o abuso de privilegios | Exclusión por involucrados, auditoría y revisión de roles |
+| Riesgo | Presupuesto/calendario aún no fijados | No prometer fecha o costo; registrar antes de comprometer entrega |
 
-11. Gestión de Configuración y Seguridad
+Entra ID no es dependencia ni bloqueo activo. Una integración futura implica un cambio de alcance y vinculación verificada.
 
-Para garantizar la seguridad de las credenciales y facilitar el despliegue del proyecto, se implementará la siguiente estrategia:
+## 12. Glosario y cambios
 
-Archivo .env (Entorno Local): Se utilizará para almacenar las credenciales reales (Claves de OpenAI, ID de Azure, contraseña de PostgreSQL). Este archivo será excluido del control de versiones mediante un archivo .gitignore.
+- **Reportante:** created_by; quien registra.
+- **Afectado:** affected_employee_id; persona sobre quien versa el caso personal.
+- **Involucrado:** afectado o participante declarado; determina conflictos de interés de gestores.
+- **Responsable:** assigned_to; usuario que atiende con autorización vigente.
+- **Clasificación vigente:** bandera verdadera tras confirmación humana sobre el contenido actual.
+- **Confidencial:** acceso solo a Admin RH independiente.
+- **Ciclo:** periodo de revisión hasta resolución; una reapertura inicia otro.
+- **Sesión opaca:** token aleatorio revocable; no JWT ni identidad Microsoft.
 
-Archivo .env.example (Control de Versiones): Se entregará una plantilla en el repositorio para guiar a los desarrolladores, utilizando valores simulados.
-
-Documentación en README.md: Instrucciones claras sobre cómo configurar el entorno local.
-
-Control de versión 1.7: la autora decide sustituir Entra ID por autenticación propia en FastAPI. Se mantienen roles, confidencialidad y trazabilidad. La copia Word 1.6 se conserva como referencia histórica; este PRD Markdown es la versión vigente.
-
-## Cambio de autenticación autorizado
-
-Decisión de la autora del 15 de octubre de 2026: Entra ID fuera del MVP por falta de acceso administrativo y credenciales disponibles. Se implementa autenticación local; una integración futura requerirá vinculación verificada, sin unir cuentas automáticamente por correo. Detalles operativos en AUTENTICACION.md.
-
-Entidades nuevas: local_credentials (user_id, password_hash, updated_at), auth_sessions (token_hash, user_id, created_at, expires_at, revoked_at), login_throttle (email, failures, locked_until). No se incorpora autenticación simulada para acceder a la aplicación.
+La versión 1.8 consolida organización, roles, revalidación, riesgos de entorno, conflictos de interés, datos para IA, alcance de correos, RF-7/RF-8, modelo objetivo, evaluación y dependencias. No cambia código ni aplica migraciones. Las diferencias funcionales necesitan implementación y pruebas posteriores, registradas en BACKLOG.md.

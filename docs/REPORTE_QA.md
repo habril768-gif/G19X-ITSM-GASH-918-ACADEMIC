@@ -84,3 +84,9 @@ Suite actual: **20 passed, 2 skipped, 1 warning in 12.72s**. Comando desde raíz
 Pruebas de autenticación en tests/test_auth.py: hash Argon2id; token almacenado solo como digest; errores indistinguibles de cuenta/contraseña; cinco intentos bloquean 15 minutos; logout, expiración y desactivación; empleado sin permiso administrativo; cambio de contraseña revoca todas las sesiones; política de longitud; flujo HTTP login/me/logout y no devolución de secretos en validaciones; alta administrativa auditada sin exponer hash y rechazo de duplicado. SQLite se usa con variantes JSON de los modelos; no sustituye validación PostgreSQL de concurrencia/migración.
 
 Migration offline 0001→0002 compilada sin credenciales; conserva esquema y añade tablas e índice de correo. pip check sin conflictos. Pendientes: aplicación real en PostgreSQL, alembic check y pruebas manuales de autenticación Docker, bootstrap interactivo y ejecución CI. Los resultados manuales de 0001 permanecen como evidencia histórica. No se presentan como verificación de 0002.
+
+## Revisión documental PRD 1.8 — 15 de octubre de 2026
+
+Comprobaciones: ocho requisitos RF únicos, RF-1 a RF-8 presentes en trazabilidad, enlaces locales existentes en documentos modificados, campos de revalidación/participantes/IA omitida declarados y ausencia de marcadores de codificación incorrecta en PRD, backlog, trazabilidad y README. git diff --check sin incidencias.
+
+No se ejecutaron pruebas de aplicación porque esta entrega cambia requisitos/documentación, no código. Los requisitos de entorno, conflicto de interés y classification_valid requieren una migración futura y pruebas: no se consideran satisfechos por la revisión. La última suite de autenticación conserva su resultado histórico de 20 aprobadas y 2 omitidas, sin repetición en este avance.

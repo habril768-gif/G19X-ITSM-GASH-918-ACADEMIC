@@ -1,43 +1,40 @@
-# Trazabilidad inicial
+# Trazabilidad vigente del PRD 1.8
 
-Base funcional: docs/PRD.md. Base académica: matriz docs/ENTREGABLES.md.
+Fecha de consolidación: 15 de octubre de 2026. La tabla distingue requisito objetivo, evidencia existente y trabajo pendiente. El detalle histórico y los resultados de pruebas están en REPORTE_QA.md y BITACORA.md.
 
-| Requisito | Implementación prevista | Validación prevista | Estado |
-| --- | --- | --- | --- |
-| RF-1 Autenticación | backend/app/core y API | Token inválido, usuario no autorizado/inactivo, roles | Pendiente |
-| RF-2 Registro | API, modelos y formulario | Creación propia y por terceros, edición auditada | Pendiente |
-| RF-3 IA y validación | Servicios y worker | Fallas, respuesta tardía, validación humana, 20 casos etiquetados | Pendiente |
-| RF-4 Asignación y ciclo | Servicios y detalle de incidencia | Transiciones, responsable activo y permisos | Pendiente |
-| RF-5 Notificaciones | Servicio de correo y worker | SMTP de prueba, permisos, reintentos y deduplicación | Pendiente |
-| RF-6 Analítica | Vistas agregadas y Power BI | Fórmulas, fecha de corte y ausencia de datos personales | Pendiente |
-| Confidencialidad | Autorización transversal | Acceso por ID, departamento, reasignación y pérdida de acceso | Pendiente |
-| RNF-1 Seguridad | API y despliegue | Validación JWT y HTTPS en entorno de entrega | Pendiente |
-| RNF-2 Rendimiento | API y colas | p95 < 200 ms, 10 usuarios, condiciones documentadas | Pendiente |
+| ID | Requisito | Implementación/evidencia existente | Verificación pendiente | Estado |
+| --- | --- | --- | --- | --- |
+| RF-1 | Sesiones locales, contraseña, revocación | core/security.py, api/auth.py, manage_users.py; tests/test_auth.py; migración 0002 | Aplicar 0002 y probar bootstrap/login/logout en PostgreSQL | Implementado parcialmente verificado |
+| RF-2 | Registro PERSONA/ENTORNO y edición auditada | Modelos iniciales en app/models; solo 0001 verificada, sin rutas de incidencias | Afectado condicional, validación de participantes, scope y edición | Pendiente de servicio y migración adicional |
+| RF-3 | IA sobre texto simulado revisado y validación | Campos básicos IA; OpenAI elegido | Worker, eligibility check, OMITIDA, classification_valid, prueba de 50 casos | Pendiente |
+| RF-4 | Asignación, transiciones y ciclos | Campos iniciales y restricciones básicas | Servicio atómico, revalidación, gestor independiente, reapertura/retroceso protector | Pendiente |
+| RF-5 | Correo por eventos | Variables SMTP de ejemplo | Capturador, eventos, acceso antes de envío, reintentos y deduplicación | Pendiente |
+| RF-6 | Reportes agregados | Fechas y departamento histórico iniciales | Vistas, Power BI, métricas y fecha de corte | Pendiente |
+| RF-7 | Administración de usuarios/departamentos | Alta local restringida y comandos de bootstrap/reset; tests/test_auth.py | Bajas y roles/departamentos con reasignación; no perder último admin | Parcial |
+| RF-8 | Panel React y consultas | Solo estructura frontend | Login, listado paginado, filtros, detalle, acciones, errores y administración | Pendiente |
+| RNF-1 | Seguridad y permisos por objeto | Hash/sesión y pruebas locales; publicación API en loopback | Reglas de expedientes, HTTPS externo y límite global de tráfico | Parcial |
+| RNF-2 | p95 y condiciones de carga | Meta definida; sin medición | 100 casos, 10 usuarios, 5 minutos y reporte | Pendiente |
+| RNF-3 | Reproducibilidad | Compose, migraciones, requirements y CI; evidencias 01–08 | 0002 real, futura migración, CI remoto y arranque desde base vacía actualizado | Parcial |
+| RNF-4 | Auditoría transaccional | Modelo historial y eventos de alta/cambio de contraseña | Incidencias, participantes, ciclos, permisos e inmutabilidad operativa | Parcial |
+| RNF-5 | Operación y entrega | Manual técnico y QA iniciales | Soporte, recuperación, capacitación real e informe final | Parcial |
 
-Al implementar se añadirán rutas de archivos, nombres de pruebas y resultados reales. Esta tabla no equivale a pruebas aprobadas.
+## Pruebas de aceptación a implementar
 
-RF-3: proveedor seleccionado por la autora: API directa de OpenAI. Modelo, conexión e implementación pendientes.
+| Caso | Regla | Resultado esperado |
+| --- | --- | --- |
+| AC-01 | RF-1 sesión | Login válido, logout y expiración consistentes; secreto no expuesto |
+| AC-02 | RF-2 ámbito | Riesgo ENTORNO sin afectado aceptado; PERSONA sin afectado rechazado |
+| AC-03 | RF-2/RF-4 validación | Editar descripción invalida bandera; no resolver hasta confirmar de nuevo |
+| AC-04 | Conflicto de interés | Supervisor/Admin involucrado no consulta ni gestiona; RH independiente sí |
+| AC-05 | Falta de gestor | Caso confidencial PENDIENTE, sin responsable; ningún involucrado gana acceso |
+| AC-06 | RF-3 privacidad | Caso confidencial/inelegible no llama proveedor; clasificación manual disponible |
+| AC-07 | RF-5 acceso | Correo omitido si destinatario perdió permiso; no duplica eventos |
+| AC-08 | RF-6 agregados | Métricas conocidas, cero denominador y ningún campo individual importado |
+| AC-09 | RF-7 bajas | Revocar sesiones y reasignar antes de perder permiso; no eliminar último admin |
+| AC-10 | RF-8 filtros | Conteos, filtros y búsquedas solo sobre conjunto autorizado; IDOR rechazado |
 
-## Infraestructura de API inicial
+AC son identificadores de pruebas previstas, no resultados aprobados. AC-01 tiene cobertura local parcial en test_auth.py; la aceptación real de PostgreSQL sigue pendiente. El resto requiere implementación. Las 20 pruebas aprobadas de la última entrega y las dos omitidas son un resultado histórico; esta revisión documental no las vuelve a ejecutar.
 
-Endpoint público de disponibilidad en `backend/app/api/health.py`, aplicación en `backend/app/main.py` y pruebas en `backend/tests/test_api.py`. Es una base técnica y no implica cumplimiento de RF-1 a RF-6. Resultados reales en REPORTE_QA.md.
+## Evidencia disponible
 
-## Configuración de infraestructura
-
-compose.yaml, backend/Dockerfile y backend/.dockerignore preparan el entorno local reproducible de API, PostgreSQL y Redis. Relacionado con arquitectura, desarrollo y entrega. Las comprobaciones ejecutables están en infra/README.md; resultados pendientes por falta de Docker. Esto no acredita conexión real ni cumplimiento de RF-2 o RF-3.
-
-Infraestructura: cuatro evidencias manuales recibidas y verificadas visualmente; rutas y límites en REPORTE_QA.md. La comprobación de servicios no completa RF-2 ni RF-3.
-
-## Persistencia inicial
-
-RF-1: users con unicidad tenant_id/external_id, rol y departamento; autenticación pendiente. RF-2/RF-4: modelo incidencias e historial; operaciones y permisos pendientes. RF-3: campos IA y validación, sin integración externa. RF-6: fechas de ciclo y departamento histórico para futuras vistas.
-
-Implementación: backend/app/models/__init__.py; backend/app/core/database.py; migración 0001. Verificación: tests/test_database.py y pruebas PostgreSQL optativas en tests/test_postgres.py. Aplicación real y evidencia /health/db pendientes; ver REPORTE_QA.md.
-
-Persistencia: evidencias 05 y 06 confirman revisión 0001 y conexión real. Fixtures QA: app/seed_demo.py y tests/test_seed_demo.py preparan seis usuarios y dos departamentos; no implementan RF-1 ni cuentas SSO.
-
-Fixtures QA: carga manual PostgreSQL y repetición verificadas en evidencias 07/08. Datos de prueba disponibles para próximos servicios; no implica cumplimiento de autenticación RF-1.
-
-## RF-1 actualizado — PRD 1.7
-
-Autenticación propia sustituye Entra ID por decisión de la autora. Implementación: core/security.py, api/auth.py, manage_users.py, modelos de credenciales/sesiones/intentos y migración 0002. Verificación: tests/test_auth.py; resultados en REPORTE_QA.md. Validación PostgreSQL real de 0002 pendiente. Los campos externos son opcionales, no intervienen en login. RF-2 a RF-6 siguen sin completar por disponer de autenticación.
+01: HTTP health; 02: servicios Compose healthy; 03: SELECT 1; 04: PONG; 05: revisión 0001 y alembic check; 06: health/db real con 0001; 07/08: carga DEMO y repetición. No acreditan aún autenticación real 0002 ni reglas nuevas de PRD 1.8.

@@ -7,7 +7,7 @@ Plataforma Inteligente de Gestión de Incidencias Laborales para PluriOne S.A. d
 
 ## Estado actual
 
-API FastAPI con `/health`, `/health/db`, `/docs` y `/openapi.json`; modelos y migración PostgreSQL inicial verificados manualmente. Autenticación local implementada y probada en SQLite/HTTP; migración 0002 y prueba manual en PostgreSQL pendientes. Incidencias, frontend e IA siguen pendientes. PRD vigente: 1.7.
+API FastAPI con `/health`, `/health/db`, `/docs` y `/openapi.json`; modelos y migración PostgreSQL inicial verificados manualmente. Autenticación local implementada y probada en SQLite/HTTP; migración 0002 y prueba manual en PostgreSQL pendientes. Incidencias, frontend e IA siguen pendientes. PRD vigente: 1.8.
 
 ## Alcance
 
@@ -18,7 +18,7 @@ Tecnologías previstas: React, FastAPI, PostgreSQL, Redis, autenticación local 
 ## Documentación
 
 - [PRD vigente](docs/PRD.md)
-- [Documento Word recibido](docs/PRD_PluriOne_v1.6.docx)
+- [PRD Word 1.6 — referencia histórica](docs/PRD_PluriOne_v1.6.docx)
 - [Plan de desarrollo y criterios de término](docs/BACKLOG.md)
 - [Decisiones iniciales](docs/DECISIONES.md)
 - [Entregables de residencia](docs/ENTREGABLES.md)
@@ -57,4 +57,8 @@ Consultar [carga de usuarios de QA](docs/DATOS_DEMO.md). Requiere confirmación 
 
 ## Autenticación local
 
-API 0.3.0 y PRD 1.7. Se sustituye Entra ID por correo y contraseña, Argon2id y sesiones revocables. Aplicar migración 0002 y crear el primer Admin RH siguiendo [AUTENTICACION.md](docs/AUTENTICACION.md). La copia Word del PRD 1.6 es histórica; el PRD Markdown es vigente.
+API 0.3.0 y PRD 1.8. Se sustituye Entra ID por correo y contraseña, Argon2id y sesiones revocables. Aplicar migración 0002 y crear el primer Admin RH siguiendo [AUTENTICACION.md](docs/AUTENTICACION.md). La copia Word del PRD 1.6 es histórica; el PRD Markdown es vigente.
+
+## Reglas consolidadas del MVP
+
+El PRD 1.8 organiza RF-1 a RF-8 y distingue modelo objetivo de esquema implementado. Incluye riesgos de entorno, conflicto de interés y vigencia de clasificación, aún pendientes de código/migración. No asumir que el esquema actual ya los soporta. Estado vigente en BACKLOG.md y TRAZABILIDAD.md.

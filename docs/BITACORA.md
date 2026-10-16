@@ -106,3 +106,11 @@
 **Validación:** suite completa: 20 passed, 2 skipped, 1 warning en 12.72 segundos. Incluye hash Argon2id, normalización, rechazo genérico, bloqueo de intentos, expiración, logout, cuenta inactiva, revocación al cambiar contraseña, permisos de alta y redacción de secretos en errores HTTP. Se corrigió uso inicial incompatible de la API de pwdlib mediante verify_and_update. pip check sin conflictos y migración offline generada.
 **Resultado:** API 0.3.0 implementada; suite local completada, superando el bloqueo observado en el avance anterior. No se ejecutó migración 0002 ni login real en PostgreSQL desde el asistente.
 **Pendientes:** aplicar 0002 en Docker, provisionar primer administrador y verificar manualmente login/me/logout. CI remota no confirmada. Interfaz React, gestión completa de usuarios, incidencias y recuperación por correo pendientes.
+
+## 15 de octubre de 2026 — Revisión integral del PRD
+
+**Propósito:** resolver inconsistencias de la revisión externa y consolidar una fuente única de requisitos.
+**Cambios:** PRD 1.8 reestructurado, RF-7/RF-8, reglas de ámbito, revalidación, conflicto de interés, privacidad IA y evaluación; modelo objetivo integrado; backlog y trazabilidad reescritos como estado vigente; README identifica Word histórico.
+**Validación:** revisión documental de IDs, enlaces relativos, reglas y referencias cruzadas; diferencias con esquema actual declaradas. No se modifica código ni base y no se vuelven a ejecutar pruebas funcionales por este cambio documental.
+**Resultado:** requisitos consistentes como objetivo de desarrollo; funciones nuevas siguen pendientes.
+**Pendientes:** fecha límite y horas disponibles para calendarizar; validación real de autenticación 0002; diseño e implementación de migración/servicios del nuevo alcance de incidencias.

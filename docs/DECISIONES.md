@@ -47,3 +47,13 @@ La autora decide no utilizar Entra ID en el MVP por falta de acceso y consentimi
 Implementación: Argon2id mediante pwdlib, sesiones opacas aleatorias de 256 bits y digest SHA-256 en base, expiración fija de una hora, revocación por logout/cambio de contraseña, validación de cuenta/departamento activo. Se elige sesión revocable en lugar de JWT para simplificar revocación inmediata sin claves de firma.
 
 No hay registro público. Bootstrap por operador con getpass; altas por Admin RH y recuperación inicial por operador. Se mantienen IDs internos, campos externos opcionales y posibilidad futura de vinculación verificada. No hay vinculación automática por correo. Migración 0002 sin eliminación de datos. Detalles y límites en AUTENTICACION.md.
+
+## 15 de octubre de 2026 — Consolidación PRD 1.8
+
+Se reorganiza el PRD por reglas, RF-1 a RF-8, modelo objetivo, seguridad, QA y plan. Se conserva autenticación local y Word 1.6 como histórico. El estado vigente del backlog y trazabilidad sustituye sus listas acumuladas; la cronología permanece en bitácora y Git.
+
+Decisiones funcionales para implementar: ámbitos PERSONA/ENTORNO; afectados condicionales; participantes y exclusión de gestores involucrados; confidencialidad automática ante Supervisor/Admin implicado; bandera classification_valid sin borrar actor/fecha; revalidación antes de resolver; retroceso protector excepcional a PENDIENTE si no hay responsable independiente. Requieren migración futura; no se modifica 0001/0002.
+
+IA: solo texto simulado mínimo revisado, sin confidenciales; OMITIDA como estado de trabajo, con atención manual. Conjunto final 50 casos con categoría y prioridad, metas iniciales explícitas; 20 casos previos solo smoke test. No se garantiza anonimización ni cumplimiento legal para datos reales. Retención de demo hasta cierre de evaluación +30 días por operador; plazos reales pendientes antes de uso productivo.
+
+Correo: solo eventos del MVP; SLA/vencimientos fuera. RF-7 administración y RF-8 panel separados. Cronograma por diez hitos sin inventar fecha límite o capacidad semanal. Nombres técnicos existentes conservados con glosario.

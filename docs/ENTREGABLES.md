@@ -1,3 +1,5 @@
+> Estado documental vigente: PRD 1.8, backlog y trazabilidad consolidados. Los requisitos nuevos están pendientes de implementación; esto no completa los entregables de desarrollo o QA.
+
 # Entregables de residencia
 
 Fuente: secciÃ³n 7 del Descriptivo de Proyecto proporcionado por la autora. Esta matriz organiza los entregables; un archivo o carpeta por sÃ­ solo no demuestra que la actividad estÃ© terminada.

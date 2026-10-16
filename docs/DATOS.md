@@ -1,3 +1,5 @@
+> PRD 1.8 define el modelo objetivo en su sección 6. El código conserva 0001/0002; aún faltan scope, participantes y vigencia/control IA. Este documento conserva instrucciones operativas de las migraciones iniciales. No aplicar cambios de esquema manuales para simular funcionalidad pendiente.
+
 > Actualización vigente: esquema 0002 y autenticación local; consultar AUTENTICACION.md. La descripción de 0001 que sigue documenta el esquema inicial.
 
 # Diseño de datos e instalación del esquema inicial

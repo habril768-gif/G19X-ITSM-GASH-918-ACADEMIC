@@ -1,66 +1,40 @@
-# Plan de desarrollo del MVP
+# Backlog y plan vigente
 
-Los hitos se completan en orden. Hito 1 completado; hito 2 en curso (API inicial implementada; cliente pendiente). Los demÃ¡s estÃ¡n pendientes.
+Base: [PRD 1.8](PRD.md). Estado consolidado al 15 de octubre de 2026. Las entradas históricas permanecen en Git y BITACORA.md; este archivo muestra el estado actual.
 
-| Hito | Resultado verificable | Evidencia |
-| --- | --- | --- |
-| 1. Base del repositorio | README, PRD, exclusiÃ³n de secretos y plantilla | Archivos versionados |
-| 2. Estructura tÃ©cnica | API de salud y cliente inicial ejecutables | Instrucciones y comprobaciones locales |
-| 3. Datos | Modelos, migraciones, categorÃ­as y usuarios simulados | Base creada desde cero |
-| 4. AutenticaciÃ³n y permisos | Autenticación local, cuentas administradas, roles y departamentos | Pruebas de rechazo y acceso por ID |
-| 5. Incidencias | Registro, listado, asignaciÃ³n y confidencialidad | Pruebas entre departamentos |
-| 6. Ciclo y auditorÃ­a | Validar, resolver, cerrar y reabrir | Pruebas de transiciones y conservaciÃ³n histÃ³rica |
-| 7. IA | Worker Redis, clasificaciÃ³n, reintentos y validaciÃ³n humana | Fallas controladas y evaluaciÃ³n etiquetada |
-| 8. Correo | Eventos, permisos previos al envÃ­o y deduplicaciÃ³n | SMTP de pruebas |
-| 9. AnalÃ­tica | Vistas agregadas y reporte Power BI | FÃ³rmulas verificadas sin datos personales |
-| 10. Entrega | Docker, CI, manuales y pruebas de carga | InstalaciÃ³n reproducible y reporte QA |
+## Estado de los hitos
 
-## Criterios de evaluaciÃ³n
+| Hito | Alcance | Estado verificable | Próxima evidencia |
+| --- | --- | --- | --- |
+| H1 Requisitos y propuesta | PRD, decisiones y propuesta técnica | PRD 1.8 consolidado; propuesta independiente pendiente | Revisión documental y propuesta |
+| H2 Arquitectura y entorno | API base, Docker, diseño y estructura React | API y contenedores verificados manualmente; arquitectura formal y React pendientes | Documento de arquitectura |
+| H3 Datos | Esquema y fixtures de QA | 0001 y seis usuarios DEMO verificados; 0002 implementada, aplicación real pendiente; cambios 1.8 sin implementar | Migración 0002 y diseño de próxima migración |
+| H4 Identidad y administración | RF-1 y RF-7 | Autenticación local y alta básica implementadas; 20 pruebas locales aprobadas en último avance, 2 PostgreSQL omitidas; administración completa pendiente | Login real, logout y gestión de bajas/roles |
+| H5 Registro y panel | RF-2 y RF-8 | Pendiente; modelos iniciales no equivalen al servicio | Casos PERSONA/ENTORNO y filtros autorizados |
+| H6 Ciclo y confidencialidad | RF-4 y reglas transversales | Pendiente | Revalidación, recusa y auditoría atómica |
+| H7 IA | RF-3 | Pendiente; proveedor OpenAI elegido | Worker, omisión de confidenciales y evaluación independiente |
+| H8 Correo | RF-5 | Pendiente; solo eventos, sin SLA | SMTP capturador y pruebas de permisos |
+| H9 Analítica | RF-6 | Pendiente | Vistas agregadas y fórmulas verificadas |
+| H10 Entrega | QA, manuales, soporte, capacitación e informe | Manuales/QA iniciales; entrega final pendiente | Instalación y evaluación integral |
 
-- Funcionalidad: demostrar los flujos completos del MVP.
-- Calidad tÃ©cnica: separar capas, validar entradas y probar permisos.
-- DocumentaciÃ³n: mantener README, PRD y decisiones al dÃ­a.
-- Reproducibilidad: dependencias declaradas, entorno de ejemplo y arranque documentado.
-- Alcance: completar el MVP acordado antes de incorporar funciones nuevas.
+## Orden inmediato
 
-## Secuencia de commits propuesta
+1. Aplicar 0002 desde terminal autorizada y verificar primer administrador/login. Seguir AUTENTICACION.md.
+2. Diseñar la siguiente migración sin modificar 0001/0002: scope, afectado nullable condicional, departamento reportado, participantes, classification_valid y control de IA. Actualizar DATOS.md como diseño vigente antes de implementarla.
+3. Implementar permisos por objeto y conflictos de interés junto con RF-2/RF-4; no construir un CRUD sin restricciones como solución final.
+4. Crear diez casos simulados mediante servicio auditado. Implementar panel React y pruebas de acceso/filtrado.
+5. Integrar IA solo sobre texto simulado revisado, sin confidenciales; preparar 50 referencias independientes. Integrar correo por eventos y analítica.
 
-1. `docs: documentar PRD y plan inicial del MVP`
-2. `chore: crear estructura de backend y frontend`
-3. `feat: agregar modelos y migraciones iniciales`
-4. `feat: implementar autenticacion y permisos por rol`
-5. `feat: registrar y consultar incidencias con confidencialidad`
-6. `feat: implementar transiciones e historial`
-7. `feat: integrar clasificacion asincrona con IA`
-8. `feat: agregar notificaciones y analitica`
-9. `test: validar flujos y reproducibilidad de entrega`
+## Calendario y capacidad
 
-Los hitos pueden requerir varios commits. Se registra solo trabajo realizado, con su validaciÃ³n y limitaciones.
+Arranque documentado: 15 de octubre de 2026. No se ha recibido fecha límite definitiva ni horas disponibles por semana. El cronograma anterior de seis semanas no constituye compromiso vigente. Registrar esos dos datos antes de fijar fechas por hito. Mientras tanto, el orden de trabajo se define por dependencias y evidencia, no por fechas inventadas.
 
-## Proveedor IA definido
+Los hitos se relacionan con las diez actividades académicas mediante la sección 10 del PRD y ENTREGABLES.md. Documentación y pruebas acompañan cada avance. Capacitación requiere sesión real y el cierre requiere resultados reales.
 
-Se usarÃ¡ API directa de OpenAI con LangChain. Modelo y prueba de conectividad pendientes. VÃ©ase DECISIONES.md.
+## Criterios de término por avance
 
-## Avance de infraestructura
+Código y configuración revisables, pruebas pertinentes con resultado/limitaciones, manual e instrucciones actualizados, evidencia sin secretos, bitácora y trazabilidad al día, y commit por cambio real. Una prueba omitida o una configuración no ejecutada no equivale a aprobación. Las versiones previas del PRD no se convierten en actividad retrospectiva.
 
-ConfiguraciÃ³n Compose de API, PostgreSQL y Redis preparada, pendiente de ejecuciÃ³n y validaciÃ³n en Docker Desktop. PrÃ³xima tarea: comprobar servicios y crear modelos/migraciones. El cliente React y la capa de persistencia siguen pendientes.
+## Decisiones que no amplían el MVP
 
-## VerificaciÃ³n manual recibida
-
-La autora aportÃ³ evidencia de API/PostgreSQL/Redis healthy, SELECT 1 y PONG. Infraestructura bÃ¡sica arrancada; prÃ³ximo avance: modelos, migraciones y conexiÃ³n real de FastAPI a PostgreSQL. Ver REPORTE_QA.md.
-
-## Modelos y migraciÃ³n inicial
-
-Hito 3 en curso: modelos, migraciÃ³n 0001 y catÃ¡logos implementados. Pendiente aplicaciÃ³n real, validaciÃ³n PostgreSQL y usuarios/departamentos simulados. Ocho pruebas locales aprobadas; dos de integraciÃ³n omitidas. El hito no se marca completado todavÃ­a.
-
-## MigraciÃ³n validada y fixtures preparados
-
-Evidencia manual confirma migraciÃ³n 0001, alineaciÃ³n del esquema y conexiÃ³n HTTP de la API a PostgreSQL. Usuarios/departamentos simulados implementados con carga explÃ­cita; ejecuciÃ³n PostgreSQL pendiente. Los casos de prueba y autenticaciÃ³n siguen pendientes.
-
-## Fixtures validados en PostgreSQL
-
-Evidencias 07/08 confirman carga de dos departamentos y seis usuarios y repeticiÃ³n sin duplicados. Del hito de datos sigue pendiente preparar los diez casos ficticios cuando exista su creaciÃ³n auditada. PrÃ³ximo avance funcional: autenticaciÃ³n y autorizaciÃ³n; requiere configurar aplicaciÃ³n/tenant Entra ID para validaciÃ³n real.
-
-## Cambio vigente: autenticaciÃ³n local
-
-El hito 4 utiliza FastAPI con correo/contraseÃ±a, no Entra ID. API de sesiones, alta restringida, bootstrap y pruebas implementados. ValidaciÃ³n manual Docker y provisiÃ³n de Admin RH pendientes. GestiÃ³n completa de bajas y cambios de rol/departamento con reasignaciÃ³n de casos queda para el servicio administrativo. DespuÃ©s: registro/listado de incidencias con autorizaciÃ³n por departamento y confidencialidad.
+Sin Entra ID, SLA, alertas por tiempo, nómina, app móvil, registro público o uso productivo de datos reales. La conservación de campos externos permite una futura integración sin prometerla. Modelo OpenAI, librería worker y SMTP concreto se eligen antes de sus hitos y se documentan.
