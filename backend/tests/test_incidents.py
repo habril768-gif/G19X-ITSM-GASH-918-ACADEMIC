@@ -165,3 +165,128 @@ def test_filters_options_and_input_limits(world):
     assert str(a["outsider"].id) not in [x["id"] for x in options["participants"]]
     assert "email" not in str(options)
     assert c.post("/incidents",json=payload(titulo=" ")).status_code==422
+
+
+def validate(c, case, **fields):
+    return c.put(f'/incidents/{case}/classification', json={'category_id':2,'priority':1,**fields})
+
+
+def move(c, case, status, **fields):
+    return c.post(f'/incidents/{case}/transitions', json={'status':status,**fields})
+
+
+def test_lifecycle_archives_cycles_and_closes(world):
+    c,db,a,s,one,two=world
+    case=create(c);s['user']=a['admin']
+    assert validate(c,case).status_code==200
+    assigned=c.put(f'/incidents/{case}/assignment',json={'assigned_to':str(a['super'].id)})
+    assert assigned.status_code==200
+    assert move(c,case,'EN_REVISION').status_code==200
+    assert move(c,case,'RESUELTA',resolution_text='Acción simulada').status_code==200
+    assert move(c,case,'CERRADA').status_code==200
+    assert validate(c,case).status_code==409
+    assert c.put(f'/incidents/{case}/assignment',json={'assigned_to':str(a['admin'].id)}).status_code==409
+    assert move(c,case,'EN_REVISION').status_code==422
+    result=move(c,case,'EN_REVISION',reason='Nueva información simulada',assigned_to=str(a['admin'].id))
+    assert result.status_code==200,result.text
+    assert result.json()['resolved_at'] is None and result.json()['closed_at'] is None
+    assert result.json()['resolution_text'] is None
+    history=c.get(f'/incidents/{case}/history').json()['items']
+    reopened=next(r for r in history if r['accion']=='REAPERTURA')
+    assert reopened['detalle']['before']['resolution_text']=='Acción simulada'
+    assert reopened['detalle']['before']['closed_at'] is not None
+    assert reopened['detalle']['reason']=='Nueva información simulada'
+
+
+def test_edit_requires_revalidation_without_erasing_validator(world):
+    c,db,a,s,one,two=world
+    case=create(c);s['user']=a['super']
+    assert move(c,case,'EN_REVISION',assigned_to=str(a['super'].id)).status_code==409
+    assert validate(c,case).status_code==200
+    assert move(c,case,'EN_REVISION',assigned_to=str(a['super'].id)).status_code==200
+    edited=c.put(f'/incidents/{case}/content',json={'titulo':'Editado','descripcion':'Nueva descripción simulada'})
+    assert edited.status_code==200,edited.text
+    assert edited.json()['classification_valid'] is False
+    assert edited.json()['validated_by']==str(a['super'].id)
+    assert edited.json()['status']=='EN_REVISION'
+    assert move(c,case,'RESUELTA',resolution_text='Prueba').status_code==409
+    assert validate(c,case,priority=3).status_code==200
+    assert move(c,case,'RESUELTA',resolution_text='Prueba').status_code==200
+    assert move(c,case,'CERRADA').status_code==403
+    assert move(c,case,'EN_REVISION',reason='Prueba').status_code==403
+
+
+def test_management_access_and_assignment_eligibility(world):
+    c,db,a,s,one,two=world
+    case=create(c)
+    assert validate(c,case).status_code==403
+    s['user']=a['super2'];assert validate(c,case).status_code==404
+    s['user']=a['admin']
+    for name in ['employee','super2']:
+        assert c.put(f'/incidents/{case}/assignment',json={'assigned_to':str(a[name].id)}).status_code==422
+    a['super'].is_active=False;db.commit()
+    assert c.put(f'/incidents/{case}/assignment',json={'assigned_to':str(a['super'].id)}).status_code==422
+    confidential=create(c,affected_employee_id=str(a['employee'].id),is_confidential=True)
+    assert c.put(f'/incidents/{confidential}/assignment',json={'assigned_to':str(a['super2'].id)}).status_code==422
+    assert c.put(f'/incidents/{confidential}/assignment',json={'assigned_to':str(a['admin2'].id)}).status_code==200
+    s['user']=a['employee'];involved=create(c,participants=[{'user_id':str(a['admin'].id),'declaration_reason':'Prueba'}])
+    s['user']=a['admin'];assert validate(c,involved).status_code==404
+
+
+def test_transition_validation_and_environment_category(world):
+    c,db,a,s,one,two=world
+    case=create(c,scope='ENTORNO',reported_department_id=str(one.id));s['user']=a['admin']
+    assert validate(c,case).status_code==422
+    assert validate(c,case,category_id=999).status_code==422
+    assert validate(c,case,category_id=4,priority=4).status_code==422
+    assert move(c,case,'RESUELTA',resolution_text='Prueba').status_code==409
+    assert validate(c,case,category_id=4).status_code==200
+    assert move(c,case,'EN_REVISION').status_code==422
+    assert move(c,case,'EN_REVISION',assigned_to=str(a['admin'].id)).status_code==200
+    assert move(c,case,'EN_REVISION',assigned_to=str(a['admin'].id)).status_code==409
+    assert move(c,case,'RESUELTA').status_code==422
+    assert move(c,case,'RESUELTA',resolution_text='   ').status_code==422
+    assert move(c,case,'RESUELTA',resolution_text='Prueba',assigned_to=str(a['admin'].id)).status_code==422
+    assert move(c,case,'RESUELTA',resolution_text='Prueba').status_code==200
+    assert c.put(f'/incidents/{case}/content',json={'titulo':'Prueba','descripcion':'Cambio'}).status_code==409
+
+
+def test_lifecycle_rolls_back_on_failed_audit(world):
+    c,db,a,s,one,two=world
+    case=create(c);s['user']=a['admin']
+    def fail_audit(session,flush_context,instances):
+        if any(isinstance(row,AuditEvent) and row.accion=='VALIDACION_IA' for row in session.new):
+            raise SQLAlchemyError('simulated failure')
+    event.listen(db,'before_flush',fail_audit)
+    try:
+        assert validate(c,case).status_code==503
+    finally:
+        event.remove(db,'before_flush',fail_audit)
+    detail=c.get('/incidents/'+case).json()
+    assert detail['classification_valid'] is False and detail['category_id'] is None
+    assert c.get(f'/incidents/{case}/history').json()['total']==1
+
+
+def test_resolve_rechecks_assignee_and_transition_rollback(world):
+    c,db,a,s,one,two=world
+    case=create(c);s['user']=a['admin']
+    assert validate(c,case).status_code==200
+    assert move(c,case,'EN_REVISION',assigned_to=str(a['super'].id)).status_code==200
+    a['super'].departamento_id=two.id;db.commit()
+    assert move(c,case,'RESUELTA',resolution_text='Prueba').status_code==422
+    assert c.put(f'/incidents/{case}/assignment',json={'assigned_to':str(a['admin'].id)}).status_code==200
+    def fail_event(session,flush_context,instances):
+        if any(isinstance(row,AuditEvent) and row.accion=='ESTADO_CAMBIADO' for row in session.new):
+            raise SQLAlchemyError('simulated transition failure')
+    event.listen(db,'before_flush',fail_event)
+    try:
+        assert move(c,case,'RESUELTA',resolution_text='No debe persistir').status_code==503
+    finally:
+        event.remove(db,'before_flush',fail_event)
+    detail=c.get('/incidents/'+case).json()
+    assert detail['status']=='EN_REVISION' and detail['resolution_text'] is None
+    for reason in ['Primer ciclo','Segundo ciclo']:
+        assert move(c,case,'RESUELTA',resolution_text=reason).status_code==200
+        assert move(c,case,'EN_REVISION',reason=reason).status_code==200
+    events=c.get(f'/incidents/{case}/history').json()['items']
+    assert sum(row['accion']=='REAPERTURA' for row in events)==2

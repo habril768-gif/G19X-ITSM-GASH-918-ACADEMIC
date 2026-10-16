@@ -132,3 +132,7 @@ Cambios aditivos sin editar migraciones previas. Casos existentes quedan PERSONA
 ## 16 de octubre de 2026 — Registro y autorización SQL
 
 Predicado único para listar/contar/consultar, con exclusión de gestores involucrados y protección dinámica por roles de participantes/afectado. No exponer existencia vía ID: 404 para ausentes/no autorizados. Creación devuelve acuse, no expediente. Auditoría y participantes se guardan con el caso o se revierten juntos. Historial para empleado solo cronología sin actor/copias; motivos de participantes solo gestores autorizados. Máximo técnico 20 participantes por petición. No cambia el esquema ni implementa todavía todo el ciclo.
+
+## 16 de octubre de 2026 — Gestión transaccional de casos
+
+Se implementa API 0.6.0 sin nueva migración: clasificación humana, asignación, edición e inicio/resolución/cierre/reapertura. Se bloquea expediente con SELECT FOR UPDATE antes de reevaluar acceso y estado; auditoría y cambios se confirman juntos. El evento existente VALIDACION_IA se reutiliza para confirmación manual, con source=HUMANA. Reapertura conserva ciclo anterior en before/after del historial; no se crea tabla adicional. Cambiar descripción invalida bandera sin borrar último validador. Participantes, confidencialidad, retroceso protector y administración completa siguen pendientes; no hay integración IA/correo.

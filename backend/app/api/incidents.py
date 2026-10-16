@@ -12,6 +12,7 @@ from app.core.database import get_session
 from app.core.security import current_user
 from app.models import AuditEvent, Category, Department, Incident, IncidentParticipant, Role, User
 from app.services.incidents import create_case, role_name, visibility, visible_case
+from app.services.lifecycle import manage_case
 
 router=APIRouter(prefix="/incidents",tags=["Incidencias"])
 
@@ -48,6 +49,45 @@ class Receipt(BaseModel):
     id: UUID
     received: bool
     can_view: bool
+
+
+class ClassificationInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    category_id: int = Field(ge=1)
+    priority: int = Field(ge=1, le=3)
+
+
+class AssignmentInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    assigned_to: UUID
+
+
+class ContentInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    titulo: str = Field(min_length=1, max_length=200)
+    descripcion: str = Field(min_length=1, max_length=10000)
+
+    @field_validator("titulo", "descripcion")
+    @classmethod
+    def not_blank(cls, value):
+        if not value.strip():
+            raise ValueError("El texto no puede estar vacío")
+        return value.strip()
+
+
+class TransitionInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    status: Literal["EN_REVISION", "RESUELTA", "CERRADA"]
+    assigned_to: UUID | None = None
+    resolution_text: str | None = Field(None, min_length=1, max_length=10000)
+    reason: str | None = Field(None, min_length=1, max_length=2000)
+
+    @field_validator("resolution_text", "reason")
+    @classmethod
+    def not_blank(cls, value):
+        if value is not None and not value.strip():
+            raise ValueError("El texto no puede estar vacío")
+        return value.strip() if value is not None else None
 
 
 class CaseSummary(BaseModel):
@@ -155,3 +195,31 @@ def history(case_id:UUID,response:Response,page:int=Query(1,ge=1),page_size:int=
     total=db.scalar(select(func.count()).select_from(AuditEvent).where(predicate))
     rows=db.scalars(select(AuditEvent).where(predicate).order_by(AuditEvent.fecha.desc(),AuditEvent.id.desc()).offset((page-1)*page_size).limit(page_size)).all()
     return {"items":[({"id":r.id,"accion":r.accion,"fecha":r.fecha} if limited else {"id":r.id,"accion":r.accion,"usuario_id":r.usuario_id,"detalle":r.detalle,"fecha":r.fecha}) for r in rows],"total":total,"page":page,"page_size":page_size}
+
+
+@router.put('/{case_id}/classification', response_model=CaseDetail)
+def classify(case_id: UUID, body: ClassificationInput, response: Response, user: User = Depends(current_user), db: Session = Depends(get_session)):
+    response.headers['Cache-Control'] = 'no-store'
+    return manage_case(db, user, case_id, 'classification', body)
+
+
+@router.put('/{case_id}/assignment', response_model=CaseDetail)
+def assign(case_id: UUID, body: AssignmentInput, response: Response, user: User = Depends(current_user), db: Session = Depends(get_session)):
+    response.headers['Cache-Control'] = 'no-store'
+    return manage_case(db, user, case_id, 'assignment', body)
+
+
+@router.put('/{case_id}/content', response_model=CaseDetail)
+def edit_content(case_id: UUID, body: ContentInput, response: Response, user: User = Depends(current_user), db: Session = Depends(get_session)):
+    response.headers['Cache-Control'] = 'no-store'
+    return manage_case(db, user, case_id, 'content', body)
+
+
+@router.post('/{case_id}/transitions', response_model=CaseDetail)
+def transition(case_id: UUID, body: TransitionInput, response: Response, user: User = Depends(current_user), db: Session = Depends(get_session)):
+    response.headers['Cache-Control'] = 'no-store'
+    if body.status != 'EN_REVISION' and (body.assigned_to is not None or body.reason is not None):
+        raise HTTPException(422, 'Responsable y motivo solo aplican a entrada en revisión')
+    if body.status != 'RESUELTA' and body.resolution_text is not None:
+        raise HTTPException(422, 'La resolución solo aplica al resolver')
+    return manage_case(db, user, case_id, 'transition', body)

@@ -101,3 +101,9 @@ RF-2/RF-3/RF-4: modelos y migración 0003 incorporan ámbitos, participantes/rev
 ## 16 de octubre de 2026 — Endpoints iniciales de incidencias
 
 RF-2: api/incidents.py y services/incidents.py implementan registro con ámbitos y auditoría. Reglas de acceso/recusa y confidencialidad se aplican a lectura SQL y acuse. RF-8: opciones/listado/detalle/historial backend, sin React. Tests/test_incidents.py cubre AC-02, parte de AC-04/05/10/11/14 y rollback; no implica RF completos. Cambios de estado/participantes, provisión de RH independiente e integraciones pendientes. Resultados y limitaciones en REPORTE_QA.md.
+
+Evidencias 14/15 revisadas el 16 de octubre de 2026: RF-2 registro básico con acuse 201 y RF-8 listado backend 200 del mismo caso PENDIENTE. Alcance parcial; no acredita todos los criterios de acceso ni el ciclo de vida. Ver REPORTE_QA.md.
+
+Actualización 16 de octubre de 2026: evidencia 16 revisada, historial HTTP 200 con evento CREADO. Registro, listado e historial básicos verificados manualmente; RF-2/RF-4/RF-8 continúan parciales. Validación, asignación y transiciones pendientes. Alcance de la prueba en REPORTE_QA.md.
+
+API 0.6.0 (16 de octubre de 2026): RF-2 edición auditada; RF-3 clasificación humana vigente; RF-4 asignación/estados/reapertura. services/lifecycle.py y seis pruebas HTTP/SQLite adicionales en test_incidents.py cubren parcialmente revalidación, acceso, transiciones y rollback. No sustituyen concurrencia PostgreSQL, revisión de participantes, confidencialidad ni frontend. Resultados y límites en REPORTE_QA.md.

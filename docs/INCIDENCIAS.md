@@ -66,3 +66,36 @@ Evidencias previstas: docs/evidencias/14-registro-incidencia-201.png y 15-listad
 Suite nueva tests/test_incidents.py usa SQLite con claves foráneas y HTTP TestClient; sustituye únicamente la dependencia de identidad por actores de prueba. No prueba credenciales reales ni reemplaza pruebas PostgreSQL. La autenticación local tiene sus propias pruebas existentes.
 
 Se verifica rollback completo ante fallo de auditoría, filtros/count sin fuga, 404/IDOR, límites PERSONA/ENTORNO, participantes, confidencialidad y recusa incluso si cambia el rol del afectado. No se simula que ya existan worker, frontend o transiciones. Los endpoints de mutación restantes se implementarán con sus pruebas antes de aceptar el ciclo de vida completo.
+
+## Gestión del ciclo — API 0.6.0
+
+Sin migración nueva: conserva esquema 0003. Todas las rutas exigen gestor con acceso independiente al caso; empleados no pueden modificarlos. Rechaza gestor involucrado o fuera de departamento. Operaciones y auditoría comparten transacción; PostgreSQL bloquea la fila del caso antes de reevaluar acceso y estado. Las pruebas SQLite no verifican bloqueo concurrente real.
+
+| Método y ruta | Cuerpo y reglas |
+| --- | --- |
+| PUT /incidents/{case_id}/classification | category_id y priority (1 Alta, 2 Media, 3 Baja); confirma ambas, actualiza validated_by/at y classification_valid. ENTORNO solo categoría 4 |
+| PUT /incidents/{case_id}/assignment | assigned_to de gestor activo, departamento activo y acceso independiente; solo PENDIENTE/EN_REVISION |
+| PUT /incidents/{case_id}/content | titulo y descripcion completos; conserva valores previos en historial. Cambiar descripción invalida clasificación sin borrar último validador; solo PENDIENTE/EN_REVISION |
+| POST /incidents/{case_id}/transitions | status objetivo; assigned_to opcional al entrar/reabrir revisión; resolution_text obligatorio al resolver; reason obligatorio y exclusivo de reapertura |
+
+PENDIENTE → EN_REVISION requiere clasificación vigente y responsable autorizado. EN_REVISION → RESUELTA exige revalidación vigente, responsable todavía elegible y resolución no vacía. RESUELTA → CERRADA solo Admin RH independiente. RESUELTA/CERRADA → EN_REVISION solo Admin RH independiente, con motivo y responsable elegible; archiva resolución/fechas/ciclo anterior en auditoría y limpia campos finales. Reabrir conserva la vigencia de clasificación existente. No hay saltos ni edición de casos resueltos/cerrados sin reapertura.
+
+Evento VALIDACION_IA identifica también confirmación humana manual por compatibilidad con el catálogo existente; detalle source=HUMANA, no implica llamada IA. Ninguna operación implementada envía texto a OpenAI. No se implementan todavía revisión de participantes, cambios de confidencialidad ni su retroceso excepcional a PENDIENTE. No aceptar RF-3/RF-4 completos por esta entrega parcial.
+
+### Prueba manual de clasificación
+
+Reconstruir desde la raíz con Docker Desktop abierto:
+
+```powershell
+docker compose up -d --build --wait
+```
+
+Abrir /docs, actualizar y verificar 0.6.0. Volver a iniciar sesión y autorizar si expiró. Obtener ID del caso Ausencia simulada con GET /incidents. Abrir PUT /incidents/{case_id}/classification, pegar ID y enviar:
+
+```json
+{"category_id":1,"priority":2}
+```
+
+Esperar 200 y classification_valid=true con validador/fecha. Evidencia prevista 17-clasificacion-validada-200.png; capturar únicamente Server response, sin Curl/token. Para continuar, obtener ID del Admin RH autenticado mediante GET /auth/me y usarlo como assigned_to en PUT assignment. Evidencia prevista 18-asignacion-200.png. No confundir UUID de usuario con UUID del expediente.
+
+Iniciar revisión con POST transitions y {"status":"EN_REVISION"}; resolver con {"status":"RESUELTA","resolution_text":"Acción correctiva simulada para la prueba académica"}; cerrar con {"status":"CERRADA"}; reabrir con {"status":"EN_REVISION","reason":"Nueva información simulada"}. Comprobar historial y conservación de ciclos. Estas son instrucciones previstas, no pruebas manuales ya acreditadas.

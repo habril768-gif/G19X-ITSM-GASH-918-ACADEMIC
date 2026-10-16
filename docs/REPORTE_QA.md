@@ -212,3 +212,17 @@ Once pruebas nuevas en tests/test_incidents.py: registro y cronología reducida;
 Las pruebas HTTP usan SQLite con FK y sustituyen solo current_user por actores ficticios. No acreditan una sesión real PostgreSQL de estos endpoints ni todo el ciclo. La suite de autenticación existente sí se ejecutó junto con ellas. El primer intento HTTP fue interrumpido por bloqueo del entorno; se concedieron sockets locales y la ejecución final terminó.
 
 Pendientes: reconstruir Docker, prueba manual de opciones/registro/listado/detalle con Admin RH, evidencias 14/15. No hay nueva migración: se mantiene 0003. Asignación, transición, revisión de participantes, frontend, IA y correo no se presentan como implementados.
+
+## 16 de octubre de 2026 — Evidencias 14 y 15 revisadas
+
+[Registro 201](evidencias/14-registro-incidencia-201.png): received=true y can_view=true. [Listado 200](evidencias/15-listado-incidencias-200.png): mismo ID, Ausencia simulada, PERSONA, PENDIENTE, total=1, sin responsable ni clasificación validada. Capturas de la autora inspeccionadas visualmente, sin token ni Curl. Acreditan registro y listado básicos en el entorno Docker/PostgreSQL reportado; no prueban por sí solas detalle, historial, permisos entre roles, persistencia tras reinicio ni ciclo completo. No se ejecutó suite nueva para esta revisión.
+
+## 16 de octubre de 2026 — Historial manual verificado
+
+Se inspeccionó docs/evidencias/16-historial-incidencia-200.png, ejecutada y guardada por la autora. HTTP 200, evento CREADO, total=1 y detalle de Ausencia simulada con datos ficticios. No se observan token ni Curl. Se documenta lectura básica del historial para el gestor autenticado; no acredita permisos de otros roles, detalle individual ni el ciclo completo. Sin cambios de código ni nueva ejecución automática. Pendientes: clasificación humana, asignación, transiciones auditadas y revisión de participantes.
+
+## 16 de octubre de 2026 — Gestión API 0.6.0
+
+Ejecución final: backend/.venv/Scripts/python.exe -m pytest -q backend/tests → 51 passed, 3 skipped, 1 warning in 11.14s. pip check sin conflictos. Primera ejecución con cinco pruebas nuevas: 50 passed; se añadió caso de pérdida de acceso del responsable, rollback de transición y reaperturas múltiples, y se repitió suite completa.
+
+Seis pruebas nuevas en test_incidents.py: recorrido de estados y archivo de resolución/fechas; edición y revalidación; roles/IDOR y responsable elegible; categoría de ENTORNO y transiciones inválidas; rollback de validación ante fallo de auditoría; pérdida de acceso del asignado, rollback de resolución y ciclos múltiples. SQLite no demuestra bloqueo concurrente PostgreSQL. Se mantienen tres pruebas de integración omitidas y advertencia conocida TestClient/httpx. No se ejecutó nueva validación Docker desde el asistente. Evidencias manuales 17/18 y ciclo completo siguen pendientes. No se presenta RF-3/RF-4 como terminado.

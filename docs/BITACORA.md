@@ -262,3 +262,15 @@
 **Validación:** 45 pruebas aprobadas, 3 PostgreSQL omitidas, 1 advertencia; pip check sin conflictos. Once casos nuevos comprueban acceso y rollback. Pruebas SQLite/HTTP con identidades simuladas; no se ejecutaron comandos Docker desde el asistente.
 **Resultado:** registro/listados/detalle backend parcial implementado. Validación manual PostgreSQL de endpoints pendiente.
 **Pendientes:** reconstruir imagen y obtener evidencias 14/15. Luego validación/edición, asignación y transiciones auditadas; API completa de administración y frontend pendientes.
+
+## 16 de octubre de 2026 — Evidencias de registro y listado
+
+Propósito: verificar el primer registro de caso con PostgreSQL. Cambios: incorporación de evidencias 14/15 y actualización del seguimiento documental. Validación: inspección visual de POST con HTTP 201, received=true y can_view=true; GET con HTTP 200 y el mismo ID, título Ausencia simulada, estado PENDIENTE y total=1. Ejecución manual realizada por la autora. No se observan credenciales en estas capturas. Resultado: registro y listado básicos acreditados; sin ejecutar nuevamente pruebas automáticas. Pendientes: detalle/historial manuales, validación, asignación y transiciones, revisión de participantes, frontend e integraciones.
+
+## 16 de octubre de 2026 — Historial manual verificado
+
+Se inspeccionó docs/evidencias/16-historial-incidencia-200.png, ejecutada y guardada por la autora. HTTP 200, evento CREADO, total=1 y detalle de Ausencia simulada con datos ficticios. No se observan token ni Curl. Se documenta lectura básica del historial para el gestor autenticado; no acredita permisos de otros roles, detalle individual ni el ciclo completo. Sin cambios de código ni nueva ejecución automática. Pendientes: clasificación humana, asignación, transiciones auditadas y revisión de participantes.
+
+## 16 de octubre de 2026 — Gestión API 0.6.0
+
+Propósito: implementar clasificación humana, asignación y ciclo auditado. Cambios: services/lifecycle.py, esquemas/rutas en api/incidents.py y versión 0.6.0; edición invalida clasificación y reapertura conserva ciclo previo. Manuales, decisiones y seguimiento actualizados. Validación final: 51 passed, 3 skipped, 1 warning in 11.14s; pip check sin conflictos. Seis pruebas nuevas HTTP/SQLite con identidad simulada, sin ejecutar Docker ni modificar .env. Resultado: gestión backend parcial implementada; no acredita concurrencia real PostgreSQL ni prueba manual nueva. Pendientes: reconstrucción y evidencias 17/18; revisión de participantes/confidencialidad, retroceso protector, frontend y demás integraciones.

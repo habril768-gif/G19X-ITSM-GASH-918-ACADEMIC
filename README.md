@@ -136,3 +136,5 @@ API 0.4.0 prepara ámbitos PERSONA/ENTORNO, participantes y clasificación vigen
 ## Registro y consultas de incidencias
 
 API 0.5.0 añade rutas /incidents sobre esquema 0003, sin migración adicional. Seguir [INCIDENCIAS.md](docs/INCIDENCIAS.md) para registrar y consultar con sesión local, datos DEMO y auditoría. Asignación/transiciones, frontend e integraciones siguen pendientes.
+
+API 0.6.0 incorpora gestión protegida de clasificación, responsable, contenido y ciclo. Guía y cuerpos de ejemplo en docs/INCIDENCIAS.md. Mantiene esquema 0003; reconstruir imagen sin repetir bootstrap ni seed. La comprobación manual de estas operaciones sigue pendiente.

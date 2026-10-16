@@ -26,3 +26,14 @@ Autenticación local: siguientes evidencias pendientes 09-migracion-auth-local.p
 Ambas inspeccionadas el 16 de octubre de 2026; limitaciones en REPORTE_QA.md.
 
 Próximas evidencias previstas: 14-registro-incidencia-201.png y 15-listado-incidencias-200.png, solo Server response con datos simulados y sin token/Curl.
+
+Evidencias 14/15 recibidas e inspeccionadas el 16 de octubre de 2026:
+
+- [14-registro-incidencia-201.png](14-registro-incidencia-201.png): acuse HTTP 201, received=true y can_view=true.
+- [15-listado-incidencias-200.png](15-listado-incidencias-200.png): listado HTTP 200 con el mismo caso PENDIENTE y total=1.
+
+Sin token ni Curl visibles; resultados y límites en REPORTE_QA.md.
+
+- [16-historial-incidencia-200.png](16-historial-incidencia-200.png): inspeccionada el 16 de octubre de 2026; HTTP 200, evento CREADO y total=1 con datos simulados, sin token/Curl visibles. No sustituye pruebas entre roles.
+
+Próximas evidencias previstas para API 0.6.0: 17-clasificacion-validada-200.png y 18-asignacion-200.png. Aún no recibidas ni verificadas. Guardar solo Server response con datos ficticios; omitir Curl/token.

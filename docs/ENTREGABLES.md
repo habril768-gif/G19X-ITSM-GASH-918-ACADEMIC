@@ -30,3 +30,9 @@ El descriptivo enumera Azure OpenAI Service. El 15 de octubre de 2026 la autora 
 Actualización 16 de octubre de 2026: autenticación verificada manualmente en evidencias 09–11; esquema 0003 de incidencias implementado, no aplicado todavía desde el asistente. No equivale a sistema de casos funcional; resultados actuales en REPORTE_QA.md.
 
 Entrega 0.5.0: registro y consulta de casos implementados como avance backend parcial; prueba manual pendiente. No marca sistema funcional completo ni panel React entregado.
+
+Validación manual de entrega 0.5.0 (16 de octubre de 2026): registro y listado básicos acreditados por evidencias 14/15 inspeccionadas. Los pendientes históricos anteriores se conservan como historial; esto no declara entregado el sistema completo.
+
+Actualización 16 de octubre de 2026: evidencia 16 revisada, historial HTTP 200 con evento CREADO. Registro, listado e historial básicos verificados manualmente; RF-2/RF-4/RF-8 continúan parciales. Validación, asignación y transiciones pendientes. Alcance de la prueba en REPORTE_QA.md.
+
+Entrega parcial API 0.6.0: clasificación humana, asignación, edición y ciclo auditado implementados, con 51 pruebas locales aprobadas y 3 PostgreSQL omitidas. Manuales actualizados; verificación manual del nuevo ciclo pendiente. No equivale a sistema completo ni reporte QA final.

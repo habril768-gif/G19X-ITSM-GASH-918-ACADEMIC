@@ -96,3 +96,11 @@ Evidencias 12/13 confirman migración 0003, alembic check sin diferencias y cone
 ## 16 de octubre de 2026 — Registro y consultas
 
 RF-2 parcial: alta PERSONA/ENTORNO auditada, confidencialidad preventiva y declaración de participantes. RF-8 backend parcial: opciones, listado con filtros/paginación, detalle, participantes e historial restringidos. API 0.5.0 mantiene esquema 0003. Validación manual PostgreSQL de estos endpoints pendiente. Siguiente: validación/edición y asignación/transiciones auditadas; frontend e integraciones no están terminados.
+
+Actualización 16 de octubre de 2026: evidencias 14/15 verificadas, registro 201 y listado 200 del mismo caso PENDIENTE. Se cierra esta prueba manual básica; detalle/historial manuales y validación/asignación/transiciones continúan pendientes. RF-2 y RF-8 siguen parciales.
+
+Actualización 16 de octubre de 2026: evidencia 16 revisada, historial HTTP 200 con evento CREADO. Registro, listado e historial básicos verificados manualmente; RF-2/RF-4/RF-8 continúan parciales. Validación, asignación y transiciones pendientes. Alcance de la prueba en REPORTE_QA.md.
+
+## 16 de octubre de 2026 — Clasificación y ciclo backend
+
+API 0.6.0 implementa validación conjunta de categoría/prioridad, asignación a gestor elegible, edición con invalidación y transiciones/reapertura auditadas. RF-3/RF-4 continúan parciales: faltan revisión de participantes, cambios de confidencialidad y retroceso protector; integración IA, frontend y pruebas reales de concurrencia pendientes. Validación local 51 pruebas aprobadas/3 omitidas; reconstrucción y evidencias 17/18 pendientes.

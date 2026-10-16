@@ -43,3 +43,7 @@ Actualizar según DATOS.md, sin repetir alta del administrador. Readiness exige 
 ## API 0.5.0 — Incidencias iniciales
 
 Consultar INCIDENCIAS.md para rutas, contrato y validación manual. Requiere esquema 0003 y sesión válida; basta reconstruir imagen, no repetir bootstrap. No hay estados de negocio mutables todavía. La auditoría inicial se realiza dentro de la transacción. Un fallo SQL devuelve 503 genérico sin consulta ni credenciales.
+
+## API 0.6.0 — Operación de incidencias
+
+Mantiene esquema 0003. Reconstruir con docker compose up -d --build --wait y verificar 0.6.0 en /docs. No necesita credenciales nuevas ni cambios a .env. Rutas, reglas y prueba manual en INCIDENCIAS.md. Para confirmación humana usar PUT classification antes de iniciar revisión; asignar solo gestor con acceso. No hay frontend de gestión todavía. Las rutas devuelven 409 ante estado incompatible, 422 ante datos/responsable inválidos, 403 para operación de rol no permitido y 404 ante expediente no visible. Un error SQL revierte cambios y devuelve 503 genérico.
