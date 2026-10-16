@@ -60,3 +60,9 @@
 **Resultado:** configuración preparada y documentada, ejecución pendiente. No se considera probada la integración de servicios.
 
 **Pendientes:** instalar/iniciar Docker Desktop, completar contraseña local, ejecutar comprobaciones documentadas y conservar evidencia. Después implementar modelos, migraciones y acceso real a datos.
+
+## 15 de octubre de 2026 — Inventario de herramientas
+
+**Propósito:** identificar instalaciones necesarias antes de ejecutar Compose.
+**Validación:** comandos de ubicación y versión: Git, VS Code, Python 3.11.0, Node 24.13.1 y npm 11.8.0 disponibles. Docker ausente. WSL y listado de aplicaciones Store no pudieron verificarse por acceso denegado. Power BI no localizado en rutas habituales.
+**Resultado:** inventario en HERRAMIENTAS.md; sin instalaciones ni cambios al sistema. Pendiente Docker Desktop y comprobación manual de WSL 2. Power BI puede prepararse posteriormente.
