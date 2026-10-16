@@ -68,3 +68,7 @@ Consultar [diseÃ±o de datos](../docs/DATOS.md). La API no crea tablas automÃ�
 ## Sesiones locales
 
 Ver [AUTENTICACION.md](../docs/AUTENTICACION.md): migraciÃ³n 0002, bootstrap interactivo, login, /auth/me, logout y cambio de contraseÃ±a. La API no necesita variables Entra ni claves de firma JWT.
+
+## Esquema de incidencias
+
+API 0.4.0 requiere 0003 para readiness. Ver docs/DATOS.md para actualización y conservación. No existen todavía rutas de gestión de incidencias; los modelos no sustituyen sus servicios de permisos.

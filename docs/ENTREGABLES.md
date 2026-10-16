@@ -26,3 +26,5 @@ Cada entrada de bitÃ¡cora registra propÃ³sito, cambio, validaciÃ³n, result
 ## Diferencia documentada
 
 El descriptivo enumera Azure OpenAI Service. El 15 de octubre de 2026 la autora eligiÃ³ la API directa de OpenAI, consistente con el PRD. DecisiÃ³n registrada en DECISIONES.md. La conexiÃ³n, el modelo y la integraciÃ³n siguen pendientes; no se ha realizado una llamada de prueba.
+
+Actualización 16 de octubre de 2026: autenticación verificada manualmente en evidencias 09–11; esquema 0003 de incidencias implementado, no aplicado todavía desde el asistente. No equivale a sistema de casos funcional; resultados actuales en REPORTE_QA.md.

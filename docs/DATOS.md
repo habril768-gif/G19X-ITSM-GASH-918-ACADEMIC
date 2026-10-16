@@ -1,29 +1,34 @@
-> PRD 1.8 define el modelo objetivo en su sección 6. El código conserva 0001/0002; aún faltan scope, participantes y vigencia/control IA. Este documento conserva instrucciones operativas de las migraciones iniciales. No aplicar cambios de esquema manuales para simular funcionalidad pendiente.
+# Modelo de datos y migración 0003
 
-> Actualización vigente: esquema 0002 y autenticación local; consultar AUTENTICACION.md. La descripción de 0001 que sigue documenta el esquema inicial.
+API 0.4.0. Base funcional: PRD 1.9. Las revisiones 0001 y 0002 permanecen intactas; la 0003 añade estructura para incidencias. No implementa aún sus endpoints ni las reglas completas de autorización.
 
-# Diseño de datos e instalación del esquema inicial
+## Cambios de esquema
 
-## Alcance
-
-SQLAlchemy 2 con Psycopg 3; migraciones Alembic. Revisión inicial `0001`. Datos UUID para usuarios, departamentos, casos y auditoría; catálogos con ID entero. El esquema utiliza JSONB y fechas con zona horaria de PostgreSQL. La aplicación debe enviar fechas UTC.
-
-## Entidades
-
-| Tabla | Propósito y restricciones |
+| Cambio | Regla |
 | --- | --- |
-| roles | ADMIN_RH=1, SUPERVISOR=2, EMPLEADO=3 |
-| departamentos | Nombre único, estado activo |
-| users | Identidad única por tenant_id y external_id; rol y departamento obligatorios |
-| categorias_incidencia | Cinco categorías del PRD, IDs 1 a 5 |
-| incidencias | Autor, afectado, departamento histórico, responsable, clasificación humana/IA y ciclo |
-| historial_incidencias | Actor nullable para sistema, destino incidencia o usuario, acción y detalle JSONB |
+| scope | PERSONA o ENTORNO; PERSONA por defecto |
+| affected_employee_id | Obligatorio en PERSONA y nulo en ENTORNO |
+| reported_department_id | Departamento reportado obligatorio, con FK |
+| department_id_at_creation | Departamento histórico existente, conservado |
+| classification_valid | FALSE inicialmente; TRUE exige categoría, prioridad y última validación |
+| Resolución | RESUELTA/CERRADA exigen bandera de validación vigente además de campos anteriores |
+| ai_status | Añade OMITIDA, que exige motivo no vacío |
+| Control IA | Texto revisado, revisor/fecha, motivo de omisión, modelo y versión de prompt |
+| incident_involved_users | Pareja caso/usuario única; declaración, revisión y estado DECLARADO/CONFIRMADO/DESCARTADO |
 
-No se crean usuarios ni credenciales reales. La migración inserta únicamente roles y categorías. La generación de departamentos y usuarios simulados se implementará después. Los IDs UUID se generan por SQLAlchemy; inserciones SQL manuales deben proporcionarlos.
+ENTORNO acepta solo categoría Riesgos (ID estable 4 del catálogo inicial), o categoría nula mientras esté pendiente. No permite resolver sin categoría ni prioridad. La revisión de participante requiere motivo, actor/fecha y prohíbe que el actor sea el propio participante. La independencia respecto a otros involucrados y las exclusiones de acceso deben implementarse en los servicios; una restricción por fila no cubre todas las relaciones.
 
-`affected_user_id` permite auditar gestión de usuarios sin asociar artificialmente una incidencia. Los CHECK controlan valores y campos esenciales; permisos, confidencialidad, transiciones, usuario activo y escritura atómica del historial se implementarán en los servicios. El esquema por sí solo no aplica esas reglas. La eliminación no se publica como operación de aplicación. La inmutabilidad del historial deberá reforzarse con el usuario de aplicación al separar privilegios de migración; actualmente Compose usa el usuario de desarrollo.
+Los CHECK de la base validan combinaciones y referencias, pero no ejecutan transiciones ni escriben auditoría automáticamente. La edición de descripción deberá invalidar la bandera en la misma transacción en el servicio futuro. No se crean casos ni participantes por arrancar la API.
 
-## Aplicar en Docker desde la raíz
+## Conservación de casos previos
+
+0003 asigna PERSONA a cada caso existente y copia reported_department_id desde department_id_at_creation, sin recalcular historia con el departamento actual del afectado. Preserva IDs, textos, fechas y auditoría. Conserva clasificación vigente solo si ya hay categoría, prioridad y actor/fecha de validación; no crea una validación humana nueva. Se añaden restricciones después del relleno. Los casos resueltos válidos de 0002 cumplen esos campos.
+
+El código de migración contiene DDL congelado y no importa los modelos actuales. La operación PostgreSQL es transaccional. No se permite downgrade automático por el riesgo de perder datos de entorno/participantes. No borrar volúmenes para resolver errores.
+
+## Aplicar desde la raíz
+
+Con Docker Desktop abierto, sin cambiar .env:
 
 ```powershell
 docker compose up -d --build --wait
@@ -32,25 +37,16 @@ docker compose exec api python -m alembic current
 docker compose exec api python -m alembic check
 ```
 
-Se espera revisión `0001` y ningún cambio de esquema pendiente. Aplicar `upgrade head` nuevamente no debe duplicar catálogos. Las migraciones son explícitas: la API no crea tablas al arrancar. No ejecutar downgrade sobre datos que deban conservarse; el downgrade inicial elimina las tablas.
+Se espera 0003 (head) y sin operaciones nuevas pendientes. Antes de aplicar sobre datos importantes, realizar el respaldo indicado por el procedimiento del proyecto; no hay respaldo automático en este avance.
 
-Después abrir http://127.0.0.1:8000/docs y ejecutar GET /health/db. Devuelve HTTP 200 solo si conecta a PostgreSQL y la revisión es 0001. Si no hay configuración, no hay conexión o faltan migraciones, devuelve 503 genérico, sin credenciales. `/health` sigue respondiendo si el proceso está disponible.
+GET /health/db devuelve 200 solo con conexión y revisión 0003. El liveness /health no depende de la migración. Hasta aplicar la actualización puede verse 503 en /health/db. Las cuentas y sesiones existentes no se eliminan.
 
-```powershell
-docker compose exec postgres sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT version_num FROM alembic_version;"'
-docker compose exec postgres sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT nombre FROM categorias_incidencia ORDER BY id;"'
-```
+Capturas previstas: docs/evidencias/12-migracion-incidencias.png y 13-db-health-0003.png. La respuesta de /health/db no incluye credenciales. No es necesario repetir bootstrap ni proporcionar contraseñas por esta migración.
 
-Capturas previstas: docs/evidencias/05-migracion-inicial.png y 06-api-db-health-200.png. No se consideran existentes hasta recibirlas.
+## Validación
 
-## Configuración de conexión
+Pruebas SQLite con FK habilitadas: ámbito/afectado, categoría de entorno, bandera, omisión IA, revisión de participantes y resolución sin revalidar. Prueba offline Alembic: compila 0002→0003 y confirma relleno/creación sin DROP TABLE.
 
-La aplicación lee POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DB, POSTGRES_USER y POSTGRES_PASSWORD del entorno del proceso. Compose ya los proporciona. No se concatena la contraseña en una URL: URL.create preserva caracteres especiales. DATABASE_URL permanece reservada y no se utiliza. La API no lee automáticamente .env; en ejecución nativa se deben definir variables en PowerShell y tener acceso a PostgreSQL. Los servicios de Compose no exponen puerto PostgreSQL al host.
+Prueba PostgreSQL optativa: crea un esquema QA aislado en una transacción, aplica 0001/0002, inserta dos casos simulados, aplica 0003 y comprueba conservación, relleno y alta ENTORNO. Revierte la transacción al terminar. Solo se ejecuta con RUN_DB_TESTS=1 contra base de pruebas; la CI preparada usa PostgreSQL aislado y alembic check. No ejecutar contra datos reales.
 
-## Verificación
-
-Desde la raíz: backend/.venv/Scripts/python.exe -m pytest -q backend/tests. Sin base de prueba, se omiten las pruebas marcadas por RUN_DB_TESTS. La CI incluye PostgreSQL aislado, aplica migración dos veces, ejecuta alembic check y habilita pruebas de integración. Su resultado remoto queda pendiente de observar. No activar RUN_DB_TESTS en una base de trabajo con datos reales.
-
-Las migraciones contienen DDL congelado y no importan modelos actuales. La generación offline no sustituye una ejecución real en PostgreSQL. Futuras modificaciones de modelos exigen otra revisión Alembic.
-
-Referencias: https://docs.sqlalchemy.org/en/20/dialects/postgresql.html y https://alembic.sqlalchemy.org/en/latest/tutorial.html .
+Resultados actuales y límites en REPORTE_QA.md. Generar SQL o pasar pruebas SQLite no equivale a haber aplicado 0003 en PostgreSQL.

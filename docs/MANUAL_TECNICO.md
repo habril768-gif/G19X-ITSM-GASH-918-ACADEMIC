@@ -35,3 +35,7 @@ Seguir DATOS_DEMO.md para carga explícita, repetible y transaccional de cuentas
 ## API 0.3.0: autenticación propia
 
 Esta actualización sustituye las referencias anteriores a Entra ID. Ver AUTENTICACION.md para migración 0002, primer administrador, inicio/cierre de sesión, alta de usuarios y restablecimiento. El token es opaco y solo su digest se almacena en PostgreSQL; no requiere secreto JWT. La contraseña se introduce por getpass para comandos de operación.
+
+## API 0.4.0 y esquema 0003
+
+Actualizar según DATOS.md, sin repetir alta del administrador. Readiness exige 0003, liveness no depende de DB. La migración no publica nuevos endpoints de casos ni ejecuta IA.

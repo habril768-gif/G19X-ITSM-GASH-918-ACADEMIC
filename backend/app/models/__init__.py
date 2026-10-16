@@ -2,7 +2,7 @@
 from datetime import date, datetime
 from uuid import UUID, uuid4
 
-from sqlalchemy import JSON, Boolean, CheckConstraint, Date, DateTime, ForeignKey, Index, Integer, String, Text, UniqueConstraint, Uuid, func, column
+from sqlalchemy import JSON, Boolean, CheckConstraint, Date, DateTime, ForeignKey, Index, Integer, String, Text, UniqueConstraint, Uuid, func, column, false, true
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -21,7 +21,7 @@ class Department(Base):
     __tablename__ = "departamentos"
     id: Mapped[UUID] = mapped_column(Uuid, primary_key=True, default=uuid4)
     nombre: Mapped[str] = mapped_column(String(120), unique=True)
-    is_active: Mapped[bool] = mapped_column(Boolean, server_default="true")
+    is_active: Mapped[bool] = mapped_column(Boolean, server_default=true())
 
 
 class User(Base):
@@ -38,7 +38,7 @@ class User(Base):
     nombre_completo: Mapped[str] = mapped_column(String(200))
     departamento_id: Mapped[UUID] = mapped_column(ForeignKey("departamentos.id"), index=True)
     rol_id: Mapped[int] = mapped_column(ForeignKey("roles.id"))
-    is_active: Mapped[bool] = mapped_column(Boolean, server_default="true")
+    is_active: Mapped[bool] = mapped_column(Boolean, server_default=true())
 
 
 class Category(Base):
@@ -53,10 +53,17 @@ class Incident(Base):
     __table_args__ = (
         CheckConstraint("status IN ('PENDIENTE','EN_REVISION','RESUELTA','CERRADA')", name="ck_incident_status"),
         CheckConstraint("priority IS NULL OR priority IN (1,2,3)", name="ck_incident_priority"),
-        CheckConstraint("ai_status IN ('PENDIENTE','COMPLETADA','FALLIDA')", name="ck_incident_ai_status"),
+        CheckConstraint("ai_status IN ('PENDIENTE','COMPLETADA','FALLIDA','OMITIDA')", name="ck_incident_ai_status"),
         CheckConstraint("status = 'PENDIENTE' OR (assigned_to IS NOT NULL AND category_id IS NOT NULL AND priority IS NOT NULL AND cycle_start_at IS NOT NULL)", name="ck_incident_assigned"),
         CheckConstraint("status NOT IN ('RESUELTA','CERRADA') OR (resolved_at IS NOT NULL AND length(trim(resolution_text)) > 0 AND resolution_text IS NOT NULL AND validated_by IS NOT NULL AND validated_at IS NOT NULL)", name="ck_incident_resolution"),
         CheckConstraint("status != 'CERRADA' OR closed_at IS NOT NULL", name="ck_incident_closed"),
+        CheckConstraint("scope IN ('PERSONA','ENTORNO')", name="ck_incident_scope"),
+        CheckConstraint("(scope = 'PERSONA' AND affected_employee_id IS NOT NULL) OR (scope = 'ENTORNO' AND affected_employee_id IS NULL)", name="ck_incident_affected_scope"),
+        CheckConstraint("scope != 'ENTORNO' OR category_id IS NULL OR category_id = 4", name="ck_incident_environment_category"),
+        CheckConstraint("NOT classification_valid OR (validated_by IS NOT NULL AND validated_at IS NOT NULL AND category_id IS NOT NULL AND priority IS NOT NULL)", name="ck_incident_classification_valid"),
+        CheckConstraint("status NOT IN ('RESUELTA','CERRADA') OR classification_valid", name="ck_incident_resolved_validation"),
+        CheckConstraint("ai_status != 'OMITIDA' OR (ai_skip_reason IS NOT NULL AND length(trim(ai_skip_reason)) > 0)", name="ck_incident_ai_skip"),
+        CheckConstraint("(ai_input_reviewed_by IS NULL AND ai_input_reviewed_at IS NULL) OR (ai_input_reviewed_by IS NOT NULL AND ai_input_reviewed_at IS NOT NULL AND ai_input_text IS NOT NULL AND length(trim(ai_input_text)) > 0)", name="ck_incident_ai_review"),
         Index("ix_incident_status_priority", "status", "priority"),
     )
     id: Mapped[UUID] = mapped_column(Uuid, primary_key=True, default=uuid4)
@@ -78,11 +85,21 @@ class Incident(Base):
     closed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     cycle_start_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     reopening_reason: Mapped[str | None] = mapped_column(Text)
-    is_confidential: Mapped[bool] = mapped_column(Boolean, server_default="false")
+    is_confidential: Mapped[bool] = mapped_column(Boolean, server_default=false())
     created_by: Mapped[UUID] = mapped_column(ForeignKey("users.id"), index=True)
-    affected_employee_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"), index=True)
+    affected_employee_id: Mapped[UUID | None] = mapped_column(ForeignKey("users.id"), index=True)
     assigned_to: Mapped[UUID | None] = mapped_column(ForeignKey("users.id"), index=True)
     department_id_at_creation: Mapped[UUID] = mapped_column(ForeignKey("departamentos.id"))
+    scope: Mapped[str] = mapped_column(String(10), server_default="PERSONA")
+    reported_department_id: Mapped[UUID] = mapped_column(ForeignKey("departamentos.id"), index=True)
+    classification_valid: Mapped[bool] = mapped_column(Boolean, server_default=false())
+    ai_input_text: Mapped[str | None] = mapped_column(Text)
+    ai_input_reviewed_by: Mapped[UUID | None] = mapped_column(ForeignKey("users.id"))
+    ai_input_reviewed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    ai_skip_reason: Mapped[str | None] = mapped_column(Text)
+    ai_model: Mapped[str | None] = mapped_column(String(120))
+    ai_prompt_version: Mapped[str | None] = mapped_column(String(80))
+
 
 
 class AuditEvent(Base):
@@ -121,3 +138,21 @@ class LoginThrottle(Base):
     email: Mapped[str] = mapped_column(String(320), primary_key=True)
     failures: Mapped[int] = mapped_column(Integer, server_default="0")
     locked_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class IncidentParticipant(Base):
+    """Relación declarada; autorización y recusa requieren servicio transaccional."""
+    __tablename__ = "incident_involved_users"
+    __table_args__ = (
+        CheckConstraint("review_status IN ('DECLARADO','CONFIRMADO','DESCARTADO')", name="ck_participant_status"),
+        CheckConstraint("length(trim(declaration_reason)) > 0", name="ck_participant_declaration"),
+        CheckConstraint("(review_status = 'DECLARADO' AND reviewed_by IS NULL AND reviewed_at IS NULL AND review_reason IS NULL) OR (review_status IN ('CONFIRMADO','DESCARTADO') AND reviewed_by IS NOT NULL AND reviewed_at IS NOT NULL AND review_reason IS NOT NULL AND length(trim(review_reason)) > 0)", name="ck_participant_review"),
+        CheckConstraint("reviewed_by IS NULL OR reviewed_by != user_id", name="ck_participant_no_self_review"),
+    )
+    incidencia_id: Mapped[UUID] = mapped_column(ForeignKey("incidencias.id"), primary_key=True)
+    user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"), primary_key=True, index=True)
+    review_status: Mapped[str] = mapped_column(String(20), server_default="DECLARADO")
+    declaration_reason: Mapped[str] = mapped_column(Text)
+    reviewed_by: Mapped[UUID | None] = mapped_column(ForeignKey("users.id"))
+    reviewed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    review_reason: Mapped[str | None] = mapped_column(Text)

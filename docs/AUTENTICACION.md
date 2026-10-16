@@ -1,3 +1,5 @@
+> Actualización: la autenticación se introdujo en 0002; la API 0.4.0 requiere ahora head 0003 para /health/db. Aplicar el último head conserva cuentas/sesiones. El procedimiento de login no cambia.
+
 # Autenticación local FastAPI
 
 ## Decisión vigente

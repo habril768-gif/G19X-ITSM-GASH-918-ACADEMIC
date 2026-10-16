@@ -1,96 +1,198 @@
-# Reporte QA inicial
-
-## 15 de octubre de 2026 — API 0.1.0
-
-Entorno: Windows, Python 3.11, entorno virtual local `backend/.venv`. Sin conexión a datos reales ni servicios de IA.
-
-| Comprobación | Resultado | Evidencia |
-| --- | --- | --- |
-| GET /health con cliente ASGI | Aprobada | HTTP 200, contenido JSON y contrato esperado |
-| Contrato OpenAPI | Aprobada | Ruta /health y referencia HealthResponse presentes |
-| Página /docs | Aprobada | HTML disponible con referencia al contrato local |
-| Dependencias | Aprobada | pip check: No broken requirements found |
-| Arranque Uvicorn | Aprobada | Application startup complete; escucha en 127.0.0.1:8000 |
-| Consulta HTTP entre procesos del entorno | No verificada | PowerShell agotó el tiempo de conexión a loopback; no se presenta como prueba HTTP aprobada |
-| Secretos y entorno virtual excluidos | Aprobada | git check-ignore sobre .env y backend/.venv/pyvenv.cfg |
-| CI de GitHub | Pendiente | Workflow creado; no se ha observado una ejecución remota |
-
-Comando de pruebas desde la raíz: `backend/.venv/Scripts/python.exe -m pytest -q backend/tests`. Resultado: **3 passed, 1 warning**. La advertencia indica deprecación de httpx en TestClient de Starlette; no hay fallos. Se conserva constancia y se revisará la migración al ampliar las pruebas.
-
-La descarga directa mediante pip fue bloqueada por el entorno. Se descargaron ruedas oficiales de PyPI mediante PowerShell y se instalaron localmente con pip --no-index; posteriormente se verificaron los archivos requirements contra el entorno instalado. Los archivos descargados quedan fuera del repositorio. En un equipo con conectividad normal se utiliza el comando documentado de pip.
-
-## Límites de esta validación
-
-No se probaron autenticación, incidencias, PostgreSQL, Redis, Docker, IA, correo, rendimiento ni frontend. Docker no está disponible como comando en este entorno. La prueba de /docs verifica HTML, no un renderizado visual de Swagger UI en navegador. Este reporte no acredita el MVP completo.
-
-## 15 de octubre de 2026 — Configuración Compose
-
-Revisión estática: API con contexto backend, instalación por requirements, PostgreSQL/Redis sin ports, contraseña requerida, healthchecks y volúmenes nombrados. .env y entorno virtual excluidos de Git y del contexto de construcción.
-
-**Pendiente:** validación real de `docker compose config --quiet`, construcción de imagen Linux, arranque de servicios, GET /health, SELECT 1 y PONG. Docker no está disponible como comando. No hay un resultado de contenedores aprobado. La validación automática YAML tampoco se ejecutó por ausencia de los parsers consultados.
-
-Ejecutar los pasos de infra/README.md y guardar las evidencias indicadas en docs/evidencias/README.md. No reutilizar el resultado de pruebas ASGI como evidencia de Docker.
-
-## Evidencias recibidas el 15 de octubre de 2026 — Verificación manual
-
-La autora ejecutó los comandos en su equipo y proporcionó las capturas siguientes. Se inspeccionaron visualmente; no son ejecuciones nuevas del asistente. Esta evidencia complementa las limitaciones históricas descritas arriba.
-
-| Comprobación | Resultado observado | Evidencia |
-| --- | --- | --- |
-| GET /health desde navegador | HTTP 200 y JSON status ok, service plurione-api | [Captura](evidencias/01-api-health-200.png) |
-| Construcción y arranque Compose | Imagen API construida; API, PostgreSQL y Redis healthy | [Captura](evidencias/02-compose-servicios.png) |
-| PostgreSQL SELECT 1 | Una fila con valor 1 | [Captura](evidencias/03-postgres-select.png) |
-| Redis PING | PONG | [Captura](evidencias/04-redis-ping.png) |
-
-La captura HTTP no permite distinguir por sí sola entre el arranque nativo y Docker. La captura Compose sí acredita la comprobación de salud del contenedor API. No se acredita aún conexión de la aplicación con PostgreSQL o Redis, persistencia tras reinicio, migraciones, autenticación o flujos del MVP.
-
-## 15 de octubre de 2026 — Capa de datos inicial
-
-Resultado local: **8 passed, 2 skipped, 1 warning**. Comando: backend/.venv/Scripts/python.exe -m pytest -q backend/tests.
-
-Pruebas nuevas aprobadas: manejo de caracteres reservados en contraseña sin URL concatenada; respuesta genérica 503 con liveness operativo; respuesta 200 con dependencia simulada; compilación de esquema PostgreSQL con JSONB/fechas y restricciones; generación offline de migración y catálogos. Las tres pruebas HTTP anteriores siguen aprobadas. pip check: sin conflictos.
-
-Las dos pruebas PostgreSQL (esquema/catálogos e identidad Entra única) se omiten sin RUN_DB_TESTS=1. No se presentan como aprobadas. La CI ahora prepara PostgreSQL aislado, aplica migración dos veces, comprueba alineación de modelos y ejecuta integración; no se ha observado su resultado remoto.
-
-Docker instalado localizado, pero conexión al pipe dockerDesktopLinuxEngine denegada para el asistente. Migración real, alembic check y /health/db contra PostgreSQL quedan pendientes. Prueba HTTP 200 nueva usa dependencia simulada y no acredita conexión real. Instrucciones en DATOS.md.
-
-## Evidencias de migración y conexión recibidas el 15 de octubre de 2026
-
-Inspección visual de [05-migracion-inicial.png](evidencias/05-migracion-inicial.png): tres contenedores healthy, revisión 0001 (head) y «No new upgrade operations detected». La autora aplicó y verificó la migración en su equipo.
-
-Inspección de [06-api-db-health-200.png](evidencias/06-api-db-health-200.png): API 0.2.0, GET /health/db, HTTP 200, status ok y database postgresql. Acredita conexión real desde la API y revisión esperada; no son resultados simulados. Los archivos recibidos eran PNG sin extensión y se renombraron sin alterar contenido.
-
-Esto completa la validación manual pendiente de la migración; las dos pruebas automáticas PostgreSQL de la suite no se consideran ejecutadas por estas capturas.
-
-## Fixtures DEMO
-
-Comando: backend/.venv/Scripts/python.exe -m pytest -q backend/tests/test_seed_demo.py. Resultado: **3 passed in 1.35s**. SQLite solo para las tablas auxiliares: roles, departamentos y users. Se verificó repetición sin duplicados, conservación de is_active=False y reversión de transacción.
-
-El intento de suite completa no terminó: se bloqueó en la prueba ASGI preexistente test_api.py::test_health_contract, confirmado con ejecución detallada; ambos intentos se interrumpieron. No se afirma una regresión completa aprobada. La carga DEMO en PostgreSQL y ejecución de CI siguen pendientes. Las ocho pruebas aprobadas del avance anterior permanecen como resultado histórico, no una ejecución nueva.
-
-## Evidencias de carga DEMO recibidas el 15 de octubre de 2026
-
-Se inspeccionaron las capturas proporcionadas por la autora, sin ejecutar nuevamente la carga desde el asistente.
-
-- [07-usuarios-demo.png](evidencias/07-usuarios-demo.png): contenedores healthy y carga completada con departamentos_creados=2, usuarios_creados=6.
-- [08-usuarios-demo-sin-duplicados.png](evidencias/08-usuarios-demo-sin-duplicados.png): segunda ejecución completada con ambos contadores en 0.
-
-Resultado: carga inicial en PostgreSQL y repetición sin inserciones adicionales verificadas manualmente. No acredita autenticación SSO, permisos de negocio, conservación de cambios en PostgreSQL ni pruebas automáticas de integración pendientes. No hay credenciales visibles en estas capturas.
-
-## Autenticación local — 15 de octubre de 2026
-
-Suite actual: **20 passed, 2 skipped, 1 warning in 12.72s**. Comando desde raíz: backend/.venv/Scripts/python.exe -m pytest -q backend/tests. Las dos omitidas requieren PostgreSQL de pruebas. La advertencia de TestClient/httpx sigue pendiente de migración de herramienta; no hay fallos. La suite completa sí terminó en esta ejecución.
-
-Pruebas de autenticación en tests/test_auth.py: hash Argon2id; token almacenado solo como digest; errores indistinguibles de cuenta/contraseña; cinco intentos bloquean 15 minutos; logout, expiración y desactivación; empleado sin permiso administrativo; cambio de contraseña revoca todas las sesiones; política de longitud; flujo HTTP login/me/logout y no devolución de secretos en validaciones; alta administrativa auditada sin exponer hash y rechazo de duplicado. SQLite se usa con variantes JSON de los modelos; no sustituye validación PostgreSQL de concurrencia/migración.
-
-Migration offline 0001→0002 compilada sin credenciales; conserva esquema y añade tablas e índice de correo. pip check sin conflictos. Pendientes: aplicación real en PostgreSQL, alembic check y pruebas manuales de autenticación Docker, bootstrap interactivo y ejecución CI. Los resultados manuales de 0001 permanecen como evidencia histórica. No se presentan como verificación de 0002.
-
-## Revisión documental PRD 1.8 — 15 de octubre de 2026
-
-Comprobaciones: ocho requisitos RF únicos, RF-1 a RF-8 presentes en trazabilidad, enlaces locales existentes en documentos modificados, campos de revalidación/participantes/IA omitida declarados y ausencia de marcadores de codificación incorrecta en PRD, backlog, trazabilidad y README. git diff --check sin incidencias.
-
-No se ejecutaron pruebas de aplicación porque esta entrega cambia requisitos/documentación, no código. Los requisitos de entorno, conflicto de interés y classification_valid requieren una migración futura y pruebas: no se consideran satisfechos por la revisión. La última suite de autenticación conserva su resultado histórico de 20 aprobadas y 2 omitidas, sin repetición en este avance.
+# Reporte QA inicial
+
+
+
+## 15 de octubre de 2026 — API 0.1.0
+
+
+
+Entorno: Windows, Python 3.11, entorno virtual local `backend/.venv`. Sin conexión a datos reales ni servicios de IA.
+
+
+
+| Comprobación | Resultado | Evidencia |
+
+| --- | --- | --- |
+
+| GET /health con cliente ASGI | Aprobada | HTTP 200, contenido JSON y contrato esperado |
+
+| Contrato OpenAPI | Aprobada | Ruta /health y referencia HealthResponse presentes |
+
+| Página /docs | Aprobada | HTML disponible con referencia al contrato local |
+
+| Dependencias | Aprobada | pip check: No broken requirements found |
+
+| Arranque Uvicorn | Aprobada | Application startup complete; escucha en 127.0.0.1:8000 |
+
+| Consulta HTTP entre procesos del entorno | No verificada | PowerShell agotó el tiempo de conexión a loopback; no se presenta como prueba HTTP aprobada |
+
+| Secretos y entorno virtual excluidos | Aprobada | git check-ignore sobre .env y backend/.venv/pyvenv.cfg |
+
+| CI de GitHub | Pendiente | Workflow creado; no se ha observado una ejecución remota |
+
+
+
+Comando de pruebas desde la raíz: `backend/.venv/Scripts/python.exe -m pytest -q backend/tests`. Resultado: **3 passed, 1 warning**. La advertencia indica deprecación de httpx en TestClient de Starlette; no hay fallos. Se conserva constancia y se revisará la migración al ampliar las pruebas.
+
+
+
+La descarga directa mediante pip fue bloqueada por el entorno. Se descargaron ruedas oficiales de PyPI mediante PowerShell y se instalaron localmente con pip --no-index; posteriormente se verificaron los archivos requirements contra el entorno instalado. Los archivos descargados quedan fuera del repositorio. En un equipo con conectividad normal se utiliza el comando documentado de pip.
+
+
+
+## Límites de esta validación
+
+
+
+No se probaron autenticación, incidencias, PostgreSQL, Redis, Docker, IA, correo, rendimiento ni frontend. Docker no está disponible como comando en este entorno. La prueba de /docs verifica HTML, no un renderizado visual de Swagger UI en navegador. Este reporte no acredita el MVP completo.
+
+
+
+## 15 de octubre de 2026 — Configuración Compose
+
+
+
+Revisión estática: API con contexto backend, instalación por requirements, PostgreSQL/Redis sin ports, contraseña requerida, healthchecks y volúmenes nombrados. .env y entorno virtual excluidos de Git y del contexto de construcción.
+
+
+
+**Pendiente:** validación real de `docker compose config --quiet`, construcción de imagen Linux, arranque de servicios, GET /health, SELECT 1 y PONG. Docker no está disponible como comando. No hay un resultado de contenedores aprobado. La validación automática YAML tampoco se ejecutó por ausencia de los parsers consultados.
+
+
+
+Ejecutar los pasos de infra/README.md y guardar las evidencias indicadas en docs/evidencias/README.md. No reutilizar el resultado de pruebas ASGI como evidencia de Docker.
+
+
+
+## Evidencias recibidas el 15 de octubre de 2026 — Verificación manual
+
+
+
+La autora ejecutó los comandos en su equipo y proporcionó las capturas siguientes. Se inspeccionaron visualmente; no son ejecuciones nuevas del asistente. Esta evidencia complementa las limitaciones históricas descritas arriba.
+
+
+
+| Comprobación | Resultado observado | Evidencia |
+
+| --- | --- | --- |
+
+| GET /health desde navegador | HTTP 200 y JSON status ok, service plurione-api | [Captura](evidencias/01-api-health-200.png) |
+
+| Construcción y arranque Compose | Imagen API construida; API, PostgreSQL y Redis healthy | [Captura](evidencias/02-compose-servicios.png) |
+
+| PostgreSQL SELECT 1 | Una fila con valor 1 | [Captura](evidencias/03-postgres-select.png) |
+
+| Redis PING | PONG | [Captura](evidencias/04-redis-ping.png) |
+
+
+
+La captura HTTP no permite distinguir por sí sola entre el arranque nativo y Docker. La captura Compose sí acredita la comprobación de salud del contenedor API. No se acredita aún conexión de la aplicación con PostgreSQL o Redis, persistencia tras reinicio, migraciones, autenticación o flujos del MVP.
+
+
+
+## 15 de octubre de 2026 — Capa de datos inicial
+
+
+
+Resultado local: **8 passed, 2 skipped, 1 warning**. Comando: backend/.venv/Scripts/python.exe -m pytest -q backend/tests.
+
+
+
+Pruebas nuevas aprobadas: manejo de caracteres reservados en contraseña sin URL concatenada; respuesta genérica 503 con liveness operativo; respuesta 200 con dependencia simulada; compilación de esquema PostgreSQL con JSONB/fechas y restricciones; generación offline de migración y catálogos. Las tres pruebas HTTP anteriores siguen aprobadas. pip check: sin conflictos.
+
+
+
+Las dos pruebas PostgreSQL (esquema/catálogos e identidad Entra única) se omiten sin RUN_DB_TESTS=1. No se presentan como aprobadas. La CI ahora prepara PostgreSQL aislado, aplica migración dos veces, comprueba alineación de modelos y ejecuta integración; no se ha observado su resultado remoto.
+
+
+
+Docker instalado localizado, pero conexión al pipe dockerDesktopLinuxEngine denegada para el asistente. Migración real, alembic check y /health/db contra PostgreSQL quedan pendientes. Prueba HTTP 200 nueva usa dependencia simulada y no acredita conexión real. Instrucciones en DATOS.md.
+
+
+
+## Evidencias de migración y conexión recibidas el 15 de octubre de 2026
+
+
+
+Inspección visual de [05-migracion-inicial.png](evidencias/05-migracion-inicial.png): tres contenedores healthy, revisión 0001 (head) y «No new upgrade operations detected». La autora aplicó y verificó la migración en su equipo.
+
+
+
+Inspección de [06-api-db-health-200.png](evidencias/06-api-db-health-200.png): API 0.2.0, GET /health/db, HTTP 200, status ok y database postgresql. Acredita conexión real desde la API y revisión esperada; no son resultados simulados. Los archivos recibidos eran PNG sin extensión y se renombraron sin alterar contenido.
+
+
+
+Esto completa la validación manual pendiente de la migración; las dos pruebas automáticas PostgreSQL de la suite no se consideran ejecutadas por estas capturas.
+
+
+
+## Fixtures DEMO
+
+
+
+Comando: backend/.venv/Scripts/python.exe -m pytest -q backend/tests/test_seed_demo.py. Resultado: **3 passed in 1.35s**. SQLite solo para las tablas auxiliares: roles, departamentos y users. Se verificó repetición sin duplicados, conservación de is_active=False y reversión de transacción.
+
+
+
+El intento de suite completa no terminó: se bloqueó en la prueba ASGI preexistente test_api.py::test_health_contract, confirmado con ejecución detallada; ambos intentos se interrumpieron. No se afirma una regresión completa aprobada. La carga DEMO en PostgreSQL y ejecución de CI siguen pendientes. Las ocho pruebas aprobadas del avance anterior permanecen como resultado histórico, no una ejecución nueva.
+
+
+
+## Evidencias de carga DEMO recibidas el 15 de octubre de 2026
+
+
+
+Se inspeccionaron las capturas proporcionadas por la autora, sin ejecutar nuevamente la carga desde el asistente.
+
+
+
+- [07-usuarios-demo.png](evidencias/07-usuarios-demo.png): contenedores healthy y carga completada con departamentos_creados=2, usuarios_creados=6.
+
+- [08-usuarios-demo-sin-duplicados.png](evidencias/08-usuarios-demo-sin-duplicados.png): segunda ejecución completada con ambos contadores en 0.
+
+
+
+Resultado: carga inicial en PostgreSQL y repetición sin inserciones adicionales verificadas manualmente. No acredita autenticación SSO, permisos de negocio, conservación de cambios en PostgreSQL ni pruebas automáticas de integración pendientes. No hay credenciales visibles en estas capturas.
+
+
+
+## Autenticación local — 15 de octubre de 2026
+
+
+
+Suite actual: **20 passed, 2 skipped, 1 warning in 12.72s**. Comando desde raíz: backend/.venv/Scripts/python.exe -m pytest -q backend/tests. Las dos omitidas requieren PostgreSQL de pruebas. La advertencia de TestClient/httpx sigue pendiente de migración de herramienta; no hay fallos. La suite completa sí terminó en esta ejecución.
+
+
+
+Pruebas de autenticación en tests/test_auth.py: hash Argon2id; token almacenado solo como digest; errores indistinguibles de cuenta/contraseña; cinco intentos bloquean 15 minutos; logout, expiración y desactivación; empleado sin permiso administrativo; cambio de contraseña revoca todas las sesiones; política de longitud; flujo HTTP login/me/logout y no devolución de secretos en validaciones; alta administrativa auditada sin exponer hash y rechazo de duplicado. SQLite se usa con variantes JSON de los modelos; no sustituye validación PostgreSQL de concurrencia/migración.
+
+
+
+Migration offline 0001→0002 compilada sin credenciales; conserva esquema y añade tablas e índice de correo. pip check sin conflictos. Pendientes: aplicación real en PostgreSQL, alembic check y pruebas manuales de autenticación Docker, bootstrap interactivo y ejecución CI. Los resultados manuales de 0001 permanecen como evidencia histórica. No se presentan como verificación de 0002.
+
+
+
+## Revisión documental PRD 1.8 — 15 de octubre de 2026
+
+
+
+Comprobaciones: ocho requisitos RF únicos, RF-1 a RF-8 presentes en trazabilidad, enlaces locales existentes en documentos modificados, campos de revalidación/participantes/IA omitida declarados y ausencia de marcadores de codificación incorrecta en PRD, backlog, trazabilidad y README. git diff --check sin incidencias.
+
+
+
+No se ejecutaron pruebas de aplicación porque esta entrega cambia requisitos/documentación, no código. Los requisitos de entorno, conflicto de interés y classification_valid requieren una migración futura y pruebas: no se consideran satisfechos por la revisión. La última suite de autenticación conserva su resultado histórico de 20 aprobadas y 2 omitidas, sin repetición en este avance.
+
 
 ## Revisión documental 1.9 — 15 de octubre de 2026
 
 Se comprueba PRD con ocho RF y AC-11 a AC-16 en trazabilidad, exclusión de confidenciales en Power BI, supresión complementaria, criterio SIN_CLASIFICACION y ausencia de la afirmación de smoke test ejecutado. No se ejecutó suite funcional; las pruebas nuevas son previstas. Documentos preparados fuera del repositorio por restricción de escritura; pendientes de incorporar.
+
+## 16 de octubre de 2026 — Esquema 0003
+
+Suite completa: **34 passed, 3 skipped, 1 warning in 8.75s**. Comando desde raíz: backend/.venv/Scripts/python.exe -m pytest -q backend/tests. La advertencia de TestClient/httpx continúa; sin fallos en la ejecución final. Las tres omitidas requieren PostgreSQL de pruebas y no se consideran aprobadas.
+
+Cobertura nueva: combinaciones ámbito/afectado, categoría de entorno, vigencia de clasificación y resolución, motivo de omisión IA, datos de revisión del texto, revisión de participantes sin autorrevisión, conservación de declaración y compilación de migración offline. Se corrigieron valores booleanos SQL para no depender de literales de texto en SQLite y la prueba de revisión actualiza sus campos antes de autoflush. pip check sin conflictos. SQL offline de todas las revisiones generado correctamente.
+
+Nueva prueba PostgreSQL preparada: esquema QA transaccional aislado, dos casos previos y aplicación 0003 para verificar preservación y creación ENTORNO. No fue ejecutada aquí. Aplicación real 0003, alembic check y readiness continúan pendientes de terminal Docker autorizada; no se afirman por pasar SQLite.
+
+Evidencias 09–11 inspeccionadas: revisión 0002/alineación, respuesta autenticada 200 con ADMIN_RH y 401 posterior con sesión inválida/expirada. La captura 10 guardada era la vista previa alterada; se reemplazó por la redacción determinística preparada desde el original (bloque opaco, sin alterar otros píxeles). No se reproduce ningún token. El 401 es consistente con logout reportado por la autora; su captura aislada también podría corresponder a expiración, por lo que no demuestra por sí sola causalidad exclusiva de logout.
