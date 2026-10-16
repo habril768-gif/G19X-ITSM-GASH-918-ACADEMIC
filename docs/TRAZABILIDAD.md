@@ -17,3 +17,7 @@ Base funcional: docs/PRD.md. Base académica: matriz docs/ENTREGABLES.md.
 Al implementar se añadirán rutas de archivos, nombres de pruebas y resultados reales. Esta tabla no equivale a pruebas aprobadas.
 
 RF-3: proveedor seleccionado por la autora: API directa de OpenAI. Modelo, conexión e implementación pendientes.
+
+## Infraestructura de API inicial
+
+Endpoint público de disponibilidad en `backend/app/api/health.py`, aplicación en `backend/app/main.py` y pruebas en `backend/tests/test_api.py`. Es una base técnica y no implica cumplimiento de RF-1 a RF-6. Resultados reales en REPORTE_QA.md.

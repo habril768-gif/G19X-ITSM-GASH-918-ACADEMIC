@@ -1,6 +1,6 @@
 # Plan de desarrollo del MVP
 
-Los siguientes hitos se completan en orden. Estado inicial: pendientes.
+Los hitos se completan en orden. Hito 1 completado; hito 2 en curso (API inicial implementada; cliente pendiente). Los demás están pendientes.
 
 | Hito | Resultado verificable | Evidencia |
 | --- | --- | --- |

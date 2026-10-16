@@ -1,0 +1,24 @@
+# Reporte QA inicial
+
+## 15 de octubre de 2026 — API 0.1.0
+
+Entorno: Windows, Python 3.11, entorno virtual local `backend/.venv`. Sin conexión a datos reales ni servicios de IA.
+
+| Comprobación | Resultado | Evidencia |
+| --- | --- | --- |
+| GET /health con cliente ASGI | Aprobada | HTTP 200, contenido JSON y contrato esperado |
+| Contrato OpenAPI | Aprobada | Ruta /health y referencia HealthResponse presentes |
+| Página /docs | Aprobada | HTML disponible con referencia al contrato local |
+| Dependencias | Aprobada | pip check: No broken requirements found |
+| Arranque Uvicorn | Aprobada | Application startup complete; escucha en 127.0.0.1:8000 |
+| Consulta HTTP entre procesos del entorno | No verificada | PowerShell agotó el tiempo de conexión a loopback; no se presenta como prueba HTTP aprobada |
+| Secretos y entorno virtual excluidos | Aprobada | git check-ignore sobre .env y backend/.venv/pyvenv.cfg |
+| CI de GitHub | Pendiente | Workflow creado; no se ha observado una ejecución remota |
+
+Comando de pruebas desde la raíz: `backend/.venv/Scripts/python.exe -m pytest -q backend/tests`. Resultado: **3 passed, 1 warning**. La advertencia indica deprecación de httpx en TestClient de Starlette; no hay fallos. Se conserva constancia y se revisará la migración al ampliar las pruebas.
+
+La descarga directa mediante pip fue bloqueada por el entorno. Se descargaron ruedas oficiales de PyPI mediante PowerShell y se instalaron localmente con pip --no-index; posteriormente se verificaron los archivos requirements contra el entorno instalado. Los archivos descargados quedan fuera del repositorio. En un equipo con conectividad normal se utiliza el comando documentado de pip.
+
+## Límites de esta validación
+
+No se probaron autenticación, incidencias, PostgreSQL, Redis, Docker, IA, correo, rendimiento ni frontend. Docker no está disponible como comando en este entorno. La prueba de /docs verifica HTML, no un renderizado visual de Swagger UI en navegador. Este reporte no acredita el MVP completo.

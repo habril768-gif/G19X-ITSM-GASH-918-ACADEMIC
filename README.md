@@ -7,7 +7,7 @@ Plataforma Inteligente de Gestión de Incidencias Laborales para PluriOne S.A. d
 
 ## Estado actual
 
-Repositorio inicial: requisitos, planificación y estructura de carpetas documentados. La funcionalidad del MVP está pendiente de implementación. El PRD 1.6 es la base de desarrollo elegida por la autora.
+Primera API FastAPI implementada: `/health`, `/docs` y `/openapi.json`. El flujo de incidencias, autenticación, base de datos, frontend e IA siguen pendientes. El PRD 1.6 es la base de desarrollo elegida por la autora.
 
 ## Alcance
 
@@ -24,10 +24,16 @@ Tecnologías previstas: React, FastAPI, PostgreSQL, Redis, Microsoft Entra ID, O
 - [Entregables de residencia](docs/ENTREGABLES.md)
 - [Bitácora de avances](docs/BITACORA.md)
 - [Trazabilidad de requisitos](docs/TRAZABILIDAD.md)
+- [Reporte QA](docs/REPORTE_QA.md)
+- [Manual técnico](docs/MANUAL_TECNICO.md)
 
 ## Estructura
 
-`backend/` contiene las capas previstas de FastAPI; `frontend/`, las vistas React; `infra/`, el despliegue por implementar. La estructura todavía no es una aplicación ejecutable.
+`backend/` contiene las capas previstas de FastAPI; `frontend/`, las vistas React; `infra/`, el despliegue por implementar. El backend tiene un punto de entrada ejecutable; frontend e infraestructura siguen pendientes.
+
+## Ejecutar la API
+
+Consultar [instalación y arranque del backend](backend/README.md). No se necesita configurar claves para la API inicial.
 
 ## Configuración
 
