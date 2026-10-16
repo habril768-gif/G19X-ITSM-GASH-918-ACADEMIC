@@ -274,3 +274,39 @@ Se inspeccionó docs/evidencias/16-historial-incidencia-200.png, ejecutada y gua
 ## 16 de octubre de 2026 — Gestión API 0.6.0
 
 Propósito: implementar clasificación humana, asignación y ciclo auditado. Cambios: services/lifecycle.py, esquemas/rutas en api/incidents.py y versión 0.6.0; edición invalida clasificación y reapertura conserva ciclo previo. Manuales, decisiones y seguimiento actualizados. Validación final: 51 passed, 3 skipped, 1 warning in 11.14s; pip check sin conflictos. Seis pruebas nuevas HTTP/SQLite con identidad simulada, sin ejecutar Docker ni modificar .env. Resultado: gestión backend parcial implementada; no acredita concurrencia real PostgreSQL ni prueba manual nueva. Pendientes: reconstrucción y evidencias 17/18; revisión de participantes/confidencialidad, retroceso protector, frontend y demás integraciones.
+
+## 16 de octubre de 2026 — Clasificación manual verificada
+
+Propósito: comprobar confirmación humana del caso simulado. Evidencia 17-clasificacion-validada-200.png aportada por la autora e inspeccionada: HTTP 200, Ausencia simulada, category_id=1, priority=2, classification_valid=true, validated_by y validated_at presentes. Sigue PENDIENTE y sin responsable. Sin token ni Curl visibles. Se actualiza seguimiento, sin cambios de código ni nueva ejecución automática. Pendientes: asignación y prueba manual del ciclo, concurrencia PostgreSQL e integraciones. Esta captura no acredita ejecución de IA.
+
+## 16 de octubre de 2026 — Asignación manual verificada
+
+Propósito: comprobar asignación del caso simulado. Evidencia 18-asignacion-200.png ejecutada por la autora e inspeccionada: HTTP 200, Ausencia simulada, assigned_to con ID de gestor, clasificación vigente y estado PENDIENTE. Sin Curl ni token visibles. Cambio: seguimiento documental y referencia a evidencia. Sin cambios de código ni nueva ejecución automática. Resultado: asignación básica acreditada; asignar no inicia revisión automáticamente. Pendientes: prueba manual de transiciones y archivo de ciclos; controles de acceso entre roles y concurrencia real no se acreditan con esta captura.
+
+## 16 de octubre de 2026 — Inicio de revisión verificado
+
+Propósito: comprobar entrada en revisión del caso simulado. Evidencia 19-en-revision-200.png ejecutada por la autora e inspeccionada: HTTP 200, Ausencia simulada en EN_REVISION, responsable asignado y classification_valid=true. Sin Curl ni token visibles. Cambio: actualización documental. Resultado: transición básica acreditada; no se comprueba cycle_start_at en esta captura porque no se expone en la respuesta. Sin cambios de código ni pruebas automáticas nuevas. Pendientes: resolución, cierre, reapertura e historial de ciclos manuales; concurrencia PostgreSQL.
+
+## 16 de octubre de 2026 — Resolución manual verificada
+
+Propósito: comprobar resolución del caso simulado. Evidencia 20-resuelta-200.png ejecutada por la autora e inspeccionada: HTTP 200, Ausencia simulada en RESUELTA, resolution_text con acción simulada, resolved_at presente, clasificación vigente y closed_at nulo. Sin Curl ni token visibles. Cambios: seguimiento documental. Resultado: resolución básica acreditada, todavía sin cierre. Sin cambios de código ni ejecución automática nueva. Pendientes: cierre, reapertura y revisión del historial de ciclos; concurrencia real PostgreSQL.
+
+## 16 de octubre de 2026 — Cierre manual verificado
+
+Propósito: comprobar cierre del caso simulado. Evidencia 21-cerrada-200.png ejecutada por la autora e inspeccionada: HTTP 200, Ausencia simulada en CERRADA, closed_at presente y resolución/fecha de resolución conservadas. Sin Curl ni token visibles. Cambio: seguimiento documental. Resultado: cierre básico acreditado; la captura no demuestra por sí sola bloqueo de ediciones ni permisos entre roles. Sin cambios de código ni nuevas pruebas automáticas. Pendientes: reapertura e historial de ciclos manuales y concurrencia PostgreSQL.
+
+## 16 de octubre de 2026 — Reapertura manual verificada
+
+Propósito: comprobar retorno del caso cerrado a revisión. Evidencia 22-reapertura-200.png ejecutada por la autora e inspeccionada: HTTP 200, Ausencia simulada en EN_REVISION, responsable y clasificación vigente conservados; resolution_text, resolved_at y closed_at nulos. Sin Curl ni token visibles. Cambio: seguimiento documental. Resultado: reapertura básica acreditada. La captura no muestra el motivo ni la conservación del ciclo anterior; verificar ambos mediante historial. Sin cambios de código ni ejecución automática nueva. Pendientes: historial de reapertura y concurrencia PostgreSQL; RF-4 continúa parcial.
+
+## 16 de octubre de 2026 — Historial de reapertura, revisión parcial
+
+Propósito: comprobar auditoría de reapertura. Evidencia 23-historial-reapertura-200.png ejecutada por la autora e inspeccionada: HTTP 200, evento REAPERTURA; after muestra EN_REVISION con campos finales nulos y before muestra CERRADA con fechas de resolución/cierre anteriores. El bloque está recortado: no son visibles resolution_text anterior ni reason, por lo que no se declaran verificados manualmente todavía. Sin token ni Curl visibles. Cambios: registro documental, sin código ni pruebas automáticas nuevas. Resultado: evento y conservación de estado/fechas anteriores acreditados parcialmente; completar evidencia del texto y motivo. RF-4 continúa parcial y concurrencia PostgreSQL pendiente.
+
+## 16 de octubre de 2026 — Detalle de reapertura confirmado
+
+Evidencia complementaria 23b-historial-reapertura-detalle.png aportada por la autora e inspeccionada. HTTP 200: before conserva estado CERRADA, resolución simulada y fechas previas; reason conserva el motivo de información adicional simulada; source=HUMANA y operation=transition. Complementa la captura 23, donde se veía el evento REAPERTURA y after. Resultado: conservación del ciclo anterior y motivo verificados visualmente para este caso. Cambios: seguimiento documental, sin código ni nuevas pruebas automáticas. Sin Curl ni token visibles. Esto no acredita concurrencia real, permisos de todos los roles ni revisión de participantes/confidencialidad; RF-4 sigue parcial.
+
+## 16 de octubre de 2026 — Protección de expedientes API 0.7.0
+
+Propósito: implementar revisión independiente y recusa. Cambios: services/protection.py, tres rutas/esquemas protegidos, API 0.7.0 y ocho pruebas nuevas; manuales, PRD, decisiones y seguimiento. Alta de participantes, revisión con motivo y original conservado; confidencialidad automática/expresa, omisión IA, reasignación atómica o retroceso protector si no hay RH elegible. Respuesta mínima si actor pierde acceso. Validación final: 59 passed, 3 skipped, 1 warning in 13.60s; pip check sin conflictos. Primera ejecución de seis pruebas nuevas: 57 aprobadas; se añadieron reasignación expresa/afectado gestor y límite/inactivos, repitiendo suite. SQLite/HTTP con identidad de prueba; sin comandos Docker ejecutados desde asistente. Resultado: backend parcial implementado, sin nueva migración ni cambios a .env. Pendientes: prueba manual 0.7.0/evidencia 24, concurrencia PostgreSQL, provisión adicional por operador y gestión de cambios administrativos, frontend/IA/correo/analítica.

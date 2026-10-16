@@ -1,6 +1,6 @@
 # Registro y consulta de incidencias
 
-API 0.5.0, esquema 0003. Entrega parcial de RF-2/RF-4/RF-8: registro auditado, consultas y opciones mínimas. No incluye aún asignación, cambios de estado, edición, revisión de participantes, envío IA ni correo.
+API 0.7.0, esquema 0003. Entrega backend parcial de RF-2/RF-3/RF-4/RF-8: registro, consultas, clasificación humana, asignación, edición, transiciones y protección de participantes/confidencialidad. Sin frontend, envío IA ni correo. Las secciones 0.5/0.6 describen entregas previas; las ampliaciones actuales están al final.
 
 ## Rutas protegidas
 
@@ -99,3 +99,33 @@ Abrir /docs, actualizar y verificar 0.6.0. Volver a iniciar sesión y autorizar 
 Esperar 200 y classification_valid=true con validador/fecha. Evidencia prevista 17-clasificacion-validada-200.png; capturar únicamente Server response, sin Curl/token. Para continuar, obtener ID del Admin RH autenticado mediante GET /auth/me y usarlo como assigned_to en PUT assignment. Evidencia prevista 18-asignacion-200.png. No confundir UUID de usuario con UUID del expediente.
 
 Iniciar revisión con POST transitions y {"status":"EN_REVISION"}; resolver con {"status":"RESUELTA","resolution_text":"Acción correctiva simulada para la prueba académica"}; cerrar con {"status":"CERRADA"}; reabrir con {"status":"EN_REVISION","reason":"Nueva información simulada"}. Comprobar historial y conservación de ciclos. Estas son instrucciones previstas, no pruebas manuales ya acreditadas.
+
+## Protección y participantes — API 0.7.0
+
+Sustituye los pendientes de esta guía sobre servicios de participantes/confidencialidad de 0.5/0.6. Esquema 0003 sin nueva migración. Las tres operaciones requieren Admin RH activo e independiente con acceso al expediente, solo PENDIENTE o EN_REVISION. Casos resueltos/cerrados deben reabrirse primero.
+
+| Método y ruta | Cuerpo |
+| --- | --- |
+| POST /incidents/{case_id}/participants | user_id, declaration_reason; alta DECLARADO, máximo total 20 relaciones, sin duplicados ni afectado duplicado |
+| PUT /incidents/{case_id}/participants/{participant_id}/review | review_status CONFIRMADO/DESCARTADO, reason; assigned_to opcional para ajustar responsable |
+| PUT /incidents/{case_id}/confidentiality | is_confidential, reason; assigned_to opcional de gestor elegible |
+
+Respuesta: acuse id, received y can_view. No devuelve expediente: declarar al propio administrador puede quitarle acceso inmediatamente. No puede confirmar/descartar su propia relación; debe intervenir otro Admin RH independiente. Actor, afectado y relaciones DECLARADAS/CONFIRMADAS se evalúan en servidor, no en el formulario. Las cuentas siguen activas y mantienen acceso a otros casos permitidos.
+
+Se conserva motivo original de declaración. Revisar registra actor/fecha/motivo y anterior estado en auditoría. DESCARTADO no retira por sí solo confidencialidad. Para desmarcarla se requiere operación explícita con motivo y ningún Supervisor/Admin RH involucrado. Una relación descartada puede corregirse por otro estado con motivo, conservando cambios en historial.
+
+Al añadir/confirmar un gestor se activa confidencialidad y ai_status=OMITIDA. Retirarla no relanza IA automáticamente. Se preservan las sugerencias históricas si existieran; no se invoca proveedor externo. El worker y su comprobación previa a envío siguen pendientes.
+
+Cuando el responsable pierde acceso, en PENDIENTE se desasigna. En EN_REVISION se conserva uno elegible, se aplica el indicado válido o se selecciona un Admin RH activo independiente por orden de ID. Si no existe, vuelve a PENDIENTE, sin responsable ni inicio de ciclo actual; auditoría conserva valores previos y motivo. No hay retroceso libre por /transitions. Reasignación, restricciones y auditoría usan una transacción y bloqueo de fila del expediente.
+
+El evento CAMBIO_CONFIDENCIALIDAD identifica estas operaciones por detalle.operation (participant_add, participant_review o confidentiality), incluyendo relación anterior/nueva y estado/responsable anteriores/nuevos. No se agrega un catálogo de eventos ni migración en esta entrega.
+
+### Prueba manual de confidencialidad prevista
+
+Reconstruir con docker compose up -d --build --wait; verificar 0.7.0 en /docs y renovar sesión si expiró. Sobre Ausencia simulada en EN_REVISION y con Admin RH como responsable, abrir PUT /incidents/{case_id}/confidentiality y usar:
+
+```json
+{"is_confidential":true,"reason":"Prueba académica de protección del expediente"}
+```
+
+Esperar 200 con received=true y can_view=true para RH independiente. Luego GET /incidents/{case_id} debe mostrar is_confidential=true, ai_status=OMITIDA y responsable RH. Evidencia prevista 24-confidencialidad-200.png: solo Server response del detalle, sin Curl ni token. Esta guía no afirma ejecución manual. No añadir al único Admin RH como participante en esta primera prueba: perdería acceso y requeriría otro RH independiente. El CLI auditado para provisionar ese administrador adicional continúa pendiente.

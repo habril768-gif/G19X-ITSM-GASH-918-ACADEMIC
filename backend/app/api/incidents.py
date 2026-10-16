@@ -223,3 +223,52 @@ def transition(case_id: UUID, body: TransitionInput, response: Response, user: U
     if body.status != 'RESUELTA' and body.resolution_text is not None:
         raise HTTPException(422, 'La resolución solo aplica al resolver')
     return manage_case(db, user, case_id, 'transition', body)
+
+
+class ParticipantReviewInput(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    review_status: Literal['CONFIRMADO', 'DESCARTADO']
+    reason: str = Field(min_length=1, max_length=2000)
+    assigned_to: UUID | None = None
+
+    @field_validator('reason')
+    @classmethod
+    def not_blank(cls, value):
+        if not value.strip():
+            raise ValueError('El motivo no puede estar vacío')
+        return value.strip()
+
+
+class ConfidentialityInput(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    is_confidential: bool
+    reason: str = Field(min_length=1, max_length=2000)
+    assigned_to: UUID | None = None
+
+    @field_validator('reason')
+    @classmethod
+    def not_blank(cls, value):
+        if not value.strip():
+            raise ValueError('El motivo no puede estar vacío')
+        return value.strip()
+
+
+@router.post('/{case_id}/participants', status_code=201, response_model=Receipt)
+def add_participant(case_id: UUID, body: ParticipantInput, response: Response, user: User = Depends(current_user), db: Session = Depends(get_session)):
+    from app.services.protection import protect_case
+    response.headers['Cache-Control'] = 'no-store'
+    return protect_case(db, user, case_id, 'participant_add', body)
+
+
+@router.put('/{case_id}/participants/{participant_id}/review', response_model=Receipt)
+def review_participant(case_id: UUID, participant_id: UUID, body: ParticipantReviewInput, response: Response, user: User = Depends(current_user), db: Session = Depends(get_session)):
+    from app.services.protection import protect_case
+    response.headers['Cache-Control'] = 'no-store'
+    return protect_case(db, user, case_id, 'participant_review', body, participant_id)
+
+
+@router.put('/{case_id}/confidentiality', response_model=Receipt)
+def change_confidentiality(case_id: UUID, body: ConfidentialityInput, response: Response, user: User = Depends(current_user), db: Session = Depends(get_session)):
+    from app.services.protection import protect_case
+    response.headers['Cache-Control'] = 'no-store'
+    return protect_case(db, user, case_id, 'confidentiality', body)

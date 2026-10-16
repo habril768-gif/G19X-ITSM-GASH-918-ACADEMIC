@@ -290,3 +290,145 @@ def test_resolve_rechecks_assignee_and_transition_rollback(world):
         assert move(c,case,'EN_REVISION',reason=reason).status_code==200
     events=c.get(f'/incidents/{case}/history').json()['items']
     assert sum(row['accion']=='REAPERTURA' for row in events)==2
+
+
+def add_relation(c, case, person, reason='Participación simulada'):
+    return c.post(f'/incidents/{case}/participants',json={'user_id':str(person.id),'declaration_reason':reason})
+
+
+def confidential(c, case, value, **extra):
+    return c.put(f'/incidents/{case}/confidentiality',json={'is_confidential':value,'reason':'Protección simulada',**extra})
+
+
+def review(c, case, person, status):
+    return c.put(f'/incidents/{case}/participants/{person.id}/review',json={'review_status':status,'reason':'Revisión independiente simulada'})
+
+
+def test_participant_review_keeps_original_and_requires_explicit_privacy_removal(world):
+    c,db,a,s,one,two=world
+    case=create(c,participants=[{'user_id':str(a['super'].id),'declaration_reason':'Declaración original'}])
+    s['user']=a['super'];assert review(c,case,a['super'],'DESCARTADO').status_code==403
+    s['user']=a['admin']
+    assert review(c,case,a['super'],'CONFIRMADO').status_code==200
+    assert confidential(c,case,False).status_code==409
+    assert review(c,case,a['super'],'DESCARTADO').status_code==200
+    assert c.get('/incidents/'+case).json()['is_confidential'] is True
+    row=c.get(f'/incidents/{case}/participants').json()['items'][0]
+    assert row['declaration_reason']=='Declaración original' and row['reviewed_by']==str(a['admin'].id)
+    assert confidential(c,case,False).status_code==200
+    s['user']=a['employee'];assert c.get('/incidents/'+case).status_code==200
+    s['user']=a['admin'];assert review(c,case,a['super'],'CONFIRMADO').status_code==200
+    s['user']=a['employee'];assert c.get('/incidents/'+case).status_code==404
+
+
+def test_protection_reassigns_supervisor_atomically(world):
+    c,db,a,s,one,two=world
+    case=create(c);s['user']=a['admin']
+    assert validate(c,case).status_code==200
+    assert move(c,case,'EN_REVISION',assigned_to=str(a['super'].id)).status_code==200
+    result=add_relation(c,case,a['super'])
+    assert result.status_code==201,result.text
+    detail=c.get('/incidents/'+case).json()
+    assert detail['is_confidential'] is True and detail['ai_status']=='OMITIDA'
+    assert detail['assigned_to'] in {str(a['admin'].id),str(a['admin2'].id)}
+    assert detail['status']=='EN_REVISION'
+    s['user']=a['super'];assert c.get('/incidents/'+case).status_code==404
+
+
+def test_only_admin_independent_can_change_relations_and_confidentiality(world):
+    c,db,a,s,one,two=world
+    case=create(c)
+    assert add_relation(c,case,a['peer']).status_code==403
+    assert confidential(c,case,True).status_code==403
+    s['user']=a['super'];assert add_relation(c,case,a['peer']).status_code==403
+    s['user']=a['admin']
+    assert add_relation(c,case,a['admin']).json()['can_view'] is False
+    assert c.get('/incidents/'+case).status_code==404
+    assert confidential(c,case,False).status_code==404
+    assert review(c,case,a['admin'],'DESCARTADO').status_code==404
+    s['user']=a['admin2'];assert review(c,case,a['admin'],'DESCARTADO').status_code==200
+    assert confidential(c,case,False).status_code==200
+
+
+def test_no_independent_admin_returns_case_to_pending(world):
+    c,db,a,s,one,two=world
+    case=create(c);s['user']=a['admin']
+    a['admin2'].is_active=False;db.commit()
+    assert validate(c,case).status_code==200
+    assert move(c,case,'EN_REVISION',assigned_to=str(a['admin'].id)).status_code==200
+    response=add_relation(c,case,a['admin'])
+    assert response.status_code==201,response.text
+    assert response.json()['can_view'] is False
+    record=db.get(Incident,__import__('uuid').UUID(case))
+    assert record.status=='PENDIENTE' and record.assigned_to is None
+    assert record.is_confidential is True and record.cycle_start_at is None
+    entries=db.scalars(select(AuditEvent).where(AuditEvent.incidencia_id==record.id)).all()
+    event_row=next(row for row in entries if row.detalle.get('operation')=='participant_add')
+    assert event_row.detalle['before']['status']=='EN_REVISION'
+    assert event_row.detalle['after']['status']=='PENDIENTE'
+    assert event_row.detalle['reason']
+
+
+def test_protection_validation_and_terminal_states(world):
+    c,db,a,s,one,two=world
+    case=create(c);s['user']=a['admin']
+    assert add_relation(c,case,a['employee']).status_code==409
+    assert add_relation(c,case,a['peer']).status_code==201
+    assert add_relation(c,case,a['peer']).status_code==409
+    assert review(c,case,a['outsider'],'DESCARTADO').status_code==404
+    assert c.put(f'/incidents/{case}/confidentiality',json={'is_confidential':True,'reason':' '}).status_code==422
+    assert confidential(c,case,True,assigned_to=str(a['super'].id)).status_code==422
+    assert c.get('/incidents/'+case).json()['is_confidential'] is False
+    assert validate(c,case).status_code==200
+    assert move(c,case,'EN_REVISION',assigned_to=str(a['admin'].id)).status_code==200
+    assert move(c,case,'RESUELTA',resolution_text='Prueba').status_code==200
+    assert confidential(c,case,True).status_code==409
+    assert review(c,case,a['peer'],'DESCARTADO').status_code==409
+    assert add_relation(c,case,a['outsider']).status_code==409
+
+
+def test_protection_rolls_back_relation_and_access_on_audit_failure(world):
+    c,db,a,s,one,two=world
+    case=create(c);s['user']=a['admin']
+    def fail_event(session,flush_context,instances):
+        if any(isinstance(row,AuditEvent) and row.accion=='CAMBIO_CONFIDENCIALIDAD' for row in session.new):
+            raise SQLAlchemyError('simulated protection failure')
+    event.listen(db,'before_flush',fail_event)
+    try:
+        assert add_relation(c,case,a['super']).status_code==503
+    finally:
+        event.remove(db,'before_flush',fail_event)
+    assert c.get('/incidents/'+case).json()['is_confidential'] is False
+    assert c.get(f'/incidents/{case}/participants').json()['items']==[]
+    assert c.get(f'/incidents/{case}/history').json()['total']==1
+
+
+def test_manual_confidentiality_reassignment_and_affected_manager_guard(world):
+    c,db,a,s,one,two=world
+    case=create(c);s['user']=a['admin']
+    assert validate(c,case).status_code==200
+    assert move(c,case,'EN_REVISION',assigned_to=str(a['super'].id)).status_code==200
+    result=confidential(c,case,True,assigned_to=str(a['admin2'].id))
+    assert result.status_code==200,result.text
+    detail=c.get('/incidents/'+case).json()
+    assert detail['assigned_to']==str(a['admin2'].id) and detail['status']=='EN_REVISION'
+    assert confidential(c,case,False).status_code==200
+    assert c.get('/incidents/'+case).json()['ai_status']=='OMITIDA'
+    affected_manager=create(c,affected_employee_id=str(a['super'].id))
+    assert confidential(c,affected_manager,False).status_code==409
+    assert confidential(c,affected_manager,True,assigned_to=str(a['super'].id)).status_code==422
+
+
+def test_relation_limit_and_inactive_participant(world):
+    from uuid import UUID
+    c,db,a,s,one,two=world
+    case=create(c);s['user']=a['admin']
+    a['outsider'].is_active=False;db.commit()
+    assert add_relation(c,case,a['outsider']).status_code==422
+    for index in range(20):
+        person=User(email=f'bounded{index}@example.invalid',nombre_completo=f'Bounded {index}',rol_id=3,departamento_id=one.id,is_active=True)
+        db.add(person);db.flush()
+        db.add(IncidentParticipant(incidencia_id=UUID(case),user_id=person.id,declaration_reason='Prueba límite'))
+    db.commit()
+    assert add_relation(c,case,a['peer']).status_code==422
+    assert c.get(f'/incidents/{case}/participants').json()['items'].__len__()==20

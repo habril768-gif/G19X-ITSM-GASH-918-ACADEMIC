@@ -47,3 +47,7 @@ Consultar INCIDENCIAS.md para rutas, contrato y validación manual. Requiere esq
 ## API 0.6.0 — Operación de incidencias
 
 Mantiene esquema 0003. Reconstruir con docker compose up -d --build --wait y verificar 0.6.0 en /docs. No necesita credenciales nuevas ni cambios a .env. Rutas, reglas y prueba manual en INCIDENCIAS.md. Para confirmación humana usar PUT classification antes de iniciar revisión; asignar solo gestor con acceso. No hay frontend de gestión todavía. Las rutas devuelven 409 ante estado incompatible, 422 ante datos/responsable inválidos, 403 para operación de rol no permitido y 404 ante expediente no visible. Un error SQL revierte cambios y devuelve 503 genérico.
+
+## API 0.7.0 — Protección del expediente
+
+Esquema 0003. Reconstruir con docker compose up -d --build --wait y verificar 0.7.0. No repetir bootstrap ni seed. Rutas de participantes/revisión y confidencialidad documentadas en INCIDENCIAS.md. Solo Admin RH independiente; respuesta mínima con can_view porque puede perder acceso. RESUELTA/CERRADA exigen reapertura. Confidencialidad fuerza omisión IA y revisión preserva original. Reasignación y retroceso protector se ejecutan junto con auditoría. Pruebas SQLite no demuestran bloqueo concurrente PostgreSQL. El CLI para provisionar administrador independiente adicional sigue pendiente.

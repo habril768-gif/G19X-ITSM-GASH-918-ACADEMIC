@@ -37,3 +37,21 @@ Sin token ni Curl visibles; resultados y límites en REPORTE_QA.md.
 - [16-historial-incidencia-200.png](16-historial-incidencia-200.png): inspeccionada el 16 de octubre de 2026; HTTP 200, evento CREADO y total=1 con datos simulados, sin token/Curl visibles. No sustituye pruebas entre roles.
 
 Próximas evidencias previstas para API 0.6.0: 17-clasificacion-validada-200.png y 18-asignacion-200.png. Aún no recibidas ni verificadas. Guardar solo Server response con datos ficticios; omitir Curl/token.
+
+- [17-clasificacion-validada-200.png](17-clasificacion-validada-200.png): revisada el 16 de octubre de 2026; HTTP 200 y classification_valid=true. Clasificación humana, sin IA ejecutada ni credenciales visibles.
+
+- [18-asignacion-200.png](18-asignacion-200.png): inspeccionada el 16 de octubre de 2026; HTTP 200, assigned_to presente y estado PENDIENTE, sin token/Curl visibles.
+
+- [19-en-revision-200.png](19-en-revision-200.png): inspeccionada el 16 de octubre de 2026; HTTP 200 y estado EN_REVISION, sin token/Curl visibles.
+
+- [20-resuelta-200.png](20-resuelta-200.png): inspeccionada el 16 de octubre de 2026; HTTP 200, RESUELTA con resolución y fecha, sin token/Curl visibles.
+
+- [21-cerrada-200.png](21-cerrada-200.png): inspeccionada el 16 de octubre de 2026; HTTP 200, CERRADA y closed_at presente, sin token/Curl visibles.
+
+- [22-reapertura-200.png](22-reapertura-200.png): inspeccionada el 16 de octubre de 2026; HTTP 200, EN_REVISION y campos finales nulos. Conservación del ciclo previo aún pendiente de inspección del historial. Sin token/Curl visibles.
+
+- [23-historial-reapertura-200.png](23-historial-reapertura-200.png): inspeccionada el 16 de octubre de 2026; HTTP 200, REAPERTURA y before con estado/fechas anteriores. Recorte no permite verificar texto de resolución anterior ni motivo. Sin token/Curl visibles.
+
+- [23b-historial-reapertura-detalle.png](23b-historial-reapertura-detalle.png): inspeccionada el 16 de octubre de 2026; completa evidencia 23 mostrando resolución/fechas anteriores y reason. Sin token/Curl visibles.
+
+Evidencia 24-confidencialidad-200.png prevista para API 0.7.0, todavía no recibida ni verificada. Capturar Server response del detalle, sin token/Curl y con datos simulados. Guía en INCIDENCIAS.md.

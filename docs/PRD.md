@@ -362,3 +362,5 @@ La versión 1.9 precisa revisión independiente de participantes, supresión de 
 ### Estado técnico de la entrega 0.5.0
 
 Registro y consultas backend de RF-2/RF-8 implementados parcialmente, con auditoría y acceso; sin edición ni ciclo completo. Campo participants limita a 20 entradas por petición como control técnico contra incorporación masiva. El empleado consulta cronología, sin detalles históricos que incluyan terceros; participantes detallados solo para gestores autorizados. No equivale a aceptación final; ver INCIDENCIAS.md y TRAZABILIDAD.md.
+
+Actualización de implementación, 16 de octubre de 2026 (API 0.7.0): los servicios ya incorporan alta/revisión de participantes, cambios de confidencialidad y reasignación/retroceso protector auditados. Sustituye menciones anteriores a estos servicios como pendientes. Continúan pendientes provisión adicional de administrador independiente por operador, revisión de asignaciones al cambiar usuarios/roles/departamentos, concurrencia PostgreSQL y UI. La estructura y servicios parciales no certifican RF completos; ejecución manual de 0.7.0 aún pendiente.
