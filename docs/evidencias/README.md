@@ -102,3 +102,7 @@ Evidencia 38-admin-usuarios-listado-200.png prevista para 0.8.0, todavía no rec
 - [46-rh-reactivado-nueva-sesion-200.png](46-rh-reactivado-nueva-sesion-200.png)
 
 Todas inspeccionadas; evidencia 42 actual muestra GET con cuenta activa. Recorrido, resultados y límites en ../REVISION_ADMIN_USUARIOS.md. Sin tokens ni contraseñas observados.
+
+## Traslado y rol — revisadas el 17 de octubre de 2026
+
+Evidencias 47–57 (incluye 52b): detalle, resultados, enlaces y límites en [REVISION_TRASLADO_ROL.md](../REVISION_TRASLADO_ROL.md). JSON 51 contiene 4/4 eventos; JSON 57, 5/5. Datos ficticios, sin tokens/contraseñas observados. No equivale a concurrencia PostgreSQL verificada.

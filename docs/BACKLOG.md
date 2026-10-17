@@ -150,3 +150,5 @@ Actualización 16 de octubre de 2026: procedimiento de RH adicional aplicado y e
 Administración backend 0.8.0 preparada: modificación de cuentas y revisión de casos con auditoría/revocación. 35 pruebas seleccionadas aprobadas; pendiente aplicación, suite HTTP completa, prueba real PostgreSQL/concurrencia, UI y CRUD departamentos. RF-7 parcial.
 
 Actualización 16 de octubre de 2026: backend de administración 0.8.0 aplicado según la autora; suite completa acreditada por evidencia 38, 77 aprobadas/3 omitidas/1 advertencia. Recorrido manual 39–46 de listado, desactivación/reactivación y revocación documentado con límites en REVISION_ADMIN_USUARIOS.md. RF-7 parcial: UI/CRUD departamentos, pruebas reales PostgreSQL/concurrencia y reasignación manual pendientes.
+
+Actualización 17 de octubre de 2026: evidencias 47–57 acreditan recorrido manual de traslado con reasignación/auditoría y protección por promoción, conservada al restaurar rol. RF-4/RF-7 parciales; no se acredita concurrencia ni UI completa. Ver REVISION_TRASLADO_ROL.md y REPORTE_QA.md.

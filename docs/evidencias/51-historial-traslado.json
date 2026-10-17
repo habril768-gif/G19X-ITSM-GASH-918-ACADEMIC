@@ -1,0 +1,135 @@
+{
+  "items": [
+    {
+      "id": "4e416cb5-6c3a-42bb-a376-5da5577c5680",
+      "accion": "ASIGNADO",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "1dfa2acb-3064-4b27-a97f-b3d891884917",
+          "category_id": 5,
+          "resolved_at": null,
+          "validated_at": "2026-10-17T05:51:58.172344+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-17T05:55:09.280382+00:00",
+          "is_confidential": false,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "054af081-bdb7-58dd-bf9f-e3ed852ff7e3",
+          "category_id": 5,
+          "resolved_at": null,
+          "validated_at": "2026-10-17T05:51:58.172344+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-17T05:55:09.280382+00:00",
+          "is_confidential": false,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": "Traslado simulado para comprobar reasignación de casos",
+        "operation": "USER_ACCESS_REVIEW"
+      },
+      "fecha": "2026-10-17T06:00:19.417257+00:00"
+    },
+    {
+      "id": "0dd075ff-2ba7-419b-93d8-646933d86278",
+      "accion": "ESTADO_CAMBIADO",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "054af081-bdb7-58dd-bf9f-e3ed852ff7e3",
+          "category_id": 5,
+          "resolved_at": null,
+          "validated_at": "2026-10-17T05:51:58.172344+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-17T05:55:09.280382+00:00",
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "PENDIENTE",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": null,
+          "category_id": 5,
+          "resolved_at": null,
+          "validated_at": "2026-10-17T05:51:58.172344+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": null,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": null,
+        "source": "HUMANA",
+        "operation": "transition"
+      },
+      "fecha": "2026-10-17T05:55:09.253783+00:00"
+    },
+    {
+      "id": "fdee1544-9db5-4d5f-bab5-ebf76c194052",
+      "accion": "VALIDACION_IA",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "PENDIENTE",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": null,
+          "category_id": 5,
+          "resolved_at": null,
+          "validated_at": "2026-10-17T05:51:58.172344+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": null,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "PENDIENTE",
+          "priority": null,
+          "closed_at": null,
+          "assigned_to": null,
+          "category_id": null,
+          "resolved_at": null,
+          "validated_at": null,
+          "validated_by": null,
+          "cycle_start_at": null,
+          "resolution_text": null,
+          "classification_valid": false
+        },
+        "reason": null,
+        "source": "HUMANA",
+        "operation": "classification"
+      },
+      "fecha": "2026-10-17T05:51:58.124467+00:00"
+    },
+    {
+      "id": "9b0efddd-3b25-411e-9dd3-59257323f10b",
+      "accion": "CREADO",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "scope": "PERSONA",
+        "titulo": "Prueba de traslado de departamento",
+        "descripcion": "Caso ficticio para comprobar la reasignación al cambiar de departamento.",
+        "participants": [],
+        "is_confidential": false,
+        "affected_employee_id": "9818c0b4-d829-52a1-99d2-d7159e29bfbb",
+        "confidentiality_reason": null,
+        "reported_department_id": "3c72c3ec-21dc-5686-993a-1460f3d31179"
+      },
+      "fecha": "2026-10-17T05:49:27.708446+00:00"
+    }
+  ],
+  "total": 4,
+  "page": 1,
+  "page_size": 20
+}
