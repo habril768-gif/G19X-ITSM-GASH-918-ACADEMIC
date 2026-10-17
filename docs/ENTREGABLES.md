@@ -86,3 +86,11 @@ Actualización 16 de octubre de 2026: backend de administración 0.8.0 aplicado 
 Actualización 17 de octubre de 2026: evidencias 47–57 acreditan recorrido manual de traslado con reasignación/auditoría y protección por promoción, conservada al restaurar rol. RF-4/RF-7 parciales; no se acredita concurrencia ni UI completa. Ver REVISION_TRASLADO_ROL.md y REPORTE_QA.md.
 
 Actualización 17 de octubre de 2026: RF-1/RF-8 frontend parciales, login y lectura de casos/lista/filtros/historial en React. 9 pruebas simuladas y build aprobados; frontend HTTP 200 y proxy health ok. Formularios de escritura, administración UI, deep links y pruebas manuales pendientes. Ver FRONTEND.md; no se declara RF-8 completo.
+
+Actualización 17 de octubre de 2026: evidencia 58 inspeccionada, panel React con 2 casos reales de prueba autorizados. Primera lectura/listado manual acreditada; RF-8 parcial. Detalle, filtros/logout manuales y formularios de gestión pendientes; ver REPORTE_QA.md.
+
+Actualización 17 de octubre de 2026: evidencia 59 revisada, detalle React y fragmento de historial de caso simulado renderizados. RF-8 parcial: filtros/logout/móvil manuales y formularios pendientes. Límites en REPORTE_QA.md.
+
+Actualización 17 de octubre de 2026: evidencia 60 inspeccionada, búsqueda React por título con una fila y total 1. RF-8 parcial; no acredita todos los filtros. Logout/móvil manuales y formularios pendientes. Ver REPORTE_QA.md.
+
+Actualización 17 de octubre de 2026: evidencia 61 revisada, logout React vuelve a login vacío sin datos de casos visibles. Evidencias 58–61 completan recorrido manual inicial de lectura/búsqueda/salida, sin acreditar móvil ni todos los roles. RF-8 parcial; formularios pendientes. Ver REPORTE_QA.md.

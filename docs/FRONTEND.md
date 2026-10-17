@@ -42,3 +42,10 @@ Primera instalación encontró error de certificado; se completó con NODE_OPTIO
 ## Verificación manual pendiente
 
 Abrir login, iniciar sesión con Admin RH, comprobar listado, filtrar y abrir un caso. Cerrar sesión y comprobar que no queda información privada; repetir con empleado/supervisor habilitado. Validar visualmente escritorio/móvil y recorrido con API real. No guardar contraseña/token en capturas. Evidencia prevista 58-panel-react-incidencias.png: únicamente área del listado con datos simulados, evitando identidad real y cualquier consola de red. La apertura del navegador por el asistente no acredita estas pruebas.
+Validación manual inicial: evidencia 58 revisada el 17 de octubre de 2026 confirma panel/listado con 2 casos simulados y estado de acceso. No equivale a todos los pasos del plan manual; detalle, filtros, cierre de sesión y vista móvil siguen pendientes.
+
+Detalle manual: evidencia 59 revisada el 17 de octubre de 2026 muestra descripción, restricción, validación, IA omitida y fragmento de historial. No acredita historial completo ni otros roles. Responsable se presenta como UUID en esta primera entrega.
+
+Filtro manual: evidencia 60 revisada el 17 de octubre de 2026 muestra búsqueda Ausencia simulada con una fila y contador 1. Otros filtros y roles no se consideran verificados por esa imagen.
+
+Logout manual: evidencia 61 revisada el 17 de octubre de 2026 muestra login vacío con aviso de cierre y sin expedientes. Recorrido inicial 58–61 completo; no sustituye prueba de revocación de servidor ni revisión móvil/otros roles.
