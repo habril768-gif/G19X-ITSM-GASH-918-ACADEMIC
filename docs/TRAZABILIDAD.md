@@ -149,3 +149,7 @@ Actualización 16 de octubre de 2026: evidencia 33 revisada y validada estructur
 RF-7 y escalamiento de 3.2/3.3: CLI provision-independent-admin preparado en copia, test_manage_users.py verifica cuenta nueva, auditoría/rollback y exclusión original. 24 pruebas seleccionadas aprobadas; suite HTTP completa no verificada. Pendiente aplicar paquete y probar Docker; no acredita independencia humana ni RF-7 completo.
 
 Actualización 16 de octubre de 2026: procedimiento de RH adicional aplicado y ejecutado según reporte de la autora; evidencias 34–37 revisadas y documentadas en REVISION_RH_INDEPENDIENTE.md. RF-7 parcial: cuenta/sesión independiente acreditadas, recorrido de acceso permitido y rechazo reportados con límites del recorte. Administración completa, frontend y concurrencia pendientes.
+
+RF-7: services/users.py, api/users.py y test_user_administration.py preparados; cubren cambios, bajas/reactivación, último RH local y ajustes atómicos. Gate compartido coordina RF-2/RF-4 con cambios de acceso. 35 pruebas seleccionadas, sin validación HTTP completa ni concurrencia. Aplicación/manual pendientes. Ver ADMIN_USUARIOS.md.
+
+Actualización 16 de octubre de 2026: backend de administración 0.8.0 aplicado según la autora; suite completa acreditada por evidencia 38, 77 aprobadas/3 omitidas/1 advertencia. Recorrido manual 39–46 de listado, desactivación/reactivación y revocación documentado con límites en REVISION_ADMIN_USUARIOS.md. RF-7 parcial: UI/CRUD departamentos, pruebas reales PostgreSQL/concurrencia y reasignación manual pendientes.

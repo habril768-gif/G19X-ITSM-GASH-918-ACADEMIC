@@ -82,6 +82,10 @@ def change_password(body: PasswordChange, user: User = Depends(current_user), db
 
 @router.post("/users", status_code=201, tags=["Usuarios"])
 def create_user(body: CreateUser, admin: User = Depends(admin_user), db: Session = Depends(get_session)):
+    from app.services.administration_lock import administration_lock
+    administration_lock(db, admin, exclusive=True)
+    if db.get(Role, admin.rol_id).nombre != "ADMIN_RH":
+        raise HTTPException(403, "Se requiere Admin RH")
     department = db.get(Department, body.departamento_id)
     if not department or not department.is_active or db.get(Role, body.rol_id) is None:
         raise HTTPException(422, "Departamento o rol no válido")

@@ -368,3 +368,7 @@ Actualización de implementación, 16 de octubre de 2026 (API 0.7.0): los servic
 Actualización técnica preparada el 16 de octubre de 2026: procedimiento de operador para RH adicional implementado y probado en copia aislada; aún no aplicado al repositorio. Conserva exclusión del involucrado y no cambia casos automáticamente. La designación de otra persona es responsabilidad del operador; el sistema no detecta que una misma persona controle dos cuentas. RF-7 sigue parcial, no hay administración React completa. Guía ADMIN_INDEPENDIENTE.md.
 
 Estado posterior al paquete: procedimiento de RH adicional aplicado/ejecutado según la autora y sesión independiente verificada con evidencia 34. Recorrido de acceso 35–37 documentado con sus límites en REVISION_RH_INDEPENDIENTE.md. No implica RF-7 completo ni demostración técnica de independencia humana entre cuentas.
+
+Estado preparado para 0.8.0: backend de modificaciones de usuario con revocación y revisión de asignaciones implementado en copia; no aplicado todavía. RF-7 parcial, frontend y CRUD de departamentos pendientes. Política de casos finalizados y restricciones detallada en ADMIN_USUARIOS.md.
+
+Estado posterior de administración 0.8.0, 16 de octubre de 2026: implementación aplicada según la autora, suite completa de 77 pruebas aprobadas y tres integraciones PostgreSQL omitidas. Evidencias manuales y limitaciones en REVISION_ADMIN_USUARIOS.md. Actualiza el estado previo de paquete preparado, sin declarar RF-7 completo ni UI entregada.

@@ -35,6 +35,8 @@ def snapshot(case):
 
 def manage_case(db, actor, case_id, operation, body):
     try:
+        from app.services.administration_lock import administration_lock
+        administration_lock(db, actor)
         if role_name(db, actor) not in MANAGERS:
             raise HTTPException(403, "Solo gestores autorizados")
         # Lock first, then reevaluate visibility on the refreshed row. PostgreSQL

@@ -31,6 +31,8 @@ def eligible(db, case, person):
 
 def protect_case(db, actor, case_id, operation, body, participant_id=None):
     try:
+        from app.services.administration_lock import administration_lock
+        administration_lock(db, actor)
         if role_name(db, actor) != "ADMIN_RH":
             raise HTTPException(403, "Solo Admin RH independiente")
         case = db.scalar(select(Incident).where(Incident.id == case_id).with_for_update()

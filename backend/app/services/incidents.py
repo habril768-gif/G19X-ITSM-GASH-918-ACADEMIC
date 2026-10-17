@@ -58,6 +58,8 @@ def visible_case(db: Session, actor: User, case_id: UUID) -> Incident:
 
 
 def create_case(db: Session, actor: User, body):
+    from app.services.administration_lock import administration_lock
+    administration_lock(db, actor)
     role = role_name(db, actor)
     affected = None
     if body.scope == "PERSONA":

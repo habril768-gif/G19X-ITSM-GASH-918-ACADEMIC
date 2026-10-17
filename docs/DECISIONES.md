@@ -144,3 +144,11 @@ Participantes y confidencialidad se modifican solo por Admin RH independiente, b
 ## 16 de octubre de 2026 — Cuenta independiente por operador
 
 Se amplía el CLI existente, sin endpoint ni migración. Exige nueva cuenta y motivo, no modifica restricciones ni asigna casos. Auditoría por servidor con actor nulo y affected_user_id; no inventa un actor humano autenticado. La independencia entre personas depende de designación administrativa; no puede demostrarse con un UUID. Detalles en ADMIN_INDEPENDIENTE.md. Paquete preparado, pendiente de aplicar.
+
+## 16 de octubre de 2026 — Ajustes administrativos atómicos
+
+Se conserva historial finalizado: un ajuste que requiere protección/asignación sobre RESUELTA/CERRADA se rechaza hasta reapertura. Si un caso está oculto al administrador, rechaza la modificación indirecta sin revelar IDs. Reasignación a RH elegible por ID estable; retroceso sin responsable solo para confidencialidad sin gestor independiente. Advisory lock global coordina escritura de usuarios e incidencias; recorrido completo de casos aceptado para MVP, rendimiento por medir. No se promete RF-7 completo; paquete aún por aplicar.
+
+## 16 de octubre de 2026 — Resultado posterior a aplicación 0.8.0
+
+Se conserva distinción entre acuse de modificación y estado persistido, y entre logout y revocación administrativa. Evidencias 38–46 consolidadas; suite completa aprobada por ejecución de la autora. No se elimina historial de intentos interrumpidos ni se presentan tres pruebas PostgreSQL omitidas como aprobadas. Ver REVISION_ADMIN_USUARIOS.md.

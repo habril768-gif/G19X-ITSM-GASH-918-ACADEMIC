@@ -86,3 +86,19 @@ Evidencia 24-confidencialidad-200.png prevista para API 0.7.0, todavía no recib
 - [37-rh-involucrado-acceso-404.png](37-rh-involucrado-acceso-404.png): rechazo 404 según recorrido reportado; recorte sin ID/identidad.
 
 Sin contraseñas ni tokens observados. Ver ../REVISION_RH_INDEPENDIENTE.md y ../REPORTE_QA.md.
+
+Evidencia 38-admin-usuarios-listado-200.png prevista para 0.8.0, todavía no recibida ni verificada. Solo Server response de GET /users con datos simulados, sin Curl/token.
+
+## Evidencias de administración consolidadas — 16 de octubre de 2026
+
+- [38-suite-completa-77-passed.png](38-suite-completa-77-passed.png)
+- [39-admin-usuarios-listado-200.png](39-admin-usuarios-listado-200.png)
+- [40-usuario-demo-desactivado-200.png](40-usuario-demo-desactivado-200.png)
+- [41-usuario-demo-inactivo-listado-200.png](41-usuario-demo-inactivo-listado-200.png)
+- [42-usuario-demo-reactivado-200.png](42-usuario-demo-reactivado-200.png)
+- [43-sesion-revocada-401.png](43-sesion-revocada-401.png)
+- [44-revocacion-administrativa-401.png](44-revocacion-administrativa-401.png)
+- [45-token-anterior-tras-reactivacion-401.png](45-token-anterior-tras-reactivacion-401.png)
+- [46-rh-reactivado-nueva-sesion-200.png](46-rh-reactivado-nueva-sesion-200.png)
+
+Todas inspeccionadas; evidencia 42 actual muestra GET con cuenta activa. Recorrido, resultados y límites en ../REVISION_ADMIN_USUARIOS.md. Sin tokens ni contraseñas observados.

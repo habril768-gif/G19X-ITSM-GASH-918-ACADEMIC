@@ -146,3 +146,7 @@ Actualización 16 de octubre de 2026: evidencia 33 revisada y validada estructur
 Procedimiento de RH adicional preparado en paquete, con siete pruebas nuevas; pendiente aplicar/reconstruir/verificar manualmente. No declarar RF-7 terminado: gestión completa de cuentas/roles/departamentos y UI pendientes. Ver ADMIN_INDEPENDIENTE.md y REPORTE_QA.md.
 
 Actualización 16 de octubre de 2026: procedimiento de RH adicional aplicado y ejecutado según reporte de la autora; evidencias 34–37 revisadas y documentadas en REVISION_RH_INDEPENDIENTE.md. RF-7 parcial: cuenta/sesión independiente acreditadas, recorrido de acceso permitido y rechazo reportados con límites del recorte. Administración completa, frontend y concurrencia pendientes.
+
+Administración backend 0.8.0 preparada: modificación de cuentas y revisión de casos con auditoría/revocación. 35 pruebas seleccionadas aprobadas; pendiente aplicación, suite HTTP completa, prueba real PostgreSQL/concurrencia, UI y CRUD departamentos. RF-7 parcial.
+
+Actualización 16 de octubre de 2026: backend de administración 0.8.0 aplicado según la autora; suite completa acreditada por evidencia 38, 77 aprobadas/3 omitidas/1 advertencia. Recorrido manual 39–46 de listado, desactivación/reactivación y revocación documentado con límites en REVISION_ADMIN_USUARIOS.md. RF-7 parcial: UI/CRUD departamentos, pruebas reales PostgreSQL/concurrencia y reasignación manual pendientes.

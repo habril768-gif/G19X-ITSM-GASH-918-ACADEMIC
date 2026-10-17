@@ -55,3 +55,7 @@ Esquema 0003. Reconstruir con docker compose up -d --build --wait y verificar 0.
 Procedimiento provision-independent-admin preparado para operador; tras aplicar paquete, reconstruir imagen sin migración nueva (0003, API 0.7.0). Comando interactivo y límites en ADMIN_INDEPENDIENTE.md. Mantiene bootstrap y restablecimiento de contraseña; no usar contraseña en argumentos.
 
 Actualización posterior: paquete de RH adicional aplicado y reconstruido según reporte de la autora. API 0.7.0/esquema 0003 conservados. Sesión nueva y recorrido manual en REVISION_RH_INDEPENDIENTE.md; no hay suite HTTP completa nueva acreditada.
+
+Actualización preparada 0.8.0: aplicar paquete completo y ejecutar suite, luego reconstruir con docker compose up -d --build --wait. No requiere nueva migración ni bootstrap. Mutaciones de usuarios/incidencias coordinadas, deben desplegarse juntas. Guía ADMIN_USUARIOS.md.
+
+Estado posterior de 0.8.0: paquete aplicado y Docker reconstruido según la autora. Suite completa 77/3/1 observada, recorrido administrativo documentado en REVISION_ADMIN_USUARIOS.md. Sin nueva migración (0003); no repetir bootstrap. Los pendientes de pruebas PostgreSQL y concurrencia siguen vigentes.

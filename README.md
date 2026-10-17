@@ -144,3 +144,7 @@ API 0.7.0: revisión de participantes y confidencialidad con recusa, reasignaci�
 Procedimiento de operador para crear RH independiente adicional preparado y documentado en docs/ADMIN_INDEPENDIENTE.md. Aplicar actualización y reconstruir antes de usar el nuevo comando; conserva API 0.7.0/esquema 0003 y no cambia casos existentes.
 
 El procedimiento de RH independiente fue aplicado y ejecutado según reporte de la autora; evidencias y límites de validación en docs/REVISION_RH_INDEPENDIENTE.md. RF-7 sigue parcial.
+
+Administración de usuarios 0.8.0 preparada: listado/opciones y actualización auditada de rol, departamento y activación, con revisión de casos y revocación. Paquete pendiente de aplicación; instrucciones y límites en docs/ADMIN_USUARIOS.md. Mantiene esquema 0003.
+
+Administración backend 0.8.0 aplicada según la autora; suite completa observada: 77 aprobadas, 3 PostgreSQL omitidas y 1 advertencia. Evidencias de administración y límites en docs/REVISION_ADMIN_USUARIOS.md. RF-7 sigue parcial; frontend/CRUD de departamentos y concurrencia pendientes.
