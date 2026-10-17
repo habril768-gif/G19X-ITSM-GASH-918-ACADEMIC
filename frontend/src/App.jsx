@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { createApi, caseQuery } from './services/api.js';
+import NewIncident from './pages/NewIncident.jsx';
 
 const statuses = { PENDIENTE: 'Pendiente', EN_REVISION: 'En revisión', RESUELTA: 'Resuelta', CERRADA: 'Cerrada' };
 const priorities = { 1: 'Alta', 2: 'Media', 3: 'Baja' };
@@ -102,15 +103,17 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [selected, setSelected] = useState(null);
   const [notice, setNotice] = useState('');
+  const [creating, setCreating] = useState(false);
   const api = useRef(null);
-  if (!api.current) api.current = createApi(() => { setUser(null); setSelected(null); setNotice('Tu sesión terminó o cambió el acceso de tu cuenta. Inicia sesión nuevamente.'); });
+  if (!api.current) api.current = createApi(() => { setUser(null); setSelected(null); setCreating(false); setNotice('Tu sesión terminó o cambió el acceso de tu cuenta. Inicia sesión nuevamente.'); });
   function logout() {
     const pending = api.current.logout();
-    setUser(null); setSelected(null); setNotice('Cerraste tu sesión.');
+    setUser(null); setSelected(null); setCreating(false); setNotice('Cerraste tu sesión.');
     pending.catch(() => { setNotice('Se retiró la sesión de este navegador. No se pudo confirmar el cierre en el servidor; la sesión vencerá según su vigencia.'); });
   }
   if (!user) return <Login api={api.current} notice={notice} onLogin={value => { setNotice(''); setUser(value); }} />;
-  return <div className="workspace"><aside className="sidebar"><Brand /><p className="sidebar-label">ESPACIO DE TRABAJO</p><button className="nav-item" onClick={() => setSelected(null)}>▤ <span>Incidencias</span></button><div className="sidebar-foot"><strong>Un seguimiento más claro.</strong><p>La información se comparte según los permisos de cada cuenta.</p></div></aside>
-    <div className="main-area"><header className="topbar"><span>Gestión de incidencias laborales</span><div className="account"><div><strong>{user.nombre_completo}</strong><small>{roles[user.rol] || user.rol}</small></div><button onClick={logout}>Cerrar sesión</button></div></header><main className="content">{selected ? <CaseDetail key={selected} id={selected} api={api.current} onBack={() => setSelected(null)} /> : <Cases api={api.current} user={user} onSelect={setSelected} />}</main><footer>PluriOne · Entorno académico · Utiliza datos simulados</footer></div>
+  const list = () => { setSelected(null); setCreating(false); };
+  return <div className="workspace"><aside className="sidebar"><Brand /><p className="sidebar-label">ESPACIO DE TRABAJO</p><button className="nav-item" onClick={list}>▤ <span>Incidencias</span></button><button className="nav-item" onClick={() => { setSelected(null); setCreating(true); }}>＋ <span>Nueva incidencia</span></button><div className="sidebar-foot"><strong>Un seguimiento más claro.</strong><p>La información se comparte según los permisos de cada cuenta.</p></div></aside>
+    <div className="main-area"><header className="topbar"><span>Gestión de incidencias laborales</span><div className="account"><div><strong>{user.nombre_completo}</strong><small>{roles[user.rol] || user.rol}</small></div><button onClick={logout}>Cerrar sesión</button></div></header><main className="content">{creating ? <NewIncident api={api.current} user={user} onBack={list} onOpen={id => { setCreating(false); setSelected(id); }} /> : selected ? <CaseDetail key={selected} id={selected} api={api.current} onBack={list} /> : <Cases api={api.current} user={user} onSelect={setSelected} />}</main><footer>PluriOne · Entorno académico · Utiliza datos simulados</footer></div>
   </div>;
 }

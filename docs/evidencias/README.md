@@ -116,3 +116,5 @@ Evidencia prevista 58-panel-react-incidencias.png para prueba manual del fronten
 - [60-panel-react-filtro.png](60-panel-react-filtro.png): revisada el 17 de octubre de 2026; búsqueda por título, una fila y total 1, sin credenciales visibles.
 
 - [61-panel-react-sesion-cerrada.png](61-panel-react-sesion-cerrada.png): revisada el 17 de octubre de 2026; login vacío y aviso de cierre, sin datos de casos ni credenciales visibles.
+
+Evidencia prevista 62-registro-react-acuse.png, todavía no recibida ni verificada: una sola captura del acuse de alta desde React con datos simulados. No capturar cada campo ni credenciales. Plan agrupado en ../FRONTEND.md.

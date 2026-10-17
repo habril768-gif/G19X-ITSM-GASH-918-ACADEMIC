@@ -156,3 +156,7 @@ Se conserva distinción entre acuse de modificación y estado persistido, y entr
 ## 17 de octubre de 2026 — Cliente React con sesión efímera
 
 React/Vite, cliente /api con proxy local al backend para desarrollo, sin CORS nuevo ni variables con secretos. Token solo en memoria; recarga pide login y logout retira datos aun si falla red, informando resultado no confirmado. Totales/filtros y eventos autorizados vienen de API. Primera entrega de lectura, sin botones de escritura que aún no existen. No se activa integración IA ni persistencia del navegador. Guía FRONTEND.md; CI remoto y pruebas visuales pendientes.
+
+## 17 de octubre de 2026 — Acuse de alta y respuesta incierta
+
+Formulario React 0.2.0 usa directorio permitido y aviso general de confidencialidad, con confirmación cuando se prevé restricción. La API decide acceso final. can_view=false muestra solo acuse; no se enlaza expediente ni se consulta su estado. Una respuesta ambigua de red/servidor bloquea reenvío en esa instancia y recomienda comprobar el registro antes de repetir. Esto reduce duplicados locales; no implementa idempotencia de backend. Sin borradores persistidos ni llamadas IA. Verificación manual agrupada con una evidencia de acuse, sin captura por campo.

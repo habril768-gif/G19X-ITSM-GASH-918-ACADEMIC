@@ -94,3 +94,5 @@ Actualización 17 de octubre de 2026: evidencia 59 revisada, detalle React y fra
 Actualización 17 de octubre de 2026: evidencia 60 inspeccionada, búsqueda React por título con una fila y total 1. RF-8 parcial; no acredita todos los filtros. Logout/móvil manuales y formularios pendientes. Ver REPORTE_QA.md.
 
 Actualización 17 de octubre de 2026: evidencia 61 revisada, logout React vuelve a login vacío sin datos de casos visibles. Evidencias 58–61 completan recorrido manual inicial de lectura/búsqueda/salida, sin acreditar móvil ni todos los roles. RF-8 parcial; formularios pendientes. Ver REPORTE_QA.md.
+
+React 0.2.0 (17 de octubre de 2026): RF-2/RF-8 parciales, alta persona/entorno con participantes, aviso y acuse según permiso en pages/NewIncident.jsx. Seis pruebas nuevas, 15 UI aprobadas y build correcto. Prueba real de registro desde UI pendiente; no equivale a RF completos. Formularios de gestión/admin y demás límites en FRONTEND.md.

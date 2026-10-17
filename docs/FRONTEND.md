@@ -49,3 +49,22 @@ Detalle manual: evidencia 59 revisada el 17 de octubre de 2026 muestra descripci
 Filtro manual: evidencia 60 revisada el 17 de octubre de 2026 muestra búsqueda Ausencia simulada con una fila y contador 1. Otros filtros y roles no se consideran verificados por esa imagen.
 
 Logout manual: evidencia 61 revisada el 17 de octubre de 2026 muestra login vacío con aviso de cierre y sin expedientes. Recorrido inicial 58–61 completo; no sustituye prueba de revocación de servidor ni revisión móvil/otros roles.
+
+## Registro desde React — versión 0.2.0 (17 de octubre de 2026)
+
+Esta ampliación sustituye el pendiente de formulario de alta de la entrega 0.1.0. Disponible en el menú Nueva incidencia. No necesita dependencias nuevas, migración ni cambios al backend. Con Vite activo, actualizar la página; al recargar se solicita nueva sesión porque token solo vive en memoria.
+
+- PERSONA: empleado reporta sobre sí mismo; gestor elige afectado del directorio permitido por /incidents/options.
+- ENTORNO: exige departamento permitido y no envía empleado ficticio. El empleado no incorpora participantes en ENTORNO; gestores pueden declarar según contrato API.
+- Participantes opcionales con motivo obligatorio, sin duplicados ni afectado repetido, máximo 20. Empleado solo los declara en caso personal.
+- Al solicitar confidencialidad o detectar gestor involucrado se muestra aviso y confirmación de comprensión. Aviso general siempre visible porque permisos pueden cambiar entre cargar opciones y registrar. El servidor mantiene la decisión definitiva.
+- No se acepta en formulario autor, estado, asignación ni decisión IA. Fecha local inicial editable; título/descripción y motivos se validan también por servidor.
+- Acuse con ID: can_view=true permite abrir detalle; can_view=false ofrece solo referencia y regreso al listado, sin estado posterior ni enlace al expediente.
+- Se bloquea envío mientras está pendiente y se conserva el formulario ante errores de validación. Una respuesta de red/servidor no confirmada no se reintenta automáticamente: se indica comprobar el listado/RH para evitar duplicados. No hay idempotencia ni garantía de entrega exactamente una vez del backend; el bloqueo cubre interacción local del formulario.
+- No hay persistencia de borradores ni envío a OpenAI. La descripción/relaciones se retiran del formulario al recibir acuse; sesión expirada desmonta la vista como el resto del panel.
+
+Pruebas finales: npm test, 15 aprobadas en 3 archivos, 17.63s; npm run build, 18 módulos y compilación correcta en 379ms. Seis pruebas nuevas de formulario usan API simulada: persona propia, entorno sin víctima, acuse restringido, relación de gestor y aviso, respuesta incierta y bloqueo de doble clic en respuesta pendiente. Nueve pruebas anteriores regresaron sin fallo. No acredita creación real en PostgreSQL ni todo el control entre roles; autorización sigue respaldada por pruebas del backend y necesita recorrido manual de alta desde UI.
+
+Verificación manual agrupada: iniciar sesión como RH; Nueva incidencia; elegir Empleado RH Demo, introducir título/fecha/descripción simulados y registrar sin confidencialidad ni participantes. Confirmar acuse y abrir expediente si can_view=true. Una sola evidencia prevista: 62-registro-react-acuse.png, con ID de caso ficticio y sin contraseñas/tokens. No se requieren capturas de cada campo ni repetir todo el ciclo ya probado en Swagger. Esta comprobación todavía no se ejecutó ni se presenta como aprobada.
+
+Pendientes: edición, validación, asignación/transiciones y administración en React; enlaces profundos, comprobación móvil y permisos de otros roles. RF-2/RF-8 siguen parciales. El navegador no sustituye reglas API.
