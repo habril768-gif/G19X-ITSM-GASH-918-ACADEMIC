@@ -372,3 +372,5 @@ Estado posterior al paquete: procedimiento de RH adicional aplicado/ejecutado se
 Estado preparado para 0.8.0: backend de modificaciones de usuario con revocación y revisión de asignaciones implementado en copia; no aplicado todavía. RF-7 parcial, frontend y CRUD de departamentos pendientes. Política de casos finalizados y restricciones detallada en ADMIN_USUARIOS.md.
 
 Estado posterior de administración 0.8.0, 16 de octubre de 2026: implementación aplicada según la autora, suite completa de 77 pruebas aprobadas y tres integraciones PostgreSQL omitidas. Evidencias manuales y limitaciones en REVISION_ADMIN_USUARIOS.md. Actualiza el estado previo de paquete preparado, sin declarar RF-7 completo ni UI entregada.
+
+Estado frontend al 17 de octubre de 2026: primera UI React de login, listado/filtros y detalle/historial de lectura implementada y compilada; sustituye referencias históricas a frontend inexistente. RF-8 parcial: registro/gestión/administración UI y enlaces profundos pendientes. Pruebas/validación manual distinguidas en FRONTEND.md y REPORTE_QA.md.

@@ -1,9 +1,5 @@
-# Frontend
+# Frontend PluriOne
 
-Cliente React pendiente de implementación.
+Primera entrega ejecutable React 0.1.0: login, listado/filtros y detalle/historial de lectura. Guía completa y límites en [FRONTEND.md](../docs/FRONTEND.md).
 
-- `src/components`: componentes compartidos.
-- `src/pages`: vistas de registro, listado y detalle.
-- `src/services`: cliente de API.
-
-No hay todavía interfaz ejecutable ni dependencias instaladas.
+Desde esta carpeta: npm.cmd ci; luego npm.cmd run dev. Abrir http://127.0.0.1:5173/ y mantener API/Docker activos. Verificación: npm test y npm run build. Tokens solo en memoria. Aún sin formularios de gestión ni despliegue productivo.

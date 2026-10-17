@@ -152,3 +152,7 @@ Se conserva historial finalizado: un ajuste que requiere protección/asignación
 ## 16 de octubre de 2026 — Resultado posterior a aplicación 0.8.0
 
 Se conserva distinción entre acuse de modificación y estado persistido, y entre logout y revocación administrativa. Evidencias 38–46 consolidadas; suite completa aprobada por ejecución de la autora. No se elimina historial de intentos interrumpidos ni se presentan tres pruebas PostgreSQL omitidas como aprobadas. Ver REVISION_ADMIN_USUARIOS.md.
+
+## 17 de octubre de 2026 — Cliente React con sesión efímera
+
+React/Vite, cliente /api con proxy local al backend para desarrollo, sin CORS nuevo ni variables con secretos. Token solo en memoria; recarga pide login y logout retira datos aun si falla red, informando resultado no confirmado. Totales/filtros y eventos autorizados vienen de API. Primera entrega de lectura, sin botones de escritura que aún no existen. No se activa integración IA ni persistencia del navegador. Guía FRONTEND.md; CI remoto y pruebas visuales pendientes.

@@ -148,3 +148,7 @@ El procedimiento de RH independiente fue aplicado y ejecutado según reporte de 
 Administración de usuarios 0.8.0 preparada: listado/opciones y actualización auditada de rol, departamento y activación, con revisión de casos y revocación. Paquete pendiente de aplicación; instrucciones y límites en docs/ADMIN_USUARIOS.md. Mantiene esquema 0003.
 
 Administración backend 0.8.0 aplicada según la autora; suite completa observada: 77 aprobadas, 3 PostgreSQL omitidas y 1 advertencia. Evidencias de administración y límites en docs/REVISION_ADMIN_USUARIOS.md. RF-7 sigue parcial; frontend/CRUD de departamentos y concurrencia pendientes.
+
+## Panel web local
+
+Primera UI React: iniciar API/Docker, luego desde frontend ejecutar npm.cmd ci y npm.cmd run dev. Abrir http://127.0.0.1:5173/. Login, listado con filtros y detalle/historial; gestión sigue en Swagger en esta entrega parcial. Guía [FRONTEND.md](docs/FRONTEND.md), sin .env frontend ni tokens persistentes. No es despliegue productivo.

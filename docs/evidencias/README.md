@@ -106,3 +106,5 @@ Todas inspeccionadas; evidencia 42 actual muestra GET con cuenta activa. Recorri
 ## Traslado y rol — revisadas el 17 de octubre de 2026
 
 Evidencias 47–57 (incluye 52b): detalle, resultados, enlaces y límites en [REVISION_TRASLADO_ROL.md](../REVISION_TRASLADO_ROL.md). JSON 51 contiene 4/4 eventos; JSON 57, 5/5. Datos ficticios, sin tokens/contraseñas observados. No equivale a concurrencia PostgreSQL verificada.
+
+Evidencia prevista 58-panel-react-incidencias.png para prueba manual del frontend de lectura. Todavía no recibida ni verificada. Solo datos simulados y listado; omitir contraseña/token, red y cualquier identidad real. Guía ../FRONTEND.md.

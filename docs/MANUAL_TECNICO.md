@@ -59,3 +59,5 @@ Actualización posterior: paquete de RH adicional aplicado y reconstruido según
 Actualización preparada 0.8.0: aplicar paquete completo y ejecutar suite, luego reconstruir con docker compose up -d --build --wait. No requiere nueva migración ni bootstrap. Mutaciones de usuarios/incidencias coordinadas, deben desplegarse juntas. Guía ADMIN_USUARIOS.md.
 
 Estado posterior de 0.8.0: paquete aplicado y Docker reconstruido según la autora. Suite completa 77/3/1 observada, recorrido administrativo documentado en REVISION_ADMIN_USUARIOS.md. Sin nueva migración (0003); no repetir bootstrap. Los pendientes de pruebas PostgreSQL y concurrencia siguen vigentes.
+
+Frontend React 0.1.0: Node 24 verificado, npm.cmd ci y npm.cmd run dev desde frontend; http://127.0.0.1:5173/. Backend existente debe seguir activo. Proxy /api local sin secretos. Pruebas/build: npm test, npm run build. No migración adicional. Configuración, limitaciones y comprobación manual en FRONTEND.md.
