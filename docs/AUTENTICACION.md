@@ -64,3 +64,9 @@ No hay CAPTCHA, MFA, recuperación por correo, interfaz React, administración c
 Para una futura integración externa se conserva id interno; cualquier vinculación a Entra requerirá verificación explícita de identidad. No se implementa ahora.
 
 Referencias: [FastAPI y hash de contraseñas](https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/) y [gestión de sesiones OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html). Se toma el hash Argon2id de la guía; las sesiones de este proyecto son opacas, no JWT.
+
+## RH independiente adicional
+
+El paquete preparado amplía app.manage_users con provision-independent-admin. Requiere cuenta nueva, motivo administrativo y contraseña interactiva. No desbloquea al involucrado ni asigna casos. Aplicación/reconstrucción y prueba manual pendientes; ver ADMIN_INDEPENDIENTE.md.
+
+Actualización 16 de octubre de 2026: la autora reporta aplicación y ejecución de provision-independent-admin; evidencia 34 acredita inicio de sesión de nueva cuenta ADMIN_RH. Ver REVISION_RH_INDEPENDIENTE.md y sus límites.

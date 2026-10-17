@@ -51,3 +51,7 @@ Mantiene esquema 0003. Reconstruir con docker compose up -d --build --wait y ver
 ## API 0.7.0 — Protección del expediente
 
 Esquema 0003. Reconstruir con docker compose up -d --build --wait y verificar 0.7.0. No repetir bootstrap ni seed. Rutas de participantes/revisión y confidencialidad documentadas en INCIDENCIAS.md. Solo Admin RH independiente; respuesta mínima con can_view porque puede perder acceso. RESUELTA/CERRADA exigen reapertura. Confidencialidad fuerza omisión IA y revisión preserva original. Reasignación y retroceso protector se ejecutan junto con auditoría. Pruebas SQLite no demuestran bloqueo concurrente PostgreSQL. El CLI para provisionar administrador independiente adicional sigue pendiente.
+
+Procedimiento provision-independent-admin preparado para operador; tras aplicar paquete, reconstruir imagen sin migración nueva (0003, API 0.7.0). Comando interactivo y límites en ADMIN_INDEPENDIENTE.md. Mantiene bootstrap y restablecimiento de contraseña; no usar contraseña en argumentos.
+
+Actualización posterior: paquete de RH adicional aplicado y reconstruido según reporte de la autora. API 0.7.0/esquema 0003 conservados. Sesión nueva y recorrido manual en REVISION_RH_INDEPENDIENTE.md; no hay suite HTTP completa nueva acreditada.

@@ -140,3 +140,7 @@ Se implementa API 0.6.0 sin nueva migración: clasificación humana, asignación
 ## 16 de octubre de 2026 — Protección del expediente 0.7.0
 
 Participantes y confidencialidad se modifican solo por Admin RH independiente, bajo bloqueo del caso y con auditoría atómica. La declaración de un gestor activa protección antes de revisar; descartarla no desmarca confidencialidad. La respuesta es un acuse mínimo porque el actor puede perder acceso al declarar su propia relación. Se reutiliza CAMBIO_CONFIDENCIALIDAD con operation explícita para alta/revisión/protección; el original y revisiones anteriores se conservan. Reasignación automática a RH independiente por ID estable si el anterior pierde acceso, o retroceso protector a PENDIENTE sin responsable si no existe ninguno. Retirar protección no reinicia IA. Se mantiene esquema 0003. Provisión adicional por operador, cambios administrativos de rol/departamento, worker y concurrencia real PostgreSQL siguen pendientes.
+
+## 16 de octubre de 2026 — Cuenta independiente por operador
+
+Se amplía el CLI existente, sin endpoint ni migración. Exige nueva cuenta y motivo, no modifica restricciones ni asigna casos. Auditoría por servidor con actor nulo y affected_user_id; no inventa un actor humano autenticado. La independencia entre personas depende de designación administrativa; no puede demostrarse con un UUID. Detalles en ADMIN_INDEPENDIENTE.md. Paquete preparado, pendiente de aplicar.

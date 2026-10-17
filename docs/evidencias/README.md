@@ -55,3 +55,34 @@ Próximas evidencias previstas para API 0.6.0: 17-clasificacion-validada-200.png
 - [23b-historial-reapertura-detalle.png](23b-historial-reapertura-detalle.png): inspeccionada el 16 de octubre de 2026; completa evidencia 23 mostrando resolución/fechas anteriores y reason. Sin token/Curl visibles.
 
 Evidencia 24-confidencialidad-200.png prevista para API 0.7.0, todavía no recibida ni verificada. Capturar Server response del detalle, sin token/Curl y con datos simulados. Guía en INCIDENCIAS.md.
+
+- [24-confidencialidad-200.png](24-confidencialidad-200.png): inspeccionada el 16 de octubre de 2026; acuse HTTP 200 con received/can_view verdaderos. No contiene detalle de confidencialidad/IA; pendiente captura complementaria del GET. Sin credenciales visibles.
+
+- [24b-confidencialidad-detalle-200.png](24b-confidencialidad-detalle-200.png): inspeccionada el 16 de octubre de 2026; HTTP 200, is_confidential=true y ai_status=OMITIDA con motivo. Completa acuse 24, sin token/Curl visibles.
+
+- [25-confidencialidad-retirada-200.png](25-confidencialidad-retirada-200.png): inspeccionada el 16 de octubre de 2026; HTTP 200, is_confidential=false y ai_status=OMITIDA. Sin token/Curl visibles.
+
+- [26-participante-declarado-201.png](26-participante-declarado-201.png): acuse HTTP 201 revisado el 16 de octubre de 2026, received/can_view verdaderos. No contiene detalle de relación ni confidencialidad. Sin credenciales visibles.
+
+- [27-participante-declarado-detalle-200.png](27-participante-declarado-detalle-200.png): revisada el 16 de octubre de 2026; HTTP 200, DECLARADO, motivo original y revisión todavía nula. Sin credenciales visibles.
+
+- [28-participante-confirmado-200.png](28-participante-confirmado-200.png): revisada el 16 de octubre de 2026; HTTP 200, CONFIRMADO, revisión completa y motivo original conservado. Sin credenciales visibles.
+
+- [29-bloqueo-confidencialidad-409.png](29-bloqueo-confidencialidad-409.png): revisada el 16 de octubre de 2026; HTTP 409 esperado, impide retirar confidencialidad con gestor involucrado. Sin credenciales visibles.
+
+- [30-participante-descartado-200.png](30-participante-descartado-200.png): revisada el 16 de octubre de 2026; HTTP 200, DESCARTADO, declaración original y revisión con motivo. Sin credenciales visibles.
+
+- [31-confidencialidad-tras-descarte-200.png](31-confidencialidad-tras-descarte-200.png): revisada el 16 de octubre de 2026; HTTP 200, confidencialidad activa e IA omitida después de evidencia 30. Sin credenciales visibles.
+
+- [32-retiro-tras-descarte-200.png](32-retiro-tras-descarte-200.png): revisada el 16 de octubre de 2026; HTTP 200, is_confidential=false y ai_status=OMITIDA tras descarte y retiro explícito reportados. Sin credenciales visibles.
+
+- [33-historial-proteccion.json](33-historial-proteccion.json): revisado el 16 de octubre de 2026, JSON válido con 15/15 eventos; conserva declaración/revisiones, protección y retiro explícito, además del ciclo previo. Solo datos simulados, sin contraseñas ni tokens observados.
+
+## RH independiente — evidencias revisadas el 16 de octubre de 2026
+
+- [34-rh-independiente-auth-me-200.png](34-rh-independiente-auth-me-200.png): cuenta nueva autenticada ADMIN_RH.
+- [35-caso-rh-involucrado-201.png](35-caso-rh-involucrado-201.png): acuse 201.
+- [36-rh-independiente-acceso-200.png](36-rh-independiente-acceso-200.png): detalle confidencial 200 con administrador original afectado.
+- [37-rh-involucrado-acceso-404.png](37-rh-involucrado-acceso-404.png): rechazo 404 según recorrido reportado; recorte sin ID/identidad.
+
+Sin contraseñas ni tokens observados. Ver ../REVISION_RH_INDEPENDIENTE.md y ../REPORTE_QA.md.

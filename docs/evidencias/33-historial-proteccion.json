@@ -1,0 +1,594 @@
+{
+  "items": [
+    {
+      "id": "5f518fcc-b74a-44dd-aee8-e736ec0c600c",
+      "accion": "CAMBIO_CONFIDENCIALIDAD",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": false,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": true,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": "Participación descartada; se autoriza retirar la protección del caso simulado",
+        "operation": "confidentiality",
+        "participant_id": null,
+        "relation_after": null,
+        "relation_before": null
+      },
+      "fecha": "2026-10-17T00:23:03.859105+00:00"
+    },
+    {
+      "id": "8c5537b7-437f-4be6-9743-173ae719ab59",
+      "accion": "CAMBIO_CONFIDENCIALIDAD",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": true,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": true,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": "Se descarta la participación tras revisar el caso simulado",
+        "operation": "participant_review",
+        "participant_id": "c8c3952a-49b1-571c-86e8-536af633508e",
+        "relation_after": {
+          "reviewed_at": "2026-10-17T00:17:01.595197+00:00",
+          "reviewed_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "review_reason": "Se descarta la participación tras revisar el caso simulado",
+          "review_status": "DESCARTADO"
+        },
+        "relation_before": {
+          "reviewed_at": "2026-10-17T00:07:57.715735+00:00",
+          "reviewed_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "review_reason": "Participación confirmada para la prueba académica",
+          "review_status": "CONFIRMADO",
+          "declaration_reason": "Participación simulada para comprobar la protección automática"
+        }
+      },
+      "fecha": "2026-10-17T00:17:01.506415+00:00"
+    },
+    {
+      "id": "0cf3c085-7497-4592-ab9a-9c065d365ba0",
+      "accion": "CAMBIO_CONFIDENCIALIDAD",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": true,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": true,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": "Participación confirmada para la prueba académica",
+        "operation": "participant_review",
+        "participant_id": "c8c3952a-49b1-571c-86e8-536af633508e",
+        "relation_after": {
+          "reviewed_at": "2026-10-17T00:07:57.715735+00:00",
+          "reviewed_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "review_reason": "Participación confirmada para la prueba académica",
+          "review_status": "CONFIRMADO"
+        },
+        "relation_before": {
+          "reviewed_at": null,
+          "reviewed_by": null,
+          "review_reason": null,
+          "review_status": "DECLARADO",
+          "declaration_reason": "Participación simulada para comprobar la protección automática"
+        }
+      },
+      "fecha": "2026-10-17T00:07:57.585335+00:00"
+    },
+    {
+      "id": "280325b5-73da-4515-bfe9-fa62cccb5712",
+      "accion": "CAMBIO_CONFIDENCIALIDAD",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": true,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": false,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": "Participación simulada para comprobar la protección automática",
+        "operation": "participant_add",
+        "participant_id": "c8c3952a-49b1-571c-86e8-536af633508e",
+        "relation_after": {
+          "review_status": "DECLARADO",
+          "declaration_reason": "Participación simulada para comprobar la protección automática"
+        },
+        "relation_before": null
+      },
+      "fecha": "2026-10-16T23:58:47.811120+00:00"
+    },
+    {
+      "id": "3b673e7c-b097-4837-950f-a764eb40c1c8",
+      "accion": "CAMBIO_CONFIDENCIALIDAD",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": false,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": false,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": "Fin de la prueba académica de confidencialidad",
+        "operation": "confidentiality",
+        "participant_id": null,
+        "relation_after": null,
+        "relation_before": null
+      },
+      "fecha": "2026-10-16T23:48:26.628954+00:00"
+    },
+    {
+      "id": "a470f5cb-83ea-48f4-bb25-5614e7ff4851",
+      "accion": "CAMBIO_CONFIDENCIALIDAD",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": false,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": true,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": "Fin de la prueba académica de confidencialidad",
+        "operation": "confidentiality",
+        "participant_id": null,
+        "relation_after": null,
+        "relation_before": null
+      },
+      "fecha": "2026-10-16T23:47:23.668478+00:00"
+    },
+    {
+      "id": "694eab4c-c078-42dd-8498-ef55a2ac3575",
+      "accion": "CAMBIO_CONFIDENCIALIDAD",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": true,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "is_confidential": false,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": "Prueba académica de protección del expediente",
+        "operation": "confidentiality",
+        "participant_id": null,
+        "relation_after": null,
+        "relation_before": null
+      },
+      "fecha": "2026-10-16T23:39:53.063981+00:00"
+    },
+    {
+      "id": "0b6220c4-be33-4121-9d5b-0257e690cc2d",
+      "accion": "REAPERTURA",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:20:47.072063+00:00",
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "CERRADA",
+          "priority": 2,
+          "closed_at": "2026-10-16T23:19:17.222781+00:00",
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": "2026-10-16T23:15:58.946328+00:00",
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:13:30.456546+00:00",
+          "resolution_text": "Se revisó la ausencia simulada y se registró la acción correctiva para la prueba académica.",
+          "classification_valid": true
+        },
+        "reason": "Se recibió información adicional simulada para comprobar la reapertura.",
+        "source": "HUMANA",
+        "operation": "transition"
+      },
+      "fecha": "2026-10-16T23:20:47.001366+00:00"
+    },
+    {
+      "id": "14c5fb4b-e58c-49d3-9fcc-c55e36269c8f",
+      "accion": "ESTADO_CAMBIADO",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "CERRADA",
+          "priority": 2,
+          "closed_at": "2026-10-16T23:19:17.222781+00:00",
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": "2026-10-16T23:15:58.946328+00:00",
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:13:30.456546+00:00",
+          "resolution_text": "Se revisó la ausencia simulada y se registró la acción correctiva para la prueba académica.",
+          "classification_valid": true
+        },
+        "before": {
+          "status": "RESUELTA",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": "2026-10-16T23:15:58.946328+00:00",
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:13:30.456546+00:00",
+          "resolution_text": "Se revisó la ausencia simulada y se registró la acción correctiva para la prueba académica.",
+          "classification_valid": true
+        },
+        "reason": null,
+        "source": "HUMANA",
+        "operation": "transition"
+      },
+      "fecha": "2026-10-16T23:19:16.776974+00:00"
+    },
+    {
+      "id": "48f4e737-9ae4-4f19-9c5c-a282c80fc82c",
+      "accion": "ESTADO_CAMBIADO",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "RESUELTA",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": "2026-10-16T23:15:58.946328+00:00",
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:13:30.456546+00:00",
+          "resolution_text": "Se revisó la ausencia simulada y se registró la acción correctiva para la prueba académica.",
+          "classification_valid": true
+        },
+        "before": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:13:30.456546+00:00",
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": null,
+        "source": "HUMANA",
+        "operation": "transition"
+      },
+      "fecha": "2026-10-16T23:15:58.654864+00:00"
+    },
+    {
+      "id": "2aa117ad-9c5c-460d-a160-9de74a57a092",
+      "accion": "ESTADO_CAMBIADO",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "EN_REVISION",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": "2026-10-16T23:13:30.456546+00:00",
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "PENDIENTE",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": null,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": null,
+        "source": "HUMANA",
+        "operation": "transition"
+      },
+      "fecha": "2026-10-16T23:13:30.368483+00:00"
+    },
+    {
+      "id": "cfd2967b-a544-4239-b59e-a12e3544e63c",
+      "accion": "ASIGNADO",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "PENDIENTE",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": null,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "PENDIENTE",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": null,
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": null,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": null,
+        "source": "HUMANA",
+        "operation": "assignment"
+      },
+      "fecha": "2026-10-16T23:09:34.215201+00:00"
+    },
+    {
+      "id": "57862262-d474-42d7-8a1b-21ef0fae3698",
+      "accion": "VALIDACION_IA",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "PENDIENTE",
+          "priority": 2,
+          "closed_at": null,
+          "assigned_to": null,
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:59:24.095483+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": null,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "PENDIENTE",
+          "priority": 1,
+          "closed_at": null,
+          "assigned_to": null,
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:58:51.560095+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": null,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "reason": null,
+        "source": "HUMANA",
+        "operation": "classification"
+      },
+      "fecha": "2026-10-16T22:59:24.043953+00:00"
+    },
+    {
+      "id": "1eea401b-85f2-4197-bf05-8be8a846edfc",
+      "accion": "VALIDACION_IA",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "after": {
+          "status": "PENDIENTE",
+          "priority": 1,
+          "closed_at": null,
+          "assigned_to": null,
+          "category_id": 1,
+          "resolved_at": null,
+          "validated_at": "2026-10-16T22:58:51.560095+00:00",
+          "validated_by": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+          "cycle_start_at": null,
+          "resolution_text": null,
+          "classification_valid": true
+        },
+        "before": {
+          "status": "PENDIENTE",
+          "priority": null,
+          "closed_at": null,
+          "assigned_to": null,
+          "category_id": null,
+          "resolved_at": null,
+          "validated_at": null,
+          "validated_by": null,
+          "cycle_start_at": null,
+          "resolution_text": null,
+          "classification_valid": false
+        },
+        "reason": null,
+        "source": "HUMANA",
+        "operation": "classification"
+      },
+      "fecha": "2026-10-16T22:58:51.509117+00:00"
+    },
+    {
+      "id": "fb7aa7fd-a0c9-41ec-9709-edbb1e447f51",
+      "accion": "CREADO",
+      "usuario_id": "bc923269-5a6f-41cc-ab84-299e0bb2d610",
+      "detalle": {
+        "scope": "PERSONA",
+        "titulo": "Ausencia simulada",
+        "descripcion": "Colaborador ficticio ausente durante una prueba académica.",
+        "participants": [],
+        "is_confidential": false,
+        "affected_employee_id": "4234adea-1190-5bed-83e5-d1f5731a07b0",
+        "confidentiality_reason": null,
+        "reported_department_id": "5fe02975-d3df-58ce-8131-707633e07e8a"
+      },
+      "fecha": "2026-10-16T22:16:02.259144+00:00"
+    }
+  ],
+  "total": 15,
+  "page": 1,
+  "page_size": 20
+}

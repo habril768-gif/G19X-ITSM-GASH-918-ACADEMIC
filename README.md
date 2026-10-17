@@ -140,3 +140,7 @@ API 0.5.0 añade rutas /incidents sobre esquema 0003, sin migración adicional. 
 API 0.6.0 incorpora gestión protegida de clasificación, responsable, contenido y ciclo. Guía y cuerpos de ejemplo en docs/INCIDENCIAS.md. Mantiene esquema 0003; reconstruir imagen sin repetir bootstrap ni seed. La comprobación manual de estas operaciones sigue pendiente.
 
 API 0.7.0: revisión de participantes y confidencialidad con recusa, reasignación/retroceso protector y auditoría. Reconstruir imagen; sin nueva migración. Guía de rutas y prueba manual en docs/INCIDENCIAS.md. La provisión de RH independiente adicional por operador y el frontend siguen pendientes.
+
+Procedimiento de operador para crear RH independiente adicional preparado y documentado en docs/ADMIN_INDEPENDIENTE.md. Aplicar actualización y reconstruir antes de usar el nuevo comando; conserva API 0.7.0/esquema 0003 y no cambia casos existentes.
+
+El procedimiento de RH independiente fue aplicado y ejecutado según reporte de la autora; evidencias y límites de validación en docs/REVISION_RH_INDEPENDIENTE.md. RF-7 sigue parcial.
