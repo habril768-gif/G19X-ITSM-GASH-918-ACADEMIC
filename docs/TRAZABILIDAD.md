@@ -186,3 +186,5 @@ Actualización 17 de octubre de 2026: evidencia 63 revisada; caso creado en Reac
 40 pruebas UI simuladas aprobadas y build correcto. Sustituye pendientes históricos de estas pantallas, sin afirmar cumplimiento completo. Backend 0.8.0/esquema 0003 conservados. Evidencia 64 pendiente.
 
 Actualización 17 de octubre de 2026: evidencias 64/64b revisadas; listado administrativo React y aviso de guardado sin cambio de permisos, 0 casos ajustados. Primera comprobación manual de Usuarios acreditada con límites en REPORTE_QA.md; no acredita protección, auditoría persistida ni administración completa. RF-7/RF-8 parciales. Pruebas de código no repetidas por este registro documental.
+
+Actualización 17 de octubre de 2026: evidencias 65–66 inspeccionadas, primera comprobación React de caso confidencial/IA omitida y participante CONFIRMADO con declaración y motivo de revisión conservados. Sustituye el pendiente total del recorrido inicial de protección UI; no completa matriz de roles, auditoría ni concurrencia. El recorte 66 no contiene ID de expediente. RF-4/RF-8 parciales; límites en REPORTE_QA.md. No se repitieron pruebas de código para esta actualización documental.

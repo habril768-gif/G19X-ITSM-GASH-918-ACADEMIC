@@ -129,3 +129,6 @@ Evidencia prevista 64-admin-react-usuarios.png: una captura final de listado/con
 
 - [64-admin-react-usuarios.png](64-admin-react-usuarios.png): revisada el 17 de octubre de 2026; listado administrativo React y aviso de guardado sin cambio de permisos/0 casos ajustados. Sustituye el estado anterior de captura pendiente.
 - [64b-admin-react-usuarios-continuacion.png](64b-admin-react-usuarios-continuacion.png): continuación aportada en el mismo mensaje, conservada sin edición; filas finales (incluido Supervisor RH Demo Juan) y página 1 de 1. Sin credenciales visibles. Límites en REPORTE_QA.md.
+
+- [65-react-confidencialidad.png](65-react-confidencialidad.png): revisada el 17 de octubre de 2026; Ausencia simulada EN_REVISION, protección actualizada, acceso restringido a RH independiente e IA omitida.
+- [66-react-participante-confirmado.png](66-react-participante-confirmado.png): revisada el 17 de octubre de 2026; Empleado Operaciones Uno Demo CONFIRMADO, declaración «testigo» y última revisión «Testigo Visual». Recorte sin ID de expediente. Ambas sin credenciales visibles; límites en REPORTE_QA.md.
