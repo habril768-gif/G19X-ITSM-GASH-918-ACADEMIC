@@ -154,3 +154,5 @@ Administración backend 0.8.0 aplicada según la autora; suite completa observad
 Primera UI React: iniciar API/Docker, luego desde frontend ejecutar npm.cmd ci y npm.cmd run dev. Abrir http://127.0.0.1:5173/. Login, listado con filtros y detalle/historial; gestión sigue en Swagger en esta entrega parcial. Guía [FRONTEND.md](docs/FRONTEND.md), sin .env frontend ni tokens persistentes. No es despliegue productivo.
 
 React 0.2.0: menú Nueva incidencia con registro de persona/entorno, participantes y acuse seguro. No necesita migración ni dependencias nuevas. Formularios de gestión/admin pendientes; prueba manual agrupada y límites en docs/FRONTEND.md.
+
+React 0.3.0: gestión de clasificación/responsable/edición y estados desde detalle, con recarga de historial y controles por rol. 26 pruebas frontend aprobadas; comprobación real de esta entrega pendiente. Guía agrupada en docs/FRONTEND.md. Sin migración ni dependencias nuevas.

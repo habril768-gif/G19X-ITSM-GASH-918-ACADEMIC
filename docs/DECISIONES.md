@@ -160,3 +160,7 @@ React/Vite, cliente /api con proxy local al backend para desarrollo, sin CORS nu
 ## 17 de octubre de 2026 — Acuse de alta y respuesta incierta
 
 Formulario React 0.2.0 usa directorio permitido y aviso general de confidencialidad, con confirmación cuando se prevé restricción. La API decide acceso final. can_view=false muestra solo acuse; no se enlaza expediente ni se consulta su estado. Una respuesta ambigua de red/servidor bloquea reenvío en esa instancia y recomienda comprobar el registro antes de repetir. Esto reduce duplicados locales; no implementa idempotencia de backend. Sin borradores persistidos ni llamadas IA. Verificación manual agrupada con una evidencia de acuse, sin captura por campo.
+
+## 17 de octubre de 2026 — Gestión UI con estado confirmado por API
+
+Formularios por rol/estado, candidatos de directorio permitido y exclusión preventiva de involucrados. El backend conserva autoridad final. Cada éxito dispara lectura de detalle/historial; no se simula transición definitiva en cliente. Reapertura requiere motivo/responsable, cierre confirmación RH; edición advierte revalidación. Error 404 retira datos; respuesta incierta requiere actualización antes de repetir. Prueba manual agrupada con una evidencia final; sin repetir capturas de cada operación. UI de protección/administración queda pendiente.

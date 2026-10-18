@@ -26,6 +26,7 @@ export function createApi(onExpired = () => {}) {
       const message = response.status === 401 ? (anonymous ? 'Correo o contraseña incorrectos, o acceso temporalmente bloqueado.' : 'La sesión terminó. Inicia sesión nuevamente.')
         : response.status === 403 ? 'Tu cuenta no tiene acceso a esta operación.'
         : response.status === 404 ? 'El caso no está disponible o no tienes permiso para consultarlo.'
+        : response.status === 409 ? 'El caso cambió o no cumple los requisitos de la operación. Actualiza el expediente antes de repetirla.'
         : response.status === 422 ? 'Revisa los datos ingresados.'
         : 'El servicio no pudo completar la solicitud. Inténtalo nuevamente.';
       throw new ApiError(response.status, message);

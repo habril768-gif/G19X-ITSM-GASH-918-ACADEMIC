@@ -69,3 +69,25 @@ Verificación manual agrupada: iniciar sesión como RH; Nueva incidencia; elegir
 
 Pendientes: edición, validación, asignación/transiciones y administración en React; enlaces profundos, comprobación móvil y permisos de otros roles. RF-2/RF-8 siguen parciales. El navegador no sustituye reglas API.
 Prueba manual de alta inicial: evidencia 62 revisada el 17 de octubre de 2026 muestra acuse de recepción con ID y acceso permitido. Sustituye el pendiente total de primera prueba; no acredita todos los campos enviados ni apertura del detalle por sí sola. Escenarios restringidos/entorno siguen pendientes de prueba real. No se requiere más captura para este caso.
+
+## Gestión del expediente — React 0.3.0 (17 de octubre de 2026)
+
+Amplía el detalle con clasificación humana, asignación, edición y ciclo completo. Sustituye los pendientes de estas operaciones en 0.1/0.2; no añade endpoints, migraciones ni dependencias. Backend 0.8.0 y esquema 0003 conservados. Actualizar navegador con Vite activo; iniciar sesión de nuevo tras recarga.
+
+Sección Gestionar incidencia visible solo a Supervisor/Admin RH tras detalle autorizado. Empleado conserva vista de lectura. Opciones proceden de /incidents/options y relaciones de /participants; se descartan afectados y relaciones DECLARADO/CONFIRMADO como candidatos gestores. Caso confidencial ofrece solo Admin RH; supervisor candidato requiere departamento actual del afectado o departamento de entorno. Esto ayuda al formulario; el backend vuelve a comprobar elegibilidad, estado y cuenta activa en cada operación.
+
+- Confirmar clasificación: categoría y prioridad juntas, solo PENDIENTE/EN_REVISION. ENTORNO solo Riesgos.
+- Guardar responsable: gestor elegible, solo estados editables. No inicia revisión automáticamente.
+- Iniciar revisión: exige clasificación vigente y responsable elegido. API valida antes de entrar.
+- Registrar resolución: EN_REVISION con clasificación vigente y resolución obligatoria, máximo 10000 caracteres.
+- Cerrar caso: únicamente Admin RH, caso RESUELTA y confirmación explícita de cierre. No se ofrece cierre a supervisor.
+- Reabrir: Admin RH desde RESUELTA/CERRADA, motivo obligatorio y responsable elegible. Se informa conservación del ciclo anterior. Reabrir no exige clasificación vigente como condición adicional que el PRD no establece, pero resolver después sí.
+- Editar contenido: título/descripción completos en PENDIENTE/EN_REVISION. Aviso de revalidación al cambiar descripción, sin borrar validación anterior en el servidor.
+
+Las escrituras usan las rutas existentes classification, assignment, transitions y content. Después del éxito se recargan detalle e historial desde servidor y el historial vuelve a primera página; no se inventa estado local como resultado definitivo. Botones bloqueados mientras guarda. 404 retira expediente/historial; 401/403 limpian sesión como antes; 409 indica actualizar y revisar requisitos. Respuesta de red/servidor incierta bloquea reenvío hasta Actualizar expediente: no hay reintentos automáticos ni garantía de idempotencia. El botón de actualización vuelve a consultar estado sin escribir.
+
+Validación final: npm test, 26 pruebas aprobadas en 4 archivos, 15.80s. Incluye 10 nuevas de componentes y una integración de UI con ciclo completo/recarga del historial, además de 15 regresiones previas. Todas usan API simulada; no acreditan ciclo real PostgreSQL por esta entrega. npm run build correcto, 19 módulos y 262ms. Primer intento detectó un error JSX (dos suites sin ejecutar), corregido antes de pasar 25 pruebas; se añadió integración completa y se repitió suite con 26 aprobadas. Backend no modificado ni repetido.
+
+Comprobación manual agrupada: iniciar sesión como Admin RH, abrir el caso simulado creado desde React, confirmar categoría/prioridad, seleccionar RH responsable, iniciar revisión, escribir resolución simulada y cerrar confirmando la casilla. Una sola captura del detalle final: 63-gestion-react-caso-cerrado.png, solo datos ficticios y sin credenciales. Opcionalmente reabrir con motivo y comprobar historial; no pedir captura por cada paso. Este recorrido real aún está pendiente y no se presenta como aprobado por las pruebas simuladas.
+
+Siguen pendientes interfaces de participantes/confidencialidad y administración de usuarios/departamentos, móvil y matriz completa de roles, enlaces profundos e integraciones IA/correo/analítica. RF-3/RF-4/RF-8 parciales. No hay borrado ni retroceso libre a PENDIENTE en UI. Las nuevas funciones no ejecutan IA ni correo.

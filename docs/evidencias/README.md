@@ -120,3 +120,5 @@ Evidencia prevista 58-panel-react-incidencias.png para prueba manual del fronten
 Evidencia prevista 62-registro-react-acuse.png, todavía no recibida ni verificada: una sola captura del acuse de alta desde React con datos simulados. No capturar cada campo ni credenciales. Plan agrupado en ../FRONTEND.md.
 
 - [62-registro-react-acuse.png](62-registro-react-acuse.png): revisada el 17 de octubre de 2026; acuse React con referencia y acceso permitido. Sin credenciales visibles; límites en REPORTE_QA.md.
+
+Evidencia prevista 63-gestion-react-caso-cerrado.png: una captura final del recorrido de gestión React 0.3.0, todavía no recibida ni verificada. Solo datos ficticios, sin credenciales. No se requiere captura de cada paso. Plan en ../FRONTEND.md.

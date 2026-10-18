@@ -80,3 +80,45 @@ it('retira el detalle si pierde acceso al consultar otra página del historial',
   await screen.findByRole('alert');
   await waitFor(() => expect(screen.queryByText('Descripción ficticia')).toBeNull());
 });
+
+it('gestiona un ciclo completo y recarga detalle e historial después de cada cambio', async () => {
+  const state = { ...incident, descripcion: 'Caso ficticio', scope: 'PERSONA', affected_employee_id: 'e', ai_status: 'PENDIENTE', classification_valid: false, assigned_to: null };
+  const events = [];
+  const original = fetch.getMockImplementation();
+  fetch.mockImplementation(async (url, opts) => {
+    if (url.endsWith('/incidents/options')) return ok({ categories: [{ id: 2, nombre: 'Conflictos' }], affected_employees: [{ id: 'e', departamento_id: 'd' }], participants: [{ id: 'admin', nombre_completo: 'RH Demo', rol: 'ADMIN_RH', departamento_id: 'd' }] });
+    if (url.endsWith('/participants')) return ok({ items: [] });
+    if (url.includes('/history?')) return ok({ items: [...events], total: events.length });
+    if (url.endsWith('/classification') || url.endsWith('/transitions')) {
+      const body = JSON.parse(opts.body);
+      if (url.endsWith('/classification')) Object.assign(state, body, { classification_valid: true });
+      else Object.assign(state, body);
+      events.unshift({ id: String(events.length + 1), accion: body.reason ? 'REAPERTURA' : 'ACTUALIZADO', fecha: incident.created_at });
+      return ok({ ...state });
+    }
+    if (url.endsWith('/incidents/test-case')) return ok({ ...state });
+    return original(url, opts);
+  });
+  render(<App />); const ui = await login();
+  await ui.click(screen.getByRole('button', { name: incident.titulo }));
+  await screen.findByLabelText('Categoría oficial');
+  await ui.selectOptions(screen.getByLabelText('Categoría oficial'), '2');
+  await ui.selectOptions(screen.getByLabelText('Prioridad oficial'), '2');
+  await ui.click(screen.getByRole('button', { name: 'Confirmar clasificación' }));
+  await waitFor(() => expect(screen.getByRole('button', { name: 'Iniciar revisión' }).disabled).toBe(false));
+  await ui.selectOptions(screen.getByLabelText('Responsable para revisión'), 'admin');
+  await ui.click(screen.getByRole('button', { name: 'Iniciar revisión' }));
+  await screen.findByLabelText('Resolución del caso');
+  await ui.type(screen.getByLabelText('Resolución del caso'), 'Resolución simulada');
+  await ui.click(screen.getByRole('button', { name: 'Registrar resolución' }));
+  await screen.findByLabelText('Confirmo el cierre del caso con la resolución registrada');
+  await ui.click(screen.getByLabelText('Confirmo el cierre del caso con la resolución registrada'));
+  await ui.click(screen.getByRole('button', { name: 'Cerrar caso' }));
+  await screen.findByText('Caso cerrado.');
+  await screen.findByLabelText('Motivo de reapertura');
+  await ui.type(screen.getByLabelText('Motivo de reapertura'), 'Nueva información ficticia');
+  await ui.click(screen.getByRole('button', { name: 'Reabrir con motivo' }));
+  await screen.findByText('REAPERTURA');
+  await screen.findByLabelText('Resolución del caso');
+  expect(fetch.mock.calls.filter(([url]) => url.endsWith('/transitions')).map(([, opts]) => JSON.parse(opts.body).status)).toEqual(['EN_REVISION', 'RESUELTA', 'CERRADA', 'EN_REVISION']);
+}, 15000);

@@ -512,3 +512,12 @@ textarea:focus-visible { outline: 3px solid #8174df; outline-offset: 3px; }
 .receipt button { margin: .7rem .7rem .7rem 0; }
 .receipt-id { background: #f1f3fa; padding: 1rem; border-radius: 8px; }
 @media(max-width:720px) { .form-row { grid-template-columns: 1fr; } .sidebar { flex-wrap: wrap; gap: .6rem; } }
+
+/* Gestión del expediente */
+.management { margin-top: 1.5rem; }
+.management-fields { margin: 1rem 0 0; padding: 0; border: 0; min-width: 0; }
+.management-fields > form, .management-fields > details { border-top: 1px solid #e1e6ef; padding-top: 1.2rem; margin-top: 1.3rem; }
+.management-fields h3 { font-size: 1rem; margin: 0 0 1rem; }
+.management-fields label { margin-bottom: 1rem; }
+.management-fields textarea { min-height: 80px; }
+.management-fields form { max-width: 800px; }

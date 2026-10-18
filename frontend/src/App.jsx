@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createApi, caseQuery } from './services/api.js';
 import NewIncident from './pages/NewIncident.jsx';
+import CaseManagement from './components/CaseManagement.jsx';
 
 const statuses = { PENDIENTE: 'Pendiente', EN_REVISION: 'En revisión', RESUELTA: 'Resuelta', CERRADA: 'Cerrada' };
 const priorities = { 1: 'Alta', 2: 'Media', 3: 'Baja' };
@@ -33,8 +34,10 @@ function Login({ api, onLogin, notice }) {
   </main>;
 }
 
-function CaseDetail({ id, api, onBack }) {
+function CaseDetail({ id, api, user, onBack }) {
   const accessLost = useRef(false);
+  const [revision, setRevision] = useState(0);
+  const [message, setMessage] = useState('');
   const [data, setData] = useState(null);
   const [history, setHistory] = useState({ items: [], total: 0 });
   const [historyPage, setHistoryPage] = useState(1);
@@ -45,17 +48,18 @@ function CaseDetail({ id, api, onBack }) {
     api.request(`/incidents/${id}`, { signal: controller.signal }).then(result => { if (!controller.signal.aborted && !accessLost.current) setData(result); })
       .catch(e => { if (!controller.signal.aborted) setError(e.message); }).finally(() => { if (!controller.signal.aborted) setBusy(false); });
     return () => controller.abort();
-  }, [id, api]);
+  }, [id, api, revision]);
   useEffect(() => {
     const controller = new AbortController(); setHistory({ items: [], total: 0 });
     api.request(`/incidents/${id}/history?page=${historyPage}&page_size=20`, { signal: controller.signal }).then(result => { if (!controller.signal.aborted) setHistory(result); })
       .catch(e => { if (!controller.signal.aborted) { setError(e.message); if (e.status === 404) { accessLost.current = true; setData(null); } } });
     return () => controller.abort();
-  }, [id, historyPage, api]);
-  return <section><button className="text-button" onClick={onBack}>← Volver a incidencias</button><ErrorMessage>{error}</ErrorMessage>{busy && <p role="status">Cargando expediente…</p>}
+  }, [id, historyPage, api, revision]);
+  return <section><button className="text-button" onClick={onBack}>← Volver a incidencias</button><ErrorMessage>{error}</ErrorMessage>{message && <p className="notice" role="status">{message}</p>}{busy && <p role="status">Cargando expediente…</p>}
     {data && <><div className="section-heading"><div><span className="eyebrow">EXPEDIENTE</span><h1>{data.titulo}</h1><p className="muted id">{data.id}</p></div><Badge value={data.status} /></div>
       <div className="detail-grid"><article className="card"><h2>Descripción del caso</h2><p className="description">{data.descripcion}</p><dl><dt>Fecha del hecho</dt><dd>{data.incident_date}</dd><dt>Ámbito</dt><dd>{data.scope === 'ENTORNO' ? 'Entorno de trabajo' : 'Persona'}</dd><dt>Prioridad</dt><dd>{priorities[data.priority] || 'Por definir'}</dd><dt>Confidencialidad</dt><dd>{data.is_confidential ? 'Acceso restringido a RH independiente' : 'Acceso según rol y departamento'}</dd><dt>Clasificación</dt><dd>{data.classification_valid ? 'Validación vigente' : 'Requiere validación humana'}</dd></dl></article>
       <article className="card"><h2>Seguimiento</h2><p className="notice">{data.ai_status === 'OMITIDA' ? 'Asistencia IA omitida. Este caso requiere clasificación manual.' : data.ai_status === 'FALLIDA' ? 'La asistencia IA no pudo completarse. El caso puede atenderse manualmente.' : data.ai_status === 'COMPLETADA' ? 'La asistencia IA tiene una respuesta registrada; requiere revisión humana.' : 'Asistencia IA pendiente. Puedes consultar el seguimiento disponible.'}</p><dl><dt>Registrada</dt><dd>{dateLabel(data.created_at)}</dd><dt>Responsable</dt><dd className="id">{data.assigned_to || 'Sin asignar'}</dd><dt>Resolución</dt><dd className="description">{data.resolution_text || 'Sin resolución registrada'}</dd><dt>Resuelta</dt><dd>{dateLabel(data.resolved_at)}</dd><dt>Cerrada</dt><dd>{dateLabel(data.closed_at)}</dd></dl></article></div>
+      <CaseManagement data={data} user={user} api={api} onUpdated={text => { setMessage(text); setHistoryPage(1); setRevision(r => r + 1); }} onAccessLost={text => { accessLost.current = true; setData(null); setHistory({ items: [], total: 0 }); setError(text); }} />
       <article className="card history"><h2>Historial del caso</h2><p className="muted">Se muestran los eventos permitidos para tu cuenta.</p><ol>{history.items.map(item => <li key={item.id}><strong>{item.accion.replaceAll('_', ' ')}</strong><time dateTime={item.fecha}>{dateLabel(item.fecha)}</time>{item.detalle?.reason && <p>{item.detalle.reason}</p>}</li>)}</ol>{history.total === 0 && <p>Sin eventos disponibles.</p>}<div className="pager"><button disabled={historyPage <= 1} onClick={() => setHistoryPage(p => p - 1)}>Anterior</button><span>Página {historyPage}</span><button disabled={historyPage * 20 >= history.total} onClick={() => setHistoryPage(p => p + 1)}>Siguiente</button></div></article>
     </>}
   </section>;
@@ -114,6 +118,6 @@ export default function App() {
   if (!user) return <Login api={api.current} notice={notice} onLogin={value => { setNotice(''); setUser(value); }} />;
   const list = () => { setSelected(null); setCreating(false); };
   return <div className="workspace"><aside className="sidebar"><Brand /><p className="sidebar-label">ESPACIO DE TRABAJO</p><button className="nav-item" onClick={list}>▤ <span>Incidencias</span></button><button className="nav-item" onClick={() => { setSelected(null); setCreating(true); }}>＋ <span>Nueva incidencia</span></button><div className="sidebar-foot"><strong>Un seguimiento más claro.</strong><p>La información se comparte según los permisos de cada cuenta.</p></div></aside>
-    <div className="main-area"><header className="topbar"><span>Gestión de incidencias laborales</span><div className="account"><div><strong>{user.nombre_completo}</strong><small>{roles[user.rol] || user.rol}</small></div><button onClick={logout}>Cerrar sesión</button></div></header><main className="content">{creating ? <NewIncident api={api.current} user={user} onBack={list} onOpen={id => { setCreating(false); setSelected(id); }} /> : selected ? <CaseDetail key={selected} id={selected} api={api.current} onBack={list} /> : <Cases api={api.current} user={user} onSelect={setSelected} />}</main><footer>PluriOne · Entorno académico · Utiliza datos simulados</footer></div>
+    <div className="main-area"><header className="topbar"><span>Gestión de incidencias laborales</span><div className="account"><div><strong>{user.nombre_completo}</strong><small>{roles[user.rol] || user.rol}</small></div><button onClick={logout}>Cerrar sesión</button></div></header><main className="content">{creating ? <NewIncident api={api.current} user={user} onBack={list} onOpen={id => { setCreating(false); setSelected(id); }} /> : selected ? <CaseDetail key={selected} id={selected} api={api.current} user={user} onBack={list} /> : <Cases api={api.current} user={user} onSelect={setSelected} />}</main><footer>PluriOne · Entorno académico · Utiliza datos simulados</footer></div>
   </div>;
 }

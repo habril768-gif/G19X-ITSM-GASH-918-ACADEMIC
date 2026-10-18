@@ -63,3 +63,5 @@ Estado posterior de 0.8.0: paquete aplicado y Docker reconstruido según la auto
 Frontend React 0.1.0: Node 24 verificado, npm.cmd ci y npm.cmd run dev desde frontend; http://127.0.0.1:5173/. Backend existente debe seguir activo. Proxy /api local sin secretos. Pruebas/build: npm test, npm run build. No migración adicional. Configuración, limitaciones y comprobación manual en FRONTEND.md.
 
 Frontend 0.2.0 añade Nueva incidencia. No requiere npm install adicional ni nueva migración; conservar npm ci para instalación limpia y npm run dev desde frontend. Validación: npm test y npm run build. Prueba manual agrupada en FRONTEND.md; operaciones de gestión restantes siguen en Swagger.
+
+React 0.3.0 incorpora gestión al detalle del expediente para Supervisor/Admin RH. Mantener npm run dev en frontend, actualizar e iniciar sesión; sin nuevas dependencias, Docker build ni migración requeridos por el frontend. Pruebas/build: npm test y npm run build. Recorrido agrupado y límites en FRONTEND.md; no cambiar .env.
