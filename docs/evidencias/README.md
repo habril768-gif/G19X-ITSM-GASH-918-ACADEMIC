@@ -144,3 +144,10 @@ Evidencia prevista 68-react-departamentos-historial.png: una captura final del h
 - [69-postgresql-integracion.json](69-postgresql-integracion.json): registro estructurado del 17 de octubre de 2026; PostgreSQL 18.6 aislado, 103 aprobadas/0 omitidas, migraciones/check y retirada de ejecución final. Incluye referencia a CI exitoso con PostgreSQL 17 del commit c8ad75c y límites de ambos resultados. Generado a partir de ejecución observada y API pública, sin credenciales ni captura manual requerida.
 
 - [70-ia-flujo-pruebas.json](70-ia-flujo-pruebas.json): 17 de octubre de 2026, flujo IA con proveedor/Redis simulados; 130 backend/64 UI y 0005 en PostgreSQL aislado. No acredita calidad, llamadas externas ni despliegue. Sin captura manual requerida.
+## Primera prueba IA integrada — 17 de octubre de 2026
+
+- [71-react-ia-sugerencia.png](71-react-ia-sugerencia.png): COMPLETADA, 1/3 intentos, sugerencia Riesgos/Alta pendiente de validación humana. Recorte sin ID.
+- [72-react-ia-sin-validacion-automatica.png](72-react-ia-sin-validacion-automatica.png): Prueba IA — piso mojado PENDIENTE, prioridad oficial por definir y clasificación sin validar.
+- [73-react-ia-caso-cerrado.png](73-react-ia-caso-cerrado.png): mismo expediente que 72, CERRADA, prioridad Alta, validación vigente, responsable y resolución simulada.
+
+Archivos inspeccionados sin credenciales visibles y conservados sin edición. Primera prueba funcional externa/UI, sin aceptación estadística de calidad. Límites y procedencia del recorrido en REPORTE_QA.md.

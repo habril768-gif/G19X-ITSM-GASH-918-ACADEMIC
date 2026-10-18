@@ -16,7 +16,7 @@ Plataforma Inteligente de Gestión de Incidencias Laborales para PluriOne S.A. d
 
 
 
-API FastAPI con `/health`, `/health/db`, `/docs` y `/openapi.json`; modelos y migración PostgreSQL inicial verificados manualmente. Autenticación local implementada y probada en SQLite/HTTP; migración 0002 y prueba manual en PostgreSQL pendientes. Incidencias, frontend e IA siguen pendientes. PRD vigente: 1.9.
+API 0.10.0 y React 0.7.0 con autenticación local, incidencias, ciclo de vida, protección y administración. Primera prueba integrada de IA con validación humana y cierre documentada en evidencias 71–73. Migraciones hasta 0005 verificadas en PostgreSQL aislado. Evaluación independiente de IA 50+5, correo, analítica y validación integral pendientes. PRD vigente: 1.9.
 
 
 
@@ -166,3 +166,6 @@ Actualización 17 de octubre de 2026: API 0.9.0 / React 0.6.0 añaden administra
 17 de octubre de 2026: integraciones antes omitidas ejecutadas en clúster temporal PostgreSQL 18.6; suite 103 aprobadas/0 omitidas/1 advertencia. Incluye cinco integraciones PostgreSQL y las pruebas originales SQLite. Migración hasta 0004 y check verificados en aislamiento; base de desarrollo sin modificar. CI PostgreSQL 17 del commit c8ad75c observado exitoso. Guía PRUEBAS_POSTGRESQL.md, evidencia 69 JSON y límites en REPORTE_QA.md. Nuevas pruebas remotas y carreras adicionales pendientes; sin nuevas capturas.
 
 17 de octubre de 2026: API 0.10.0 / React 0.7.0 preparan IA revisada, trabajo durable PostgreSQL/avisos Redis y sugerencia independiente de validación humana. Requiere 0005; desactivada por defecto, clave solo worker. 130 backend sin omisiones en aislamiento y 64 UI/build correctos; no acreditan calidad del modelo. Proveedor/Redis reales, despliegue y evaluación independiente 50+5 pendientes. Guía IA.md y evidencia 70; RF-3/RF-8 parciales.
+## Primera prueba integrada de IA
+
+El 17 de octubre de 2026 se revisaron las evidencias 71–73: respuesta de asistencia completada, sugerencia separada de clasificación oficial y cierre posterior del caso simulado con validación humana vigente. Guía en [IA.md](docs/IA.md) y límites en [REPORTE_QA.md](docs/REPORTE_QA.md). RF-3 continúa parcial: evaluación independiente 50+5 pendiente. La configuración distribuida mantiene IA desactivada por defecto; cada entorno requiere activación local.

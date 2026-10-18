@@ -16,7 +16,7 @@ Base: [PRD 1.9](PRD.md). Estado consolidado al 17 de octubre de 2026. Las entrad
 
 | H1 Requisitos y propuesta | PRD, decisiones y propuesta técnica | PRD 1.9 consolidado; propuesta independiente pendiente | Revisión documental y propuesta |
 
-| H2 Arquitectura y entorno | API, Docker, React y worker | API 0.10.0/React 0.7.0 y worker optativo preparados; arquitectura formal pendiente | Instalar 0005 y actualizar arquitectura |
+| H2 Arquitectura y entorno | API, Docker, React y worker | API 0.10.0/React 0.7.0 y worker optativo preparados; arquitectura formal pendiente | Check directo de desarrollo y actualizar arquitectura |
 
 | H3 Datos | Esquema y fixtures QA | 0001–0005 verificadas en PostgreSQL aislado; 130 pruebas completas sin omisiones | Check directo de desarrollo y carreras adicionales |
 
@@ -26,7 +26,7 @@ Base: [PRD 1.9](PRD.md). Estado consolidado al 17 de octubre de 2026. Las entrad
 
 | H6 Ciclo y confidencialidad | RF-4 y reglas transversales | Gestión/protección con evidencias; exclusión administrativa y rollback verificados en PostgreSQL real | Carreras de negocio adicionales y matriz completa de roles/UI |
 
-| H7 IA | RF-3 | Flujo API/React/worker y 0005 preparados; revisor explícito, abstención, reintentos y respuesta tardía probados con proveedor simulado | Instalar 0005, configurar proveedor/Redis y evaluar 50+5 referencias independientes |
+| H7 IA | RF-3 | Primera prueba externa/UI y cierre humano acreditados por 71–73; controles adicionales con proveedor simulado | Evaluar 50+5 referencias independientes y revisar calidad |
 
 | H8 Correo | RF-5 | Pendiente; solo eventos, sin SLA | SMTP capturador y pruebas de permisos |
 
@@ -38,8 +38,8 @@ Base: [PRD 1.9](PRD.md). Estado consolidado al 17 de octubre de 2026. Las entrad
 
 ## Orden inmediato
 
-1. Instalar API 0.10.0 y aplicar 0005 en el proyecto sin activar llamadas externas. Seguir IA.md; no repetir seed/bootstrap ni capturas previas.
-2. Configurar localmente proveedor/modelo/worker y comprobar Redis/OpenAI reales cuando exista acceso. Ninguna clave se comparte en chat ni frontend.
+1. Actualización y activación local reportadas; primera prueba IA registrada en 71–73. Conservar como pendiente el check directo de desarrollo no inspeccionado; no repetir seed/bootstrap ni el mismo recorrido.
+2. Preparar y congelar referencias independientes antes de generar predicciones; no usar resultados del modelo para asignar etiquetas esperadas.
 3. Completar evaluación con 50 referencias independientes y cinco abstenciones, sin confundir fixtures o cálculos de prueba con calidad real.
 4. Continuar H8 correo y H9 analítica, manteniendo separados pendientes de aceptación de IA, carreras adicionales y matriz UI/móvil.
 5. Verificar CI del nuevo commit después de subirlo y completar arquitectura/manuales H10 sin inventar validación de campo ni capacitación.
@@ -180,3 +180,6 @@ Actualización 17 de octubre de 2026: evidencia 68 inspeccionada, historial Reac
 17 de octubre de 2026: integraciones antes omitidas ejecutadas en clúster temporal PostgreSQL 18.6; suite 103 aprobadas/0 omitidas/1 advertencia. Incluye cinco integraciones PostgreSQL y las pruebas originales SQLite. Migración hasta 0004 y check verificados en aislamiento; base de desarrollo sin modificar. CI PostgreSQL 17 del commit c8ad75c observado exitoso. Guía PRUEBAS_POSTGRESQL.md, evidencia 69 JSON y límites en REPORTE_QA.md. Nuevas pruebas remotas y carreras adicionales pendientes; sin nuevas capturas.
 
 17 de octubre de 2026: API 0.10.0 / React 0.7.0, asistencia revisada con cola durable y worker optativo. Pruebas de infraestructura pasan, no aceptan calidad RF-3. Proveedor/Redis reales, nueva UI manual y evaluación 50+5 pendientes; IA.md y evidencia 70. Sin llamadas OpenAI en desarrollo.
+## 17 de octubre de 2026 — Primera prueba IA real registrada
+
+Evidencias 71–73 inspeccionadas: sugerencia completada, separación de clasificación oficial y cierre posterior con validación humana. Primera prueba externa/UI realizada; sustituye ese pendiente total. H7 continúa parcial: preparar etiquetas independientes 50+5, congelarlas antes de predicciones, ejecutar evaluación y revisar falsos negativos Alta. No volver a pedir capturas del mismo flujo. H8 correo y H9 analítica siguen pendientes; check directo de desarrollo y demás límites en REPORTE_QA.md.
