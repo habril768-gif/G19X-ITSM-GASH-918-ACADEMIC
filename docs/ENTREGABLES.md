@@ -104,3 +104,5 @@ React 0.3.0, 17 de octubre de 2026: edición, validación, asignación y transic
 Actualización 17 de octubre de 2026: evidencia 63 revisada; caso creado en React muestra cierre con resolución, fechas y validación vigente. Resultado manual de gestión inicial acreditado con límites en REPORTE_QA.md. Reapertura/edición manuales y pantallas de protección/admin pendientes; no se declaran RF completos.
 
 Actualización 17 de octubre de 2026, React 0.4.0: desarrollo incluye directorio/alta/edición de cuentas y protección/revisión de participantes desde UI. QA: 40 pruebas frontend con API simulada y build aprobados; manual técnico/guía de uso actualizados. Prueba real agrupada/evidencia 64 pendiente; no completa desarrollo/QA del MVP ni administración de departamentos.
+
+Actualización 17 de octubre de 2026: evidencias 64/64b revisadas; listado administrativo React y aviso de guardado sin cambio de permisos, 0 casos ajustados. Primera comprobación manual de Usuarios acreditada con límites en REPORTE_QA.md; no acredita protección, auditoría persistida ni administración completa. RF-7/RF-8 parciales. Pruebas de código no repetidas por este registro documental.

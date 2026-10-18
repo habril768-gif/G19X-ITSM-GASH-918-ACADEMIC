@@ -126,3 +126,6 @@ Evidencia prevista 63-gestion-react-caso-cerrado.png: una captura final del reco
 - [63-gestion-react-caso-cerrado.png](63-gestion-react-caso-cerrado.png): captura aportada y guardada sin edición el 17 de octubre de 2026; caso Retardo cerrado con resolución y fechas, sin credenciales visibles. Límites en REPORTE_QA.md.
 
 Evidencia prevista 64-admin-react-usuarios.png: una captura final de listado/confirmación de modificación de nombre DEMO en React 0.4.0. Todavía no recibida ni verificada. Datos ficticios, sin contraseñas/tokens; no se exige captura de cada campo. Guía agrupada en ../FRONTEND.md.
+
+- [64-admin-react-usuarios.png](64-admin-react-usuarios.png): revisada el 17 de octubre de 2026; listado administrativo React y aviso de guardado sin cambio de permisos/0 casos ajustados. Sustituye el estado anterior de captura pendiente.
+- [64b-admin-react-usuarios-continuacion.png](64b-admin-react-usuarios-continuacion.png): continuación aportada en el mismo mensaje, conservada sin edición; filas finales (incluido Supervisor RH Demo Juan) y página 1 de 1. Sin credenciales visibles. Límites en REPORTE_QA.md.

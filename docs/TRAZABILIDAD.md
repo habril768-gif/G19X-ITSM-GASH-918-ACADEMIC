@@ -184,3 +184,5 @@ Actualización 17 de octubre de 2026: evidencia 63 revisada; caso creado en Reac
 | RF-8 | Navegación administrativa y formularios por rol/estado | Móvil, matriz de roles y enlaces profundos |
 
 40 pruebas UI simuladas aprobadas y build correcto. Sustituye pendientes históricos de estas pantallas, sin afirmar cumplimiento completo. Backend 0.8.0/esquema 0003 conservados. Evidencia 64 pendiente.
+
+Actualización 17 de octubre de 2026: evidencias 64/64b revisadas; listado administrativo React y aviso de guardado sin cambio de permisos, 0 casos ajustados. Primera comprobación manual de Usuarios acreditada con límites en REPORTE_QA.md; no acredita protección, auditoría persistida ni administración completa. RF-7/RF-8 parciales. Pruebas de código no repetidas por este registro documental.
