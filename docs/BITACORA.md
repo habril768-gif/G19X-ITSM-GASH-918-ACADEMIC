@@ -433,3 +433,9 @@ Capturas aportadas por la autora, conservadas sin edición. 65-react-confidencia
 66-react-participante-confirmado.png muestra Empleado Operaciones Uno Demo con estado CONFIRMADO, declaración «testigo» y última revisión «Testigo Visual». La declaración se conserva separada del motivo de revisión y los campos del siguiente envío están vacíos. El recorte no incluye título/ID, revisor ni fecha: no permite vincular por sí solo la relación con el expediente de la evidencia 65 ni probar autoría independiente.
 
 Sin contraseñas ni tokens visibles. Primera comprobación manual de confidencialidad y relación confirmada en React acreditada dentro de esos límites; no demuestra toda la matriz de permisos, exclusión del propio gestor, descarte, auditoría persistida ni concurrencia. No se repitieron tests para este registro documental; se mantienen separados los 40 tests UI simulados previos. RF-4/RF-8 parciales. No se requieren capturas adicionales de los mismos campos.
+
+## 17 de octubre de 2026 — Cambio personal de contraseña en React 0.5.0
+
+Propósito: ofrecer el endpoint existente de cambio de credencial en la interfaz de los tres roles. Añadidos PasswordChange.jsx y sus pruebas; App incorpora navegación personal, bloqueo durante envío y retiro de vistas/token al guardar o resultado incierto. Paquete/lock actualizados a 0.5.0; Vitest limitado a dos workers. Sin dependencias, backend ni migración nuevos.
+
+Verificación: primer pase 46 aprobadas/2 timeout de pruebas anteriores; repetición completa con dos procesos, 48 aprobadas/7 archivos/67.31s. Build 22 módulos/749ms; diff revisado. Detalle y límites en REPORTE_QA.md. Manual/README, decisiones, backlog, entregables, trazabilidad y PRD actualizados. Pendientes: comprobación real con cuenta DEMO/evidencia 67, administración de departamentos y demás integraciones/matriz de roles. No se declara ejecución manual realizada.

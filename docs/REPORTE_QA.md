@@ -386,3 +386,11 @@ Capturas aportadas por la autora, conservadas sin edición. 65-react-confidencia
 66-react-participante-confirmado.png muestra Empleado Operaciones Uno Demo con estado CONFIRMADO, declaración «testigo» y última revisión «Testigo Visual». La declaración se conserva separada del motivo de revisión y los campos del siguiente envío están vacíos. El recorte no incluye título/ID, revisor ni fecha: no permite vincular por sí solo la relación con el expediente de la evidencia 65 ni probar autoría independiente.
 
 Sin contraseñas ni tokens visibles. Primera comprobación manual de confidencialidad y relación confirmada en React acreditada dentro de esos límites; no demuestra toda la matriz de permisos, exclusión del propio gestor, descarte, auditoría persistida ni concurrencia. No se repitieron tests para este registro documental; se mantienen separados los 40 tests UI simulados previos. RF-4/RF-8 parciales. No se requieren capturas adicionales de los mismos campos.
+
+## 17 de octubre de 2026 — React 0.5.0: contraseña personal
+
+Validación final: npm.cmd test -- --maxWorkers=2, 48/48 aprobadas en 7 archivos, 67.31s. npm.cmd run build correcto: 22 módulos, 749ms. Cinco pruebas nuevas del formulario: confirmación distinta sin envío, contrato exacto/limpieza, rechazo 400 sin éxito, resultado incierto sin reintento, doble envío/cancelación bloqueados. Tres integraciones App comprueban acceso por ADMIN_RH/SUPERVISOR/EMPLEADO y regreso al login con campos vacíos y sin casos tras éxito.
+
+Primer intento con paralelismo predeterminado: 46 aprobadas/2 timeout de 5000ms en pruebas existentes de registro y login, 97.98s; las ocho nuevas pasaron. Repetición completa con dos workers aprobada sin ampliar timeout. Se fija maxWorkers=2 en vite.config.js para limitar carga en ejecuciones posteriores. No se atribuye el fallo a un defecto de producto sin evidencia.
+
+Todas las pruebas UI usan API simulada: no certifican cambio real de hash, revocación de otras sesiones ni acceso con nueva contraseña. Backend no modificado ni repetido. Evidencia 67 y recorrido real pendientes, con instrucciones en FRONTEND.md. No se solicita captura del formulario con credenciales.

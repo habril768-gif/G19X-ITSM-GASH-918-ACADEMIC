@@ -168,3 +168,7 @@ Formularios por rol/estado, candidatos de directorio permitido y exclusión prev
 ## 17 de octubre de 2026 — Usuarios y protección desde UI
 
 Se reutilizan rutas backend existentes, sin duplicar políticas de acceso. RH administra cuentas con motivo; cambios propios que revocan sesiones retiran token y vistas sin relectura. Protección usa acuse can_view y retira expediente cuando corresponde; conserva declaraciones y exige reapertura de casos finalizados. Se utiliza reasignación automática protectora del servidor sin nuevo selector. Recuperación de contraseña y CRUD departamentos no se incorporan. Verificación agrupada con una evidencia de directorio, manteniendo pruebas simuladas separadas de resultados reales.
+
+## 17 de octubre de 2026 — Cambio de contraseña en UI
+
+Se ofrece cambio personal a los tres roles usando el contrato existente. Confirmación solo local, sin persistencia de campos ni token. Éxito vuelve al login tras revocación por API. Red/5xx se trata como resultado incierto: retirar sesión local y no repetir automáticamente una escritura potencialmente completada. Contraseña perdida conserva recuperación por operador; no se añade restablecimiento público ni nuevas políticas de credencial. Una sola evidencia de login vacío, nunca formulario con credenciales.

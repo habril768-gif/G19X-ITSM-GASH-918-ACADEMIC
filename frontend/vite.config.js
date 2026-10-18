@@ -7,5 +7,5 @@ export default defineConfig({
     host: '127.0.0.1', port: 5173, strictPort: true,
     proxy: { '/api': { target: 'http://127.0.0.1:8000', changeOrigin: false, rewrite: path => path.replace(/^\/api/, '') } },
   },
-  test: { environment: 'jsdom', setupFiles: ['./src/test-setup.js'], clearMocks: true },
+  test: { maxWorkers: 2, environment: 'jsdom', setupFiles: ['./src/test-setup.js'], clearMocks: true },
 });

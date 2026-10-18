@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createApi, caseQuery } from './services/api.js';
 import NewIncident from './pages/NewIncident.jsx';
 import Users from './pages/Users.jsx';
+import PasswordChange from './pages/PasswordChange.jsx';
 import CaseManagement from './components/CaseManagement.jsx';
 
 const statuses = { PENDIENTE: 'Pendiente', EN_REVISION: 'En revisión', RESUELTA: 'Resuelta', CERRADA: 'Cerrada' };
@@ -110,16 +111,18 @@ export default function App() {
   const [notice, setNotice] = useState('');
   const [creating, setCreating] = useState(false);
   const [usersVisible, setUsersVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordBusy, setPasswordBusy] = useState(false);
   const api = useRef(null);
-  if (!api.current) api.current = createApi(() => { setUser(null); setSelected(null); setCreating(false); setUsersVisible(false); setNotice('Tu sesión terminó o cambió el acceso de tu cuenta. Inicia sesión nuevamente.'); });
+  if (!api.current) api.current = createApi(() => { setUser(null); setSelected(null); setCreating(false); setUsersVisible(false); setPasswordVisible(false); setNotice('Tu sesión terminó o cambió el acceso de tu cuenta. Inicia sesión nuevamente.'); });
   function logout() {
     const pending = api.current.logout();
-    setUser(null); setSelected(null); setCreating(false); setUsersVisible(false); setNotice('Cerraste tu sesión.');
+    setUser(null); setSelected(null); setCreating(false); setUsersVisible(false); setPasswordVisible(false); setNotice('Cerraste tu sesión.');
     pending.catch(() => { setNotice('Se retiró la sesión de este navegador. No se pudo confirmar el cierre en el servidor; la sesión vencerá según su vigencia.'); });
   }
   if (!user) return <Login api={api.current} notice={notice} onLogin={value => { setNotice(''); setUser(value); }} />;
-  const list = () => { setSelected(null); setCreating(false); setUsersVisible(false); };
-  return <div className="workspace"><aside className="sidebar"><Brand /><p className="sidebar-label">ESPACIO DE TRABAJO</p><button className="nav-item" onClick={list}>▤ <span>Incidencias</span></button><button className="nav-item" onClick={() => { setSelected(null); setUsersVisible(false); setCreating(true); }}>＋ <span>Nueva incidencia</span></button>{user.rol === 'ADMIN_RH' && <button className="nav-item" onClick={() => { setSelected(null); setCreating(false); setUsersVisible(true); }}>⚙ <span>Usuarios</span></button>}<div className="sidebar-foot"><strong>Un seguimiento más claro.</strong><p>La información se comparte según los permisos de cada cuenta.</p></div></aside>
-    <div className="main-area"><header className="topbar"><span>Gestión de incidencias laborales</span><div className="account"><div><strong>{user.nombre_completo}</strong><small>{roles[user.rol] || user.rol}</small></div><button onClick={logout}>Cerrar sesión</button></div></header><main className="content">{usersVisible ? <Users api={api.current} user={user} onSelfRevoked={() => { api.current.clear(); setUser(null); setSelected(null); setCreating(false); setUsersVisible(false); setNotice('Cambiaste los permisos de tu cuenta. Inicia sesión de nuevo.'); }} /> : creating ? <NewIncident api={api.current} user={user} onBack={list} onOpen={id => { setCreating(false); setSelected(id); }} /> : selected ? <CaseDetail key={selected} id={selected} api={api.current} user={user} onBack={list} /> : <Cases api={api.current} user={user} onSelect={setSelected} />}</main><footer>PluriOne · Entorno académico · Utiliza datos simulados</footer></div>
+  const list = () => { setSelected(null); setCreating(false); setUsersVisible(false); setPasswordVisible(false); };
+  return <div className="workspace"><aside className="sidebar"><Brand /><p className="sidebar-label">ESPACIO DE TRABAJO</p><button className="nav-item" disabled={passwordBusy} onClick={list}>▤ <span>Incidencias</span></button><button className="nav-item" disabled={passwordBusy} onClick={() => { setSelected(null); setUsersVisible(false); setPasswordVisible(false); setCreating(true); }}>＋ <span>Nueva incidencia</span></button>{user.rol === 'ADMIN_RH' && <button className="nav-item" disabled={passwordBusy} onClick={() => { setSelected(null); setCreating(false); setPasswordVisible(false); setUsersVisible(true); }}>⚙ <span>Usuarios</span></button>}<div className="sidebar-foot"><strong>Un seguimiento más claro.</strong><p>La información se comparte según los permisos de cada cuenta.</p></div></aside>
+    <div className="main-area"><header className="topbar"><span>Gestión de incidencias laborales</span><div className="account"><div><strong>{user.nombre_completo}</strong><small>{roles[user.rol] || user.rol}</small></div><button disabled={passwordBusy} onClick={() => { list(); setPasswordVisible(true); }}>Cambiar contraseña</button><button disabled={passwordBusy} onClick={logout}>Cerrar sesión</button></div></header><main className="content">{passwordVisible ? <PasswordChange api={api.current} onBusy={setPasswordBusy} onBack={list} onChanged={() => { api.current.clear(); setUser(null); list(); setNotice('Contraseña actualizada. Se revocaron tus sesiones. Inicia sesión con la nueva contraseña.'); }} onUncertain={() => { api.current.clear(); setUser(null); list(); setNotice('No se pudo confirmar el cambio de contraseña. Por precaución se retiró esta sesión. Intenta iniciar sesión; si no puedes acceder, contacta al operador.'); }} /> : usersVisible ? <Users api={api.current} user={user} onSelfRevoked={() => { api.current.clear(); setUser(null); setSelected(null); setCreating(false); setUsersVisible(false); setPasswordVisible(false); setNotice('Cambiaste los permisos de tu cuenta. Inicia sesión de nuevo.'); }} /> : creating ? <NewIncident api={api.current} user={user} onBack={list} onOpen={id => { setCreating(false); setSelected(id); }} /> : selected ? <CaseDetail key={selected} id={selected} api={api.current} user={user} onBack={list} /> : <Cases api={api.current} user={user} onSelect={setSelected} />}</main><footer>PluriOne · Entorno académico · Utiliza datos simulados</footer></div>
   </div>;
 }

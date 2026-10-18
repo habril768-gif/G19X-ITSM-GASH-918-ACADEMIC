@@ -110,3 +110,15 @@ Pendientes: comprobación real de esta entrega, matriz completa de roles/móvil,
 Actualización 17 de octubre de 2026: evidencias 64/64b revisadas; listado administrativo React y aviso de guardado sin cambio de permisos, 0 casos ajustados. Primera comprobación manual de Usuarios acreditada con límites en REPORTE_QA.md; no acredita protección, auditoría persistida ni administración completa. RF-7/RF-8 parciales. Pruebas de código no repetidas por este registro documental.
 
 Actualización 17 de octubre de 2026: evidencias 65–66 inspeccionadas, primera comprobación React de caso confidencial/IA omitida y participante CONFIRMADO con declaración y motivo de revisión conservados. Sustituye el pendiente total del recorrido inicial de protección UI; no completa matriz de roles, auditoría ni concurrencia. El recorte 66 no contiene ID de expediente. RF-4/RF-8 parciales; límites en REPORTE_QA.md. No se repitieron pruebas de código para esta actualización documental.
+
+## Contraseña personal — React 0.5.0 (17 de octubre de 2026)
+
+Botón Cambiar contraseña en la cabecera para todos los roles. Solicita contraseña actual, nueva de 12–128 caracteres no compuesta únicamente por espacios y confirmación idéntica. No altera espacios válidos de la credencial. Reutiliza POST /auth/change-password: la API verifica la actual, guarda el hash, revoca todas las sesiones y audita sin registrar contraseñas. Una respuesta 204 limpia sesión/vistas y vuelve al login con aviso; la nueva credencial se usa al entrar otra vez.
+
+El formulario envía solo current_password y new_password. Limpia los tres campos después de un intento de envío y no usa almacenamiento persistente. Un 400 informa que no se pudo verificar la actual; 401/403 siguen el cierre global de sesión. Red/5xx deja resultado no confirmado y retira sesión local por precaución, sin reintento de escritura. Login con credencial válida o recuperación por operador resuelven ese caso. Mientras espera respuesta se bloquean envío, cancelación y navegación de la aplicación; recargar/cerrar navegador sigue siendo posible.
+
+No añade rutas, dependencias, migración ni cambios al backend 0.8.0/esquema 0003. Con Vite activo, actualizar página e iniciar sesión. Este avance no completa CRUD de departamentos ni recuperación pública de contraseña.
+
+Comprobación manual agrupada pendiente: iniciar con una cuenta DEMO cuya contraseña actual se conozca, usar Cambiar contraseña y guardar una nueva elegida por la autora. Confirmar regreso al login con aviso. Guardar únicamente ese login vacío como 67-react-password-actualizada.png; no capturar el formulario ni enviar credenciales al asistente. Luego comprobar acceso con la nueva contraseña. La captura por sí sola no demuestra revocación de otras sesiones ni inicio con la nueva credencial.
+
+Validación de esta entrega: 48 pruebas UI simuladas aprobadas en 7 archivos/67.31s y build de 22 módulos/749ms. Primer intento tuvo dos timeout en pruebas anteriores; repetición con dos workers pasó. Configuración Vitest conserva maxWorkers=2 para npm.cmd test. Backend no repetido. Detalle en REPORTE_QA.md.

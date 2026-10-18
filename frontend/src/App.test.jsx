@@ -121,6 +121,26 @@ it('retira expediente e historial cuando declarar participante elimina acceso', 
   expect(screen.queryByLabelText('Nuevo participante')).toBeNull();
 });
 
+it.each(['ADMIN_RH', 'SUPERVISOR', 'EMPLEADO'])('permite cambiar contraseña a %s y vuelve al login sin datos privados', async rol => {
+  const original = fetch.getMockImplementation();
+  fetch.mockImplementation(async (url, opts) => {
+    if (url.endsWith('/auth/me')) return ok({ ...user, rol });
+    if (url.endsWith('/auth/change-password')) return { ok: true, status: 204 };
+    return original(url, opts);
+  });
+  render(<App />); const ui = await login();
+  await ui.click(screen.getByRole('button', { name: 'Cambiar contraseña' }));
+  await ui.type(screen.getByLabelText('Contraseña actual'), 'Actual-simulada-123');
+  await ui.type(screen.getByLabelText('Nueva contraseña'), 'Nueva-simulada-123');
+  await ui.type(screen.getByLabelText('Confirmar nueva contraseña'), 'Nueva-simulada-123');
+  await ui.click(screen.getByRole('button', { name: 'Guardar nueva contraseña' }));
+  await screen.findByRole('heading', { name: 'Inicia sesión' });
+  expect(screen.getByText(/Contraseña actualizada/)).toBeTruthy();
+  expect(screen.queryByText(incident.titulo)).toBeNull();
+  expect(screen.getByLabelText('Contraseña').value).toBe('');
+  expect(localStorage.length).toBe(0); expect(sessionStorage.length).toBe(0);
+});
+
 it('gestiona un ciclo completo y recarga detalle e historial después de cada cambio', async () => {
   const state = { ...incident, descripcion: 'Caso ficticio', scope: 'PERSONA', affected_employee_id: 'e', ai_status: 'PENDIENTE', classification_valid: false, assigned_to: null };
   const events = [];
