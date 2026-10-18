@@ -134,3 +134,5 @@ Evidencia prevista 64-admin-react-usuarios.png: una captura final de listado/con
 - [66-react-participante-confirmado.png](66-react-participante-confirmado.png): revisada el 17 de octubre de 2026; Empleado Operaciones Uno Demo CONFIRMADO, declaración «testigo» y última revisión «Testigo Visual». Recorte sin ID de expediente. Ambas sin credenciales visibles; límites en REPORTE_QA.md.
 
 Evidencia prevista 67-react-password-actualizada.png: login vacío con aviso de contraseña actualizada tras cambio desde React. Todavía no recibida ni verificada. No capturar formulario ni credenciales; plan en ../FRONTEND.md.
+
+- [67-react-password-actualizada.png](67-react-password-actualizada.png): inspeccionada el 17 de octubre de 2026; login vacío con aviso de contraseña actualizada, sin credenciales visibles. Sustituye el estado previo de evidencia pendiente. Nuevo inicio de sesión reportado por la autora; límites en REPORTE_QA.md.

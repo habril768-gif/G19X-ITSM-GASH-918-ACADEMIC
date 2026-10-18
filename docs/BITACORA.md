@@ -439,3 +439,9 @@ Sin contraseñas ni tokens visibles. Primera comprobación manual de confidencia
 Propósito: ofrecer el endpoint existente de cambio de credencial en la interfaz de los tres roles. Añadidos PasswordChange.jsx y sus pruebas; App incorpora navegación personal, bloqueo durante envío y retiro de vistas/token al guardar o resultado incierto. Paquete/lock actualizados a 0.5.0; Vitest limitado a dos workers. Sin dependencias, backend ni migración nuevos.
 
 Verificación: primer pase 46 aprobadas/2 timeout de pruebas anteriores; repetición completa con dos procesos, 48 aprobadas/7 archivos/67.31s. Build 22 módulos/749ms; diff revisado. Detalle y límites en REPORTE_QA.md. Manual/README, decisiones, backlog, entregables, trazabilidad y PRD actualizados. Pendientes: comprobación real con cuenta DEMO/evidencia 67, administración de departamentos y demás integraciones/matriz de roles. No se declara ejecución manual realizada.
+
+## 17 de octubre de 2026 — Evidencia 67: contraseña desde React
+
+Se inspeccionó directamente docs/evidencias/67-react-password-actualizada.png, guardada por la autora. Muestra login con correo/contraseña vacíos y aviso «Contraseña actualizada. Se revocaron tus sesiones. Inicia sesión con la nueva contraseña». Sin credenciales ni token visibles; conservada sin edición. Acredita resultado visible y retiro de la vista autenticada tras el flujo guiado, no revocación de todas las sesiones por sí sola.
+
+La autora informó que volvió a iniciar sesión después del cambio; se registra como comprobación manual reportada de acceso con la nueva contraseña, sin inspeccionar ni guardar la credencial. No se comprobó rechazo de contraseña anterior ni de otras sesiones abiertas. RF-1/RF-8 siguen parciales. No se repitieron pruebas de código para este registro; la suite previa de 48 pruebas UI simuladas se mantiene separada.

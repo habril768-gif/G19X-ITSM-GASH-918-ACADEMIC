@@ -394,3 +394,9 @@ Validación final: npm.cmd test -- --maxWorkers=2, 48/48 aprobadas en 7 archivos
 Primer intento con paralelismo predeterminado: 46 aprobadas/2 timeout de 5000ms en pruebas existentes de registro y login, 97.98s; las ocho nuevas pasaron. Repetición completa con dos workers aprobada sin ampliar timeout. Se fija maxWorkers=2 en vite.config.js para limitar carga en ejecuciones posteriores. No se atribuye el fallo a un defecto de producto sin evidencia.
 
 Todas las pruebas UI usan API simulada: no certifican cambio real de hash, revocación de otras sesiones ni acceso con nueva contraseña. Backend no modificado ni repetido. Evidencia 67 y recorrido real pendientes, con instrucciones en FRONTEND.md. No se solicita captura del formulario con credenciales.
+
+## 17 de octubre de 2026 — Evidencia 67: contraseña desde React
+
+Se inspeccionó directamente docs/evidencias/67-react-password-actualizada.png, guardada por la autora. Muestra login con correo/contraseña vacíos y aviso «Contraseña actualizada. Se revocaron tus sesiones. Inicia sesión con la nueva contraseña». Sin credenciales ni token visibles; conservada sin edición. Acredita resultado visible y retiro de la vista autenticada tras el flujo guiado, no revocación de todas las sesiones por sí sola.
+
+La autora informó que volvió a iniciar sesión después del cambio; se registra como comprobación manual reportada de acceso con la nueva contraseña, sin inspeccionar ni guardar la credencial. No se comprobó rechazo de contraseña anterior ni de otras sesiones abiertas. RF-1/RF-8 siguen parciales. No se repitieron pruebas de código para este registro; la suite previa de 48 pruebas UI simuladas se mantiene separada.
