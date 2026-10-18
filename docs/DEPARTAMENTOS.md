@@ -43,3 +43,5 @@ Con Vite activo, recargar navegador y entrar como RH. Crear «DEMO - Departament
 ## Validación y límites
 
 Pruebas HTTP locales con SQLite/FK; UI con API simulada; compilación y SQL de Alembic offline. Resultados exactos en REPORTE_QA.md. PostgreSQL real, concurrencia, instalación 0004 y recorrido de interfaz permanecen pendientes. La prueba optativa existente de migraciones en esquema transaccional aislado se amplió para aplicar 0004 y comprobar conservación; no se presenta como ejecutada si RUN_DB_TESTS no está habilitado. RF-7/RF-8 parciales.
+
+Actualización 17 de octubre de 2026: evidencia 68 inspeccionada, historial React de DEMO - PRUEBA 1 con alta, renombrado, baja y reactivación, fechas y motivos. Primera comprobación manual de departamentos acreditada con límites en REPORTE_QA.md; sustituye el pendiente total de ese recorrido. Terminal Alembic/check, matriz completa y concurrencia no acreditados por la imagen. RF-7/RF-8 parciales; pruebas de código no repetidas.

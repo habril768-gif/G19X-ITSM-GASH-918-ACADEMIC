@@ -138,3 +138,5 @@ Evidencia prevista 67-react-password-actualizada.png: login vacío con aviso de 
 - [67-react-password-actualizada.png](67-react-password-actualizada.png): inspeccionada el 17 de octubre de 2026; login vacío con aviso de contraseña actualizada, sin credenciales visibles. Sustituye el estado previo de evidencia pendiente. Nuevo inicio de sesión reportado por la autora; límites en REPORTE_QA.md.
 
 Evidencia prevista 68-react-departamentos-historial.png: una captura final del historial de un departamento DEMO tras alta/renombrado/baja/reactivación. Todavía no recibida ni verificada. Primero aplicar API 0.9.0 y 0004; guía ../DEPARTAMENTOS.md. No requiere capturas por campo ni credenciales.
+
+- [68-react-departamentos-historial.png](68-react-departamentos-historial.png): inspeccionada el 17 de octubre de 2026; historial de DEMO - PRUEBA 1 con cuatro eventos de alta/renombrado/baja/reactivación, fechas y motivos. Sin credenciales visibles. Sustituye el estado previo de captura pendiente; límites en REPORTE_QA.md.

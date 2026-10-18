@@ -453,3 +453,11 @@ Propósito: cubrir catálogo administrativo pendiente con API y React. Añadidos
 Validación final: 90 pruebas backend aprobadas/3 PostgreSQL omitidas/1 advertencia previa, 23.96s; 55 frontend aprobadas, 77.33s; build 23 módulos/571ms. Diagnóstico de conexión interna de TestClient y pasos interrumpidos documentados en REPORTE_QA.md; tests completos se ejecutaron después de habilitar red para pruebas.
 
 Guía DEPARTAMENTOS.md creada; modelo de datos, manuales/README, decisiones, PRD, entregables, trazabilidad y backlog actualizados. Tabla y orden inmediato del backlog sincronizados para evitar presentar estados históricos como vigentes. Docker rechazó acceso desde el entorno del asistente: aplicación 0004, check real, evidencia 68 y concurrencia pendientes. No se declara RF-7 completo ni desplegado.
+
+## 17 de octubre de 2026 — Evidencia 68: historial de departamentos desde React
+
+Se inspeccionó directamente 68-react-departamentos-historial.png, guardada por la autora y conservada sin edición. Historial de «DEMO - PRUEBA 1» con cuatro eventos visibles: CREADO (nombre DEMO, activo), ACTUALIZADO por renombrado DEMO → DEMO - PRUEBA 1, ACTUALIZADO por desactivación (Inactivo), y ACTUALIZADO por reactivación (Activo). Cada entrada muestra fecha/hora y motivo académico; página 1 sin navegación adicional disponible. Sin contraseñas, tokens ni datos personales visibles.
+
+Se acredita visualmente el recorrido básico de alta/renombrado/baja/reactivación y consulta de historial desde React para el departamento simulado. Sustituye el pendiente total de prueba manual de esta función. El recorte no muestra actor/UUID, terminal, versión Alembic ni alembic check: no acredita por sí solo revisión 0004 sin diferencias, autorización entre roles, bloqueo por usuarios/casos activos, atomicidad bajo fallos ni concurrencia PostgreSQL. La ejecución funcional observada es compatible con aplicación del backend y nueva auditoría; no se registra como verificación directa de migración.
+
+Actualización documental, sin repetir pruebas de código. Se conservan separados resultados previos: 90 backend aprobadas/3 PostgreSQL omitidas/1 advertencia y 55 UI simuladas/build correcto. RF-7/RF-8 parciales; no se requieren nuevas capturas de los mismos campos.
