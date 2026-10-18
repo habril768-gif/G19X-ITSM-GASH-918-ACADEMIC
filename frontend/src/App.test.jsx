@@ -11,6 +11,7 @@ beforeEach(() => {
     if (url.endsWith('/auth/login')) return ok({ access_token: 'memory-test-token' });
     if (url.endsWith('/auth/me')) return ok(user);
     if (url.endsWith('/auth/logout')) return { ok: true, status: 204 };
+    if (url.endsWith('/participants')) return ok({ items: [] });
     if (url.endsWith('/incidents/options')) return ok({ categories: [], participants: [], departments: [] });
     if (url.includes('/history?')) return ok({ items: [{ id: 'e', accion: 'CREADO', fecha: incident.created_at }], total: 1 });
     if (url.endsWith('/incidents/test-case')) return ok({ ...incident, descripcion: 'Descripción ficticia', scope: 'PERSONA', ai_status: 'OMITIDA', classification_valid: false });
@@ -28,12 +29,12 @@ async function login() {
 it('inicio de sesión, consulta del detalle y logout retiran datos privados', async () => {
   render(<App />); const ui = await login();
   await ui.click(screen.getByRole('button', { name: incident.titulo }));
-  await screen.findByText('Descripción ficticia');
+  await screen.findByText('Descripción ficticia', { selector: 'p' });
   await screen.findByText('CREADO');
   expect(screen.getByText(/Asistencia IA omitida/)).toBeTruthy();
   await ui.click(screen.getByRole('button', { name: 'Cerrar sesión' }));
   await screen.findByRole('heading', { name: 'Inicia sesión' });
-  expect(screen.queryByText('Descripción ficticia')).toBeNull();
+  expect(screen.queryByText('Descripción ficticia', { selector: 'p' })).toBeNull();
   expect(localStorage.length).toBe(0); expect(sessionStorage.length).toBe(0);
 });
 it('un 401 durante filtrado limpia datos y regresa al login', async () => {
@@ -74,11 +75,50 @@ it('retira el detalle si pierde acceso al consultar otra página del historial',
     : url.includes('/history?') ? Promise.resolve(ok({ items: [{ id: 'e', accion: 'CREADO', fecha: incident.created_at }], total: 21 })) : original(url, opts));
   render(<App />); const ui = await login();
   await ui.click(screen.getByRole('button', { name: incident.titulo }));
-  await screen.findByText('Descripción ficticia');
+  await screen.findByText('Descripción ficticia', { selector: 'p' });
   await screen.findByText('CREADO');
   await ui.click(screen.getByRole('button', { name: 'Siguiente' }));
   await screen.findByRole('alert');
-  await waitFor(() => expect(screen.queryByText('Descripción ficticia')).toBeNull());
+  await waitFor(() => expect(screen.queryByText('Descripción ficticia', { selector: 'p' })).toBeNull());
+});
+
+it('retira la sesión y el directorio al modificar los permisos propios', async () => {
+  const original = fetch.getMockImplementation();
+  fetch.mockImplementation(async (url, opts) => {
+    if (url.endsWith('/users/options')) return ok({ departments: [{ id: 'd', nombre: 'Demo' }], roles: [{ id: 1, nombre: 'ADMIN_RH' }, { id: 3, nombre: 'EMPLEADO' }] });
+    if (url.includes('/users?')) return ok({ items: [{ ...user, email: 'demo@example.invalid', departamento_id: 'd', rol_id: 1, is_active: true }], total: 1 });
+    if (url.endsWith('/users/test-user')) return ok({ id: user.id, updated: true, sessions_revoked: true, cases_adjusted: 0 });
+    return original(url, opts);
+  });
+  render(<App />); const ui = await login();
+  await ui.click(screen.getByRole('button', { name: /Usuarios/ }));
+  await ui.click(await screen.findByRole('button', { name: 'Editar Persona Demo' }));
+  await ui.selectOptions(screen.getByLabelText('Rol del usuario'), '3');
+  await ui.type(screen.getByLabelText('Motivo administrativo'), 'Cambio simulado de permisos');
+  const reads = fetch.mock.calls.filter(([url]) => url.includes('/users?')).length;
+  await ui.click(screen.getByRole('button', { name: 'Guardar usuario' }));
+  await screen.findByRole('heading', { name: 'Inicia sesión' });
+  expect(screen.queryByRole('table')).toBeNull();
+  expect(screen.getByText(/Cambiaste los permisos de tu cuenta/)).toBeTruthy();
+  expect(fetch.mock.calls.filter(([url]) => url.includes('/users?')).length).toBe(reads);
+});
+
+it('retira expediente e historial cuando declarar participante elimina acceso', async () => {
+  const original = fetch.getMockImplementation();
+  fetch.mockImplementation(async (url, opts) => {
+    if (url.endsWith('/incidents/options')) return ok({ categories: [], affected_employees: [], departments: [], participants: [{ ...user, departamento_id: 'd' }] });
+    if (url.endsWith('/participants')) return opts?.method === 'POST' ? ok({ id: incident.id, received: true, can_view: false }) : ok({ items: [] });
+    return original(url, opts);
+  });
+  render(<App />); const ui = await login();
+  await ui.click(screen.getByRole('button', { name: incident.titulo }));
+  await ui.selectOptions(await screen.findByLabelText('Nuevo participante'), user.id);
+  await ui.type(screen.getByLabelText('Relación con el hecho'), 'Participación simulada propia');
+  await ui.click(screen.getByRole('button', { name: 'Declarar participante' }));
+  await screen.findByText(/Tu cuenta ya no puede consultar este expediente/);
+  expect(screen.queryByText('Descripción ficticia', { selector: 'p' })).toBeNull();
+  expect(screen.queryByRole('heading', { name: 'Historial del caso' })).toBeNull();
+  expect(screen.queryByLabelText('Nuevo participante')).toBeNull();
 });
 
 it('gestiona un ciclo completo y recarga detalle e historial después de cada cambio', async () => {

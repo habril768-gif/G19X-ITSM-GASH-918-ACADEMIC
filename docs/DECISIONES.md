@@ -164,3 +164,7 @@ Formulario React 0.2.0 usa directorio permitido y aviso general de confidenciali
 ## 17 de octubre de 2026 — Gestión UI con estado confirmado por API
 
 Formularios por rol/estado, candidatos de directorio permitido y exclusión preventiva de involucrados. El backend conserva autoridad final. Cada éxito dispara lectura de detalle/historial; no se simula transición definitiva en cliente. Reapertura requiere motivo/responsable, cierre confirmación RH; edición advierte revalidación. Error 404 retira datos; respuesta incierta requiere actualización antes de repetir. Prueba manual agrupada con una evidencia final; sin repetir capturas de cada operación. UI de protección/administración queda pendiente.
+
+## 17 de octubre de 2026 — Usuarios y protección desde UI
+
+Se reutilizan rutas backend existentes, sin duplicar políticas de acceso. RH administra cuentas con motivo; cambios propios que revocan sesiones retiran token y vistas sin relectura. Protección usa acuse can_view y retira expediente cuando corresponde; conserva declaraciones y exige reapertura de casos finalizados. Se utiliza reasignación automática protectora del servidor sin nuevo selector. Recuperación de contraseña y CRUD departamentos no se incorporan. Verificación agrupada con una evidencia de directorio, manteniendo pruebas simuladas separadas de resultados reales.

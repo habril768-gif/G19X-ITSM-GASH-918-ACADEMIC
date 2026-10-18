@@ -102,3 +102,5 @@ Actualización 17 de octubre de 2026: evidencia 62 inspeccionada, acuse de alta 
 React 0.3.0, 17 de octubre de 2026: edición, validación, asignación y transiciones en components/CaseManagement.jsx, con 26 pruebas frontend aprobadas y build correcto. RF-3/RF-4/RF-8 parciales; prueba real agrupada pendiente, así como protección/admin UI y otras funciones. Integración de UI completa con API simulada no sustituye PostgreSQL. Ver FRONTEND.md y REPORTE_QA.md.
 
 Actualización 17 de octubre de 2026: evidencia 63 revisada; caso creado en React muestra cierre con resolución, fechas y validación vigente. Resultado manual de gestión inicial acreditado con límites en REPORTE_QA.md. Reapertura/edición manuales y pantallas de protección/admin pendientes; no se declaran RF completos.
+
+Actualización 17 de octubre de 2026, React 0.4.0: desarrollo incluye directorio/alta/edición de cuentas y protección/revisión de participantes desde UI. QA: 40 pruebas frontend con API simulada y build aprobados; manual técnico/guía de uso actualizados. Prueba real agrupada/evidencia 64 pendiente; no completa desarrollo/QA del MVP ni administración de departamentos.

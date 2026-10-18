@@ -92,3 +92,17 @@ Comprobación manual agrupada: iniciar sesión como Admin RH, abrir el caso simu
 
 Siguen pendientes interfaces de participantes/confidencialidad y administración de usuarios/departamentos, móvil y matriz completa de roles, enlaces profundos e integraciones IA/correo/analítica. RF-3/RF-4/RF-8 parciales. No hay borrado ni retroceso libre a PENDIENTE en UI. Las nuevas funciones no ejecutan IA ni correo.
 Prueba manual de gestión: evidencia 63 revisada el 17 de octubre de 2026 muestra Retardo cerrado con resolución/fechas y clasificación vigente. Corresponde al ID del acuse 62. Completa resultado final del recorrido guiado, sin sustituir pruebas de cada transición/rol. No se requieren capturas intermedias adicionales para este caso.
+
+## Usuarios y protección — React 0.4.0 (17 de octubre de 2026)
+
+Esta entrega sustituye los pendientes históricos de interfaz de administración de cuentas y protección. Menú Usuarios solo para Admin RH: listado paginado, alta local y edición de nombre, departamento, rol y activación con motivo. El correo no se modifica y la contraseña inicial se limpia tras el intento; recuperación continúa por el procedimiento administrativo existente. No incorpora CRUD de departamentos.
+
+En detalle autorizado, RH dispone de confidencialidad, declaración y revisión de participantes con motivo, conservando declaración original. Solo en PENDIENTE/EN_REVISION; casos finalizados exigen reapertura. La reasignación protectora la decide la API mediante su selección automática existente. Descartar una relación no retira confidencialidad; no se ofrece autorrevisión. Candidatos de asignación y candidatos a participante son listas distintas.
+
+Cada escritura se confirma en servidor y recarga datos. Si el acuse indica can_view=false, desaparecen expediente, formularios e historial. Cambiar los propios permisos con sessions_revoked=true limpia token y vuelve al login sin consultar otra vez el directorio. Respuestas inciertas no se reintentan automáticamente y requieren consulta antes de repetir. Permisos, último RH activo y ajustes atómicos siguen siendo responsabilidad del backend.
+
+Validación: 40 pruebas aprobadas en 6 archivos, 23.66s; compilación de 21 módulos en 358ms. Incluye 12 pruebas nuevas de componentes y 2 integraciones de navegación/retiro de datos. Se corrigió una prueba anterior con selector ambiguo entre párrafo y textarea, y se completó su fixture de participantes. API simulada; no acredita ejecución real de estas operaciones contra PostgreSQL ni concurrencia. Backend no cambiado ni repetido; conserva 0.8.0/esquema 0003. Sin dependencias ni migraciones nuevas.
+
+Comprobación manual agrupada pendiente: actualizar página con Vite activo, entrar como Admin RH y abrir Usuarios. Editar únicamente el nombre de una cuenta DEMO, conservar rol/departamento/activación, indicar motivo y guardar; comprobar confirmación y listado actualizado. No modificar los propios permisos para esta primera comprobación. Una captura final del listado/aviso: 64-admin-react-usuarios.png. Solo identidades ficticias; contraseña inicial y tokens fuera de captura. Protección puede recorrerse sobre un caso simulado abierto, sin exigir captura de cada paso; resultado real todavía no acreditado.
+
+Pendientes: comprobación real de esta entrega, matriz completa de roles/móvil, CRUD departamentos, enlaces profundos e integraciones IA/correo/analítica. RF-4/RF-7/RF-8 siguen parciales.

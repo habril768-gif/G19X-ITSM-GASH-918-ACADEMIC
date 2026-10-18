@@ -521,3 +521,11 @@ textarea:focus-visible { outline: 3px solid #8174df; outline-offset: 3px; }
 .management-fields label { margin-bottom: 1rem; }
 .management-fields textarea { min-height: 80px; }
 .management-fields form { max-width: 800px; }
+
+/* Administración y protección */
+.user-editor { max-width: 850px; margin: 1.5rem 0; }
+.user-editor fieldset { border: 0; margin: 0 0 1rem; padding: 0; }
+.user-editor label { margin-bottom: 1.2rem; }
+.user-list { margin-top: 1.5rem; }
+.relations { margin-top: 1.5rem; }
+.relations form { max-width: 100%; }

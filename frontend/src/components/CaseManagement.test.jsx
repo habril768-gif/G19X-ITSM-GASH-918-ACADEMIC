@@ -41,7 +41,7 @@ it('confirma clasificación y exige validación para iniciar revisión', async (
 });
 it('asigna y empieza revisión solo con candidatos del caso', async () => {
   const ui = await start();
-  expect(screen.queryByRole('option', { name: /Supervisor Otro/ })).toBeNull();
+  expect(within(screen.getByLabelText('Responsable del caso')).queryByRole('option', { name: /Supervisor Otro/ })).toBeNull();
   await ui.selectOptions(screen.getByLabelText('Responsable del caso'), 'admin');
   await ui.click(screen.getByRole('button', { name: 'Guardar responsable' }));
   await waitFor(() => expect(updated).toHaveBeenCalled());
@@ -54,8 +54,8 @@ it('caso confidencial excluye supervisores y gestores involucrados', async () =>
   const original = api.request.getMockImplementation();
   api.request.mockImplementation((path, opts) => path.endsWith('/participants') ? Promise.resolve({ items: [{ user_id: 'admin', review_status: 'CONFIRMADO' }] }) : original(path, opts));
   await start({ is_confidential: true });
-  expect(screen.queryByRole('option', { name: /Supervisor Demo/ })).toBeNull();
-  expect(screen.queryByRole('option', { name: /RH Demo/ })).toBeNull();
+  expect(within(screen.getByLabelText('Responsable del caso')).queryByRole('option', { name: /Supervisor Demo/ })).toBeNull();
+  expect(within(screen.getByLabelText('Responsable del caso')).queryByRole('option', { name: /RH Demo/ })).toBeNull();
 });
 it('ENTORNO solo permite categoría Riesgos', async () => {
   await start({ scope: 'ENTORNO', affected_employee_id: null, category_id: 4 });

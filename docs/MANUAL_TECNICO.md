@@ -65,3 +65,9 @@ Frontend React 0.1.0: Node 24 verificado, npm.cmd ci y npm.cmd run dev desde fro
 Frontend 0.2.0 añade Nueva incidencia. No requiere npm install adicional ni nueva migración; conservar npm ci para instalación limpia y npm run dev desde frontend. Validación: npm test y npm run build. Prueba manual agrupada en FRONTEND.md; operaciones de gestión restantes siguen en Swagger.
 
 React 0.3.0 incorpora gestión al detalle del expediente para Supervisor/Admin RH. Mantener npm run dev en frontend, actualizar e iniciar sesión; sin nuevas dependencias, Docker build ni migración requeridos por el frontend. Pruebas/build: npm test y npm run build. Recorrido agrupado y límites en FRONTEND.md; no cambiar .env.
+
+## React 0.4.0 — 17 de octubre de 2026
+
+Mismos comandos de frontend: npm.cmd run dev, npm.cmd test y npm.cmd run build, desde frontend. No requiere npm install, reconstrucción Docker, migración ni variables nuevas. Backend 0.8.0 y esquema 0003.
+
+Users.jsx consume GET /users/options, GET /users paginado, POST /users y PUT /users/{id}. CaseProtection.jsx consume POST /incidents/{id}/participants, PUT /participants/{user_id}/review y PUT /confidentiality bajo la incidencia. Roles/estados solo orientan UI: autorización definitiva en API. onSelfRevoked limpia sesión y onAccessLost retira expediente/historial. La recuperación administrativa de contraseña conserva su procedimiento existente. Uso y comprobación manual agrupada en FRONTEND.md; evidencia 64 todavía pendiente.

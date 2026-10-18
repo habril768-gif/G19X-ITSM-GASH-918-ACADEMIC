@@ -156,3 +156,5 @@ Primera UI React: iniciar API/Docker, luego desde frontend ejecutar npm.cmd ci y
 React 0.2.0: menú Nueva incidencia con registro de persona/entorno, participantes y acuse seguro. No necesita migración ni dependencias nuevas. Formularios de gestión/admin pendientes; prueba manual agrupada y límites en docs/FRONTEND.md.
 
 React 0.3.0: gestión de clasificación/responsable/edición y estados desde detalle, con recarga de historial y controles por rol. 26 pruebas frontend aprobadas; comprobación real de esta entrega pendiente. Guía agrupada en docs/FRONTEND.md. Sin migración ni dependencias nuevas.
+
+React 0.4.0: menú Usuarios para Admin RH (listado/alta/edición) y confidencialidad/participantes/revisión desde detalle. 40 pruebas frontend simuladas y build aprobados. Actualizar navegador e iniciar sesión; sin migraciones ni dependencias nuevas. Uso y única comprobación manual agrupada pendiente en [FRONTEND.md](docs/FRONTEND.md).

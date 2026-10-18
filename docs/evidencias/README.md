@@ -124,3 +124,5 @@ Evidencia prevista 62-registro-react-acuse.png, todavía no recibida ni verifica
 Evidencia prevista 63-gestion-react-caso-cerrado.png: una captura final del recorrido de gestión React 0.3.0, todavía no recibida ni verificada. Solo datos ficticios, sin credenciales. No se requiere captura de cada paso. Plan en ../FRONTEND.md.
 
 - [63-gestion-react-caso-cerrado.png](63-gestion-react-caso-cerrado.png): captura aportada y guardada sin edición el 17 de octubre de 2026; caso Retardo cerrado con resolución y fechas, sin credenciales visibles. Límites en REPORTE_QA.md.
+
+Evidencia prevista 64-admin-react-usuarios.png: una captura final de listado/confirmación de modificación de nombre DEMO en React 0.4.0. Todavía no recibida ni verificada. Datos ficticios, sin contraseñas/tokens; no se exige captura de cada campo. Guía agrupada en ../FRONTEND.md.
