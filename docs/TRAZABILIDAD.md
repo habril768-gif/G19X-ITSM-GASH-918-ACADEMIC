@@ -16,13 +16,13 @@ Fecha de consolidación: 17 de octubre de 2026. La tabla distingue requisito obj
 
 | RF-3 | IA sobre texto simulado revisado y validación | Validación humana implementada; servicio externo/worker pendientes | Worker, revisión de entrada y evaluación 50 casos | Parcial; integración IA pendiente |
 
-| RF-4 | Asignación, transiciones, confidencialidad y ciclos | Servicios y React; evidencias 16–33/47–57/63/65–66 | Matriz completa, concurrencia/PostgreSQL | Parcial |
+| RF-4 | Asignación, transiciones, confidencialidad y ciclos | Servicios/React, evidencias 16–33/47–57/63/65–66; bloqueo administrativo y rollback comprobados en PostgreSQL aislado | Matriz completa y carreras adicionales de negocio | Parcial |
 
 | RF-5 | Correo por eventos | Variables SMTP de ejemplo | Capturador, eventos, acceso antes de envío, reintentos y deduplicación | Pendiente |
 
 | RF-6 | Reportes agregados | Fechas y departamento histórico iniciales | Vistas, Power BI, métricas y fecha de corte | Pendiente |
 
-| RF-7 | Usuarios y departamentos | Cuentas API/React con evidencia 64; departamentos API 0.9.0/React 0.6.0 y auditoría 0004 preparados | Aplicar 0004 y verificar departamentos; PostgreSQL real/concurrencia | Parcial |
+| RF-7 | Usuarios y departamentos | API/React, evidencias 64/68 y pruebas PostgreSQL aisladas hasta 0004; evidencia 69 | Matriz completa, carreras adicionales y check directo de desarrollo | Parcial |
 
 | RF-8 | Panel operativo React | Registro, consulta/filtros, gestión, protección y administración; 55 pruebas UI simuladas | Departamentos reales, móvil, matriz completa y enlaces profundos | Parcial |
 
@@ -196,3 +196,5 @@ Actualización 17 de octubre de 2026: evidencia 67 revisada, login vacío con av
 Actualización 17 de octubre de 2026: API 0.9.0 / React 0.6.0 añaden administración de departamentos con auditoría 0004. Código probado localmente: 90 backend aprobadas/3 PostgreSQL omitidas/1 advertencia y 55 UI simuladas/build correcto. Despliegue/migración real, concurrencia y evidencia 68 pendientes. Ver DEPARTAMENTOS.md y REPORTE_QA.md.
 
 Actualización 17 de octubre de 2026: evidencia 68 inspeccionada, historial React de DEMO - PRUEBA 1 con alta, renombrado, baja y reactivación, fechas y motivos. Primera comprobación manual de departamentos acreditada con límites en REPORTE_QA.md; sustituye el pendiente total de ese recorrido. Terminal Alembic/check, matriz completa y concurrencia no acreditados por la imagen. RF-7/RF-8 parciales; pruebas de código no repetidas.
+
+17 de octubre de 2026: integraciones antes omitidas ejecutadas en clúster temporal PostgreSQL 18.6; suite 103 aprobadas/0 omitidas/1 advertencia. Incluye cinco integraciones PostgreSQL y las pruebas originales SQLite. Migración hasta 0004 y check verificados en aislamiento; base de desarrollo sin modificar. CI PostgreSQL 17 del commit c8ad75c observado exitoso. Guía PRUEBAS_POSTGRESQL.md, evidencia 69 JSON y límites en REPORTE_QA.md. Nuevas pruebas remotas y carreras adicionales pendientes; sin nuevas capturas.

@@ -461,3 +461,11 @@ Se inspeccionó directamente 68-react-departamentos-historial.png, guardada por 
 Se acredita visualmente el recorrido básico de alta/renombrado/baja/reactivación y consulta de historial desde React para el departamento simulado. Sustituye el pendiente total de prueba manual de esta función. El recorte no muestra actor/UUID, terminal, versión Alembic ni alembic check: no acredita por sí solo revisión 0004 sin diferencias, autorización entre roles, bloqueo por usuarios/casos activos, atomicidad bajo fallos ni concurrencia PostgreSQL. La ejecución funcional observada es compatible con aplicación del backend y nueva auditoría; no se registra como verificación directa de migración.
 
 Actualización documental, sin repetir pruebas de código. Se conservan separados resultados previos: 90 backend aprobadas/3 PostgreSQL omitidas/1 advertencia y 55 UI simuladas/build correcto. RF-7/RF-8 parciales; no se requieren nuevas capturas de los mismos campos.
+
+## 17 de octubre de 2026 — PostgreSQL aislado reproducible
+
+Propósito: ejecutar las integraciones omitidas sin tocar la base del proyecto. Añadidos test_support.py, guardas pytest, ejecutor nativo temporal y ocho pruebas unitarias; ampliado test_postgres.py con dos integraciones reales y precisión de unicidad. Se detectaron binarios PostgreSQL 18.6 instalados; no se descargó servidor ni se alteró Compose/PostgreSQL 17.
+
+Verificación final: 103 aprobadas, cero omitidas, una advertencia previa, 21.70s; upgrade 0001–0004 repetido y check sin diferencias. Resultado JUnit validado antes de retirada del servidor/carpeta final. Se observaron también pasos exitosos de CI PostgreSQL 17 del commit c8ad75c. Fallo inicial de captura de pipes y rechazo automático de limpieza de restos documentados con sus límites en REPORTE_QA.md/PRUEBAS_POSTGRESQL.md.
+
+Actualizados seguimiento, trazabilidad, modelo/guías y evidencia estructurada 69. Las tres pruebas antes omitidas ya tienen ejecución acreditada en base aislada; el modo sin RUN_DB_TESTS las conserva omitidas por diseño. Pendientes: CI del nuevo commit, carreras adicionales de negocio, matriz UI e integraciones IA/correo/analítica. No se exigen más capturas por esta ejecución.

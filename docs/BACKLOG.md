@@ -18,13 +18,13 @@ Base: [PRD 1.9](PRD.md). Estado consolidado al 17 de octubre de 2026. Las entrad
 
 | H2 Arquitectura y entorno | API base, Docker, diseño y React | API/Compose verificados antes de esta entrega; React 0.6.0 preparado; arquitectura formal pendiente | Aplicar API 0.9.0 y actualizar arquitectura |
 
-| H3 Datos | Esquema y fixtures QA | 0001–0003 verificadas previamente; 0004 preparada para auditoría de departamentos | Aplicar 0004 y alembic check |
+| H3 Datos | Esquema y fixtures QA | 0001–0004 verificadas en PostgreSQL aislado; 103 pruebas completas sin omisiones | Check directo de base de desarrollo y carreras adicionales |
 
 | H4 Identidad y administración | RF-1 y RF-7 | Autenticación/cuentas/cambio personal con evidencias; departamentos API/React preparados y probados localmente | Migración y recorrido real de departamentos |
 
 | H5 Registro y panel | RF-2 y RF-8 | Registro/listado/detalle/filtros React implementados; primeras evidencias 58–62 | Matriz completa de roles/móvil |
 
-| H6 Ciclo y confidencialidad | RF-4 y reglas transversales | Gestión React y protección con primeras evidencias 63/65/66; servicios auditados | Pruebas PostgreSQL/concurrencia y matriz completa |
+| H6 Ciclo y confidencialidad | RF-4 y reglas transversales | Gestión/protección con evidencias; exclusión administrativa y rollback verificados en PostgreSQL real | Carreras de negocio adicionales y matriz completa de roles/UI |
 
 | H7 IA | RF-3 | Pendiente; proveedor OpenAI elegido | Worker, omisión de confidenciales y evaluación independiente |
 
@@ -38,11 +38,11 @@ Base: [PRD 1.9](PRD.md). Estado consolidado al 17 de octubre de 2026. Las entrad
 
 ## Orden inmediato
 
-1. Aplicar API 0.9.0 y migración 0004 desde la terminal con acceso a Docker. Seguir DEPARTAMENTOS.md.
-2. Verificar readiness y recorrido agrupado del catálogo/historial de departamentos (evidencia 68).
-3. Completar matriz de acceso, pruebas PostgreSQL de pruebas y revisión móvil; mantener sus resultados separados de UI simulada/SQLite.
-4. Continuar H7–H9: IA sobre texto simulado revisado con 50 referencias independientes, correo por eventos y analítica con supresión. Estos bloques siguen pendientes.
-5. Consolidar arquitectura/manuales y entregables de H10 sin inventar capacitación ni validación de campo.
+1. Mantener distinguida la verificación de base de desarrollo (recorrido funcional de departamentos acreditado con evidencia 68) de los upgrades/check ejecutados en base aislada. No repetir altas/seed ni pedir nuevas capturas de recorridos ya documentados.
+2. Continuar H7: IA exclusivamente sobre texto simulado revisado, omisión de confidenciales y evaluación con 50 referencias independientes. H8 correo por eventos y H9 analítica siguen después.
+3. Ampliar carreras de negocio y revisión móvil/matriz de roles; las cinco integraciones PostgreSQL ejecutadas no prueban todas esas combinaciones.
+4. Consolidar arquitectura/manuales y entregables H10, sin inventar capacitación, validación de campo ni aprobaciones.
+5. Al subir el nuevo commit, revisar CI: el éxito remoto observado corresponde al commit c8ad75c; las nuevas pruebas ya pasaron localmente en PostgreSQL 18.6.
 
 ## Calendario y capacidad
 
@@ -176,3 +176,5 @@ Actualización 17 de octubre de 2026: evidencia 67 revisada, login vacío con av
 17 de octubre de 2026: API 0.9.0/React 0.6.0 preparados; 90 pruebas backend aprobadas, 3 PostgreSQL omitidas, 1 advertencia previa; 55 pruebas UI simuladas y build correctos. Departamentos implementados en código; instalación 0004 y prueba real pendientes. Límites y comandos en DEPARTAMENTOS.md/REPORTE_QA.md.
 
 Actualización 17 de octubre de 2026: evidencia 68 inspeccionada, historial React de DEMO - PRUEBA 1 con alta, renombrado, baja y reactivación, fechas y motivos. Primera comprobación manual de departamentos acreditada con límites en REPORTE_QA.md; sustituye el pendiente total de ese recorrido. Terminal Alembic/check, matriz completa y concurrencia no acreditados por la imagen. RF-7/RF-8 parciales; pruebas de código no repetidas.
+
+17 de octubre de 2026: integraciones antes omitidas ejecutadas en clúster temporal PostgreSQL 18.6; suite 103 aprobadas/0 omitidas/1 advertencia. Incluye cinco integraciones PostgreSQL y las pruebas originales SQLite. Migración hasta 0004 y check verificados en aislamiento; base de desarrollo sin modificar. CI PostgreSQL 17 del commit c8ad75c observado exitoso. Guía PRUEBAS_POSTGRESQL.md, evidencia 69 JSON y límites en REPORTE_QA.md. Nuevas pruebas remotas y carreras adicionales pendientes; sin nuevas capturas.

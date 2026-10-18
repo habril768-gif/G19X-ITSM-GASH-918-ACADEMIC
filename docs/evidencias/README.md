@@ -140,3 +140,5 @@ Evidencia prevista 67-react-password-actualizada.png: login vacío con aviso de 
 Evidencia prevista 68-react-departamentos-historial.png: una captura final del historial de un departamento DEMO tras alta/renombrado/baja/reactivación. Todavía no recibida ni verificada. Primero aplicar API 0.9.0 y 0004; guía ../DEPARTAMENTOS.md. No requiere capturas por campo ni credenciales.
 
 - [68-react-departamentos-historial.png](68-react-departamentos-historial.png): inspeccionada el 17 de octubre de 2026; historial de DEMO - PRUEBA 1 con cuatro eventos de alta/renombrado/baja/reactivación, fechas y motivos. Sin credenciales visibles. Sustituye el estado previo de captura pendiente; límites en REPORTE_QA.md.
+
+- [69-postgresql-integracion.json](69-postgresql-integracion.json): registro estructurado del 17 de octubre de 2026; PostgreSQL 18.6 aislado, 103 aprobadas/0 omitidas, migraciones/check y retirada de ejecución final. Incluye referencia a CI exitoso con PostgreSQL 17 del commit c8ad75c y límites de ambos resultados. Generado a partir de ejecución observada y API pública, sin credenciales ni captura manual requerida.

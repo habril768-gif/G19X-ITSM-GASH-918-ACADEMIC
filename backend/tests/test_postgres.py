@@ -3,9 +3,17 @@ import os
 import pytest
 from sqlalchemy import inspect, text
 from sqlalchemy.exc import IntegrityError
+from test_support import validate_test_database
 from app.core.database import get_engine
 
 pytestmark = pytest.mark.skipif(os.environ.get("RUN_DB_TESTS") != "1", reason="Requiere PostgreSQL de pruebas migrado")
+
+
+@pytest.fixture(autouse=True)
+def dedicated_database():
+    validate_test_database(os.environ)
+    with get_engine().connect() as connection:
+        assert connection.scalar(text('SELECT current_database()')) == os.environ['POSTGRES_DB']
 
 
 def test_migrated_database_and_catalogs():
@@ -24,12 +32,72 @@ def test_entra_identity_is_unique():
         tx = c.begin()
         try:
             c.execute(text("INSERT INTO departamentos (id,nombre) VALUES ('11111111-1111-1111-1111-111111111111','QA temporal')"))
-            sql = text("INSERT INTO users (id,email,external_id,tenant_id,nombre_completo,departamento_id,rol_id) VALUES (:id,'qa@example.invalid','22222222-2222-2222-2222-222222222222','33333333-3333-3333-3333-333333333333','QA','11111111-1111-1111-1111-111111111111',3)")
-            c.execute(sql, {"id": "44444444-4444-4444-4444-444444444444"})
-            with pytest.raises(IntegrityError):
-                c.execute(sql, {"id": "55555555-5555-5555-5555-555555555555"})
+            sql = text("INSERT INTO users (id,email,external_id,tenant_id,nombre_completo,departamento_id,rol_id) VALUES (:id,:email,'22222222-2222-2222-2222-222222222222','33333333-3333-3333-3333-333333333333','QA','11111111-1111-1111-1111-111111111111',3)")
+            c.execute(sql, {"id": "44444444-4444-4444-4444-444444444444", "email": "qa-a@example.invalid"})
+            with pytest.raises(IntegrityError) as exc:
+                c.execute(sql, {"id": "55555555-5555-5555-5555-555555555555", "email": "qa-b@example.invalid"})
+            assert exc.value.orig.diag.constraint_name == 'uq_users_entra'
         finally:
             tx.rollback()
+
+
+def test_administrative_lock_serializes_exclusive_and_shared_transactions():
+    from sqlalchemy.exc import DBAPIError
+    from sqlalchemy.orm import Session
+    from app.services.administration_lock import administration_lock
+    with Session(get_engine()) as first, Session(get_engine()) as second:
+        administration_lock(first, exclusive=True)
+        second.execute(text("SET LOCAL lock_timeout = '300ms'"))
+        with pytest.raises(DBAPIError) as exc:
+            administration_lock(second)
+        assert exc.value.orig.sqlstate == '55P03'
+        second.rollback(); first.rollback()
+        # Dos lecturas pueden coexistir, pero una escritura espera a que terminen.
+        administration_lock(first); administration_lock(second)
+        second.rollback()
+        second.execute(text("SET LOCAL lock_timeout = '300ms'"))
+        with pytest.raises(DBAPIError) as exc:
+            administration_lock(second, exclusive=True)
+        assert exc.value.orig.sqlstate == '55P03'
+        second.rollback(); first.rollback()
+        administration_lock(second, exclusive=True)
+
+
+def test_department_mutation_and_audit_rollback_on_postgres():
+    from sqlalchemy import event, select
+    from sqlalchemy.exc import SQLAlchemyError
+    from sqlalchemy.orm import Session
+    from uuid import uuid4
+    from app.api.departments import DepartmentCreate, DepartmentUpdate
+    from app.models import Department, DepartmentAudit, User
+    from app.services.departments import save_department
+    with get_engine().connect() as connection:
+        outer = connection.begin()
+        try:
+            with Session(bind=connection, join_transaction_mode='create_savepoint', expire_on_commit=False) as db:
+                home = Department(nombre='QA-' + uuid4().hex, is_active=True)
+                db.add(home); db.flush()
+                actor = User(email=uuid4().hex+'@example.invalid', nombre_completo='RH QA', departamento_id=home.id, rol_id=1, is_active=True)
+                db.add(actor); db.commit()
+                result = save_department(db, actor, DepartmentCreate(nombre='QA-' + uuid4().hex, reason='Alta aislada'))
+                from uuid import UUID
+                ident = UUID(result['id'])
+                assert db.scalar(select(DepartmentAudit).where(DepartmentAudit.department_id == ident)).detalle['after']['is_active']
+                def fail(session, *_):
+                    if any(isinstance(row, DepartmentAudit) for row in session.new):
+                        raise SQLAlchemyError('Fallo simulado de auditoría QA')
+                event.listen(db, 'before_flush', fail)
+                try:
+                    with pytest.raises(SQLAlchemyError):
+                        save_department(db, actor, DepartmentUpdate(nombre='No persistir', is_active=False, reason='Prueba de rollback'), ident)
+                finally:
+                    event.remove(db, 'before_flush', fail)
+                db.expire_all()
+                row = db.get(Department, ident)
+                assert row.nombre == result['nombre'] and row.is_active
+                assert len(db.scalars(select(DepartmentAudit).where(DepartmentAudit.department_id == ident)).all()) == 1
+        finally:
+            outer.rollback()
 
 
 def test_migration_0003_preserves_legacy_cases_in_isolated_schema():

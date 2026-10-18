@@ -176,3 +176,7 @@ Se ofrece cambio personal a los tres roles usando el contrato existente. Confirm
 ## 17 de octubre de 2026 — Baja lógica y auditoría de departamentos
 
 Se incorpora catálogo administrable por RH con tabla de auditoría propia (0004), sin distorsionar eventos de usuario/incidencia. No hay eliminación física ni traslados masivos. Baja bloqueada con usuarios activos o casos abiertos de entorno/de afectados actuales; los casos finalizados y referencias históricas se conservan. Motivo obligatorio también para alta y reactivación. Se preservan catálogos antiguos sin fabricar historia y se reutiliza bloqueo administrativo con revalidación de actor. No se declara concurrencia validada por SQLite ni migración aplicada sin evidencia. Guía DEPARTAMENTOS.md y una sola captura de historial prevista.
+
+## 17 de octubre de 2026 — Verificación PostgreSQL sin reutilizar desarrollo
+
+Se usa clúster nativo temporal (PostgreSQL 18.6 ya instalado) con puerto/base/credencial propios y entorno limitado al hijo; Compose conserva PostgreSQL 17. Guardas de nombre/host y current_database previenen errores de destino. Ejecutor exige cero omisiones, detiene recursos y valida su ruta antes de limpiar; si no confirma parada conserva carpeta. Un fallo/interrupción no acredita pruebas. Evidencia de CI 17 del commit anterior se distingue de ejecución local 18.6 y de futuras carreras de negocio. Rechazo automático del borrado manual de restos se respeta sin recurrir a otro mecanismo.

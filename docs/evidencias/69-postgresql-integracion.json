@@ -1,0 +1,46 @@
+{
+  "fecha_local": "2026-10-17",
+  "comando": "backend/.venv/Scripts/python.exe backend/scripts/test_postgres_isolated.py",
+  "local": {
+    "postgres": "18.6",
+    "base": "cluster temporal nuevo, plurione_test_*",
+    "direccion": "127.0.0.1, puerto temporal",
+    "migraciones": "0001-0004",
+    "upgrade_repetido": "aprobado",
+    "alembic_check": "No new upgrade operations detected.",
+    "pytest": {
+      "aprobadas": 103,
+      "fallos": 0,
+      "errores": 0,
+      "omitidas": 0,
+      "advertencias": 1,
+      "segundos": 21.7
+    },
+    "salida_ejecutor": 0,
+    "servidor_final": "detenido",
+    "carpeta_ejecucion_final": "retirada",
+    "limite": "Solo cinco pruebas usan PostgreSQL real; las restantes conservan sus fixtures originales."
+  },
+  "ci": {
+    "run_id": 39090144556,
+    "commit": "c8ad75c65eda5ac797c5478b1ad9a9d60d03afec",
+    "url": "https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/39090144556",
+    "job": "postgres-integration",
+    "job_id": 117564970907,
+    "postgres": "17-bookworm",
+    "conclusion": "success",
+    "pasos_observados": [
+      "upgrade head",
+      "upgrade head repetido",
+      "alembic check",
+      "pytest -q"
+    ],
+    "limite": "Ejecución anterior a las guardas y dos integraciones nuevas; no se obtuvo conteo de pruebas del log remoto."
+  },
+  "base_desarrollo": "No utilizada ni modificada por estas ejecuciones aisladas.",
+  "resto_inicial": {
+    "carpeta": ".pgdata/run-gykzcxje",
+    "servidor": "detenido, verificado con pg_ctl status y puerto propio cerrado",
+    "borrado": "Rechazado por revisión automática; conservado ignorado por Git."
+  }
+}

@@ -418,3 +418,15 @@ Se inspeccionó directamente 68-react-departamentos-historial.png, guardada por 
 Se acredita visualmente el recorrido básico de alta/renombrado/baja/reactivación y consulta de historial desde React para el departamento simulado. Sustituye el pendiente total de prueba manual de esta función. El recorte no muestra actor/UUID, terminal, versión Alembic ni alembic check: no acredita por sí solo revisión 0004 sin diferencias, autorización entre roles, bloqueo por usuarios/casos activos, atomicidad bajo fallos ni concurrencia PostgreSQL. La ejecución funcional observada es compatible con aplicación del backend y nueva auditoría; no se registra como verificación directa de migración.
 
 Actualización documental, sin repetir pruebas de código. Se conservan separados resultados previos: 90 backend aprobadas/3 PostgreSQL omitidas/1 advertencia y 55 UI simuladas/build correcto. RF-7/RF-8 parciales; no se requieren nuevas capturas de los mismos campos.
+
+## 17 de octubre de 2026 — Integraciones PostgreSQL ejecutadas sin omisiones
+
+Ejecutor backend/scripts/test_postgres_isolated.py sobre PostgreSQL 18.6 local temporal: upgrade head, repetición, alembic check sin diferencias y suite completa 103 aprobadas/0 fallos/0 errores/0 omitidas/1 advertencia previa, 21.70s. Resumen leído desde JUnit; servidor y carpeta de la ejecución final retirados. No se utilizó la base de desarrollo.
+
+Se ejecutaron las tres integraciones antes omitidas y dos nuevas: exclusión de bloqueo administrativo con conexiones independientes/lock_timeout y rollback real de departamento/auditoría bajo savepoint. Ocho pruebas nuevas del ejecutor/guardas verifican destinos dedicados y limpieza/conservación al fallar. La prueba de identidad reservada usa ahora correos distintos y comprueba uq_users_entra, evitando confundir rechazo por correo con identidad. No reactiva Entra ID.
+
+Ejecución anterior del nuevo ejecutor completó etapas con salida 0, pero no se consignó conteo no observado; se añadió salida explícita/JUnit y se repitió para obtener el resultado anterior. Primer intento con captura de pipes se interrumpió; restos propios ignorados conservados tras rechazo automático de borrado. Servidor inicial detenido/puerto cerrado comprobados; detalle en PRUEBAS_POSTGRESQL.md.
+
+Además se consultó la API pública de GitHub: run 39090144556, commit c8ad75c, job postgres-integration exitoso en PostgreSQL 17 con upgrades/check/pytest exitosos. Acredita CI de ese commit, no de estas pruebas nuevas. Docker sigue inaccesible desde el entorno; binarios locales proporcionaron aislamiento alternativo sin cambiar el stack. Evidencia 69 JSON y guía PRUEBAS_POSTGRESQL.md.
+
+La suite completa aún contiene fixtures SQLite: cinco pruebas son específicamente PostgreSQL. No se certifican todas las carreras de negocio ni la matriz completa de roles/UI. Frontend sin cambios, no repetido. Sin nuevas capturas manuales requeridas.
