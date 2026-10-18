@@ -109,6 +109,36 @@ class Incident(Base):
     ai_skip_reason: Mapped[str | None] = mapped_column(Text)
     ai_model: Mapped[str | None] = mapped_column(String(120))
     ai_prompt_version: Mapped[str | None] = mapped_column(String(80))
+    content_revision: Mapped[int] = mapped_column(Integer, server_default="0")
+
+
+class AIJob(Base):
+    __tablename__ = "ai_jobs"
+    __table_args__ = (
+        UniqueConstraint("case_id", "input_digest", name="uq_ai_job_input"),
+        CheckConstraint("status IN ('PENDIENTE','EN_PROCESO','COMPLETADA','FALLIDA','OMITIDA')", name="ck_ai_job_status"),
+        CheckConstraint("attempts BETWEEN 0 AND 3", name="ck_ai_job_attempts"),
+        Index("ix_ai_jobs_due", "status", "available_at"),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid, primary_key=True, default=uuid4)
+    case_id: Mapped[UUID] = mapped_column(ForeignKey("incidencias.id"), index=True)
+    reviewed_by: Mapped[UUID] = mapped_column(ForeignKey("users.id"))
+    input_text: Mapped[str] = mapped_column(Text)
+    input_digest: Mapped[str] = mapped_column(String(64))
+    content_revision: Mapped[int] = mapped_column(Integer)
+    catalog: Mapped[list] = mapped_column(JSONB().with_variant(JSON(), "sqlite"))
+    model: Mapped[str] = mapped_column(String(120))
+    prompt_version: Mapped[str] = mapped_column(String(80))
+    status: Mapped[str] = mapped_column(String(20), server_default="PENDIENTE")
+    attempts: Mapped[int] = mapped_column(Integer, server_default="0")
+    available_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    lease_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    lease_token: Mapped[UUID | None] = mapped_column(Uuid)
+    dispatched_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    result: Mapped[dict | None] = mapped_column(JSONB().with_variant(JSON(), "sqlite"))
+    error: Mapped[str | None] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 

@@ -65,6 +65,11 @@ def manage_case(db, actor, case_id, operation, body):
             before.update(titulo=case.titulo, descripcion=case.descripcion)
             if body.descripcion != case.descripcion:
                 case.classification_valid = False
+                case.content_revision += 1
+                case.ai_input_text = case.ai_input_reviewed_by = case.ai_input_reviewed_at = None
+                if case.ai_status == 'PENDIENTE':
+                    case.ai_status = 'OMITIDA'
+                    case.ai_skip_reason = 'Contenido editado; requiere una nueva revisión del texto IA'
             case.titulo, case.descripcion = body.titulo, body.descripcion
             action = "CONTENIDO_EDITADO"
         elif operation == "transition":

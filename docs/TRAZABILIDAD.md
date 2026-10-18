@@ -14,7 +14,7 @@ Fecha de consolidación: 17 de octubre de 2026. La tabla distingue requisito obj
 
 | RF-2 | Registro PERSONA/ENTORNO y edición auditada | Servicios/modelos 0003 y React; evidencias 14–15/62 y pruebas | Escenarios completos de roles/entorno en UI real | Parcial |
 
-| RF-3 | IA sobre texto simulado revisado y validación | Validación humana implementada; servicio externo/worker pendientes | Worker, revisión de entrada y evaluación 50 casos | Parcial; integración IA pendiente |
+| RF-3 | IA revisada, salida estructurada y validación humana | app/ai, services/ai, api/ai, AIJob/0005 y AIAssistance; pruebas de omisión, reintentos, abstención y respuesta tardía | Proveedor/Redis reales, referencias independientes 50+5 y calidad | Implementado parcialmente; no aceptado |
 
 | RF-4 | Asignación, transiciones, confidencialidad y ciclos | Servicios/React, evidencias 16–33/47–57/63/65–66; bloqueo administrativo y rollback comprobados en PostgreSQL aislado | Matriz completa y carreras adicionales de negocio | Parcial |
 
@@ -24,7 +24,7 @@ Fecha de consolidación: 17 de octubre de 2026. La tabla distingue requisito obj
 
 | RF-7 | Usuarios y departamentos | API/React, evidencias 64/68 y pruebas PostgreSQL aisladas hasta 0004; evidencia 69 | Matriz completa, carreras adicionales y check directo de desarrollo | Parcial |
 
-| RF-8 | Panel operativo React | Registro, consulta/filtros, gestión, protección y administración; 55 pruebas UI simuladas | Departamentos reales, móvil, matriz completa y enlaces profundos | Parcial |
+| RF-8 | Panel operativo React | Registro/gestión/protección/admin y asistencia IA revisada; 64 pruebas UI simuladas | IA real, móvil, matriz completa y enlaces profundos | Parcial |
 
 | RNF-1 | Seguridad y permisos por objeto | Hash/sesión y pruebas locales; publicación API en loopback | Reglas de expedientes, HTTPS externo y límite global de tráfico | Parcial |
 
@@ -198,3 +198,5 @@ Actualización 17 de octubre de 2026: API 0.9.0 / React 0.6.0 añaden administra
 Actualización 17 de octubre de 2026: evidencia 68 inspeccionada, historial React de DEMO - PRUEBA 1 con alta, renombrado, baja y reactivación, fechas y motivos. Primera comprobación manual de departamentos acreditada con límites en REPORTE_QA.md; sustituye el pendiente total de ese recorrido. Terminal Alembic/check, matriz completa y concurrencia no acreditados por la imagen. RF-7/RF-8 parciales; pruebas de código no repetidas.
 
 17 de octubre de 2026: integraciones antes omitidas ejecutadas en clúster temporal PostgreSQL 18.6; suite 103 aprobadas/0 omitidas/1 advertencia. Incluye cinco integraciones PostgreSQL y las pruebas originales SQLite. Migración hasta 0004 y check verificados en aislamiento; base de desarrollo sin modificar. CI PostgreSQL 17 del commit c8ad75c observado exitoso. Guía PRUEBAS_POSTGRESQL.md, evidencia 69 JSON y límites en REPORTE_QA.md. Nuevas pruebas remotas y carreras adicionales pendientes; sin nuevas capturas.
+
+17 de octubre de 2026: API 0.10.0 / React 0.7.0 preparan IA revisada, trabajo durable PostgreSQL/avisos Redis y sugerencia independiente de validación humana. Requiere 0005; desactivada por defecto, clave solo worker. 130 backend sin omisiones en aislamiento y 64 UI/build correctos; no acreditan calidad del modelo. Proveedor/Redis reales, despliegue y evaluación independiente 50+5 pendientes. Guía IA.md y evidencia 70; RF-3/RF-8 parciales.

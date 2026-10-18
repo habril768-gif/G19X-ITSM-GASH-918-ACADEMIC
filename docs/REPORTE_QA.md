@@ -430,3 +430,21 @@ Ejecución anterior del nuevo ejecutor completó etapas con salida 0, pero no se
 Además se consultó la API pública de GitHub: run 39090144556, commit c8ad75c, job postgres-integration exitoso en PostgreSQL 17 con upgrades/check/pytest exitosos. Acredita CI de ese commit, no de estas pruebas nuevas. Docker sigue inaccesible desde el entorno; binarios locales proporcionaron aislamiento alternativo sin cambiar el stack. Evidencia 69 JSON y guía PRUEBAS_POSTGRESQL.md.
 
 La suite completa aún contiene fixtures SQLite: cinco pruebas son específicamente PostgreSQL. No se certifican todas las carreras de negocio ni la matriz completa de roles/UI. Frontend sin cambios, no repetido. Sin nuevas capturas manuales requeridas.
+
+## 17 de octubre de 2026 — API 0.10.0 / React 0.7.0: IA revisada
+
+Backend final: ejecutor PostgreSQL 18.6 aislado, 129 aprobadas/0 fallos/0 errores/0 omitidas, 23.97s. Upgrade 0005 repetido y check sin diferencias; servidor/carpeta final retirados. Seis integraciones PostgreSQL, una nueva del trabajo IA/descarte de respuesta por privacidad con proveedor simulado; resto conserva fixtures originales. No son 129 llamadas ni integraciones reales del modelo.
+
+Pruebas nuevas cubren confirmaciones/identificadores/permisos, entrada revisada sin copiar original, durabilidad sin Redis, idempotencia, sugerencia sin decisión oficial, abstención, cancelación antes de envío/cambios durante petición, tres intentos, esquema/catálogo inválidos, lease vencido y propietario antiguo, nueva revisión tras editar y rollback ante fallo de auditoría de solicitud/resultado. Proveedor: configuración Responses/store=false/reintentos 0/salida acotada con constructor/invocación simulados; Redis solo ID. Evaluador prueba denominadores, fallos y Alta→Baja, sin medir calidad real.
+
+Primer pase específico: 18 aprobadas/1 fallo por orden de trabajos creados en un mismo segundo en SQLite. Corregidos timestamp explícito y orden por revisión; siguiente pase 23 aprobadas/9.08s. Con auditoría e integración nueva, suite 129/45.12s; tras acotar salida y completar reporte de falsos negativos, repetición final 129/23.97s.
+
+Frontend completo: 64 aprobadas/9 archivos/66.43s, incluida integración donde la sugerencia no rellena clasificación oficial. Tras ajuste de mensajes, ocho específicas/9.96s y build 24 módulos/658ms correctos. Primera suite de 62 también pasó, sin presentarse como conteo final.
+
+Dependencias y transitivas fijadas; pip check correcto. Compose parseado con PyYAML: clave solo worker/perfil ai. Pip inicial encontró PermissionError de conexión; instalación con wheels oficiales PyPI descargados HTTPS y hashes SHA256 verificados, sin desactivar TLS. Importación detectó escritura de SSLKEYLOGFILE heredado fuera del workspace; validación sin ese log de depuración en proceso hijo solamente, sin modificar configuración persistente/certificados. No se leyó .env real ni clave API.
+
+Sin OpenAI/Redis reales, evaluación independiente 50+5, despliegue/check de desarrollo ni nueva UI manual acreditados. Docker continúa restringido. RF-3 no aceptado por tests de infraestructura; manual operativa. Guía IA.md y evidencia 70.
+
+Verificación adicional final del adaptador: clase real ChatOpenAI/OpenAI SDK con MockTransport HTTP, serializa Responses JSON Schema/store=false/max_output_tokens=1500 y parsea resultado válido; sin red ni credencial real. Pase específico proveedor: 3/3, 5.73s; ampliado chequeo de límite y repetida suite completa nativa final: 130/130 aprobadas, 0 omitidas, 23.65s, migración/check correctos y recursos de esa ejecución retirados. Este es el resultado backend vigente, posterior a los pases de 129 anteriores.
+
+CLI del worker comprobado con AI_ENABLED=false y --once: salida 0, mensaje de IA desactivada y ninguna consulta de cola/proveedor; confirma arranque seguro sin credencial.

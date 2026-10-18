@@ -180,3 +180,11 @@ Se incorpora catálogo administrable por RH con tabla de auditoría propia (0004
 ## 17 de octubre de 2026 — Verificación PostgreSQL sin reutilizar desarrollo
 
 Se usa clúster nativo temporal (PostgreSQL 18.6 ya instalado) con puerto/base/credencial propios y entorno limitado al hijo; Compose conserva PostgreSQL 17. Guardas de nombre/host y current_database previenen errores de destino. Ejecutor exige cero omisiones, detiene recursos y valida su ruta antes de limpiar; si no confirma parada conserva carpeta. Un fallo/interrupción no acredita pruebas. Evidencia de CI 17 del commit anterior se distingue de ejecución local 18.6 y de futuras carreras de negocio. Rechazo automático del borrado manual de restos se respeta sin recurrir a otro mecanismo.
+
+## 17 de octubre de 2026 — IA durable sin autoridad operativa
+
+Texto simulado confirmado por gestor, sin copiar descripción ni admitir confidenciales/conflictos. PostgreSQL conserva solicitud y revisión; Redis solo avisa con UUID y su caída no pierde lo confirmado. Worker revalida antes/después; no se promete retirar petición ya autorizada/iniciada. Tres intentos/lease/token: puede duplicarse llamada/coste tras interrupción, no respuesta aceptada ni decisión oficial.
+
+Abstención es trabajo completado sin categoría forzada. store=false/tracing desactivado no equivalen a retención cero. Clave solo worker y perfil ai desactivado por defecto, modelo local explícito, sin solicitudes externas en desarrollo.
+
+Evaluación separada de fixtures: 50 referencias independientes más 5 abstenciones, todos los falsos negativos de Alta revisables y bloqueo Alta→Baja. No aceptar RF-3 ni declarar calidad sin respuestas reales/referencias independientes. Fuentes/límites en IA.md.

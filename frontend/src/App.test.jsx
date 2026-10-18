@@ -11,6 +11,7 @@ beforeEach(() => {
     if (url.endsWith('/auth/login')) return ok({ access_token: 'memory-test-token' });
     if (url.endsWith('/auth/me')) return ok(user);
     if (url.endsWith('/auth/logout')) return { ok: true, status: 204 };
+    if (url.endsWith('/ai')) return ok({ enabled: false, eligible: true, ai_status: 'PENDIENTE', job: null });
     if (url.endsWith('/participants')) return ok({ items: [] });
     if (url.endsWith('/incidents/options')) return ok({ categories: [], participants: [], departments: [] });
     if (url.includes('/history?')) return ok({ items: [{ id: 'e', accion: 'CREADO', fecha: incident.created_at }], total: 1 });
@@ -152,6 +153,32 @@ it('navega de incidencias al catálogo de departamentos y vuelve sin mezclar vis
   await screen.findByRole('button', { name: incident.titulo });
   expect(screen.queryByText('Departamento UI simulado')).toBeNull();
 });
+
+it('solicita IA y muestra sugerencia sin sustituir la clasificación humana', async () => {
+  let queued = false, completed = false;
+  const original = fetch.getMockImplementation();
+  fetch.mockImplementation(async (url, opts) => {
+    if (url.endsWith('/incidents/options')) return ok({ categories: [{ id: 2, nombre: 'Conflictos' }], participants: [], affected_employees: [], departments: [] });
+    if (url.endsWith('/ai')) {
+      if (opts.method === 'POST') { queued = true; return ok({ received: true, queue_available: true }); }
+      return ok({ enabled: true, eligible: true, job: queued ? { status: completed ? 'COMPLETADA' : 'PENDIENTE', attempts: 1, current: true } : null,
+        suggestion: completed ? { result: 'CLASIFICADA', category_id: 2, priority: 1, suggestion: 'Sugerencia ficticia de IA.', reason: 'Prueba simulada.' } : null });
+    }
+    return original(url, opts);
+  });
+  render(<App />); const ui = await login();
+  await ui.click(screen.getByRole('button', { name: incident.titulo }));
+  await ui.type(await screen.findByLabelText('Texto simulado para la IA'), 'Desacuerdo ficticio sobre una tarea.');
+  await ui.click(screen.getByLabelText('Confirmo que el texto es completamente simulado'));
+  await ui.click(screen.getByLabelText('Revisé que no contiene identificadores personales'));
+  await ui.click(screen.getByRole('button', { name: 'Confirmar texto y solicitar IA' }));
+  await screen.findByText(/Solicitud IA registrada/);
+  completed = true;
+  await ui.click(await screen.findByRole('button', { name: 'Actualizar asistencia IA' }));
+  await screen.findByText('Sugerencia ficticia de IA.');
+  expect(screen.getByLabelText('Categoría oficial').value).toBe('');
+  expect(screen.getByLabelText('Prioridad oficial').value).toBe('');
+}, 15000);
 
 it('gestiona un ciclo completo y recarga detalle e historial después de cada cambio', async () => {
   const state = { ...incident, descripcion: 'Caso ficticio', scope: 'PERSONA', affected_employee_id: 'e', ai_status: 'PENDIENTE', classification_valid: false, assigned_to: null };

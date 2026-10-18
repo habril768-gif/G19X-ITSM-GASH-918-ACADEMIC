@@ -16,9 +16,9 @@ Base: [PRD 1.9](PRD.md). Estado consolidado al 17 de octubre de 2026. Las entrad
 
 | H1 Requisitos y propuesta | PRD, decisiones y propuesta técnica | PRD 1.9 consolidado; propuesta independiente pendiente | Revisión documental y propuesta |
 
-| H2 Arquitectura y entorno | API base, Docker, diseño y React | API/Compose verificados antes de esta entrega; React 0.6.0 preparado; arquitectura formal pendiente | Aplicar API 0.9.0 y actualizar arquitectura |
+| H2 Arquitectura y entorno | API, Docker, React y worker | API 0.10.0/React 0.7.0 y worker optativo preparados; arquitectura formal pendiente | Instalar 0005 y actualizar arquitectura |
 
-| H3 Datos | Esquema y fixtures QA | 0001–0004 verificadas en PostgreSQL aislado; 103 pruebas completas sin omisiones | Check directo de base de desarrollo y carreras adicionales |
+| H3 Datos | Esquema y fixtures QA | 0001–0005 verificadas en PostgreSQL aislado; 130 pruebas completas sin omisiones | Check directo de desarrollo y carreras adicionales |
 
 | H4 Identidad y administración | RF-1 y RF-7 | Autenticación/cuentas/cambio personal con evidencias; departamentos API/React preparados y probados localmente | Migración y recorrido real de departamentos |
 
@@ -26,7 +26,7 @@ Base: [PRD 1.9](PRD.md). Estado consolidado al 17 de octubre de 2026. Las entrad
 
 | H6 Ciclo y confidencialidad | RF-4 y reglas transversales | Gestión/protección con evidencias; exclusión administrativa y rollback verificados en PostgreSQL real | Carreras de negocio adicionales y matriz completa de roles/UI |
 
-| H7 IA | RF-3 | Pendiente; proveedor OpenAI elegido | Worker, omisión de confidenciales y evaluación independiente |
+| H7 IA | RF-3 | Flujo API/React/worker y 0005 preparados; revisor explícito, abstención, reintentos y respuesta tardía probados con proveedor simulado | Instalar 0005, configurar proveedor/Redis y evaluar 50+5 referencias independientes |
 
 | H8 Correo | RF-5 | Pendiente; solo eventos, sin SLA | SMTP capturador y pruebas de permisos |
 
@@ -38,11 +38,11 @@ Base: [PRD 1.9](PRD.md). Estado consolidado al 17 de octubre de 2026. Las entrad
 
 ## Orden inmediato
 
-1. Mantener distinguida la verificación de base de desarrollo (recorrido funcional de departamentos acreditado con evidencia 68) de los upgrades/check ejecutados en base aislada. No repetir altas/seed ni pedir nuevas capturas de recorridos ya documentados.
-2. Continuar H7: IA exclusivamente sobre texto simulado revisado, omisión de confidenciales y evaluación con 50 referencias independientes. H8 correo por eventos y H9 analítica siguen después.
-3. Ampliar carreras de negocio y revisión móvil/matriz de roles; las cinco integraciones PostgreSQL ejecutadas no prueban todas esas combinaciones.
-4. Consolidar arquitectura/manuales y entregables H10, sin inventar capacitación, validación de campo ni aprobaciones.
-5. Al subir el nuevo commit, revisar CI: el éxito remoto observado corresponde al commit c8ad75c; las nuevas pruebas ya pasaron localmente en PostgreSQL 18.6.
+1. Instalar API 0.10.0 y aplicar 0005 en el proyecto sin activar llamadas externas. Seguir IA.md; no repetir seed/bootstrap ni capturas previas.
+2. Configurar localmente proveedor/modelo/worker y comprobar Redis/OpenAI reales cuando exista acceso. Ninguna clave se comparte en chat ni frontend.
+3. Completar evaluación con 50 referencias independientes y cinco abstenciones, sin confundir fixtures o cálculos de prueba con calidad real.
+4. Continuar H8 correo y H9 analítica, manteniendo separados pendientes de aceptación de IA, carreras adicionales y matriz UI/móvil.
+5. Verificar CI del nuevo commit después de subirlo y completar arquitectura/manuales H10 sin inventar validación de campo ni capacitación.
 
 ## Calendario y capacidad
 
@@ -178,3 +178,5 @@ Actualización 17 de octubre de 2026: evidencia 67 revisada, login vacío con av
 Actualización 17 de octubre de 2026: evidencia 68 inspeccionada, historial React de DEMO - PRUEBA 1 con alta, renombrado, baja y reactivación, fechas y motivos. Primera comprobación manual de departamentos acreditada con límites en REPORTE_QA.md; sustituye el pendiente total de ese recorrido. Terminal Alembic/check, matriz completa y concurrencia no acreditados por la imagen. RF-7/RF-8 parciales; pruebas de código no repetidas.
 
 17 de octubre de 2026: integraciones antes omitidas ejecutadas en clúster temporal PostgreSQL 18.6; suite 103 aprobadas/0 omitidas/1 advertencia. Incluye cinco integraciones PostgreSQL y las pruebas originales SQLite. Migración hasta 0004 y check verificados en aislamiento; base de desarrollo sin modificar. CI PostgreSQL 17 del commit c8ad75c observado exitoso. Guía PRUEBAS_POSTGRESQL.md, evidencia 69 JSON y límites en REPORTE_QA.md. Nuevas pruebas remotas y carreras adicionales pendientes; sin nuevas capturas.
+
+17 de octubre de 2026: API 0.10.0 / React 0.7.0, asistencia revisada con cola durable y worker optativo. Pruebas de infraestructura pasan, no aceptan calidad RF-3. Proveedor/Redis reales, nueva UI manual y evaluación 50+5 pendientes; IA.md y evidencia 70. Sin llamadas OpenAI en desarrollo.

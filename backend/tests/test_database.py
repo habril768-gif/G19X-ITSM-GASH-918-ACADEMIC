@@ -57,3 +57,4 @@ def test_initial_migration_compiles_offline():
     assert "COMMIT" in sql
     assert "CREATE TABLE department_audit_events" in sql
     assert "ix_department_audit_events_department_id" in sql
+    assert "CREATE TABLE ai_jobs" in sql

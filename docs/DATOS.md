@@ -58,3 +58,11 @@ Añade department_audit_events (id UUID, department_id FK, actor_id FK, detalle 
 Readiness exige 0004. La compilación offline y pruebas SQLite no acreditan aplicación PostgreSQL. Ampliada prueba optativa de esquema aislado para comprobar preservación de tres casos y catálogo al aplicar 0004. Actualización real pendiente por falta de acceso al pipe de Docker del entorno del asistente; comandos y restricciones en DEPARTAMENTOS.md. Reversión automática deshabilitada para conservar auditoría.
 
 17 de octubre de 2026: integraciones antes omitidas ejecutadas en clúster temporal PostgreSQL 18.6; suite 103 aprobadas/0 omitidas/1 advertencia. Incluye cinco integraciones PostgreSQL y las pruebas originales SQLite. Migración hasta 0004 y check verificados en aislamiento; base de desarrollo sin modificar. CI PostgreSQL 17 del commit c8ad75c observado exitoso. Guía PRUEBAS_POSTGRESQL.md, evidencia 69 JSON y límites en REPORTE_QA.md. Nuevas pruebas remotas y carreras adicionales pendientes; sin nuevas capturas.
+
+## 17 de octubre de 2026 — 0005: trabajos IA y revisión de contenido
+
+incidencias.content_revision: entero no nulo inicial 0. ai_jobs: UUID, caso/revisor FK, texto/digest, revisión, catálogo JSONB, modelo/prompt, estado/intentos, disponibilidad/lease/token/despacho, resultado/error/fechas. Único por caso/digest; intentos 0–3; estados PENDIENTE/EN_PROCESO/COMPLETADA/FALLIDA/OMITIDA, índices caso y disponibilidad.
+
+No copia descripciones ni genera trabajos existentes. Editar descripción invalida revisión de entrada; snapshots anteriores se conservan. Worker ordena bloqueos caso→trabajo, libera durante HTTP y verifica token. Auditoría usa source IA y operación; no confundir VALIDACION_IA del worker con validación humana. Retención automática de snapshots requiere completar mantenimiento antes de uso real; solo textos simulados.
+
+Migración hasta 0005 repetida/check correctos en PostgreSQL 18.6 aislado; prueba aislada conserva tres casos y audita ai_jobs vacío/revisión 0. Aplicación al proyecto pendiente. Readiness exige 0005; guía IA.md.

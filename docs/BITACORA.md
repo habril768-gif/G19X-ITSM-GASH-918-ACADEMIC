@@ -469,3 +469,9 @@ Propósito: ejecutar las integraciones omitidas sin tocar la base del proyecto. 
 Verificación final: 103 aprobadas, cero omitidas, una advertencia previa, 21.70s; upgrade 0001–0004 repetido y check sin diferencias. Resultado JUnit validado antes de retirada del servidor/carpeta final. Se observaron también pasos exitosos de CI PostgreSQL 17 del commit c8ad75c. Fallo inicial de captura de pipes y rechazo automático de limpieza de restos documentados con sus límites en REPORTE_QA.md/PRUEBAS_POSTGRESQL.md.
 
 Actualizados seguimiento, trazabilidad, modelo/guías y evidencia estructurada 69. Las tres pruebas antes omitidas ya tienen ejecución acreditada en base aislada; el modo sin RUN_DB_TESTS las conserva omitidas por diseño. Pendientes: CI del nuevo commit, carreras adicionales de negocio, matriz UI e integraciones IA/correo/analítica. No se exigen más capturas por esta ejecución.
+
+## 17 de octubre de 2026 — Flujo IA con revisión y cola durable
+
+Implementados contratos/proveedor/avisos Redis/worker y evaluador offline en app/ai, servicio/rutas, AIJob/0005 e invalidación de entrada al editar descripción. API 0.10.0, React 0.7.0 con solicitud/seguimiento/sugerencia separada de clasificación oficial. Compose agrega worker ai optativo y deja clave fuera de API/frontend. Dependencias fijadas; migraciones anteriores y credenciales intactas.
+
+Validación final: 130 backend/0 omitidas/23.65s, upgrade/check 0005 correctos en PostgreSQL aislado; 64 UI/66.43s y ocho específicas tras ajuste de mensaje/9.96s; build 24 módulos/658ms. Fallo de orden temporal e instalación/importación detallados en REPORTE_QA.md. Sin envíos a OpenAI ni medición de calidad; proveedor/Redis simulados. Documentación/modelo/seguimiento y evidencia 70 actualizados. Pendiente aplicar 0005 al proyecto, configurar proveedor, probar Redis/worker reales y reunir 50+5 referencias independientes. RF-3 parcial.

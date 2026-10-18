@@ -18,9 +18,9 @@ def dedicated_database():
 
 def test_migrated_database_and_catalogs():
     engine = get_engine()
-    assert {"users", "incidencias", "historial_incidencias", "departamentos", "department_audit_events"} <= set(inspect(engine).get_table_names())
+    assert {"users", "incidencias", "historial_incidencias", "departamentos", "department_audit_events", "ai_jobs"} <= set(inspect(engine).get_table_names())
     with engine.connect() as c:
-        assert c.execute(text("SELECT version_num FROM alembic_version")).scalar_one() == "0004"
+        assert c.execute(text("SELECT version_num FROM alembic_version")).scalar_one() == "0005"
         assert c.execute(text("SELECT count(*) FROM roles")).scalar_one() == 3
         assert c.execute(text("SELECT count(*) FROM categorias_incidencia")).scalar_one() == 5
 
@@ -39,6 +39,46 @@ def test_entra_identity_is_unique():
             assert exc.value.orig.diag.constraint_name == 'uq_users_entra'
         finally:
             tx.rollback()
+
+
+def test_ai_durable_job_and_late_privacy_response_on_postgres(monkeypatch):
+    from datetime import date
+    from types import SimpleNamespace
+    from uuid import UUID, uuid4
+    from sqlalchemy import select
+    from sqlalchemy.orm import Session
+    from app.ai.contracts import AIInput
+    from app.models import AIJob, Department, Incident, User
+    from app.services.ai import enqueue, process_one
+    monkeypatch.setenv('AI_ENABLED', 'true'); monkeypatch.setenv('OPENAI_MODEL', 'fixture-model')
+    monkeypatch.setattr('app.services.ai.notify', lambda *_: False)
+    with get_engine().connect() as connection:
+        outer = connection.begin()
+        def factory(): return Session(bind=connection, join_transaction_mode='create_savepoint', expire_on_commit=False)
+        try:
+            with factory() as db:
+                home = Department(nombre='IA-QA-'+uuid4().hex, is_active=True); db.add(home); db.flush()
+                admin = User(email=uuid4().hex+'@example.invalid', nombre_completo='RH QA', departamento_id=home.id, rol_id=1, is_active=True)
+                employee = User(email=uuid4().hex+'@example.invalid', nombre_completo='Empleado QA', departamento_id=home.id, rol_id=3, is_active=True)
+                db.add_all([admin, employee]); db.flush()
+                case = Incident(titulo='QA IA', descripcion='Descripción original no enviada', incident_date=date(2026,10,17),
+                                created_by=employee.id, affected_employee_id=employee.id, scope='PERSONA',
+                                reported_department_id=home.id, department_id_at_creation=home.id)
+                db.add(case); db.commit(); ident = case.id
+                body = AIInput(ai_input_text='Dos colaboradores ficticios discrepan sobre una tarea.', confirmed_simulated=True, confirmed_no_identifiers=True)
+                enqueue(db, admin, ident, body)
+                def classify(*_):
+                    with factory() as other:
+                        row = other.get(Incident, ident); row.is_confidential = True
+                        row.ai_status, row.ai_skip_reason = 'OMITIDA', 'Protección QA'; other.commit()
+                    return {'result': 'CLASIFICADA', 'category_id': 2, 'priority': 2, 'suggestion': 'Revisión humana.', 'reason': 'Simulado.'}
+                assert process_one(factory, SimpleNamespace(classify=classify))
+                db.expire_all()
+                result = db.scalar(select(AIJob).where(AIJob.case_id == ident))
+                assert result.status == 'OMITIDA' and result.dispatched_at is not None and result.result is None
+                assert db.get(Incident, ident).ai_suggestion is None and not db.get(Incident, ident).classification_valid
+        finally:
+            outer.rollback()
 
 
 def test_administrative_lock_serializes_exclusive_and_shared_transactions():
@@ -140,5 +180,8 @@ def test_migration_0003_preserves_legacy_cases_in_isolated_schema():
             assert c.execute(text("SELECT count(*) FROM incidencias")).scalar_one() == 3
             assert c.execute(text("SELECT count(*) FROM department_audit_events")).scalar_one() == 0
             assert c.execute(text("SELECT nombre FROM departamentos WHERE id=:id"), {"id": dep}).scalar_one() == 'QA aislado'
+            apply('0005_ai_jobs.py')
+            assert c.execute(text('SELECT count(*) FROM ai_jobs')).scalar_one() == 0
+            assert c.execute(text('SELECT count(*) FROM incidencias WHERE content_revision=0')).scalar_one() == 3
         finally:
             tx.rollback()
