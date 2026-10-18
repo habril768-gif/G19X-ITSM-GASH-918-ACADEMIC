@@ -168,3 +168,5 @@ React 0.2.0 (17 de octubre de 2026): RF-2/RF-8 parciales, alta persona/entorno c
 Actualización 17 de octubre de 2026: evidencia 62 inspeccionada, acuse de alta React con referencia y acceso permitido. Primera prueba manual del registro acreditada con límites en REPORTE_QA.md. RF-2/RF-8 parciales; gestión UI y otros escenarios manuales pendientes.
 
 React 0.3.0, 17 de octubre de 2026: edición, validación, asignación y transiciones en components/CaseManagement.jsx, con 26 pruebas frontend aprobadas y build correcto. RF-3/RF-4/RF-8 parciales; prueba real agrupada pendiente, así como protección/admin UI y otras funciones. Integración de UI completa con API simulada no sustituye PostgreSQL. Ver FRONTEND.md y REPORTE_QA.md.
+
+Actualización 17 de octubre de 2026: evidencia 63 revisada; caso creado en React muestra cierre con resolución, fechas y validación vigente. Resultado manual de gestión inicial acreditado con límites en REPORTE_QA.md. Reapertura/edición manuales y pantallas de protección/admin pendientes; no se declaran RF completos.
