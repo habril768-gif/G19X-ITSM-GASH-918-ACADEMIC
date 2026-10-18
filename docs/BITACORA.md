@@ -445,3 +445,11 @@ Verificación: primer pase 46 aprobadas/2 timeout de pruebas anteriores; repetic
 Se inspeccionó directamente docs/evidencias/67-react-password-actualizada.png, guardada por la autora. Muestra login con correo/contraseña vacíos y aviso «Contraseña actualizada. Se revocaron tus sesiones. Inicia sesión con la nueva contraseña». Sin credenciales ni token visibles; conservada sin edición. Acredita resultado visible y retiro de la vista autenticada tras el flujo guiado, no revocación de todas las sesiones por sí sola.
 
 La autora informó que volvió a iniciar sesión después del cambio; se registra como comprobación manual reportada de acceso con la nueva contraseña, sin inspeccionar ni guardar la credencial. No se comprobó rechazo de contraseña anterior ni de otras sesiones abiertas. RF-1/RF-8 siguen parciales. No se repitieron pruebas de código para este registro; la suite previa de 48 pruebas UI simuladas se mantiene separada.
+
+## 17 de octubre de 2026 — Administración de departamentos
+
+Propósito: cubrir catálogo administrativo pendiente con API y React. Añadidos api/departments.py, services/departments.py, DepartmentAudit, migración 0004 y Departments.jsx con navegación RH. Alta/renombrado/baja lógica/reactivación/historial con motivo y restricciones. Escritura/auditoría transaccionales; exclusión de usuarios activos/casos abiertos para baja. API 0.9.0, React 0.6.0; readiness ahora exige 0004. No se modificaron migraciones anteriores ni dependencias.
+
+Validación final: 90 pruebas backend aprobadas/3 PostgreSQL omitidas/1 advertencia previa, 23.96s; 55 frontend aprobadas, 77.33s; build 23 módulos/571ms. Diagnóstico de conexión interna de TestClient y pasos interrumpidos documentados en REPORTE_QA.md; tests completos se ejecutaron después de habilitar red para pruebas.
+
+Guía DEPARTAMENTOS.md creada; modelo de datos, manuales/README, decisiones, PRD, entregables, trazabilidad y backlog actualizados. Tabla y orden inmediato del backlog sincronizados para evitar presentar estados históricos como vigentes. Docker rechazó acceso desde el entorno del asistente: aplicación 0004, check real, evidencia 68 y concurrencia pendientes. No se declara RF-7 completo ni desplegado.

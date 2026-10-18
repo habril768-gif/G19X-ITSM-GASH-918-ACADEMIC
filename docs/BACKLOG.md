@@ -2,7 +2,7 @@
 
 
 
-Base: [PRD 1.9](PRD.md). Estado consolidado al 15 de octubre de 2026. Las entradas históricas permanecen en Git y BITACORA.md; este archivo muestra el estado actual.
+Base: [PRD 1.9](PRD.md). Estado consolidado al 17 de octubre de 2026. Las entradas históricas permanecen en Git y BITACORA.md; este archivo muestra el estado actual.
 
 
 
@@ -16,15 +16,15 @@ Base: [PRD 1.9](PRD.md). Estado consolidado al 15 de octubre de 2026. Las entrad
 
 | H1 Requisitos y propuesta | PRD, decisiones y propuesta técnica | PRD 1.9 consolidado; propuesta independiente pendiente | Revisión documental y propuesta |
 
-| H2 Arquitectura y entorno | API base, Docker, diseño y estructura React | API y contenedores verificados manualmente; arquitectura formal y React pendientes | Documento de arquitectura |
+| H2 Arquitectura y entorno | API base, Docker, diseño y React | API/Compose verificados antes de esta entrega; React 0.6.0 preparado; arquitectura formal pendiente | Aplicar API 0.9.0 y actualizar arquitectura |
 
-| H3 Datos | Esquema y fixtures de QA | 0001 y seis usuarios DEMO verificados; 0002 implementada, aplicación real pendiente; cambios 1.8 sin implementar | Migración 0002 y diseño de próxima migración |
+| H3 Datos | Esquema y fixtures QA | 0001–0003 verificadas previamente; 0004 preparada para auditoría de departamentos | Aplicar 0004 y alembic check |
 
-| H4 Identidad y administración | RF-1 y RF-7 | Autenticación local y alta básica implementadas; 20 pruebas locales aprobadas en último avance, 2 PostgreSQL omitidas; administración completa pendiente | Login real, logout y gestión de bajas/roles |
+| H4 Identidad y administración | RF-1 y RF-7 | Autenticación/cuentas/cambio personal con evidencias; departamentos API/React preparados y probados localmente | Migración y recorrido real de departamentos |
 
-| H5 Registro y panel | RF-2 y RF-8 | Pendiente; modelos iniciales no equivalen al servicio | Casos PERSONA/ENTORNO y filtros autorizados |
+| H5 Registro y panel | RF-2 y RF-8 | Registro/listado/detalle/filtros React implementados; primeras evidencias 58–62 | Matriz completa de roles/móvil |
 
-| H6 Ciclo y confidencialidad | RF-4 y reglas transversales | Pendiente | Revalidación, recusa y auditoría atómica |
+| H6 Ciclo y confidencialidad | RF-4 y reglas transversales | Gestión React y protección con primeras evidencias 63/65/66; servicios auditados | Pruebas PostgreSQL/concurrencia y matriz completa |
 
 | H7 IA | RF-3 | Pendiente; proveedor OpenAI elegido | Worker, omisión de confidenciales y evaluación independiente |
 
@@ -38,19 +38,11 @@ Base: [PRD 1.9](PRD.md). Estado consolidado al 15 de octubre de 2026. Las entrad
 
 ## Orden inmediato
 
-
-
-1. Aplicar 0002 desde terminal autorizada y verificar primer administrador/login. Seguir AUTENTICACION.md.
-
-2. Diseñar la siguiente migración sin modificar 0001/0002: scope, afectado nullable condicional, departamento reportado, participantes, classification_valid y control de IA. Actualizar DATOS.md como diseño vigente antes de implementarla.
-
-3. Implementar permisos por objeto y conflictos de interés junto con RF-2/RF-4; no construir un CRUD sin restricciones como solución final.
-
-4. Crear diez casos simulados mediante servicio auditado. Implementar panel React y pruebas de acceso/filtrado.
-
-5. Integrar IA solo sobre texto simulado revisado, sin confidenciales; preparar 50 referencias independientes. Integrar correo por eventos y analítica.
-
-
+1. Aplicar API 0.9.0 y migración 0004 desde la terminal con acceso a Docker. Seguir DEPARTAMENTOS.md.
+2. Verificar readiness y recorrido agrupado del catálogo/historial de departamentos (evidencia 68).
+3. Completar matriz de acceso, pruebas PostgreSQL de pruebas y revisión móvil; mantener sus resultados separados de UI simulada/SQLite.
+4. Continuar H7–H9: IA sobre texto simulado revisado con 50 referencias independientes, correo por eventos y analítica con supresión. Estos bloques siguen pendientes.
+5. Consolidar arquitectura/manuales y entregables de H10 sin inventar capacitación ni validación de campo.
 
 ## Calendario y capacidad
 
@@ -180,3 +172,5 @@ Actualización 17 de octubre de 2026: evidencias 65–66 inspeccionadas, primera
 React 0.5.0, 17 de octubre de 2026: pantalla de cambio de contraseña para todos los roles, reutilizando /auth/change-password. Confirma nueva credencial, limpia campos y vuelve al login al guardar; resultado incierto retira sesión local sin reenvío. Sin migración ni backend nuevo. RF-1/RF-8 parciales; comprobación real/evidencia 67 y departamentos pendientes. Uso y límites en FRONTEND.md.
 
 Actualización 17 de octubre de 2026: evidencia 67 revisada, login vacío con aviso de contraseña actualizada. La autora confirmó nuevo inicio de sesión; registro manual reportado, sin exposición de credenciales. Sustituye el pendiente del recorrido básico de cambio personal; otras sesiones/contraseña anterior no comprobadas. RF-1/RF-8 parciales. Límites en REPORTE_QA.md; no se requieren más capturas de este recorrido.
+
+17 de octubre de 2026: API 0.9.0/React 0.6.0 preparados; 90 pruebas backend aprobadas, 3 PostgreSQL omitidas, 1 advertencia previa; 55 pruebas UI simuladas y build correctos. Departamentos implementados en código; instalación 0004 y prueba real pendientes. Límites y comandos en DEPARTAMENTOS.md/REPORTE_QA.md.

@@ -10,9 +10,9 @@ pytestmark = pytest.mark.skipif(os.environ.get("RUN_DB_TESTS") != "1", reason="R
 
 def test_migrated_database_and_catalogs():
     engine = get_engine()
-    assert {"users", "incidencias", "historial_incidencias", "departamentos"} <= set(inspect(engine).get_table_names())
+    assert {"users", "incidencias", "historial_incidencias", "departamentos", "department_audit_events"} <= set(inspect(engine).get_table_names())
     with engine.connect() as c:
-        assert c.execute(text("SELECT version_num FROM alembic_version")).scalar_one() == "0003"
+        assert c.execute(text("SELECT version_num FROM alembic_version")).scalar_one() == "0004"
         assert c.execute(text("SELECT count(*) FROM roles")).scalar_one() == 3
         assert c.execute(text("SELECT count(*) FROM categorias_incidencia")).scalar_one() == 5
 
@@ -68,5 +68,9 @@ def test_migration_0003_preserves_legacy_cases_in_isolated_schema():
             env=str(uuid4())
             c.execute(text("INSERT INTO incidencias (id,titulo,descripcion,incident_date,created_by,affected_employee_id,department_id_at_creation,scope,reported_department_id,category_id) VALUES (:id,'Entorno','Riesgo simulado',CURRENT_DATE,:u,NULL,:d,'ENTORNO',:d,4)"),{"id":env,"u":user,"d":dep})
             assert c.execute(text("SELECT affected_employee_id FROM incidencias WHERE id=:id"),{"id":env}).scalar_one() is None
+            apply("0004_department_audit.py")
+            assert c.execute(text("SELECT count(*) FROM incidencias")).scalar_one() == 3
+            assert c.execute(text("SELECT count(*) FROM department_audit_events")).scalar_one() == 0
+            assert c.execute(text("SELECT nombre FROM departamentos WHERE id=:id"), {"id": dep}).scalar_one() == 'QA aislado'
         finally:
             tx.rollback()

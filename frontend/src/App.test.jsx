@@ -141,6 +141,18 @@ it.each(['ADMIN_RH', 'SUPERVISOR', 'EMPLEADO'])('permite cambiar contraseña a %
   expect(localStorage.length).toBe(0); expect(sessionStorage.length).toBe(0);
 });
 
+it('navega de incidencias al catálogo de departamentos y vuelve sin mezclar vistas', async () => {
+  const original = fetch.getMockImplementation();
+  fetch.mockImplementation((url, opts) => url.includes('/departments?') ? Promise.resolve(ok({ items: [{ id: 'd', nombre: 'Departamento UI simulado', is_active: true }], total: 1 })) : original(url, opts));
+  render(<App />); const ui = await login();
+  await ui.click(screen.getByRole('button', { name: /Departamentos/ }));
+  await screen.findByText('Departamento UI simulado');
+  expect(screen.queryByText(incident.titulo)).toBeNull();
+  await ui.click(screen.getByRole('button', { name: /Incidencias/ }));
+  await screen.findByRole('button', { name: incident.titulo });
+  expect(screen.queryByText('Departamento UI simulado')).toBeNull();
+});
+
 it('gestiona un ciclo completo y recarga detalle e historial después de cada cambio', async () => {
   const state = { ...incident, descripcion: 'Caso ficticio', scope: 'PERSONA', affected_employee_id: 'e', ai_status: 'PENDIENTE', classification_valid: false, assigned_to: null };
   const events = [];

@@ -2,7 +2,7 @@
 
 
 
-Fecha de consolidación: 15 de octubre de 2026. La tabla distingue requisito objetivo, evidencia existente y trabajo pendiente. El detalle histórico y los resultados de pruebas están en REPORTE_QA.md y BITACORA.md.
+Fecha de consolidación: 17 de octubre de 2026. La tabla distingue requisito objetivo, evidencia existente y trabajo pendiente. El detalle histórico y los resultados de pruebas están en REPORTE_QA.md y BITACORA.md.
 
 
 
@@ -10,21 +10,21 @@ Fecha de consolidación: 15 de octubre de 2026. La tabla distingue requisito obj
 
 | --- | --- | --- | --- | --- |
 
-| RF-1 | Sesiones locales, contraseña, revocación | core/security.py, api/auth.py, manage_users.py; tests/test_auth.py; migración 0002 | Aplicar 0002 y probar bootstrap/login/logout en PostgreSQL | Implementado parcialmente verificado |
+| RF-1 | Sesiones locales, contraseña y revocación | API auth y React 0.5+; evidencias 09–11, 43–46 y 67 con límites | Otras sesiones, matriz integral y concurrencia | Parcial |
 
-| RF-2 | Registro PERSONA/ENTORNO y edición auditada | Modelos iniciales en app/models; solo 0001 verificada, sin rutas de incidencias | Afectado condicional, validación de participantes, scope y edición | Pendiente de servicio y migración adicional |
+| RF-2 | Registro PERSONA/ENTORNO y edición auditada | Servicios/modelos 0003 y React; evidencias 14–15/62 y pruebas | Escenarios completos de roles/entorno en UI real | Parcial |
 
-| RF-3 | IA sobre texto simulado revisado y validación | Campos básicos IA; OpenAI elegido | Worker, eligibility check, OMITIDA, classification_valid, prueba de 50 casos | Pendiente |
+| RF-3 | IA sobre texto simulado revisado y validación | Validación humana implementada; servicio externo/worker pendientes | Worker, revisión de entrada y evaluación 50 casos | Parcial; integración IA pendiente |
 
-| RF-4 | Asignación, transiciones y ciclos | Campos iniciales y restricciones básicas | Servicio atómico, revalidación, gestor independiente, reapertura/retroceso protector | Pendiente |
+| RF-4 | Asignación, transiciones, confidencialidad y ciclos | Servicios y React; evidencias 16–33/47–57/63/65–66 | Matriz completa, concurrencia/PostgreSQL | Parcial |
 
 | RF-5 | Correo por eventos | Variables SMTP de ejemplo | Capturador, eventos, acceso antes de envío, reintentos y deduplicación | Pendiente |
 
 | RF-6 | Reportes agregados | Fechas y departamento histórico iniciales | Vistas, Power BI, métricas y fecha de corte | Pendiente |
 
-| RF-7 | Administración de usuarios/departamentos | Alta local restringida y comandos de bootstrap/reset; tests/test_auth.py | Bajas y roles/departamentos con reasignación; no perder último admin | Parcial |
+| RF-7 | Usuarios y departamentos | Cuentas API/React con evidencia 64; departamentos API 0.9.0/React 0.6.0 y auditoría 0004 preparados | Aplicar 0004 y verificar departamentos; PostgreSQL real/concurrencia | Parcial |
 
-| RF-8 | Panel React y consultas | Solo estructura frontend | Login, listado paginado, filtros, detalle, acciones, errores y administración | Pendiente |
+| RF-8 | Panel operativo React | Registro, consulta/filtros, gestión, protección y administración; 55 pruebas UI simuladas | Departamentos reales, móvil, matriz completa y enlaces profundos | Parcial |
 
 | RNF-1 | Seguridad y permisos por objeto | Hash/sesión y pruebas locales; publicación API en loopback | Reglas de expedientes, HTTPS externo y límite global de tráfico | Parcial |
 
@@ -192,3 +192,5 @@ Actualización 17 de octubre de 2026: evidencias 65–66 inspeccionadas, primera
 React 0.5.0, 17 de octubre de 2026: pantalla de cambio de contraseña para todos los roles, reutilizando /auth/change-password. Confirma nueva credencial, limpia campos y vuelve al login al guardar; resultado incierto retira sesión local sin reenvío. Sin migración ni backend nuevo. RF-1/RF-8 parciales; comprobación real/evidencia 67 y departamentos pendientes. Uso y límites en FRONTEND.md.
 
 Actualización 17 de octubre de 2026: evidencia 67 revisada, login vacío con aviso de contraseña actualizada. La autora confirmó nuevo inicio de sesión; registro manual reportado, sin exposición de credenciales. Sustituye el pendiente del recorrido básico de cambio personal; otras sesiones/contraseña anterior no comprobadas. RF-1/RF-8 parciales. Límites en REPORTE_QA.md; no se requieren más capturas de este recorrido.
+
+Actualización 17 de octubre de 2026: API 0.9.0 / React 0.6.0 añaden administración de departamentos con auditoría 0004. Código probado localmente: 90 backend aprobadas/3 PostgreSQL omitidas/1 advertencia y 55 UI simuladas/build correcto. Despliegue/migración real, concurrencia y evidencia 68 pendientes. Ver DEPARTAMENTOS.md y REPORTE_QA.md.

@@ -24,6 +24,16 @@ class Department(Base):
     is_active: Mapped[bool] = mapped_column(Boolean, server_default=true())
 
 
+class DepartmentAudit(Base):
+    """Historial administrativo separado de los expedientes personales."""
+    __tablename__ = "department_audit_events"
+    id: Mapped[UUID] = mapped_column(Uuid, primary_key=True, default=uuid4)
+    department_id: Mapped[UUID] = mapped_column(ForeignKey("departamentos.id"), index=True)
+    actor_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"))
+    detalle: Mapped[dict] = mapped_column(JSONB().with_variant(JSON(), "sqlite"))
+    fecha: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
 class User(Base):
     __tablename__ = "users"
     __table_args__ = (

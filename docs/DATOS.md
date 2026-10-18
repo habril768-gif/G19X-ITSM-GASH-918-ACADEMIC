@@ -50,3 +50,9 @@ Pruebas SQLite con FK habilitadas: ámbito/afectado, categoría de entorno, band
 Prueba PostgreSQL optativa: crea un esquema QA aislado en una transacción, aplica 0001/0002, inserta dos casos simulados, aplica 0003 y comprueba conservación, relleno y alta ENTORNO. Revierte la transacción al terminar. Solo se ejecuta con RUN_DB_TESTS=1 contra base de pruebas; la CI preparada usa PostgreSQL aislado y alembic check. No ejecutar contra datos reales.
 
 Resultados actuales y límites en REPORTE_QA.md. Generar SQL o pasar pruebas SQLite no equivale a haber aplicado 0003 en PostgreSQL.
+
+## 17 de octubre de 2026 — Migración 0004 preparada
+
+Añade department_audit_events (id UUID, department_id FK, actor_id FK, detalle JSONB, fecha timestamptz) e índice por departamento. Generación UUID a cargo del modelo, como tablas anteriores. Catálogo departamentos y sus referencias permanecen intactos; no se rellenan eventos de altas históricas. Servicio transaccional escribe valores antes/después y motivo; no se añade FK ficticia a un expediente ni se reutiliza USUARIO_ACTUALIZADO para departamentos.
+
+Readiness exige 0004. La compilación offline y pruebas SQLite no acreditan aplicación PostgreSQL. Ampliada prueba optativa de esquema aislado para comprobar preservación de tres casos y catálogo al aplicar 0004. Actualización real pendiente por falta de acceso al pipe de Docker del entorno del asistente; comandos y restricciones en DEPARTAMENTOS.md. Reversión automática deshabilitada para conservar auditoría.

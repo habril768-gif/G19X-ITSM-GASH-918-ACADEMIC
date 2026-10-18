@@ -382,3 +382,5 @@ Estado UI al 17 de octubre de 2026: React 0.3.0 incorpora edición/validación/a
 Estado UI al 17 de octubre de 2026: React 0.4.0 incorpora administración de cuentas y protección/participantes/revisión desde expediente. Sustituye esos pendientes históricos; no modifica reglas de negocio del PRD. 40 pruebas UI simuladas y build aprobados. RF-4/RF-7/RF-8 parciales: verificación real de esta entrega, CRUD departamentos y demás límites en FRONTEND.md.
 
 Estado UI al 17 de octubre de 2026: React 0.5.0 añade cambio personal de contraseña para todos los roles sobre API existente, con confirmación y retiro de sesión al guardar. No modifica las reglas de credenciales del PRD. RF-1/RF-8 parciales; recorrido real pendiente y límites en FRONTEND.md.
+
+Actualización 17 de octubre de 2026: API 0.9.0 / React 0.6.0 añaden administración de departamentos con historial propio, baja lógica protegida y reactivación. Requiere aplicar 0004; sustituye el pendiente de código de departamentos, sin acreditar despliegue ni recorrido real. Guía vigente DEPARTAMENTOS.md. RF-7/RF-8 parciales; instalación, PostgreSQL real/concurrencia y evidencia 68 pendientes.

@@ -172,3 +172,7 @@ Se reutilizan rutas backend existentes, sin duplicar políticas de acceso. RH ad
 ## 17 de octubre de 2026 — Cambio de contraseña en UI
 
 Se ofrece cambio personal a los tres roles usando el contrato existente. Confirmación solo local, sin persistencia de campos ni token. Éxito vuelve al login tras revocación por API. Red/5xx se trata como resultado incierto: retirar sesión local y no repetir automáticamente una escritura potencialmente completada. Contraseña perdida conserva recuperación por operador; no se añade restablecimiento público ni nuevas políticas de credencial. Una sola evidencia de login vacío, nunca formulario con credenciales.
+
+## 17 de octubre de 2026 — Baja lógica y auditoría de departamentos
+
+Se incorpora catálogo administrable por RH con tabla de auditoría propia (0004), sin distorsionar eventos de usuario/incidencia. No hay eliminación física ni traslados masivos. Baja bloqueada con usuarios activos o casos abiertos de entorno/de afectados actuales; los casos finalizados y referencias históricas se conservan. Motivo obligatorio también para alta y reactivación. Se preservan catálogos antiguos sin fabricar historia y se reutiliza bloqueo administrativo con revalidación de actor. No se declara concurrencia validada por SQLite ni migración aplicada sin evidencia. Guía DEPARTAMENTOS.md y una sola captura de historial prevista.

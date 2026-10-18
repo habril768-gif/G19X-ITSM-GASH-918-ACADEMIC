@@ -72,3 +72,5 @@ Ver [AUTENTICACION.md](../docs/AUTENTICACION.md): migraciÃ³n 0002, bootstrap i
 ## Esquema de incidencias
 
 API 0.4.0 requiere 0003 para readiness. Ver docs/DATOS.md para actualización y conservación. No existen todavía rutas de gestión de incidencias; los modelos no sustituyen sus servicios de permisos.
+
+Actualización 17 de octubre de 2026: API 0.9.0 / React 0.6.0 añaden administración de departamentos con historial propio, baja lógica protegida y reactivación. Requiere aplicar 0004; sustituye el pendiente de código de departamentos, sin acreditar despliegue ni recorrido real. Guía vigente DEPARTAMENTOS.md. RF-7/RF-8 parciales; instalación, PostgreSQL real/concurrencia y evidencia 68 pendientes.

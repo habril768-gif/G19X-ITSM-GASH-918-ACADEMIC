@@ -55,3 +55,5 @@ def test_initial_migration_compiles_offline():
     assert "INSERT INTO roles" in sql
     assert "INSERT INTO categorias_incidencia" in sql
     assert "COMMIT" in sql
+    assert "CREATE TABLE department_audit_events" in sql
+    assert "ix_department_audit_events_department_id" in sql
