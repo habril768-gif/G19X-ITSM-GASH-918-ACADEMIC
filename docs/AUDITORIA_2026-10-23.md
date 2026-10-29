@@ -32,3 +32,9 @@ Para la captura nueva, usa un caso ficticio visible al reportante: clasifícalo,
 - Se conserva pendiente RNF-2: las siete formales anteriores fallaron el umbral. Ningún diagnóstico breve acredita el requisito.
 
 La ejecución completa de backend y la migración en PostgreSQL se delegan a los workflows ya definidos de GitHub al publicar; su resultado debe leerse en Actions, no suponerse aprobado. Registro estructurado: [evidencia 201](evidencias/201-respuesta-auditoria-cierre-correo.json).
+
+## Publicación y comprobación remota confirmadas
+
+**Publicado el 29 de octubre:** [commit1794299 en main](https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/commit/179429934fb632e1874bd0dcd67ae00747e0f4ff). Código y documentación ya están disponibles para el siguiente corte. La instantánea preserva los archivos revisados; los commits locales originales permanecen respaldados en un bundle local.
+
+GitHub Actions: [backend y PostgreSQL](https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/40946040298) aprobados; [frontend](https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/40946040141) aprobado. Se verificó además la generación OpenAPI con descripción UTF-8 correcta. [Evidencia202](evidencias/202-publicacion-auditoria-ci-aprobada.json). Estas comprobaciones resuelven la publicación y validan el código/migración en CI; la captura del aviso de cierre en Mailpit del equipo y RNF-2 siguen pendientes.

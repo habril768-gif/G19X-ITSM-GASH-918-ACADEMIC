@@ -15,7 +15,7 @@ El comando carga dos departamentos identificados como DEMO y seis usuarios: un A
 
 ## Ejecutar desde la raíz del repositorio
 
-Con Docker Desktop abierto y revisión 0001 aplicada:
+Con Docker Desktop abierto y las migraciones vigentes aplicadas según el README:
 
 ```powershell
 docker compose up -d --build --wait
@@ -40,4 +40,4 @@ Repite el comando para las cuentas de la tabla que necesites probar. Introduce u
 
 ## Validación
 
-Las pruebas test_seed_demo.py ejecutan solo las tablas roles, departamentos y users en SQLite con claves foráneas habilitadas. Comprueban carga repetible, conservación de bajas, roles y reversión transaccional. No sustituyen la ejecución real PostgreSQL ni prueban permisos de incidencias. Los diez casos ficticios del plan de QA se agregarán cuando exista el servicio de creación auditada.
+Las pruebas test_seed_demo.py ejecutan solo las tablas roles, departamentos y users en SQLite con claves foráneas habilitadas. Comprueban carga repetible, conservación de bajas, roles y reversión transaccional. No sustituyen la ejecución real PostgreSQL ni prueban permisos de incidencias. Las incidencias ficticias se registran desde el panel con una cuenta habilitada; esta carga no las crea.

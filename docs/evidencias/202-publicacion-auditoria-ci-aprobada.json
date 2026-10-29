@@ -1,0 +1,42 @@
+{
+  "fecha_local": "2026-10-29",
+  "commit_publicado": "179429934fb632e1874bd0dcd67ae00747e0f4ff",
+  "rama": "main",
+  "arbol_verificado": "a0bf144c395d8795621e8db87ef2eead29c6c587",
+  "archivos": 495,
+  "recepcion": "CONFIRMADA_GITHUB_Y_GIT_LS_REMOTE",
+  "ci": {
+    "backend": {
+      "run_id": 40946040298,
+      "jobs": [
+        {
+          "id": 123701525901,
+          "name": "tests",
+          "conclusion": "success"
+        },
+        {
+          "id": 123701525628,
+          "name": "postgres-integration",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "frontend": {
+      "run_id": 40946040141,
+      "conclusion": "success"
+    }
+  },
+  "openapi_local": {
+    "version": "3.1.0",
+    "rutas": 25,
+    "descripcion_utf8": "OK",
+    "servidor_http": false
+  },
+  "limites": [
+    "CI corresponde a1794299; no Docker local",
+    "Captura Mailpit del nuevo cierre pendiente",
+    "RNF-2 pendiente; no otra carga",
+    "Índice y HEAD de carpeta original sin modificar; publicación desde copia autorizada",
+    "Historial original local conservado en audit-history-20261029.bundle; snapshot remoto conserva contenido, no reproduce fechas originales de commits no enviados"
+  ]
+}
