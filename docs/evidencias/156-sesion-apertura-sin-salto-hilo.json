@@ -1,0 +1,42 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "APERTURA_ASINCRONA_PREPARADA_INTEGRACION_PENDIENTE",
+  "motivo": "155 midió cinco pasos por hilos en edición; construir Session ocupó 0,043 ms dentro del worker frente a unos 15 ms de espera/retorno. Se elimina exclusivamente el paso de apertura.",
+  "cambio": [
+    "get_session pasa a generador asíncrono; construye Session(get_engine()) sin consultas ni checkout de conexión.",
+    "Autenticación, endpoints, SQL, commit y validación conservan su ejecución existente. Sin caché nueva, nuevas dependencias o cambios de permisos/auditoría/outbox.",
+    "El finally envía Session.close al worker con CapacityLimiter(1) independiente por cierre, preservando la liberación cuando el limiter general está ocupado, como FastAPI contextmanager_in_threadpool.",
+    "CancelScope(shield=True) protege el cierre frente a cancelación de ámbito AnyIO; no se reintenta ni se suprimen excepciones.",
+    "Session.close puede revertir una transacción: no se ejecuta en el event loop. No se añade commit implícito.",
+    "La instrumentación v3 registrará close como other; no cambian sus categorías ni validadores. Se espera eliminar dependency_enter; el conteo real queda pendiente."
+  ],
+  "validacion": {
+    "local": "7/7 SessionLifecycleTests aprobadas en 0,143 s con Python 3.11, SQLAlchemy y SQLite reales, ejecutor ThreadPoolExecutor real y dobles de await/CancelScope/CapacityLimiter sin event loop.",
+    "casos_locales": [
+      "Entrada sin SQL/salto y cierre único incluso con aclose repetido.",
+      "Rollback de escritura sin commit en hilo distinto del principal.",
+      "Persistencia de escritura confirmada.",
+      "Propagación de la misma excepción de endpoint con cierre.",
+      "BaseException/CancelledError inyectada conserva identidad y programa cierre protegido.",
+      "Fallo de close se propaga sin reintento.",
+      "Fallo de factory no programa un cierre inexistente."
+    ],
+    "estatica": "AST válido en ambos archivos; revisión del cierre instalado en FastAPI y búsqueda de llamadores: producción usa Depends y los overrides de pruebas conservan la identidad de la función.",
+    "preparadas_no_ejecutadas": [
+      "AnyIO real: cierre con el limiter general saturado.",
+      "AnyIO real: cancelación de ámbito espera al cierre antes de propagarse.",
+      "FastAPI TestClient real: generador asíncrono original, endpoint y cierre en workers, rollback tras HTTP 200 y 409."
+    ]
+  },
+  "limites": [
+    "Las 7 locales no prueban cancelación/planificación AnyIO real; las 3 integraciones nuevas y la regresión API deben ejecutarse en el entorno de la autora. Aquí se evita repetir el bloqueo conocido de creación de event loop/socketpair.",
+    "No se ejecutaron Docker, smoke o full. Ningún nuevo p95 ni ahorro de latencia demostrado.",
+    "150 sigue siendo la última formal, FALLIDA_UMBRAL; RNF-2 pendiente. No restar los 15 ms del diagnóstico anterior al p95.",
+    "El get_engine inicial construye engine/pool/dialecto, sin conectar; las lecturas y el rollback permanecen bloqueantes en worker.",
+    "Sin commit Git: el entorno no permite resolverlo como work tree; cambios guardados en los archivos existentes."
+  ],
+  "sha256": {
+    "backend/app/core/database.py": "9e9157538076f6222a9715eb27a00b04d63f632b8c92e737b581b159aacee894",
+    "backend/tests/test_database_session.py": "3fba3f8c2bd72af378bed66ebf59e0f30bf38549605425cbaa849c3680c393d6"
+  }
+}

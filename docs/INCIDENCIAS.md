@@ -1,6 +1,6 @@
-# Registro y consulta de incidencias
+# Registro y gestión de incidencias
 
-API 0.7.0, esquema 0003. Entrega backend parcial de RF-2/RF-3/RF-4/RF-8: registro, consultas, clasificación humana, asignación, edición, transiciones y protección de participantes/confidencialidad. Sin frontend, envío IA ni correo. Las secciones 0.5/0.6 describen entregas previas; las ampliaciones actuales están al final.
+Registro, consultas, clasificación humana, asignación, edición, transiciones y protección de participantes/confidencialidad están implementados en API y panel React. IA y correo tienen guías propias. Aplica las migraciones pendientes antes de usar las rutas; los recorridos históricos no sustituyen la aceptación integral.
 
 ## Rutas protegidas
 
@@ -23,7 +23,7 @@ Participantes requieren ID válido y motivo; máximo técnico de 20 por petició
 
 Solicitar confidencialidad o involucrar a Supervisor/Admin RH hace el caso confidencial desde la creación, sin llamada IA (OMITIDA y motivo). No se asigna responsable automáticamente: puede permanecer PENDIENTE hasta disponer de RH independiente. El afectado gestor o participante gestor DECLARADO/CONFIRMADO no tiene acceso, aunque sea Admin RH. El reportante no se considera involucrado automáticamente.
 
-El predicado SQL verifica nuevamente la participación y el rol actual del afectado/participantes para no exponer un caso si una promoción dejó una marca de confidencialidad desactualizada. La actualización persistente de marca y reasignación por cambios de roles todavía pertenece al servicio administrativo pendiente; por eso no se declara terminada toda la recusa del PRD.
+El predicado SQL verifica nuevamente la participación y el rol actual del afectado/participantes para no exponer un caso si una promoción dejó una marca de confidencialidad desactualizada. El servicio administrativo coordina la actualización persistente de restricciones y reasignaciones por cambios de rol; las pruebas no sustituyen la aceptación completa de la recusa.
 
 Si un caso no es confidencial, el empleado ve sus personales o riesgos generales que creó y siguen en su departamento; supervisor ve su departamento; Admin RH ve todo excepto los casos en que esté involucrado. Conteo, filtros, búsqueda, detalle, participantes e historial aplican el mismo conjunto autorizado. El historial del empleado se reduce a eventos para no exponer texto anterior o terceros.
 
@@ -35,13 +35,13 @@ page >=1; page_size 20 por defecto y máximo 100. Filtros status, priority (1–
 
 ## Prueba manual desde la raíz
 
-No hay migración nueva respecto a 0003. Con Docker Desktop abierto:
+Con las migraciones al día y Docker Desktop abierto:
 
 ```powershell
 docker compose up -d --build --wait
 ```
 
-Abrir /docs y comprobar versión 0.5.0. Login local y Authorize como indica AUTENTICACION.md. Ejecutar GET /incidents/options para obtener el ID de un empleado DEMO, por ejemplo Empleado RH Demo; no elegir al propio administrador como afectado para esta primera prueba.
+Abrir /docs y comprobar el contrato disponible. Login local y Authorize como indica AUTENTICACION.md. Ejecutar GET /incidents/options para obtener el ID de un empleado DEMO, por ejemplo Empleado RH Demo; no elegir al propio administrador como afectado para esta primera prueba.
 
 POST /incidents, sustituyendo el UUID con el obtenido:
 
@@ -63,13 +63,13 @@ Evidencias previstas: docs/evidencias/14-registro-incidencia-201.png y 15-listad
 
 ## Pruebas y límites
 
-Suite nueva tests/test_incidents.py usa SQLite con claves foráneas y HTTP TestClient; sustituye únicamente la dependencia de identidad por actores de prueba. No prueba credenciales reales ni reemplaza pruebas PostgreSQL. La autenticación local tiene sus propias pruebas existentes.
+Las pruebas HTTP y de servicios cubren rollback de auditoría, filtros/count sin fuga, IDOR, ámbito, participantes, confidencialidad y ciclo. PostgreSQL aislado añade comprobaciones de persistencia y bloqueos; SQLite por sí solo no verifica concurrencia real. Los resultados y sus límites están en [QA](REPORTE_QA.md).
 
-Se verifica rollback completo ante fallo de auditoría, filtros/count sin fuga, 404/IDOR, límites PERSONA/ENTORNO, participantes, confidencialidad y recusa incluso si cambia el rol del afectado. No se simula que ya existan worker, frontend o transiciones. Los endpoints de mutación restantes se implementarán con sus pruebas antes de aceptar el ciclo de vida completo.
+El panel y los workers están implementados. La aceptación completa requiere escenarios por rol y protección en un entorno real; no se deduce de una captura ni de probar una ruta aislada.
 
-## Gestión del ciclo — API 0.6.0
+## Gestión del ciclo
 
-Sin migración nueva: conserva esquema 0003. Todas las rutas exigen gestor con acceso independiente al caso; empleados no pueden modificarlos. Rechaza gestor involucrado o fuera de departamento. Operaciones y auditoría comparten transacción; PostgreSQL bloquea la fila del caso antes de reevaluar acceso y estado. Las pruebas SQLite no verifican bloqueo concurrente real.
+Con las migraciones al día, todas las rutas exigen gestor con acceso independiente al caso; empleados no pueden modificarlos. Rechaza gestor involucrado o fuera de departamento. Operaciones y auditoría comparten transacción; PostgreSQL bloquea la fila del caso antes de reevaluar acceso y estado. Las pruebas SQLite no verifican bloqueo concurrente real.
 
 | Método y ruta | Cuerpo y reglas |
 | --- | --- |
@@ -90,7 +90,7 @@ Reconstruir desde la raíz con Docker Desktop abierto:
 docker compose up -d --build --wait
 ```
 
-Abrir /docs, actualizar y verificar 0.6.0. Volver a iniciar sesión y autorizar si expiró. Obtener ID del caso Ausencia simulada con GET /incidents. Abrir PUT /incidents/{case_id}/classification, pegar ID y enviar:
+Abrir /docs y actualizar el contrato. Volver a iniciar sesión y autorizar si expiró. Obtener ID del caso Ausencia simulada con GET /incidents. Abrir PUT /incidents/{case_id}/classification, pegar ID y enviar:
 
 ```json
 {"category_id":1,"priority":2}
@@ -100,9 +100,9 @@ Esperar 200 y classification_valid=true con validador/fecha. Evidencia prevista 
 
 Iniciar revisión con POST transitions y {"status":"EN_REVISION"}; resolver con {"status":"RESUELTA","resolution_text":"Acción correctiva simulada para la prueba académica"}; cerrar con {"status":"CERRADA"}; reabrir con {"status":"EN_REVISION","reason":"Nueva información simulada"}. Comprobar historial y conservación de ciclos. Estas son instrucciones previstas, no pruebas manuales ya acreditadas.
 
-## Protección y participantes — API 0.7.0
+## Protección y participantes
 
-Sustituye los pendientes de esta guía sobre servicios de participantes/confidencialidad de 0.5/0.6. Esquema 0003 sin nueva migración. Las tres operaciones requieren Admin RH activo e independiente con acceso al expediente, solo PENDIENTE o EN_REVISION. Casos resueltos/cerrados deben reabrirse primero.
+Las tres operaciones requieren Admin RH activo e independiente con acceso al expediente, solo PENDIENTE o EN_REVISION. Casos resueltos/cerrados deben reabrirse primero.
 
 | Método y ruta | Cuerpo |
 | --- | --- |
@@ -114,7 +114,7 @@ Respuesta: acuse id, received y can_view. No devuelve expediente: declarar al pr
 
 Se conserva motivo original de declaración. Revisar registra actor/fecha/motivo y anterior estado en auditoría. DESCARTADO no retira por sí solo confidencialidad. Para desmarcarla se requiere operación explícita con motivo y ningún Supervisor/Admin RH involucrado. Una relación descartada puede corregirse por otro estado con motivo, conservando cambios en historial.
 
-Al añadir/confirmar un gestor se activa confidencialidad y ai_status=OMITIDA. Retirarla no relanza IA automáticamente. Se preservan las sugerencias históricas si existieran; no se invoca proveedor externo. El worker y su comprobación previa a envío siguen pendientes.
+Al añadir/confirmar un gestor se activa confidencialidad y ai_status=OMITIDA. Retirarla no relanza IA automáticamente. Se preservan las sugerencias históricas si existieran; no se invoca proveedor externo. El worker vuelve a comprobar elegibilidad antes del envío y al aceptar la respuesta; consultar los límites de envío en IA.md.
 
 Cuando el responsable pierde acceso, en PENDIENTE se desasigna. En EN_REVISION se conserva uno elegible, se aplica el indicado válido o se selecciona un Admin RH activo independiente por orden de ID. Si no existe, vuelve a PENDIENTE, sin responsable ni inicio de ciclo actual; auditoría conserva valores previos y motivo. No hay retroceso libre por /transitions. Reasignación, restricciones y auditoría usan una transacción y bloqueo de fila del expediente.
 
@@ -122,10 +122,10 @@ El evento CAMBIO_CONFIDENCIALIDAD identifica estas operaciones por detalle.opera
 
 ### Prueba manual de confidencialidad prevista
 
-Reconstruir con docker compose up -d --build --wait; verificar 0.7.0 en /docs y renovar sesión si expiró. Sobre Ausencia simulada en EN_REVISION y con Admin RH como responsable, abrir PUT /incidents/{case_id}/confidentiality y usar:
+Reconstruir con docker compose up -d --build --wait; comprobar el contrato en /docs y renovar sesión si expiró. Sobre Ausencia simulada en EN_REVISION y con Admin RH como responsable, abrir PUT /incidents/{case_id}/confidentiality y usar:
 
 ```json
 {"is_confidential":true,"reason":"Prueba académica de protección del expediente"}
 ```
 
-Esperar 200 con received=true y can_view=true para RH independiente. Luego GET /incidents/{case_id} debe mostrar is_confidential=true, ai_status=OMITIDA y responsable RH. Evidencia prevista 24-confidencialidad-200.png: solo Server response del detalle, sin Curl ni token. Esta guía no afirma ejecución manual. No añadir al único Admin RH como participante en esta primera prueba: perdería acceso y requeriría otro RH independiente. El CLI auditado para provisionar ese administrador adicional continúa pendiente.
+Esperar 200 con received=true y can_view=true para RH independiente. Luego GET /incidents/{case_id} debe mostrar is_confidential=true, ai_status=OMITIDA y responsable RH. Evidencia prevista 24-confidencialidad-200.png: solo Server response del detalle, sin Curl ni token. Esta guía no afirma ejecución manual. No añadir al único Admin RH como participante en esta primera prueba: perdería acceso y requeriría otro RH independiente. El CLI auditado para provisionar otro administrador se documenta en ADMIN_INDEPENDIENTE.md.

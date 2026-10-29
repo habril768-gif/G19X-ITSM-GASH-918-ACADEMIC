@@ -1,0 +1,24 @@
+{
+  "version": "congelado-v1",
+  "frozen_on": "2026-10-18",
+  "labels_frozen": true,
+  "author_conformity": {
+    "reported": true,
+    "reported_on": "2026-10-18",
+    "scope": "Conformidad general de la autora: los casos estan bien",
+    "independent_third_party_review": false,
+    "individual_label_review_observed": false
+  },
+  "reference_provenance": "Textos y etiquetas sinteticos propuestos por asistente; conformidad general de autora antes de predicciones. Sin revision independiente de terceros ni revision individual observada.",
+  "human_review_completed": false,
+  "independent_acceptance": false,
+  "prompt_version": "plurione-classify-v1",
+  "provider_sha256": "0d000a82ab0e6a4d73f615e34d57462be80a3689c2755654e5df865423563545",
+  "review_document_sha256": "960d0e8cec1baa00e01e03c209b17e9fd1e406f021404570d4b1d543e5c69a25",
+  "hash_normalization": "UTF-8 y saltos LF",
+  "sha256": {
+    "referencias-congeladas-v1.json": "3cdc7700a640f365992dc24c370bd4656b30510fd748ad85ef364df90c6e8a66",
+    "entradas-congeladas-v1.json": "7360f347ac1563be37a192ec5122d1d54e67a265f7596b790158940e2b099ee5",
+    "catalogo-v1.json": "68145613a454948697d23852129f10950bf20e73788fca08c006ebe7b6966f5f"
+  }
+}

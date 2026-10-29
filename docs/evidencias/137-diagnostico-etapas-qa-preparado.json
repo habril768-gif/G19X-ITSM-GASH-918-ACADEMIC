@@ -1,0 +1,38 @@
+{
+  "fecha": "2026-10-22",
+  "estado": "DIAGNOSTICO_PREPARADO_40_UNITARIAS_APROBADAS_DOCKER_PENDIENTE",
+  "motivo": "136 conserva p95 >= 200 ms en las cuatro operaciones; localizar coste antes de otra optimización.",
+  "implementacion": [
+    "Entrada ASGI optativa app.core.performance_diagnostics:app; app.main y su configuración normal no cambian.",
+    "Guard exige identificador QA, base/usuario nuevos del mismo run_id, host postgres y proveedores deshabilitados.",
+    "Modo --diagnostic exige smoke. Mismo fixture aislado, permisos, transacciones, auditoría y colas.",
+    "Cabecera de fase optativa solo en peticiones de carga. Preflight, login y verificaciones quedan fuera de los agregados.",
+    "Mide total ASGI, current_user, endpoint, ejecución SQL, commit (incluye flush), cantidad de consultas y residual fuera de auth/endpoint.",
+    "ContextVar mutable propagada a hilos; agregación por fase/operación, con límite de muestras y bloqueo.",
+    "Emite agregados al shutdown y provisionador lee solo el marcador JSON tras detener QA. Cruza conteos con HTTP y rechaza fases/etapas ausentes.",
+    "Salida DIAGNOSTICO_QA_SIN_ACREDITAR_RNF2; instrumentación de diagnóstico no se usa para aprobar el umbral."
+  ],
+  "validacion": {
+    "suite": "unittest discover backend/tests con patrón test_performance*.py",
+    "resultado_final": "Ran 40 tests in 1.681s; OK",
+    "alcance": "13 casos nuevos (10 de tiempos/guardias y 3 de orquestación), más 27 anteriores. Dobles ASGI sin sockets y Docker simulado.",
+    "revision_framework": "Código instalado FastAPI 0.143.2: rutas incluidas diferidas toman route.endpoint; se instrumenta router fuente antes de create_app.",
+    "incidencia_local": "Dos intentos anteriores se interrumpieron sin resumen al crear loop asyncio Windows; traza mostró socket.socketpair bloqueado en accept. Las dobles de tests se adaptaron a corutinas no suspendidas e hilos con copy_context, sin sockets. No se afirma causa de red más específica.",
+    "comprobacion_estatica": "AST válido en seis archivos."
+  },
+  "limites": [
+    "Sin prueba de integración FastAPI/PostgreSQL/Docker desde herramientas. Primera corrida instrumentada real pendiente.",
+    "SQL y commit son subconjuntos solapados de auth/endpoint; no sumar p95 ni tratarlos como fases excluyentes.",
+    "SQL mide ejecución de cursor, no espera de pool, pre_ping interno, construcción ORM ni toda la transacción.",
+    "Total ASGI no incluye toda la red/cliente. Instrumentación añade carga. Smoke 2+5 s no acredita RNF-2 ni identifica causalidad exclusiva.",
+    "No se han optimizado nuevas consultas ni relajado permisos, bloqueos o requisitos; 136 sigue fallida."
+  ],
+  "sha256": {
+    "backend/app/core/performance_timing.py": "abeecab3a54ab786fcd1a00fa34c3b2ffc73633fcdb2468070248519d1cbbc57",
+    "backend/app/core/performance_diagnostics.py": "8fd5229d36c9db6b70abd602a6d2755885f0db635417fe64ea3e8ea5ff8a3270",
+    "backend/scripts/performance_runner.py": "289d6c97ac09808bb57735f619532b33bada0b99db569baaaf4b72f790eceea8",
+    "backend/scripts/provision_performance_qa.py": "466aaac0e8140f49acb6b9781508c629b3028a475639b5b1f26b73ba765da8e9",
+    "backend/tests/test_performance_diagnostics.py": "902ad5036c149c4255093f5d135eafd6f9562d98a105fd523449b8195d1209e1",
+    "backend/tests/test_performance_provisioner.py": "ea8be83ffdf0f0d49326c731f16763a1c67996a5e05773821ccb1beef05aea94"
+  }
+}

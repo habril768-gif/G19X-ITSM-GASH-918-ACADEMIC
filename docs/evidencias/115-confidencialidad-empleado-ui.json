@@ -1,0 +1,28 @@
+{
+  "fecha_registro": "2026-10-21",
+  "estado": "RESULTADO_ESPERADO_EN_RECORRIDO_MANUAL",
+  "caso_id": "361f68d8-af1a-4e4b-8698-6013dda5dad4",
+  "titulo": "Prueba de aceptación — Empleado 1",
+  "antecedente": "Empleado 1 creó y consultó el caso según 111; reapertura y consulta por RH/Empleado documentadas en 112.",
+  "fuente": "Capturas aportadas y confirmación textual de la autora; sin operación directa del agente.",
+  "cambio_reportado": "La autora confirmó marcar el caso simulado como confidencial desde RH independiente y conservar acceso RH; no aportó captura del cambio ni del detalle RH posterior.",
+  "observado": [
+    {
+      "captura": "codex-clipboard-24525c6b-8a73-4af9-a201-60eb11ad40fe.png",
+      "resultado": "Cabecera Empleado Operaciones Uno Demo y aviso El caso no está disponible o no tienes permiso para consultarlo, sin detalle del caso. La autora siguió el enlace objetivo indicado en la conversación; barra de URL no visible en captura."
+    },
+    {
+      "captura": "codex-clipboard-c551f04b-e387-46cf-afcc-c38cf881cb20.png",
+      "resultado": "Misma identidad de Empleado, listado vacío y contador 0. Búsqueda vacía, Todos los estados y prioridad Todas; filtros adicionales colapsados, sin inspección independiente."
+    }
+  ],
+  "resultado": "Tras cambio de confidencialidad reportado, se observa denegación de detalle y ausencia del caso en la consulta del creador. Retención de acceso RH confirmada textualmente.",
+  "estado_final_reportado": "Caso simulado conservado como confidencial; no se solicitó revertir, cerrar ni eliminar.",
+  "limites": [
+    "Sin inspección HTTP, código de respuesta ni peticiones API directas",
+    "Sin comprobación directa de flag en base de datos, auditoría del cambio o historial restringido",
+    "Sin comprobación de retirada de datos de una sesión ya abierta, cachés, correos o informes",
+    "No acredita restricciones de escritura ni todos los roles/escenarios",
+    "Capturas originales fuera del repositorio; sin suite nueva ni cambios de código"
+  ]
+}

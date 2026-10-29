@@ -1,0 +1,61 @@
+{
+  "recorded_on": "2026-10-18",
+  "source": "Ejecucion externa de persona responsable, verificada y recomputada offline",
+  "dataset": "docs/evaluacion_ia/aceptacion-v4",
+  "responses": 55,
+  "category_correct": 47,
+  "priority_correct": 50,
+  "abstention_correct": 5,
+  "priority_class_metrics": {
+    "1": {
+      "reference_cases": 20,
+      "correct": 20,
+      "recall": 1.0
+    },
+    "2": {
+      "reference_cases": 15,
+      "correct": 15,
+      "recall": 1.0
+    },
+    "3": {
+      "reference_cases": 15,
+      "correct": 15,
+      "recall": 1.0
+    }
+  },
+  "priority_contrast_pairs": {
+    "pairs": 15,
+    "both_priorities_correct": 15,
+    "accuracy": 1.0,
+    "failed_pair_ids": []
+  },
+  "high_false_negative_ids": [],
+  "high_as_low_ids": [],
+  "automated_targets_met": true,
+  "media_baja_targets_met": true,
+  "all_high_priority_identified": true,
+  "priority_checks_met": true,
+  "human_acceptance": false,
+  "effective_models": {
+    "gpt-4.1-mini-2025-04-14": 55
+  },
+  "usage_reported": {
+    "input_tokens": 76487,
+    "output_tokens": 4164,
+    "total_tokens": 80651
+  },
+  "billed_cost_verified": false,
+  "additional_external_calls": 0,
+  "files_sha256": {
+    "journal.jsonl": "2f6d4ef04608d79aea5906a03470f1d4b9f127b3ec7454c686803912ba81b802",
+    "predicciones.json": "919d885474faf78ccb362327763ad0e6c97509fd29bf556911edf566e9bd80e6",
+    "reporte.json": "cc906f14bf639b551192ea5fa805c615c725916afccf9f9730671e04aef5d798",
+    "run.json": "932a1e0902a8ec65a2cb5e17b6c943ebfaf98f9ca9b2e2729ecdcd40de99e619"
+  },
+  "limitations": [
+    "Casos sinteticos sin revision independiente de terceros",
+    "Tres errores de categoria del mismo grupo Ausencias/Administrativas; referencias intactas",
+    "Conjuntos v3/v4 distintos; sin comparacion causal controlada",
+    "Evaluacion no acredita actualizar contenedores operativos"
+  ]
+}

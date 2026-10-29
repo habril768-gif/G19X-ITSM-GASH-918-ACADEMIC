@@ -1,0 +1,18 @@
+{
+  "fecha": "2026-10-20",
+  "estado": "CONSULTA_UI_CONFIRMADA_POR_AUTORA",
+  "cuenta_indicada": "admin@plurione.local",
+  "fuente": "Confirmación textual de la autora en esta conversación: «Si ambos cargan».",
+  "pasos_confirmados": [
+    "Iniciar sesión con la cuenta indicada.",
+    "Abrir Usuarios: carga el listado.",
+    "Abrir Departamentos: carga el listado."
+  ],
+  "observacion_directa_del_agente": false,
+  "capturas_adjuntas": false,
+  "limites": [
+    "Solo consulta de ambos listados; no acredita altas, ediciones, bajas, auditoría o permisos negativos.",
+    "No verifica acceso con Empleado, Supervisor u otra cuenta.",
+    "El control automatizado de ventanas falló; se pidió comprobación manual y se detuvieron los reintentos."
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "fecha": "2026-10-22",
+  "estado": "VALUES_MULTIRREGISTRO_VALIDADO_LOCALMENTE_API_PENDIENTE",
+  "motivo": "143 identifica INSERT/mail_deliveries como mayor familia SQL de creación (66,05 ms medios por incidencia para diez destinatarios).",
+  "cambio": [
+    "queue_event conserva selección de destinatarios y consulta de IDs existentes, construye mismas filas y ejecuta Core INSERT VALUES múltiples en bloques de hasta 50.",
+    "Para diez entregas: una sentencia con diez VALUES, sin executemany de diez parámetros por fila. Bloques mayores mantienen máximo 600 parámetros de las doce columnas explícitas.",
+    "Misma Session/transacción del caso y auditoría, sin commits propios, SMTP, Redis, upsert ni cambio de UUID5 o estados/contexto.",
+    "No se crean objetos ORM pendientes de MailDelivery; test de fallo se inyecta ahora antes del INSERT real, conservando respuesta 503 y aserciones de rollback."
+  ],
+  "perfil_forma_antes": {
+    "method": "Real queue_event body via AST, models and SQLite. PostgreSQL compilation only, no server or network timing.",
+    "results": [
+      {
+        "recipients": 2,
+        "insert_calls": [
+          {
+            "executemany": true,
+            "parameter_sets": 2,
+            "postgresql_bound_parameters": 14
+          }
+        ],
+        "same_recipients_ids_state": true,
+        "idempotent": true,
+        "rollback_case_event_deliveries": "Event and deliveries rolled back; preexisting case preserved."
+      },
+      {
+        "recipients": 10,
+        "insert_calls": [
+          {
+            "executemany": true,
+            "parameter_sets": 10,
+            "postgresql_bound_parameters": 14
+          }
+        ],
+        "same_recipients_ids_state": true,
+        "idempotent": true,
+        "rollback_case_event_deliveries": "Event and deliveries rolled back; preexisting case preserved."
+      },
+      {
+        "recipients": 30,
+        "insert_calls": [
+          {
+            "executemany": true,
+            "parameter_sets": 30,
+            "postgresql_bound_parameters": 14
+          }
+        ],
+        "same_recipients_ids_state": true,
+        "idempotent": true,
+        "rollback_case_event_deliveries": "Event and deliveries rolled back; preexisting case preserved."
+      },
+      {
+        "recipients": 123,
+        "insert_calls": [
+          {
+            "executemany": true,
+            "parameter_sets": 123,
+            "postgresql_bound_parameters": 14
+          }
+        ],
+        "same_recipients_ids_state": true,
+        "idempotent": true,
+        "rollback_case_event_deliveries": "Event and deliveries rolled back; preexisting case preserved."
+      }
+    ]
+  },
+  "perfil_forma_despues": {
+    "method": "Real queue_event body via AST, models and SQLite. PostgreSQL compilation only, no server or network timing.",
+    "results": [
+      {
+        "recipients": 2,
+        "insert_calls": [
+          {
+            "executemany": false,
+            "parameter_sets": 1,
+            "postgresql_bound_parameters": 24
+          }
+        ],
+        "same_recipients_ids_state": true,
+        "idempotent": true,
+        "rollback_case_event_deliveries": "Event and deliveries rolled back; preexisting case preserved."
+      },
+      {
+        "recipients": 10,
+        "insert_calls": [
+          {
+            "executemany": false,
+            "parameter_sets": 1,
+            "postgresql_bound_parameters": 120
+          }
+        ],
+        "same_recipients_ids_state": true,
+        "idempotent": true,
+        "rollback_case_event_deliveries": "Event and deliveries rolled back; preexisting case preserved."
+      },
+      {
+        "recipients": 30,
+        "insert_calls": [
+          {
+            "executemany": false,
+            "parameter_sets": 1,
+            "postgresql_bound_parameters": 360
+          }
+        ],
+        "same_recipients_ids_state": true,
+        "idempotent": true,
+        "rollback_case_event_deliveries": "Event and deliveries rolled back; preexisting case preserved."
+      },
+      {
+        "recipients": 123,
+        "insert_calls": [
+          {
+            "executemany": false,
+            "parameter_sets": 1,
+            "postgresql_bound_parameters": 600
+          },
+          {
+            "executemany": false,
+            "parameter_sets": 1,
+            "postgresql_bound_parameters": 600
+          },
+          {
+            "executemany": false,
+            "parameter_sets": 1,
+            "postgresql_bound_parameters": 276
+          }
+        ],
+        "same_recipients_ids_state": true,
+        "idempotent": true,
+        "rollback_case_event_deliveries": "Event and deliveries rolled back; preexisting case preserved."
+      }
+    ]
+  },
+  "matriz_permisos_local": {
+    "metodo": "AST de funciones reales, modelos reales, SQLite en memoria; utcnow local sustituido, sin FastAPI/HTTP/autenticación/PostgreSQL",
+    "resultados": [
+      {
+        "rh": 2,
+        "sql": {
+          "total": 4,
+          "insert": 2,
+          "select": 2
+        },
+        "entregas": 2,
+        "idempotencia": true
+      },
+      {
+        "rh": 10,
+        "sql": {
+          "total": 4,
+          "insert": 2,
+          "select": 2
+        },
+        "entregas": 10,
+        "idempotencia": true
+      },
+      {
+        "rh": 30,
+        "sql": {
+          "total": 4,
+          "insert": 2,
+          "select": 2
+        },
+        "entregas": 30,
+        "idempotencia": true
+      }
+    ],
+    "access_checks": [
+      {
+        "scenario": "confidential",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "declared",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "confirmed",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "discarded",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "affected_rh",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "inactive_user",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "inactive_department",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "changed_role",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "no_recipients",
+        "matches_legacy": true,
+        "rollback": true
+      }
+    ]
+  },
+  "fallos_locales": {
+    "method": "Real queue_event body by AST, SQLite/models real; no HTTP or PostgreSQL.",
+    "results": [
+      {
+        "scenario": "partial_retry",
+        "ok": true
+      },
+      {
+        "scenario": "second_chunk_failure",
+        "ok": true
+      }
+    ]
+  },
+  "revision_estatica": "Todas las funciones de mail.py excepto queue_event son idénticas por AST, incluyendo controles de worker y despacho. AST válido en tres archivos.",
+  "pruebas_pytest": {
+    "estado": "PREPARADAS_NO_EJECUTADAS",
+    "nuevos_casos": 6,
+    "archivo": "backend/tests/test_mail_multivalues.py",
+    "cobertura": "2/10/30/123 destinatarios, forma efectiva sin executemany y parámetros acotados, contenido/IDs/estados, repetición sin INSERT, reintento parcial que conserva ENVIADA, y fallo del segundo bloque sin filas parciales tras rollback."
+  },
+  "limites": [
+    "Funciones reales compiladas por AST y modelos/SQLite reales; no ejecución de API/Pydantic ni PostgreSQL.",
+    "Compilación dialecto PostgreSQL verificada, sin demostrar modo efectivo del driver previo ni viajes/tiempos del servidor.",
+    "No hay mejora de p95 acreditada. La inserción física ocurre durante queue_event y cualquier fallo se propaga para rollback del llamador.",
+    "RNF-2 sigue pendiente y 141 conserva FALLIDA_UMBRAL. Primero regresión API, después diagnóstico breve de la familia modificada antes de decidir otra carga formal."
+  ],
+  "sha256": {
+    "backend/app/services/mail.py": "7dc77544fbbcdd412fbc19a580b9b39c928fdc059c23d19a3fd8099bf9156984",
+    "backend/tests/test_mail.py": "f3a7d21b77dcb14ef38335829a1464413ce03ececdfb09b42bb163636bd0c778",
+    "backend/tests/test_mail_multivalues.py": "f1c2ba5e96824d5d4266a8f0f150c7a388e8438c0d579c0dc60369226b2dd5d0"
+  }
+}

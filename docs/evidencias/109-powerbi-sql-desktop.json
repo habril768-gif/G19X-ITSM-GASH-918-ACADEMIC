@@ -1,0 +1,144 @@
+{
+  "fecha": "2026-10-20",
+  "estado": "SQL_JSON_DESKTOP_VERIFICADO",
+  "sql_evidencia": "108-powerbi-sql-aislado.json",
+  "fallo_previo_conservado": "107-powerbi-sql-aislado.json",
+  "recorrido": "PostgreSQL aislado migrado → misma consulta.sql ejecutada por cuenta BI → agregados JSON → Power Query y medidas heredadas en copia QA Desktop",
+  "archivos": [
+    {
+      "archivo": "backend/scripts/test_powerbi_sql_isolated.py",
+      "bytes": 13075,
+      "sha256": "ecff54bb7b4f893e90ff905b9091c9d792ff03481cabbd35b6eccd2d67646f36"
+    },
+    {
+      "archivo": "powerbi/consulta.sql",
+      "bytes": 621,
+      "sha256": "4b17d5633d86f6434948dab9a0103cf0e1299f465b47e3b9fab209fc953ff31a"
+    },
+    {
+      "archivo": "powerbi/QA_SQL/publicado.json",
+      "bytes": 1969,
+      "sha256": "fad5e759f109e955e28c66401d7a45e104164e5d1e4fdfb7f8fe87c4f2293705"
+    },
+    {
+      "archivo": "powerbi/QA_SQL/suprimido.json",
+      "bytes": 2046,
+      "sha256": "0e04a58b4cace119bbd97b68ddf02baabe8f76cf4323d81ce2e188fa0a0d2e11"
+    },
+    {
+      "archivo": "powerbi/QA_SQL/entrada_actual.json",
+      "bytes": 2046,
+      "sha256": "0e04a58b4cace119bbd97b68ddf02baabe8f76cf4323d81ce2e188fa0a0d2e11"
+    },
+    {
+      "archivo": "powerbi/QA_SQL/Indicadores_QA_SQL.pq",
+      "bytes": 1231,
+      "sha256": "c67f2815bc61d725f564768e659402cd1450fc9b5662bc7a301d4f7267ada871"
+    },
+    {
+      "archivo": "powerbi/QA_SQL/Comprobaciones_publicado.dax",
+      "bytes": 1022,
+      "sha256": "2b29deafb7e0496a83e5f4fe50dec753de6de65771d5a0ab715bcdd1d5defd23"
+    },
+    {
+      "archivo": "powerbi/QA_SQL/Comprobaciones_suprimido.dax",
+      "bytes": 1035,
+      "sha256": "53ebe8f958c2e4d0ca4f09e62245959985054087532197c685c71c2eac0faf48"
+    },
+    {
+      "archivo": "powerbi/QA_SQL/plurione_bi_QA_SQL_publicado.pbix",
+      "bytes": 66093,
+      "sha256": "8fe3eb6c4b89fa37b0d857c40eef688c4486c42b52879fb2c566a9a0fd2e5143",
+      "zip_crc_correcto": true
+    },
+    {
+      "archivo": "powerbi/plurione_bi_QA_SQL_aislado.pbix",
+      "bytes": 65066,
+      "sha256": "629638d0353cb602727f41680a07971ba0c54c3baf5d60c39291688554993bf5",
+      "zip_crc_correcto": true
+    }
+  ],
+  "sql": {
+    "status": "PASSED",
+    "cuenta_bi_datos_operativos_denegados": true,
+    "servidor_temporal_detenido": true,
+    "fixture": {
+      "incidents": 40,
+      "confidential_after": 1,
+      "cells": 2,
+      "distinct_affected_people": 20,
+      "origin": "ORM fixtures in new native PostgreSQL, not API/business acceptance"
+    },
+    "cortes_locales": {
+      "published": "2026-10-20T12:04:58.256918",
+      "suppressed": "2026-10-20T12:04:59.087538"
+    },
+    "campos_agregados": 24,
+    "celdas": 2
+  },
+  "publicado": {
+    "controles": {
+      "Dos_celdas_SQL": true,
+      "Estado_SQL_esperado": true,
+      "Numeros_SQL_esperados": true,
+      "Sin_denominadores": true,
+      "Totales_BLANK": true,
+      "Corte_SQL_esperado": true
+    },
+    "dax_ms": 354.5,
+    "visual_observado": [
+      "20",
+      "6.00",
+      "55.0%",
+      "50.0%"
+    ],
+    "otra_celda": "Volumen 20, horas y porcentajes sin denominador vacíos."
+  },
+  "control_cache_antigua": {
+    "procedimiento": "Introducir expectativas de suprimido antes de Actualizar. La entrada en disco ya era nueva, el modelo aún conservaba la primera instantánea.",
+    "resultado_esperado_observado": {
+      "Dos_celdas_SQL": true,
+      "Estado_SQL_esperado": false,
+      "Numeros_SQL_esperados": false,
+      "Sin_denominadores": true,
+      "Totales_BLANK": true,
+      "Corte_SQL_esperado": false
+    },
+    "dax_ms": 477.2,
+    "interpretacion": "Rechazo intencional de estado/números/corte antiguos, no fallo de negocio."
+  },
+  "despues_refresco": {
+    "controles": {
+      "Dos_celdas_SQL": true,
+      "Estado_SQL_esperado": true,
+      "Numeros_SQL_esperados": true,
+      "Sin_denominadores": true,
+      "Totales_BLANK": true,
+      "Corte_SQL_esperado": true
+    },
+    "dax_ms": 208.8,
+    "visual_observado": "Desaparecen las cuatro cifras retiradas; la otra celda conserva volumen 20.",
+    "guardado": true,
+    "corte_comprobado": "Se comparó FORMAT yyyy-MM-dd HH:mm:ss con la extracción SQL, precisión de segundos. JSON conserva fracciones originales."
+  },
+  "principal_sin_cambios": {
+    "archivo": "powerbi/plurione_bi.pbix",
+    "bytes": 64678,
+    "sha256": "2eba3a958b14efc29e3ebf38991c55e9dbc92c82263d09efa5e151eb46b6b636",
+    "zip_crc_correcto": true
+  },
+  "limites": [
+    "El puente de QA usa JSON con los resultados reales de las vistas; no es conexión directa de Desktop al PostgreSQL temporal.",
+    "El principal conserva su conector PostgreSQL y refresco confirmado en 105; no se cambió su fuente ni sus datos durante este ensayo.",
+    "Fixture de 40 casos ficticios; cambio de confidencialidad y auditoría por ORM, sin API/UI ni trabajadores.",
+    "La vista aplicó supresión automáticamente: no se sustituyeron números ni se redujo k=5 en el exportador.",
+    "Seis controles en dos estados y un control negativo de caché; no son una suite backend nueva ni aceptación integral.",
+    "Faltan prueba aislada del conector directo si se exige, matriz integral por roles y procedimientos de custodia/retirada de copias.",
+    "Sin credenciales exportadas, llamadas IA, correos, publicación o capturas con datos personales versionadas."
+  ],
+  "incidencias": [
+    "107 falló por acción QA_CONFIDENCIALIDAD fuera de ck_audit_action; solo el fixture cambió a CAMBIO_CONFIDENCIALIDAD y 108 pasó. No se relajó la restricción.",
+    "Primera copia de evidencia bloqueada por expiración del permiso temporal; acceso docs/powerbi renovado antes de repetir.",
+    "Una lectura de textos devolvió sesión todavía en ejecución y se intentó interpretar salida vacía; se releyó correctamente sin alterar los archivos."
+  ]
+}

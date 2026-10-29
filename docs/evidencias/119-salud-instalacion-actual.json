@@ -1,0 +1,55 @@
+{
+  "fecha_registro": "2026-10-21",
+  "estado": "SALUD_ACTUAL_OBSERVADA_EN_CAPTURAS",
+  "fuente": "Consulta manual de la autora, capturas revisadas por el agente; sin acceso directo a Docker desde herramientas.",
+  "observaciones": [
+    {
+      "captura": "codex-clipboard-b96bb0b3-ac69-4b91-8a8c-622956568dbb.png",
+      "url": "http://127.0.0.1:8000/health",
+      "cuerpo": {
+        "status": "ok",
+        "service": "plurione-api"
+      }
+    },
+    {
+      "captura": "codex-clipboard-caa85283-aa7c-41ae-a04e-9bea4942f2e4.png",
+      "url": "http://127.0.0.1:8000/health/db",
+      "cuerpo": {
+        "status": "ok",
+        "database": "postgresql"
+      }
+    },
+    {
+      "captura": "codex-clipboard-a14773e0-d15f-4397-ba8b-62cf156388c8.png",
+      "comando": "docker compose ps",
+      "servicios": [
+        {
+          "nombre": "plurione-api-1",
+          "estado": "Up 37 minutes (healthy)",
+          "puerto": "127.0.0.1:8000->8000/tcp"
+        },
+        {
+          "nombre": "plurione-postgres-1",
+          "imagen": "postgres:17-bookworm",
+          "estado": "Up 37 minutes (healthy)",
+          "puerto": "5432/tcp"
+        },
+        {
+          "nombre": "plurione-redis-1",
+          "imagen": "redis:7.4-bookworm",
+          "estado": "Up 37 minutes (healthy)",
+          "puerto": "6379/tcp"
+        }
+      ]
+    }
+  ],
+  "interpretacion": "Proceso API disponible y comprobación de conexión/esquema satisfactoria según implementación revisada de database_ready(); tres contenedores base saludables en el momento de las capturas.",
+  "limites": [
+    "No es instalación limpia ni prueba de reinicio ejecutada",
+    "No es recuperación completa o restauración de la base de uso",
+    "No acredita workers opcionales, correo, IA ni disponibilidad futura",
+    "Sin medición de carga, RTO/RPO o aceptación integral",
+    "No se modificaron servicios ni datos en esta comprobación; capturas originales fuera del repositorio"
+  ],
+  "antecedente_recuperacion": "Evidencia 103 de restauración aislada permanece separada."
+}

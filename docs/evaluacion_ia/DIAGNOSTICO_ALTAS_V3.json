@@ -1,0 +1,35 @@
+{
+  "source": "Reanalisis offline de predicciones externas v3; no nueva evaluacion del modelo",
+  "prediction_prompt_version": "plurione-classify-v3",
+  "evaluator_api_version": "0.10.3",
+  "global_original_targets_met": true,
+  "media_baja_targets_met": true,
+  "all_high_priority_identified": false,
+  "priority_checks_met": false,
+  "high_false_negative_ids": [
+    "MB3-C1-A2",
+    "MB3-C3-A1",
+    "MB3-C5-A1",
+    "MB3-C5-A2"
+  ],
+  "priority_class_metrics": {
+    "1": {
+      "reference_cases": 10,
+      "correct": 6,
+      "recall": 0.6
+    },
+    "2": {
+      "reference_cases": 20,
+      "correct": 20,
+      "recall": 1.0
+    },
+    "3": {
+      "reference_cases": 20,
+      "correct": 20,
+      "recall": 1.0
+    }
+  },
+  "external_calls": 0,
+  "v4_quality_measured": false,
+  "original_report_modified": false
+}

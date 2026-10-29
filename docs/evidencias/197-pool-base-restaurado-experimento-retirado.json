@@ -1,0 +1,14 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "EXPERIMENTO194_RETIRADO_BASE_RESTAURADA",
+  "motivo": "Diagnostico196 no demuestra ganancia p95 de retener10 y consume hasta5conexiones ociosas adicionales. Retorno conservador a base; no afirmar que el pool10 haya causado por si solo empeoramiento.",
+  "restauracion": "database.py restaurado byte por byte al respaldo previo194 y hash de190 (99 pruebas de usuario en esa revision). Pool vuelve a defaults5retenidas+10extra,max15/tiempo30/pre_pingTrue/connect_timeout3. Mantiene cierre limpio189 y mejoras de mail183/departamento186; diagnostico ping192 sigue disponible.",
+  "pruebas": "20 pruebas locales aprobadas en0,294s: seis de pool adaptadas a base5 y catorce deSession; QueuePool/SQLite sin HTTP/PostgreSQL. Se comprueban max15/rechazo16a, espera y reuso, recuperacion de conexion obsoleta conpre_ping,dispose de5,creacion diferida y ciclo deSession. No nueva regresion API del agente; se revalida hash exacto del codigo previo probado.",
+  "cambio_pruebas": "Se retienen pruebas de limite/recuperacion/liberacion; caso de oleadas describe explicitamente base10/5/5 nuevas por oleada, sin fingir eliminacion de recreaciones. No se borran evidencias de194/195/196.",
+  "sha256": {
+    "backend/app/core/database.py": "6f3a01538dab819df76e78a58d34aa8fefe3ef85312da9fec7048705b63fa442",
+    "backend/tests/test_database_pool.py": "be4e7edd40d3aa0e259693be9b2dc85def989543030a0dca0af97ca3fe699482"
+  },
+  "limites": "Ninguna nueva formal/smoke ni ganancia p95. RNF-2 pendiente; siete formales fallidas conservadas. Resultado196 corresponde al pool10 experimental, no medirlo como si fuera el codigo restaurado.",
+  "pendiente": "No pedir otra formal por restauracion. Una nueva hipotesis necesita evidencia de costes antes de otra carga; mantener resultado adverso y separar tiempo de driver/servidor/planificacion sin cambiarcriterio."
+}

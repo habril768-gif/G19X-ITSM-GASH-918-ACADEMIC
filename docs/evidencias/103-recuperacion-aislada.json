@@ -1,0 +1,161 @@
+{
+  "status": "PASSED",
+  "date_utc": "2026-10-20T15:01:19.504661+00:00",
+  "test": "logical_backup_restore_two_isolated_clusters",
+  "stages": [
+    {
+      "stage": "source_init",
+      "seconds": 6.788
+    },
+    {
+      "stage": "source_start",
+      "seconds": 0.992
+    },
+    {
+      "stage": "source_database",
+      "seconds": 1.412
+    },
+    {
+      "stage": "target_init",
+      "seconds": 8.438
+    },
+    {
+      "stage": "target_start",
+      "seconds": 0.937
+    },
+    {
+      "stage": "target_database",
+      "seconds": 1.45
+    },
+    {
+      "stage": "source_migrate",
+      "seconds": 3.001
+    },
+    {
+      "stage": "source_schema_check",
+      "seconds": 2.653
+    },
+    {
+      "stage": "logical_backup",
+      "seconds": 0.546
+    },
+    {
+      "stage": "archive_catalog",
+      "seconds": 0.125
+    },
+    {
+      "stage": "restore_isolated",
+      "seconds": 0.667
+    },
+    {
+      "stage": "target_schema_check",
+      "seconds": 2.21
+    },
+    {
+      "stage": "target_stop",
+      "seconds": 1.041
+    },
+    {
+      "stage": "source_stop",
+      "seconds": 0.952
+    }
+  ],
+  "development_database_accessed": false,
+  "workers_started": false,
+  "external_calls": false,
+  "docker_sequence_executed": false,
+  "fixture": "Simulated SQL/ORM fixtures, not a business/API acceptance test",
+  "schema_comparison": "Exacta tras normalizar únicamente casts de arrays de literales varchar sin límite a text; datos por hash exacto",
+  "postgres": "postgres (PostgreSQL) 18.6",
+  "source_bi": {
+    "views_readable": true,
+    "public_data_and_writes_denied": 3
+  },
+  "archive": {
+    "bytes": 59831,
+    "sha256": "f6d78c1a6d1c2a412b9cc2dc4fe2ad21013b840262f8c0b5b820614b4748bb26"
+  },
+  "invalid_archive_rejected": true,
+  "data_comparison": {
+    "all_tables_equal": true,
+    "tables": {
+      "ai_jobs": {
+        "count": 1,
+        "sha256": "e6df930f2c3783e6aeef5410d5192772b254dd39264fcc0e86f307206164f834"
+      },
+      "alembic_version": {
+        "count": 1,
+        "sha256": "6601c757d22867e9cc3476cb2c514891740472ce7d1fef7b50a1c32c1155b3ea"
+      },
+      "auth_sessions": {
+        "count": 1,
+        "sha256": "d276d27d53798e54ef31b8a0fee453383a38509dc754166385a7c56f6bc54f20"
+      },
+      "categorias_incidencia": {
+        "count": 5,
+        "sha256": "ea7569e39cb7452697cd450d83ae120afaea09e69828c13c7080ec7b9cda2bef"
+      },
+      "departamentos": {
+        "count": 1,
+        "sha256": "ed1f7a9d1ec0c525139f0424f82c92a26124a78d876b09d015bbb1ad9da0ca47"
+      },
+      "department_audit_events": {
+        "count": 1,
+        "sha256": "6977060836d45dab01ee670c6d6d94ba09c24246dfff1badd65083123131303a"
+      },
+      "historial_incidencias": {
+        "count": 6,
+        "sha256": "7f4743e384bacfdff9340ed7825a2666da380bf7e5ef14db04002e30c5d7967e"
+      },
+      "incidencias": {
+        "count": 6,
+        "sha256": "eb1dd2d32141d96cefd046ecc7fa9984c55c4925e6c0260d0d0a28ccba5d5001"
+      },
+      "incident_involved_users": {
+        "count": 1,
+        "sha256": "08c168b3cb338364ca4f164964f8531c93a02eaf3bcd877f158b912765bfa9c9"
+      },
+      "local_credentials": {
+        "count": 1,
+        "sha256": "16d62ddf2aaa2b711e3453730c37fdced7ffb2c26da183715f1cf0101c8613bf"
+      },
+      "login_throttle": {
+        "count": 1,
+        "sha256": "f861ac3bf5267484cc3969745b3d057af5545e8735698a64025cf1e1b9d9fa17"
+      },
+      "mail_deliveries": {
+        "count": 1,
+        "sha256": "001963faaf625844010310d732976a06d7b3afa5d5e87cbe772d06be642f63b1"
+      },
+      "roles": {
+        "count": 3,
+        "sha256": "4d2c3e7ae683e5b1f2b4743eb2af220c13047dfe2bae8563e16167b896bfd0f7"
+      },
+      "users": {
+        "count": 3,
+        "sha256": "a450eb97037f3328d12e86fb8b4fc87a5a8be640757c78697f423bb834c04170"
+      }
+    },
+    "revision": "0007",
+    "views_equal": true,
+    "constraints_compared": 144,
+    "indexes_compared": 35
+  },
+  "restored_bi": {
+    "views_readable": true,
+    "public_data_and_writes_denied": 3
+  },
+  "source_unchanged": true,
+  "servers_stopped": {
+    "target": true,
+    "source": true
+  },
+  "retained_local_folder": "recovery-wujde778",
+  "limits": [
+    "PostgreSQL nativo; secuencia Docker no ejecutada",
+    "Datos ficticios insertados para recuperacion, no recorrido de negocio",
+    "Propietarios/ACL originales no restaurados; BI reconstruido y probado aparte",
+    "Sin instalacion limpia, carga, capacitacion o aceptacion integral",
+    "Archivo y clusters detenidos conservados en .pgdata ignorado por Git"
+  ]
+}

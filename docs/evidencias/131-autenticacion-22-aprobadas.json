@@ -1,0 +1,23 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "REGRESION_AUTH_APROBADA_SEGUN_CAPTURA_AUTORA",
+  "captura": "codex-clipboard-1d9a40e2-ffe3-40d0-a746-627e3eda2a94.png",
+  "resultado": "22 passed in 13.84s",
+  "procedencia": "La autora ejecuta; el agente revisa captura de terminal. No se reejecutó desde herramientas.",
+  "archivos": [
+    "backend/tests/test_auth.py",
+    "backend/tests/test_auth_queries.py"
+  ],
+  "hashes_codigo": {
+    "backend/app/core/security.py": "8dab79e41f497b3bf603fb1f2356dcbde5d6a04d06746215190f6e76e4e49488",
+    "backend/tests/test_auth_queries.py": "759ecc8abc76e9ed56874978ab8974304b3d6f3c0038495aef68ef3bb114d134"
+  },
+  "coincide_con_130": true,
+  "alcance": "Autenticación existente y trece regresiones nuevas: una consulta por sesión válida, rechazos y cambios externos sin caché. SQLite y TestClient según tests; no PostgreSQL ni carga.",
+  "limites": [
+    "No es suite completa ni CI remoto",
+    "Sin nuevo p95; RNF-2 todavía incumplido según 129",
+    "Sin cambio adicional de código ni servicios en este avance; captura original fuera del repositorio"
+  ],
+  "siguiente_paso": "Medición full en QA nuevo para comparar con 129, sin repetir suites sin cambios."
+}

@@ -1,6 +1,6 @@
-# Administración de departamentos — API 0.9.0 / React 0.6.0
+# Administración de departamentos
 
-Preparado el 17 de octubre de 2026. Migración 0004 añade exclusivamente department_audit_events. No cambia cuentas, incidencias, identidades ni las migraciones 0001–0003. La aplicación real de 0004 permanece pendiente: el acceso a Docker desde el entorno del asistente devolvió permission denied para dockerDesktopLinuxEngine.
+API y React permiten administrar departamentos con baja lógica e historial. La migración de auditoría departamental está probada en PostgreSQL aislado y existe un recorrido básico de interfaz; falta completar la matriz de aceptación. Aplica siempre el head del proyecto, conservando datos y cuentas.
 
 ## Reglas y uso
 
@@ -24,26 +24,8 @@ UI bloquea doble envío y no presenta modificaciones optimistas como confirmadas
 - GET /departments/{id}/history?page=1&page_size=20: eventos, total y paginación.
 - Todas requieren Admin RH; respuestas correctas llevan Cache-Control: no-store.
 
-## Aplicación local pendiente
+## Actualización y verificación
 
-En PowerShell, desde la raíz del proyecto y con Docker Desktop iniciado:
+Sigue el arranque y las migraciones del README. No repitas seed ni bootstrap. Después, verifica `/health/db` y abre Departamentos con una cuenta Admin RH autorizada.
 
-~~~powershell
-docker compose up -d --build --wait api
-docker compose exec api python -m alembic upgrade head
-docker compose exec api python -m alembic current
-docker compose exec api python -m alembic check
-Invoke-RestMethod http://127.0.0.1:8000/health/db
-~~~
-
-Esperado: 0004 (head), ausencia de nuevas operaciones de actualización y health/db con status ok. /health sigue comprobando solo disponibilidad del proceso; /health/db exige ahora 0004. No repetir bootstrap/seed ni restablecer contraseñas. La reversión automática está deshabilitada para preservar auditoría; requiere plan y respaldo, como 0002/0003.
-
-Con Vite activo, recargar navegador y entrar como RH. Crear «DEMO - Departamento temporal» con motivo académico, renombrarlo, desactivar y reactivar (sin asignarle usuarios/casos). Consultar Historial y comprobar eventos/motivos. Una captura final del historial: 68-react-departamentos-historial.png, solo datos ficticios y sin credenciales. No crear un departamento si ya existe el nombre de la prueba; reutilizarlo. Este recorrido aún no está acreditado.
-
-## Validación y límites
-
-Pruebas HTTP locales con SQLite/FK; UI con API simulada; compilación y SQL de Alembic offline. Resultados exactos en REPORTE_QA.md. PostgreSQL real, concurrencia, instalación 0004 y recorrido de interfaz permanecen pendientes. La prueba optativa existente de migraciones en esquema transaccional aislado se amplió para aplicar 0004 y comprobar conservación; no se presenta como ejecutada si RUN_DB_TESTS no está habilitado. RF-7/RF-8 parciales.
-
-Actualización 17 de octubre de 2026: evidencia 68 inspeccionada, historial React de DEMO - PRUEBA 1 con alta, renombrado, baja y reactivación, fechas y motivos. Primera comprobación manual de departamentos acreditada con límites en REPORTE_QA.md; sustituye el pendiente total de ese recorrido. Terminal Alembic/check, matriz completa y concurrencia no acreditados por la imagen. RF-7/RF-8 parciales; pruebas de código no repetidas.
-
-17 de octubre de 2026: integraciones antes omitidas ejecutadas en clúster temporal PostgreSQL 18.6; suite 103 aprobadas/0 omitidas/1 advertencia. Incluye cinco integraciones PostgreSQL y las pruebas originales SQLite. Migración hasta 0004 y check verificados en aislamiento; base de desarrollo sin modificar. CI PostgreSQL 17 del commit c8ad75c observado exitoso. Guía PRUEBAS_POSTGRESQL.md, evidencia 69 JSON y límites en REPORTE_QA.md. Nuevas pruebas remotas y carreras adicionales pendientes; sin nuevas capturas.
+La evidencia 68 registra alta, renombrado, baja y reactivación con historial de un departamento simulado. Las migraciones y pruebas PostgreSQL se ejecutaron posteriormente en un clúster aislado. Esos resultados no acreditan un check actual del entorno de uso ni todos los escenarios concurrentes. Consulta QA y completa la matriz de aceptación antes de cerrar RF-7/RF-8.

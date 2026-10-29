@@ -1,0 +1,33 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "REGRESION_APROBADA_SEGUN_CAPTURA_AUTORA",
+  "captura": "codex-clipboard-23e6cce6-6839-48f4-b9ae-cfb419e62fe7.png",
+  "procedencia": "Ejecución por la autora en su terminal; resultado visible revisado por el agente.",
+  "resultado": "60 passed in 15.07s",
+  "archivos_prueba": [
+    "backend/tests/test_mail.py",
+    "backend/tests/test_incidents.py",
+    "backend/tests/test_mail_batching.py"
+  ],
+  "configuracion_visible": {
+    "RUN_DB_TESTS": "0",
+    "SSLKEYLOGFILE": "vacío",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "cacheprovider": "deshabilitado"
+  },
+  "codigo_sha256": {
+    "backend/app/services/incidents.py": "b5008868e6c15aaff9e93176512ae5572c64cd00bf6a97cb8846bd0bdc3ea398",
+    "backend/app/services/mail.py": "f50c5872b9df93b52fc28808e4cdd3a79245ffa8dfe09e3afcf9107a8bbfda62",
+    "backend/tests/test_mail_batching.py": "c5598d5f947e0034865e86d147a5b70c78d67c191e8cb39c5d8ce8fca10b5435"
+  },
+  "coincide_con_optimizacion_127": true,
+  "alcance": "Regresiones de correo/incidencias y trece casos nuevos de encolado: selección de destinatarios, controles por objeto, idempotencia, reversión y número de SELECT por lote; según archivos seleccionados. SQLite/TestClient con usuario/sesión sustituidos y transporte simulado/captura local según test.",
+  "limites": [
+    "No es suite backend completa ni CI remoto",
+    "No es prueba PostgreSQL concurrente o autenticación real",
+    "No es nueva medición de rendimiento; RNF-2 continúa fuera de umbral según 126 hasta nueva comparación",
+    "No se repitió la ejecución desde herramientas ni se cambiaron código/servicios en este avance",
+    "Captura original fuera del repositorio; sin commit"
+  ],
+  "siguiente_paso": "Medición full con fixture nuevo y misma configuración/protocolo; las verificaciones previas y calentamiento del provisionador se mantienen. Conservar línea base y todos los resultados."
+}

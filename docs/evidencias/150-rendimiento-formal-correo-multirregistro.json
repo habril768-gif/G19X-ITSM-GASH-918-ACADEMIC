@@ -1,0 +1,169 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "FALLIDA_UMBRAL_CON_MEJORA_CUATRO_OPERACIONES",
+  "captura": "codex-clipboard-64d8a5d4-627c-4c4d-86f8-a4b88b1c9075.png",
+  "procedencia": "Autora ejecutó; agente cotejó captura y reportes originales.",
+  "fuentes": [
+    {
+      "ruta_local": ".pgdata/performance-e0b63b390b764550/report.json",
+      "run_id": "e0b63b390b764550",
+      "sha256": "fdc9f95b181a25c129029a0e43bdbc3f0769a5b101cdb4771a9eb8e95706436b"
+    },
+    {
+      "ruta_local": ".pgdata/performance-c0baad3867644ad2/report.json",
+      "run_id": "c0baad3867644ad2",
+      "sha256": "e16a07204c4a807a20c8edd77547f7b711855b7eb28900804076e4c1caf08d70"
+    }
+  ],
+  "comparacion": {
+    "listado": {
+      "p95_antes_ms": 286.9096000067657,
+      "p95_ahora_ms": 259.27779999619815,
+      "cambio_porcentaje": -9.630838427823928
+    },
+    "detalle": {
+      "p95_antes_ms": 258.4329999954207,
+      "p95_ahora_ms": 221.31870000157505,
+      "cambio_porcentaje": -14.361285127868062
+    },
+    "creacion": {
+      "p95_antes_ms": 505.9766999911517,
+      "p95_ahora_ms": 385.49020000209566,
+      "cambio_porcentaje": -23.81265777478746
+    },
+    "actualizacion": {
+      "p95_antes_ms": 393.48790000076406,
+      "p95_ahora_ms": 347.43320000416134,
+      "cambio_porcentaje": -11.70422267025576
+    }
+  },
+  "solicitudes_antes_ahora": [
+    13873,
+    15349
+  ],
+  "cambio_solicitudes_porcentaje": 10.639371440928414,
+  "medicion": {
+    "inicio_utc": "2026-10-22T20:12:59.793590+00:00",
+    "fin_utc": "2026-10-22T20:17:59.878757+00:00",
+    "duracion_objetivo_s": 300,
+    "duracion_hasta_ultima_respuesta_s": 300.07233920000726,
+    "clientes": 10,
+    "completa": true,
+    "metricas": {
+      "listado": {
+        "intentos": 3839,
+        "exitos": 3839,
+        "errores": 0,
+        "estados": {
+          "200": 3839
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 12.796666666666667,
+        "min_ms": 70.98309999855701,
+        "mediana_ms": 147.00140000786632,
+        "p95_exitos_ms": 259.27779999619815,
+        "p99_exitos_ms": 336.914399988018,
+        "max_ms": 573.7997999967774,
+        "p95_todos_ms": 259.27779999619815,
+        "finalizadas_fuera_ventana": 0
+      },
+      "detalle": {
+        "intentos": 3839,
+        "exitos": 3839,
+        "errores": 0,
+        "estados": {
+          "200": 3839
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 12.796666666666667,
+        "min_ms": 38.52210000331979,
+        "mediana_ms": 130.0292000087211,
+        "p95_exitos_ms": 221.31870000157505,
+        "p99_exitos_ms": 295.5431000009412,
+        "max_ms": 443.31279999460094,
+        "p95_todos_ms": 221.31870000157505,
+        "finalizadas_fuera_ventana": 0
+      },
+      "creacion": {
+        "intentos": 3839,
+        "exitos": 3839,
+        "errores": 0,
+        "estados": {
+          "201": 3839
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 12.796666666666667,
+        "min_ms": 126.0898000036832,
+        "mediana_ms": 241.90660000022035,
+        "p95_exitos_ms": 385.49020000209566,
+        "p99_exitos_ms": 492.0057999988785,
+        "max_ms": 759.1948000044795,
+        "p95_todos_ms": 385.49020000209566,
+        "finalizadas_fuera_ventana": 7
+      },
+      "actualizacion": {
+        "intentos": 3832,
+        "exitos": 3832,
+        "errores": 0,
+        "estados": {
+          "200": 3832
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 12.773333333333333,
+        "min_ms": 111.85929999919608,
+        "mediana_ms": 212.57080000214046,
+        "p95_exitos_ms": 347.43320000416134,
+        "p99_exitos_ms": 458.96970000467263,
+        "max_ms": 695.0618999981089,
+        "p95_todos_ms": 347.43320000416134,
+        "finalizadas_fuera_ventana": 3
+      }
+    },
+    "creados": 3839,
+    "inicio_clientes_offset_ms": [
+      0.6196000031195581,
+      0.16290000348817557,
+      0.7240000122692436,
+      0.24190000840462744,
+      0.07480000203941017,
+      0.3100000030826777,
+      0.3660000074887648,
+      0.5332000000635162,
+      0.4803000047104433,
+      0.4293000092729926
+    ]
+  },
+  "conteos_inicial_calentamiento_final": [
+    100,
+    502,
+    4341
+  ],
+  "comprobacion_sql": {
+    "incidencias": 4341,
+    "eventos_creado": 4341,
+    "eventos_editado": 4231,
+    "entregas_encoladas": 43410,
+    "intentos_smtp": 0,
+    "trabajos_ia": 0
+  },
+  "sesiones_revocadas_204": 10,
+  "contenedores_detenidos": true,
+  "hash_mail_coincide": true,
+  "condiciones_previas": {
+    "captura": "codex-clipboard-343baeb5-95eb-4c6d-af0c-452926755491.png",
+    "cpu_visible_porcentaje": 19,
+    "memoria_visible_porcentaje": 86,
+    "limite": "Captura previa instantánea; no demuestra ausencia de otras cargas ni CPU/memoria constante durante el ensayo."
+  },
+  "interpretacion": [
+    "La sexta corrida formal incluye INSERT multirregistro; mejora p95 en cuatro operaciones y solicitudes frente a 141, sin cumplir <200 ms.",
+    "Mejora observacional acumulada y cambio de condiciones del host; no atribuir causalidad exclusiva al INSERT.",
+    "Regresión 77 aprobada y mejora localizada previa de 146 se conservan con sus límites. No se reduce el umbral ni se excluyen auditoría/cola/permisos."
+  ],
+  "limites": [
+    "Población creciente y distinta entre corridas; mismo host compartido con generador, sin control exclusivo de otras cargas.",
+    "Sin instrumentación diagnóstica ni CPU del generador/host por fase en esta formal; solo contexto previo y muestras Docker.",
+    "RNF-2 sigue incumplido en todas las operaciones. No repetir full sin cambio o diagnóstico que lo justifique."
+  ],
+  "siguiente_paso": "Revisar el coste restante de autenticación/autorización y viajes SQL usando los diagnósticos existentes, sin retirar controles; escoger un cambio acotado y regresión antes de otra formal."
+}

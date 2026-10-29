@@ -1,0 +1,272 @@
+{
+  "fecha_registro": "2026-10-23",
+  "estado": "DIAGNOSTICO_QA_SIN_ACREDITAR_RNF2",
+  "run_id": "fd78431c613f4e14",
+  "fuentes": [
+    "Salida textual de limpieza y diagnóstico aportada por la autora; ejecutados por ella, no por el agente.",
+    ".pgdata/performance-fd78431c613f4e14/report.json"
+  ],
+  "sha256_reporte": "260cc4eefa4fe37600783121b089d309ddb3b63d87ecac6f784322880c6a7767",
+  "limpieza_observada": {
+    "modo": "APLICAR",
+    "limite": 2,
+    "redes_elegibles_conteo": 28,
+    "eliminadas": [
+      "plurione-qa-perf-791d2288a84d4872_entry",
+      "plurione-qa-perf-c7ad7be7ff304f58_net"
+    ],
+    "omitidas_al_revalidar": [],
+    "fallidas": [],
+    "carga_condicionada": "Dos eliminadas sin fallos comprobadas antes de iniciar smoke."
+  },
+  "validacion": {
+    "agregados": "read_diagnostics v3 sobre JSON original: ocho grupos y sumas SQL/hilos concordantes.",
+    "codigo": "Hash de incidents.py de la corrida coincide con 175 y código actual.",
+    "archivos_de_codigo_declarado_distintos_frente_174": [
+      "backend/app/services/incidents.py"
+    ],
+    "peticiones_medidas": 218,
+    "errores_medidos": 0,
+    "consultas_por_peticion": {
+      "listado": 3,
+      "detalle": 2,
+      "creacion": 10,
+      "actualizacion": 7
+    },
+    "hilos": "Tres llamadas por petición y cero incompletas en todos los grupos.",
+    "conteos_http": {
+      "conteo_inicial": 100,
+      "conteo_tras_calentamiento": 110,
+      "conteo_final": 164
+    },
+    "comprobacion_sql": {
+      "incidencias": 164,
+      "eventos_creado": 164,
+      "eventos_editado": 60,
+      "entregas_encoladas": 1640,
+      "intentos_smtp": 0,
+      "trabajos_ia": 0
+    },
+    "posteriores": "OK",
+    "revocacion_sesiones": {
+      "204": 10
+    },
+    "contenedores_detenidos": true
+  },
+  "medicion": {
+    "cpu": {
+      "duracion_s": 5.114822599993204,
+      "cpu_logicas": 4,
+      "generador_cpu_s": 0.203125,
+      "generador_cpu_porcentaje_un_nucleo": 3.971300979241585,
+      "generador_cpu_porcentaje_equipo": 0.9928252448103962,
+      "host_cpu_porcentaje": 80.42813455657492,
+      "host_estado": "OK",
+      "limites": "CPU proceso incluye todos sus hilos; no Docker. Host incluye otras aplicaciones/VM. Medias de fase, no picos ni causa única; GetSystemTimes Windows."
+    },
+    "http_p95_ms": {
+      "listado": 588.8402999989921,
+      "detalle": 360.30980000214186,
+      "creacion": 479.3433000013465,
+      "actualizacion": 313.42510000104085
+    },
+    "detalle_metricas": {
+      "total": {
+        "media": 209.9168905632475,
+        "p95": 418.19325299729826,
+        "max": 492.2118850008701
+      },
+      "auth": {
+        "media": 57.41664450893454,
+        "p95": 154.79266100010136,
+        "max": 225.61909999785712
+      },
+      "endpoint": {
+        "media": 25.983445890729357,
+        "p95": 55.55254199862247,
+        "max": 182.65236300067045
+      },
+      "sql": {
+        "media": 49.207228745349724,
+        "p95": 82.64801100449404,
+        "max": 236.50286799966125
+      },
+      "commit": {
+        "media": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      },
+      "fuera_auth_endpoint": {
+        "media": 126.51680016358362,
+        "p95": 356.6961460019229,
+        "max": 382.46499600063544
+      },
+      "consultas": {
+        "media": 2.0,
+        "p95": 2.0,
+        "max": 2.0
+      },
+      "hasta_envio": {
+        "media": 159.1969455999788,
+        "p95": 333.4632550031529,
+        "max": 407.88983999664197
+      },
+      "cierre": {
+        "media": 50.71994496326872,
+        "p95": 113.39898499863921,
+        "max": 194.63107699993998
+      },
+      "thread_calls": {
+        "media": 3.0,
+        "p95": 3.0,
+        "max": 3.0
+      },
+      "thread_wait": {
+        "media": 61.422730417160146,
+        "p95": 263.9146459987387,
+        "max": 289.5020450014272
+      },
+      "thread_run": {
+        "media": 101.44119410939642,
+        "p95": 200.19570600561565,
+        "max": 285.4209910001373
+      },
+      "thread_resume": {
+        "media": 35.347431327152826,
+        "p95": 106.25213100138353,
+        "max": 113.60111500835046
+      },
+      "thread_incomplete": {
+        "media": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      }
+    },
+    "detalle_familias_sql": {
+      "SELECT/departamentos+users+auth_sessions": {
+        "consultas": 55,
+        "ms": 1417.024362970551,
+        "consultas_por_peticion": 1.0,
+        "ms_por_peticion": 25.764079326737292,
+        "ms_por_consulta": 25.764079326737292
+      },
+      "SELECT/roles+users+incidencias+incident_involved_users": {
+        "consultas": 55,
+        "ms": 1289.3732180236839,
+        "consultas_por_peticion": 1.0,
+        "ms_por_peticion": 23.443149418612435,
+        "ms_por_consulta": 23.443149418612435
+      }
+    },
+    "detalle_etapas_hilo": {
+      "auth": {
+        "calls": 55,
+        "incomplete": 0,
+        "wait_ms": 1133.3889800007455,
+        "run_ms": 3158.5768389704754,
+        "resume_ms": 535.7943920316757,
+        "calls_per_request": 1.0,
+        "wait_ms_per_request": 20.60707236364992,
+        "run_ms_per_request": 57.42866979946319,
+        "resume_ms_per_request": 9.74171621875774
+      },
+      "endpoint": {
+        "calls": 55,
+        "incomplete": 0,
+        "wait_ms": 1262.326208932791,
+        "run_ms": 1429.6279530462925,
+        "resume_ms": 602.3450329812476,
+        "calls_per_request": 1.0,
+        "wait_ms_per_request": 22.951385616959836,
+        "run_ms_per_request": 25.993235509932592,
+        "resume_ms_per_request": 10.951727872386321
+      },
+      "other": {
+        "calls": 55,
+        "incomplete": 0,
+        "wait_ms": 982.5349840102717,
+        "run_ms": 991.060884000035,
+        "resume_ms": 805.9692979804822,
+        "calls_per_request": 1.0,
+        "wait_ms_per_request": 17.864272436550394,
+        "run_ms_per_request": 18.019288800000638,
+        "resume_ms_per_request": 14.653987236008767
+      }
+    }
+  },
+  "comparacion_con_174": {
+    "http_p95_ms": {
+      "listado": {
+        "antes": 285.3000000031898,
+        "ahora": 588.8402999989921
+      },
+      "detalle": {
+        "antes": 347.96120000828523,
+        "ahora": 360.30980000214186
+      },
+      "creacion": {
+        "antes": 474.42929999670014,
+        "ahora": 479.3433000013465
+      },
+      "actualizacion": {
+        "antes": 371.3714999903459,
+        "ahora": 313.42510000104085
+      }
+    },
+    "detalle_media": {
+      "total": {
+        "antes": 230.47967305861746,
+        "ahora": 209.9168905632475
+      },
+      "auth": {
+        "antes": 59.574119098696805,
+        "ahora": 57.41664450893454
+      },
+      "endpoint": {
+        "antes": 54.39809552883483,
+        "ahora": 25.983445890729357
+      },
+      "sql": {
+        "antes": 52.846001686560285,
+        "ahora": 49.207228745349724
+      },
+      "fuera_auth_endpoint": {
+        "antes": 116.50745843108584,
+        "ahora": 126.51680016358362
+      },
+      "thread_wait": {
+        "antes": 52.49366827575061,
+        "ahora": 61.422730417160146
+      },
+      "thread_resume": {
+        "antes": 33.58765456719351,
+        "ahora": 35.347431327152826
+      },
+      "cierre": {
+        "antes": 50.26320880350278,
+        "ahora": 50.71994496326872
+      }
+    },
+    "detalle_mediana_http_ms": {
+      "antes": 186.72300000616815,
+      "ahora": 148.6936000001151
+    }
+  },
+  "lectura": [
+    "Integración de plantilla SQL 175 completada; misma cantidad de SQL/hilos y controles de auditoría/cola/cierre.",
+    "Endpoint de detalle medio baja 54,40 a 25,98 ms y ASGI total medio 230,48 a 209,92 ms. Mediana HTTP de detalle baja 186,72 a 148,69 ms; se observa mejora localizada compatible con retirar construcción repetida.",
+    "No mejora el p95 HTTP de detalle: 347,96 a 360,31 ms. Listado y creación también empeoran; edición mejora. No hay mejora global demostrada.",
+    "Espera media de hilos de detalle sube 52,49 a 61,42 ms y residual ASGI 116,51 a 126,52; cierre medio actual 50,72 ms, posterior al envío en este recorrido. No confundir cierre con latencia cliente.",
+    "CPU global media actual 80,43 %, generador 0,99 %. No es comparación controlada ni prueba de causa exclusiva. El cambio no elimina variabilidad/esperas del host.",
+    "164 casos/creaciones auditadas, 60 ediciones y 1640 entregas; cero SMTP/IA. Diez logout 204 y QA detenido."
+  ],
+  "limites": [
+    "Smoke instrumentado 2+5 s con diez clientes, condiciones/conjuntos distintos; no formal RNF-2.",
+    "No sumar p95 ni componentes solapados; todas las operaciones siguen superando 200 ms de p95 HTTP.",
+    "Regresión 176 de 117 pruebas/63 subpruebas mantiene alcance; sin tests adicionales o Docker desde herramientas.",
+    "Formal 150 conserva FALLIDA_UMBRAL; no repetir carga automáticamente ni atribuir la mejora localizada como cumplimiento general."
+  ],
+  "sha256_codigo": {
+    "backend/app/services/incidents.py": "fc5c4a9ef4b209af95167a29240279d9986cee6f406c812628156cec11536d74"
+  }
+}

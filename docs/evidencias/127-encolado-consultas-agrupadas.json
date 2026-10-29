@@ -1,0 +1,158 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "OPTIMIZACION_SQL_VERIFICADA_EN_AISLAMIENTO_API_PENDIENTE",
+  "motivo": "Línea base 126: creación p95 1245.9 ms, sin errores pero fuera de umbral. Se encontró crecimiento de consultas de encolado por destinatario.",
+  "cambio": [
+    "Predicado de independencia RH compartido por visibility() y selección de destinatarios",
+    "Una consulta SQL de RH activos/departamentos activos/no afectados/no involucrados para creación",
+    "Una búsqueda conjunta de IDs de entregas existentes, conservando UUID5 e idempotencia",
+    "Agregar entregas sin búsquedas intermedias permite flush en lote; no cambia transacción/auditoría ni worker"
+  ],
+  "perfil_antes": {
+    "metodo": "AST de funciones reales, modelos reales, SQLite en memoria; utcnow local sustituido, sin FastAPI/HTTP/autenticación/PostgreSQL",
+    "resultados": [
+      {
+        "rh": 2,
+        "sql": {
+          "total": 10,
+          "insert": 3,
+          "select": 7
+        },
+        "entregas": 2,
+        "idempotencia": true
+      },
+      {
+        "rh": 10,
+        "sql": {
+          "total": 42,
+          "insert": 11,
+          "select": 31
+        },
+        "entregas": 10,
+        "idempotencia": true
+      },
+      {
+        "rh": 30,
+        "sql": {
+          "total": 122,
+          "insert": 31,
+          "select": 91
+        },
+        "entregas": 30,
+        "idempotencia": true
+      }
+    ]
+  },
+  "perfil_despues": {
+    "metodo": "AST de funciones reales, modelos reales, SQLite en memoria; utcnow local sustituido, sin FastAPI/HTTP/autenticación/PostgreSQL",
+    "resultados": [
+      {
+        "rh": 2,
+        "sql": {
+          "total": 4,
+          "insert": 2,
+          "select": 2
+        },
+        "entregas": 2,
+        "idempotencia": true
+      },
+      {
+        "rh": 10,
+        "sql": {
+          "total": 4,
+          "insert": 2,
+          "select": 2
+        },
+        "entregas": 10,
+        "idempotencia": true
+      },
+      {
+        "rh": 30,
+        "sql": {
+          "total": 4,
+          "insert": 2,
+          "select": 2
+        },
+        "entregas": 30,
+        "idempotencia": true
+      }
+    ],
+    "access_checks": [
+      {
+        "scenario": "confidential",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "declared",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "confirmed",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "discarded",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "affected_rh",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "inactive_user",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "inactive_department",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "changed_role",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "no_recipients",
+        "matches_legacy": true,
+        "rollback": true
+      }
+    ]
+  },
+  "metodo": "Funciones extraídas del AST de fuentes reales y modelos reales en SQLite en memoria; utcnow sustituido localmente. Sin importar FastAPI/SDK, autenticación, HTTP, PostgreSQL o workers. Conteo de before_cursor_execute, no duración ni carga concurrente.",
+  "resultados": "Para 2/10/30 RH, sentencias antes 10/42/122 y después 4/4/4. Selecciones después 2 en todos; entregas conservadas 2/10/30, reencolado del mismo evento no duplica. Nueve escenarios de permisos coinciden con funciones antiguas y revierten evento/entregas mediante rollback de savepoint.",
+  "fuentes_perfil_locales": [
+    "profile_outbox_sql.py",
+    "outbox-before-incidents.py",
+    "outbox-before-mail.py"
+  ],
+  "hashes_antes": {
+    "incidents.py": "b55073e5446263f320d4a48f4b6f1d279b2fdec8c14ebbfdbcb76c7c09ee0bf3",
+    "mail.py": "3be412eea42f7fc4da6ab6657d776501d1ae13f2bd2eaf8943c8f9a84d3d8be8"
+  },
+  "hashes_despues": {
+    "backend/app/services/incidents.py": "b5008868e6c15aaff9e93176512ae5572c64cd00bf6a97cb8846bd0bdc3ea398",
+    "backend/app/services/mail.py": "f50c5872b9df93b52fc28808e4cdd3a79245ffa8dfe09e3afcf9107a8bbfda62",
+    "backend/tests/test_mail_batching.py": "c5598d5f947e0034865e86d147a5b70c78d67c191e8cb39c5d8ce8fca10b5435"
+  },
+  "regresiones_preparadas": {
+    "archivo": "backend/tests/test_mail_batching.py",
+    "casos": 13,
+    "estado": "AST_VALIDO_PYTEST_API_NO_EJECUTADO",
+    "alcance": "Dos SELECT independientes de 2/10/30 RH, equivalencia explícita en nueve escenarios e idempotencia/rollback."
+  },
+  "otras_validaciones": "AST de allowed(), omission() y process_one() idéntico al anterior. AST de archivos cambiados válido. Perfil inicial con fixture completo se detuvo durante importación y fue interrumpido sin resultados; no se declara aprobado.",
+  "limites": [
+    "No hay nueva medición PostgreSQL/Docker o p95; no se afirma que RNF-2 ya se cumpla",
+    "No hay regresión API completa ejecutada desde el agente; requiere terminal de la autora",
+    "No se suprimen entregas, auditoría o autorización para mejorar cifras; no se cambia el umbral",
+    "No modifica índices/migraciones ni la configuración del entorno de uso",
+    "Sin commit; cambios aún deben pasar regresión antes de carga nueva"
+  ]
+}

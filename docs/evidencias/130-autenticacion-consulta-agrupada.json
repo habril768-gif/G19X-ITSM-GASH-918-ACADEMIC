@@ -1,0 +1,300 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "CONSULTA_AUTH_OPTIMIZADA_SQL_VERIFICADO_API_PENDIENTE",
+  "motivo": "Las cuatro operaciones del benchmark autentican cada petición. current_user leía sesión, usuario y departamento en consultas separadas.",
+  "cambio": "Una consulta con outer joins y populate_existing=True. Se validan encabezado, revocación, expiración y actividad con los mismos mensajes/estados. No hay caché de permisos. Otras funciones de security.py conservan AST.",
+  "perfil_antes": {
+    "metodo": "Cuerpo de funciones reales extraído por AST, modelos reales, SQLite propio y sesión ORM nueva; sin FastAPI/HTTP ni hash de contraseña. Depends/HTTPException sustituidos para cargar definiciones.",
+    "results": [
+      {
+        "scenario": "valid",
+        "status": 200,
+        "error": null,
+        "sql": 3
+      },
+      {
+        "scenario": "revoked",
+        "status": 401,
+        "error": {
+          "detail": "Sesión inválida o expirada",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 1
+      },
+      {
+        "scenario": "expired",
+        "status": 401,
+        "error": {
+          "detail": "Sesión inválida o expirada",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 1
+      },
+      {
+        "scenario": "expired_inactive",
+        "status": 401,
+        "error": {
+          "detail": "Sesión inválida o expirada",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 1
+      },
+      {
+        "scenario": "inactive_user",
+        "status": 403,
+        "error": {
+          "detail": "Cuenta no habilitada",
+          "headers": null
+        },
+        "sql": 3
+      },
+      {
+        "scenario": "inactive_department",
+        "status": 403,
+        "error": {
+          "detail": "Cuenta no habilitada",
+          "headers": null
+        },
+        "sql": 3
+      },
+      {
+        "scenario": "missing_user",
+        "status": 403,
+        "error": {
+          "detail": "Cuenta no habilitada",
+          "headers": null
+        },
+        "sql": 2
+      },
+      {
+        "scenario": "missing_department",
+        "status": 403,
+        "error": {
+          "detail": "Cuenta no habilitada",
+          "headers": null
+        },
+        "sql": 3
+      },
+      {
+        "scenario": "unknown_token",
+        "status": 401,
+        "error": {
+          "detail": "Sesión inválida o expirada",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 1
+      },
+      {
+        "scenario": "no_header",
+        "status": 401,
+        "error": {
+          "detail": "Sesión requerida",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 0
+      },
+      {
+        "scenario": "wrong_scheme",
+        "status": 401,
+        "error": {
+          "detail": "Sesión requerida",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 0
+      },
+      {
+        "scenario": "oversized_token",
+        "status": 401,
+        "error": {
+          "detail": "Sesión requerida",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 0
+      }
+    ]
+  },
+  "perfil_despues": {
+    "metodo": "Cuerpo de funciones reales extraído por AST, modelos reales, SQLite propio y sesión ORM nueva; sin FastAPI/HTTP ni hash de contraseña. Depends/HTTPException sustituidos para cargar definiciones.",
+    "results": [
+      {
+        "scenario": "valid",
+        "status": 200,
+        "error": null,
+        "sql": 1
+      },
+      {
+        "scenario": "revoked",
+        "status": 401,
+        "error": {
+          "detail": "Sesión inválida o expirada",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 1
+      },
+      {
+        "scenario": "expired",
+        "status": 401,
+        "error": {
+          "detail": "Sesión inválida o expirada",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 1
+      },
+      {
+        "scenario": "expired_inactive",
+        "status": 401,
+        "error": {
+          "detail": "Sesión inválida o expirada",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 1
+      },
+      {
+        "scenario": "inactive_user",
+        "status": 403,
+        "error": {
+          "detail": "Cuenta no habilitada",
+          "headers": null
+        },
+        "sql": 1
+      },
+      {
+        "scenario": "inactive_department",
+        "status": 403,
+        "error": {
+          "detail": "Cuenta no habilitada",
+          "headers": null
+        },
+        "sql": 1
+      },
+      {
+        "scenario": "missing_user",
+        "status": 403,
+        "error": {
+          "detail": "Cuenta no habilitada",
+          "headers": null
+        },
+        "sql": 1
+      },
+      {
+        "scenario": "missing_department",
+        "status": 403,
+        "error": {
+          "detail": "Cuenta no habilitada",
+          "headers": null
+        },
+        "sql": 1
+      },
+      {
+        "scenario": "unknown_token",
+        "status": 401,
+        "error": {
+          "detail": "Sesión inválida o expirada",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 1
+      },
+      {
+        "scenario": "no_header",
+        "status": 401,
+        "error": {
+          "detail": "Sesión requerida",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 0
+      },
+      {
+        "scenario": "wrong_scheme",
+        "status": 401,
+        "error": {
+          "detail": "Sesión requerida",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 0
+      },
+      {
+        "scenario": "oversized_token",
+        "status": 401,
+        "error": {
+          "detail": "Sesión requerida",
+          "headers": {
+            "WWW-Authenticate": "Bearer"
+          }
+        },
+        "sql": 0
+      }
+    ],
+    "freshness": [
+      {
+        "change": "revoked",
+        "expected_status": 401,
+        "observed": true
+      },
+      {
+        "change": "user",
+        "expected_status": 403,
+        "observed": true
+      },
+      {
+        "change": "department",
+        "expected_status": 403,
+        "observed": true
+      }
+    ]
+  },
+  "resultado": "Sesión válida 3→1 consultas con ORM nuevo; doce escenarios conservan estado/mensaje/challenge. Tres cambios externos (revocación/usuario/departamento) se detectan con identidad previamente cargada.",
+  "metodo": "Funciones reales extraídas por AST y modelos reales, SQLite propio; Depends y HTTPException sustituidos solo para carga. No se importó FastAPI/SDK ni se ejecutó HTTP/PostgreSQL.",
+  "hashes_security": {
+    "before": "ecf6178eae7b0623c4d5de9eb0637b3c8bcd82c732e537e2fc130b14016b582c",
+    "after": "8dab79e41f497b3bf603fb1f2356dcbde5d6a04d06746215190f6e76e4e49488"
+  },
+  "hashes_despues": {
+    "backend/app/core/security.py": "8dab79e41f497b3bf603fb1f2356dcbde5d6a04d06746215190f6e76e4e49488",
+    "backend/tests/test_auth_queries.py": "759ecc8abc76e9ed56874978ab8974304b3d6f3c0038495aef68ef3bb114d134"
+  },
+  "archivos_bloqueo_y_sesion_sin_cambios": [
+    "backend/app/services/lifecycle.py",
+    "backend/app/services/administration_lock.py",
+    "backend/app/core/database.py"
+  ],
+  "regresion_api_preparada": {
+    "archivo_nuevo": "backend/tests/test_auth_queries.py",
+    "casos_nuevos": 13,
+    "ejecutar_junto_con": "backend/tests/test_auth.py",
+    "estado": "PENDIENTE"
+  },
+  "limites": [
+    "Sin nueva latencia HTTP/PostgreSQL ni medición RNF-2",
+    "No se declara regresión pytest ejecutada",
+    "No se modifica get_session, política de contraseñas, login, revocación, permisos por objeto ni bloqueos de edición",
+    "Los casos de enlaces huérfanos del perfil usan SQLite sin FK como prueba de fallback; PostgreSQL real impide esos enlaces",
+    "Sin migraciones, dependencias nuevas, Docker operado, base de uso modificada o commit"
+  ],
+  "pendientes": "Ejecutar regresión de autenticación en terminal de la autora; medir de nuevo solo si pasa. Línea base 129 conserva RNF-2 fuera de umbral."
+}

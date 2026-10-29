@@ -1,0 +1,30 @@
+{
+  "fecha_local": "2026-10-29",
+  "corte_auditado": "2026-10-23",
+  "estado": "IMPLEMENTADO_VALIDACION_LOCAL_PUBLICACION_PENDIENTE",
+  "remoto_previo": "7886d1e2980aba71a890de896cd86fcce1f8ac98",
+  "validacion": {
+    "cierre_servicios_sqlite": 8,
+    "regresion_outbox_unitarias": 8,
+    "regresion_outbox_casos_servicio": 19,
+    "herramientas_rendimiento": 102,
+    "react_mailstatus": 4,
+    "build_vite": "OK",
+    "utf8_archivos_sin_mojibake": 89
+  },
+  "limites": [
+    "Sin nueva carga de rendimiento; RNF-2 pendiente",
+    "Sin ejecución local nueva PostgreSQL/Docker/Mailpit; Docker API deniega acceso",
+    "CI remoto y recepción de push aún no confirmados",
+    "No edición del cambio ajeno docs/evaluacion_ia/REVISION.md"
+  ],
+  "sha256": {
+    "README.md": "b410bdb33f42592c543bac23acf2221d1124ce258b9ae4ff0218f49b1f698aed",
+    "backend/app/services/mail.py": "985a803dbbefd4d296f4082418d4539e0dc9522e992c46e900a53da015f82c2a",
+    "backend/app/models/__init__.py": "7db6639778fcbea61458b258ebe7623e4d66bde02aaabe2c3bd30eefa9d360d4",
+    "backend/app/core/database.py": "9086ba55dbad20e3004bde7ba983bf77e15953141eea4b2b6983f8d2ece065d1",
+    "backend/migrations/versions/0008_mail_closure.py": "01c0a98f14f781de9d4af239bd7ea537968b33c901939f00542b5b6329a263ad",
+    "backend/tests/test_mail_closure.py": "392643638e0ed12058046fcab2db6d2b18957ca2a5523c67571a8d2834647e94",
+    "frontend/src/components/MailStatus.jsx": "12ca68ee4e0e83143423695285d00571cec6c33eeae292e5bfa917cbceb13e2d"
+  }
+}

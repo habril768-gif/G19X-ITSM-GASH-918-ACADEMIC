@@ -1,0 +1,28 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "INSTRUMENTACION_QA_PREPARADA_SIN_NUEVA_CARGA",
+  "hipotesis": "Autenticacion compartida incluye checkout/ping ademas del SELECT del motor. Codigo SQLAlchemy2.1.4 PGDialect_psycopg.do_ping usa cursor DBAPI execute(SELECT1), sin before_cursor_execute. Pool_pre_ping=True vigente. Puede explicar parte de auth fuera de sql; tiempo real PostgreSQL aun no medido.",
+  "revision_instalada": "DefaultDialect._do_ping_w_event delega a do_ping y conserva clasificacion de desconexion. PGDialect_psycopg.do_ping cambia autocommit temporalmente, ejecuta SELECT1, cierra cursor y restaura autocommit. Se reviso source local, no se presupone tiempo ni frecuencia.",
+  "cambio": "Diagnostico v4 agrega metricas pool_ping(ms), pool_ping_calls y pool_ping_errors. Wrapper de PGDialect_psycopg.do_ping solo tras guard QA y en entrada performance_diagnostics; sin contexto de peticion delega sin medir. Conserva funcion/args/resultado/excepcion y no agrega reintentos. No guarda conexion, SQL, parametros, mensajes de error o datos personales. app.main y pool_pre_ping quedan intactos.",
+  "formato": "Timing indica pool_ping_instrumentado=True solo cuando entrada protegida instala wrapper. Reader acepta v3/v4; v4 exige marca y metricas finitas/no negativas, conteos enteros agregados y errores<=llamadas; cero pings permitido para conexion nueva. Counts SQL de motor no se cambian: ping separado. consultas no representa total de viajes DBAPI e ignora BEGIN/COMMIT/ROLLBACK/conexion nueva.",
+  "validacion": {
+    "herramientas_stdlib": "85 unitarias aprobadas en1,569s; nueve nuevas de wrapper/v4/aislamiento/lector/pipeline ASGI de ocho grupos.",
+    "sqlalchemy": "Tres pruebas aprobadas en0,049s: SQLite con conexion reutilizada observa SELECT1 directo pero solo SELECT2 en eventos del motor; dialecto psycopg preserva cursor/autocommit/True; ruta original de desconexion conserva False tras error clasificado. Sin PostgreSQL real.",
+    "compatibilidad": "Reportes v3 originales185/188/191 revalidados por reader nuevo sin alterarlos. AST correcto en seis archivos y guard precede parche.",
+    "privacidad": "Excepciones con datos privados no quedan en estado; contadores por contexto concurrente, wrapper fuera de peticion no cronometra. Wrapper no altera opciones del pool."
+  },
+  "limites": "Aun no se conoce coste real del ping en PostgreSQL QA. No afirmar un ping por peticion si no se observa: conexiones frescas pueden omitirlo y pool conserva su recuperacion. pool_ping es subconjunto solapado de auth, no sumar p95. SQL engine y ping separados no son todos los viajes de red. Instrumentacion añade coste; no optimizacion ni acreditacion RNF-2.",
+  "fuentes": [
+    "https://docs.sqlalchemy.org/en/21/core/pooling.html",
+    "https://docs.sqlalchemy.org/en/21/faq/connections.html"
+  ],
+  "sha256": {
+    "backend/app/core/performance_timing.py": "899042382ec184a349eb953a6ed6082938267bfd61186f0b94a28b4b7474bf6c",
+    "backend/app/core/performance_diagnostics.py": "743d1584174a33bcebe06c9f39fd87a509e76ff8ac144d0c60f66cba7b5ecd55",
+    "backend/scripts/provision_performance_qa.py": "2b44647a53331d065900e393890b2186fc55c63a96dbb1ffc7f58d99ca88675b",
+    "backend/tests/test_performance_diagnostics.py": "9bb31ac265f6f15fff353d470f5b62f91b87071e7ea7c38f8f3fbb7bf5075ca2",
+    "backend/tests/test_performance_pool_ping.py": "689a0108efb1750fd3b8a17250f2da3afd9bff238b4b2d33fc0a4bf744290e48",
+    "backend/tests/test_pool_ping_sqlalchemy.py": "c67bebfb2ee1eab9e890c2bc3236635d438029e93e00604730a586777d6ce854"
+  },
+  "pendiente": "Un unico smoke diagnostico v4 para conocer coste/frecuencia/fallos de ping y contrastar auth; no repetir formal ni desactivar pre_ping para mejorar benchmark. Siete formales fallidas y RNF-2 pendiente se conservan."
+}

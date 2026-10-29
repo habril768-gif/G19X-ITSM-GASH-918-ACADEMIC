@@ -1,0 +1,46 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "SMOKE_REAL_INCOMPLETO_CORRECCION_PREPARADA",
+  "run_id": "897c25b02d4340d6",
+  "fecha_ejecucion_utc": "2026-10-22T01:21:14.777282+00:00",
+  "captura": "codex-clipboard-1f575f6b-d7bf-4354-95df-d16089879546.png",
+  "fuente": {
+    "reporte_local": ".pgdata/performance-897c25b02d4340d6/report.json",
+    "sha256": "9646770fa77a87323db9b5f4aa78e8a7cbec0cd4c41a589e25e3d42646160715",
+    "lectura": "Agente leyó el reporte generado por ejecución real de la autora; original conservado sin cambios."
+  },
+  "observado": {
+    "estado": "INCOMPLETA",
+    "estado_http": "INCOMPLETA",
+    "error_http": "ConnectionRefusedError",
+    "contenedores_detenidos": true,
+    "sql": {
+      "incidencias": 100,
+      "eventos_creado": 100,
+      "eventos_editado": 0,
+      "entregas_encoladas": 1000,
+      "intentos_smtp": 0,
+      "trabajos_ia": 0
+    },
+    "hubo_calentamiento_o_medicion": false
+  },
+  "interpretacion": "Build/arranque/migración y fixture reales completados. Falló la conexión del cliente HTTP al host antes de login/calientamiento/carga. Se comprobaron cien casos/eventos y mil entregas en cola, sin intentos SMTP ni trabajos IA. No hay p95 de rendimiento.",
+  "hipotesis": "Problema en accesibilidad del puerto publicado desde Windows con la única red interna de QA; no se demostró causa raíz específica de Docker Desktop/firewall/mapeo.",
+  "correccion": [
+    "API conectada además a una red de entrada propia no interna; PostgreSQL/Redis permanecen solo en red interna y sin puertos publicados",
+    "Comprobación de /health y /health/db desde el host después de migrar y antes de crear fixture; reintentos solo de GET de salud",
+    "Inspección reporta redes/puertos reales y comprueba pertenencia esperada; detecta colisión de ambas redes"
+  ],
+  "artefactos_sha256": {
+    "backend/scripts/provision_performance_qa.py": "dd8d2a1ba0a23de8426aef100c3b6dbdbe1164529380eb4921bdc7e1de20b082",
+    "backend/tests/test_performance_provisioner.py": "3cad3e5135862f06cddf9aa5e838d04f0fab472d2cb3dd64c4c5e22761d38dd8"
+  },
+  "validacion_correccion": "12 pruebas locales del provisionador instalado en 0.993 s; OK con Docker/HTTP simulados. AST válido. Ejecutor de carga sin cambios.",
+  "limites": [
+    "Corrección aún sin smoke Docker real",
+    "No se confirma causa raíz ni resolución hasta nueva ejecución",
+    "Red de entrada permite conectividad externa a la API QA; claves/proveedores externos no configurados y workers no iniciados",
+    "No se cambió configuración de la plataforma de uso ni se borraron recursos de la corrida fallida",
+    "RNF-2 sigue pendiente de carga formal, sin resultados inventados ni commit"
+  ]
+}

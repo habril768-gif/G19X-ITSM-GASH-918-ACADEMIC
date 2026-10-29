@@ -1,0 +1,43 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "INSTRUMENTACION_CPU_QA_PREPARADA_SIN_NUEVA_CARGA",
+  "hipotesis": "thread_run de perfiles anteriores es tiempo transcurrido dentro del worker, incluye IO/esperas/planificacion. No permite decidir si optimizar CPU de aplicacion o investigar tiempo fuera de CPU. Medir CPU del mismo hilo orienta ese siguiente paso.",
+  "cambio": "Diagnostico formato5 agrega thread_cpu(ms) y cpu_ms/cpu_ms_per_request por etapa fija. Se usa diferencia de time.thread_time al entrar/salir dentro del mismo worker; llamadas solo si contexto QA medido. Conserva callable/argumentos/opciones limiter/cancelacion/resultado/excepciones y conteo de incompletas.",
+  "formato": "Timing marca thread_cpu_instrumentado junto a pool_ping_instrumentado; reader acepta3/4/5 y exige marca, valores finitos/no negativos y suma por etapas concordante en5. Permite CPU0 por granularidad. Sin limite artificial CPU<=wall porque relojes/resolucion difieren. Errores/incompletas siguen invalidando diagnostico.",
+  "preservado": [
+    "Guard QA y prohibicion de diagnostico full",
+    "Sin guardar nombres arbitrarios/SQL/parametros/datos privados",
+    "Poolbase5+10/pre_ping y claseSession/cierre197 sin cambios",
+    "SQL/permisos/auditoria/atomicidad/durabilidad sin modificaciones",
+    "Fuera de contexto no se consulta reloj CPU",
+    "Reporte original y versiones anteriores intactos"
+  ],
+  "validacion": {
+    "herramientas": "94 unitarias stdlib aprobadas en2,125s, nueve nuevas para CPU. Sin Docker/red/PostgreSQL/HTTP real.",
+    "casos": [
+      "Relojes CPU4ms y wall40ms separados; opciones intactas",
+      "Dos lecturas de reloj en mismo worker real conContextVar",
+      "Worker no iniciado no lee reloj y queda incompleto",
+      "Excepcion exacta preservada y CPU registrada sin mensaje privado",
+      "Resumen CPU con filas legacy",
+      "Reportes3/4/5 validos leidos",
+      "Version5 sin marcaCPU rechazada",
+      "Valores CPU corruptos/no finitos/negativos/booleanos y sumas incoherentes rechazados",
+      "CPU0aceptada por granularidad; pipeline ASGI simulado->snapshot5->reader cubierto por suite"
+    ],
+    "compatibilidad": "Reportes originales177/191(v3) y193/196(v4) revalidados por reader nuevo. AST valido en seis archivos. database.py coincide exactamente con hash190 restaurado197."
+  },
+  "limites": "No optimizacion de latencia ni dato real nuevo CPU en PostgreSQL. thread_cpu excluye eventloop/otros workers/procesoPG/hipervisor y no es CPU global. Diferencia wall-CPU incluye IO, bloqueo o planificacion y no identifica causa unica. No restar p95 ni sumarlos. Instrumentacion agrega coste.",
+  "fuentes": [
+    "https://docs.python.org/3.11/library/time.html#time.thread_time"
+  ],
+  "sha256": {
+    "backend/app/core/performance_timing.py": "727421f8617e33c5780660ebeac39eeeeeb76d4992a136dee201a8a5d02eef65",
+    "backend/app/core/performance_diagnostics.py": "c322f233adf9ffeddcb8830ae634345b33f975e00f47bf0fab58ab035a196610",
+    "backend/scripts/provision_performance_qa.py": "6856e405d32f572e2d3e0afed196df205278f0fbe0b1addc0564523beb09980f",
+    "backend/tests/test_performance_diagnostics.py": "c3898827d019a7d2a8c9e2f27599e4ae4ed75ac1fdb96798d3f33912e04df025",
+    "backend/tests/test_performance_pool_ping.py": "d78a73223aaaad395c51d41332d8c997fc7d088bdbbfbec45f4b29b2ccb5a9da",
+    "backend/tests/test_performance_thread_cpu.py": "3f84f9f3b7c8cff379604c89e6c2e628a9de02f4d52b49259cf91727e8bb6f89"
+  },
+  "pendiente": "Unico smoke diagnostico5 para comparar CPU/wall por auth yendpoint. No repetir formal ni afirmar mejora por instrumentacion. RNF-2 pendiente y sieteformales fallidas conservadas."
+}

@@ -1,0 +1,39 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "LECTURAS_AGRUPADAS_PREPARADAS_REGRESION_PENDIENTE",
+  "motivo": "171 conserva listado 4 y detalle 3 consultas incluyendo autenticación. Reducir un viaje SQL por lectura sin caché de permisos ni alterar autenticación.",
+  "cambio": [
+    "Listado conserva la lectura de rol/visibilidad y todos los filtros; agrupa count y página mediante dos subconsultas y LEFT JOIN desde el agregado, en una sola sentencia/instantánea.",
+    "El agregado produce una fila incluso sin resultados o con offset fuera de rango; se retiene total y se eliminan entidades None de items. Orden created_at/id descendente se aplica dentro y fuera de la página.",
+    "Detalle/visible_case agrupa Role.nombre vigente y búsqueda autorizada de Incident en un SELECT con LEFT JOIN. Compone condiciones por los tres roles válidos reutilizando los mismos predicados de _visibility_for_role.",
+    "Rol ausente/desconocido sigue siendo 403 Rol no habilitado, incluso si no existe el caso; rol válido y caso ausente/oculto sigue siendo 404 Incidencia no encontrada.",
+    "Role.nombre se lee como escalar actual, sin almacenar autorización en usuario/Session/contexto entre peticiones. Autenticación, creación/gestión, locks, commit, auditoría, outbox, workers y schemas no cambian.",
+    "visible_case también sirve a participantes/historial y API de correo, conservando su retorno Incident y denegaciones. No adelanta consultas de escritura ni cambia permisos."
+  ],
+  "validacion": {
+    "local": "11/11 ReadQueryGroupingTests aprobadas en 1,323 s con funciones importadas, modelos/SQLAlchemy/Pydantic/SQLite reales, sin HTTP o event loop.",
+    "consulta_local": "Listado: rol más count/página, 2 consultas frente a 3; detalle: 1 consulta frente a 2. Captura CasePage/CaseDetail no genera SQL adicional.",
+    "matriz": "56 combinaciones de siete actores y ocho casos: coincide con predicado anterior para detalle; listado también coincide para los siete actores. Incluye departamentos, confidencialidad, gestores afectados, participante RH y propiedad del caso.",
+    "casos_adicionales": [
+      "Filtro sin resultados conserva total=0/items=[].",
+      "Página fuera de rango conserva total positivo/items=[].",
+      "Orden con timestamps empatados, paginación sin duplicados.",
+      "Búsqueda literal de %, categoría, fechas y rango inválido.",
+      "Rol ausente/desconocido mantiene 403 aun sin caso; caso ausente con rol válido mantiene 404.",
+      "Sentencias agrupadas compilan para dialecto PostgreSQL."
+    ],
+    "estatica": "AST válido en tres archivos. No se ejecutó HTTP/FastAPI servidor, PostgreSQL o Docker real."
+  },
+  "expectativa_qa": "Con autenticación sin cambios se esperan listado 4 a 3 y detalle 3 a 2 consultas. Creación/edición 10/7 y tres pasos por hilo se mantienen; integración y latencia por comprobar.",
+  "limites": [
+    "Las sentencias son más complejas: ahorro de viajes no garantiza ahorro de tiempo. Compilación no equivale a plan/ejecución PostgreSQL.",
+    "El conteo todavía recorre el conjunto autorizado y los filtros se evalúan en ambas ramas de la sentencia; no es eliminación del coste count.",
+    "Regresión API y seguridad seleccionadas pendientes. Las 98 y cuatro subpruebas de 170 corresponden al código anterior.",
+    "Sin nueva carga, limpieza de redes o latencia. RNF-2 pendiente, formal 150 FALLIDA_UMBRAL. No medir antes de regresión."
+  ],
+  "sha256": {
+    "backend/app/services/incidents.py": "db276f39418d41aade680708853a9b19b392b7dae1868ecadd46a93b57b72fc1",
+    "backend/app/api/incidents.py": "14ad6e8ad22ecec3f994027f6b07ce94cbb6f7bc7009e46342555550b5058b4c",
+    "backend/tests/test_read_query_grouping.py": "644bb656316f263091926d84b68e28b91b07a2c345539d9e3363b9918e7443ca"
+  }
+}

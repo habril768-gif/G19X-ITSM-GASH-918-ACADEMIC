@@ -5,9 +5,10 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Response
 from pydantic import BaseModel, ConfigDict, Field, field_validator
-from sqlalchemy import and_, func, or_, select
-from sqlalchemy.orm import Session
+from sqlalchemy import and_, func, or_, select, true
+from sqlalchemy.orm import Session, aliased
 
+from app.core.worker_response import worker_response
 from app.core.database import get_session
 from app.core.security import current_user
 from app.models import AuditEvent, Category, Department, Incident, IncidentParticipant, Role, User
@@ -141,12 +142,14 @@ def options(response:Response,user:User=Depends(current_user),db:Session=Depends
 
 
 @router.post("",status_code=201,response_model=Receipt)
+@worker_response(Receipt)
 def register(body:IncidentInput,response:Response,user:User=Depends(current_user),db:Session=Depends(get_session)):
     response.headers["Cache-Control"]="no-store"
     return create_case(db,user,body)
 
 
 @router.get("",response_model=CasePage)
+@worker_response(CasePage)
 def list_cases(response:Response,page:int=Query(1,ge=1),page_size:int=Query(20,ge=1,le=100),
                status:Literal["PENDIENTE","EN_REVISION","RESUELTA","CERRADA"]|None=None,
                priority:int|None=Query(None,ge=1,le=3),category_id:int|None=Query(None,ge=1),assigned_to:UUID|None=None,
@@ -164,12 +167,22 @@ def list_cases(response:Response,page:int=Query(1,ge=1),page_size:int=Query(20,g
         try:match=or_(Incident.id==UUID(q.strip()),title)
         except ValueError:match=title
         conditions.append(match)
-    total=db.scalar(select(func.count()).select_from(Incident).where(*conditions))
-    items=db.scalars(select(Incident).where(*conditions).order_by(Incident.created_at.desc(),Incident.id.desc()).offset((page-1)*page_size).limit(page_size)).all()
-    return {"items":items,"total":total,"page":page,"page_size":page_size}
+    # El agregado siempre produce una fila, aunque la página esté vacía.
+    # Ambas ramas usan el mismo predicado y una sola instantánea SQL.
+    totals = select(func.count().label("total")).select_from(Incident).where(*conditions).subquery()
+    page_rows = (select(Incident).where(*conditions)
+        .order_by(Incident.created_at.desc(), Incident.id.desc())
+        .offset((page-1)*page_size).limit(page_size).subquery())
+    page_case = aliased(Incident, page_rows)
+    rows = db.execute(select(page_case, totals.c.total).select_from(totals)
+        .outerjoin(page_rows, true())
+        .order_by(page_rows.c.created_at.desc(), page_rows.c.id.desc())).all()
+    items = [row[0] for row in rows if row[0] is not None]
+    return {"items":items,"total":rows[0][1],"page":page,"page_size":page_size}
 
 
 @router.get("/{case_id}",response_model=CaseDetail)
+@worker_response(CaseDetail)
 def detail(case_id:UUID,response:Response,user:User=Depends(current_user),db:Session=Depends(get_session)):
     response.headers["Cache-Control"]="no-store"
     return visible_case(db,user,case_id)
@@ -200,19 +213,20 @@ def history(case_id:UUID,response:Response,page:int=Query(1,ge=1),page_size:int=
 @router.put('/{case_id}/classification', response_model=CaseDetail)
 def classify(case_id: UUID, body: ClassificationInput, response: Response, user: User = Depends(current_user), db: Session = Depends(get_session)):
     response.headers['Cache-Control'] = 'no-store'
-    return manage_case(db, user, case_id, 'classification', body)
+    return manage_case(db, user, case_id, 'classification', body, presenter=CaseDetail.model_validate)
 
 
 @router.put('/{case_id}/assignment', response_model=CaseDetail)
 def assign(case_id: UUID, body: AssignmentInput, response: Response, user: User = Depends(current_user), db: Session = Depends(get_session)):
     response.headers['Cache-Control'] = 'no-store'
-    return manage_case(db, user, case_id, 'assignment', body)
+    return manage_case(db, user, case_id, 'assignment', body, presenter=CaseDetail.model_validate)
 
 
 @router.put('/{case_id}/content', response_model=CaseDetail)
+@worker_response(CaseDetail)
 def edit_content(case_id: UUID, body: ContentInput, response: Response, user: User = Depends(current_user), db: Session = Depends(get_session)):
     response.headers['Cache-Control'] = 'no-store'
-    return manage_case(db, user, case_id, 'content', body)
+    return manage_case(db, user, case_id, 'content', body, presenter=CaseDetail.model_validate)
 
 
 @router.post('/{case_id}/transitions', response_model=CaseDetail)
@@ -222,7 +236,7 @@ def transition(case_id: UUID, body: TransitionInput, response: Response, user: U
         raise HTTPException(422, 'Responsable y motivo solo aplican a entrada en revisión')
     if body.status != 'RESUELTA' and body.resolution_text is not None:
         raise HTTPException(422, 'La resolución solo aplica al resolver')
-    return manage_case(db, user, case_id, 'transition', body)
+    return manage_case(db, user, case_id, 'transition', body, presenter=CaseDetail.model_validate)
 
 
 class ParticipantReviewInput(BaseModel):

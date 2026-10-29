@@ -1,0 +1,62 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "DOCUMENTACION_CONSOLIDADA_REVISION_ESTATICA_SIN_CARGA_NUEVA",
+  "cambio": "PRUEBA_RENDIMIENTO.md actualizado en el mismo archivo: estado inicial obsoleto corregido, protocolo preservado, cinco formales reunidas, herramientas/diagnóstico/validaciones/pendientes organizados.",
+  "documento_bytes_antes": 46933,
+  "documento_bytes_despues": 25222,
+  "fuentes_formales_verificadas": [
+    {
+      "evidencia": 126,
+      "run_id": "d1c50f8001464425",
+      "ruta": ".pgdata/performance-d1c50f8001464425/report.json",
+      "sha256": "93127e4ca426588beaf051afe71800837d4642b4eaae948a8e4dd2cfc25c84aa"
+    },
+    {
+      "evidencia": 129,
+      "run_id": "791d2288a84d4872",
+      "ruta": ".pgdata/performance-791d2288a84d4872/report.json",
+      "sha256": "0bae138a240048660276c85de60e93bd851d4c9597f9c5e736893e7180c44920"
+    },
+    {
+      "evidencia": 132,
+      "run_id": "c7ad7be7ff304f58",
+      "ruta": ".pgdata/performance-c7ad7be7ff304f58/report.json",
+      "sha256": "63084d943d79e841c403599e9970143bbe9640f5664cf23ea1bb15bf5e70b556"
+    },
+    {
+      "evidencia": 136,
+      "run_id": "3dabef717c5549c6",
+      "ruta": ".pgdata/performance-3dabef717c5549c6/report.json",
+      "sha256": "73d1bfe40f50ed646422d81d541364c165cfbaf6b4937a110b9524ce29e1d3ef"
+    },
+    {
+      "evidencia": 141,
+      "run_id": "e0b63b390b764550",
+      "ruta": ".pgdata/performance-e0b63b390b764550/report.json",
+      "sha256": "fdc9f95b181a25c129029a0e43bdbc3f0769a5b101cdb4771a9eb8e95706436b"
+    }
+  ],
+  "contexto_autora": {
+    "videollamada": "Brave en uso; mantenerlo abierto. No ejecutar carga durante la llamada.",
+    "captura_actual": "codex-clipboard-e4275c65-c5f2-4b3d-9f8c-63d7887ec316.png",
+    "cpu_visible_porcentaje": 32,
+    "memoria_visible_porcentaje": 84,
+    "limite": "Lectura instantánea del Administrador de tareas, posterior a los ensayos. No línea base comparable ni causa única."
+  },
+  "revision_estatica": [
+    "queue_event conserva ausencia de commit propio, UUID5 y bloques de 50.",
+    "Consumidores en app consultan MailDelivery persistida; no se halló dependencia de Session.new para estas filas.",
+    "Hash de mail.py coincide con el diagnóstico 146; sin nueva modificación de servicios."
+  ],
+  "validacion_documental": [
+    "Cinco reportes completos con diez clientes/300 s y cero errores cotejados; p95 de tabla extraídos de JSON originales.",
+    "Todos los enlaces de evidencias JSON del documento anterior preservados; enlaces locales comprobados.",
+    "No se repitieron tests o cargas ya ejecutados. No nueva prueba de concurrencia, API o rendimiento."
+  ],
+  "limites": [
+    "RNF-2 sigue incumplido según cinco formales; ninguna incluye el INSERT multirregistro más reciente.",
+    "Mejora localizada de correo y regresión 77 aprobada no acreditan rendimiento global.",
+    "Instalación/recuperación integral, custodia, aceptación/capacitación y demás pendientes no se declaran completos por esta revisión."
+  ],
+  "sha256_documento": "859ccfb1e18e32c351613403e4433ad1ac261a76edc6b992ec8d303cdbed8711"
+}

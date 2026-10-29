@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ausencias"
+  },
+  {
+    "id": 2,
+    "nombre": "Conflictos"
+  },
+  {
+    "id": 3,
+    "nombre": "Incumplimientos"
+  },
+  {
+    "id": 4,
+    "nombre": "Riesgos"
+  },
+  {
+    "id": 5,
+    "nombre": "Solicitudes Administrativas"
+  }
+]

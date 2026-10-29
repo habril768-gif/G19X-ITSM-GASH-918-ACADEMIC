@@ -1,0 +1,44 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "SEGUNDO_FALLO_ARRANQUE_QA_CAUSA_PENDIENTE",
+  "run_id": "6bcb02bfdbe040ad",
+  "fuentes": [
+    "Captura aportada por la autora: codex-clipboard-3fa48ee0-bbd4-4e0f-a673-fdb8c6a8c1ca.png",
+    ".pgdata/performance-6bcb02bfdbe040ad/report.json"
+  ],
+  "sha256_reporte": "7cc72f01e468e000d1d67fbfc235dfb3e23d235840e997e865b4061645b9d06c",
+  "resultado_original": {
+    "fecha_utc": "2026-10-23T00:07:32.655775+00:00",
+    "run_id": "6bcb02bfdbe040ad",
+    "modo": "smoke",
+    "estado": "INCOMPLETA",
+    "limites": [
+      "No es una instalación de producción ni recuperación de datos operativos.",
+      "Recursos QA retenidos y detenidos cuando es posible; sin borrar volúmenes.",
+      "Contraseñas aleatorias no guardadas en manifiesto/reporte; metadatos de contenedores contienen configuración privada.",
+      "Muestreo docker stats añade carga al mismo equipo."
+    ],
+    "configuracion_validada": true,
+    "error_codigo": "ARRANQUE_QA_SALIDA_1",
+    "recursos": [],
+    "contenedores_detenidos": false,
+    "parada_requiere_revision": true,
+    "recursos_retenidos": {
+      "project": "plurione-qa-perf-6bcb02bfdbe040ad",
+      "folder": "C:\\Users\\sanch\\Documents\\Codex\\Desarrollo de una Plataforma Inteligente de Gestión de Incidencias Laborales - G19X-ITSM-GASH-918-ACADEMIC\\.pgdata\\performance-6bcb02bfdbe040ad",
+      "sin_borrado_volumenes": true
+    }
+  },
+  "revision": [
+    "Configuración validada y fallo en compose up --build --wait, sin migraciones/fixture/carga. Parada de esta nueva corrida no confirmada.",
+    "command() conserva solo el código de salida para no exponer stdout/stderr privados. No permite atribuir la causa raíz.",
+    "La imagen API se construyó correctamente en 160; el nuevo fallo puede estar en otra etapa del arranque. No prueba fallo del ajuste get_session.",
+    "Se observaron 16 carpetas performance-* y specification crea dos redes por corrida; stop no elimina redes. Esto justifica comprobar asignación de redes, pero no demuestra cuántas redes existen realmente o si faltan direcciones."
+  ],
+  "siguiente_paso": "Prueba mínima de creación de red interna vacía con nombre QA aleatorio; si se crea, eliminar exclusivamente esa red recién creada. Mostrar error original de Docker si falla. Sin contenedores, credenciales, benchmark o borrado de redes ajenas.",
+  "limites": [
+    "No se ejecutó Docker desde herramientas, no hay resultado de la prueba de red todavía.",
+    "Conservar ambos reportes incompletos. No repetir smoke/full sin conocer la causa.",
+    "93 pruebas seleccionadas siguen aprobadas; RNF-2 pendiente y formal 150 sigue FALLIDA_UMBRAL."
+  ]
+}

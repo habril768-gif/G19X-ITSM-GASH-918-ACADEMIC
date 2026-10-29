@@ -1,0 +1,186 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "DIAGNOSTICO_QA_SIN_ACREDITAR_RNF2",
+  "run_id": "b2bda80fd89d433c",
+  "fuentes": [
+    "Salida textual de limpieza y smoke aportada por la autora; no ejecutados por el agente.",
+    ".pgdata/performance-b2bda80fd89d433c/report.json"
+  ],
+  "sha256_reporte": "89b6bd025eb42e6059fc914a89ecd856f3f6896062f21f2bdf868169d5d7a9dd",
+  "limpieza_observada": {
+    "modo": "APLICAR",
+    "limite": 2,
+    "redes_elegibles_conteo": 28,
+    "eliminadas": [
+      "plurione-qa-perf-42486b8ff1264162_entry",
+      "plurione-qa-perf-d1c50f8001464425_entry"
+    ],
+    "omitidas_al_revalidar": [],
+    "fallidas": [],
+    "carga_condicionada": "Dos eliminadas sin fallos, comprobadas antes del smoke."
+  },
+  "validacion": {
+    "agregados": "read_diagnostics v3 ejecutado sobre JSON original: ocho grupos y sumas SQL/hilos concordantes.",
+    "codigo": "Hashes de los tres servicios coinciden con 169 y el código actual.",
+    "peticiones_medidas": 202,
+    "errores_medidos": 0,
+    "consultas_por_peticion": {
+      "listado": 4,
+      "detalle": 3,
+      "creacion": 10,
+      "actualizacion": 7
+    },
+    "familias": "En ambas fases, creación/edición incluyen SELECT/roles+departamentos+users y dejan de incluir SELECT/roles individual.",
+    "hilos": "Tres llamadas por petición y cero incompletas en los ocho grupos.",
+    "conteos_http": {
+      "conteo_inicial": 100,
+      "conteo_tras_calentamiento": 128,
+      "conteo_final": 178
+    },
+    "comprobacion_sql": {
+      "incidencias": 178,
+      "eventos_creado": 178,
+      "eventos_editado": 68,
+      "entregas_encoladas": 1780,
+      "intentos_smtp": 0,
+      "trabajos_ia": 0
+    },
+    "posteriores": "OK",
+    "revocacion_sesiones": {
+      "204": 10
+    },
+    "contenedores_detenidos": true
+  },
+  "medicion": {
+    "cpu": {
+      "duracion_s": 5.123796599989873,
+      "cpu_logicas": 4,
+      "generador_cpu_s": 0.15625,
+      "generador_cpu_porcentaje_un_nucleo": 3.0494965393495286,
+      "generador_cpu_porcentaje_equipo": 0.7623741348373821,
+      "host_cpu_porcentaje": 88.71951219512195,
+      "host_estado": "OK",
+      "limites": "CPU proceso incluye todos sus hilos; no Docker. Host incluye otras aplicaciones/VM. Medias de fase, no picos ni causa única; GetSystemTimes Windows."
+    },
+    "http_p95_ms": {
+      "listado": 366.1821999994572,
+      "detalle": 273.9463999896543,
+      "creacion": 760.4376000090269,
+      "actualizacion": 423.13180000928696
+    },
+    "edicion_metricas": {
+      "total": {
+        "media": 255.15996431234575,
+        "p95": 424.48137299652444,
+        "max": 668.8169729968649
+      },
+      "auth": {
+        "media": 49.59070787481323,
+        "p95": 105.39446799521102,
+        "max": 167.89587600214873
+      },
+      "endpoint": {
+        "media": 117.49545027002266,
+        "p95": 216.07833000598475,
+        "max": 355.8349619997898
+      },
+      "sql": {
+        "media": 117.8400531468166,
+        "p95": 258.963667009084,
+        "max": 297.3200190026546
+      },
+      "commit": {
+        "media": 17.12217252058205,
+        "p95": 42.52880300191464,
+        "max": 51.45939799695043
+      },
+      "fuera_auth_endpoint": {
+        "media": 88.07380616750986,
+        "p95": 177.51591900014319,
+        "max": 207.5875430018641
+      },
+      "consultas": {
+        "media": 7.0,
+        "p95": 7.0,
+        "max": 7.0
+      },
+      "hasta_envio": {
+        "media": 225.97386312509116,
+        "p95": 377.8128249978181,
+        "max": 630.7803750023595
+      },
+      "cierre": {
+        "media": 29.186101187254582,
+        "p95": 63.23833799979184,
+        "max": 72.34960500500165
+      },
+      "thread_calls": {
+        "media": 3.0,
+        "p95": 3.0,
+        "max": 3.0
+      },
+      "thread_wait": {
+        "media": 43.82638304180849,
+        "p95": 88.87420700193616,
+        "max": 100.41528700094204
+      },
+      "thread_run": {
+        "media": 167.13550579030803,
+        "p95": 304.7857849887805,
+        "max": 461.28533099545166
+      },
+      "thread_resume": {
+        "media": 35.09212093846751,
+        "p95": 78.23364801151911,
+        "max": 83.34838799783029
+      },
+      "thread_incomplete": {
+        "media": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      }
+    }
+  },
+  "comparacion_con_168": {
+    "http_p95_ms": {
+      "listado": {
+        "antes": 302.70390000077896,
+        "ahora": 366.1821999994572
+      },
+      "detalle": {
+        "antes": 243.35730000166222,
+        "ahora": 273.9463999896543
+      },
+      "creacion": {
+        "antes": 427.8645000013057,
+        "ahora": 760.4376000090269
+      },
+      "actualizacion": {
+        "antes": 312.76420000358485,
+        "ahora": 423.13180000928696
+      }
+    },
+    "cpu_host_media_porcentaje": {
+      "antes": 84.20245398773007,
+      "ahora": 88.71951219512195
+    }
+  },
+  "lectura": [
+    "Confirma la reducción SQL esperada de 169: creación 11 a 10 y edición 8 a 7 en PostgreSQL QA, conservando tres pasos por hilo y SQL de lectura sin cambios.",
+    "Todos los p95 HTTP de este smoke empeoran frente a 168; el ahorro de un viaje no acredita mejora de latencia.",
+    "CPU global media 88,72 % frente a 84,20 %; generador 0,76 % del equipo. La carga del host es contexto relevante, no prueba de causa exclusiva.",
+    "Auditoría y cola: 178 casos/creaciones, 68 ediciones, 1780 entregas, cero SMTP/IA. Diez logout 204 y QA detenido.",
+    "Conservar tanto la mejora estructural como el resultado de latencia adverso, sin reescribir resultados anteriores o declarar cumplimiento."
+  ],
+  "limites": [
+    "Smoke instrumentado 2+5 s, diez clientes y conjuntos finales distintos; no comparación controlada ni formal RNF-2.",
+    "No sumar p95 ni componentes solapados. No atribuir regresión exclusivamente a código o CPU.",
+    "98 pruebas/cuatro subpruebas de 170 mantienen alcance; no se ejecutaron tests o Docker nuevos desde herramientas.",
+    "RNF-2 pendiente. Formal 150 sigue FALLIDA_UMBRAL; no repetir full o smoke sin un cambio/hipótesis nuevo justificado."
+  ],
+  "sha256_codigo": {
+    "backend/app/services/administration_lock.py": "5bdd6d779a1c3e8ffddbaa7378572ee7c6e50a13a6d511e6e6a000ec328e989d",
+    "backend/app/services/incidents.py": "cedaf1b0fa2bdbaae916989a8ce7a04dbb5978921d13efb78554532a5f638e7d",
+    "backend/app/services/lifecycle.py": "83fda9b85761513287a03e00b152d01f46c30679090026abd32d03dbc2a03c6e"
+  }
+}

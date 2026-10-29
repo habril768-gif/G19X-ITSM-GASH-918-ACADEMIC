@@ -1,0 +1,76 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "REVISION_COMMIT_COMPLETADA_CAUSA_POSTGRESQL_NO_DETERMINADA",
+  "motivo": "164 registró commit de edición medio 66,42 ms, p95 356,23 ms; revisar alcance y trabajo redundante antes de cambiar producto o repetir carga.",
+  "revision_codigo_instalado": [
+    "manage_case con presenter ejecuta db.flush y captura el esquema antes de db.commit. queue_event retorna sin encolar ante edición de contenido sin cambio de asignación/estado.",
+    "El cronómetro QA comienza en Session.before_commit y acaba en Session.after_commit. Incluye preparación/flush si queda trabajo y confirmación del driver.",
+    "En SQLAlchemy instalado, SessionTransaction.commit llama a trans.commit antes de after_commit; después ejecuta _remove_snapshot (expiración) y close. El tiempo QA no equivale a todo Session.commit ni al cierre de dependencia.",
+    "No hay segundo commit en queue_event ni envío SMTP/Redis en esa transacción. Auth, lock administrativo, bloqueo de expediente y snapshot permanecen previos a confirmación."
+  ],
+  "comprobacion_local": {
+    "metodo": "Funciones de servicios extraídas por AST y modelos SQLAlchemy reales, SQLite aislado, sin HTTP/PostgreSQL/AnyIO. Eventos de Session y wrapper local de dialect.do_commit registran orden y cantidades, no estiman latencia PostgreSQL.",
+    "resultados": [
+      {
+        "operacion": "create",
+        "commit_calls": 1,
+        "pending_at_before_commit": [
+          {
+            "new": 0,
+            "dirty": 0,
+            "deleted": 0
+          }
+        ],
+        "sql_inside_commit": 0,
+        "flushes_inside_commit": 0,
+        "driver_commit_calls": 1,
+        "ordered_events": [
+          "before_commit",
+          "driver_commit_start",
+          "driver_commit_end",
+          "after_commit"
+        ]
+      },
+      {
+        "operacion": "edit",
+        "commit_calls": 1,
+        "pending_at_before_commit": [
+          {
+            "new": 0,
+            "dirty": 0,
+            "deleted": 0
+          }
+        ],
+        "sql_inside_commit": 0,
+        "flushes_inside_commit": 0,
+        "driver_commit_calls": 1,
+        "ordered_events": [
+          "before_commit",
+          "driver_commit_start",
+          "driver_commit_end",
+          "after_commit"
+        ]
+      }
+    ]
+  },
+  "resultado_local": "En creación y edición con presenter: una confirmación de Session y una de driver, Session sin objetos nuevos/sucios/borrados al entrar en before_commit, cero SQL y cero flush entre before_commit y after_commit.",
+  "lectura": [
+    "No se encontró flush redundante dentro del intervalo medido ni un commit duplicado en los dos escenarios locales.",
+    "Los 66,42 ms de PostgreSQL QA no pueden atribuirse a preparar CaseDetail, expirar objetos o cerrar la dependencia; estos pasos están fuera de ese intervalo en el código revisado.",
+    "El tramo medido incluye confirmación del driver/conexión y posibles esperas. Los agregados no separan WAL, almacenamiento, red, SO/GIL o planificación; no afirmar que sea disco/WAL por sí solo.",
+    "No hay cambio justificado de durabilidad, autocommit o atomicidad. No modificar configuración PostgreSQL para bajar artificialmente la latencia.",
+    "Otro coste acotado conocido en 164 es validación de respuesta en hilo: ejecución media 0,029 ms pero espera+retorno 15,45 ms por edición. Evaluar consolidación con el worker que captura el DTO, conservando validación y sin lectura ORM/SQL en event loop."
+  ],
+  "limites": [
+    "Comprobación de orden/cantidades con funciones extraídas por AST, modelos/SQLAlchemy/SQLite reales; no HTTP/Pydantic/AnyIO/PostgreSQL ni prueba de latencia o carreras.",
+    "Dos escenarios locales no sustituyen las 93 API de 157 ni se suman como suite.",
+    "Sin cambios en código del producto, nueva instrumentación, Docker o nuevas cargas. RNF-2 pendiente; 150 conserva FALLIDA_UMBRAL.",
+    "No se vuelve a pedir smoke/full solo para repetir el mismo dato. Siguiente implementación debe abordar un coste identificado y pasar regresión antes de medir."
+  ],
+  "sha256_codigo_revisado": {
+    "backend/app/services/lifecycle.py": "70d47ad5af9c569f745140f6c4fdaced935d281575e1f0c68e02cb5ec6a758f4",
+    "backend/app/services/incidents.py": "736d95575577341650edd27933f324d8dbc1a851465453381efc446aec27f36e",
+    "backend/app/services/mail.py": "7dc77544fbbcdd412fbc19a580b9b39c928fdc059c23d19a3fd8099bf9156984",
+    "backend/app/core/performance_diagnostics.py": "688f8e58bb57a2d24faa3d784cbd8b7188887461064eadfd1d9820a808cef5c4"
+  }
+}

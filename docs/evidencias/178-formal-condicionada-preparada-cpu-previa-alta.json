@@ -1,0 +1,74 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "FORMAL_CONDICIONADA_PREPARADA_SIN_CARGA_NUEVA",
+  "revision_actual": {
+    "fecha_registro": "2026-10-27",
+    "archivos_regresiones_verificados": 15,
+    "discrepancias_regresiones": [],
+    "archivos_qa_verificados": 53,
+    "diferencias_frente_177": []
+  },
+  "cpu_global_previa_observada": {
+    "modo": "CPU_GLOBAL_SIN_CARGA_GENERADA",
+    "intervalos": [
+      {
+        "duracion_s": 2.05831030000013,
+        "cpu_global_porcentaje": 67.6300578034682,
+        "estado": "OK"
+      },
+      {
+        "duracion_s": 2.0142617999999857,
+        "cpu_global_porcentaje": 91.61793372319688,
+        "estado": "OK"
+      },
+      {
+        "duracion_s": 2.0002458999999817,
+        "cpu_global_porcentaje": 51.5625,
+        "estado": "OK"
+      }
+    ],
+    "intervalos_validos": 3,
+    "intervalos_totales": 3,
+    "media_cpu_global_porcentaje": 70.29419091413425,
+    "limites": "Muestra actual de CPU global Windows; otras aplicaciones pueden estar activas. No identifica procesos, no recrea la corrida previa ni acredita RNF-2. No disponible se conserva como null.",
+    "fecha_registro": "2026-10-27",
+    "ejecutado_por": "agente, sin carga generada"
+  },
+  "lectura": [
+    "Se retomó el trabajo tras interrupción sin modificaciones de producto en ese turno interrumpido. Quince archivos de regresiones y 53 de la última identidad QA coinciden, sin discrepancias.",
+    "Sondeo real de solo lectura ejecutado por el agente: tres intervalos válidos, CPU media 70,29 % sin carga generada. Otras aplicaciones pueden estar activas; no identifica procesos ni causa única.",
+    "La última formal sigue siendo 150, anterior a los cambios de sesión, worker DTO, rol agrupado y lecturas/plantilla. Es justificable una nueva formal del código actual cuando haya mejores condiciones previas; no otra repetición del mismo smoke."
+  ],
+  "cambio_herramientas": [
+    "Nuevo run_performance_full_guarded.py requiere --confirm-isolated-qa. Toma línea base de seis segundos antes de cualquier comando Docker o limpieza.",
+    "Exige tres intervalos válidos/finítos y media ponderada concordante, media <=30 % y todos los intervalos <=50 %. Son límites operativos de arranque, no requisito/umbral RNF-2 ni garantía durante construcción/medición.",
+    "Si la CPU no cumple o faltan lecturas: NO_INICIADA_CPU_PREVIA, código 2, sin tocar Docker/redes. No reintenta automáticamente ni programa esperas futuras.",
+    "Si cumple: valida contexto Docker local, libera como máximo dos redes QA vacías con herramienta existente; exige dos eliminadas sin fallidas/omitidas antes de iniciar.",
+    "Si la limpieza no cumple: NO_INICIADA_REDES_QA, código 2, sin carga. No detiene o borra contenedores, imágenes, volúmenes o reportes.",
+    "Si todo cumple: llama una vez al provisionador en modo full, sin diagnóstico de API, con protocolo existente 30 s calentamiento +300 s medición, diez clientes y criterio p95<200 ms por operación.",
+    "El provisionador admite metadatos preflight opcionales y guarda cpu_previa/umbrales/redes liberadas en precondiciones_arranque del reporte original. Los llamadores anteriores no cambian y los reportes anteriores no se reescriben."
+  ],
+  "validacion": {
+    "herramientas_local": "74 unitarias locales aprobadas en 1,839 s; diez nuevas (nueve de guardia, una de conservación de metadatos). Docker/CPU simulados, sin nueva carga real.",
+    "casos_guardia": [
+      "CPU alta no llama Docker/limpieza/provisionador.",
+      "Lecturas ausentes, no finitas, incompletas o medias discordantes no inician.",
+      "Pico de intervalo bloquea aunque la media sea baja.",
+      "Contexto remoto se rechaza antes de limpieza.",
+      "Limpieza fallida o menor de dos redes impide carga.",
+      "Camino válido llama full una vez, sin diagnóstico, y conserva línea base/redes.",
+      "Confirmación obligatoria antes de medir.",
+      "Reporte conserva metadatos sin alterar veredicto previo."
+    ],
+    "estatica": "AST válido en cuatro archivos; lógica de aplicación/seguridad/transacciones no modificada.",
+    "limites": "Integración real del comando completo todavía no ejecutada. La línea base de hoy no reúne las condiciones propuestas; no se lanzó formal ni smoke."
+  },
+  "pendiente": "Ejecutar el comando cuando el equipo tenga menor actividad; si se detiene, compartir la salida y no repetir en bucle. Si inicia, revisar reporte formal y condiciones, preservando todo resultado adverso.",
+  "rnf2": "Pendiente. No séptima formal ni nuevo p95 registrado; formal 150 FALLIDA_UMBRAL se conserva. 117 pruebas/63 subpruebas de 176 mantienen alcance de aplicación.",
+  "sha256": {
+    "backend/scripts/run_performance_full_guarded.py": "438ed8372e2b87fff4b3fa38a5949416d386d4ec66aef5004c1b48f24c7ffcce",
+    "backend/scripts/provision_performance_qa.py": "751122481aa523dda8a5084ea9068222f32bdd7ac0516a10f5af5602def45724",
+    "backend/tests/test_performance_full_guard.py": "f0f48e0e85b8a98dade9dbdad43e7e3b4273e5f37649fc162e87e6956346c82e",
+    "backend/tests/test_performance_provisioner.py": "243e3d0fc1fb66528145ec49f4ba306a0fb9beed8640d90a669639a0328e8296"
+  }
+}

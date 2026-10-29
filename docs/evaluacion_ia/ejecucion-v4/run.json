@@ -1,0 +1,15 @@
+{
+  "dataset_sha256": {
+    "referencias.json": "9864926bbb3bdc543063bd4556c46a346b54e1e806a17c099cdf62321c934e9e",
+    "entradas.json": "033c716dc36660515a938518545576b04ae8a4454e92bad631bc68e58fc71c65",
+    "catalogo.json": "68145613a454948697d23852129f10950bf20e73788fca08c006ebe7b6966f5f"
+  },
+  "provider_sha256": "5a499d4e808cb5c545189e798dd971107c4cc60e757ba96b3c5240fdd78604b2",
+  "prompt_sha256": "7ae7c618c98fbf43935c6a70e3a78f8fc33ff14f49e5dc2f87ee7f18e6fd04e1",
+  "requested_model": "gpt-4.1-mini",
+  "prompt_version": "plurione-classify-v4",
+  "max_calls": 55,
+  "created_at": "2026-10-18T22:58:29.632337+00:00",
+  "source": "external_provider",
+  "review_scope": "Conformidad general de la autora; no revisión independiente de terceros"
+}

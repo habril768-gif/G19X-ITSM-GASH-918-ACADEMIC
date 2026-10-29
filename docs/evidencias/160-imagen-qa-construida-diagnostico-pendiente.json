@@ -1,0 +1,28 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "CONSTRUCCION_API_QA_COMPLETADA_ARRANQUE_PENDIENTE",
+  "fuente": "Salida textual de docker build aportada por la autora; no ejecutado por el agente.",
+  "comando": "docker build --progress=plain -f .\\backend\\Dockerfile -t plurione-qa-perf-cc10cf1d32dd4a8d-api .\\backend",
+  "resultado": {
+    "builder": "desktop-linux, docker driver",
+    "imagen": "docker.io/library/plurione-qa-perf-cc10cf1d32dd4a8d-api:latest",
+    "base": "python:3.11-slim-bookworm",
+    "base_digest": "sha256:f06d01d4ba3f8ad5af45a3ec87df19c1d317d8e8961edc0fabda61811af6f7cf",
+    "manifest_list": "sha256:220a68c6f89f1887914d7d44afb17622b6b3b7f67b89f4f4e0d25fb71fe5cd3c",
+    "manifest": "sha256:5aea569badf1e3d71b9f062f80a81d4a23419536df0f362623f89ca1d34d9cc2",
+    "config": "sha256:61776ddab3296cb328f1f4c8ec647ba59c8849ace2eb6b4490ed992ad8ef369b",
+    "pasos_2_a_7": "CACHED",
+    "exportacion": "DONE 0.5s; naming y unpacking completos; vuelve al prompt sin ERROR"
+  },
+  "interpretacion": [
+    "La construcción explícita de la imagen API terminó correctamente en esta ocasión.",
+    "Usó caché: no demuestra instalación limpia de dependencias ni descarga nueva de todas las capas.",
+    "No inició API/PostgreSQL/Redis ni prueba su salud o migraciones. No explica retrospectivamente ARRANQUE_QA_SALIDA_1 de 158.",
+    "Con Docker disponible y sin contenedores de la corrida según 159, se justifica un único reintento de smoke diagnóstico con el provisionador, que crea proyecto nuevo y verifica el arranque completo."
+  ],
+  "limites": [
+    "Sin cambios funcionales, nueva regresión, medición o aprobación RNF-2.",
+    "Conservar corrida fallida cc10cf1d32dd4a8d intacta. No reutilizar sus credenciales perdidas ni borrar volúmenes.",
+    "La selección 157 conserva 93 aprobadas; rendimiento del ajuste 156 pendiente. No lanzar full automáticamente."
+  ]
+}

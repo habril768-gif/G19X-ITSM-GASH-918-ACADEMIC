@@ -1,0 +1,36 @@
+{
+  "recorded_on": "2026-10-18",
+  "source": "Ejecuciones observadas de pytest y CLI; no evaluación externa",
+  "dataset": "docs/evaluacion_ia/manifest-congelado-v1.json",
+  "specific_tests": {
+    "passed": 17,
+    "seconds": 7.03
+  },
+  "backend_final": {
+    "passed": 141,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 27.85,
+    "postgresql": "18.6 aislado",
+    "migration": "0005",
+    "upgrade_runs": 2,
+    "alembic_check": "sin operaciones nuevas",
+    "cluster_stopped_and_removed": true
+  },
+  "initial_specific": {
+    "passed": 11,
+    "failed": 6,
+    "reason": "PermissionError os.replace en temporal sandbox; repetición en .pgdata pasó"
+  },
+  "provider": "Simulado/MockTransport; SDK real, sin red del modelo",
+  "external_calls": 0,
+  "frontend": "Sin cambios; no repetido",
+  "limitations": [
+    "Ejecución externa 55 casos pendiente",
+    "Conformidad general no acredita revisión independiente ni examen individual observado",
+    "Sin comprobación de CLI en Docker en este entorno",
+    "Sin techo monetario garantizado",
+    "Los resultados temporales de pruebas no son predicciones reales"
+  ]
+}

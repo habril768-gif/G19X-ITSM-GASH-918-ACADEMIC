@@ -1,6 +1,6 @@
-# Asistencia IA — API 0.10.0 / React 0.7.0
+# Asistencia IA
 
-Preparado el 17 de octubre de 2026. RF-3 parcialmente implementado: revisión explícita, trabajo durable, worker Redis/PostgreSQL, LangChain/OpenAI y sugerencia separada de decisión humana. No se hicieron llamadas reales al proveedor. Configuración desactivada por defecto.
+RF-3 dispone de revisión explícita, trabajo durable, workers Redis/PostgreSQL y sugerencias separadas de la decisión humana. Se realizaron pruebas integradas y evaluaciones sobre casos simulados; los resultados y límites están en el reporte QA y la documentación de evaluación. La configuración distribuida mantiene IA desactivada por defecto.
 
 ## Revisión y decisión
 
@@ -32,59 +32,33 @@ store=false no garantiza retención cero ni anonimato; siguen aplicando controle
 
 Variables en .env local, sin compartir/versionar:
 - AI_ENABLED=false por defecto.
-- OPENAI_MODEL: modelo de la cuenta compatible con Responses y salida estructurada; no se seleccionó ni comprobó acceso/coste de un modelo real.
+- OPENAI_MODEL: modelo explícito de la cuenta compatible con Responses y salida estructurada; comprobar disponibilidad y coste antes de nuevas llamadas.
 - OPENAI_API_KEY: solo ai-worker, nunca API/frontend.
 - REDIS_URL interno; sin variables VITE con secretos.
 
-## Instalar sin activar llamadas
 
-Desde raíz, con Docker Desktop en terminal de la autora:
+## Instalar y activar
 
-~~~powershell
-docker compose up -d --build --wait api
-docker compose exec api python -m alembic upgrade head
-docker compose exec api python -m alembic current
-docker compose exec api python -m alembic check
-~~~
+Aplica las migraciones con `alembic upgrade head` según el README. No repitas bootstrap ni seed. Con `AI_ENABLED=false`, la gestión manual permanece disponible y no se habilitan llamadas por iniciar el núcleo.
 
-Esperado 0005 (head), sin diferencias. Readiness /health/db exige 0005. No repetir seed/bootstrap. 0005 añade tabla/revisión sin reescribir 0001–0004 ni enviar datos; downgrade automático deshabilitado para preservar historial.
+Para activar asistencia, configura localmente `AI_ENABLED=true`, `OPENAI_MODEL` y la clave del worker. Desde la raíz:
 
-Actualizar React con Vite activo y abrir un caso autorizado. AI_ENABLED=false muestra asistencia sin activar y mantiene clasificación manual. Nueva UI en navegador real aún pendiente.
-
-## Activación externa pendiente
-
-Configurar modelo/clave y AI_ENABLED=true solo localmente; después:
-
-~~~powershell
+```powershell
 docker compose --profile ai up -d --build api ai-worker
-~~~
+```
 
-Abrir caso ficticio sin confidencialidad ni clasificación vigente, escribir hechos simulados, confirmar casillas y solicitar. Actualizar asistencia IA consulta resultado. Confirmar categoría/prioridad después en Clasificación humana. Sin worker listo, solicitud permanece pendiente: HTTP 202 no acredita resultado.
+Actualizar API y worker juntos evita procesar solicitudes con instrucciones incompatibles. Los trabajos y resultados conservan su procedencia; no reescribir sugerencias completadas para aparentar una evaluación nueva.
 
-No capturar clave, .env, formulario con datos reales o red. Proveedor/Redis reales y una única evidencia final de sugerencia se revisarán cuando exista configuración autorizada; no se declaran verificados por mocks.
+En un caso ficticio elegible, escribe texto mínimo, confirma las casillas y solicita asistencia. Actualizar asistencia consulta el resultado sin crear otra solicitud. Después confirma la clasificación oficial en el formulario humano. Cada envío elegible al proveedor puede consumir saldo.
 
-## Evaluación independiente pendiente
+## Evaluación y resultados
 
-Cálculo offline sin llamadas:
+Se registraron ejecuciones externas con referencias simuladas revisadas por la autora. El último conjunto obtuvo prioridad 50/50, categoría 47/50 y abstenciones 5/5; no omitió prioridades Alta en ese conjunto. Se conservan tres diferencias de categoría y la revisión humana obligatoria. Estos resultados no garantizan desempeño en datos nuevos ni certifican revisión independiente de terceros.
 
-~~~powershell
-cd backend
-.\.venv\Scripts\python.exe -m app.ai.evaluate referencias.json predicciones.json
-~~~
+Consulta el [resultado detallado](evaluacion_ia/RESULTADOS_V4.md) y el [conjunto fijado](evaluacion_ia/aceptacion-v4/README.md). Las evaluaciones anteriores son historial de desarrollo; sus archivos, hashes y diarios se conservan sin mezclarlos. No volver a ejecutar para buscar una puntuación mejor ni modificar etiquetas después de observar predicciones.
 
-Referencias JSON: 50 filas kind=reference, id único, category_id 1–5, priority 1–3; cinco filas más kind=abstention. Congelar previamente etiquetas independientes y conservar procedencia/revisión/versiones. Predicciones: una fila por ID con output (cinco campos del esquema) o error. No omitir fallos/abstenciones para mejorar el denominador 50.
+La ejecución de evaluación es separada del arranque y exige su procedimiento específico; no debe automatizarse por un cambio documental. Correo e informe Power BI tienen guías propias.
 
-Metas: 45/50 categorías y 40/50 prioridades; listar todos los falsos negativos de Alta para revisión, y bloquear cualquier Alta→Baja. Cinco casos de abstención deben ir a atención manual sin categoría forzada. automated_targets_met no certifica independencia, revisión humana ni aceptación RF-3. Si se ajusta prompt con referencias, preparar otras antes de aceptación.
+## Aceptación pendiente
 
-Fixtures sintéticos de tests comprueban el cálculo; no son conjunto independiente ni medición de calidad. No se prepararon ni ejecutaron 50+5 referencias independientes durante este avance.
-
-## Validación
-
-130 backend aprobadas/0 omitidas, seis integraciones PostgreSQL 18.6 aisladas, migraciones/check hasta 0005 correctos. 64 UI aprobadas; tras ajustar mensajes, ocho específicas y build 24 módulos/658ms correctos. Proveedor y Redis simulados, sin llamadas OpenAI, calidad independiente ni despliegue Docker acreditados. Resultados/límites en REPORTE_QA.md y evidencia 70 JSON. RF-3/RF-8 parciales.
-
-Resultado final backend: 130/130, 23.65s. Incluye adaptador real LangChain/SDK contra transporte HTTP simulado; se verifican formato/store=false/límite de salida sin red ni clave real. Los pases de 129 anteriores son históricos.
-
-Para suspender procesamiento: detener ai-worker desde Compose, poner AI_ENABLED=false localmente y recrear API para retirar nuevas solicitudes. Cambiar solo el archivo .env no cambia procesos ya iniciados. Una petición ya despachada no se puede retirar; el trabajo durable y sus controles permanecen. Nunca eliminar historial para ocultar un envío.
-## Primera prueba manual integrada — 17 de octubre de 2026
-
-La autora configuró localmente clave y activación según el recorrido guiado (modelo indicado gpt-4.1-mini, no inspeccionado en ejecución). Evidencias 71–73 revisadas: trabajo COMPLETADA en 1/3, sugerencia Riesgos/Alta; prioridad oficial aún por definir antes de decisión humana; mismo caso cerrado después con prioridad Alta y validación vigente. Sin lectura de clave ni llamadas adicionales durante este registro. Esta prueba sustituye el pendiente total de UI/proveedor reales; no la evaluación independiente 50+5, ni certifica transporte Redis, modelo/consumo efectivos o toda la matriz de privacidad. Detalles y límites en REPORTE_QA.md. La configuración distribuida sigue desactivada por defecto.
+Las evidencias 71–73 muestran el primer recorrido integrado; la 84 documenta la medición más reciente. Falta aceptación integral y completar controles operativos según QA. No se considera terminada la plataforma por cumplir las metas numéricas de un conjunto. La IA sigue limitada a texto simulado revisado y no sustituye atención humana.

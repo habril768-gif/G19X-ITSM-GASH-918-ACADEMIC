@@ -1,0 +1,44 @@
+{
+  "fecha_registro": "2026-10-21",
+  "estado": "RECORRIDO_MANUAL_UI_PARCIAL_CONFIRMADO",
+  "caso_id": "361f68d8-af1a-4e4b-8698-6013dda5dad4",
+  "titulo": "Prueba de aceptación — Empleado 1",
+  "contexto": "Caso simulado registrado por la autora; continuación de evidencia 111.",
+  "fuente": "Capturas aportadas y confirmaciones textuales de la autora, sin operación directa del agente.",
+  "observaciones_capturas": [
+    {
+      "archivo": "codex-clipboard-11abbfe4-e70d-4a3d-8aa0-b37e4b54b846.png",
+      "resultado": "Supervisor Operaciones Demo seleccionado para revisión. Botón deshabilitado con aviso de confirmar clasificación vigente; no acredita asignación guardada."
+    },
+    {
+      "archivo": "codex-clipboard-e5c7ff13-c62e-4838-99da-05db69d7342e.png",
+      "resultado": "Formulario de clasificación humana con Riesgos seleccionado y prioridad todavía sin seleccionar."
+    },
+    {
+      "archivo": "codex-clipboard-606b8970-2d3c-4496-81a5-c700a6a55dc1.png",
+      "resultado": "RH Independiente Demo: caso En revisión, aviso de caso reabierto/ciclo anterior conservado en historial, prioridad Baja, validación vigente, responsable identificado por UUID; resolución sin registrar y fechas de resuelta/cerrada sin registro en seguimiento actual."
+    },
+    {
+      "archivo": "codex-clipboard-6fa057da-0873-4cdf-a4a7-a039a33d1f78.png",
+      "resultado": "Empleado Operaciones Uno Demo: mismo caso e ID en listado, estado En revisión y prioridad Baja."
+    }
+  ],
+  "confirmaciones_textuales": [
+    "RH puede abrir el caso.",
+    "La autora confirmó resolución después de recibir una propuesta de texto explícitamente ficticio; texto exacto guardado no verificado.",
+    "La autora confirmó que el caso quedó cerrado.",
+    "La autora confirmó que el historial registra la reapertura."
+  ],
+  "resultado": "Estado posterior a reapertura En revisión coherente entre detalle RH y listado Empleado. Se deja el caso en revisión; no se solicita resolverlo o cerrarlo nuevamente.",
+  "limites": [
+    "No se dispone de capturas de cada transición intermedia ni del historial completo.",
+    "El aviso afirma conservación del ciclo anterior; contenido histórico no inspeccionado directamente.",
+    "No acredita permisos API, acceso negativo, correo SMTP, IA procesada ni aceptación integral/institucional.",
+    "Sin suite automática nueva, cambios de código ni borrados. Capturas originales fuera del repositorio."
+  ],
+  "pendientes": [
+    "Acceso a casos ajenos/confidenciales y restricciones API",
+    "Móvil y accesibilidad",
+    "Demás escenarios de aceptación y operación"
+  ]
+}

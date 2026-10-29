@@ -1,0 +1,240 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "DIAGNOSTICO_QA_SIN_ACREDITAR_RNF2",
+  "run_id": "485d89bb828f4582",
+  "fuentes": [
+    "Salida textual de limpieza y smoke aportada por la autora; no ejecutados por el agente.",
+    ".pgdata/performance-485d89bb828f4582/report.json"
+  ],
+  "sha256_reporte": "f093a9b3242b39d93c8a3199ea7831717e97c5a539e7b48563b61d5485083cd9",
+  "limpieza_previa_observada": {
+    "modo": "APLICAR",
+    "limite": 2,
+    "redes_elegibles_conteo": 28,
+    "eliminadas": [
+      "plurione-qa-perf-d1c2d490b7df42b4_entry",
+      "plurione-qa-perf-42486b8ff1264162_net"
+    ],
+    "omitidas_al_revalidar": [],
+    "fallidas": [],
+    "carga_condicionada": "El bloque PowerShell comprobó dos eliminadas sin fallos antes de ejecutar el smoke."
+  },
+  "validacion": {
+    "agregados": "read_diagnostics v3 sobre JSON original: ocho grupos y sumas SQL/hilos concordantes.",
+    "codigo": "Hashes de cuatro archivos de aplicación/instrumentación coinciden con el ajuste 166 y los actuales.",
+    "peticiones_medidas": 236,
+    "errores_medidos": 0,
+    "pasos_hilo": "3 por petición en los ocho grupos: auth, endpoint y other (close); sin dependency_enter o response_validation ni llamadas incompletas.",
+    "consultas_por_peticion": {
+      "listado": 4.0,
+      "detalle": 3.0,
+      "creacion": 11.0,
+      "actualizacion": 8.0
+    },
+    "conteos_http": {
+      "conteo_inicial": 100,
+      "conteo_tras_calentamiento": 130,
+      "conteo_final": 190
+    },
+    "comprobacion_sql": {
+      "incidencias": 190,
+      "eventos_creado": 190,
+      "eventos_editado": 78,
+      "entregas_encoladas": 1900,
+      "intentos_smtp": 0,
+      "trabajos_ia": 0
+    },
+    "posteriores": "OK",
+    "revocacion_sesiones": {
+      "204": 10
+    },
+    "contenedores_detenidos": true
+  },
+  "medicion": {
+    "cpu": {
+      "duracion_s": 5.087122199998703,
+      "cpu_logicas": 4,
+      "generador_cpu_s": 0.203125,
+      "generador_cpu_porcentaje_un_nucleo": 3.9929255090442255,
+      "generador_cpu_porcentaje_equipo": 0.9982313772610564,
+      "host_cpu_porcentaje": 84.20245398773007,
+      "host_estado": "OK",
+      "limites": "CPU proceso incluye todos sus hilos; no Docker. Host incluye otras aplicaciones/VM. Medias de fase, no picos ni causa única; GetSystemTimes Windows."
+    },
+    "http_p95_ms": {
+      "listado": 302.70390000077896,
+      "detalle": 243.35730000166222,
+      "creacion": 427.8645000013057,
+      "actualizacion": 312.76420000358485
+    },
+    "edicion_metricas": {
+      "total": {
+        "media": 220.8583864175704,
+        "p95": 342.23179100081325,
+        "max": 365.6745080006658
+      },
+      "auth": {
+        "media": 43.623307600236416,
+        "p95": 89.35447100520832,
+        "max": 92.27911500056507
+      },
+      "endpoint": {
+        "media": 95.25314930929612,
+        "p95": 135.51984899822855,
+        "max": 146.36505000089528
+      },
+      "sql": {
+        "media": 102.87259789223423,
+        "p95": 146.88495000154944,
+        "max": 161.4595259889029
+      },
+      "commit": {
+        "media": 11.890016345503021,
+        "p95": 34.69009500258835,
+        "max": 45.41344199969899
+      },
+      "fuera_auth_endpoint": {
+        "media": 81.98192950803787,
+        "p95": 177.82068999076728,
+        "max": 208.14939299452817
+      },
+      "consultas": {
+        "media": 8.0,
+        "p95": 8.0,
+        "max": 8.0
+      },
+      "hasta_envio": {
+        "media": 190.22096170916814,
+        "p95": 292.74907799845096,
+        "max": 303.3453790048952
+      },
+      "cierre": {
+        "media": 30.63742470840225,
+        "p95": 69.81651699607028,
+        "max": 83.90727399819298
+      },
+      "thread_calls": {
+        "media": 3.0,
+        "p95": 3.0,
+        "max": 3.0
+      },
+      "thread_wait": {
+        "media": 41.559569363148924,
+        "p95": 104.64067599968985,
+        "max": 141.27623299282277
+      },
+      "thread_run": {
+        "media": 138.93090325463245,
+        "p95": 214.92995000153314,
+        "max": 223.1287790054921
+      },
+      "thread_resume": {
+        "media": 32.841049818274435,
+        "p95": 66.95813800615724,
+        "max": 86.13881500787102
+      },
+      "thread_incomplete": {
+        "media": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      }
+    },
+    "edicion_etapas": {
+      "auth": {
+        "calls": 55,
+        "incomplete": 0,
+        "wait_ms": 698.7106320011662,
+        "run_ms": 2399.792786985927,
+        "resume_ms": 501.1807389964815,
+        "calls_per_request": 1.0,
+        "wait_ms_per_request": 12.703829672748476,
+        "run_ms_per_request": 43.63259612701685,
+        "resume_ms_per_request": 9.1123770726633
+      },
+      "endpoint": {
+        "calls": 55,
+        "incomplete": 0,
+        "wait_ms": 575.3414469872951,
+        "run_ms": 5239.57608598721,
+        "resume_ms": 644.3431300285738,
+        "calls_per_request": 1.0,
+        "wait_ms_per_request": 10.460753581587182,
+        "run_ms_per_request": 95.26501974522199,
+        "resume_ms_per_request": 11.71532963688316
+      },
+      "other": {
+        "calls": 55,
+        "incomplete": 0,
+        "wait_ms": 1011.7242359847296,
+        "run_ms": 1.8308060316485353,
+        "resume_ms": 660.7338709800388,
+        "calls_per_request": 1.0,
+        "wait_ms_per_request": 18.394986108813267,
+        "run_ms_per_request": 0.03328738239360973,
+        "resume_ms_per_request": 12.013343108727979
+      }
+    }
+  },
+  "comparacion_con_164": {
+    "http_p95_ms": {
+      "listado": {
+        "antes": 190.86489999608602,
+        "ahora": 302.70390000077896
+      },
+      "detalle": {
+        "antes": 203.75700001022778,
+        "ahora": 243.35730000166222
+      },
+      "creacion": {
+        "antes": 465.73979999811854,
+        "ahora": 427.8645000013057
+      },
+      "actualizacion": {
+        "antes": 488.6636000010185,
+        "ahora": 312.76420000358485
+      }
+    },
+    "edicion_media": {
+      "total": {
+        "antes": 269.8452238522596,
+        "ahora": 220.8583864175704
+      },
+      "commit": {
+        "antes": 66.41591127869314,
+        "ahora": 11.890016345503021
+      },
+      "thread_calls": {
+        "antes": 4.0,
+        "ahora": 3.0
+      },
+      "thread_wait": {
+        "antes": 32.71472475409878,
+        "ahora": 41.559569363148924
+      },
+      "thread_resume": {
+        "antes": 32.01954034440979,
+        "ahora": 32.841049818274435
+      }
+    }
+  },
+  "lectura": [
+    "La reducción estructural de 166 queda confirmada en integración QA real: cuatro a tres pasos, con las mismas cantidades de SQL por operación 4/3/11/8.",
+    "Edición p95 HTTP 488,66 a 312,76 ms y creación 465,74 a 427,86 ms; listado y detalle empeoran. No hay mejora general demostrada ni comparación controlada.",
+    "CPU global media pasa de 68,02 a 84,20 %; generador actual 1,00 % del equipo. No atribuir cambios de p95 exclusivamente al ajuste.",
+    "Commit de edición vuelve a 11,89 ms medios, p95 34,69 ms; el pico anterior de 66,42 ms medios no se repitió en este smoke, sin haber cambiado durabilidad/commit.",
+    "ASGI total de edición 220,86 ms medios y cierre posterior al envío 30,64 ms. El residual y las esperas son variables y no son exclusivamente SQL.",
+    "Endpoint ahora incluye preparación/validación del DTO dentro del worker; diferencia de alcance declarada en 166. No comparar esa etapa como idéntica a 164."
+  ],
+  "limites": [
+    "Smoke instrumentado 2+5 s y diez clientes; no acredita RNF-2 ni sustituye la formal 150 FALLIDA_UMBRAL.",
+    "No sumar p95 ni componentes solapados. Todos los p95 HTTP de este smoke superan 200 ms.",
+    "La selección 167 de 102 API aprobadas conserva su alcance; no se ejecutaron pruebas adicionales o Docker desde herramientas.",
+    "Sin nueva formal automática. Revisar reducción segura de viajes SQL y condiciones del entorno antes de otra carga; no cambiar durabilidad/seguridad para acomodar umbral."
+  ],
+  "sha256_codigo": {
+    "backend/app/api/incidents.py": "d5fbc39a74365ac9ada3fba973cd4f4a6a98426a702e586a48b74d2747880519",
+    "backend/app/core/worker_response.py": "98c579faa3f3540e01ff3190aaf465d6bc56f1285d9a354fd0f2a0183c2d8b82",
+    "backend/app/core/performance_diagnostics.py": "1a02d04022f54ac0353eb6e0e868b4fea172ccf93d91c5980e0ba730157ab9d6",
+    "backend/app/core/performance_timing.py": "20bd1ba31b6c3f8cdc51aa6ea942ff2f5f0d2bb2ef2ac2065d113ffd51c2524c"
+  }
+}

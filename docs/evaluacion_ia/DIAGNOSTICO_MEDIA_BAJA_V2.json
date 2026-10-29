@@ -1,0 +1,40 @@
+{
+  "source": "Reanalisis offline de las mismas predicciones externas v2, sin llamadas adicionales",
+  "prediction_prompt_version": "plurione-classify-v2",
+  "evaluator_api_version": "0.10.2",
+  "global_prd_targets_met_original": true,
+  "priority_class_metrics": {
+    "1": {
+      "reference_cases": 15,
+      "correct": 15,
+      "recall": 1.0
+    },
+    "2": {
+      "reference_cases": 20,
+      "correct": 10,
+      "recall": 0.5
+    },
+    "3": {
+      "reference_cases": 15,
+      "correct": 15,
+      "recall": 1.0
+    }
+  },
+  "medium_as_low_ids": [
+    "NUEVO-C1-02",
+    "NUEVO-C1-04",
+    "NUEVO-C1-07",
+    "NUEVO-C2-04",
+    "NUEVO-C2-07",
+    "NUEVO-C3-02",
+    "NUEVO-C3-04",
+    "NUEVO-C4-02",
+    "NUEVO-C5-04",
+    "NUEVO-C5-07"
+  ],
+  "low_as_medium_ids": [],
+  "media_baja_targets_met": false,
+  "complementary_target": "Con al menos 10 referencias por clase, >=80% de aciertos tanto Media como Baja; diagnostico, no aceptacion automatica",
+  "external_calls": 0,
+  "v3_quality_measured": false
+}

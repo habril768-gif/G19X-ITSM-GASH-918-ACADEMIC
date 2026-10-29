@@ -1,0 +1,90 @@
+{
+  "recorded_on": "2026-10-19",
+  "source": "Capturas aportadas, inspección ZIP/PBIR local y guardado normal de Power BI mediante computer-use",
+  "report": "powerbi/plurione_bi.pbix",
+  "pbix_bytes": 78823,
+  "pbix_sha256": "dfec81fea46d5a962688bc542b1f27fc1a070d455b5ab4f5dc4ecb98d20c4578",
+  "zip_crc_ok": true,
+  "saved_after_detecting_unsaved_changes": true,
+  "initial_file_bytes": 78236,
+  "initial_table_measures": [
+    "Volumen visible"
+  ],
+  "saved_visuals": [
+    {
+      "type": "tableEx",
+      "fields": [
+        "Indicadores.mes_creacion",
+        "Indicadores.categoria",
+        "Indicadores.departamento",
+        "Indicadores.privacidad",
+        "Indicadores.Volumen visible",
+        "Indicadores.Resolución horas",
+        "Indicadores.Reapertura porcentaje",
+        "Indicadores.Concordancia porcentaje"
+      ],
+      "show_all": true,
+      "totals": "false"
+    },
+    {
+      "type": "cardVisual",
+      "fields": [
+        "Indicadores.Fecha de corte"
+      ],
+      "show_all": null,
+      "totals": null
+    },
+    {
+      "type": "textbox",
+      "fields": [],
+      "show_all": null,
+      "totals": null
+    }
+  ],
+  "observed_preview": {
+    "aggregated_cells": 3,
+    "columns": 24,
+    "all_cells_suppressed": true,
+    "suppressed_numbers_null": true
+  },
+  "observed_cut_display": "18/10/2026 09:02:54 p.m.",
+  "cut_refreshed_during_review": false,
+  "numeric_percent_rendering_verified": false,
+  "semantic_binary_decoded": false,
+  "hidden_model_tables_audited": false,
+  "raw_model_data_certified_absent": false,
+  "published_to_service": false,
+  "new_ai_calls": 0,
+  "operational_database_queried_by_tools": false,
+  "backend_tests_repeated": false,
+  "baseline_backend_tests": 201,
+  "human_acceptance": false,
+  "screenshots": {
+    "94-powerbi-valores-suprimidos.png": {
+      "sha256": "696b3cfd92eb20465ced3c3b431a5d27ffc74cff66f4e7d9ff28da412ab84c12",
+      "versioned": true,
+      "local_only_reason": null
+    },
+    "95-powerbi-etiqueta-privacidad.png": {
+      "sha256": "0ee31bee3a6b26f8dca3615756114d7c748a9a01b5640b2de68ccbd0f57beaff",
+      "versioned": true,
+      "local_only_reason": null
+    },
+    "96-powerbi-tabla-privacidad-corte.png": {
+      "sha256": "4a56446e5a494008442fef698828b6ebf929b8cf42210ad8da43919d5cf81492",
+      "versioned": false,
+      "local_only_reason": "Nombre de cuenta visible en barra superior; original local sin editar"
+    },
+    "97-powerbi-medidas-privacidad.png": {
+      "sha256": "04370334a6dd720149cfdbe3aaa0ab685aabe9ee0f6e42f066c7edb8a88cfc80",
+      "versioned": false,
+      "local_only_reason": "Nombre de cuenta visible en barra superior; original local sin editar"
+    }
+  },
+  "remaining": [
+    "Renderizado porcentual con valores publicables de QA, sin reducir mínimos",
+    "Revisión de modelo semántico/consultas y tablas ocultas antes de entrega",
+    "Verificación de actualización manual y nueva extracción",
+    "Custodia/revocación y aceptación integral RF-6"
+  ]
+}

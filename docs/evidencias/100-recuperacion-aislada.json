@@ -1,0 +1,90 @@
+{
+  "status": "FAILED",
+  "date_utc": "2026-10-20T13:15:51.454959+00:00",
+  "test": "logical_backup_restore_two_isolated_clusters",
+  "stages": [
+    {
+      "stage": "source_init",
+      "seconds": 21.261
+    },
+    {
+      "stage": "source_start",
+      "seconds": 1.437
+    },
+    {
+      "stage": "source_database",
+      "seconds": 2.682
+    },
+    {
+      "stage": "target_init",
+      "seconds": 13.882
+    },
+    {
+      "stage": "target_start",
+      "seconds": 1.137
+    },
+    {
+      "stage": "target_database",
+      "seconds": 2.815
+    },
+    {
+      "stage": "source_migrate",
+      "seconds": 6.667
+    },
+    {
+      "stage": "source_schema_check",
+      "seconds": 5.577
+    },
+    {
+      "stage": "logical_backup",
+      "seconds": 0.879
+    },
+    {
+      "stage": "archive_catalog",
+      "seconds": 0.285
+    },
+    {
+      "stage": "restore_isolated",
+      "seconds": 0.982
+    },
+    {
+      "stage": "target_stop",
+      "seconds": 2.635
+    },
+    {
+      "stage": "source_stop",
+      "seconds": 1.846
+    }
+  ],
+  "development_database_accessed": false,
+  "workers_started": false,
+  "external_calls": false,
+  "docker_sequence_executed": false,
+  "fixture": "Simulated SQL/ORM fixtures, not a business/API acceptance test",
+  "postgres": "postgres (PostgreSQL) 18.6",
+  "source_bi": {
+    "views_readable": true,
+    "public_data_and_writes_denied": 3
+  },
+  "archive": {
+    "bytes": 59831,
+    "sha256": "c56410df08d762f9e20f01095db0a11f8b49eab66c042520f3b492593e64f559"
+  },
+  "invalid_archive_rejected": true,
+  "failure": {
+    "stage": "compare_data_schema",
+    "type": "AssertionError"
+  },
+  "servers_stopped": {
+    "target": true,
+    "source": true
+  },
+  "retained_local_folder": "recovery-y99q3eu4",
+  "limits": [
+    "PostgreSQL nativo; secuencia Docker no ejecutada",
+    "Datos ficticios insertados para recuperacion, no recorrido de negocio",
+    "Propietarios/ACL originales no restaurados; BI reconstruido y probado aparte",
+    "Sin instalacion limpia, carga, capacitacion o aceptacion integral",
+    "Archivo y clusters detenidos conservados en .pgdata ignorado por Git"
+  ]
+}

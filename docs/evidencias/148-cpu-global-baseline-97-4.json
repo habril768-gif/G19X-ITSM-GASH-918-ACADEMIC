@@ -1,0 +1,37 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "CPU_GLOBAL_ACTUAL_MUY_ALTA_SIN_CARGA_GENERADA",
+  "procedencia": "Salida textual pegada por la autora de performance_host.py --baseline; no ejecución del agente.",
+  "modo": "CPU_GLOBAL_SIN_CARGA_GENERADA",
+  "intervalos": [
+    {
+      "duracion_s": 2.0448423999914667,
+      "cpu_global_porcentaje": 92.12007504690432,
+      "estado": "OK"
+    },
+    {
+      "duracion_s": 2.1791929000028176,
+      "cpu_global_porcentaje": 99.82174688057042,
+      "estado": "OK"
+    },
+    {
+      "duracion_s": 2.1711721000028774,
+      "cpu_global_porcentaje": 100.0,
+      "estado": "OK"
+    }
+  ],
+  "intervalos_validos": 3,
+  "intervalos_totales": 3,
+  "media_cpu_global_porcentaje": 97.41968453046378,
+  "interpretacion": [
+    "Los contadores globales Windows informan CPU media de 97,42 % en esta muestra actual, sin carga generada por el script.",
+    "Sin carga generada no significa equipo ocioso: aplicaciones, servicios, VM u otras tareas pueden estar activos.",
+    "No identifica consumidores ni demuestra que la CPU explique por sí sola los resultados de carga anteriores.",
+    "No repetir benchmark bajo esta condición; contrastar CPU global y mayores consumidores en Administrador de tareas."
+  ],
+  "siguiente_paso": "Abrir Administrador de tareas (Ctrl+Mayús+Esc), ordenar Procesos por CPU descendente y aportar primeros consumidores/CPU global. Sin cerrar procesos automáticamente ni modificar configuración.",
+  "limites": [
+    "Muestra aproximada de 6,4 s, posterior a las corridas. Sin identificación por proceso ni atribución causal retrospectiva.",
+    "RNF-2 sigue pendiente y 141 conserva FALLIDA_UMBRAL. No se cambia el umbral ni se declara correcto el rendimiento de la aplicación."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "fecha_registro": "2026-10-21",
+  "estado": "BLOQUEADA_ANTES_DE_RESULTADOS",
+  "archivo": "backend/tests/test_incidents.py",
+  "seleccion": [
+    "test_management_access_and_assignment_eligibility",
+    "test_only_admin_independent_can_change_relations_and_confidentiality",
+    "test_edit_requires_revalidation_without_erasing_validator",
+    "test_employee_cannot_report_for_peer_or_spoof_author"
+  ],
+  "lectura_estatica": "Los cuatro tests existentes incluyen rechazos de clasificación por empleado, asignación inválida, cambios de protección no autorizados, cierre/reapertura por supervisor, registro para otro empleado y autor adulterado. La lectura del código no acredita resultados de ejecución.",
+  "intentos": [
+    {
+      "runtime": "backend/.venv/Scripts/python.exe",
+      "resultado": "Sin salida ni resumen pytest; proceso interrumpido con Ctrl+C, salida 1. No se atribuye causa raíz."
+    },
+    {
+      "runtime": "Python auxiliar con PYTHONPATH apuntando a site-packages del entorno backend",
+      "resultado": "Fallo durante importación de plugins/dependencias: ImportError: cannot import name 'ArgsKwargs' from 'pydantic_core._pydantic_core' (unknown location). Salida 1; no hubo resultados de tests. Este intento no demuestra que el entorno original esté dañado."
+    }
+  ],
+  "aislamiento_previsto": "Fixtures SQLite en memoria, current_user/get_session sustituidos; RUN_DB_TESTS=0 y caché/bytecode deshabilitados. No se solicitó acceso a PostgreSQL operativo.",
+  "limites": [
+    "Cero pruebas declaradas aprobadas en este avance",
+    "Sin cambios de código ni instalación/actualización de dependencias",
+    "No sustituye la autenticación real, Docker o PostgreSQL",
+    "Mantener pendientes restricciones de escritura hasta ejecución satisfactoria"
+  ],
+  "siguiente_paso": "Ejecutar esta selección en un runtime compatible del proyecto, conservando el resultado real."
+}

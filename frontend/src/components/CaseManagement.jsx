@@ -1,5 +1,6 @@
 import CaseProtection from './CaseProtection.jsx';
 import AIAssistance from './AIAssistance.jsx';
+import MailStatus from './MailStatus.jsx';
 import { useEffect, useRef, useState } from 'react';
 
 export default function CaseManagement({ data, user, api, onUpdated, onAccessLost }) {
@@ -86,5 +87,5 @@ export default function CaseManagement({ data, user, api, onUpdated, onAccessLos
       {editable && <details><summary>Editar título y descripción</summary><form aria-label="Editar contenido" onSubmit={e => { e.preventDefault(); if (!title.trim() || !description.trim()) { setError('Escribe título y descripción.'); return; } save('content', { titulo: title.trim(), descripcion: description.trim() }, 'Contenido actualizado. Revisa la vigencia de la clasificación.'); }}><p className="notice">Cambiar la descripción exige revalidar la clasificación. El contenido anterior se conserva en el historial.</p><label>Título del caso<input required maxLength={200} value={title} onChange={e => setTitle(e.target.value)} /></label><label>Descripción del caso<textarea required maxLength={10000} rows={4} value={description} onChange={e => setDescription(e.target.value)} /></label><button>Guardar contenido</button></form></details>}
       {!editable && !admin && <p>Solo Admin RH independiente puede cerrar o reabrir este caso.</p>}
     </fieldset>}{busy && <p role="status">Guardando operación…</p>}
-  </article>{options && <><AIAssistance api={api} data={data} options={options} onUpdated={onUpdated} onAccessLost={onAccessLost} /><CaseProtection api={api} data={data} user={user} options={options} relations={relations} onUpdated={onUpdated} onAccessLost={onAccessLost} /></>}</>;
+  </article>{admin && <MailStatus api={api} caseId={data.id} onAccessLost={onAccessLost} />}{options && <><AIAssistance api={api} data={data} options={options} onUpdated={onUpdated} onAccessLost={onAccessLost} /><CaseProtection api={api} data={data} user={user} options={options} relations={relations} onUpdated={onUpdated} onAccessLost={onAccessLost} /></>}</>;
 }

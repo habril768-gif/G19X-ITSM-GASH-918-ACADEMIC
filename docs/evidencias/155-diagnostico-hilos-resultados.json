@@ -1,0 +1,1555 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "DIAGNOSTICO_V3_REAL_ESPERAS_HILOS_CONFIRMADAS",
+  "captura": "codex-clipboard-f4499e67-b514-4d98-a776-448058f03210.png",
+  "procedencia": "Autora ejecutó; agente leyó captura y reporte original.",
+  "fuente": {
+    "ruta_local": ".pgdata/performance-19f2fbae76134abb/report.json",
+    "sha256": "a0cac77ac3e1167a3168462aac5b4dbafdcb48e3d14566b89bfc26e8b4030edc"
+  },
+  "solicitudes_medidas": 224,
+  "diagnostico": {
+    "version": 3,
+    "limite_excedido": false,
+    "grupos": {
+      "calentamiento/listado": {
+        "solicitudes": 30,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 176.16120346707854,
+            "p95": 241.9976819983276,
+            "max": 250.38700499862898
+          },
+          "auth": {
+            "media": 43.19707080006386,
+            "p95": 87.80873800060363,
+            "max": 93.87096099817427
+          },
+          "endpoint": {
+            "media": 35.42778280013105,
+            "p95": 58.9048020010523,
+            "max": 70.26000300174928
+          },
+          "sql": {
+            "media": 49.70819739901344,
+            "p95": 86.2697139964439,
+            "max": 95.6703679948987
+          },
+          "commit": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          },
+          "fuera_auth_endpoint": {
+            "media": 97.53634986688364,
+            "p95": 134.5162360012182,
+            "max": 141.79414600221207
+          },
+          "consultas": {
+            "media": 4.0,
+            "p95": 4.0,
+            "max": 4.0
+          },
+          "hasta_envio": {
+            "media": 147.1933837334897,
+            "p95": 217.97248999791918,
+            "max": 225.57305100053782
+          },
+          "cierre": {
+            "media": 28.96781973358884,
+            "p95": 55.94461700093234,
+            "max": 77.64650500030257
+          },
+          "thread_calls": {
+            "media": 5.0,
+            "p95": 5.0,
+            "max": 5.0
+          },
+          "thread_wait": {
+            "media": 39.285102800567984,
+            "p95": 80.22808900204836,
+            "max": 80.54243499645963
+          },
+          "thread_run": {
+            "media": 90.00410899958904,
+            "p95": 149.57283600597293,
+            "max": 161.94653099955758
+          },
+          "thread_resume": {
+            "media": 39.00311830111605,
+            "p95": 60.258699999394594,
+            "max": 65.22067200421588
+          },
+          "thread_incomplete": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          }
+        },
+        "familias_sql": {
+          "SELECT/departamentos+users+auth_sessions": {
+            "consultas": 30,
+            "ms": 557.4707899977511,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 18.582359666591703,
+            "ms_por_consulta": 18.582359666591703
+          },
+          "SELECT/roles": {
+            "consultas": 30,
+            "ms": 290.91714398600743,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 9.697238132866914,
+            "ms_por_consulta": 9.697238132866914
+          },
+          "SELECT/incidencias+incident_involved_users": {
+            "consultas": 60,
+            "ms": 642.8579879866447,
+            "consultas_por_peticion": 2.0,
+            "ms_por_peticion": 21.428599599554826,
+            "ms_por_consulta": 10.714299799777413
+          }
+        },
+        "thread_stages": {
+          "dependency_enter": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 149.55003900104202,
+            "run_ms": 1.3268759976199362,
+            "resume_ms": 251.5962620091159,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 4.985001300034734,
+            "run_ms_per_request": 0.04422919992066454,
+            "resume_ms_per_request": 8.386542066970529
+          },
+          "auth": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 283.49135399548686,
+            "run_ms": 1296.1832670043805,
+            "resume_ms": 231.68260699821985,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 9.449711799849561,
+            "run_ms_per_request": 43.20610890014601,
+            "resume_ms_per_request": 7.722753566607328
+          },
+          "endpoint": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 213.3888690113963,
+            "run_ms": 1063.6396639965824,
+            "resume_ms": 213.0708980075724,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 7.112962300379877,
+            "run_ms_per_request": 35.454655466552744,
+            "resume_ms_per_request": 7.10236326691908
+          },
+          "response_validation": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 221.24116599661647,
+            "run_ms": 6.724539001879748,
+            "resume_ms": 253.41892000869848,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 7.374705533220549,
+            "run_ms_per_request": 0.22415130006265827,
+            "resume_ms_per_request": 8.447297333623283
+          },
+          "dependency_exit": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 310.88165601249784,
+            "run_ms": 332.2489239872084,
+            "resume_ms": 220.32486200987478,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 10.36272186708326,
+            "run_ms_per_request": 11.074964132906947,
+            "resume_ms_per_request": 7.344162066995826
+          }
+        }
+      },
+      "calentamiento/detalle": {
+        "solicitudes": 30,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 165.59198990022801,
+            "p95": 212.87524299987126,
+            "max": 248.73952499910956
+          },
+          "auth": {
+            "media": 37.59586076666892,
+            "p95": 73.20110900036525,
+            "max": 88.34546800062526
+          },
+          "endpoint": {
+            "media": 23.121305833168055,
+            "p95": 46.34564799926011,
+            "max": 56.3962870000978
+          },
+          "sql": {
+            "media": 39.756081033677525,
+            "p95": 83.85320999877877,
+            "max": 87.91850299894577
+          },
+          "commit": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          },
+          "fuera_auth_endpoint": {
+            "media": 104.87482330039104,
+            "p95": 146.0504439965007,
+            "max": 148.54130100138718
+          },
+          "consultas": {
+            "media": 3.0,
+            "p95": 3.0,
+            "max": 3.0
+          },
+          "hasta_envio": {
+            "media": 131.14687176712323,
+            "p95": 178.8577119987167,
+            "max": 214.46807199754403
+          },
+          "cierre": {
+            "media": 34.44511813310479,
+            "p95": 54.88513499949477,
+            "max": 63.28261200178531
+          },
+          "thread_calls": {
+            "media": 5.0,
+            "p95": 5.0,
+            "max": 5.0
+          },
+          "thread_wait": {
+            "media": 41.99624050039953,
+            "p95": 56.27820700101438,
+            "max": 82.39735100141843
+          },
+          "thread_run": {
+            "media": 73.86668963384484,
+            "p95": 124.04534300367231,
+            "max": 147.9171069986478
+          },
+          "thread_resume": {
+            "media": 42.35459676613876,
+            "p95": 66.42106899744249,
+            "max": 87.18044299530447
+          },
+          "thread_incomplete": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          }
+        },
+        "familias_sql": {
+          "SELECT/departamentos+users+auth_sessions": {
+            "consultas": 30,
+            "ms": 569.3005630018888,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 18.976685433396295,
+            "ms_por_consulta": 18.976685433396295
+          },
+          "SELECT/roles": {
+            "consultas": 30,
+            "ms": 279.2266750075214,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 9.307555833584047,
+            "ms_por_consulta": 9.307555833584047
+          },
+          "SELECT/incidencias+incident_involved_users": {
+            "consultas": 30,
+            "ms": 344.15519300091546,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 11.471839766697181,
+            "ms_por_consulta": 11.471839766697181
+          }
+        },
+        "thread_stages": {
+          "dependency_enter": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 225.0555400023586,
+            "run_ms": 1.463456002966268,
+            "resume_ms": 274.5265189987549,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 7.501851333411953,
+            "run_ms_per_request": 0.04878186676554227,
+            "resume_ms_per_request": 9.150883966625164
+          },
+          "auth": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 326.38776199746644,
+            "run_ms": 1128.308310995635,
+            "resume_ms": 194.12746599846287,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 10.879592066582214,
+            "run_ms_per_request": 37.610277033187835,
+            "resume_ms_per_request": 6.470915533282096
+          },
+          "endpoint": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 216.41252101107966,
+            "run_ms": 694.2612239909067,
+            "resume_ms": 205.58004100530525,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 7.213750700369322,
+            "run_ms_per_request": 23.14204079969689,
+            "resume_ms_per_request": 6.852668033510175
+          },
+          "response_validation": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 194.0592460014159,
+            "run_ms": 5.04936401557643,
+            "resume_ms": 250.1801509897632,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 6.46864153338053,
+            "run_ms_per_request": 0.16831213385254765,
+            "resume_ms_per_request": 8.33933836632544
+          },
+          "dependency_exit": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 297.9721459996654,
+            "run_ms": 386.9183340102609,
+            "resume_ms": 346.22372599187656,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 9.932404866655512,
+            "run_ms_per_request": 12.89727780034203,
+            "resume_ms_per_request": 11.540790866395886
+          }
+        }
+      },
+      "calentamiento/creacion": {
+        "solicitudes": 30,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 295.83900513353,
+            "p95": 383.924058998673,
+            "max": 427.783097999054
+          },
+          "auth": {
+            "media": 41.09565289994256,
+            "p95": 77.84059799814713,
+            "max": 113.28681699887966
+          },
+          "endpoint": {
+            "media": 167.62987773314913,
+            "p95": 259.5105139989755,
+            "max": 274.38006599913933
+          },
+          "sql": {
+            "media": 164.9412233672289,
+            "p95": 255.7840209992719,
+            "max": 278.16675800204393
+          },
+          "commit": {
+            "media": 10.390125866494296,
+            "p95": 24.053470999206183,
+            "max": 25.643949000368593
+          },
+          "fuera_auth_endpoint": {
+            "media": 87.11347450043831,
+            "p95": 126.50031399607542,
+            "max": 129.28971300061676
+          },
+          "consultas": {
+            "media": 11.0,
+            "p95": 11.0,
+            "max": 11.0
+          },
+          "hasta_envio": {
+            "media": 279.207694300203,
+            "p95": 377.16047799767694,
+            "max": 425.30004599757376
+          },
+          "cierre": {
+            "media": 16.631310833327007,
+            "p95": 38.76389000288327,
+            "max": 41.06808199867373
+          },
+          "thread_calls": {
+            "media": 5.0,
+            "p95": 5.0,
+            "max": 5.0
+          },
+          "thread_wait": {
+            "media": 38.44266953286327,
+            "p95": 66.66194399440428,
+            "max": 81.42140100244433
+          },
+          "thread_run": {
+            "media": 208.93701669980751,
+            "p95": 299.4073860027129,
+            "max": 314.9807610025164
+          },
+          "thread_resume": {
+            "media": 42.55018343368041,
+            "p95": 72.84316099685384,
+            "max": 79.6976130004623
+          },
+          "thread_incomplete": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          }
+        },
+        "familias_sql": {
+          "SELECT/departamentos+users+auth_sessions": {
+            "consultas": 30,
+            "ms": 732.5726020135335,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 24.41908673378445,
+            "ms_por_consulta": 24.41908673378445
+          },
+          "SELECT/advisory_lock": {
+            "consultas": 30,
+            "ms": 396.71141700819135,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 13.223713900273045,
+            "ms_por_consulta": 13.223713900273045
+          },
+          "SELECT/departamentos+users": {
+            "consultas": 30,
+            "ms": 433.5738100016897,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 14.452460333389658,
+            "ms_por_consulta": 14.452460333389658
+          },
+          "SELECT/roles": {
+            "consultas": 30,
+            "ms": 374.2778280029597,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 12.475927600098657,
+            "ms_por_consulta": 12.475927600098657
+          },
+          "SELECT/departamentos": {
+            "consultas": 30,
+            "ms": 347.03119899495505,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 11.567706633165168,
+            "ms_por_consulta": 11.567706633165168
+          },
+          "INSERT/incidencias": {
+            "consultas": 30,
+            "ms": 461.2672329931229,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 15.375574433104097,
+            "ms_por_consulta": 15.375574433104097
+          },
+          "INSERT/historial_incidencias": {
+            "consultas": 30,
+            "ms": 476.0507250066439,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 15.868357500221464,
+            "ms_por_consulta": 15.868357500221464
+          },
+          "SELECT/roles+departamentos+users+incidencias+incident_involved_users": {
+            "consultas": 30,
+            "ms": 409.4459080006345,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 13.648196933354484,
+            "ms_por_consulta": 13.648196933354484
+          },
+          "SELECT/mail_deliveries": {
+            "consultas": 30,
+            "ms": 417.74966200682684,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 13.924988733560895,
+            "ms_por_consulta": 13.924988733560895
+          },
+          "INSERT/mail_deliveries": {
+            "consultas": 30,
+            "ms": 489.2414900023141,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 16.308049666743802,
+            "ms_por_consulta": 16.308049666743802
+          },
+          "SELECT/incidencias+incident_involved_users": {
+            "consultas": 30,
+            "ms": 410.31482698599575,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 13.677160899533192,
+            "ms_por_consulta": 13.677160899533192
+          }
+        },
+        "thread_stages": {
+          "dependency_enter": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 140.34849500239943,
+            "run_ms": 1.1470879981061444,
+            "resume_ms": 335.2376330003608,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 4.678283166746648,
+            "run_ms_per_request": 0.03823626660353815,
+            "resume_ms_per_request": 11.174587766678693
+          },
+          "auth": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 265.50401199347107,
+            "run_ms": 1233.0941959990014,
+            "resume_ms": 286.8347760013421,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 8.850133733115703,
+            "run_ms_per_request": 41.10313986663338,
+            "resume_ms_per_request": 9.561159200044736
+          },
+          "endpoint": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 270.7704589993227,
+            "run_ms": 5031.47355301553,
+            "resume_ms": 218.300050986727,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 9.025681966644092,
+            "run_ms_per_request": 167.71578510051768,
+            "resume_ms_per_request": 7.276668366224233
+          },
+          "response_validation": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 184.98989399085985,
+            "run_ms": 0.9758289961609989,
+            "resume_ms": 233.0026710042148,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 6.166329799695329,
+            "run_ms_per_request": 0.032527633205366634,
+            "resume_ms_per_request": 7.766755700140493
+          },
+          "dependency_exit": {
+            "calls": 30,
+            "incomplete": 0,
+            "wait_ms": 291.66722599984496,
+            "run_ms": 1.41983498542686,
+            "resume_ms": 203.1303720177675,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 9.7222408666615,
+            "run_ms_per_request": 0.047327832847562,
+            "resume_ms_per_request": 6.771012400592251
+          }
+        }
+      },
+      "calentamiento/actualizacion": {
+        "solicitudes": 22,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 209.8947523180951,
+            "p95": 301.4550150001014,
+            "max": 303.6319339989859
+          },
+          "auth": {
+            "media": 42.36292245431369,
+            "p95": 76.13936300185742,
+            "max": 78.37151100102346
+          },
+          "endpoint": {
+            "media": 95.99165159075214,
+            "p95": 122.09431900191703,
+            "max": 140.37606100100675
+          },
+          "sql": {
+            "media": 103.81169249756732,
+            "p95": 136.3707839991548,
+            "max": 145.97568799945293
+          },
+          "commit": {
+            "media": 10.704373091026685,
+            "p95": 17.625092001253506,
+            "max": 18.45088100162684
+          },
+          "fuera_auth_endpoint": {
+            "media": 71.54017827302927,
+            "p95": 119.42986000212841,
+            "max": 136.19890900008613
+          },
+          "consultas": {
+            "media": 8.0,
+            "p95": 8.0,
+            "max": 8.0
+          },
+          "hasta_envio": {
+            "media": 194.19235054523267,
+            "p95": 274.6623710008862,
+            "max": 291.4731800010486
+          },
+          "cierre": {
+            "media": 15.702401772862437,
+            "p95": 28.96956299809972,
+            "max": 40.29177299889852
+          },
+          "thread_calls": {
+            "media": 5.0,
+            "p95": 5.0,
+            "max": 5.0
+          },
+          "thread_wait": {
+            "media": 29.954110317538092,
+            "p95": 58.93237399868667,
+            "max": 64.56989300204441
+          },
+          "thread_run": {
+            "media": 138.48438859184336,
+            "p95": 184.31761200190522,
+            "max": 200.60248099980527
+          },
+          "thread_resume": {
+            "media": 34.05274004415498,
+            "p95": 51.31393699412001,
+            "max": 78.45707799788215
+          },
+          "thread_incomplete": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          }
+        },
+        "familias_sql": {
+          "SELECT/departamentos+users+auth_sessions": {
+            "consultas": 22,
+            "ms": 546.1350499972468,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 24.82432045442031,
+            "ms_por_consulta": 24.82432045442031
+          },
+          "SELECT/advisory_lock": {
+            "consultas": 22,
+            "ms": 254.493325985095,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 11.567878453867955,
+            "ms_por_consulta": 11.567878453867955
+          },
+          "SELECT/departamentos+users": {
+            "consultas": 22,
+            "ms": 226.73838500486454,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 10.306290227493843,
+            "ms_por_consulta": 10.306290227493843
+          },
+          "SELECT/roles": {
+            "consultas": 22,
+            "ms": 287.24463900289265,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 13.056574500131484,
+            "ms_por_consulta": 13.056574500131484
+          },
+          "SELECT/incidencias": {
+            "consultas": 22,
+            "ms": 261.3127189906663,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 11.877850863212105,
+            "ms_por_consulta": 11.877850863212105
+          },
+          "SELECT/incidencias+incident_involved_users": {
+            "consultas": 22,
+            "ms": 255.2736529869435,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 11.603347863042886,
+            "ms_por_consulta": 11.603347863042886
+          },
+          "INSERT/historial_incidencias": {
+            "consultas": 22,
+            "ms": 220.30139498747303,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 10.013699772157866,
+            "ms_por_consulta": 10.013699772157866
+          },
+          "UPDATE/incidencias": {
+            "consultas": 22,
+            "ms": 232.35806799129932,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 10.561730363240878,
+            "ms_por_consulta": 10.561730363240878
+          }
+        },
+        "thread_stages": {
+          "dependency_enter": {
+            "calls": 22,
+            "incomplete": 0,
+            "wait_ms": 124.60989399914979,
+            "run_ms": 0.8708519999345299,
+            "resume_ms": 126.40017699231976,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 5.664086090870445,
+            "run_ms_per_request": 0.039584181815205906,
+            "resume_ms_per_request": 5.745462590559989
+          },
+          "auth": {
+            "calls": 22,
+            "incomplete": 0,
+            "wait_ms": 115.85039300553035,
+            "run_ms": 932.1573289926164,
+            "resume_ms": 157.1178929953021,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 5.265926954796834,
+            "run_ms_per_request": 42.37078768148256,
+            "resume_ms_per_request": 7.141722408877368
+          },
+          "endpoint": {
+            "calls": 22,
+            "incomplete": 0,
+            "wait_ms": 143.7945939906058,
+            "run_ms": 2112.290732013207,
+            "resume_ms": 173.33856898767408,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 6.5361179086639,
+            "run_ms_per_request": 96.01321509150942,
+            "resume_ms_per_request": 7.8790258630760945
+          },
+          "response_validation": {
+            "calls": 22,
+            "incomplete": 0,
+            "wait_ms": 89.46392500001821,
+            "run_ms": 0.3768050046346616,
+            "resume_ms": 134.95078899723012,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 4.066542045455373,
+            "run_ms_per_request": 0.017127500210666436,
+            "resume_ms_per_request": 6.134126772601369
+          },
+          "dependency_exit": {
+            "calls": 22,
+            "incomplete": 0,
+            "wait_ms": 185.27162099053385,
+            "run_ms": 0.9608310101612005,
+            "resume_ms": 157.35285299888346,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 8.421437317751538,
+            "run_ms_per_request": 0.043674136825509115,
+            "resume_ms_per_request": 7.152402409040158
+          }
+        }
+      },
+      "medicion/listado": {
+        "solicitudes": 60,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 255.16607723311608,
+            "p95": 489.1529430024093,
+            "max": 554.1345319979882
+          },
+          "auth": {
+            "media": 58.73467579998154,
+            "p95": 147.3839809987112,
+            "max": 228.6264790018322
+          },
+          "endpoint": {
+            "media": 52.32384226698438,
+            "p95": 106.38510200078599,
+            "max": 180.15686000217102
+          },
+          "sql": {
+            "media": 77.08949531655283,
+            "p95": 169.36964199703652,
+            "max": 197.15344199721585
+          },
+          "commit": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          },
+          "fuera_auth_endpoint": {
+            "media": 144.10755916615017,
+            "p95": 309.50754399964353,
+            "max": 323.16502000321634
+          },
+          "consultas": {
+            "media": 4.0,
+            "p95": 4.0,
+            "max": 4.0
+          },
+          "hasta_envio": {
+            "media": 214.31575258338853,
+            "p95": 442.6076000017929,
+            "max": 502.8731019992847
+          },
+          "cierre": {
+            "media": 40.850324649727554,
+            "p95": 75.6513050000649,
+            "max": 130.59414899908006
+          },
+          "thread_calls": {
+            "media": 5.0,
+            "p95": 5.0,
+            "max": 5.0
+          },
+          "thread_wait": {
+            "media": 65.13581721780308,
+            "p95": 172.48490900237812,
+            "max": 243.53634199724183
+          },
+          "thread_run": {
+            "media": 125.53994046587225,
+            "p95": 265.5067229970882,
+            "max": 301.7629960049817
+          },
+          "thread_resume": {
+            "media": 56.029445533446655,
+            "p95": 127.31250500291935,
+            "max": 208.1332999987353
+          },
+          "thread_incomplete": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          }
+        },
+        "familias_sql": {
+          "SELECT/departamentos+users+auth_sessions": {
+            "consultas": 60,
+            "ms": 1815.9914950119855,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 30.266524916866427,
+            "ms_por_consulta": 30.266524916866427
+          },
+          "SELECT/roles": {
+            "consultas": 60,
+            "ms": 872.256747996289,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 14.537612466604818,
+            "ms_por_consulta": 14.537612466604818
+          },
+          "SELECT/incidencias+incident_involved_users": {
+            "consultas": 120,
+            "ms": 1937.1214759848954,
+            "consultas_por_peticion": 2.0,
+            "ms_por_peticion": 32.28535793308159,
+            "ms_por_consulta": 16.142678966540796
+          }
+        },
+        "thread_stages": {
+          "dependency_enter": {
+            "calls": 60,
+            "incomplete": 0,
+            "wait_ms": 702.61656103321,
+            "run_ms": 2.3438649805029854,
+            "resume_ms": 776.1068859945226,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 11.710276017220167,
+            "run_ms_per_request": 0.039064416341716424,
+            "resume_ms_per_request": 12.935114766575376
+          },
+          "auth": {
+            "calls": 60,
+            "incomplete": 0,
+            "wait_ms": 807.8266000193253,
+            "run_ms": 3524.64388498629,
+            "resume_ms": 632.4162810051348,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 13.463776666988755,
+            "run_ms_per_request": 58.744064749771496,
+            "resume_ms_per_request": 10.54027135008558
+          },
+          "endpoint": {
+            "calls": 60,
+            "incomplete": 0,
+            "wait_ms": 822.1786109897948,
+            "run_ms": 3141.379277989472,
+            "resume_ms": 649.9159110062465,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 13.702976849829914,
+            "run_ms_per_request": 52.356321299824536,
+            "resume_ms_per_request": 10.831931850104107
+          },
+          "response_validation": {
+            "calls": 60,
+            "incomplete": 0,
+            "wait_ms": 764.7817300094175,
+            "run_ms": 17.392515001120046,
+            "resume_ms": 515.3016770018439,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 12.746362166823625,
+            "run_ms_per_request": 0.28987525001866743,
+            "resume_ms_per_request": 8.588361283364065
+          },
+          "dependency_exit": {
+            "calls": 60,
+            "incomplete": 0,
+            "wait_ms": 810.7455310164369,
+            "run_ms": 846.6368849949504,
+            "resume_ms": 788.0259769990516,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 13.512425516940615,
+            "run_ms_per_request": 14.11061474991584,
+            "resume_ms_per_request": 13.133766283317527
+          }
+        }
+      },
+      "medicion/detalle": {
+        "solicitudes": 59,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 190.57113764408268,
+            "p95": 309.52730299759423,
+            "max": 447.29380900025717
+          },
+          "auth": {
+            "media": 45.19227889854307,
+            "p95": 97.56581699912203,
+            "max": 176.16459700002451
+          },
+          "endpoint": {
+            "media": 27.43606571188508,
+            "p95": 44.443422000767896,
+            "max": 56.920646002254216
+          },
+          "sql": {
+            "media": 48.180953830123435,
+            "p95": 86.53374400455505,
+            "max": 107.42500999913318
+          },
+          "commit": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          },
+          "fuera_auth_endpoint": {
+            "media": 117.94279303365452,
+            "p95": 176.78875700221397,
+            "max": 331.8780320005317
+          },
+          "consultas": {
+            "media": 3.0,
+            "p95": 3.0,
+            "max": 3.0
+          },
+          "hasta_envio": {
+            "media": 157.7070441187169,
+            "p95": 279.1141419984342,
+            "max": 396.7333740001777
+          },
+          "cierre": {
+            "media": 32.864093525365774,
+            "p95": 60.69027299963636,
+            "max": 73.62188100159983
+          },
+          "thread_calls": {
+            "media": 5.0,
+            "p95": 5.0,
+            "max": 5.0
+          },
+          "thread_wait": {
+            "media": 52.199840423011246,
+            "p95": 100.89850900112651,
+            "max": 156.16547299941885
+          },
+          "thread_run": {
+            "media": 84.78114737319352,
+            "p95": 144.25027499964926,
+            "max": 226.04603800209588
+          },
+          "thread_resume": {
+            "media": 46.60953855920401,
+            "p95": 72.22993999675964,
+            "max": 145.17277700360864
+          },
+          "thread_incomplete": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          }
+        },
+        "familias_sql": {
+          "SELECT/departamentos+users+auth_sessions": {
+            "consultas": 59,
+            "ms": 1431.9708680122858,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 24.270692678174335,
+            "ms_por_consulta": 24.270692678174335
+          },
+          "SELECT/roles": {
+            "consultas": 59,
+            "ms": 684.1632339856005,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 11.595987016705093,
+            "ms_por_consulta": 11.595987016705093
+          },
+          "SELECT/incidencias+incident_involved_users": {
+            "consultas": 59,
+            "ms": 726.5421739793965,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 12.314274135244007,
+            "ms_por_consulta": 12.314274135244007
+          }
+        },
+        "thread_stages": {
+          "dependency_enter": {
+            "calls": 59,
+            "incomplete": 0,
+            "wait_ms": 592.6920480014815,
+            "run_ms": 3.00191800124594,
+            "resume_ms": 616.5998950018547,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 10.045627932228498,
+            "run_ms_per_request": 0.050879966122812544,
+            "resume_ms_per_request": 10.450845677997538
+          },
+          "auth": {
+            "calls": 59,
+            "incomplete": 0,
+            "wait_ms": 687.8854629976558,
+            "run_ms": 2666.9490939893876,
+            "resume_ms": 596.688156008895,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 11.659075644028066,
+            "run_ms_per_request": 45.20252701676928,
+            "resume_ms_per_request": 10.11335857642195
+          },
+          "endpoint": {
+            "calls": 59,
+            "incomplete": 0,
+            "wait_ms": 566.2027999787824,
+            "run_ms": 1620.3173410067393,
+            "resume_ms": 456.1366859925329,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 9.596657626759024,
+            "run_ms_per_request": 27.46300577977524,
+            "resume_ms_per_request": 7.731130271059879
+          },
+          "response_validation": {
+            "calls": 59,
+            "incomplete": 0,
+            "wait_ms": 561.4682449922839,
+            "run_ms": 5.6231870148621965,
+            "resume_ms": 534.0078019908105,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 9.516410932072608,
+            "run_ms_per_request": 0.09530825448918977,
+            "resume_ms_per_request": 9.050979694759501
+          },
+          "dependency_exit": {
+            "calls": 59,
+            "incomplete": 0,
+            "wait_ms": 671.5420289874601,
+            "run_ms": 706.1961550061824,
+            "resume_ms": 546.5302359989437,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 11.382068287923053,
+            "run_ms_per_request": 11.969426356036989,
+            "resume_ms_per_request": 9.263224338965147
+          }
+        }
+      },
+      "medicion/creacion": {
+        "solicitudes": 54,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 303.440733796109,
+            "p95": 413.7361590001092,
+            "max": 452.5223630007531
+          },
+          "auth": {
+            "media": 43.19583133359696,
+            "p95": 79.8496220013476,
+            "max": 110.75579799944535
+          },
+          "endpoint": {
+            "media": 174.61636301818038,
+            "p95": 270.245106999937,
+            "max": 292.5042989991198
+          },
+          "sql": {
+            "media": 166.9901278894233,
+            "p95": 233.0685400083894,
+            "max": 274.5139440012281
+          },
+          "commit": {
+            "media": 13.041148666498312,
+            "p95": 36.01290799997514,
+            "max": 49.765471998398425
+          },
+          "fuera_auth_endpoint": {
+            "media": 85.62853944433165,
+            "p95": 137.2627000018838,
+            "max": 168.16454899526434
+          },
+          "consultas": {
+            "media": 11.0,
+            "p95": 11.0,
+            "max": 11.0
+          },
+          "hasta_envio": {
+            "media": 285.982555648001,
+            "p95": 398.25614700021106,
+            "max": 423.4327800004394
+          },
+          "cierre": {
+            "media": 17.458178148108008,
+            "p95": 32.79454000221449,
+            "max": 42.269844001566526
+          },
+          "thread_calls": {
+            "media": 5.0,
+            "p95": 5.0,
+            "max": 5.0
+          },
+          "thread_wait": {
+            "media": 40.3385729814208,
+            "p95": 78.73643700077082,
+            "max": 100.4822469985811
+          },
+          "thread_run": {
+            "media": 218.01014988960998,
+            "p95": 293.70036700129276,
+            "max": 326.53246100380784
+          },
+          "thread_resume": {
+            "media": 38.056047277239955,
+            "p95": 66.37731199225527,
+            "max": 73.38973199875909
+          },
+          "thread_incomplete": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          }
+        },
+        "familias_sql": {
+          "SELECT/departamentos+users+auth_sessions": {
+            "consultas": 54,
+            "ms": 1322.9929940025613,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 24.49987025930669,
+            "ms_por_consulta": 24.49987025930669
+          },
+          "SELECT/advisory_lock": {
+            "consultas": 54,
+            "ms": 663.3863620045304,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 12.284932629713525,
+            "ms_por_consulta": 12.284932629713525
+          },
+          "SELECT/departamentos+users": {
+            "consultas": 54,
+            "ms": 683.543055998598,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 12.658204740714778,
+            "ms_por_consulta": 12.658204740714778
+          },
+          "SELECT/roles": {
+            "consultas": 54,
+            "ms": 758.2641739900282,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 14.041929147963485,
+            "ms_por_consulta": 14.041929147963485
+          },
+          "SELECT/departamentos": {
+            "consultas": 54,
+            "ms": 843.8140640100755,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 15.626186370556955,
+            "ms_por_consulta": 15.626186370556955
+          },
+          "INSERT/incidencias": {
+            "consultas": 54,
+            "ms": 855.368485004874,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 15.840157129719888,
+            "ms_por_consulta": 15.840157129719888
+          },
+          "INSERT/historial_incidencias": {
+            "consultas": 54,
+            "ms": 701.1623750040599,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 12.984488426001109,
+            "ms_por_consulta": 12.984488426001109
+          },
+          "SELECT/roles+departamentos+users+incidencias+incident_involved_users": {
+            "consultas": 54,
+            "ms": 845.5445199979295,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 15.65823185181351,
+            "ms_por_consulta": 15.65823185181351
+          },
+          "SELECT/mail_deliveries": {
+            "consultas": 54,
+            "ms": 747.6346970070153,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 13.845086981611395,
+            "ms_por_consulta": 13.845086981611395
+          },
+          "INSERT/mail_deliveries": {
+            "consultas": 54,
+            "ms": 872.2341939937905,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 16.152485073959085,
+            "ms_por_consulta": 16.152485073959085
+          },
+          "SELECT/incidencias+incident_involved_users": {
+            "consultas": 54,
+            "ms": 723.5219850153953,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 13.398555278062876,
+            "ms_por_consulta": 13.398555278062876
+          }
+        },
+        "thread_stages": {
+          "dependency_enter": {
+            "calls": 54,
+            "incomplete": 0,
+            "wait_ms": 367.5211549962114,
+            "run_ms": 3.3533790083311033,
+            "resume_ms": 537.1649539993086,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 6.805947314744656,
+            "run_ms_per_request": 0.0620996112653908,
+            "resume_ms_per_request": 9.947499148135345
+          },
+          "auth": {
+            "calls": 54,
+            "incomplete": 0,
+            "wait_ms": 474.7547639926779,
+            "run_ms": 2333.1188860138354,
+            "resume_ms": 409.2056619847426,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 8.791754888753294,
+            "run_ms_per_request": 43.20590529655251,
+            "resume_ms_per_request": 7.577882629347085
+          },
+          "endpoint": {
+            "calls": 54,
+            "incomplete": 0,
+            "wait_ms": 469.95647200310486,
+            "run_ms": 9431.670936013688,
+            "resume_ms": 376.3276169956953,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 8.702897629687127,
+            "run_ms_per_request": 174.66057288914237,
+            "resume_ms_per_request": 6.969029944364728
+          },
+          "response_validation": {
+            "calls": 54,
+            "incomplete": 0,
+            "wait_ms": 334.92364601625013,
+            "run_ms": 1.7731619846017566,
+            "resume_ms": 328.0664289959532,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 6.202289741041669,
+            "run_ms_per_request": 0.03283633304818068,
+            "resume_ms_per_request": 6.075304240665799
+          },
+          "dependency_exit": {
+            "calls": 54,
+            "incomplete": 0,
+            "wait_ms": 531.1269039884792,
+            "run_ms": 2.631731018482242,
+            "resume_ms": 404.261890995258,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 9.83568340719406,
+            "run_ms_per_request": 0.048735759601522995,
+            "resume_ms_per_request": 7.486331314727
+          }
+        }
+      },
+      "medicion/actualizacion": {
+        "solicitudes": 51,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 215.30767668624392,
+            "p95": 261.44923600077163,
+            "max": 385.6556130012905
+          },
+          "auth": {
+            "media": 33.54104299989344,
+            "p95": 62.03865000134101,
+            "max": 76.61523399656289
+          },
+          "endpoint": {
+            "media": 96.33159482366275,
+            "p95": 126.6630849968351,
+            "max": 213.59780399870942
+          },
+          "sql": {
+            "media": 99.86180384201397,
+            "p95": 147.524739990331,
+            "max": 212.84136800386477
+          },
+          "commit": {
+            "media": 11.139767391903339,
+            "p95": 21.7917989975831,
+            "max": 24.677814999449765
+          },
+          "fuera_auth_endpoint": {
+            "media": 85.43503886268773,
+            "p95": 118.08978599583497,
+            "max": 140.06069600509363
+          },
+          "consultas": {
+            "media": 8.0,
+            "p95": 8.0,
+            "max": 8.0
+          },
+          "hasta_envio": {
+            "media": 197.46117474492434,
+            "p95": 249.78569599988987,
+            "max": 365.75532799906796
+          },
+          "cierre": {
+            "media": 17.846501941319588,
+            "p95": 30.509251002513338,
+            "max": 49.89665299945045
+          },
+          "thread_calls": {
+            "media": 5.0,
+            "p95": 5.0,
+            "max": 5.0
+          },
+          "thread_wait": {
+            "media": 42.09229325451637,
+            "p95": 73.4123499969428,
+            "max": 98.79265299605322
+          },
+          "thread_run": {
+            "media": 130.014227824123,
+            "p95": 189.64467000114382,
+            "max": 245.76262000846327
+          },
+          "thread_resume": {
+            "media": 36.244580117293964,
+            "p95": 56.502316998376045,
+            "max": 59.7289919933246
+          },
+          "thread_incomplete": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          }
+        },
+        "familias_sql": {
+          "SELECT/departamentos+users+auth_sessions": {
+            "consultas": 51,
+            "ms": 1105.344965992117,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 21.673430705727785,
+            "ms_por_consulta": 21.673430705727785
+          },
+          "SELECT/advisory_lock": {
+            "consultas": 51,
+            "ms": 586.9323959959729,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 11.508478352862214,
+            "ms_por_consulta": 11.508478352862214
+          },
+          "SELECT/departamentos+users": {
+            "consultas": 51,
+            "ms": 649.1053489953629,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 12.727555862654174,
+            "ms_por_consulta": 12.727555862654174
+          },
+          "SELECT/roles": {
+            "consultas": 51,
+            "ms": 573.781198978395,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 11.25061174467441,
+            "ms_por_consulta": 11.25061174467441
+          },
+          "SELECT/incidencias": {
+            "consultas": 51,
+            "ms": 656.961564989615,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 12.881599313521862,
+            "ms_por_consulta": 12.881599313521862
+          },
+          "SELECT/incidencias+incident_involved_users": {
+            "consultas": 51,
+            "ms": 591.7224599834299,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 11.602401176145683,
+            "ms_por_consulta": 11.602401176145683
+          },
+          "INSERT/historial_incidencias": {
+            "consultas": 51,
+            "ms": 564.0480600050068,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 11.059765882451115,
+            "ms_por_consulta": 11.059765882451115
+          },
+          "UPDATE/incidencias": {
+            "consultas": 51,
+            "ms": 365.056001002813,
+            "consultas_por_peticion": 1.0,
+            "ms_por_peticion": 7.157960803976725,
+            "ms_por_consulta": 7.157960803976725
+          }
+        },
+        "thread_stages": {
+          "dependency_enter": {
+            "calls": 51,
+            "incomplete": 0,
+            "wait_ms": 432.75417000768357,
+            "run_ms": 2.168301991332555,
+            "resume_ms": 332.1153149991005,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 8.485375882503599,
+            "run_ms_per_request": 0.04251572532024618,
+            "resume_ms_per_request": 6.512064999982363
+          },
+          "auth": {
+            "calls": 51,
+            "incomplete": 0,
+            "wait_ms": 463.5034079874458,
+            "run_ms": 1711.0527510194515,
+            "resume_ms": 371.40515698774834,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 9.088302117400898,
+            "run_ms_per_request": 33.55005394155787,
+            "resume_ms_per_request": 7.2824540585833
+          },
+          "endpoint": {
+            "calls": 51,
+            "incomplete": 0,
+            "wait_ms": 346.6144120066019,
+            "run_ms": 4914.131369998358,
+            "resume_ms": 438.8531980002881,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 6.796361019737293,
+            "run_ms_per_request": 96.35551705879134,
+            "resume_ms_per_request": 8.604964666672316
+          },
+          "response_validation": {
+            "calls": 51,
+            "incomplete": 0,
+            "wait_ms": 304.3802999891341,
+            "run_ms": 0.8813780186756048,
+            "resume_ms": 402.20707499975106,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 5.968241176257531,
+            "run_ms_per_request": 0.017281921934815783,
+            "resume_ms_per_request": 7.886413235289236
+          },
+          "dependency_exit": {
+            "calls": 51,
+            "incomplete": 0,
+            "wait_ms": 599.4546659894695,
+            "run_ms": 2.491818002454238,
+            "resume_ms": 303.89284099510405,
+            "calls_per_request": 1.0,
+            "wait_ms_per_request": 11.75401305861705,
+            "run_ms_per_request": 0.04885917651871055,
+            "resume_ms_per_request": 5.958683156766746
+          }
+        }
+      }
+    },
+    "unidades": "ms salvo consultas (cantidad)",
+    "limites": "SQL y commit son subconjuntos solapados de auth/endpoint. No sumar sus p95. Total cubre ASGI, no red/cliente. Instrumentación añade coste; no acredita RNF-2."
+  },
+  "metricas_http": {
+    "listado": {
+      "intentos": 60,
+      "exitos": 60,
+      "errores": 0,
+      "estados": {
+        "200": 60
+      },
+      "tasa_error": 0.0,
+      "solicitudes_por_segundo": 12.0,
+      "min_ms": 96.38499999709893,
+      "mediana_ms": 175.71209999732673,
+      "p95_exitos_ms": 466.145599988522,
+      "p99_exitos_ms": 530.9448999905726,
+      "max_ms": 530.9448999905726,
+      "p95_todos_ms": 466.145599988522,
+      "finalizadas_fuera_ventana": 1
+    },
+    "detalle": {
+      "intentos": 59,
+      "exitos": 59,
+      "errores": 0,
+      "estados": {
+        "200": 59
+      },
+      "tasa_error": 0.0,
+      "solicitudes_por_segundo": 11.8,
+      "min_ms": 83.53840000927448,
+      "mediana_ms": 162.49409998999909,
+      "p95_exitos_ms": 304.412700003013,
+      "p99_exitos_ms": 420.81250000046566,
+      "max_ms": 420.81250000046566,
+      "p95_todos_ms": 304.412700003013,
+      "finalizadas_fuera_ventana": 5
+    },
+    "creacion": {
+      "intentos": 54,
+      "exitos": 54,
+      "errores": 0,
+      "estados": {
+        "201": 54
+      },
+      "tasa_error": 0.0,
+      "solicitudes_por_segundo": 10.8,
+      "min_ms": 120.03989999357145,
+      "mediana_ms": 288.37609999027336,
+      "p95_exitos_ms": 415.6282000039937,
+      "p99_exitos_ms": 432.0311999908881,
+      "max_ms": 432.0311999908881,
+      "p95_todos_ms": 415.6282000039937,
+      "finalizadas_fuera_ventana": 3
+    },
+    "actualizacion": {
+      "intentos": 51,
+      "exitos": 51,
+      "errores": 0,
+      "estados": {
+        "200": 51
+      },
+      "tasa_error": 0.0,
+      "solicitudes_por_segundo": 10.2,
+      "min_ms": 119.88539999583736,
+      "mediana_ms": 203.09189999534283,
+      "p95_exitos_ms": 261.77510000707116,
+      "p99_exitos_ms": 390.027999994345,
+      "max_ms": 390.027999994345,
+      "p95_todos_ms": 261.77510000707116,
+      "finalizadas_fuera_ventana": 1
+    }
+  },
+  "cpu_generador_host": {
+    "duracion_s": 5.1196274000103585,
+    "cpu_logicas": 4,
+    "generador_cpu_s": 0.265625,
+    "generador_cpu_porcentaje_un_nucleo": 5.188365856457885,
+    "generador_cpu_porcentaje_equipo": 1.2970914641144713,
+    "host_cpu_porcentaje": 80.25914634146342,
+    "host_estado": "OK",
+    "limites": "CPU proceso incluye todos sus hilos; no Docker. Host incluye otras aplicaciones/VM. Medias de fase, no picos ni causa única; GetSystemTimes Windows."
+  },
+  "comprobacion_sql": {
+    "incidencias": 184,
+    "eventos_creado": 184,
+    "eventos_editado": 73,
+    "entregas_encoladas": 1840,
+    "intentos_smtp": 0,
+    "trabajos_ia": 0
+  },
+  "contenedores_detenidos": true,
+  "sesiones_revocadas_204": 10,
+  "hallazgos": [
+    "224 solicitudes medidas, cero errores; ocho grupos, SQL y sumas de hilos concordantes, sin llamadas incompletas.",
+    "Edición: cinco pasos por hilos, espera media 42,09 ms, retorno medio 36,24 ms y ejecución media 130,01 ms. ASGI total medio 215,31 ms.",
+    "dependency_enter: ejecución 0,043 ms y espera+retorno 15,00 ms medios por petición.",
+    "response_validation: ejecución 0,017 ms y espera+retorno 13,85 ms medios por petición.",
+    "dependency_exit: ejecución 0,049 ms y espera+retorno 17,71 ms; ocurre después del envío en este recorrido, no todo ese coste es latencia HTTP cliente.",
+    "CPU host media 80,26 % y generador 1,30 % del equipo. No demuestra saturación del limiter ni causa única; las esperas incluyen planificación."
+  ],
+  "limites": [
+    "Smoke instrumentado 2+5 s y 51–60 muestras medidas por operación; no acredita RNF-2 ni mejora formal.",
+    "No sumar p95 de etapas. Tiempo de hilo se solapa con auth/endpoint/SQL. Espera/retorno no separan limiter, OS, GIL y event loop.",
+    "Abrir/cerrar sesión casi instantáneo se observó en estas escrituras con commit; no implica que rollback/cierre de lecturas sea no bloqueante.",
+    "No trasladar SQL/commit/rollback al event loop ni suprimir validación de respuesta para ahorrar tiempo.",
+    "No hay nuevo cambio de producto ni formal; última formal 150 sigue fuera del umbral."
+  ],
+  "siguiente_paso": "Evaluar una reducción acotada de saltos para tareas pequeñas, conservando trabajo SQL y cierre/rollback bloqueante en worker, validación de respuesta, permisos y limpieza ante errores/cancelación. Regresión antes de medir."
+}

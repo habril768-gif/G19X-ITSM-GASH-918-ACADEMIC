@@ -1,171 +1,118 @@
 # PluriOne
 
+Plataforma Inteligente de Gestión de Incidencias Laborales para PluriOne S.A. de C.V. Proyecto académico G19X-ITSM-GASH-918-ACADEMIC, desarrollado por Gilian Abril Sánchez Hernández.
 
+## Qué permite hacer
 
-Plataforma Inteligente de Gestión de Incidencias Laborales para PluriOne S.A. de C.V.
+Registrar incidencias de personas o del entorno de trabajo; consultar expedientes según rol y departamento; validar su clasificación, asignar responsables y gestionar revisión, resolución, cierre y reapertura. Incluye confidencialidad, revisión independiente de participantes y auditoría de operaciones.
 
+La interfaz React permite gestionar cuentas y departamentos, solicitar una sugerencia IA con texto simulado revisado y consultar el seguimiento de correos. Los avisos se capturan localmente en Mailpit. La analítica exporta únicamente agregados protegidos a Power BI Desktop.
 
+## Estado y límites
 
-**Proyecto:** G19X-ITSM-GASH-918-ACADEMIC
+El núcleo, correo y analítica tienen implementación y evidencia. El correo cuenta con un recorrido básico real; Power BI tiene conexión e informe guardado. **La entrega integral continúa pendiente**: RNF-2 aún no alcanza el p95 requerido; faltan instalación/recuperación operativa completa, aceptación integral y actividades reales de capacitación. Existen recorridos acotados por rol y pruebas de Power BI, con sus límites registrados. Consulta el [alcance del MVP](docs/MVP.md), el [plan de cierre](docs/BACKLOG.md) y la [evidencia de QA](docs/REPORTE_QA.md).
 
-**Autora:** Gilian Abril Sánchez Hernández
+El entorno está destinado a pruebas locales con datos ficticios. La IA propone; una persona autorizada confirma categoría y prioridad. La evaluación del modelo mide un conjunto simulado, no garantiza su desempeño en casos nuevos. La supresión por privacidad puede dejar todos los indicadores vacíos; un valor suprimido nunca equivale a cero.
 
+## Requisitos
 
+- Git y Docker Desktop iniciado con motor Linux y Docker Compose.
+- Node.js compatible con las dependencias fijadas en `frontend/package-lock.json` y npm.
+- Power BI Desktop para consultar el informe; es opcional para usar el panel web.
+- Python solo para desarrollo sin contenedores o pruebas aisladas; la imagen backend incluye su entorno.
 
-## Estado actual
+No se necesita una clave OpenAI para el núcleo. La asistencia IA requiere activación y credenciales propias; puede consumir saldo. Las versiones técnicas necesarias para reproducibilidad se conservan en Dockerfiles, dependencias y migraciones.
 
+## Arranque local en cinco pasos
 
+Ejecuta los comandos desde la raíz del repositorio, salvo donde se indica otra carpeta. Si ya tienes datos y cuentas, consérvalos: no repitas el alta inicial ni la carga DEMO.
 
-API 0.10.0 y React 0.7.0 con autenticación local, incidencias, ciclo de vida, protección y administración. Primera prueba integrada de IA con validación humana y cierre documentada en evidencias 71–73. Migraciones hasta 0005 verificadas en PostgreSQL aislado. Evaluación independiente de IA 50+5, correo, analítica y validación integral pendientes. PRD vigente: 1.9.
+### 1. Preparar la configuración
 
+Si todavía no existe `.env`:
 
+```powershell
+Copy-Item .env.example .env
+```
 
-## Alcance
+Completa localmente `POSTGRES_PASSWORD`. Si `.env` ya existe, agrega únicamente lo que falte; no lo sobrescribas ni lo compartas.
 
+### 2. Iniciar los servicios
 
+```powershell
+docker compose config --quiet
+docker compose up -d --build --wait
+```
 
-Registro y seguimiento de incidencias, acceso por roles y departamento, confidencialidad, clasificación asistida por IA con validación humana, auditoría, correo y analítica agregada.
+### 3. Aplicar y verificar las migraciones
 
+```powershell
+docker compose exec api python -m alembic upgrade head
+docker compose exec api python -m alembic check
+```
 
+Comprueba [salud de la API](http://127.0.0.1:8000/health) y [conexión y esquema](http://127.0.0.1:8000/health/db). La primera no verifica la base de datos. Ajusta la URL si cambiaste `API_PORT`.
 
-Tecnologías previstas: React, FastAPI, PostgreSQL, Redis, autenticación local FastAPI, OpenAI con LangChain, Docker y Power BI Desktop.
+### 4. Crear el primer administrador, solo en una instalación nueva
 
+```powershell
+docker compose exec api python -m app.manage_users bootstrap-admin --email admin@plurione.local --name "Administrador RH"
+```
 
+Introduce y confirma la contraseña cuando se solicite. No hay contraseña predeterminada ni registro público. Para cuentas adicionales y restablecimiento consulta [autenticación](docs/AUTENTICACION.md) y [administración](docs/ADMIN_USUARIOS.md). La [carga DEMO y cuentas de prueba](docs/DATOS_DEMO.md) es opcional: incluye seis correos ficticios y el comando para asignarles contraseña local de forma privada.
 
-## Documentación
+### 5. Abrir el panel web
 
+En una terminal adicional:
 
+```powershell
+cd frontend
+npm.cmd ci
+npm.cmd run dev
+```
 
-- [PRD vigente](docs/PRD.md)
+Abre [PluriOne](http://127.0.0.1:5173/) e inicia sesión con tu cuenta. Mantén la terminal abierta. El proxy de desarrollo apunta a la API local; si cambias su puerto, ajusta `frontend/vite.config.js`.
 
-- [PRD Word 1.6 — referencia histórica](docs/PRD_PluriOne_v1.6.docx)
+## Integraciones opcionales
 
-- [Plan de desarrollo y criterios de término](docs/BACKLOG.md)
+| Módulo | Instrucciones | Consideración |
+| --- | --- | --- |
+| Asistencia IA | [Configuración y revisión](docs/IA.md) | Worker con perfil `ai`; clave solo en su entorno; revisión humana obligatoria |
+| Correo | [Captura y seguimiento](docs/CORREO.md) | Perfil `mail`; Mailpit captura pruebas y no demuestra entrega a buzones externos |
+| Power BI | [Analítica](docs/ANALITICA.md) e [informe](powerbi/README.md) | Cuenta de lectura y agregados; no conectar con la cuenta administradora |
 
-- [Decisiones iniciales](docs/DECISIONES.md)
+## Organización del repositorio
 
-- [Entregables de residencia](docs/ENTREGABLES.md)
+| Carpeta | Contenido |
+| --- | --- |
+| `backend/` | API FastAPI, servicios, modelos, workers, migraciones y pruebas |
+| `frontend/` | Panel React y pruebas de componentes |
+| `infra/` | Guía del entorno Docker local |
+| `powerbi/` | Consultas, medidas e informe guardado |
+| `scripts/` | Actualización de módulos y ejecución controlada de evaluaciones |
+| `docs/` | Requisitos, manuales, alcance, QA y evidencias |
 
-- [Bitácora de avances](docs/BITACORA.md)
+## Validación y documentación
 
-- [Trazabilidad de requisitos](docs/TRAZABILIDAD.md)
+Para pruebas del backend sigue [la guía de desarrollo](backend/README.md) y [PostgreSQL aislado](docs/PRUEBAS_POSTGRESQL.md). Para frontend, desde su carpeta ejecuta `npm.cmd test` y `npm.cmd run build`. Las pruebas de componentes no sustituyen un recorrido real por roles.
 
-- [Reporte QA](docs/REPORTE_QA.md)
+El [índice documental](docs/README.md) organiza la lectura. El [manual técnico](docs/MANUAL_TECNICO.md) explica operación y límites. El estado vigente está en MVP, backlog, entregables y trazabilidad; los cambios anteriores se consultan en la bitácora y Git.
 
-- [Manual técnico](docs/MANUAL_TECNICO.md)
+## Uso de inteligencia artificial
 
+Se utilizó Codex como apoyo para elaborar código, pruebas, documentación y casos simulados de evaluación. Las revisiones de etiquetas confirmadas por la autora y las ejecuciones están registradas en la documentación de evaluación; no equivalen a aprobación externa de la plataforma.
 
+La plataforma usa OpenAI mediante LangChain para sugerir clasificación sobre texto simulado revisado explícitamente. La sugerencia no modifica por sí sola la decisión oficial. Las salidas y los resultados requieren revisión humana; no se presentan como asesoría laboral ni protocolos de emergencia.
 
-## Estructura
 
+### Mantenimiento de redes de las pruebas QA
 
+Si Docker informa que agotó los pools de direcciones, consultar [el procedimiento de redes QA](docs/PRUEBA_RENDIMIENTO.md#mantenimiento-de-redes-qa). La herramienta revisa por defecto y permite liberar hasta dos redes QA vacías y registradas; conserva contenedores, volúmenes y reportes.
 
-`backend/` contiene las capas previstas de FastAPI; `frontend/`, las vistas React; `infra/`, el despliegue por implementar. El backend tiene un punto de entrada ejecutable; frontend sigue pendiente; la configuración Docker de API, PostgreSQL y Redis está preparada, pendiente de ejecución.
 
+### Validación formal de rendimiento con control previo
 
+El [comando formal condicionado](docs/PRUEBA_RENDIMIENTO.md#corrida-formal-con-control-previo) comprueba CPU previa y libera hasta dos redes QA vacías antes de iniciar la ventana formal existente. Si no cumple las condiciones de arranque, termina sin generar carga. No cambia el criterio RNF-2 ni acredita rendimiento por sí solo.
 
-## Ejecutar la API
 
-
-
-Consultar [instalación y arranque del backend](backend/README.md). No se necesita configurar claves para la API inicial.
-
-
-
-## Configuración
-
-
-
-Copiar `.env.example` a `.env` y completar las variables locales cuando se implementen los servicios. Nunca publicar `.env`, credenciales o datos reales de empleados. La plantilla no permite autenticación ni conexión a servicios hasta configurar valores válidos.
-
-
-
-## Trabajo en Git
-
-
-
-Crear commits pequeños al completar cambios verificables. Cada mensaje debe describir el avance real. Las revisiones del PRD se registran cuando se modifica su contenido; no se generan commits retrospectivos para aparentar actividad. No hacer commits vacíos para cumplir una frecuencia.
-
-
-
-## Arranque con contenedores
-
-
-
-Consultar [el entorno Docker](infra/README.md). Completar POSTGRES_PASSWORD en .env y ejecutar desde la raíz `docker compose up -d --build --wait`. La conexión PostgreSQL se comprueba con /health/db tras aplicar la migración. Redis todavía no se utiliza.
-
-
-
-## Esquema de datos
-
-
-
-Seguir [migración y validación PostgreSQL](docs/DATOS.md).
-
-
-
-## Datos simulados
-
-
-
-Consultar [carga de usuarios de QA](docs/DATOS_DEMO.md). Requiere confirmación explícita y no habilita inicio de sesión.
-
-
-
-## Autenticación local
-
-
-
-API 0.3.0 y PRD 1.9. Se sustituye Entra ID por correo y contraseña, Argon2id y sesiones revocables. Aplicar migración 0002 y crear el primer Admin RH siguiendo [AUTENTICACION.md](docs/AUTENTICACION.md). La copia Word del PRD 1.6 es histórica; el PRD Markdown es vigente.
-
-
-
-## Reglas consolidadas del MVP
-
-
-
-El PRD 1.9 organiza RF-1 a RF-8 y distingue modelo objetivo de esquema implementado. Incluye riesgos de entorno, conflicto de interés y vigencia de clasificación, aún pendientes de código/migración. No asumir que el esquema actual ya los soporta. Estado vigente en BACKLOG.md y TRAZABILIDAD.md.
-
-
-La revisión 1.9 refuerza privacidad de agregados, revisión independiente de participantes y límites de alcance. Son requisitos objetivo, no funciones ya terminadas.
-
-## Actualización de esquema 0003
-
-API 0.4.0 prepara ámbitos PERSONA/ENTORNO, participantes y clasificación vigente. Aplicar la nueva migración siguiendo [DATOS.md](docs/DATOS.md). Las cuentas existentes se conservan; no repetir bootstrap. No existen aún endpoints de incidencias.
-
-## Registro y consultas de incidencias
-
-API 0.5.0 añade rutas /incidents sobre esquema 0003, sin migración adicional. Seguir [INCIDENCIAS.md](docs/INCIDENCIAS.md) para registrar y consultar con sesión local, datos DEMO y auditoría. Asignación/transiciones, frontend e integraciones siguen pendientes.
-
-API 0.6.0 incorpora gestión protegida de clasificación, responsable, contenido y ciclo. Guía y cuerpos de ejemplo en docs/INCIDENCIAS.md. Mantiene esquema 0003; reconstruir imagen sin repetir bootstrap ni seed. La comprobación manual de estas operaciones sigue pendiente.
-
-API 0.7.0: revisión de participantes y confidencialidad con recusa, reasignación/retroceso protector y auditoría. Reconstruir imagen; sin nueva migración. Guía de rutas y prueba manual en docs/INCIDENCIAS.md. La provisión de RH independiente adicional por operador y el frontend siguen pendientes.
-
-Procedimiento de operador para crear RH independiente adicional preparado y documentado en docs/ADMIN_INDEPENDIENTE.md. Aplicar actualización y reconstruir antes de usar el nuevo comando; conserva API 0.7.0/esquema 0003 y no cambia casos existentes.
-
-El procedimiento de RH independiente fue aplicado y ejecutado según reporte de la autora; evidencias y límites de validación en docs/REVISION_RH_INDEPENDIENTE.md. RF-7 sigue parcial.
-
-Administración de usuarios 0.8.0 preparada: listado/opciones y actualización auditada de rol, departamento y activación, con revisión de casos y revocación. Paquete pendiente de aplicación; instrucciones y límites en docs/ADMIN_USUARIOS.md. Mantiene esquema 0003.
-
-Administración backend 0.8.0 aplicada según la autora; suite completa observada: 77 aprobadas, 3 PostgreSQL omitidas y 1 advertencia. Evidencias de administración y límites en docs/REVISION_ADMIN_USUARIOS.md. RF-7 sigue parcial; frontend/CRUD de departamentos y concurrencia pendientes.
-
-## Panel web local
-
-Primera UI React: iniciar API/Docker, luego desde frontend ejecutar npm.cmd ci y npm.cmd run dev. Abrir http://127.0.0.1:5173/. Login, listado con filtros y detalle/historial; gestión sigue en Swagger en esta entrega parcial. Guía [FRONTEND.md](docs/FRONTEND.md), sin .env frontend ni tokens persistentes. No es despliegue productivo.
-
-React 0.2.0: menú Nueva incidencia con registro de persona/entorno, participantes y acuse seguro. No necesita migración ni dependencias nuevas. Formularios de gestión/admin pendientes; prueba manual agrupada y límites en docs/FRONTEND.md.
-
-React 0.3.0: gestión de clasificación/responsable/edición y estados desde detalle, con recarga de historial y controles por rol. 26 pruebas frontend aprobadas; comprobación real de esta entrega pendiente. Guía agrupada en docs/FRONTEND.md. Sin migración ni dependencias nuevas.
-
-React 0.4.0: menú Usuarios para Admin RH (listado/alta/edición) y confidencialidad/participantes/revisión desde detalle. 40 pruebas frontend simuladas y build aprobados. Actualizar navegador e iniciar sesión; sin migraciones ni dependencias nuevas. Uso y única comprobación manual agrupada pendiente en [FRONTEND.md](docs/FRONTEND.md).
-
-React 0.5.0, 17 de octubre de 2026: pantalla de cambio de contraseña para todos los roles, reutilizando /auth/change-password. Confirma nueva credencial, limpia campos y vuelve al login al guardar; resultado incierto retira sesión local sin reenvío. Sin migración ni backend nuevo. RF-1/RF-8 parciales; comprobación real/evidencia 67 y departamentos pendientes. Uso y límites en FRONTEND.md.
-
-Actualización 17 de octubre de 2026: API 0.9.0 / React 0.6.0 añaden administración de departamentos con historial propio, baja lógica protegida y reactivación. Requiere aplicar 0004; sustituye el pendiente de código de departamentos, sin acreditar despliegue ni recorrido real. Guía vigente DEPARTAMENTOS.md. RF-7/RF-8 parciales; instalación, PostgreSQL real/concurrencia y evidencia 68 pendientes.
-
-17 de octubre de 2026: integraciones antes omitidas ejecutadas en clúster temporal PostgreSQL 18.6; suite 103 aprobadas/0 omitidas/1 advertencia. Incluye cinco integraciones PostgreSQL y las pruebas originales SQLite. Migración hasta 0004 y check verificados en aislamiento; base de desarrollo sin modificar. CI PostgreSQL 17 del commit c8ad75c observado exitoso. Guía PRUEBAS_POSTGRESQL.md, evidencia 69 JSON y límites en REPORTE_QA.md. Nuevas pruebas remotas y carreras adicionales pendientes; sin nuevas capturas.
-
-17 de octubre de 2026: API 0.10.0 / React 0.7.0 preparan IA revisada, trabajo durable PostgreSQL/avisos Redis y sugerencia independiente de validación humana. Requiere 0005; desactivada por defecto, clave solo worker. 130 backend sin omisiones en aislamiento y 64 UI/build correctos; no acreditan calidad del modelo. Proveedor/Redis reales, despliegue y evaluación independiente 50+5 pendientes. Guía IA.md y evidencia 70; RF-3/RF-8 parciales.
-## Primera prueba integrada de IA
-
-El 17 de octubre de 2026 se revisaron las evidencias 71–73: respuesta de asistencia completada, sugerencia separada de clasificación oficial y cierre posterior del caso simulado con validación humana vigente. Guía en [IA.md](docs/IA.md) y límites en [REPORTE_QA.md](docs/REPORTE_QA.md). RF-3 continúa parcial: evaluación independiente 50+5 pendiente. La configuración distribuida mantiene IA desactivada por defecto; cada entorno requiere activación local.
+Para parámetros de conexión y controles diagnósticos opcionales, consulta el [manual técnico](docs/MANUAL_TECNICO.md) y la [guía de rendimiento](docs/PRUEBA_RENDIMIENTO.md). Los diagnósticos breves no acreditan RNF-2.

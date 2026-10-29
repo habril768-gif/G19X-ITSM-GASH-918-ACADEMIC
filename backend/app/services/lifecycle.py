@@ -6,17 +6,20 @@ from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.models import AuditEvent, Category, Department, Incident, User
-from app.services.incidents import MANAGERS, role_name, visibility
+from app.services.incidents import MANAGERS, _visibility_for_role, role_name
 
 
 def eligible_manager(db, case, user_id):
     person = db.scalar(select(User).where(User.id == user_id).with_for_update())
-    if person is None or not person.is_active or role_name(db, person) not in MANAGERS:
+    if person is None or not person.is_active:
+        raise HTTPException(422, "Responsable no habilitado para gestionar")
+    role = role_name(db, person)
+    if role not in MANAGERS:
         raise HTTPException(422, "Responsable no habilitado para gestionar")
     department = db.get(Department, person.departamento_id)
     if department is None or not department.is_active:
         raise HTTPException(422, "Responsable no habilitado para gestionar")
-    if db.scalar(select(Incident.id).where(Incident.id == case.id, visibility(db, person))) is None:
+    if db.scalar(select(Incident.id).where(Incident.id == case.id, _visibility_for_role(person, role))) is None:
         raise HTTPException(422, "Responsable sin acceso independiente al caso")
     return person
 
@@ -33,17 +36,17 @@ def snapshot(case):
             "closed_at": stamp(case.closed_at)}
 
 
-def manage_case(db, actor, case_id, operation, body):
+def manage_case(db, actor, case_id, operation, body, *, presenter=None):
     try:
         from app.services.administration_lock import administration_lock
-        administration_lock(db, actor)
-        if role_name(db, actor) not in MANAGERS:
+        role = administration_lock(db, actor, include_role=True)
+        if role not in MANAGERS:
             raise HTTPException(403, "Solo gestores autorizados")
         # Lock first, then reevaluate visibility on the refreshed row. PostgreSQL
         # serializes competing transitions; SQLite tests cannot prove that lock.
         case = db.scalar(select(Incident).where(Incident.id == case_id)
                          .with_for_update().execution_options(populate_existing=True))
-        if case is None or db.scalar(select(Incident.id).where(Incident.id == case_id, visibility(db, actor))) is None:
+        if case is None or db.scalar(select(Incident.id).where(Incident.id == case_id, _visibility_for_role(actor, role))) is None:
             raise HTTPException(404, "Incidencia no encontrada")
         before = snapshot(case)
         now = datetime.now(timezone.utc)
@@ -81,7 +84,7 @@ def manage_case(db, actor, case_id, operation, body):
             reopening = case.status in {"RESUELTA", "CERRADA"} and target == "EN_REVISION"
             if body.reason is not None and not reopening:
                 raise HTTPException(422, "El motivo solo aplica a reapertura")
-            if (reopening or target == "CERRADA") and role_name(db, actor) != "ADMIN_RH":
+            if (reopening or target == "CERRADA") and role != "ADMIN_RH":
                 raise HTTPException(403, "Operación reservada a Admin RH independiente")
             if reopening:
                 if not body.reason:
@@ -112,14 +115,28 @@ def manage_case(db, actor, case_id, operation, body):
         if operation == "content":
             after.update(titulo=case.titulo, descripcion=case.descripcion)
         case.updated_at = now
-        db.add(AuditEvent(incidencia_id=case.id, usuario_id=actor.id, accion=action,
+        event = AuditEvent(incidencia_id=case.id, usuario_id=actor.id, accion=action,
                          detalle={"operation": operation, "before": before, "after": after,
-                                  "reason": getattr(body, "reason", None), "source": "HUMANA"}))
+                                  "reason": getattr(body, "reason", None), "source": "HUMANA"})
+        db.add(event)
+        from app.services.mail import queue_event
+        queue_event(db, case, event, before)
+        # La API captura su esquema mientras la fila sigue cargada. Los demás
+        # llamadores conservan el retorno ORM y la expiración habitual del commit.
+        if presenter is None:
+            result = case
+        else:
+            db.flush()
+            result = presenter(case)
         db.commit()
-        return case
+        return result
     except HTTPException:
         db.rollback()
         raise
     except SQLAlchemyError:
         db.rollback()
         raise HTTPException(503, "No fue posible guardar la operación; no se guardaron cambios parciales") from None
+    except Exception:
+        # Un fallo al preparar la respuesta no debe dejar escritura parcial.
+        db.rollback()
+        raise

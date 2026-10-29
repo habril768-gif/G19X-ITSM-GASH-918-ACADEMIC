@@ -1,0 +1,100 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "RETENCION_POOL_LOCAL_VERIFICADA_API_Y_QA_PENDIENTES",
+  "hipotesis": "Concurrencia objetivo10 supera retencion predeterminada5. Overflow se cierra al devolverlo a poollleno y puede requerir handshake posterior. Mantener10ociosas puede evitarcreaciones sin aumentar maximo15.",
+  "perfil_local": {
+    "method": "Tres oleadas controladas de diez conexiones simultaneas con barrera, SQLite en memoria, QueuePool SQLAlchemy2.1.4. SELECT1 ficticio. Sin HTTP/PostgreSQL/red/Docker; mide creacion/reuso, no tiempos de red ni p95.",
+    "results": [
+      {
+        "pool_size": 5,
+        "max_overflow": 10,
+        "max_connections": 15,
+        "totals_before_dispose": {
+          "connect": 20,
+          "close": 15,
+          "ping": 10
+        },
+        "waves": [
+          {
+            "wave": 1,
+            "new_connections": 10,
+            "closed_connections": 5,
+            "pings": 0,
+            "checked_in": 5,
+            "checked_out": 0
+          },
+          {
+            "wave": 2,
+            "new_connections": 5,
+            "closed_connections": 5,
+            "pings": 5,
+            "checked_in": 5,
+            "checked_out": 0
+          },
+          {
+            "wave": 3,
+            "new_connections": 5,
+            "closed_connections": 5,
+            "pings": 5,
+            "checked_in": 5,
+            "checked_out": 0
+          }
+        ]
+      },
+      {
+        "pool_size": 10,
+        "max_overflow": 5,
+        "max_connections": 15,
+        "totals_before_dispose": {
+          "connect": 10,
+          "close": 0,
+          "ping": 20
+        },
+        "waves": [
+          {
+            "wave": 1,
+            "new_connections": 10,
+            "closed_connections": 0,
+            "pings": 0,
+            "checked_in": 10,
+            "checked_out": 0
+          },
+          {
+            "wave": 2,
+            "new_connections": 0,
+            "closed_connections": 0,
+            "pings": 10,
+            "checked_in": 10,
+            "checked_out": 0
+          },
+          {
+            "wave": 3,
+            "new_connections": 0,
+            "closed_connections": 0,
+            "pings": 10,
+            "checked_in": 10,
+            "checked_out": 0
+          }
+        ]
+      }
+    ]
+  },
+  "cambio": "get_engine especifica pool_size=10,max_overflow=5,pool_timeout=30,pool_pre_ping=True y connect_timeout3. Antes defaults5+10/30: mismo maximo15 por proceso. Creacion diferida/cached y reset/aislamiento/transacciones intactos.",
+  "validacion": "20 pruebas locales aprobadas en0,211s: seis nuevas DatabasePoolTests con get_engine real y puente de driverSQLite, mas14 SessionLifecycleTests. Sin HTTP/PostgreSQL/red/Docker.",
+  "casos": [
+    "Cero conexiones al construir y enginecacheado",
+    "Tres oleadas10:10/0/0 nuevas conexiones; diez retenidas y cero prestadas al final",
+    "La16a conexion agota limite sin subir15 (timeout acortado solo en prueba)",
+    "Pre_ping recupera conexion SQLite obsoleta",
+    "Pool saturado reusa conexion devuelta sin crear16a",
+    "Dispose cierra las diez ociosas",
+    "Cierre limpio/activo/custom y rollback/cancelacion preservados"
+  ],
+  "tradeoff": "Puede retener hasta cinco conexiones ociosas mas por proceso y su memoria. No preabre diez al inicio; capacidad simultanea maxima15sin cambio. No garantiza reduccionp95: mas conexiones reutilizadas tambien implican mas pings y se requiere medir PostgreSQL real.",
+  "limites": "La prueba local es controlada y cuenta creaciones/reuso, no latencia de red o RNF-2. Fuente193 sugiere pero no demuestra causalidad por overflow. Regresion190 de99pruebas precede194; nueva seleccion API pendiente. No repetir formal ahora.",
+  "sha256": {
+    "backend/app/core/database.py": "4407da230d53fb6e1dad4e37b4f229876e555698c1b40dbd37134b4fe104a550",
+    "backend/tests/test_database_pool.py": "87bca7f785ebe20e5f74569a7ddcd4eae83fb61a944962a6abdcf1194a84f4f3"
+  },
+  "pendiente": "Regresion seleccionada con test_database_pool; luego unico diagnostico para auth/ping/errores/auditoria/recursos y estabilidad, preservando resultados adversos."
+}

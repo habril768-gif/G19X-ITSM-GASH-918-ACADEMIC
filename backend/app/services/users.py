@@ -83,10 +83,13 @@ def update_user(db, actor, user_id, body):
             case.updated_at = now
             after = snapshot(case)
             after["is_confidential"] = case.is_confidential
-            db.add(AuditEvent(incidencia_id=case.id, affected_user_id=target.id, usuario_id=actor.id,
+            event = AuditEvent(incidencia_id=case.id, affected_user_id=target.id, usuario_id=actor.id,
                               accion="CAMBIO_CONFIDENCIALIDAD" if make_private else "ASIGNADO",
                               detalle={"operation": "USER_ACCESS_REVIEW", "reason": body.reason,
-                                       "before": previous, "after": after}))
+                                       "before": previous, "after": after})
+            db.add(event)
+            from app.services.mail import queue_event
+            queue_event(db, case, event, previous)
             db.flush()
             adjusted += 1
         after_user = {"nombre_completo": target.nombre_completo, "rol_id": target.rol_id,

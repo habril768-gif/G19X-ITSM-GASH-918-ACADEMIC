@@ -1,0 +1,91 @@
+{
+  "fecha": "2026-10-22",
+  "estado": "OPTIMIZACION_LOCAL_API_PENDIENTE",
+  "requisito": "RNF-2; sigue sin acreditarse el p95 menor de 200 ms",
+  "cambio": [
+    "Recibo de creación preparado antes del commit bajo el bloqueo vigente; se devuelve solo tras commit satisfactorio.",
+    "Las cuatro rutas de gestión capturan CaseDetail antes del commit. manage_case conserva el retorno ORM por defecto para otros llamadores.",
+    "La expiración de Session, los bloqueos y las reglas de permisos no se deshabilitan. Fallo del presentador provoca rollback."
+  ],
+  "perfil_antes": {
+    "metodo": "Servicios reales cargados por AST y modelos reales, SQLite con expire_on_commit=True. Imports internos de cola/lock apuntan al mismo cuerpo compilado; captura por campos del esquema, sin ejecutar Pydantic/HTTP. No prueba locks PostgreSQL.",
+    "results": [
+      {
+        "operation": "create",
+        "sql": {
+          "total": 14,
+          "select": 11,
+          "insert": 3,
+          "after_commit": 4
+        }
+      },
+      {
+        "operation": "edit",
+        "sql": {
+          "total": 10,
+          "select": 8,
+          "insert": 1,
+          "update": 1,
+          "after_commit": 1
+        }
+      }
+    ]
+  },
+  "perfil_despues": {
+    "metodo": "Servicios reales cargados por AST y modelos reales, SQLite con expire_on_commit=True. Imports internos de cola/lock apuntan al mismo cuerpo compilado; captura por campos del esquema, sin ejecutar Pydantic/HTTP. No prueba locks PostgreSQL.",
+    "results": [
+      {
+        "operation": "create",
+        "sql": {
+          "total": 11,
+          "select": 8,
+          "insert": 3
+        }
+      },
+      {
+        "operation": "edit",
+        "sql": {
+          "total": 9,
+          "select": 7,
+          "insert": 1,
+          "update": 1
+        }
+      }
+    ]
+  },
+  "rollback_local": {
+    "method": "Cuerpos reales por AST, modelos reales y SQLite; sin HTTP/Pydantic ni locks PostgreSQL.",
+    "results": [
+      {
+        "scenario": "create_commit_failure",
+        "rollback_case_audit_outbox": true
+      },
+      {
+        "scenario": "edit_commit_failure",
+        "rollback_case_audit_outbox": true
+      },
+      {
+        "scenario": "presenter_failure",
+        "rollback_case_audit_outbox": true
+      }
+    ]
+  },
+  "revision_estatica": "AST válido en cuatro archivos; cuerpo de gestión hasta queue_event idéntico al anterior; API solo cambia las cuatro llamadas para pasar CaseDetail.model_validate.",
+  "pruebas_api": {
+    "archivo": "backend/tests/test_write_responses.py",
+    "casos_preparados": 11,
+    "estado": "PENDIENTES_DE_EJECUCION",
+    "cobertura": "Tres recibos, cuatro respuestas de gestión con expire_on_commit=True, dos fallos de commit, fallo del presentador y compatibilidad del retorno ORM."
+  },
+  "limites": [
+    "Perfil con SQLite y funciones reales compiladas por AST; no ejecuta FastAPI/Pydantic ni prueba bloqueos PostgreSQL.",
+    "No se repitió carga Docker: primero debe pasar la regresión de API en el runtime compatible de la autora.",
+    "Última medición formal 132 conserva FALLA_UMBRAL. La reducción local de SQL no garantiza p95 ni causalidad bajo carga."
+  ],
+  "sha256": {
+    "backend/app/services/incidents.py": "5083ff4f45f7225bcf07db39319e0f1486f06fc48b1a6b536d21a6ea5e396b11",
+    "backend/app/services/lifecycle.py": "4de323554ae446e1dfab0f8b23eb45d80087cafb61b834ff1653e31ae967ccb1",
+    "backend/app/api/incidents.py": "430a845880df2a410a6d436abd6218d64279336995daf0135fee0c6d1b4ea8d6",
+    "backend/tests/test_write_responses.py": "336fa94786fbce07836fb3340620a3d5a25833b73591c67fcc126312014564c9"
+  }
+}

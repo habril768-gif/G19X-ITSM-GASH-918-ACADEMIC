@@ -1,0 +1,69 @@
+{
+  "recorded_on": "2026-10-18",
+  "api_version": "0.12.0",
+  "schema": "0007",
+  "backend_tests": {
+    "passed": 201,
+    "seconds": 45.99,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "postgresql": "18.6 aislado",
+    "upgrade_twice": true,
+    "schema_check_no_changes": true,
+    "temporary_cluster_stopped_removed": true
+  },
+  "baseline_run": {
+    "passed": 199,
+    "seconds": 44.05
+  },
+  "script_mock_controls_passed": 6,
+  "privacy": {
+    "case_threshold": 5,
+    "personal_affected_threshold": 5,
+    "whole_cell_suppression": true,
+    "contributor_complements_checked": true,
+    "raw_records_exported": false,
+    "only_fixed_grain": true
+  },
+  "known_set": {
+    "volume": 20,
+    "latest_resolved_cases": 10,
+    "latest_resolution_hours": 6,
+    "reopening_population": 20,
+    "reopened_distinct_cases": 11,
+    "reopening_percent": 55,
+    "ai_comparison_population": 10,
+    "category_agreement": 5,
+    "agreement_percent": 50,
+    "ai_omitted": 5,
+    "ai_failed": 5
+  },
+  "readonly_acl_tested": true,
+  "raw_table_reads_rejected": true,
+  "unsafe_public_grants_provision_rolls_back": true,
+  "empty_population_metadata_tested": true,
+  "single_extract_cut_tested": true,
+  "desktop_installed_reported": true,
+  "desktop_connector_tested": false,
+  "m_dax_compiled": false,
+  "pbix_created": false,
+  "docker_deployment_tested": false,
+  "operational_database_accessed": false,
+  "real_credentials_created": false,
+  "new_ai_calls": 0,
+  "human_acceptance": false,
+  "limitations": [
+    "Conexión Desktop y .pbix por verificar",
+    "Supresión conservadora puede ocultar toda la población pequeña",
+    "No ofrece promedios históricos por ventana arbitraria",
+    "Periodo de observación anual fijo, cohorte por mes de creación",
+    "Copias entregadas y cuentas BI requieren custodia y revocación manual",
+    "Mínimo k no garantiza anonimato ni protege de todas las diferencias temporales"
+  ],
+  "source_sha256": {
+    "backend/migrations/versions/0007_analytics_views.sql": "8e1c09cecebda065776b336b5541adfea370ee32d7bbe2350844699cec4f73fe",
+    "backend/app/reporting/access.py": "9c95a41784f05a53fa10145d33a6d7ce6800dc7219b874b22d7dd8efcf22df7b",
+    "powerbi/consulta.sql": "4b17d5633d86f6434948dab9a0103cf0e1299f465b47e3b9fab209fc953ff31a"
+  }
+}

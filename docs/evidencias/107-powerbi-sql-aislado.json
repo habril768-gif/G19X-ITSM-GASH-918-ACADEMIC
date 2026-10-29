@@ -1,0 +1,33 @@
+{
+  "fecha_utc": "2026-10-20T18:02:24.828090+00:00",
+  "status": "FAILED",
+  "test": "isolated_sql_eligibility_aggregate_export",
+  "development_database_accessed": false,
+  "workers_started": false,
+  "external_calls": false,
+  "desktop_verified": false,
+  "steps": [
+    "initdb",
+    "start",
+    "createdb",
+    "migrate",
+    "schema_check",
+    "stop"
+  ],
+  "postgres": "postgres (PostgreSQL) 18.6",
+  "bi_operational_access_denied": true,
+  "query_sha256": "4b17d5633d86f6434948dab9a0103cf0e1299f465b47e3b9fab209fc953ff31a",
+  "failure": {
+    "stage": "confidentiality_change",
+    "type": "IntegrityError"
+  },
+  "server_stopped": true,
+  "retained_local_folder": "powerbi-sql-6_onqpkn",
+  "limits": [
+    "Exportación agregada JSON como puente de QA, no conector directo Desktop→PostgreSQL aislado",
+    "Cambio ORM de confidencialidad, sin API/UI ni workers",
+    "Permisos BI reales y SELECT de consulta.sql; sin credenciales en agregados o reporte",
+    "Desktop se verifica por separado; este reporte por sí solo no lo acredita",
+    "No es carga, custodia, distribución ni aceptación integral"
+  ]
+}

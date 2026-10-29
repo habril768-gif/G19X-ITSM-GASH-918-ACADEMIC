@@ -1,0 +1,761 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "OPTIMIZACION_LOCAL_VERIFICADA_API_Y_POSTGRESQL_PENDIENTES",
+  "problema": "Formal 182 completa, cero errores HTTP pero cuatro p95 incumplidos. Revisar coste concreto sin repetir cargas ni atribuir todo al host.",
+  "hipotesis": "INSERT Core con .values(lista) fuerza compilacion nueva por creacion; cProfile local observa 30 compilaciones y 250,02 ms acumulados en compilacion durante 30 llamadas calientes, dentro de 575,20 ms de queue_event /860,44 ms de create_case.",
+  "cambio": "Se pasan los diccionarios como parametros de execute a Core INSERT..RETURNING(id), insertmanyvalues_page_size=50 y segmentos existentes de 50. SQLAlchemy reutiliza compilacion y realiza cursor.execute con VALUES multiples por lote. Resultado cerrado sin materializar ORM. Sin cache manual de datos/autorizacion, nuevos commits o cambios de seleccion/durabilidad.",
+  "preservado": [
+    "Ids deterministas por evento/destinatario",
+    "Consulta de destinatarios vigente",
+    "Consulta de entregas existentes antes de insertar",
+    "Entregas enviadas existentes intactas",
+    "Doce campos y valores explicitos, lease opcional sin cambios",
+    "Lotes <=50 /600 parametros efectivos",
+    "Misma transaccion de caso/auditoria/outbox, errores siguen rollback y 503",
+    "Sin SMTP, IA, Redis o tareas externas durante queue_event"
+  ],
+  "perfil_local_antes": {
+    "metodo": "31 creaciones ENTORNO reales: una fria y 30 calientes con cProfile, diez RH ficticios y Session nueva. SQLite local sin HTTP/Docker/red/PostgreSQL; no estima RNF-2 ni prueba locks PostgreSQL.",
+    "fria": {
+      "total_ms": 53.427900000315276,
+      "cpu_hilo_ms": 46.875
+    },
+    "muestras_calientes": 30,
+    "medias_calientes": {
+      "total_ms": 28.78188666660814,
+      "cpu_hilo_ms": 27.604166666666668
+    },
+    "outbox_sql": [
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      },
+      {
+        "executemany": false,
+        "cache": "CacheStats.NO_CACHE_KEY"
+      }
+    ],
+    "perfil_caliente": [
+      {
+        "funcion": "incidents.py:103:create_case",
+        "llamadas": 30,
+        "total_ms": 860.4426000000001,
+        "propio_ms": 4.7327
+      },
+      {
+        "funcion": "mail.py:34:queue_event",
+        "llamadas": 30,
+        "total_ms": 575.1963,
+        "propio_ms": 4.0286
+      },
+      {
+        "funcion": "session.py:2201:_execute_internal",
+        "llamadas": 180,
+        "total_ms": 458.42130000000003,
+        "propio_ms": 4.9506000000000006
+      },
+      {
+        "funcion": "base.py:1407:execute",
+        "llamadas": 240,
+        "total_ms": 455.2411,
+        "propio_ms": 1.1905999999999999
+      },
+      {
+        "funcion": "elements.py:524:_execute_on_connection",
+        "llamadas": 240,
+        "total_ms": 454.0505,
+        "propio_ms": 0.9189
+      },
+      {
+        "funcion": "base.py:1621:_execute_clauseelement",
+        "llamadas": 240,
+        "total_ms": 453.13160000000005,
+        "propio_ms": 6.6191
+      },
+      {
+        "funcion": "session.py:2406:execute",
+        "llamadas": 90,
+        "total_ms": 359.89750000000004,
+        "propio_ms": 0.4862000000000001
+      },
+      {
+        "funcion": "elements.py:694:_compile_w_cache",
+        "llamadas": 240,
+        "total_ms": 292.27630000000005,
+        "propio_ms": 2.5010000000000003
+      },
+      {
+        "funcion": "elements.py:324:_compiler",
+        "llamadas": 30,
+        "total_ms": 250.0231,
+        "propio_ms": 0.28270000000000006
+      },
+      {
+        "funcion": "compiler.py:1449:__init__",
+        "llamadas": 30,
+        "total_ms": 249.74040000000002,
+        "propio_ms": 0.9514
+      },
+      {
+        "funcion": "compiler.py:893:__init__",
+        "llamadas": 30,
+        "total_ms": 230.04860000000002,
+        "propio_ms": 0.5315000000000001
+      },
+      {
+        "funcion": "compiler.py:971:process",
+        "llamadas": 30,
+        "total_ms": 229.4932,
+        "propio_ms": 0.12100000000000001
+      },
+      {
+        "funcion": "visitors.py:116:_compiler_dispatch",
+        "llamadas": 3630,
+        "total_ms": 229.37220000000002,
+        "propio_ms": 9.748000000000001
+      },
+      {
+        "funcion": "compiler.py:6243:visit_insert",
+        "llamadas": 30,
+        "total_ms": 228.86910000000003,
+        "propio_ms": 1.6711
+      },
+      {
+        "funcion": "crud.py:117:_get_crud_params",
+        "llamadas": 30,
+        "total_ms": 219.2621,
+        "propio_ms": 1.2329
+      },
+      {
+        "funcion": "crud.py:1564:_extend_values_for_multiparams",
+        "llamadas": 30,
+        "total_ms": 179.8283,
+        "propio_ms": 23.111900000000002
+      },
+      {
+        "funcion": "base.py:1770:_execute_context",
+        "llamadas": 240,
+        "total_ms": 147.2705,
+        "propio_ms": 4.1278
+      },
+      {
+        "funcion": "coercions.py:323:expect",
+        "llamadas": 10050,
+        "total_ms": 133.80830000000003,
+        "propio_ms": 75.892
+      },
+      {
+        "funcion": "context.py:306:orm_execute_statement",
+        "llamadas": 150,
+        "total_ms": 126.7617,
+        "propio_ms": 0.9925000000000002
+      },
+      {
+        "funcion": "crud.py:520:_create_bind_param",
+        "llamadas": 3600,
+        "total_ms": 118.35910000000001,
+        "propio_ms": 16.3492
+      },
+      {
+        "funcion": "mail.py:21:creation_recipient_ids",
+        "llamadas": 30,
+        "total_ms": 112.3264,
+        "propio_ms": 3.7352000000000003
+      },
+      {
+        "funcion": "session.py:4504:flush",
+        "llamadas": 240,
+        "total_ms": 111.3491,
+        "propio_ms": 0.6356
+      },
+      {
+        "funcion": "<sqlalchemy generated warned() wrapper for sqlalchemy.orm.session.Session._flush>:1:_flush",
+        "llamadas": 60,
+        "total_ms": 109.56600000000002,
+        "propio_ms": 0.21930000000000002
+      },
+      {
+        "funcion": "deprecations.py:249:warned",
+        "llamadas": 60,
+        "total_ms": 109.3467,
+        "propio_ms": 0.6696
+      },
+      {
+        "funcion": "session.py:4557:_flush",
+        "llamadas": 60,
+        "total_ms": 108.67710000000001,
+        "propio_ms": 2.7701000000000002
+      },
+      {
+        "funcion": "attributes.py:456:operate",
+        "llamadas": 630,
+        "total_ms": 87.69720000000001,
+        "propio_ms": 1.7126000000000001
+      },
+      {
+        "funcion": "unitofwork.py:442:execute",
+        "llamadas": 60,
+        "total_ms": 85.1897,
+        "propio_ms": 0.7625000000000001
+      },
+      {
+        "funcion": "properties.py:481:operate",
+        "llamadas": 630,
+        "total_ms": 83.849,
+        "propio_ms": 2.0698000000000003
+      },
+      {
+        "funcion": "elements.py:1592:operate",
+        "llamadas": 690,
+        "total_ms": 83.2309,
+        "propio_ms": 1.7408000000000001
+      },
+      {
+        "funcion": "default.py:1564:_init_compiled",
+        "llamadas": 240,
+        "total_ms": 79.5463,
+        "propio_ms": 9.876000000000001
+      },
+      {
+        "funcion": "type_api.py:261:operate",
+        "llamadas": 690,
+        "total_ms": 78.43900000000001,
+        "propio_ms": 3.4215
+      },
+      {
+        "funcion": "compiler.py:3951:visit_bindparam",
+        "llamadas": 3600,
+        "total_ms": 75.40490000000001,
+        "propio_ms": 29.6
+      },
+      {
+        "funcion": "unitofwork.py:641:execute",
+        "llamadas": 60,
+        "total_ms": 73.38900000000001,
+        "propio_ms": 0.6538
+      },
+      {
+        "funcion": "persistence.py:39:_save_obj",
+        "llamadas": 60,
+        "total_ms": 72.7352,
+        "propio_ms": 2.4261
+      },
+      {
+        "funcion": "incidents.py:23:independent_rh_visibility",
+        "llamadas": 60,
+        "total_ms": 71.5883,
+        "propio_ms": 2.0339
+      }
+    ]
+  },
+  "perfil_local_despues": {
+    "metodo": "31 creaciones ENTORNO reales: una fria y 30 calientes con cProfile, diez RH ficticios y Session nueva. SQLite local sin HTTP/Docker/red/PostgreSQL; no estima RNF-2 ni prueba locks PostgreSQL.",
+    "fria": {
+      "total_ms": 66.30030000087572,
+      "cpu_hilo_ms": 31.25
+    },
+    "muestras_calientes": 30,
+    "medias_calientes": {
+      "total_ms": 18.353723333226906,
+      "cpu_hilo_ms": 16.666666666666668
+    },
+    "outbox_sql": [
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_MISS"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      },
+      {
+        "executemany": true,
+        "cache": "CacheStats.CACHE_HIT"
+      }
+    ],
+    "perfil_caliente": [
+      {
+        "funcion": "incidents.py:103:create_case",
+        "llamadas": 30,
+        "total_ms": 548.4403,
+        "propio_ms": 4.513000000000001
+      },
+      {
+        "funcion": "mail.py:34:queue_event",
+        "llamadas": 30,
+        "total_ms": 279.8509,
+        "propio_ms": 3.1717000000000004
+      },
+      {
+        "funcion": "base.py:1407:execute",
+        "llamadas": 240,
+        "total_ms": 186.116,
+        "propio_ms": 1.2006000000000001
+      },
+      {
+        "funcion": "session.py:2201:_execute_internal",
+        "llamadas": 180,
+        "total_ms": 185.1202,
+        "propio_ms": 4.7405
+      },
+      {
+        "funcion": "elements.py:524:_execute_on_connection",
+        "llamadas": 240,
+        "total_ms": 184.9154,
+        "propio_ms": 0.9219
+      },
+      {
+        "funcion": "base.py:1621:_execute_clauseelement",
+        "llamadas": 240,
+        "total_ms": 183.9935,
+        "propio_ms": 6.1122000000000005
+      },
+      {
+        "funcion": "base.py:1770:_execute_context",
+        "llamadas": 240,
+        "total_ms": 129.75330000000002,
+        "propio_ms": 3.9436000000000004
+      },
+      {
+        "funcion": "context.py:306:orm_execute_statement",
+        "llamadas": 150,
+        "total_ms": 116.3599,
+        "propio_ms": 0.8972
+      },
+      {
+        "funcion": "mail.py:21:creation_recipient_ids",
+        "llamadas": 30,
+        "total_ms": 116.33810000000001,
+        "propio_ms": 3.8395
+      },
+      {
+        "funcion": "session.py:4504:flush",
+        "llamadas": 240,
+        "total_ms": 107.5019,
+        "propio_ms": 0.6261
+      },
+      {
+        "funcion": "<sqlalchemy generated warned() wrapper for sqlalchemy.orm.session.Session._flush>:1:_flush",
+        "llamadas": 60,
+        "total_ms": 105.7593,
+        "propio_ms": 0.21250000000000002
+      },
+      {
+        "funcion": "deprecations.py:249:warned",
+        "llamadas": 60,
+        "total_ms": 105.5468,
+        "propio_ms": 0.6899000000000001
+      },
+      {
+        "funcion": "session.py:4557:_flush",
+        "llamadas": 60,
+        "total_ms": 104.8569,
+        "propio_ms": 2.5676
+      },
+      {
+        "funcion": "session.py:2406:execute",
+        "llamadas": 90,
+        "total_ms": 92.7868,
+        "propio_ms": 0.3793
+      },
+      {
+        "funcion": "attributes.py:456:operate",
+        "llamadas": 630,
+        "total_ms": 90.69000000000001,
+        "propio_ms": 1.5500000000000003
+      },
+      {
+        "funcion": "properties.py:481:operate",
+        "llamadas": 630,
+        "total_ms": 86.894,
+        "propio_ms": 2.2504
+      },
+      {
+        "funcion": "elements.py:1592:operate",
+        "llamadas": 690,
+        "total_ms": 86.1115,
+        "propio_ms": 1.3425000000000002
+      },
+      {
+        "funcion": "unitofwork.py:442:execute",
+        "llamadas": 60,
+        "total_ms": 84.3941,
+        "propio_ms": 0.8127000000000001
+      },
+      {
+        "funcion": "type_api.py:261:operate",
+        "llamadas": 690,
+        "total_ms": 82.0053,
+        "propio_ms": 3.3268000000000004
+      },
+      {
+        "funcion": "unitofwork.py:641:execute",
+        "llamadas": 60,
+        "total_ms": 72.6252,
+        "propio_ms": 0.40940000000000004
+      },
+      {
+        "funcion": "persistence.py:39:_save_obj",
+        "llamadas": 60,
+        "total_ms": 72.21580000000002,
+        "propio_ms": 2.6338000000000004
+      },
+      {
+        "funcion": "coercions.py:323:expect",
+        "llamadas": 2520,
+        "total_ms": 70.6804,
+        "propio_ms": 30.5213
+      },
+      {
+        "funcion": "incidents.py:23:independent_rh_visibility",
+        "llamadas": 60,
+        "total_ms": 68.6192,
+        "propio_ms": 2.0231000000000003
+      },
+      {
+        "funcion": "administration_lock.py:7:administration_lock",
+        "llamadas": 30,
+        "total_ms": 68.61,
+        "propio_ms": 1.8272000000000002
+      },
+      {
+        "funcion": "session.py:2565:scalars",
+        "llamadas": 60,
+        "total_ms": 64.96310000000001,
+        "propio_ms": 0.5331
+      },
+      {
+        "funcion": "persistence.py:966:_emit_insert_statements",
+        "llamadas": 60,
+        "total_ms": 61.1244,
+        "propio_ms": 3.1385
+      },
+      {
+        "funcion": "default.py:1564:_init_compiled",
+        "llamadas": 240,
+        "total_ms": 60.681400000000004,
+        "propio_ms": 9.4212
+      },
+      {
+        "funcion": "operators.py:741:__eq__",
+        "llamadas": 1440,
+        "total_ms": 50.9553,
+        "propio_ms": 2.7398000000000002
+      },
+      {
+        "funcion": "default_comparator.py:50:_boolean_compare",
+        "llamadas": 630,
+        "total_ms": 50.03340000000001,
+        "propio_ms": 4.758100000000001
+      },
+      {
+        "funcion": "<built-in method _operator.eq>",
+        "llamadas": 1080,
+        "total_ms": 49.424,
+        "propio_ms": 1.7922
+      },
+      {
+        "funcion": "annotation.py:372:__eq__",
+        "llamadas": 360,
+        "total_ms": 46.1325,
+        "propio_ms": 1.1497
+      },
+      {
+        "funcion": "base.py:1829:_exec_single_context",
+        "llamadas": 210,
+        "total_ms": 44.2426,
+        "propio_ms": 5.1148
+      },
+      {
+        "funcion": "elements.py:694:_compile_w_cache",
+        "llamadas": 240,
+        "total_ms": 41.1686,
+        "propio_ms": 2.34
+      },
+      {
+        "funcion": "incidents.py:38:_visibility_for_role",
+        "llamadas": 30,
+        "total_ms": 35.619200000000006,
+        "propio_ms": 0.18610000000000002
+      },
+      {
+        "funcion": "langhelpers.py:1461:oneshot",
+        "llamadas": 240,
+        "total_ms": 33.819300000000005,
+        "propio_ms": 1.8802
+      }
+    ]
+  },
+  "reduccion_media_caliente_local_porcentaje": 36.23168784650823,
+  "validacion": {
+    "unitarias_nuevas": "8 aprobadas en 0,659 s; SQLite real/modelos/servicios reales, sin HTTP.",
+    "casos_existentes": "19 casos parametrizados existentes de test_mail_batching/test_mail_multivalues aprobados invocados directamente con fixture SQLite y create_case, sin TestClient. Total 27 casos finales en 2,450 s.",
+    "casos": "Compilacion reutilizada entre eventos/casos sin mezcla; 123 destinatarios/3 INSERT de <=600 parametros y cero cursor.executemany; campos/UUID exactos; omision; permisos reconsultados; reintento parcial conserva enviada; repeticion no inserta/commit; fallo segundo lote revierte entregas/auditoria y creacion completa con 503.",
+    "harness_corregido": "Primer puente a casos existentes uso ENTORNO y fallo ck_incident_affected_scope en caso affected_rh. Se corrigio a PERSONA con empleado afectado, como fixture original. No se modifico producto/restriccion para eludirlo; conjunto final aprobado.",
+    "conteo_sql": {
+      "metodo": "Servicios reales cargados por AST y modelos reales, SQLite con expire_on_commit=True. Imports internos de cola/lock apuntan al mismo cuerpo compilado; captura por campos del esquema, sin ejecutar Pydantic/HTTP. No prueba locks PostgreSQL.",
+      "results": [
+        {
+          "operation": "create",
+          "sql": {
+            "total": 8,
+            "select": 5,
+            "insert": 3
+          }
+        },
+        {
+          "operation": "edit",
+          "sql": {
+            "total": 5,
+            "select": 3,
+            "insert": 1,
+            "update": 1
+          }
+        }
+      ]
+    },
+    "estatica": "AST correcto en tres archivos. SQLAlchemy 2.1.4 y dialecto PostgreSQL psycopg declaran use_insertmanyvalues/insert_executemany_returning True; compilacion PostgreSQL con RETURNING verificada, no ejecucion PostgreSQL.",
+    "cache": "Antes 31 NO_CACHE_KEY; despues primera CACHE_MISS y 30 CACHE_HIT. Contexto executemany=True significa multiples parametros logicos; eventos do_execute/do_executemany comprueban llamadas fisicas por lote.",
+    "api": "Pendiente ejecutar seleccion pytest con HTTP real por el usuario; no afirmar que el puente SQLite equivale a regresion API."
+  },
+  "limites": "Medias locales con cProfile, SQLite y un hilo, diez RH ficticios. Media caliente 28,78->18,35 ms; fria 53,43->66,30 ms, sin mejora demostrada en frio. No es latencia HTTP ni prueba durabilidad/bloqueos PostgreSQL ni acredita RNF-2. No se lanzo nueva formal/smoke; septima formal 182 FALLIDA_UMBRAL sigue vigente.",
+  "fuentes_tecnicas": [
+    "https://docs.sqlalchemy.org/en/20/core/dml.html",
+    "https://docs.sqlalchemy.org/en/20/core/engines.html"
+  ],
+  "sha256": {
+    "backend/app/services/mail.py": "3604fd8307afc1501858df39fc55c5544e088c03ecc18036e5e06ad3cf9405a0",
+    "backend/tests/test_outbox_cached_insert.py": "6c64343f8b80793a36316f5db96aa02e316651c12b5cafddd6391d9b03a87910",
+    "backend/tests/test_mail_multivalues.py": "ba4b5624f7acba7ae9e5539b2bfee2bc78e7ed279bd23119839fdfcb4619b431"
+  },
+  "sha256_perfilador": "bd540e75085530e753f8b8cfd552e33ce66eeab6bda64cc6b5bbe4090e149188",
+  "pendiente": "Regresion API seleccionada y validacion real PostgreSQL del encolado/atomicidad antes de decidir otra formal; no repetir full ahora."
+}

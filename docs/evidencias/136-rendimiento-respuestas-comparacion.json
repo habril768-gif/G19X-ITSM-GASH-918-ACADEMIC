@@ -1,0 +1,166 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "FALLIDA_UMBRAL_MEJORA_ESCRITURAS",
+  "captura": "codex-clipboard-94d2d67c-e124-403e-b26f-489e28d4eef7.png",
+  "procedencia": "Autora ejecuta; agente lee captura y reportes originales.",
+  "fuentes": [
+    {
+      "run_id": "c7ad7be7ff304f58",
+      "ruta_local": ".pgdata/performance-c7ad7be7ff304f58/report.json",
+      "sha256": "63084d943d79e841c403599e9970143bbe9640f5664cf23ea1bb15bf5e70b556"
+    },
+    {
+      "run_id": "3dabef717c5549c6",
+      "ruta_local": ".pgdata/performance-3dabef717c5549c6/report.json",
+      "sha256": "73d1bfe40f50ed646422d81d541364c165cfbaf6b4937a110b9524ce29e1d3ef"
+    }
+  ],
+  "comparacion": {
+    "listado": {
+      "p95_antes_ms": 236.55370000051335,
+      "p95_ahora_ms": 249.8286999980337,
+      "cambio_porcentaje": 5.611833591058413
+    },
+    "detalle": {
+      "p95_antes_ms": 206.16030000383034,
+      "p95_ahora_ms": 217.48590000061085,
+      "cambio_porcentaje": 5.4935892102262684
+    },
+    "creacion": {
+      "p95_antes_ms": 521.5681999980006,
+      "p95_ahora_ms": 449.40159999532625,
+      "cambio_porcentaje": -13.836464723683505
+    },
+    "actualizacion": {
+      "p95_antes_ms": 398.6741999979131,
+      "p95_ahora_ms": 358.2172000024002,
+      "cambio_porcentaje": -10.147885164308267
+    }
+  },
+  "solicitudes_antes_ahora": [
+    13072,
+    14346
+  ],
+  "cambio_solicitudes_porcentaje": 9.746022031823752,
+  "medicion": {
+    "inicio_utc": "2026-10-22T17:46:50.270541+00:00",
+    "fin_utc": "2026-10-22T17:51:50.431650+00:00",
+    "duracion_objetivo_s": 300,
+    "duracion_hasta_ultima_respuesta_s": 300.1412442000001,
+    "clientes": 10,
+    "completa": true,
+    "metricas": {
+      "listado": {
+        "intentos": 3588,
+        "exitos": 3588,
+        "errores": 0,
+        "estados": {
+          "200": 3588
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 11.96,
+        "min_ms": 68.96069999493193,
+        "mediana_ms": 137.507249997725,
+        "p95_exitos_ms": 249.8286999980337,
+        "p99_exitos_ms": 337.1588000009069,
+        "max_ms": 582.042599999113,
+        "p95_todos_ms": 249.8286999980337,
+        "finalizadas_fuera_ventana": 0
+      },
+      "detalle": {
+        "intentos": 3588,
+        "exitos": 3588,
+        "errores": 0,
+        "estados": {
+          "200": 3588
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 11.96,
+        "min_ms": 57.37129999761237,
+        "mediana_ms": 121.37109999821405,
+        "p95_exitos_ms": 217.48590000061085,
+        "p99_exitos_ms": 287.40089999337215,
+        "max_ms": 541.0111000019242,
+        "p95_todos_ms": 217.48590000061085,
+        "finalizadas_fuera_ventana": 1
+      },
+      "creacion": {
+        "intentos": 3587,
+        "exitos": 3587,
+        "errores": 0,
+        "estados": {
+          "201": 3587
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 11.956666666666667,
+        "min_ms": 144.73569999972824,
+        "mediana_ms": 305.2702999993926,
+        "p95_exitos_ms": 449.40159999532625,
+        "p99_exitos_ms": 581.414100000984,
+        "max_ms": 811.3368999984232,
+        "p95_todos_ms": 449.40159999532625,
+        "finalizadas_fuera_ventana": 4
+      },
+      "actualizacion": {
+        "intentos": 3583,
+        "exitos": 3583,
+        "errores": 0,
+        "estados": {
+          "200": 3583
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 11.943333333333333,
+        "min_ms": 111.29870000149822,
+        "mediana_ms": 222.58380000130273,
+        "p95_exitos_ms": 358.2172000024002,
+        "p99_exitos_ms": 503.7834999966435,
+        "max_ms": 703.9538999961223,
+        "p95_todos_ms": 358.2172000024002,
+        "finalizadas_fuera_ventana": 5
+      }
+    },
+    "creados": 3587,
+    "inicio_clientes_offset_ms": [
+      0.6428999986383133,
+      0.192299994523637,
+      0.26529999740887433,
+      0.32219999411609024,
+      0.41929999861167744,
+      0.3693999969982542,
+      0.47879999328870326,
+      0.5803999956697226,
+      0.5344999954104424,
+      0.08099999831756577
+    ]
+  },
+  "calentamiento_s": 30,
+  "conteos_inicial_tras_calentamiento_final": [
+    100,
+    439,
+    4026
+  ],
+  "comprobacion_sql": {
+    "incidencias": 4026,
+    "eventos_creado": 4026,
+    "eventos_editado": 3919,
+    "entregas_encoladas": 40260,
+    "intentos_smtp": 0,
+    "trabajos_ia": 0
+  },
+  "revocacion_sesiones": {
+    "204": 10
+  },
+  "contenedores_detenidos": true,
+  "muestras_recursos": 49,
+  "archivos_del_ajuste_coinciden_con_hash_reportado": {
+    "backend/app/services/incidents.py": true,
+    "backend/app/services/lifecycle.py": true,
+    "backend/app/api/incidents.py": true
+  },
+  "limites": [
+    "Las cuatro operaciones siguen con p95 >= 200 ms; RNF-2 no acreditado.",
+    "El número de casos crece durante la carga y difiere entre corridas. Host compartido con el generador, sin control exclusivo de carga externa ni medición de CPU del generador.",
+    "Comparación observacional; no demuestra causalidad exclusiva ni identifica el cuello de botella.",
+    "No repetir full sin cambio o diagnóstico que lo justifique. Siguiente trabajo: perfil temporal por fase/consulta para ubicar el coste restante, preservando permisos y locks."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "fecha_registro": "2026-10-21",
+  "estado": "EJECUTOR_PREPARADO_SIN_CARGA_REAL",
+  "artefactos_sha256": {
+    "backend/scripts/performance_runner.py": "2925bc26efc0535ad34508268f16ea34642cce19cc0226122a66e4819642594e",
+    "backend/tests/test_performance_runner.py": "2d4d0cb3d1ddcbf8f8ee1fcbbcb9c00fbf9a9aa4ea97e08a2f8267a2b92f723a",
+    "backend/scripts/performance_manifest.example.json": "57ee5eab79e6681812dac8ebe09c9e248bad82dfc56aaa1776252d44e96a98b2"
+  },
+  "validacion": {
+    "metodo": "unittest estándar, mocks y coordinación de hilos con operación simulada; sin PluriOne HTTP real.",
+    "resultado_instalado": "Ran 13 tests in 0.084s; OK",
+    "antecedentes": [
+      "Diez pruebas iniciales aprobadas",
+      "Al ampliar a trece, una falló por ausencia de contraseña ficticia en el entorno del test; se corrigió el fixture del test con patch.dict, sin relajar el ejecutor",
+      "Trece pruebas de staging aprobaron en 0.104 s; repetidas tras instalar para comprobar rutas de importación"
+    ],
+    "cli_negativo": {
+      "salida": 1,
+      "estado": "CONFIGURACION_RECHAZADA",
+      "error_codigo": "AISLAMIENTO_NO_CONFIRMADO",
+      "alcance": "Manifiesto de ejemplo deshabilitado; rechazo antes de crear clientes o enviar HTTP."
+    }
+  },
+  "funciones": [
+    "Diez sesiones/clientes reales previstos; barrera común, conexiones persistentes y una petición por cliente",
+    "Cuatro operaciones: listado, detalle, creación y edición; fase de calentamiento separada",
+    "Reporte JSON de p95/p99 por operación, errores, respuestas fuera de ventana y conteos",
+    "Destino loopback alternativo, identidades/fixture QA, cien IDs distintos y metadatos obligatorios",
+    "Sin reintentos de escrituras, parada de fase ante error, cierre de sesiones y salida exclusiva sin sobrescritura"
+  ],
+  "limites": [
+    "No se provisionó ni arrancó un despliegue Docker QA",
+    "No se realizó smoke HTTP contra PluriOne ni carga de cinco minutos",
+    "RNF-2 sigue pendiente de medición",
+    "El aislamiento de recursos Docker y hardware se declaran en manifiesto; el ejecutor comprueba destino/identidades/fixture pero no inspecciona Docker",
+    "No se automatiza muestreo CPU/memoria ni comprobación de auditoría/colas SQL",
+    "No se modificaron servicios ni datos de la instalación de uso",
+    "Sin commit ni suite backend completa repetida"
+  ]
+}

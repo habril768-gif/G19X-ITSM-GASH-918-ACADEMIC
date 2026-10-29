@@ -1,0 +1,60 @@
+{
+  "fecha_utc": "2026-10-20T18:03:56.135298+00:00",
+  "status": "PASSED",
+  "test": "isolated_sql_eligibility_aggregate_export",
+  "development_database_accessed": false,
+  "workers_started": false,
+  "external_calls": false,
+  "desktop_verified": false,
+  "steps": [
+    "initdb",
+    "start",
+    "createdb",
+    "migrate",
+    "schema_check",
+    "stop"
+  ],
+  "postgres": "postgres (PostgreSQL) 18.6",
+  "bi_operational_access_denied": true,
+  "query_sha256": "4b17d5633d86f6434948dab9a0103cf0e1299f465b47e3b9fab209fc953ff31a",
+  "fixture": {
+    "incidents": 40,
+    "confidential_after": 1,
+    "cells": 2,
+    "distinct_affected_people": 20,
+    "origin": "ORM fixtures in new native PostgreSQL, not API/business acceptance"
+  },
+  "published": {
+    "volume": 20,
+    "hours": 6,
+    "reopening_percent": 55,
+    "concordance_percent": 50
+  },
+  "suppressed": {
+    "all_11_numbers_null": true,
+    "other_cell_volume": 20
+  },
+  "exports": {
+    "publicado.json": {
+      "sha256": "fad5e759f109e955e28c66401d7a45e104164e5d1e4fdfb7f8fe87c4f2293705",
+      "bytes": 1969
+    },
+    "suprimido.json": {
+      "sha256": "0e04a58b4cace119bbd97b68ddf02baabe8f76cf4323d81ce2e188fa0a0d2e11",
+      "bytes": 2046
+    }
+  },
+  "cuts": {
+    "published": "2026-10-20T12:04:58.256918",
+    "suppressed": "2026-10-20T12:04:59.087538"
+  },
+  "server_stopped": true,
+  "retained_local_folder": "powerbi-sql-zyniiev1",
+  "limits": [
+    "Exportación agregada JSON como puente de QA, no conector directo Desktop→PostgreSQL aislado",
+    "Cambio ORM de confidencialidad, sin API/UI ni workers",
+    "Permisos BI reales y SELECT de consulta.sql; sin credenciales en agregados o reporte",
+    "Desktop se verifica por separado; este reporte por sí solo no lo acredita",
+    "No es carga, custodia, distribución ni aceptación integral"
+  ]
+}

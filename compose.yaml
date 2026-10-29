@@ -49,6 +49,36 @@ services:
       redis:
         condition: service_healthy
 
+  mail-worker:
+    build:
+      context: ./backend
+    profiles: ["mail"]
+    command: ["python", "-m", "app.mail.worker"]
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: ${POSTGRES_DB:-plurione}
+      POSTGRES_USER: ${POSTGRES_USER:-plurione}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Completa POSTGRES_PASSWORD en .env}
+      MAIL_ENABLED: "true"
+      MAIL_MODE: capture
+      SMTP_HOST: mailpit
+      SMTP_PORT: "1025"
+      SMTP_TLS: none
+      SMTP_FROM: no-reply@plurione.invalid
+      WEB_BASE_URL: ${WEB_BASE_URL:-http://127.0.0.1:5173}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+
+  mailpit:
+    image: axllent/mailpit:v1.27.4
+    profiles: ["mail"]
+    ports:
+      - "127.0.0.1:${MAILPIT_PORT:-8025}:8025"
+
   postgres:
     image: postgres:17-bookworm
     environment:

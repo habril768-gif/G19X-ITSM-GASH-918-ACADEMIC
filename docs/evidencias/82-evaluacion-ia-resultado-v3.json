@@ -1,0 +1,65 @@
+{
+  "recorded_on": "2026-10-18",
+  "source": "Ejecucion externa v3 de autora; metricas recomputadas offline y archivos coherentes",
+  "dataset": "docs/evaluacion_ia/aceptacion-v3",
+  "responses": 55,
+  "category_correct": 49,
+  "priority_correct": 46,
+  "abstention_correct": 5,
+  "priority_class_metrics": {
+    "1": {
+      "reference_cases": 10,
+      "correct": 6,
+      "recall": 0.6
+    },
+    "2": {
+      "reference_cases": 20,
+      "correct": 20,
+      "recall": 1.0
+    },
+    "3": {
+      "reference_cases": 20,
+      "correct": 20,
+      "recall": 1.0
+    }
+  },
+  "priority_contrast_pairs": {
+    "pairs": 20,
+    "both_priorities_correct": 20,
+    "accuracy": 1.0,
+    "failed_pair_ids": []
+  },
+  "high_false_negative_ids": [
+    "MB3-C1-A2",
+    "MB3-C3-A1",
+    "MB3-C5-A1",
+    "MB3-C5-A2"
+  ],
+  "high_as_low_ids": [],
+  "automated_targets_met_original": true,
+  "media_baja_targets_met": true,
+  "human_acceptance": false,
+  "technical_recommendation": "No recomendar aplicar v3 a operacion ni aceptar la prioridad mientras quedan cuatro Alta→Media sin resolver",
+  "effective_models": {
+    "gpt-4.1-mini-2025-04-14": 55
+  },
+  "usage_reported": {
+    "input_tokens": 63069,
+    "output_tokens": 4050,
+    "total_tokens": 67119
+  },
+  "billed_cost_verified": false,
+  "additional_external_calls": 0,
+  "files_sha256": {
+    "journal.jsonl": "8bc6817905274355d722657d03614fbbfffaf4f5f16b832320bf055aa71d14c4",
+    "predicciones.json": "6b52c9081e530d95834e78cacdf0191323ec47846770aedba01bf588fbac4a0d",
+    "reporte.json": "f8de12440a48b3e2f786883bb9b1c8eb192783a806805f75e3ae2b9d2164d4a1",
+    "run.json": "b904e9d28857177fe2f1b8197b5a8268061bb814c536f95d64d2e217722dbe69"
+  },
+  "limitations": [
+    "Mejora Media/Baja en este conjunto no garantiza calidad general",
+    "Cuatro falsos negativos de Alta, todos clasificados Media; ninguna Alta→Baja",
+    "Conjuntos v2/v3 distintos, sin comparacion causal controlada del prompt",
+    "Textos sinteticos y conformidad declarada de autora, sin revision independiente de terceros"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "fecha_registro": "2026-10-20",
+  "estado": "COMPROBACION_MANUAL_UI_PARCIAL",
+  "procedencia": "Capturas aportadas por la autora y confirmaciones textuales; sin control directo del navegador ni peticiones API del agente.",
+  "supervisor": {
+    "capturas": [
+      "codex-clipboard-e6d5957c-f508-4210-a591-ada4308c262d.png"
+    ],
+    "observado_en_captura": [
+      "Cabecera Supervisión y menú sin Usuarios/Departamentos",
+      "Listado con un caso Retardo cerrado"
+    ],
+    "confirmado_por_autora": [
+      "El detalle de Retardo carga bien",
+      "No permite reabrir el caso"
+    ],
+    "caso_id": "646170c4-e2fd-4b4a-95d1-60329fc9b6a9",
+    "limite": "Un aviso anterior de caso no disponible o sin permiso es ambiguo y no se considera prueba negativa aprobada."
+  },
+  "empleado": {
+    "identidad": "Empleado 1 según la autora; cuenta exacta no visible en estas capturas.",
+    "capturas": [
+      "codex-clipboard-ec655de7-5664-48cf-a825-0942d332eb60.png",
+      "codex-clipboard-420e1452-3031-414e-8279-5c7a437bcb12.png",
+      "codex-clipboard-cf6d7eed-df4d-4fbe-afff-dbc6d87a03c4.png"
+    ],
+    "observado_en_capturas": [
+      "Consulta inicial sin casos",
+      "Detalle del nuevo caso en estado Pendiente, ámbito Entorno de trabajo y evento CREADO",
+      "Caso presente en el listado posterior"
+    ],
+    "confirmado_por_autora": [
+      "Registró el caso simulado",
+      "Está registrado y no permite más acciones"
+    ],
+    "titulo": "Prueba de aceptación — Empleado 1",
+    "caso_id": "361f68d8-af1a-4e4b-8698-6013dda5dad4",
+    "limite": "La captura del detalle no cubre toda la página; ausencia de acciones de gestión confirmada por la autora."
+  },
+  "incidencia_entorno": "Durante el recorrido Docker devolvió error 500 y el frontend rechazó conexiones. La autora reinició Docker, aportó Client/Server sin error y confirmó que la página volvió a abrir.",
+  "pendientes": [
+    "Restricciones mediante peticiones API",
+    "Acceso a casos ajenos o confidenciales con resultado esperado definido",
+    "Gestión completa de RH y demás escenarios de aceptación",
+    "Móvil y accesibilidad"
+  ],
+  "limites": [
+    "No acredita aceptación integral ni institucional",
+    "No se ejecutó una suite automática nueva",
+    "Capturas originales permanecen fuera del repositorio",
+    "El caso simulado fue creado por la autora en la plataforma de uso y permanece registrado"
+  ]
+}

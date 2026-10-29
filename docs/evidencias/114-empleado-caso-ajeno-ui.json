@@ -1,0 +1,33 @@
+{
+  "fecha_registro": "2026-10-21",
+  "estado": "RESULTADO_ESPERADO_OBSERVADO_EN_CAPTURAS",
+  "metodo": "Prueba manual realizada por la autora; agente revisa capturas, sin operar navegador ni ejecutar peticiones API.",
+  "actor": "Empleado Operaciones Dos Demo, rol Empleado visible en ambas capturas",
+  "cuenta_indicada_para_prueba": "empleado-operaciones-2@example.invalid",
+  "objetivo": {
+    "caso_id": "361f68d8-af1a-4e4b-8698-6013dda5dad4",
+    "titulo": "Prueba de aceptación — Empleado 1",
+    "existencia": "Registro, consulta y reapertura documentados en evidencias 111 y 112; no es el expediente ambiguo de la evidencia 113.",
+    "ambito": "ENTORNO",
+    "creador": "Empleado Operaciones Uno Demo según recorrido previo"
+  },
+  "expectativa": "visibility() en backend/app/services/incidents.py limita ENTORNO para EMPLEADO a casos creados por el actor en su departamento, además de las condiciones de protección. Empleado 2 no debe acceder al caso de Empleado 1.",
+  "observaciones": [
+    {
+      "captura": "codex-clipboard-084f04b7-15a8-43ce-90b6-fa510572a5e6.png",
+      "resultado": "Sesión Empleado Operaciones Dos Demo. Listado vacío, contador 0, estado Todos los estados y prioridad Todas. Filtros adicionales colapsados, sin inspección independiente."
+    },
+    {
+      "captura": "codex-clipboard-b128b5d4-7a89-4f38-abe0-8e7fa5fab7ae.png",
+      "resultado": "Misma identidad visible y aviso: El caso no está disponible o no tienes permiso para consultarlo. Sin contenido del expediente."
+    }
+  ],
+  "confirmacion_autora": "Indica que la segunda captura procede del enlace de la prueba de Empleado 1 y que Empleado 2 no puede acceder en ambos casos.",
+  "limites": [
+    "URL completa no visible en capturas; vínculo con el caso objetivo procede de la instrucción previa y confirmación de la autora",
+    "Sin inspección de tráfico HTTP, código de respuesta o llamadas API directas",
+    "No acredita restricciones de escritura, confidencialidad, todos los casos ni aceptación integral"
+  ],
+  "mutaciones": "Ninguna solicitada: consulta del listado y apertura del enlace.",
+  "capturas_originales": "Fuera del repositorio; se conservan nombres de referencia."
+}

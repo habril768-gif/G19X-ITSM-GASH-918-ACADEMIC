@@ -1,0 +1,18 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "CONTROL_DB_PREPARADO_SIN_EJECUCION_POSTGRESQL",
+  "cambio": "Opcion explicita --db-probe requiere --diagnostic --mode smoke. Solo entorno nuevo QA validado. Helper guard verifica payload exacto run_id, QA_DIAGNOSTIC/DB_PROBE/DB/user/host/proveedores y compara identidad real DB/user. No admite SQL arbitrario.",
+  "control": "Despues de runnerHTTP y comprobacion SQL/auditoria, antes de pararQA: cinco EXPLAIN (ANALYZE,TIMING OFF,FORMAT JSON) SELECT1 con1conexion y50con10conexiones/hilos con inicio alineado. Sololectura, ninguna extension o cambio de PostgreSQL. SET LOCAL statement_timeout3000ms solo en transacciones de control; cada conexion se libera con rollback y helperdispose al terminar.",
+  "metricas": "Driver(ms) desde antes de execute hasta JSON recibido, CPU del mismo hilo, Planning Time/Execution Time del servidor. Soloagregados numericos/min/media/p95/max, no planSQL ni parametros/credenciales. Checkout/conexion/pre_ping/SETLOCAL fuera de intervalos. Timeoutexterno60s y barrera15s. No resta p95 ni llama diferencia red pura: tambien faltan parseo/rewrite/formateo/planificacion y trabajo del cliente.",
+  "aislamiento": "EnvQA_PERF_DB_PROBE=true soloenmodoopcionaldiagnostico. Full/diagnostico ordinario no ejecutancontrol; app/main,pool,SQLnegocio,SMTP/IA,volumenes y protocolo sin cambios. Si control falla, conservaHTTP/auditoria pero marcaINCOMPLETA y detiene recursos.",
+  "validacion": "102 unitarias de herramientas aprobadas en2,266s, ocho nuevas (seishelper/dosprovisionador). Dobles de motor/servidor, hilos reales y sinSQLAlchemy/PostgreSQL/Docker/HTTPreal. Prueban55lecturas exactas+11SETLOCAL,liberacion,guard/privacidad,medidas separadas,valoresinvalidos,opcionfullrechazada yfallo que conservaHTTP/SQL/parada. Primera pasada101/102porregexesperadaSONDEOfrenteguardpreexistenteDIAGNOSTICO_SOLO_SMOKE; se corrigioexpectativa, no se relajo guard.",
+  "limites": "Control SELECT1 no reproduce consultas del negocio ni ocurre durante misma cargaHTTP; resultados no prueban causa unica de p95 ni acreditanRNF-2. Sirvepara contraste1/10conexiones y no es optimizacion. EjecucionPGreal pendiente.",
+  "fuente": "https://www.postgresql.org/docs/17/using-explain.html",
+  "sha256": {
+    "backend/scripts/performance_db_probe.py": "b5aa370e3fa70d65ba147a909670ff7bfed9076c54eda7816b4ae62f4416153d",
+    "backend/scripts/provision_performance_qa.py": "e940976201f801796d8d4c31eebeac80f299bae2694b1b8c0bdb01e283f22370",
+    "backend/tests/test_performance_db_probe.py": "f1b1d3c58c26948f08f8f7c3ce36808c7c0f7c1040a622dafb14593e93fc9a00",
+    "backend/tests/test_performance_provisioner.py": "4f975a020f2dcc776ba90e03d05ad641284e6cebbcfe776a305391d3322d3f23"
+  },
+  "pendiente": "Una ejecucion explicita smoke --diagnostic --db-probe enQA nuevo. No nuevaformal por ahora."
+}

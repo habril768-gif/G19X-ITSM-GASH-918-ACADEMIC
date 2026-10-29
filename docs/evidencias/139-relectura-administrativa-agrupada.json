@@ -1,0 +1,149 @@
+{
+  "fecha": "2026-10-22",
+  "estado": "RELECTURA_AGRUPADA_VALIDADA_LOCALMENTE_API_PENDIENTE",
+  "motivo": "138 registra 13 consultas por creación y 11 por actualización en la API QA; revisar lecturas administrativas repetidas.",
+  "cambio": "Tras el mismo advisory lock, SELECT User LEFT JOIN Department con populate_existing reemplaza refresh usuario, get departamento y refresh departamento. No cachea permisos ni cambia bloqueo o transacción.",
+  "identidad": "Usa identidad SQLAlchemy sin cargar atributos expirados; exige actor persistente en la misma Session. Filas ausentes/inactivas deniegan con 403. Actor eliminado o departamento ausente pasan a rechazo explícito en vez de posible error de refresh.",
+  "alcance": "Helper compartido por mutaciones; las llamadas sin actor solo mantienen el advisory lock y no agregan lecturas.",
+  "perfil_antes": {
+    "metodo": "Servicios reales cargados por AST y modelos reales, SQLite con expire_on_commit=True. Imports internos de cola/lock apuntan al mismo cuerpo compilado; captura por campos del esquema, sin ejecutar Pydantic/HTTP. No prueba locks PostgreSQL.",
+    "results": [
+      {
+        "operation": "create",
+        "sql": {
+          "total": 11,
+          "select": 8,
+          "insert": 3
+        }
+      },
+      {
+        "operation": "edit",
+        "sql": {
+          "total": 9,
+          "select": 7,
+          "insert": 1,
+          "update": 1
+        }
+      }
+    ]
+  },
+  "perfil_despues": {
+    "metodo": "Servicios reales cargados por AST y modelos reales, SQLite con expire_on_commit=True. Imports internos de cola/lock apuntan al mismo cuerpo compilado; captura por campos del esquema, sin ejecutar Pydantic/HTTP. No prueba locks PostgreSQL.",
+    "results": [
+      {
+        "operation": "create",
+        "sql": {
+          "total": 9,
+          "select": 6,
+          "insert": 3
+        }
+      },
+      {
+        "operation": "edit",
+        "sql": {
+          "total": 7,
+          "select": 5,
+          "insert": 1,
+          "update": 1
+        }
+      }
+    ]
+  },
+  "seguridad_local": {
+    "method": "Cuerpo real compilado por AST, modelos y SQLite reales; HTTPException auxiliar. Orden de advisory SQL simulado; no bloqueos PostgreSQL reales.",
+    "results": [
+      {
+        "scenario": "lock_order_exclusive_False",
+        "ok": true
+      },
+      {
+        "scenario": "lock_order_exclusive_True",
+        "ok": true
+      },
+      {
+        "scenario": "no_actor_no_identity_query",
+        "ok": true
+      },
+      {
+        "scenario": "transient_actor_denied",
+        "ok": true
+      },
+      {
+        "scenario": "detached_actor_denied",
+        "ok": true
+      },
+      {
+        "scenario": "active",
+        "ok": true,
+        "denied": false,
+        "queries": 1
+      },
+      {
+        "scenario": "expired",
+        "ok": true,
+        "denied": false,
+        "queries": 1
+      },
+      {
+        "scenario": "inactive_user",
+        "ok": true,
+        "denied": true,
+        "queries": 1
+      },
+      {
+        "scenario": "inactive_department",
+        "ok": true,
+        "denied": true,
+        "queries": 1
+      },
+      {
+        "scenario": "moved_active",
+        "ok": true,
+        "denied": false,
+        "queries": 1
+      },
+      {
+        "scenario": "moved_inactive",
+        "ok": true,
+        "denied": true,
+        "queries": 1
+      },
+      {
+        "scenario": "changed_role",
+        "ok": true,
+        "denied": false,
+        "queries": 1
+      },
+      {
+        "scenario": "deleted_user",
+        "ok": true,
+        "denied": true,
+        "queries": 1
+      },
+      {
+        "scenario": "missing_department",
+        "ok": true,
+        "denied": true,
+        "queries": 1
+      }
+    ]
+  },
+  "revision_estatica": "Primer bloque de administración PostgreSQL idéntico por AST: misma clave 71419322, modo compartido/exclusivo y adquisición antes de relectura.",
+  "pruebas_api": {
+    "archivo": "backend/tests/test_administration_lock_queries.py",
+    "casos": 14,
+    "estado": "PREPARADAS_NO_EJECUTADAS",
+    "cobertura": "Estados precargados/expirados, cambios de rol/departamento, actividad, ausencias, actor ajeno a Session, orden de lock simulado y llamada sin actor."
+  },
+  "limites": [
+    "Perfil aislado SQLite con cuerpos reales cargados por AST y HTTPException auxiliar; no ejecuta FastAPI/Pydantic.",
+    "Orden del SQL advisory simulado; no prueba exclusión, espera o concurrencia PostgreSQL.",
+    "Dos viajes menos en este perfil no garantizan reducción de p95; no hay corrida formal nueva.",
+    "RNF-2 sigue pendiente; 136 conserva FALLIDA_UMBRAL. Ejecutar regresión de servicios afectados antes de nueva carga."
+  ],
+  "incidencia_herramienta": "Primer helper de edición se detuvo antes de escribir al no normalizar CRLF; se corrigió preservando respaldo. El intento dependiente de perfil no encontró su script, aún no creado; ejecución posterior satisfactoria.",
+  "sha256": {
+    "backend/app/services/administration_lock.py": "08ff9a988e6eedfc2359d2bc483e7c36c7bf8bdbc0cb6ab13089cc6c2010fc7a",
+    "backend/tests/test_administration_lock_queries.py": "b5cb1af60d68f61aa9527ef78df999a40bcf134eaa99888c820707ca4d66c4a7"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "status": "FAILED",
+  "date_utc": "2026-10-20T14:59:47.033912+00:00",
+  "test": "logical_backup_restore_two_isolated_clusters",
+  "stages": [
+    {
+      "stage": "source_init",
+      "seconds": 8.16
+    },
+    {
+      "stage": "source_start",
+      "seconds": 0.982
+    },
+    {
+      "stage": "source_database",
+      "seconds": 1.653
+    },
+    {
+      "stage": "target_init",
+      "seconds": 8.109
+    },
+    {
+      "stage": "target_start",
+      "seconds": 0.999
+    },
+    {
+      "stage": "target_database",
+      "seconds": 1.74
+    },
+    {
+      "stage": "source_migrate",
+      "seconds": 3.973
+    },
+    {
+      "stage": "source_schema_check",
+      "seconds": 2.393
+    },
+    {
+      "stage": "logical_backup",
+      "seconds": 0.576
+    },
+    {
+      "stage": "archive_catalog",
+      "seconds": 0.13
+    },
+    {
+      "stage": "restore_isolated",
+      "seconds": 0.636
+    },
+    {
+      "stage": "target_stop",
+      "seconds": 0.768
+    },
+    {
+      "stage": "source_stop",
+      "seconds": 0.993
+    }
+  ],
+  "development_database_accessed": false,
+  "workers_started": false,
+  "external_calls": false,
+  "docker_sequence_executed": false,
+  "fixture": "Simulated SQL/ORM fixtures, not a business/API acceptance test",
+  "schema_comparison": "Exacta tras normalizar únicamente casts de arrays de literales varchar sin límite a text; datos por hash exacto",
+  "postgres": "postgres (PostgreSQL) 18.6",
+  "source_bi": {
+    "views_readable": true,
+    "public_data_and_writes_denied": 3
+  },
+  "archive": {
+    "bytes": 59837,
+    "sha256": "e4a35b9342a22e5b51a2d49dbd3d794eb126e627e48433ceed26306aa542708d"
+  },
+  "invalid_archive_rejected": true,
+  "comparison_differences": {
+    "sections": [
+      "views"
+    ],
+    "tables": [],
+    "views": [
+      "incident_metrics"
+    ]
+  },
+  "failure": {
+    "stage": "compare_data_schema",
+    "type": "AssertionError"
+  },
+  "servers_stopped": {
+    "target": true,
+    "source": true
+  },
+  "retained_local_folder": "recovery-p6kbg48z",
+  "limits": [
+    "PostgreSQL nativo; secuencia Docker no ejecutada",
+    "Datos ficticios insertados para recuperacion, no recorrido de negocio",
+    "Propietarios/ACL originales no restaurados; BI reconstruido y probado aparte",
+    "Sin instalacion limpia, carga, capacitacion o aceptacion integral",
+    "Archivo y clusters detenidos conservados en .pgdata ignorado por Git"
+  ]
+}

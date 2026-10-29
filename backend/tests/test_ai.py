@@ -217,3 +217,13 @@ def test_result_audit_failure_does_not_save_partial_suggestion(setup):
     row = job(db, ident)
     assert row.status == 'EN_PROCESO' and row.result is None
     assert db.get(Incident, ident).ai_suggestion is None
+@pytest.mark.parametrize('previous', ['plurione-classify-v1', 'plurione-classify-v2', 'plurione-classify-v3'])
+def test_previous_prompt_job_is_omitted_before_external_dispatch(setup, previous):
+    c, db, a, s, ident, factory, provider = setup
+    request(c, ident)
+    row = job(db, ident)
+    row.prompt_version = previous; db.commit()
+    assert process_one(factory, provider)
+    db.expire_all()
+    assert job(db, ident).status == 'OMITIDA'
+    provider.classify.assert_not_called()

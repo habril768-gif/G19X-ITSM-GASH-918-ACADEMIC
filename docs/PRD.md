@@ -1,4 +1,4 @@
-# PRD PluriOne 1.9
+# Requisitos del producto — PluriOne
 
 Plataforma Inteligente de Gestión de Incidencias Laborales para PluriOne S.A. de C.V.
 
@@ -7,11 +7,10 @@ Plataforma Inteligente de Gestión de Incidencias Laborales para PluriOne S.A. d
 | Clave | G19X-ITSM-GASH-918-ACADEMIC |
 | Autora | Gilian Abril Sánchez Hernández |
 | Fecha de consolidación | 15 de octubre de 2026 |
-| Versión | 1.9 — base de desarrollo |
 | Autenticación | Local en FastAPI |
 | Fuente vigente | Este archivo PRD.md |
 
-Este documento consolida las reglas del MVP. Describe comportamiento requerido, no certifica funcionalidad implementada. El estado real y sus evidencias se consultan en [TRAZABILIDAD.md](TRAZABILIDAD.md), [BACKLOG.md](BACKLOG.md) y [REPORTE_QA.md](REPORTE_QA.md). La copia Word 1.6 es histórica; las versiones previas de este texto se conservan en Git. No se exige aprobación de terceros para desarrollar.
+Este documento consolida las reglas del MVP. Describe comportamiento requerido, no certifica funcionalidad implementada. El estado real y sus evidencias se consultan en [TRAZABILIDAD.md](TRAZABILIDAD.md), [BACKLOG.md](BACKLOG.md) y [REPORTE_QA.md](REPORTE_QA.md). La copia Word se conserva como referencia histórica; este archivo es la fuente vigente. No se exige aprobación de terceros para desarrollar.
 
 ## Índice
 
@@ -37,7 +36,7 @@ Este documento consolida las reglas del MVP. Describe comportamiento requerido, 
 
 - [11. Supuestos dependencias y riesgos](#11-supuestos-dependencias-y-riesgos)
 
-- [12. Glosario y cambios](#12-glosario-y-cambios)
+- [12. Glosario](#12-glosario)
 
 ## 1. Objetivo y alcance
 
@@ -93,7 +92,13 @@ Los permisos requieren cuenta y departamento activos y se aplican en la API, no 
 | Riesgos | Condiciones inseguras o accidentes menores | Piso mojado sin señalización |
 | Solicitudes Administrativas | Trámites que requieren seguimiento | Solicitud de constancia |
 
+La categoría identifica el hecho principal descrito, separando causa y consecuencias. Los problemas de asistencia se clasifican como Ausencias frente a la categoría genérica Incumplimientos. Si el hecho principal es una infracción explícita de una política o procedimiento distinto de asistencia, corresponde a Incumplimientos; una condición insegura o accidente sin infracción principal descrita corresponde a Riesgos. Una consecuencia peligrosa puede elevar la prioridad sin cambiar por sí sola la categoría. Si hay hechos principales distintos y no se puede decidir entre categorías, solicitar aclaración humana; no inventar una preferencia.
+
 Prioridad Alta: amenaza inmediata de seguridad, conflicto activo con riesgo de daño o plazo explícito con consecuencia grave. Media: impacto operativo que requiere atención pronta sin amenaza inmediata. Baja: situación sin urgencia identificada. Ante ambigüedad, el responsable humano determina prioridad y registra justificación. Una categoría no determina automáticamente su prioridad. Estas prioridades no constituyen SLA ni reemplazan canales de emergencia.
+
+Para distinguir Media de Baja, comprobar la necesidad operativa de atención pronta después de evaluar Alta. La ausencia de peligro o daño grave no descarta Media si queda trabajo bloqueado, retrasado o pendiente que necesita recuperarse, coordinación o cobertura para continuar, o una corrección necesaria antes de restablecer una actividad. Una fecha mencionada o una solicitud ordinaria no bastan por sí solas: debe existir esa necesidad próxima en los hechos. Baja corresponde cuando tampoco se identifica tal necesidad. No forzar Media a todo trámite o riesgo controlado, ni rebajar automáticamente a Baja por falta de peligro; conservar decisión humana.
+
+Los criterios de Alta son alternativas suficientes, no requisitos simultáneos. Un plazo explícito o evento inminente con consecuencia grave descrita no requiere además peligro físico: la pérdida irreversible de una prestación esencial, una autorización indispensable o recursos/información necesarios para continuidad operativa puede sustentarlo. No inventar gravedad por una fecha aislada. Si existe un criterio suficiente de Alta, no rebajar a Media por pertenecer a una categoría administrativa ni por existir también trabajo pendiente; motivo y prioridad deben ser coherentes.
 
 ### 3.2 Persona, entorno y participantes
 
@@ -175,9 +180,9 @@ Gestores solo asignan a usuarios activos autorizados y no involucrados. Cumplir 
 
 ### RF-5 Correo por eventos
 
-Eventos: creación hacia RH elegible sin asignado; asignación/reasignación al nuevo responsable; resolución al reportante y afectado si pueden consultar; reapertura al responsable. Verificar acceso e independencia justo antes de enviar; deduplicar destinatarios/eventos. Sin destinatario autorizado, registrar omisión. Un caso confidencial nunca notifica al reportante o afectado sin permiso.
+Eventos: creación hacia RH elegible sin asignado; asignación/reasignación al nuevo responsable; resolución y cierre al reportante y afectado si pueden consultar; reapertura al responsable. Verificar acceso e independencia justo antes de enviar; deduplicar destinatarios/eventos. Sin destinatario autorizado, registrar omisión. Un caso confidencial nunca notifica al reportante o afectado sin permiso.
 
-Asunto con ID de caso y cuerpo con enlace; sin nombres, descripción o resolución. En desarrollo usar SMTP de pruebas con buzón capturador, sin correo real. Configuración por variables; servicio concreto configurable. Correos asíncronos, hasta tres reintentos transitorios; fallo final visible a RH autorizado. No bloquea creación.
+Asunto con ID de caso y cuerpo con enlace; sin nombres, descripción o resolución. En desarrollo usar SMTP de pruebas con buzón capturador, sin correo real. Configuración por variables; servicio concreto configurable. Correos asíncronos, hasta tres reintentos transitorios; fallo final visible a RH autorizado. No espera a SMTP durante la creación; el registro de evento y su outbox se confirman juntos. Un intento inicial y hasta tres reintentos transitorios. SMTP aceptado no garantiza entrega/lectura; caída entre aceptación y confirmación puede duplicar avisos, identificados con Message-ID estable. La comprobación final conserva bloqueo del expediente y protección administrativa durante el despacho acotado; no se retiran mensajes ya aceptados.
 
 **Aceptación:** comprobar eventos, exclusiones por acceso, deduplicación, reintentos y fallo sin revertir el caso. No se prometen alertas por vencimiento ni SLA.
 
@@ -188,6 +193,8 @@ Power BI Desktop de uso Admin RH y Gerencia. Solo importar vistas previamente ag
 Publicación por combinación fija de mes de creación, categoría y departamento histórico. Una celda solo se publica con al menos cinco incidencias distintas; si contiene casos personales, también exige cinco afectados distintos. Un caso de ENTORNO sin víctima no cuenta como afectado personal. Si no cumple, mostrar «Suprimido por privacidad», nunca 0 ni el valor real. Promedios, porcentajes y numeradores/denominadores tienen la misma regla sobre sus respectivos casos contribuyentes, no solo sobre la celda de volumen.
 
 La supresión debe ocurrir en la vista de exportación, no mediante formato visual. Aplicar supresión complementaria: no publicar totales/subtotales que permitan reconstruir una celda suprimida por resta. Ante duda se omite el total/subtotal completo. No habilitar drill-through, filas de detalle, dimensiones o filtros que formen grupos más pequeños que los exportados, ni varias granularidades superpuestas que permitan restar resultados. Los cálculos se obtienen de los mismos conjuntos autorizados, sin completar valores suprimidos con información operacional.
+
+La implementación inicial usa un periodo de observación fijo desde el inicio del año en curso hasta la fecha de corte para reapertura; las filas conservan el mes de creación como cohorte. No se confunden ambos ejes ni se habilitan ventanas arbitrarias. Se suprime toda la celda si algún subconjunto no vacío o su complemento incumple mínimos, evitando publicar volumen que complete valores ocultos.
 
 Actualización manual y fecha de corte visible. Antes de compartir una nueva versión, volver a verificar confidencialidad y retirar de la nueva extracción los casos que perdieron elegibilidad; regenerar el archivo sin caché de versiones anteriores. Una copia previamente entregada no se puede revocar automáticamente: su distribución queda limitada a destinatarios autorizados y se documenta como riesgo residual. Estas reglas reducen reidentificación; no garantizan anonimato de datos reales y el MVP sigue usando datos simulados.
 
@@ -225,7 +232,7 @@ Detalle: información, participantes según acceso, responsable, sugerencia IA c
 | API | Python/FastAPI; autorización y transacciones |
 | Persistencia | PostgreSQL, SQLAlchemy, Psycopg; Alembic para migraciones |
 | Identidad | Argon2id y sesiones en PostgreSQL |
-| Trabajo asíncrono | Redis y worker para IA/correo; librería de tareas por decidir antes de implementar |
+| Trabajo asíncrono | IA: Redis y cola durable PostgreSQL; correo: outbox transaccional PostgreSQL y worker con sondeo. Sin nueva librería de tareas |
 | Clasificación | API directa OpenAI con LangChain; modelo por evaluar |
 | Correo | SMTP configurable; capturador de pruebas en desarrollo |
 | Analítica | Power BI Desktop y vistas agregadas |
@@ -290,7 +297,11 @@ Conjunto inicial de evaluación: 50 casos simulados, 10 por categoría; al menos
 
 Metas de ingeniería iniciales, no garantías estadísticas: al menos 45/50 categorías correctas y 40/50 prioridades correctas. Revisión obligatoria de todos los falsos negativos de prioridad Alta; cualquier Alta etiquetada que salga Baja debe corregirse y reevaluarse antes de aceptar la sugerencia de prioridad. SIN_CLASIFICACION o respuesta fallida en un caso etiquetado dentro del catálogo cuenta como no acierto; no se excluye del denominador para mejorar métricas. Agregar además cinco casos ambiguos/fuera de catálogo como prueba separada de abstención: deben conducir a atención manual sin categoría forzada. No se ajusta la referencia para mejorar la puntuación. Si se usa el conjunto para ajustar el prompt, se prepara otro conjunto independiente antes de la aceptación final.
 
-El conjunto de 20 casos se propuso en versiones anteriores, pero no se ejecutó ni se presenta como evidencia histórica. Se sustituye por la evaluación prevista de 50 casos. Si no se cumplen metas, la gestión manual sigue operativa, pero RF-3 no se marca aceptado. Evaluar también omisión de confidenciales, JSON inválido, cola fallida, duplicación y respuesta tardía.
+La evaluación requiere un conjunto de 50 casos de clasificación y un conjunto separado de abstenciones, con referencias revisadas antes de ejecutar el modelo. Si no se cumplen metas, la gestión manual sigue operativa, pero RF-3 no se marca aceptado. Evaluar también omisión de confidenciales, JSON inválido, cola fallida, duplicación y respuesta tardía.
+
+Reportar además aciertos por cada prioridad y confusiones Media→Baja/Baja→Media, incluyendo fallos y abstenciones en el denominador de la clase esperada. Para la mejora específica Media/Baja, usar como objetivo complementario ≥80% de aciertos en ambas clases con al menos diez referencias por clase; sin muestra suficiente indicar no evaluable. Los pares contrastivos nuevos permiten comprobar que se distinguen ambas prioridades sin convertir todas las salidas en Media. Este diagnóstico no modifica retrospectivamente los umbrales globales ni equivale a aceptación humana.
+
+Para verificar que esa mejora conserva Alta, añadir un indicador complementario de todos los Alta identificados, con al menos diez referencias de esa clase y ningún falso negativo, incluida clasificación Media, Baja, abstención o fallo. Con muestra insuficiente indicar no evaluable. El indicador combinado requiere metas globales, Media/Baja y Alta, y no puede cumplirse en ejecución parcial. No reescribir resultados históricos ni confundir estos controles con aceptación humana o garantía de uso real.
 
 ### 9.2 Flujos y pruebas
 
@@ -339,7 +350,7 @@ Los hitos de código no equivalen uno a uno a las diez actividades académicas: 
 
 Entra ID no es dependencia ni bloqueo activo. Una integración futura implica un cambio de alcance y vinculación verificada.
 
-## 12. Glosario y cambios
+## 12. Glosario
 
 - **Reportante:** created_by; quien registra.
 
@@ -357,32 +368,6 @@ Entra ID no es dependencia ni bloqueo activo. Una integración futura implica un
 
 - **Sesión opaca:** token aleatorio revocable; no JWT ni identidad Microsoft.
 
-La versión 1.9 precisa revisión independiente de participantes, supresión de agregados, consecuencias de confidencialidad, exclusión de reportes de testigos, prioridades de entrega, administración por API/pantalla y abstención IA. Corrige la referencia errónea a pruebas históricas no ejecutadas. No cambia código ni aplica migraciones. Las diferencias funcionales necesitan implementación y pruebas posteriores, registradas en BACKLOG.md.
+## Seguimiento de implementación
 
-### Estado técnico de la entrega 0.5.0
-
-Registro y consultas backend de RF-2/RF-8 implementados parcialmente, con auditoría y acceso; sin edición ni ciclo completo. Campo participants limita a 20 entradas por petición como control técnico contra incorporación masiva. El empleado consulta cronología, sin detalles históricos que incluyan terceros; participantes detallados solo para gestores autorizados. No equivale a aceptación final; ver INCIDENCIAS.md y TRAZABILIDAD.md.
-
-Actualización de implementación, 16 de octubre de 2026 (API 0.7.0): los servicios ya incorporan alta/revisión de participantes, cambios de confidencialidad y reasignación/retroceso protector auditados. Sustituye menciones anteriores a estos servicios como pendientes. Continúan pendientes provisión adicional de administrador independiente por operador, revisión de asignaciones al cambiar usuarios/roles/departamentos, concurrencia PostgreSQL y UI. La estructura y servicios parciales no certifican RF completos; ejecución manual de 0.7.0 aún pendiente.
-
-Actualización técnica preparada el 16 de octubre de 2026: procedimiento de operador para RH adicional implementado y probado en copia aislada; aún no aplicado al repositorio. Conserva exclusión del involucrado y no cambia casos automáticamente. La designación de otra persona es responsabilidad del operador; el sistema no detecta que una misma persona controle dos cuentas. RF-7 sigue parcial, no hay administración React completa. Guía ADMIN_INDEPENDIENTE.md.
-
-Estado posterior al paquete: procedimiento de RH adicional aplicado/ejecutado según la autora y sesión independiente verificada con evidencia 34. Recorrido de acceso 35–37 documentado con sus límites en REVISION_RH_INDEPENDIENTE.md. No implica RF-7 completo ni demostración técnica de independencia humana entre cuentas.
-
-Estado preparado para 0.8.0: backend de modificaciones de usuario con revocación y revisión de asignaciones implementado en copia; no aplicado todavía. RF-7 parcial, frontend y CRUD de departamentos pendientes. Política de casos finalizados y restricciones detallada en ADMIN_USUARIOS.md.
-
-Estado posterior de administración 0.8.0, 16 de octubre de 2026: implementación aplicada según la autora, suite completa de 77 pruebas aprobadas y tres integraciones PostgreSQL omitidas. Evidencias manuales y limitaciones en REVISION_ADMIN_USUARIOS.md. Actualiza el estado previo de paquete preparado, sin declarar RF-7 completo ni UI entregada.
-
-Estado frontend al 17 de octubre de 2026: primera UI React de login, listado/filtros y detalle/historial de lectura implementada y compilada; sustituye referencias históricas a frontend inexistente. RF-8 parcial: registro/gestión/administración UI y enlaces profundos pendientes. Pruebas/validación manual distinguidas en FRONTEND.md y REPORTE_QA.md.
-
-Estado de UI al 17 de octubre de 2026: React 0.2.0 incorpora alta persona/entorno, participantes y acuse mínimo con acceso confirmado por API. Sustituye el pendiente histórico de formulario de registro; edición/validación/asignación/transiciones y administración UI siguen pendientes. 15 pruebas simuladas aprobadas; alta real desde UI todavía pendiente. RF-2/RF-8 parciales, límites en FRONTEND.md.
-
-Estado UI al 17 de octubre de 2026: React 0.3.0 incorpora edición/validación/asignación y ciclo de estados con acuse confirmado por API y refresco. Sustituye esos pendientes históricos de formularios. 26 pruebas UI simuladas y build aprobados; prueba manual de esta entrega, interfaces de participantes/confidencialidad/admin y demás límites pendientes. RF-3/RF-4/RF-8 no se declaran completos; ver FRONTEND.md.
-
-Estado UI al 17 de octubre de 2026: React 0.4.0 incorpora administración de cuentas y protección/participantes/revisión desde expediente. Sustituye esos pendientes históricos; no modifica reglas de negocio del PRD. 40 pruebas UI simuladas y build aprobados. RF-4/RF-7/RF-8 parciales: verificación real de esta entrega, CRUD departamentos y demás límites en FRONTEND.md.
-
-Estado UI al 17 de octubre de 2026: React 0.5.0 añade cambio personal de contraseña para todos los roles sobre API existente, con confirmación y retiro de sesión al guardar. No modifica las reglas de credenciales del PRD. RF-1/RF-8 parciales; recorrido real pendiente y límites en FRONTEND.md.
-
-Actualización 17 de octubre de 2026: API 0.9.0 / React 0.6.0 añaden administración de departamentos con historial propio, baja lógica protegida y reactivación. Requiere aplicar 0004; sustituye el pendiente de código de departamentos, sin acreditar despliegue ni recorrido real. Guía vigente DEPARTAMENTOS.md. RF-7/RF-8 parciales; instalación, PostgreSQL real/concurrencia y evidencia 68 pendientes.
-
-17 de octubre de 2026: API 0.10.0 / React 0.7.0 preparan IA revisada, trabajo durable PostgreSQL/avisos Redis y sugerencia independiente de validación humana. Requiere 0005; desactivada por defecto, clave solo worker. 130 backend sin omisiones en aislamiento y 64 UI/build correctos; no acreditan calidad del modelo. Proveedor/Redis reales, despliegue y evaluación independiente 50+5 pendientes. Guía IA.md y evidencia 70; RF-3/RF-8 parciales.
+El estado actual, las evidencias y el trabajo pendiente se consultan en [MVP](MVP.md), [trazabilidad](TRAZABILIDAD.md) y [backlog](BACKLOG.md). Los cambios cronológicos están en la bitácora y Git; no modifican por sí solos los criterios de aceptación.

@@ -1,0 +1,64 @@
+{
+  "fecha_registro": "2026-10-27",
+  "fuente": "Salida de check_performance_host.ps1 compartida por el usuario; sin sondeo adicional del agente.",
+  "duracion_s": 5.34,
+  "cpu_logicas": 4,
+  "procesos_comparados": 156,
+  "lecturas_no_disponibles": 201,
+  "mayores_consumos": [
+    {
+      "nombre": "Docker Desktop",
+      "pid": 19296,
+      "cpu_equipo_porcentaje": 4.31
+    },
+    {
+      "nombre": "powershell",
+      "pid": 25220,
+      "cpu_equipo_porcentaje": 1.32
+    },
+    {
+      "nombre": "AMEM",
+      "pid": 10684,
+      "cpu_equipo_porcentaje": 0.73
+    },
+    {
+      "nombre": "WindowsTerminal",
+      "pid": 14624,
+      "cpu_equipo_porcentaje": 0.37
+    },
+    {
+      "nombre": "OneDrive",
+      "pid": 13976,
+      "cpu_equipo_porcentaje": 0.37
+    },
+    {
+      "nombre": "ChatGPT",
+      "pid": 19852,
+      "cpu_equipo_porcentaje": 0.37
+    },
+    {
+      "nombre": "com.docker.backend",
+      "pid": 15844,
+      "cpu_equipo_porcentaje": 0.29
+    },
+    {
+      "nombre": "Docker Desktop",
+      "pid": 11828,
+      "cpu_equipo_porcentaje": 0.22
+    },
+    {
+      "nombre": "AvastUI",
+      "pid": 8752,
+      "cpu_equipo_porcentaje": 0.07
+    },
+    {
+      "nombre": "SpotifyLauncher",
+      "pid": 1944,
+      "cpu_equipo_porcentaje": 0.07
+    }
+  ],
+  "lectura": "Los diez consumos visibles suman 8,12 % aproximadamente. Son procesos observables en otra ventana temporal, no CPU global ni explicación del 83,74 % anterior. Las 201 lecturas no disponibles no equivalen a 201 procesos distintos.",
+  "limites": "Muestra parcial, omite procesos nuevos, inaccesibles o terminados. El texto genérico posterior a la carga del script no implica que este intento iniciara carga: 179 fue rechazado antes de Docker. No permite atribuir el consumo a Docker, AMEM o antivirus ni justifica cerrar servicios.",
+  "resultado": "Sin cambios de código ni pruebas de carga. RNF-2 pendiente; no nueva formal.",
+  "siguiente_paso": "Observar Administrador de tareas, Procesos, orden CPU descendente, y Rendimiento/CPU durante el mismo periodo. Preservar la videollamada y Docker requerido por QA. No repetir cargas para diagnosticar procesos."
+}

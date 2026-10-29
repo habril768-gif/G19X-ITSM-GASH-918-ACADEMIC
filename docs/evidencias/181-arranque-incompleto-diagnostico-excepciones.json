@@ -1,0 +1,96 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "ARRANQUE_INCOMPLETO_CON_DIAGNOSTICO_MEJORADO_SIN_NUEVA_CARGA",
+  "fuentes": [
+    "Reporte original local leido por el agente",
+    "Salidas Docker logs/inspect aportadas por el usuario"
+  ],
+  "run_id": "66f8604531244a51",
+  "reporte_original_sha256": "ef6cfe78e0ed55f9136f64cb0ef78ec90f6602c7ed73d3aa7ac19cb1a1735bd2",
+  "reporte_original": {
+    "fecha_utc": "2026-10-27T20:21:39.840525+00:00",
+    "run_id": "66f8604531244a51",
+    "modo": "full",
+    "estado": "INCOMPLETA",
+    "limites": [
+      "No es una instalación de producción ni recuperación de datos operativos.",
+      "Recursos QA retenidos y detenidos cuando es posible; sin borrar volúmenes.",
+      "Contraseñas aleatorias no guardadas en manifiesto/reporte; metadatos de contenedores contienen configuración privada.",
+      "Muestreo docker stats añade carga al mismo equipo."
+    ],
+    "precondiciones_arranque": {
+      "cpu_previa": {
+        "modo": "CPU_GLOBAL_SIN_CARGA_GENERADA",
+        "intervalos": [
+          {
+            "duracion_s": 2.0239319999998315,
+            "cpu_global_porcentaje": 22.8515625,
+            "estado": "OK"
+          },
+          {
+            "duracion_s": 2.0061763000001065,
+            "cpu_global_porcentaje": 24.756335282651072,
+            "estado": "OK"
+          },
+          {
+            "duracion_s": 2.000936200000069,
+            "cpu_global_porcentaje": 37.5,
+            "estado": "OK"
+          }
+        ],
+        "intervalos_validos": 3,
+        "intervalos_totales": 3,
+        "media_cpu_global_porcentaje": 28.34512151463309,
+        "limites": "Muestra actual de CPU global Windows; otras aplicaciones pueden estar activas. No identifica procesos, no recrea la corrida previa ni acredita RNF-2. No disponible se conserva como null."
+      },
+      "umbrales_operativos": {
+        "media_cpu_max_porcentaje": 30.0,
+        "intervalo_cpu_max_porcentaje": 50.0
+      },
+      "limites": "Condición operativa previa, no criterio RNF-2. No garantiza carga constante durante construcción o medición. Mantiene diez clientes y p95 menor de 200 ms.",
+      "redes_qa_liberadas": [
+        "plurione-qa-perf-c7ad7be7ff304f58_entry",
+        "plurione-qa-perf-3dabef717c5549c6_net"
+      ]
+    },
+    "configuracion_validada": true,
+    "error_codigo": "ARRANQUE_QA_NO_COMPLETADO",
+    "recursos": [],
+    "contenedores_detenidos": true,
+    "recursos_retenidos": {
+      "project": "plurione-qa-perf-66f8604531244a51",
+      "folder": "C:\\Users\\sanch\\Documents\\Codex\\Desarrollo de una Plataforma Inteligente de Gestión de Incidencias Laborales - G19X-ITSM-GASH-918-ACADEMIC\\.pgdata\\performance-66f8604531244a51",
+      "sin_borrado_volumenes": true
+    }
+  },
+  "observaciones_usuario": {
+    "api_creada_utc": "2026-10-27T20:38:31.402538779Z",
+    "api_inicio_utc": "2026-10-27T20:38:38.157957008Z",
+    "api_fin_utc": "2026-10-27T20:38:46.185708247Z",
+    "api_salida": 0,
+    "api_oom": false,
+    "api_health_exitcode": 0,
+    "redis_inicio_utc": "2026-10-27T20:38:31.779464597Z",
+    "redis_fin_utc": "2026-10-27T20:38:47.366800172Z",
+    "redis_salida": 0,
+    "redis_oom": false,
+    "redis_health": [
+      "PONG",
+      "PONG"
+    ],
+    "postgres": "Logs muestran ready to accept connections y posterior parada ordenada.",
+    "guardias_previas_sin_inicio_cpu_media": [
+      60.79458392911142,
+      50.814634313568334
+    ]
+  },
+  "interpretacion": "La guardia permitio continuar con CPU media 28,3451 % y dos redes retiradas sin fallos. API/Redis tuvieron checks correctos; estados finales unhealthy posteriores a parada no prueban fallo durante arranque. Sin migraciones/fixture/carga. El antiguo ARRANQUE_QA_NO_COMPLETADO agrupa TimeoutExpired y OSError, por lo que no confirma retrospectivamente timeout. Fecha inicial del reporte no equivale al inicio exacto de compose up.",
+  "cambio": "command distingue *_TIEMPO_AGOTADO y *_ERROR_INVOCACION sin exponer stdout/stderr/argumentos privados. arranque_qa conserva inicio_utc, fin_utc, duracion_s, limite_s y resultado antes de la parada. Se mantiene timeout=900 y el protocolo formal existente.",
+  "validacion": "76 unitarias locales aprobadas en 2,722 s con Docker simulado; dos pruebas nuevas cubren excepciones sin filtracion y retencion de tiempos en exito/fallo. AST de ambos archivos correcto. Sin ejecucion real nueva de Docker, guardia o carga.",
+  "limites": "No se corrige ni demuestra la causa del intento anterior; se mejora su observabilidad para un siguiente intento explicito. RNF-2 pendiente, seis formales fallidas conservadas, ninguna nueva medicion formal completada.",
+  "pendiente": "Una ejecucion manual del comando condicionado registrara resultado y tiempos precisos; no reintentar en bucle ni ampliar limite por conjetura.",
+  "sha256": {
+    "backend/scripts/provision_performance_qa.py": "b672ec9848889af038f0bc5f539423d2069138ea245082ce4aaf5a5594d61fb5",
+    "backend/tests/test_performance_provisioner.py": "31052ccdbf3c585d860779cc3a4390d3c793d091e48ff7346568acf42ae22a7f"
+  }
+}

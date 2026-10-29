@@ -1,0 +1,35 @@
+{
+  "fecha_registro": "2026-10-21",
+  "estado": "COMPROBACION_MANUAL_POSTERIOR_A_REINICIO_REPORTADO",
+  "procedencia": "Capturas aportadas y confirmaciones de la autora; agente no opera Docker ni navegador.",
+  "operacion_solicitada": "docker compose restart api",
+  "operacion_reportada": "La autora respondió listo y aportó capturas posteriores. No hay captura del comando, código de salida ni tiempos de parada/arranque.",
+  "caso_id": "361f68d8-af1a-4e4b-8698-6013dda5dad4",
+  "observaciones": [
+    {
+      "captura": "codex-clipboard-97ee5d59-7fdb-4e8c-9249-18940ffa8241.png",
+      "resultado": "Cabecera RH Independiente Demo, listado con siete casos; caso simulado visible En revisión, prioridad Baja y acceso Restringido."
+    },
+    {
+      "captura": "codex-clipboard-3ea30d04-6c0d-42e7-8b73-7f17509e67ba.png",
+      "resultado": "RH abre el mismo ID. En revisión, prioridad Baja, clasificación Validación vigente, confidencialidad Acceso restringido a RH independiente; resolución sin registrar en ciclo actual. Responsable visible por UUID. Asistencia IA omitida con indicación de clasificación manual."
+    },
+    {
+      "captura": "codex-clipboard-fef9f4a8-5774-4269-915e-e05368cf7f6b.png",
+      "resultado": {
+        "status": "ok",
+        "database": "postgresql"
+      },
+      "url": "http://127.0.0.1:8000/health/db según enlace consultado y confirmación de la autora; barra no visible en esta captura."
+    }
+  ],
+  "resultado": "Consulta RH disponible y estado/protección del caso conservados tras reinicio de API reportado; comprobación de conexión/esquema responde ok.",
+  "limites": [
+    "No prueba instalación limpia, reinicio de PostgreSQL/Redis, restauración ni recuperación completa",
+    "Sin medición RTO/RPO, carga o disponibilidad sostenida",
+    "No se inspeccionó el proceso de autenticación ni validez de sesiones anteriores",
+    "No se reejecutó la denegación de Empleado tras reinicio; antecedente 115 permanece separado",
+    "No demuestra procesamiento IA o correo; el aviso IA omitida se registra como observación",
+    "Sin suite nueva, cambio de código o datos solicitado; capturas originales fuera del repositorio"
+  ]
+}

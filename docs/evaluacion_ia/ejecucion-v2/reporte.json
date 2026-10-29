@@ -1,0 +1,180 @@
+{
+  "reference_cases": 50,
+  "category_correct": 49,
+  "priority_correct": 40,
+  "category_accuracy": 0.98,
+  "priority_accuracy": 0.8,
+  "abstention_cases": 5,
+  "abstention_correct": 5,
+  "high_as_low_ids": [],
+  "high_false_negative_ids": [],
+  "category_confusion_matrix": {
+    "1": {
+      "1": 9,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 1,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    },
+    "2": {
+      "1": 0,
+      "2": 10,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    },
+    "3": {
+      "1": 0,
+      "2": 0,
+      "3": 10,
+      "4": 0,
+      "5": 0,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    },
+    "4": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 10,
+      "5": 0,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    },
+    "5": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 10,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    }
+  },
+  "priority_confusion_matrix": {
+    "1": {
+      "1": 15,
+      "2": 0,
+      "3": 0,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    },
+    "2": {
+      "1": 0,
+      "2": 10,
+      "3": 10,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    },
+    "3": {
+      "1": 0,
+      "2": 0,
+      "3": 15,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    }
+  },
+  "mismatches": [
+    {
+      "id": "NUEVO-C1-02",
+      "expected_category": 1,
+      "expected_priority": 2,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 1,
+      "predicted_priority": 3
+    },
+    {
+      "id": "NUEVO-C1-04",
+      "expected_category": 1,
+      "expected_priority": 2,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 1,
+      "predicted_priority": 3
+    },
+    {
+      "id": "NUEVO-C1-05",
+      "expected_category": 1,
+      "expected_priority": 3,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 5,
+      "predicted_priority": 3
+    },
+    {
+      "id": "NUEVO-C1-07",
+      "expected_category": 1,
+      "expected_priority": 2,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 1,
+      "predicted_priority": 3
+    },
+    {
+      "id": "NUEVO-C2-04",
+      "expected_category": 2,
+      "expected_priority": 2,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 2,
+      "predicted_priority": 3
+    },
+    {
+      "id": "NUEVO-C2-07",
+      "expected_category": 2,
+      "expected_priority": 2,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 2,
+      "predicted_priority": 3
+    },
+    {
+      "id": "NUEVO-C3-02",
+      "expected_category": 3,
+      "expected_priority": 2,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 3,
+      "predicted_priority": 3
+    },
+    {
+      "id": "NUEVO-C3-04",
+      "expected_category": 3,
+      "expected_priority": 2,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 3,
+      "predicted_priority": 3
+    },
+    {
+      "id": "NUEVO-C4-02",
+      "expected_category": 4,
+      "expected_priority": 2,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 4,
+      "predicted_priority": 3
+    },
+    {
+      "id": "NUEVO-C5-04",
+      "expected_category": 5,
+      "expected_priority": 2,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 5,
+      "predicted_priority": 3
+    },
+    {
+      "id": "NUEVO-C5-07",
+      "expected_category": 5,
+      "expected_priority": 2,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 5,
+      "predicted_priority": 3
+    }
+  ],
+  "automated_targets_met": true,
+  "independent_labels_and_all_high_priority_false_negatives_require_review": true,
+  "attempted_cases": 55,
+  "execution_complete": true,
+  "source": "external_provider",
+  "requested_model": "gpt-4.1-mini",
+  "prompt_version": "plurione-classify-v2",
+  "human_acceptance": false,
+  "generated_at": "2026-10-18T21:46:47.190510+00:00"
+}

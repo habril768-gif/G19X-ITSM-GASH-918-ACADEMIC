@@ -1,0 +1,130 @@
+{
+  "fecha": "2026-10-20",
+  "estado": "REVISION_MODELO_COMPLETADA_REFRESCO_FALLIDO",
+  "archivo": "powerbi/plurione_bi.pbix",
+  "bytes": 62872,
+  "sha256": "bd355749cc2a6f371b97d3e4c2978007c51f62d714ada2afbac6ab6180133ff3",
+  "sha256_antes": "934929656e03eddb2f44570d5e6758172ec97020d2d625b9bddf7af040bb1f26",
+  "zip_crc_correcto": true,
+  "visuales": [
+    {
+      "tipo": "cardVisual",
+      "campos": [
+        "Indicadores.Fecha de corte"
+      ],
+      "showAll": null,
+      "totals": null
+    },
+    {
+      "tipo": "tableEx",
+      "campos": [
+        "Indicadores.mes_creacion",
+        "Indicadores.categoria",
+        "Indicadores.departamento",
+        "Indicadores.privacidad",
+        "Indicadores.Volumen visible",
+        "Indicadores.Resolución horas",
+        "Indicadores.Reapertura porcentaje",
+        "Indicadores.Concordancia porcentaje"
+      ],
+      "showAll": true,
+      "totals": "false"
+    },
+    {
+      "tipo": "textbox",
+      "campos": [],
+      "showAll": null,
+      "totals": null
+    }
+  ],
+  "metodo": "Observación directa en Desktop mediante computer-use; consultas DAX de metadatos de solo lectura; ZIP/JSON para visuales y hash. Sin decodificar DataModel binario.",
+  "medidas_validas_observadas": [
+    "Volumen visible",
+    "Fecha de corte",
+    "Resolución horas",
+    "Reapertura porcentaje",
+    "Concordancia porcentaje"
+  ],
+  "formatos": {
+    "Reapertura porcentaje": {
+      "formato": "Porcentaje",
+      "decimales": 1,
+      "divide_entre_100": true,
+      "cambio": false
+    },
+    "Concordancia porcentaje": {
+      "formato": "Porcentaje",
+      "decimales": 1,
+      "divide_entre_100": true,
+      "cambio": false
+    },
+    "Resolución horas": {
+      "antes": "General",
+      "despues": "Número decimal",
+      "decimales": 2,
+      "cambio": true
+    }
+  },
+  "advertencia_metadatos": "INFO.VIEW.MEASURES devolvió FormatString vacío. No se usó como prueba de formato ausente; la cinta de propiedades confirmó ambos porcentajes.",
+  "tablas_antes": {
+    "cantidad": 5,
+    "importadas": 5,
+    "generadas_fechas_ocultas": 4
+  },
+  "tablas_despues": [
+    {
+      "nombre": "Indicadores",
+      "oculta": false,
+      "modo": "Import"
+    }
+  ],
+  "ajuste_fechas": "Fecha/hora automática desactivada solamente para el archivo actual; inventario DAX ejecutado de nuevo confirmó una tabla.",
+  "origen": {
+    "particiones": 1,
+    "nombre": "Indicadores",
+    "comparacion_plantilla": true,
+    "normalizacion": "Ignora CR, LF, tabuladores, espacios y el comentario inicial conocido de Indicadores.pq. No es comparación semántica SQL.",
+    "plantilla": "powerbi/Indicadores.pq",
+    "vistas": [
+      "analytics.export_info",
+      "analytics.incident_metrics"
+    ],
+    "servidor": "127.0.0.1:5433",
+    "base": "plurione",
+    "ultima_carga_mostrada_metadatos": "10/19/2026 3:02:55 AM",
+    "nota_hora": "Valor literal de metadatos; no convertir ni confundir con el corte local mostrado en la tarjeta."
+  },
+  "corte_visible_sin_actualizar": "18/10/2026 09:02:54 p.m.",
+  "refresco": {
+    "ejecutado": true,
+    "resultado": "FALLIDO",
+    "error": "No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión",
+    "nuevo_corte_verificado": false
+  },
+  "docker": {
+    "engine_observado": "running",
+    "postgres_1_observado": "running",
+    "puertos_publicados_en_fila_postgres": "ninguno",
+    "cli_herramientas": "permission denied while trying to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine",
+    "cambio_contenedores": false
+  },
+  "interaccion": {
+    "guardado_antes_refresco": true,
+    "aviso_refresco_abierto": true,
+    "limite_cierre": "Dos intentos de clic, incluido refresco/activación, rechazados: punto sobre msedgewebview2.exe Chrome Legacy Window y no PBIDesktop.exe. Sin más reintentos sobre coordenadas."
+  },
+  "pendientes": [
+    "Recrear únicamente postgres con compose.bi.yaml para publicar loopback 5433; después repetir Actualizar y guardar.",
+    "Valores publicables de QA y comprobación visual de porcentajes/horas.",
+    "Retirada de valores previamente publicables al cambiar elegibilidad y refrescar.",
+    "Custodia/retirada de copias y aceptación integral."
+  ],
+  "limites": [
+    "Sin bajar k=5, sustituir NULL por cero, alterar SQL/backend o crear incidencias.",
+    "Sin cambios de credenciales/seguridad, publicación, llamadas IA ni envío de correo.",
+    "No se acredita un refresco exitoso ni la prueba de QA publicable.",
+    "Cinco medidas reales; Población del informe de la plantilla no está creada como medida, existe leyenda estática.",
+    "Sin capturas nuevas versionadas por nombre real de cuenta en cabecera.",
+    "No se repitió la suite backend."
+  ]
+}

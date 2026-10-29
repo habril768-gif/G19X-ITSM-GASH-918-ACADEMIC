@@ -1,0 +1,45 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "INCOMPLETA_ARRANQUE_QA_SIN_MEDICION",
+  "run_id": "cc10cf1d32dd4a8d",
+  "fuentes": [
+    "Captura de PowerShell aportada por la autora: codex-clipboard-dd3aa307-603e-4b78-99e9-5c20ace5dd61.png",
+    ".pgdata/performance-cc10cf1d32dd4a8d/report.json"
+  ],
+  "sha256_reporte": "0113ff362d1b6a123b94e79a5d1f2db6c7265466047542788c3d5fcf6aefb6b7",
+  "resultado_original": {
+    "fecha_utc": "2026-10-22T23:56:57.670216+00:00",
+    "run_id": "cc10cf1d32dd4a8d",
+    "modo": "smoke",
+    "estado": "INCOMPLETA",
+    "limites": [
+      "No es una instalación de producción ni recuperación de datos operativos.",
+      "Recursos QA retenidos y detenidos cuando es posible; sin borrar volúmenes.",
+      "Contraseñas aleatorias no guardadas en manifiesto/reporte; metadatos de contenedores contienen configuración privada.",
+      "Muestreo docker stats añade carga al mismo equipo."
+    ],
+    "configuracion_validada": true,
+    "error_codigo": "ARRANQUE_QA_SALIDA_1",
+    "recursos": [],
+    "contenedores_detenidos": false,
+    "parada_requiere_revision": true,
+    "recursos_retenidos": {
+      "project": "plurione-qa-perf-cc10cf1d32dd4a8d",
+      "folder": "C:\\Users\\sanch\\Documents\\Codex\\Desarrollo de una Plataforma Inteligente de Gestión de Incidencias Laborales - G19X-ITSM-GASH-918-ACADEMIC\\.pgdata\\performance-cc10cf1d32dd4a8d",
+      "sin_borrado_volumenes": true
+    }
+  },
+  "lectura": [
+    "Comando solicitado: smoke --diagnostic --confirm-isolated-qa tras regresión seleccionada 157 de 93 aprobadas.",
+    "Configuración validada; docker compose up -d --build --wait terminó con código 1. La salida privada del subproceso no está guardada en el reporte.",
+    "El flujo no llegó a migraciones, comprobación HTTP, fixture o medición. No existe resultado de latencia ni diagnóstico de hilos.",
+    "contenedores_detenidos=false y parada_requiere_revision=true. No acredita que haya contenedores ejecutándose: la comprobación de parada falló y debe verificarse.",
+    "Recursos retenidos, sin borrado de volúmenes. Solo compose.json, empty.env y report.json en la carpeta de corrida."
+  ],
+  "siguiente_paso": "Comprobar disponibilidad del servidor Docker y listar estados de contenedores con filtro exacto de proyecto plurione-qa-perf-cc10cf1d32dd4a8d. No repetir carga ni atribuir la causa a get_session, RAM, disco o permisos sin evidencia.",
+  "limites": [
+    "La causa raíz no puede determinarse con el error resumido. No se ejecutó Docker desde las herramientas del agente.",
+    "Regresión seleccionada 157 sigue aprobada; rendimiento del ajuste 156 continúa sin medir.",
+    "RNF-2 pendiente y formal 150 conserva FALLIDA_UMBRAL. No sobrescribir ni descartar esta corrida fallida."
+  ]
+}

@@ -1,0 +1,431 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "DIAGNOSTICO_REAL_REVISADO_RNF2_PENDIENTE",
+  "captura": "codex-clipboard-f970717f-a2a8-4dd8-9ecf-01e044f3e6d3.png",
+  "procedencia": "Autora ejecutó QA aislado; agente leyó captura y reporte original.",
+  "fuente": {
+    "ruta_local": ".pgdata/performance-e22ded0274034faf/report.json",
+    "sha256": "1d13a264647274adba6847633eed725f7d83c72ef83e673b78059e7ee61e4559"
+  },
+  "resumen_medicion": {
+    "listado": {
+      "solicitudes": 61,
+      "medias": {
+        "total": 196.85550095080723,
+        "auth": 49.33492065568122,
+        "endpoint": 41.62555759049595,
+        "sql": 62.59391791798884,
+        "commit": 0.0,
+        "fuera_auth_endpoint": 105.89502270463005,
+        "consultas": 4.0
+      },
+      "http_p95_ms": 307.76630000036675
+    },
+    "detalle": {
+      "solicitudes": 61,
+      "medias": {
+        "total": 159.8542259837769,
+        "auth": 43.17177191806564,
+        "endpoint": 25.962223426236573,
+        "sql": 46.37735263889629,
+        "commit": 0.0,
+        "fuera_auth_endpoint": 90.72023063947468,
+        "consultas": 3.0
+      },
+      "http_p95_ms": 195.53989999985788
+    },
+    "creacion": {
+      "solicitudes": 55,
+      "medias": {
+        "total": 355.412336199846,
+        "auth": 34.460335672735134,
+        "endpoint": 246.58602420002518,
+        "sql": 239.81940627371924,
+        "commit": 12.17939663646658,
+        "fuera_auth_endpoint": 74.36597632708568,
+        "consultas": 13.0
+      },
+      "http_p95_ms": 559.009699994931
+    },
+    "actualizacion": {
+      "solicitudes": 54,
+      "medias": {
+        "total": 239.97001507389845,
+        "auth": 36.41988188913577,
+        "endpoint": 127.12660053687243,
+        "sql": 127.42999299869687,
+        "commit": 10.894233944377952,
+        "fuera_auth_endpoint": 76.42353264789024,
+        "consultas": 11.0
+      },
+      "http_p95_ms": 337.7961000005598
+    }
+  },
+  "diagnostico": {
+    "version": 1,
+    "limite_excedido": false,
+    "grupos": {
+      "calentamiento/listado": {
+        "solicitudes": 20,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 252.64689285031636,
+            "p95": 407.8817190020345,
+            "max": 410.95131499969284
+          },
+          "auth": {
+            "media": 82.36188990031224,
+            "p95": 162.0769000001019,
+            "max": 174.1131509988918
+          },
+          "endpoint": {
+            "media": 42.086457349978446,
+            "p95": 63.97392299913918,
+            "max": 68.73604900101782
+          },
+          "sql": {
+            "media": 64.23079395026434,
+            "p95": 100.96817699741223,
+            "max": 101.30774600111181
+          },
+          "commit": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          },
+          "fuera_auth_endpoint": {
+            "media": 128.19854560002568,
+            "p95": 197.56642500215094,
+            "max": 208.86845299901324
+          },
+          "consultas": {
+            "media": 4.0,
+            "p95": 4.0,
+            "max": 4.0
+          }
+        }
+      },
+      "calentamiento/detalle": {
+        "solicitudes": 20,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 161.90338874948793,
+            "p95": 238.07721299817786,
+            "max": 253.5699799991562
+          },
+          "auth": {
+            "media": 31.67737935036712,
+            "p95": 51.06744699878618,
+            "max": 66.96817099873442
+          },
+          "endpoint": {
+            "media": 28.699838099964836,
+            "p95": 59.385791999375215,
+            "max": 64.71580200013705
+          },
+          "sql": {
+            "media": 41.09186915065948,
+            "p95": 74.01378500435385,
+            "max": 75.39228599853232
+          },
+          "commit": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          },
+          "fuera_auth_endpoint": {
+            "media": 101.52617129915598,
+            "p95": 159.6118170018599,
+            "max": 163.94850199867506
+          },
+          "consultas": {
+            "media": 3.0,
+            "p95": 3.0,
+            "max": 3.0
+          }
+        }
+      },
+      "calentamiento/creacion": {
+        "solicitudes": 20,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 447.3299737001071,
+            "p95": 597.7028710003651,
+            "max": 604.4945219982765
+          },
+          "auth": {
+            "media": 34.346194000136165,
+            "p95": 86.56565899946145,
+            "max": 105.26469099932001
+          },
+          "endpoint": {
+            "media": 322.41327759966225,
+            "p95": 420.251138999447,
+            "max": 420.8602959988639
+          },
+          "sql": {
+            "media": 306.24289744864654,
+            "p95": 394.1188910030178,
+            "max": 406.49901600409066
+          },
+          "commit": {
+            "media": 13.306745699810563,
+            "p95": 32.408215000032214,
+            "max": 32.791704001283506
+          },
+          "fuera_auth_endpoint": {
+            "media": 90.57050210030866,
+            "p95": 149.60920300291036,
+            "max": 164.95144599684863
+          },
+          "consultas": {
+            "media": 13.0,
+            "p95": 13.0,
+            "max": 13.0
+          }
+        }
+      },
+      "calentamiento/actualizacion": {
+        "solicitudes": 19,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 245.15691299989396,
+            "p95": 369.26464499993017,
+            "max": 369.26464499993017
+          },
+          "auth": {
+            "media": 31.292295105422934,
+            "p95": 58.82992999977432,
+            "max": 58.82992999977432
+          },
+          "endpoint": {
+            "media": 123.97547715820684,
+            "p95": 181.1592070007464,
+            "max": 181.1592070007464
+          },
+          "sql": {
+            "media": 119.51124510462824,
+            "p95": 195.45267300418345,
+            "max": 195.45267300418345
+          },
+          "commit": {
+            "media": 12.51257221041382,
+            "p95": 39.62571300144191,
+            "max": 39.62571300144191
+          },
+          "fuera_auth_endpoint": {
+            "media": 89.8891407362642,
+            "p95": 143.62720700228238,
+            "max": 143.62720700228238
+          },
+          "consultas": {
+            "media": 11.0,
+            "p95": 11.0,
+            "max": 11.0
+          }
+        }
+      },
+      "medicion/listado": {
+        "solicitudes": 61,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 196.85550095080723,
+            "p95": 324.84501500221086,
+            "max": 466.1894279997796
+          },
+          "auth": {
+            "media": 49.33492065568122,
+            "p95": 169.83271899880492,
+            "max": 204.49413399910554
+          },
+          "endpoint": {
+            "media": 41.62555759049595,
+            "p95": 78.72753199990257,
+            "max": 114.07622900151182
+          },
+          "sql": {
+            "media": 62.59391791798884,
+            "p95": 113.52231500495691,
+            "max": 143.9829990013095
+          },
+          "commit": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          },
+          "fuera_auth_endpoint": {
+            "media": 105.89502270463005,
+            "p95": 158.53160099868546,
+            "max": 176.03248200248345
+          },
+          "consultas": {
+            "media": 4.0,
+            "p95": 4.0,
+            "max": 4.0
+          }
+        }
+      },
+      "medicion/detalle": {
+        "solicitudes": 61,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 159.8542259837769,
+            "p95": 241.77236200193875,
+            "max": 275.2038739999989
+          },
+          "auth": {
+            "media": 43.17177191806564,
+            "p95": 72.94651399934082,
+            "max": 117.99656800212688
+          },
+          "endpoint": {
+            "media": 25.962223426236573,
+            "p95": 46.73394099881989,
+            "max": 74.66835099694435
+          },
+          "sql": {
+            "media": 46.37735263889629,
+            "p95": 73.56490900201607,
+            "max": 97.85661599744344
+          },
+          "commit": {
+            "media": 0.0,
+            "p95": 0.0,
+            "max": 0.0
+          },
+          "fuera_auth_endpoint": {
+            "media": 90.72023063947468,
+            "p95": 132.38697400083765,
+            "max": 213.55042600043816
+          },
+          "consultas": {
+            "media": 3.0,
+            "p95": 3.0,
+            "max": 3.0
+          }
+        }
+      },
+      "medicion/creacion": {
+        "solicitudes": 55,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 355.412336199846,
+            "p95": 567.1913250007492,
+            "max": 588.0549180001253
+          },
+          "auth": {
+            "media": 34.460335672735134,
+            "p95": 73.3524999996007,
+            "max": 123.78384100156836
+          },
+          "endpoint": {
+            "media": 246.58602420002518,
+            "p95": 461.4910950003832,
+            "max": 488.22964999999385
+          },
+          "sql": {
+            "media": 239.81940627371924,
+            "p95": 441.70104199292837,
+            "max": 465.2025750001485
+          },
+          "commit": {
+            "media": 12.17939663646658,
+            "p95": 28.474889000790427,
+            "max": 67.01156700000865
+          },
+          "fuera_auth_endpoint": {
+            "media": 74.36597632708568,
+            "p95": 142.87535899711656,
+            "max": 143.79726399783976
+          },
+          "consultas": {
+            "media": 13.0,
+            "p95": 13.0,
+            "max": 13.0
+          }
+        }
+      },
+      "medicion/actualizacion": {
+        "solicitudes": 54,
+        "errores": 0,
+        "metricas": {
+          "total": {
+            "media": 239.97001507389845,
+            "p95": 349.8543699970469,
+            "max": 384.99873700129683
+          },
+          "auth": {
+            "media": 36.41988188913577,
+            "p95": 81.16532499843743,
+            "max": 130.6267840009241
+          },
+          "endpoint": {
+            "media": 127.12660053687243,
+            "p95": 171.43333999774768,
+            "max": 199.02822999938508
+          },
+          "sql": {
+            "media": 127.42999299869687,
+            "p95": 191.2815449941263,
+            "max": 215.00936200391152
+          },
+          "commit": {
+            "media": 10.894233944377952,
+            "p95": 31.417589001648594,
+            "max": 36.74270599731244
+          },
+          "fuera_auth_endpoint": {
+            "media": 76.42353264789024,
+            "p95": 113.58631600160152,
+            "max": 133.00349799828837
+          },
+          "consultas": {
+            "media": 11.0,
+            "p95": 11.0,
+            "max": 11.0
+          }
+        }
+      }
+    },
+    "unidades": "ms salvo consultas (cantidad)",
+    "limites": "SQL y commit son subconjuntos solapados de auth/endpoint. No sumar sus p95. Total cubre ASGI, no red/cliente. Instrumentación añade coste; no acredita RNF-2."
+  },
+  "comprobacion_sql": {
+    "incidencias": 175,
+    "eventos_creado": 175,
+    "eventos_editado": 73,
+    "entregas_encoladas": 1750,
+    "intentos_smtp": 0,
+    "trabajos_ia": 0
+  },
+  "conteos_inicial_calentamiento_final": [
+    100,
+    120,
+    175
+  ],
+  "sesiones_revocadas_204": 10,
+  "contenedores_detenidos": true,
+  "hallazgos": [
+    "231 peticiones de medición, cero errores; conteos instrumentados coinciden con HTTP en cuatro operaciones.",
+    "Creación: media ASGI 355,41 ms; auth 34,46; endpoint 246,59; SQL acumulado 239,82; commit 12,18; 13 consultas por petición.",
+    "Actualización: media ASGI 239,97 ms, SQL 127,43 y 11 consultas. Listado/detalle: cuatro/tres consultas.",
+    "En esta muestra SQL acumula mucho más tiempo que commit en creación; orientar revisión a las consultas y viajes al servidor, sin atribuir aún una consulta responsable.",
+    "Residual fuera de auth/endpoint: medias entre 74,37 y 105,90 ms. Puede incluir planificación, dependencias, validación/serialización y cierre; no está desglosado."
+  ],
+  "limites": [
+    "Smoke instrumentado 2+5 s y solo 54–61 muestras por operación medida; no es una prueba formal RNF-2.",
+    "SQL y commit se solapan con auth/endpoint; no sumar componentes ni restar sus p95.",
+    "Total ASGI puede incluir limpieza de dependencias posterior al envío del cuerpo: no equivale al tiempo HTTP del cliente. Por ello algunos p95 ASGI superan el p95 HTTP sin demostrar error de conteo.",
+    "SQL incluye tiempo transcurrido durante execute/esperas, no solo CPU PostgreSQL. No permite distinguir viajes, planificación, I/O o locks.",
+    "No se ha medido coste por sentencia ni espera de pool; no hay causa raíz única demostrada ni nueva optimización validada.",
+    "136 conserva FALLIDA_UMBRAL; no repetir full sin cambio justificado."
+  ],
+  "siguiente_paso": "Revisar las 13 consultas de creación y su necesidad bajo los mismos bloqueos/permisos; medir por familias si falta detalle para escoger un cambio. No eliminar controles ni cambiar el umbral."
+}

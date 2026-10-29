@@ -1,0 +1,29 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "DOS_REDES_QA_LIBERADAS_DIAGNOSTICO_PENDIENTE",
+  "fuente": "Salida textual aportada por la autora; comando ejecutado por ella, no por el agente.",
+  "comando": ".\\backend\\.venv\\Scripts\\python.exe -B backend/scripts/release_performance_networks.py --apply --limit 2",
+  "resultado": {
+    "modo": "APLICAR",
+    "redes_elegibles_conteo": 28,
+    "limite": 2,
+    "eliminadas": [
+      "plurione-qa-perf-897c25b02d4340d6_net",
+      "plurione-qa-perf-d1c2d490b7df42b4_net"
+    ],
+    "omitidas_al_revalidar": [],
+    "fallidas": []
+  },
+  "interpretacion": [
+    "Primera ejecución real de la herramienta preparada en 162: dos eliminaciones informadas, ninguna omitida o fallida.",
+    "La lista de 28 elegibles corresponde al inventario previo a las eliminaciones; no son 28 redes eliminadas ni el inventario global de Docker.",
+    "Se conservan contenedores, volúmenes, imágenes y reportes por el alcance de los comandos de la herramienta. Sin prune global.",
+    "Retirar dos redes permite reintentar la reserva de dos redes del próximo proyecto QA; disponibilidad efectiva y arranque deben comprobarse en esa ejecución, sin garantía frente a concurrencia o fallos adicionales."
+  ],
+  "pendiente": "Un smoke diagnóstico nuevo con el ajuste de sesión 156 para comprobar arranque completo, conteo de pasos por hilos, integridad SQL/auditoría/colas y parada. No repetir full automáticamente.",
+  "limites": [
+    "Sin nueva latencia ni acreditación RNF-2; formal 150 conserva FALLIDA_UMBRAL.",
+    "La selección API 157 de 93 aprobadas permanece válida en su alcance.",
+    "Los reportes incompletos 158/161 se conservan intactos. No hace falta liberar más redes antes de verificar este reintento."
+  ]
+}

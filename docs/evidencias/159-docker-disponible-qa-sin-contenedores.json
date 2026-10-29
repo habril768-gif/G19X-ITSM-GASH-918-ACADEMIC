@@ -1,0 +1,23 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "DOCKER_DISPONIBLE_CAUSA_ARRANQUE_PENDIENTE",
+  "fuente": "Captura aportada por la autora: codex-clipboard-7f4c797b-771f-4d0b-a3d8-573299b71fb6.png; comandos ejecutados por ella, no por el agente.",
+  "run_id": "cc10cf1d32dd4a8d",
+  "observado": {
+    "servidor_docker": "29.6.1",
+    "filtro": "label=com.docker.compose.project=plurione-qa-perf-cc10cf1d32dd4a8d",
+    "docker_ps_a": "Solo cabeceras NAMES STATUS; sin filas"
+  },
+  "interpretacion": [
+    "Docker responde ahora y no se observan contenedores del proyecto en la consulta actual.",
+    "No se requiere detener contenedores de esa corrida según esta consulta; el reporte original conserva correctamente su parada no confirmada en aquel momento.",
+    "La consulta no inventaría volúmenes/redes/imágenes ni reconstruye la disponibilidad durante el fallo; causa de ARRANQUE_QA_SALIDA_1 desconocida.",
+    "Se revisaron Dockerfile y specification: contexto backend e imagen exclusiva plurione-qa-perf-cc10cf1d32dd4a8d-api. Siguiente paso: construcción explícita con progreso plain para observar error si se reproduce, sin iniciar servicios/carga ni usar credenciales."
+  ],
+  "comando_propuesto_no_ejecutado": "docker build --progress=plain -f .\\backend\\Dockerfile -t plurione-qa-perf-cc10cf1d32dd4a8d-api .\\backend",
+  "limites": [
+    "Sin causa raíz demostrada ni nueva medición.",
+    "La regresión 157 de 93 aprobadas permanece válida en su alcance; RNF-2 pendiente.",
+    "No borrar recursos ni repetir full; conservar reporte 158 intacto."
+  ]
+}

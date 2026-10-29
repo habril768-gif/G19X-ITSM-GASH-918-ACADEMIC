@@ -221,3 +221,22 @@ it('gestiona un ciclo completo y recarga detalle e historial después de cada ca
   await screen.findByLabelText('Resolución del caso');
   expect(fetch.mock.calls.filter(([url]) => url.endsWith('/transitions')).map(([, opts]) => JSON.parse(opts.body).status)).toEqual(['EN_REVISION', 'RESUELTA', 'CERRADA', 'EN_REVISION']);
 }, 15000);
+
+
+it('enlace de correo espera login y consulta el UUID con la cuenta autenticada', async () => {
+  const id = '12345678-1234-1234-1234-123456789abc';
+  window.history.replaceState(null, '', `/?incident=${id}`);
+  const original = fetch.getMockImplementation();
+  fetch.mockImplementation(async (url, options) => url.endsWith(`/incidents/${id}`)
+    ? ok({ ...incident, id, descripcion: 'Expediente desde correo', scope: 'PERSONA', ai_status: 'OMITIDA' }) : original(url, options));
+  try {
+    render(<App />);
+    expect(fetch).not.toHaveBeenCalled();
+    const ui = userEvent.setup();
+    await ui.type(screen.getByLabelText('Correo electrónico'), 'demo@example.invalid');
+    await ui.type(screen.getByLabelText('Contraseña'), 'Ficticia-123456');
+    await ui.click(screen.getByRole('button', { name: /Entrar a PluriOne/ }));
+    await screen.findByText('Expediente desde correo', { selector: 'p' });
+    expect(fetch.mock.calls.some(([url, options]) => url.endsWith(`/incidents/${id}`) && options.headers.Authorization === 'Bearer memory-test-token')).toBe(true);
+  } finally { window.history.replaceState(null, '', '/'); }
+}, 30000);

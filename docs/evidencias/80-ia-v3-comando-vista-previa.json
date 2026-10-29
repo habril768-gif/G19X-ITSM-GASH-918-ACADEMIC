@@ -1,0 +1,22 @@
+{
+  "recorded_on": "2026-10-18",
+  "script": "scripts/EVALUAR_IA_V3.ps1",
+  "prompt_version": "plurione-classify-v3",
+  "checks": {
+    "powershell_parser": true,
+    "native_preview_no_docker": true,
+    "execute_blocked_before_docker": true
+  },
+  "docker_calls": 0,
+  "external_calls": 0,
+  "author_review_reported": false,
+  "labels_frozen": false,
+  "predictions_generated": false,
+  "backend_tests": "154 previas; backend sin cambios y no repetido",
+  "limitations": [
+    "Respuesta sobre revisión pendiente",
+    "Sin construcción/ejecución Docker real",
+    "Sin métricas externas v3",
+    "Rama externa solo preparada; máximo 55 y salida fija ejecucion-v3"
+  ]
+}

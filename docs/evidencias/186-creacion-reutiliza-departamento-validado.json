@@ -1,0 +1,86 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "CONSULTA_REDUNDANTE_ELIMINADA_API_Y_QA_PENDIENTES",
+  "hipotesis": "En diagnostico185 creacion tiene diez viajes SQL y SELECT/departamentos aislado medio13,15 ms. administration_lock ya revalida el departamento del actor; la referencia local se pierde al retornar solo el rol y db.get vuelve a leerlo en Session nueva. No inferir ahorro HTTP igual al temporizador.",
+  "cambio": "administration_lock incorpora include_department=False opcional, exige include_role=True y retorna (role,department) solo al solicitarlo. Retornos None/string anteriores se conservan. create_case mantiene referencia local al departamento recien refrescado bajo bloqueo; si es el reportado/afectado lo reutiliza, si difiere conserva db.get y validacion independiente.",
+  "seguridad": [
+    "Bloqueo advisory compartido/exclusivo antes de relectura populate_existing conservado",
+    "Sin cache de actor/departamento/rol entre peticiones ni Session.info",
+    "Traslados, departamento inactivo y limites de empleado/supervisor revalidados",
+    "Cambios administrativos de usuarios/departamentos conservan bloqueo exclusivo del producto",
+    "Caso, auditoria y outbox permanecen en la misma transaccion con 503/rollback existentes",
+    "manage_case conserva bloqueo de fila antes de SELECT de visibilidad; no se fusionan snapshots por ahorrar un viaje"
+  ],
+  "validacion": {
+    "unitarias": "25 aprobadas en 0,658 s: ocho nuevas CreationDepartmentReuseTests, nueve AdministrationRoleJoinTests, ocho OutboxCachedInsertTests; SQLite real, sin HTTP/PostgreSQL.",
+    "casos_nuevos": [
+      "Session nueva crea en departamento propio con siete sentencias y sin SQL postcommit",
+      "Otro departamento conserva ocho sentencias y su id correcto",
+      "Retorno conjunto refresca traslado de actor obsoleto",
+      "Departamento propio inactivo sigue403",
+      "Departamento ajeno inactivo sigue422 sin escritura",
+      "Empleado/supervisor fuera de departamento siguen403 y propio siguepermitido",
+      "Opcion invalida rechazada antes de SQL",
+      "Orden lock compartido/exclusivo y relectura de departamento simulado"
+    ],
+    "conteos_antes": {
+      "metodo": "Servicios reales cargados por AST y modelos reales, SQLite con expire_on_commit=True. Imports internos de cola/lock apuntan al mismo cuerpo compilado; captura por campos del esquema, sin ejecutar Pydantic/HTTP. No prueba locks PostgreSQL.",
+      "results": [
+        {
+          "operation": "create",
+          "sql": {
+            "total": 8,
+            "select": 5,
+            "insert": 3
+          }
+        },
+        {
+          "operation": "edit",
+          "sql": {
+            "total": 5,
+            "select": 3,
+            "insert": 1,
+            "update": 1
+          }
+        }
+      ]
+    },
+    "conteos_despues": {
+      "metodo": "Servicios reales cargados por AST y modelos reales, SQLite con expire_on_commit=True. Imports internos de cola/lock apuntan al mismo cuerpo compilado; captura por campos del esquema, sin ejecutar Pydantic/HTTP. No prueba locks PostgreSQL.",
+      "results": [
+        {
+          "operation": "create",
+          "sql": {
+            "total": 7,
+            "select": 4,
+            "insert": 3
+          }
+        },
+        {
+          "operation": "edit",
+          "sql": {
+            "total": 5,
+            "select": 3,
+            "insert": 1,
+            "update": 1
+          }
+        }
+      ]
+    },
+    "estatica": "AST correcto en tres archivos. Solo dos archivos de producto cambiados. Lectura de departamentos/usuarios confirma coordinacion administrativa exclusiva.",
+    "api": "Pendiente seleccion pytest por usuario. Prueba de orden de advisory usa sustituto; no prueba exclusion mutua PostgreSQL."
+  },
+  "esperado_qa": "Para creacion ENTORNO en departamento del actor se espera pasar de10 a9 consultas incluyendo autenticacion y advisory; no observado aun en QA. Otros departamentos conservan consulta adicional. Actualizacion sin reduccion de consultas.",
+  "limites": "No nueva carga, formal o smoke. No estimacion de mejora p95 ni validacion PostgreSQL real del cambio. RNF-2 pendiente; siete formales fallidas conservadas y85 regresiones184 se refieren a revision anterior. Cambio acotado, no garantiza alcanzar200ms.",
+  "decision_no_fusionar": "Inferencia de diseño: fusionar espera de bloqueo y comprobacion de datos en un SELECT no garantiza mantener lectura posterior al bloqueo, dado snapshot de sentencia en Read Committed. Mantener separacion actual. Referencias oficiales consultadas; no se ejecuta prueba de carrera PostgreSQL en este avance.",
+  "fuentes": [
+    "https://www.postgresql.org/docs/17/sql-select.html",
+    "https://www.postgresql.org/docs/17/explicit-locking.html"
+  ],
+  "sha256": {
+    "backend/app/services/administration_lock.py": "80d05855946fc6938e654d115e4fda3ab6d8d3e2eef0a4210da7622a04b58731",
+    "backend/app/services/incidents.py": "5ed64195113a8f976685f13c90315b2d80e6f30e8e45c96246b42e3e68162b00",
+    "backend/tests/test_creation_department_reuse.py": "388cc88166f73b95dc7a62373e0c5c0c199d2d7f0b4eb99451cf90a77368846e"
+  },
+  "pendiente": "Regresion API seleccionada antes de nuevo diagnostico; verificar luego conteo SQL real y permisos bajo PostgreSQL sin cambiar umbral/aislamiento/durabilidad."
+}

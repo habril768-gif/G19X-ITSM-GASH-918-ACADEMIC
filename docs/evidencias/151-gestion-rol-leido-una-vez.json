@@ -1,0 +1,183 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "ROL_REUTILIZADO_LOCALMENTE_REGRESION_API_PENDIENTE",
+  "cambio": [
+    "visibility(db,actor) conserva lectura del rol y delega el mismo predicado SQL a helper privado puro _visibility_for_role.",
+    "manage_case valida rol después del administration_lock y lo reutiliza para visibilidad y reserva de cierre/reapertura en la misma operación.",
+    "eligible_manager valida rol una vez y lo reutiliza para el mismo predicado. No se cambia su lectura/bloqueo de persona.",
+    "No hay caché global, de Session ni entre peticiones. Mantiene bloqueo de caso antes de reevaluar visibilidad; no elimina comprobaciones de actividad/conflictos."
+  ],
+  "perfil_antes": {
+    "metodo": "Servicios reales cargados por AST y modelos reales, SQLite con expire_on_commit=True. Imports internos de cola/lock apuntan al mismo cuerpo compilado; captura por campos del esquema, sin ejecutar Pydantic/HTTP. No prueba locks PostgreSQL.",
+    "results": [
+      {
+        "operation": "create",
+        "sql": {
+          "total": 9,
+          "select": 6,
+          "insert": 3
+        }
+      },
+      {
+        "operation": "edit",
+        "sql": {
+          "total": 7,
+          "select": 5,
+          "insert": 1,
+          "update": 1
+        }
+      }
+    ]
+  },
+  "perfil_despues": {
+    "metodo": "Servicios reales cargados por AST y modelos reales, SQLite con expire_on_commit=True. Imports internos de cola/lock apuntan al mismo cuerpo compilado; captura por campos del esquema, sin ejecutar Pydantic/HTTP. No prueba locks PostgreSQL.",
+    "results": [
+      {
+        "operation": "create",
+        "sql": {
+          "total": 9,
+          "select": 6,
+          "insert": 3
+        }
+      },
+      {
+        "operation": "edit",
+        "sql": {
+          "total": 6,
+          "select": 4,
+          "insert": 1,
+          "update": 1
+        }
+      }
+    ]
+  },
+  "seguridad_local": {
+    "method": "Cuerpos reales por AST, modelos y SQLite reales; HTTPException auxiliar. Sin HTTP ni locks PostgreSQL.",
+    "results": [
+      {
+        "scenario": "edit_admin",
+        "ok": true
+      },
+      {
+        "scenario": "edit_supervisor",
+        "ok": true
+      },
+      {
+        "scenario": "edit_employee",
+        "ok": true
+      },
+      {
+        "scenario": "eligible_admin",
+        "ok": true
+      },
+      {
+        "scenario": "eligible_supervisor",
+        "ok": true
+      },
+      {
+        "scenario": "downgrade",
+        "ok": true
+      }
+    ]
+  },
+  "matriz_destinatarios_local": {
+    "metodo": "AST de funciones reales, modelos reales, SQLite en memoria; utcnow local sustituido, sin FastAPI/HTTP/autenticación/PostgreSQL",
+    "resultados": [
+      {
+        "rh": 2,
+        "sql": {
+          "total": 4,
+          "insert": 2,
+          "select": 2
+        },
+        "entregas": 2,
+        "idempotencia": true
+      },
+      {
+        "rh": 10,
+        "sql": {
+          "total": 4,
+          "insert": 2,
+          "select": 2
+        },
+        "entregas": 10,
+        "idempotencia": true
+      },
+      {
+        "rh": 30,
+        "sql": {
+          "total": 4,
+          "insert": 2,
+          "select": 2
+        },
+        "entregas": 30,
+        "idempotencia": true
+      }
+    ],
+    "access_checks": [
+      {
+        "scenario": "confidential",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "declared",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "confirmed",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "discarded",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "affected_rh",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "inactive_user",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "inactive_department",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "changed_role",
+        "matches_legacy": true,
+        "rollback": true
+      },
+      {
+        "scenario": "no_recipients",
+        "matches_legacy": true,
+        "rollback": true
+      }
+    ]
+  },
+  "revision_estatica": "Cuerpo del predicado después de leer rol idéntico por AST; SELECT de bloqueo/refresco del caso idéntico; funciones no afectadas idénticas. AST válido en tres archivos.",
+  "pytest": {
+    "archivo": "backend/tests/test_lifecycle_role_queries.py",
+    "casos": 6,
+    "estado": "PREPARADOS_NO_EJECUTADOS",
+    "cobertura": "Una lectura de rol para edición por RH/supervisor/empleado denegado, dos responsables elegibles y bajada de rol entre peticiones con actor obsoleto."
+  },
+  "limites": [
+    "Perfil y seis comprobaciones con cuerpos reales por AST y modelos/SQLite reales; HTTPException auxiliar, sin FastAPI/Pydantic ni bloqueos PostgreSQL reales.",
+    "Matriz de nueve casos de destinatarios coincide con control anterior; no sustituye regresión API de gestión/cierre/reapertura.",
+    "Ahorro local de una consulta no acredita mejora de p95. La última formal 150 es anterior a este cambio y sigue fuera de umbral.",
+    "Primero regresión de servicios afectados; no repetir full automáticamente."
+  ],
+  "sha256": {
+    "backend/app/services/incidents.py": "736d95575577341650edd27933f324d8dbc1a851465453381efc446aec27f36e",
+    "backend/app/services/lifecycle.py": "70d47ad5af9c569f745140f6c4fdaced935d281575e1f0c68e02cb5ec6a758f4",
+    "backend/tests/test_lifecycle_role_queries.py": "3590d89b9f37d1e20d4b56a759979986c7d258ad58930326709fedf2e9f0de03"
+  }
+}

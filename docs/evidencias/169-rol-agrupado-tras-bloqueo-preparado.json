@@ -1,0 +1,86 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "ROL_EN_RELECTURA_POST_LOCK_PREPARADO_REGRESION_PENDIENTE",
+  "motivo": "168 conserva un SELECT/roles individual por escritura además de relectura de usuario/departamento posterior al advisory lock; combinar ambos viajes sin adelantarlos al bloqueo.",
+  "cambio": [
+    "administration_lock añade include_role=False keyword-only. El modo anterior conserva SELECT de usuario/departamento y retorno None, con o sin actor como antes.",
+    "Con include_role=True exige actor persistente de esa Session, adquiere el mismo advisory lock compartido/exclusivo antes de releer y agrega LEFT JOIN de Role.nombre al SELECT fresco con populate_existing.",
+    "Devuelve solo el nombre de rol de la fila actual si está habilitado; cuenta/área ausente o inactiva conserva 403 Cuenta no habilitada y rol ausente/desconocido conserva 403 Rol no habilitado.",
+    "Creación y manage_case solicitan ese rol y suprimen la consulta posterior role_name del actor. El recibo usa _visibility_for_role con ese mismo rol validado dentro de la operación, sin cachear en Session/usuario/global.",
+    "Otros llamadores de administration_lock y elegibilidad de otros gestores mantienen su contrato. No cambian SQL de bloqueo de expediente, orden de lock/relectura, permisos, escritura, commit, auditoría, outbox o cierre.",
+    "La prueba de lectura de rol en gestión ahora cuenta entidades Role seleccionadas en query individual o conjunta; sigue exigiendo una lectura y confirma JOIN roles. Las subconsultas de visibilidad no se confunden con relectura del actor."
+  ],
+  "validacion": {
+    "unitarias_locales": "9/9 AdministrationRoleJoinTests aprobadas en 0,188 s con servicios importados, modelos/SQLAlchemy/SQLite reales, sin HTTP/event loop.",
+    "casos": [
+      "Rol junto a usuario/área en un SELECT, actualizando actor obsoleto.",
+      "Cambios de rol entre llamadas se releen, sin caché.",
+      "Nombre de Role obsoleto en identity map no oculta nombre deshabilitado en BD.",
+      "Rol ausente conserva error de rol.",
+      "Departamento inactivo conserva error de cuenta.",
+      "Modo anterior devuelve None y no agrega rol.",
+      "include_role exige actor sin ejecutar consulta.",
+      "Actor transitorio/ajeno o detached se deniega.",
+      "Orden de advisory compartido/exclusivo simulado antes de relectura de rol."
+    ],
+    "perfil_antes": {
+      "metodo": "Servicios reales cargados por AST y modelos reales, SQLite con expire_on_commit=True. Imports internos de cola/lock apuntan al mismo cuerpo compilado; captura por campos del esquema, sin ejecutar Pydantic/HTTP. No prueba locks PostgreSQL.",
+      "results": [
+        {
+          "operation": "create",
+          "sql": {
+            "total": 9,
+            "select": 6,
+            "insert": 3
+          }
+        },
+        {
+          "operation": "edit",
+          "sql": {
+            "total": 6,
+            "select": 4,
+            "insert": 1,
+            "update": 1
+          }
+        }
+      ]
+    },
+    "perfil_despues": {
+      "metodo": "Servicios reales cargados por AST y modelos reales, SQLite con expire_on_commit=True. Imports internos de cola/lock apuntan al mismo cuerpo compilado; captura por campos del esquema, sin ejecutar Pydantic/HTTP. No prueba locks PostgreSQL.",
+      "results": [
+        {
+          "operation": "create",
+          "sql": {
+            "total": 8,
+            "select": 5,
+            "insert": 3
+          }
+        },
+        {
+          "operation": "edit",
+          "sql": {
+            "total": 5,
+            "select": 3,
+            "insert": 1,
+            "update": 1
+          }
+        }
+      ]
+    },
+    "lectura_perfil": "Creación 9 a 8 y edición 6 a 5 consultas locales de servicio; sin SQL posterior a commit. No incluye autenticación o advisory PostgreSQL; con esos dos viajes existentes se espera QA 11 a 10 y 8 a 7, todavía por comprobar.",
+    "estatica": "AST válido en cinco archivos. Regresión API de nueva preparación pendiente; las 102 de 167 preceden este cambio."
+  },
+  "limites": [
+    "SQLite no demuestra concurrencia, advisory locks o latencia PostgreSQL. La prueba de orden usa un lock simulado.",
+    "Solo se reutiliza el rol bajo la operación protegida; no se reutiliza entre solicitudes ni para otra persona.",
+    "Sin nuevo smoke/full, reducción real de latencia o aprobación RNF-2. Formal 150 conserva FALLIDA_UMBRAL.",
+    "No se cambia autenticación, scopes o contrato HTTP. Esperar regresión antes de liberar redes o medir de nuevo."
+  ],
+  "sha256": {
+    "backend/app/services/administration_lock.py": "5bdd6d779a1c3e8ffddbaa7378572ee7c6e50a13a6d511e6e6a000ec328e989d",
+    "backend/app/services/incidents.py": "cedaf1b0fa2bdbaae916989a8ce7a04dbb5978921d13efb78554532a5f638e7d",
+    "backend/app/services/lifecycle.py": "83fda9b85761513287a03e00b152d01f46c30679090026abd32d03dbc2a03c6e",
+    "backend/tests/test_administration_role_join.py": "3b9a21af2e2fe7eb3b56245c25d64703335e53221c5be51d361777a7a752023e",
+    "backend/tests/test_lifecycle_role_queries.py": "800741e94b8c7ef8b01dd6213c089de1985b3d90f1bce6a0d3095694eebba9df"
+  }
+}

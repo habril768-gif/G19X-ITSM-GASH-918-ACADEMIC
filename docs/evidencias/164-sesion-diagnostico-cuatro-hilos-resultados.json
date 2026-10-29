@@ -1,0 +1,213 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "DIAGNOSTICO_QA_SIN_ACREDITAR_RNF2",
+  "run_id": "077bbcf2cb8d4142",
+  "fuentes": [
+    "Captura aportada por la autora: codex-clipboard-8f0448ad-1ed3-4bba-bc89-819c40ad7713.png",
+    ".pgdata/performance-077bbcf2cb8d4142/report.json"
+  ],
+  "sha256_reporte": "8d14bfd6cbdc2fde8ace7e5aee7d8a278f2ff6d37229d700b3a9827dfed5113c",
+  "validacion": {
+    "agregados": "read_diagnostics v3 ejecutado localmente sobre JSON original; ocho grupos y sumas SQL/hilos concordantes.",
+    "codigo": "Hash de backend/app/core/database.py de la corrida coincide con el archivo actual del ajuste 156.",
+    "peticiones_medidas": 249,
+    "errores_medidos": 0,
+    "pasos_hilo": "4 por petición en los ocho grupos; cero incompletas, sin dependency_enter. Etapas auth, endpoint, response_validation y other (close).",
+    "sql_por_peticion": {
+      "listado": 4.0,
+      "detalle": 3.0,
+      "creacion": 11.0,
+      "actualizacion": 8.0
+    },
+    "conteos_http": {
+      "inicial": 100,
+      "tras_calentamiento": 120,
+      "final": 181
+    },
+    "comprobacion_sql": {
+      "incidencias": 181,
+      "eventos_creado": 181,
+      "eventos_editado": 73,
+      "entregas_encoladas": 1810,
+      "intentos_smtp": 0,
+      "trabajos_ia": 0
+    },
+    "comprobaciones_http_posteriores": "OK",
+    "revocacion_sesiones": {
+      "204": 10
+    },
+    "contenedores_detenidos": true
+  },
+  "medicion": {
+    "cpu": {
+      "duracion_s": 5.375023200002033,
+      "cpu_logicas": 4,
+      "generador_cpu_s": 0.25,
+      "generador_cpu_porcentaje_un_nucleo": 4.651142715065963,
+      "generador_cpu_porcentaje_equipo": 1.1627856787664907,
+      "host_cpu_porcentaje": 68.02325581395348,
+      "host_estado": "OK",
+      "limites": "CPU proceso incluye todos sus hilos; no Docker. Host incluye otras aplicaciones/VM. Medias de fase, no picos ni causa única; GetSystemTimes Windows."
+    },
+    "http_p95_ms": {
+      "listado": 190.86489999608602,
+      "detalle": 203.75700001022778,
+      "creacion": 465.73979999811854,
+      "actualizacion": 488.6636000010185
+    },
+    "edicion_metricas_asgi": {
+      "total": {
+        "media": 269.8452238522596,
+        "p95": 500.9691350060166,
+        "max": 629.1246289983974
+      },
+      "auth": {
+        "media": 41.272889229194185,
+        "p95": 74.35073200031184,
+        "max": 95.55527799966512
+      },
+      "endpoint": {
+        "media": 156.50321639390552,
+        "p95": 427.79075900034513,
+        "max": 505.2529080057866
+      },
+      "sql": {
+        "media": 107.75599771987487,
+        "p95": 169.6901689938386,
+        "max": 212.80736799963051
+      },
+      "commit": {
+        "media": 66.41591127869314,
+        "p95": 356.227102005505,
+        "max": 426.23809900396736
+      },
+      "fuera_auth_endpoint": {
+        "media": 72.0691182291599,
+        "p95": 116.4032259985106,
+        "max": 139.40094899589894
+      },
+      "consultas": {
+        "media": 8.0,
+        "p95": 8.0,
+        "max": 8.0
+      },
+      "hasta_envio": {
+        "media": 249.7652164919466,
+        "p95": 483.46771199430805,
+        "max": 615.6210050030495
+      },
+      "cierre": {
+        "media": 20.080007360312997,
+        "p95": 39.07309200440068,
+        "max": 44.65806399821304
+      },
+      "thread_calls": {
+        "media": 4.0,
+        "p95": 4.0,
+        "max": 4.0
+      },
+      "thread_wait": {
+        "media": 32.71472475409878,
+        "p95": 58.97825099964393,
+        "max": 88.71174000523752
+      },
+      "thread_run": {
+        "media": 197.87399023060388,
+        "p95": 460.83218999410747,
+        "max": 569.6803399914643
+      },
+      "thread_resume": {
+        "media": 32.01954034440979,
+        "p95": 63.481573000899516,
+        "max": 74.8481519985944
+      },
+      "thread_incomplete": {
+        "media": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      }
+    },
+    "edicion_etapas_hilo": {
+      "auth": {
+        "calls": 61,
+        "incomplete": 0,
+        "wait_ms": 558.5572289855918,
+        "run_ms": 2518.1482620027964,
+        "resume_ms": 455.97217199974693,
+        "calls_per_request": 1.0,
+        "wait_ms_per_request": 9.156675885009701,
+        "run_ms_per_request": 41.28111904922617,
+        "resume_ms_per_request": 7.4749536393401135
+      },
+      "endpoint": {
+        "calls": 61,
+        "incomplete": 0,
+        "wait_ms": 353.22863599139964,
+        "run_ms": 9548.098506042152,
+        "resume_ms": 425.6449959866586,
+        "calls_per_request": 1.0,
+        "wait_ms_per_request": 5.790633376908191,
+        "run_ms_per_request": 156.52620501708446,
+        "resume_ms_per_request": 6.97778681945342
+      },
+      "response_validation": {
+        "calls": 61,
+        "incomplete": 0,
+        "wait_ms": 387.4443759996211,
+        "run_ms": 1.7632020317250863,
+        "resume_ms": 554.8880000133067,
+        "calls_per_request": 1.0,
+        "wait_ms_per_request": 6.351547147534772,
+        "run_ms_per_request": 0.028904951339755514,
+        "resume_ms_per_request": 9.096524590382078
+      },
+      "other": {
+        "calls": 61,
+        "incomplete": 0,
+        "wait_ms": 696.367969023413,
+        "run_ms": 2.3034339901641943,
+        "resume_ms": 516.6867930092849,
+        "calls_per_request": 1.0,
+        "wait_ms_per_request": 11.415868344646116,
+        "run_ms_per_request": 0.03776121295351138,
+        "resume_ms_per_request": 8.470275295234178
+      }
+    }
+  },
+  "comparacion_con_155": {
+    "thread_calls": {
+      "antes_media": 5.0,
+      "ahora_media": 4.0
+    },
+    "thread_wait": {
+      "antes_media": 42.09229325451637,
+      "ahora_media": 32.71472475409878
+    },
+    "thread_resume": {
+      "antes_media": 36.244580117293964,
+      "ahora_media": 32.01954034440979
+    },
+    "total": {
+      "antes_media": 215.30767668624392,
+      "ahora_media": 269.8452238522596
+    },
+    "commit": {
+      "antes_media": 11.139767391903339,
+      "ahora_media": 66.41591127869314
+    }
+  },
+  "lectura": [
+    "Liberación de redes 163 permitió completar el arranque y diagnóstico; no fue necesario modificar el producto para resolver esa incidencia de infraestructura.",
+    "Confirma el objetivo estructural de 156: cinco a cuatro pasos por hilos, preservando ejecución de SQL y cierre en worker.",
+    "No demuestra mejora global: edición ASGI media 215,31 a 269,85 ms; commit medio 11,14 a 66,42 ms, con p95 de commit 356,23 ms en esta corrida.",
+    "Espera media de hilos de edición 42,09 a 32,71 ms y retorno 36,24 a 32,02 ms; no restar componentes al p95 ni atribuir sus cambios exclusivamente al ajuste.",
+    "CPU global media actual 68,02 %, generador 1,16 % del equipo. No determina por sí sola causa de la variación de commit; confirmar alcance de temporización (incluye flush) y revisar antes de otro cambio."
+  ],
+  "limites": [
+    "Smoke instrumentado 2+5 segundos, diez clientes; no formal RNF-2 ni comparación controlada.",
+    "SQL/commit/auth/endpoint/hilos se solapan; no sumar p95.",
+    "93 API seleccionadas de 157 se conservan; no se ejecutaron tests adicionales ni Docker desde herramientas del agente.",
+    "150 sigue siendo la última formal FALLIDA_UMBRAL; RNF-2 pendiente. No repetir full automáticamente.",
+    "Siguiente revisión: coste de commit/endpoint; sin eliminar atomicidad, auditoría, durabilidad o controles."
+  ]
+}

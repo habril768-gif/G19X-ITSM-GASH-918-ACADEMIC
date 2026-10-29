@@ -1,0 +1,42 @@
+{
+  "recorded_on": "2026-10-18",
+  "source": "Archivos externos generados en Docker de la autora; recomputados offline sin llamadas adicionales",
+  "execution": "docs/evaluacion_ia/ejecucion-v1",
+  "attempted": 55,
+  "responses": 55,
+  "transport_or_schema_errors": 0,
+  "category_correct": 32,
+  "priority_correct": 30,
+  "category_accuracy": 0.64,
+  "priority_accuracy": 0.6,
+  "abstention_correct": 5,
+  "high_false_negative_ids": [
+    "EVAL-C4-02"
+  ],
+  "high_as_low_ids": [],
+  "automated_targets_met": false,
+  "human_acceptance": false,
+  "regular_cases_abstained": 12,
+  "effective_models": {
+    "gpt-4.1-mini-2025-04-14": 55
+  },
+  "usage_reported": {
+    "input_tokens": 17624,
+    "output_tokens": 3788,
+    "total_tokens": 21412
+  },
+  "billed_cost_verified": false,
+  "additional_external_calls": 0,
+  "files_sha256": {
+    "journal.jsonl": "372d50fd21a3467345ecb9db701221e6942ce7f3fe9f2dd020cfb79949435f89",
+    "predicciones.json": "7a2b6ba7bbcba6daa5a95d88afdbddb59171542f733b537fc3fb1acd2733135a",
+    "reporte.json": "79a6230acda4ddf5fe43fdda8bd69574a8a38d3843c634202967b6dbd6d061e5",
+    "run.json": "585c281f1b627b2273a6e401705d4c4c57c461b9ff1a24619780e47a5503eb6a"
+  },
+  "limitations": [
+    "Etiquetas sintéticas del asistente con conformidad general de autora, sin revisión independiente de terceros",
+    "Porcentajes sobre este conjunto, sin garantía estadística de uso real",
+    "Si se usa para ajustar el prompt se requiere otro conjunto independiente para aceptación final",
+    "Sin verificación del saldo ni factura del proveedor"
+  ]
+}

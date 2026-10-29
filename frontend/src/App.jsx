@@ -106,9 +106,14 @@ function Cases({ api, user, onSelect }) {
   </section>;
 }
 
+export function incidentFromLocation(search) {
+  const id = new URLSearchParams(search).get('incident');
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id || '') ? id : null;
+}
+
 export default function App() {
   const [user, setUser] = useState(null);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState(() => incidentFromLocation(window.location.search));
   const [notice, setNotice] = useState('');
   const [creating, setCreating] = useState(false);
   const [usersVisible, setUsersVisible] = useState(false);

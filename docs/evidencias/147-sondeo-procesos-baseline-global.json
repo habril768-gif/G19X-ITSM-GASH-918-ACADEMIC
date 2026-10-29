@@ -1,0 +1,33 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "SONDEO_PARCIAL_REVISADO_BASELINE_GLOBAL_PREPARADO",
+  "procedencia": "Salida textual de check_performance_host.ps1 pegada por la autora; no ejecución del agente.",
+  "sondeo": {
+    "duracion_s": 5.7,
+    "cpu_logicas": 4,
+    "procesos_comparados": 252,
+    "lecturas_no_disponibles": 214,
+    "mayor_proceso_visible_cpu_porcentaje_equipo": 4.8,
+    "suma_top10_porcentaje_equipo": 19.47,
+    "pids": "No conservados en esta evidencia por no ser necesarios para el análisis."
+  },
+  "interpretacion": [
+    "Ningún proceso visible concentra la CPU. No se justifica atribuir los 95,27 % previos a una aplicación concreta.",
+    "Las 214 lecturas no disponibles no equivalen necesariamente a 214 procesos distintos; no se conoce cobertura completa.",
+    "La suma del top 10 es parcial y no equivale a CPU global. Muestra posterior al smoke, sin carga del ensayo activa: no explica retrospectivamente 146.",
+    "No se cerraron ni se indicó terminar procesos por nombre."
+  ],
+  "cambio": "performance_host.py incorpora --baseline: tres intervalos de dos segundos con GetSystemTimes global, sin carga generada, procesos ajenos individualizados o cambios de configuración. Media ponderada solo con intervalos válidos; no disponibles quedan null.",
+  "validacion": {
+    "unitarias": "48 pruebas aprobadas en 1.880s, patrón test_performance*.py; dos nuevas sobre las 46 anteriores.",
+    "alcance": "CPU sintética, biblioteca estándar y Docker/ASGI simulados. Baseline global en terminal de autora pendiente."
+  },
+  "pendientes": [
+    "Obtener CPU global actual antes de decidir otra corrida diagnóstica. No repetir full automáticamente.",
+    "RNF-2 sigue pendiente y 141 conserva FALLIDA_UMBRAL; mejora localizada del correo de 146 no implica mejora global."
+  ],
+  "sha256": {
+    "backend/scripts/performance_host.py": "33abf708d3a0331be786b21a98a7f86036b54fdea05ba7767eb398390d2997ad",
+    "backend/tests/test_performance_diagnostics.py": "34e6816ced68328fbe89128a9b346a97e161c9e878594f0e03a3c9d0de5d1168"
+  }
+}

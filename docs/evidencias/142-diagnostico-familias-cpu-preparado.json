@@ -1,0 +1,123 @@
+{
+  "fecha": "2026-10-22",
+  "estado": "DIAGNOSTICO_V2_PREPARADO_DOCKER_PENDIENTE",
+  "motivo": "141 no acreditó mejora p95; distinguir familias SQL, cierre posterior a respuesta y carga del generador/host.",
+  "cambios": [
+    "Diagnóstico v2 agrupa conteos y tiempos SQL por verbo y combinación de tablas de una lista fija; no guarda SQL, parámetros, literales ni identificadores de casos.",
+    "Agregados por familia indican cantidad total y tiempos medios por petición/consulta; cotejo de sumas contra consultas y tiempo SQL global por grupo.",
+    "Separación hasta_envio (hasta entregar último cuerpo a ASGI send) y cierre (resto hasta terminar aplicación). No equivale a recepción del cliente.",
+    "CPU por fase solo con --diagnostic: time.process_time de todos los hilos del generador y GetSystemTimes global Windows. Informa porcentaje equivalente a un núcleo y normalizado por CPU lógicas.",
+    "Medidas no disponibles se expresan con null/estado, sin simular cero. Corridas normales no hacen estas lecturas CPU.",
+    "Sin cambios de autorización, servicios de negocio, bloqueos, fixture QA o umbral RNF-2. Sigue limitado a smoke."
+  ],
+  "validacion": {
+    "unitarias": "46 pruebas aprobadas en 2.536 s con unittest discover patrón test_performance*.py; seis nuevas sobre las 40 anteriores.",
+    "alcance": "Dobles ASGI sin sockets, contexto a hilos y Docker simulado; CPU comprobada con contadores sintéticos.",
+    "sql_real_local": {
+      "metodo": "Servicios reales cargados por AST y modelos reales, SQLite con expire_on_commit=True. Imports internos de cola/lock apuntan al mismo cuerpo compilado; captura por campos del esquema, sin ejecutar Pydantic/HTTP. No prueba locks PostgreSQL.",
+      "results": [
+        {
+          "operation": "create",
+          "sql": {
+            "total": 9,
+            "select": 6,
+            "insert": 3
+          },
+          "families": {
+            "SELECT/departamentos+users": {
+              "consultas": 1,
+              "ms": 0.159099989105016
+            },
+            "SELECT/roles": {
+              "consultas": 1,
+              "ms": 0.06559999019373208
+            },
+            "SELECT/departamentos": {
+              "consultas": 1,
+              "ms": 0.07449999975506216
+            },
+            "INSERT/incidencias": {
+              "consultas": 1,
+              "ms": 1.1448000004747882
+            },
+            "INSERT/historial_incidencias": {
+              "consultas": 1,
+              "ms": 0.25770001229830086
+            },
+            "SELECT/roles+departamentos+users+incidencias+incident_involved_users": {
+              "consultas": 1,
+              "ms": 0.23710000095888972
+            },
+            "SELECT/mail_deliveries": {
+              "consultas": 1,
+              "ms": 0.20120000408496708
+            },
+            "INSERT/mail_deliveries": {
+              "consultas": 1,
+              "ms": 0.4219999973429367
+            },
+            "SELECT/incidencias+incident_involved_users": {
+              "consultas": 1,
+              "ms": 0.1449000119464472
+            }
+          }
+        },
+        {
+          "operation": "edit",
+          "sql": {
+            "total": 7,
+            "select": 5,
+            "insert": 1,
+            "update": 1
+          },
+          "families": {
+            "SELECT/departamentos+users": {
+              "consultas": 1,
+              "ms": 0.16000001050997525
+            },
+            "SELECT/roles": {
+              "consultas": 2,
+              "ms": 0.10570000449661165
+            },
+            "SELECT/incidencias": {
+              "consultas": 1,
+              "ms": 0.3367000026628375
+            },
+            "SELECT/incidencias+incident_involved_users": {
+              "consultas": 1,
+              "ms": 0.12670000432990491
+            },
+            "INSERT/historial_incidencias": {
+              "consultas": 1,
+              "ms": 0.14799999189563096
+            },
+            "UPDATE/incidencias": {
+              "consultas": 1,
+              "ms": 0.34479999158065766
+            }
+          }
+        }
+      ]
+    },
+    "sql_alcance": "Callbacks reales extraídos por AST, SQLAlchemy/modelos y SQLite reales: familias suman 9 consultas de creación y 7 de edición. Sin HTTP/Pydantic ni PostgreSQL.",
+    "sondeo_windows": "GetSystemTimes devolvió contadores locales. Dos lecturas inmediatas no dieron delta válido: host_estado NO_DISPONIBLE correctamente; no se afirma CPU bajo carga medida.",
+    "estatica": "AST válido en siete archivos."
+  },
+  "limites": [
+    "Primera corrida v2 con FastAPI/PostgreSQL/Docker pendiente; no repetir full para validarla.",
+    "Familias usan reconocimiento de tablas conocidas, no huellas exactas de sentencias ni EXPLAIN. Pueden agrupar consultas diferentes y clasificar SQL no reconocido como otras.",
+    "Tiempo SQL incluye espera durante execute, sin separar CPU PostgreSQL, I/O, locks o viajes. No demuestra causa única.",
+    "CPU son promedios por fase; host incluye otras aplicaciones/VM. No mide memoria ni permite atribución exclusiva de variación.",
+    "Instrumentación añade coste. Fases SQL/commit se solapan con auth/endpoint. No sumar p95 ni comparar este smoke como acreditación RNF-2.",
+    "141 conserva FALLIDA_UMBRAL y RNF-2 sigue pendiente."
+  ],
+  "sha256": {
+    "backend/app/core/performance_timing.py": "bbf734093e01c025ad14e637fa3b2fbbf6aada01ad23cc2bf4a9b22dcea2df02",
+    "backend/app/core/performance_diagnostics.py": "776994720f1add72df9c8bfbe0eaaa33f00404f948adb3f135ebc9de41a02f36",
+    "backend/scripts/performance_runner.py": "d43903e46a5115cda1d3bc8f7b574dbd5b1eaff91cb2c32701d3b272f38699de",
+    "backend/scripts/provision_performance_qa.py": "0b54e8269877acb2b27ab5f44cb6983e9fa3df8619dfb2cf452cb4f80ef444fa",
+    "backend/scripts/performance_host.py": "7d7a4d1bc98a6d9df6451b4b258c0028bd0a2a03bc29ea309cd657f73d3a5687",
+    "backend/tests/test_performance_diagnostics.py": "5bc2d46f748b10e1e137df5d31da9488c3e260fe69a74abf865d923a29420dbb",
+    "backend/tests/test_performance_provisioner.py": "34342b14e477655b1c1d6dc77f48a696f1a3825141a44209ffa00a27be214716"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "fecha": "2026-10-20",
+  "estado": "QA_DESKTOP_APROBADA",
+  "archivos": [
+    {
+      "archivo": "powerbi/plurione_bi_QA_agregados_ficticios.pbix",
+      "bytes": 64611,
+      "sha256": "8a3f73c6f05b3c3060f30539452d787ab33953176d200ff65d1124827d33ec39",
+      "zip_crc_correcto": true
+    },
+    {
+      "archivo": "powerbi/QA/plurione_bi_QA_publicado.pbix",
+      "bytes": 65472,
+      "sha256": "ed6804ca1c3f14f56bc250aea152775564b4f796aab9103e9bd970a82c6a50ee",
+      "zip_crc_correcto": true
+    },
+    {
+      "archivo": "powerbi/QA/publicado.json",
+      "bytes": 1920,
+      "sha256": "c3428f688e5902b2080a5c989d54b251ba4faadaebb7c322de67ef209dd1167c"
+    },
+    {
+      "archivo": "powerbi/QA/suprimido.json",
+      "bytes": 1997,
+      "sha256": "b9918e4832132b1208968f3afb50da5a166e65476806c6066491b6c36752c9eb"
+    },
+    {
+      "archivo": "powerbi/QA/entrada_actual.json",
+      "bytes": 1997,
+      "sha256": "b9918e4832132b1208968f3afb50da5a166e65476806c6066491b6c36752c9eb"
+    },
+    {
+      "archivo": "powerbi/QA/Indicadores_QA.pq",
+      "bytes": 1221,
+      "sha256": "37ae795df6bf46a926338cafa0a6badf088eb46810c1bf31ab183d987975a075"
+    },
+    {
+      "archivo": "powerbi/QA/Comprobaciones.dax",
+      "bytes": 1210,
+      "sha256": "42825761a5f3f9d0ae73c042e57e3396c2bbbe06e03a462b3a2f1e243de8948e"
+    }
+  ],
+  "origen": "Dos celdas agregadas ficticias manuales en JSON, 24 campos, sin registros individuales ni consulta SQL. Cambiado únicamente el origen de la copia QA; medidas heredadas del principal sin alterar sus expresiones.",
+  "ejecucion": "Computer-use en Power BI Desktop: Guardar como, Editor avanzado, cerrar/aplicar, inspección visual y consultas DAX de solo lectura; sustitución local de fixture y Actualizar.",
+  "publicable": {
+    "celda_A": {
+      "volumen": 20,
+      "horas": 6,
+      "reapertura": 0.55,
+      "concordancia": 0.5
+    },
+    "visual_observado": [
+      "20",
+      "6.00",
+      "55.0%",
+      "50.0%"
+    ],
+    "celda_B": "Volumen 20; horas y porcentajes BLANK, estados Sin datos.",
+    "corte_ficticio": "15/01/2026 12:00:00 p.m.",
+    "controles_dax": {
+      "Dos_celdas": true,
+      "Celda_A_esperada": true,
+      "Sin_denominadores": true,
+      "Totales_BLANK": true,
+      "Corte_coherente": true
+    },
+    "ejecucion_dax_ms": 564
+  },
+  "retirada": {
+    "accion": "Copiar suprimido.json a entrada_actual.json y pulsar Actualizar en la copia QA.",
+    "celda_A": "Texto Suprimido por privacidad y las cuatro medidas vacías; desaparecieron valores anteriores.",
+    "celda_B": "Volumen 20 conservado; horas y porcentajes vacíos.",
+    "corte_ficticio": "15/01/2026 12:01:00 p.m.; comprobado por DAX Corte_coherente después de repetir Ejecutar.",
+    "controles_dax": {
+      "Dos_celdas": true,
+      "Celda_A_esperada": true,
+      "Sin_denominadores": true,
+      "Totales_BLANK": true,
+      "Corte_coherente": true
+    },
+    "ejecucion_dax_ms": 220.7
+  },
+  "principal_no_modificado_por_qa": "2eba3a958b14efc29e3ebf38991c55e9dbc92c82263d09efa5e151eb46b6b636",
+  "limites": [
+    "Los cinco controles se repiten en dos estados del mismo fixture; no son diez escenarios de negocio ni pruebas backend nuevas.",
+    "Fechas del fixture fijas y simuladas, no hora de ejecución.",
+    "La condición publicable/suprimida se escribió a mano: no acredita una transición de elegibilidad SQL hacia Desktop.",
+    "No acredita cierre integral de privacidad, custodia, retirada de copias previamente distribuidas ni publicación autorizada.",
+    "Las copias QA conservan solo datos simulados y se identifican por nombre; no distribuirlas como resultados del sistema.",
+    "Sin capturas versionadas con nombre real de cuenta, llamadas IA o correos."
+  ],
+  "incidencias_herramientas": [
+    "Una captura tras aplicar PQ agotó tiempo; recuperada al localizar/activar de nuevo la ventana.",
+    "Primera lectura del DAX del PBIX como UTF-8 falló; se comprobó prefijo UTF-16LE y se decodificó correctamente sin modificar el PBIX."
+  ]
+}

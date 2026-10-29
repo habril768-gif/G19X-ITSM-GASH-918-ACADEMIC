@@ -1,0 +1,38 @@
+{
+  "fecha_registro": "2026-10-27",
+  "fuente": "Salida PowerShell compartida por el usuario; sin ejecución adicional del agente.",
+  "comando": ".\\backend\\.venv\\Scripts\\python.exe -B backend/scripts/run_performance_full_guarded.py --confirm-isolated-qa",
+  "estado": "NO_INICIADA_CPU_PREVIA",
+  "cpu_previa": {
+    "modo": "CPU_GLOBAL_SIN_CARGA_GENERADA",
+    "intervalos": [
+      {
+        "duracion_s": 2.0534231000001455,
+        "cpu_global_porcentaje": 77.82026768642447,
+        "estado": "OK"
+      },
+      {
+        "duracion_s": 2.0237812999998823,
+        "cpu_global_porcentaje": 94.9317738791423,
+        "estado": "OK"
+      },
+      {
+        "duracion_s": 2.0037005999997746,
+        "cpu_global_porcentaje": 78.515625,
+        "estado": "OK"
+      }
+    ],
+    "intervalos_validos": 3,
+    "intervalos_totales": 3,
+    "media_cpu_global_porcentaje": 83.74425993989351
+  },
+  "umbrales_operativos": {
+    "media_cpu_max_porcentaje": 30.0,
+    "intervalo_cpu_max_porcentaje": 50.0
+  },
+  "resultado": "La guardia rechazó el arranque antes de comandos Docker, limpieza de redes o carga, conforme al flujo de 178. No hay séptima formal, p95 nuevo ni reporte formal nuevo por este intento.",
+  "validacion": "Integración real del rechazo por CPU alta observada en la salida del usuario. No valida el camino de arranque con CPU baja ni una formal completa. Sin cambios de código ni nuevas pruebas de API.",
+  "limites": "CPU global actual: no identifica procesos, causa única ni condiciones de corridas anteriores. Los límites 30/50 son operativos; se conserva RNF-2 p95<200 ms por operación con diez clientes.",
+  "pendiente": "Identificar actividad actual con observación de solo lectura si se desea continuar ahora, preservando Brave durante la videollamada. Evitar repetir cargas o guardias en bucle. Ejecutar formal cuando la condición previa permita iniciar.",
+  "rnf2": "Pendiente; se conservan las seis formales fallidas y la última regresión de 117 pruebas/63 subpruebas de 176."
+}

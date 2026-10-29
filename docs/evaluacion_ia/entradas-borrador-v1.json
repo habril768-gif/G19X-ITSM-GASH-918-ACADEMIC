@@ -1,0 +1,277 @@
+[
+  {
+    "id": "EVAL-C1-01",
+    "scope": "PERSONA",
+    "text": "La persona asignada al relevo no acudió ni avisó. Quien cubre el puesto de vigilancia lleva una jornada extendida y comunica agotamiento; el puesto debe cubrirse inmediatamente para mantener el control de acceso."
+  },
+  {
+    "id": "EVAL-C2-08",
+    "scope": "PERSONA",
+    "text": "Dos integrantes tuvieron un desacuerdo de tono menor hace varias semanas. Ya colaboran normalmente y solicitan una conversación de seguimiento sin fecha límite."
+  },
+  {
+    "id": "EVAL-C4-05",
+    "scope": "ENTORNO",
+    "text": "Una luminaria quedó suelta en un cuarto sin uso. El cuarto está cerrado y señalizado; se requiere mantenimiento antes de la actividad de la próxima semana."
+  },
+  {
+    "id": "EVAL-A-02",
+    "scope": "PERSONA",
+    "text": "Necesito orientación, pero todavía no puedo explicar lo sucedido ni a qué trámite se refiere."
+  },
+  {
+    "id": "EVAL-C2-04",
+    "scope": "PERSONA",
+    "text": "Dos integrantes se niegan a coordinarse tras una discusión sobre tareas. La entrega de hoy está retrasada, sin amenazas ni agresiones."
+  },
+  {
+    "id": "EVAL-C4-01",
+    "scope": "ENTORNO",
+    "text": "En una simulación se detecta un cable eléctrico con conductores expuestos en un área que continúa en uso. Nadie ha aislado el punto y existe peligro de contacto inmediato."
+  },
+  {
+    "id": "EVAL-C5-08",
+    "scope": "PERSONA",
+    "text": "Se solicita una copia de una constancia antigua para archivo personal. No hay fecha límite ni proceso detenido."
+  },
+  {
+    "id": "EVAL-C1-10",
+    "scope": "PERSONA",
+    "text": "La persona informa que no acudió a una actividad interna opcional y pide revisar por qué se registró una falta. No existen consecuencias pendientes ni plazo de respuesta."
+  },
+  {
+    "id": "EVAL-C3-07",
+    "scope": "PERSONA",
+    "text": "Se incumplió la regla interna de registrar movimientos del almacén. El inventario debe conciliarse esta semana y hay entregas pendientes, sin riesgo inmediato."
+  },
+  {
+    "id": "EVAL-C5-04",
+    "scope": "PERSONA",
+    "text": "Se solicita actualizar un dato del expediente para completar una gestión interna de esta semana. El trámite está detenido, pero no vence hoy ni se pierde un derecho."
+  },
+  {
+    "id": "EVAL-C1-06",
+    "scope": "PERSONA",
+    "text": "Una persona faltó sin aviso a la apertura de atención interna. Se acumulan solicitudes y la cobertura temporal permite seguir atendiendo con demora."
+  },
+  {
+    "id": "EVAL-C3-03",
+    "scope": "PERSONA",
+    "text": "Una persona está omitiendo la verificación obligatoria antes de liberar un lote. El despacho sale en minutos y la omisión puede causar la retirada total del producto y suspensión de operación."
+  },
+  {
+    "id": "EVAL-C4-10",
+    "scope": "ENTORNO",
+    "text": "Se solicita seguimiento documental de un incidente menor sin lesión ocurrido durante un ejercicio. La causa fue eliminada y el área ya se verificó segura."
+  },
+  {
+    "id": "EVAL-C1-02",
+    "scope": "PERSONA",
+    "text": "No se presentó quien debía sustituir a la persona que controla el acceso a una zona peligrosa. El turno inicia ahora y no existe otra cobertura disponible."
+  },
+  {
+    "id": "EVAL-C2-09",
+    "scope": "PERSONA",
+    "text": "Se pide mediación por preferencias distintas sobre la música en un espacio de descanso. Nadie ha amenazado a otra persona y el trabajo continúa normalmente."
+  },
+  {
+    "id": "EVAL-C4-06",
+    "scope": "ENTORNO",
+    "text": "Una pequeña fuga afecta un lavadero fuera de servicio. El paso está aislado y existe otro lavadero operativo; se necesita reparar para restablecerlo esta semana."
+  },
+  {
+    "id": "EVAL-A-03",
+    "scope": "PERSONA",
+    "text": "En esta simulación se pide una receta de cocina para una comida familiar."
+  },
+  {
+    "id": "EVAL-C2-05",
+    "scope": "PERSONA",
+    "text": "Un desacuerdo recurrente por la distribución de llamadas impide organizar el turno de mañana. Se pide mediación pronta y no hubo amenazas."
+  },
+  {
+    "id": "EVAL-C4-02",
+    "scope": "ENTORNO",
+    "text": "Una estantería se inclina y varios objetos pesados están a punto de caer junto a un paso utilizado. Se necesita aislar el área de inmediato."
+  },
+  {
+    "id": "EVAL-C5-09",
+    "scope": "PERSONA",
+    "text": "Se pide actualizar un dato de contacto ficticio en el expediente. No se proporciona el dato y no hay plazo, pago ni actividad afectados."
+  },
+  {
+    "id": "EVAL-C2-01",
+    "scope": "PERSONA",
+    "text": "Dos integrantes discuten en este momento por el uso de un escritorio y uno intenta golpear al otro. Se necesita intervención inmediata para evitar lesiones."
+  },
+  {
+    "id": "EVAL-C3-08",
+    "scope": "PERSONA",
+    "text": "Un documento archivado no utiliza la plantilla interna obligatoria. Su contenido es correcto y no hay trámites detenidos ni fecha límite para corregirlo."
+  },
+  {
+    "id": "EVAL-C5-05",
+    "scope": "PERSONA",
+    "text": "Se pide una constancia para una revisión interna programada mañana. Su ausencia retrasaría la revisión, sin cancelación de beneficios ni amenaza a la seguridad."
+  },
+  {
+    "id": "EVAL-C1-07",
+    "scope": "PERSONA",
+    "text": "Se registraron varios retardos esta semana y el equipo necesita reorganizar hoy las tareas de inicio. No hay actividades de seguridad ni un plazo de consecuencias graves."
+  },
+  {
+    "id": "EVAL-C3-04",
+    "scope": "PERSONA",
+    "text": "Se omitió el formato interno obligatorio de entrega y el siguiente turno no puede conciliar hoy los materiales. No existe peligro inmediato."
+  },
+  {
+    "id": "EVAL-C5-01",
+    "scope": "PERSONA",
+    "text": "Se solicita una constancia laboral para una gestión que vence hoy. Si no se presenta en dos horas se pierde de forma definitiva un apoyo económico indispensable; el resto de documentos está completo."
+  },
+  {
+    "id": "EVAL-C1-03",
+    "scope": "PERSONA",
+    "text": "La persona encargada de entregar una declaración obligatoria faltó sin aviso. El plazo vence en una hora y, sin sustitución, se pierde una autorización indispensable para operar."
+  },
+  {
+    "id": "EVAL-C2-10",
+    "scope": "PERSONA",
+    "text": "Una persona percibió un comentario como descortés en una reunión pasada. Solicita aclararlo cuando haya disponibilidad; no hay reiteración ni trabajo afectado."
+  },
+  {
+    "id": "EVAL-C4-07",
+    "scope": "ENTORNO",
+    "text": "Durante una revisión se detectó desgaste en una rueda de un carro de carga. Se retiró de uso y el equipo necesita reparación para la operación de mañana."
+  },
+  {
+    "id": "EVAL-A-04",
+    "scope": "PERSONA",
+    "text": "En esta simulación se solicita resolver un ejercicio de geometría para una clase particular."
+  },
+  {
+    "id": "EVAL-C2-06",
+    "scope": "PERSONA",
+    "text": "Dos integrantes dejaron de compartir información después de una discusión y eso retrasa el cierre del trabajo de esta semana. No hay riesgo físico."
+  },
+  {
+    "id": "EVAL-C4-03",
+    "scope": "ENTORNO",
+    "text": "Se observa humo saliendo de una toma eléctrica en una zona ocupada. La condición sigue presente y amenaza la seguridad de quienes están cerca."
+  },
+  {
+    "id": "EVAL-C5-10",
+    "scope": "PERSONA",
+    "text": "Se solicita información sobre los documentos necesarios para un trámite que se realizará dentro de varios meses. No hay vencimiento próximo."
+  },
+  {
+    "id": "EVAL-C2-02",
+    "scope": "PERSONA",
+    "text": "Durante una discusión por turnos, una persona bloquea físicamente la salida de otra y amenaza con empujarla. La situación sigue ocurriendo."
+  },
+  {
+    "id": "EVAL-C3-09",
+    "scope": "PERSONA",
+    "text": "Se usó una denominación distinta a la exigida por la política interna al guardar una copia histórica. El archivo se localiza y no afecta el trabajo actual."
+  },
+  {
+    "id": "EVAL-C5-06",
+    "scope": "PERSONA",
+    "text": "Se solicita corregir el turno indicado en una carta administrativa antes de la reunión de planificación de esta semana. La corrección permite continuar el proceso."
+  },
+  {
+    "id": "EVAL-C1-08",
+    "scope": "PERSONA",
+    "text": "Se desea aclarar un retardo de pocos minutos ocurrido el mes pasado. La jornada ya fue conciliada y no quedan tareas ni pagos pendientes."
+  },
+  {
+    "id": "EVAL-C3-05",
+    "scope": "PERSONA",
+    "text": "Se utilizó equipo de trabajo para una actividad no autorizada y falta devolverlo para las tareas programadas de esta tarde. No está dañado ni representa un peligro."
+  },
+  {
+    "id": "EVAL-C5-02",
+    "scope": "PERSONA",
+    "text": "Se solicita corregir un dato del expediente necesario para una prestación. El plazo vence esta tarde y la falta de corrección cancela definitivamente el beneficio; no existe otra vía de entrega."
+  },
+  {
+    "id": "EVAL-C1-04",
+    "scope": "PERSONA",
+    "text": "La persona que recibe materiales llegó una hora tarde sin autorización. Hay entregas detenidas, pero otro turno mantiene la operación básica sin peligro."
+  },
+  {
+    "id": "EVAL-C3-01",
+    "scope": "PERSONA",
+    "text": "Se está usando una máquina pese a la prohibición interna de operarla con la protección retirada. La actividad continúa y alguien puede sufrir una lesión ahora."
+  },
+  {
+    "id": "EVAL-C4-08",
+    "scope": "ENTORNO",
+    "text": "Se registra para seguimiento una condición insegura menor detectada en una simulación anterior. Ya se corrigió y verificó; no queda exposición ni plazo pendiente."
+  },
+  {
+    "id": "EVAL-A-05",
+    "scope": "PERSONA",
+    "text": "El mensaje recibido está incompleto: solamente dice «lo de ayer». No se conocen hechos, contexto ni consecuencias."
+  },
+  {
+    "id": "EVAL-C2-07",
+    "scope": "PERSONA",
+    "text": "Hay reclamos cruzados por el uso de una sala compartida. La reunión de trabajo de esta tarde no puede organizarse hasta acordar su uso; no hay amenazas."
+  },
+  {
+    "id": "EVAL-C4-04",
+    "scope": "ENTORNO",
+    "text": "Se encontró un escalón deteriorado en un acceso secundario. El acceso está acordonado y hay una ruta segura; hace falta reparar pronto antes de reabrir."
+  },
+  {
+    "id": "EVAL-A-01",
+    "scope": "PERSONA",
+    "text": "Ocurrió algo en el trabajo y necesito ayuda."
+  },
+  {
+    "id": "EVAL-C2-03",
+    "scope": "PERSONA",
+    "text": "Una disputa por herramientas está escalando: las personas se están empujando mientras otras intentan separarlas. El riesgo de lesión es inmediato."
+  },
+  {
+    "id": "EVAL-C3-10",
+    "scope": "PERSONA",
+    "text": "Se omitió una firma interna en el registro de una actividad ya terminada. La información está disponible, no hay disputa ni pago o trámite detenido."
+  },
+  {
+    "id": "EVAL-C5-07",
+    "scope": "PERSONA",
+    "text": "Se solicita copia de un comprobante para completar una conciliación interna prevista para mañana. Hay tiempo para prepararlo y no se describe pérdida grave."
+  },
+  {
+    "id": "EVAL-C1-09",
+    "scope": "PERSONA",
+    "text": "Una salida breve sin permiso quedó registrada hace varias semanas. Se recuperó el tiempo y solo falta revisar el registro, sin fecha límite."
+  },
+  {
+    "id": "EVAL-C3-06",
+    "scope": "PERSONA",
+    "text": "No se realizó la revisión interna obligatoria de una orden y ahora debe corregirse antes de continuar el trabajo de mañana. No existe amenaza a la seguridad."
+  },
+  {
+    "id": "EVAL-C5-03",
+    "scope": "PERSONA",
+    "text": "Se pide emitir un comprobante de antigüedad requerido para conservar una cobertura. La recepción cierra en una hora y no entregarlo suspende una protección esencial desde hoy."
+  },
+  {
+    "id": "EVAL-C1-05",
+    "scope": "PERSONA",
+    "text": "Se solicitó retirarse antes de terminar el turno y se abandonó el puesto sin autorización. El equipo está redistribuyendo las tareas pendientes para entregar hoy."
+  },
+  {
+    "id": "EVAL-C3-02",
+    "scope": "PERSONA",
+    "text": "Se incumple en este momento el procedimiento que exige desconectar el equipo antes de intervenirlo. La reparación está en curso con alimentación eléctrica."
+  },
+  {
+    "id": "EVAL-C4-09",
+    "scope": "ENTORNO",
+    "text": "Una revisión preventiva de un espacio cerrado y sin uso señala un borde áspero de mobiliario almacenado. No hay acceso ni reutilización programada."
+  }
+]

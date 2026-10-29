@@ -1,0 +1,27 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "75_APROBADAS_SEGUN_CAPTURA_AUTORA",
+  "fuente": "codex-clipboard-710d36d6-f5dd-4ddd-bde7-47148266f248.png",
+  "procedencia": "Autora ejecutó; agente revisó captura de terminal, no se atribuye su ejecución.",
+  "resultado_visible": "75 passed in 12.91s",
+  "archivos": [
+    "backend/tests/test_lifecycle_role_queries.py",
+    "backend/tests/test_incidents.py",
+    "backend/tests/test_user_administration.py",
+    "backend/tests/test_mail.py",
+    "backend/tests/test_write_responses.py"
+  ],
+  "configuracion_visible": {
+    "SSLKEYLOGFILE": "",
+    "RUN_DB_TESTS": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "pytest": "-q -p no:cacheprovider -c backend/pytest.ini"
+  },
+  "alcance": "Regresión seleccionada tras 151, incluidos sus seis casos nuevos: lectura de rol, permiso denegado, elegibilidad y bajada de rol entre peticiones.",
+  "limites": [
+    "No es suite completa; selección distinta de las 77 anteriores, sin sumar conteos ni inferir menor cobertura por el número.",
+    "Fixtures SQLite/TestClient y dependencias sustituidas, sin prueba de carreras/advisory locks reales PostgreSQL.",
+    "No hay diagnóstico o formal posterior a 151; la sexta formal 150 sigue fuera de umbral. RNF-2 pendiente."
+  ],
+  "siguiente_paso": "Una corrida smoke diagnóstica v2 para verificar el coste de SELECT/roles en edición y los conteos. No repetir full automáticamente."
+}

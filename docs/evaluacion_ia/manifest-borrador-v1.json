@@ -1,0 +1,37 @@
+{
+  "version": "borrador-v1",
+  "prepared_on": "2026-10-17",
+  "prepared_by": "Asistente Codex; textos sinteticos basados en PRD 1.9",
+  "human_review_completed": false,
+  "labels_frozen": false,
+  "predictions_generated": false,
+  "external_calls": 0,
+  "reference_cases": 50,
+  "abstention_cases": 5,
+  "category_counts": {
+    "1": 10,
+    "2": 10,
+    "3": 10,
+    "4": 10,
+    "5": 10
+  },
+  "priority_counts": {
+    "1": 15,
+    "2": 20,
+    "3": 15
+  },
+  "sha256": {
+    "referencias-borrador-v1.json": "3cdc7700a640f365992dc24c370bd4656b30510fd748ad85ef364df90c6e8a66",
+    "entradas-borrador-v1.json": "7360f347ac1563be37a192ec5122d1d54e67a265f7596b790158940e2b099ee5",
+    "REVISION.md": "501ad1c5387a9af433edc533d0b6cb3fd491a0e416f1f61d43616352b1109997"
+  },
+  "validation": "55 textos unicos, contratos AIInput, distribucion, proyeccion sin etiquetas y compatibilidad offline verificadas; sin medir calidad",
+  "hash_normalization": "UTF-8, saltos LF; normalizar CRLF antes de verificar",
+  "author_conformity": {
+    "reported": true,
+    "reported_on": "2026-10-18",
+    "scope": "Conformidad general de la autora: los casos estan bien",
+    "independent_third_party_review": false,
+    "individual_label_review_observed": false
+  }
+}

@@ -117,11 +117,14 @@ def protect_case(db, actor, case_id, operation, body, participant_id=None):
         after = snapshot(case)
         after["is_confidential"] = case.is_confidential
         case.updated_at = now
-        db.add(AuditEvent(incidencia_id=case.id, usuario_id=actor.id, accion="CAMBIO_CONFIDENCIALIDAD",
+        event = AuditEvent(incidencia_id=case.id, usuario_id=actor.id, accion="CAMBIO_CONFIDENCIALIDAD",
                          detalle={"operation": operation, "reason": getattr(body, "reason", None) or getattr(body, "declaration_reason", None),
                                   "participant_id": str(participant_id) if participant_id else None,
                                   "relation_before": relation_before, "relation_after": relation_after,
-                                  "before": before, "after": after}))
+                                  "before": before, "after": after})
+        db.add(event)
+        from app.services.mail import queue_event
+        queue_event(db, case, event, before)
         db.commit()
         can_view = db.scalar(select(Incident.id).where(Incident.id == case.id, visibility(db, actor))) is not None
         return {"id": case.id, "received": True, "can_view": can_view}

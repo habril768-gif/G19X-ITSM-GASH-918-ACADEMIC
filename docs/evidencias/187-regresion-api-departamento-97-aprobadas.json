@@ -1,0 +1,40 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "REGRESION_SELECCIONADA_APROBADA",
+  "fuente": "Salida PowerShell del usuario; pytest ejecutado por el usuario, no por el agente.",
+  "pruebas_aprobadas": 97,
+  "subpruebas_aprobadas": 8,
+  "duracion_s": 8.56,
+  "seleccion": [
+    "backend/tests/test_creation_department_reuse.py",
+    "backend/tests/test_administration_role_join.py",
+    "backend/tests/test_administration_lock_queries.py",
+    "backend/tests/test_lifecycle_role_queries.py",
+    "backend/tests/test_incidents.py",
+    "backend/tests/test_departments.py",
+    "backend/tests/test_user_administration.py",
+    "backend/tests/test_write_responses.py"
+  ],
+  "entorno": {
+    "SSLKEYLOGFILE": "",
+    "RUN_DB_TESTS": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "opciones": "-B -m pytest -q -p no:cacheprovider -c backend/pytest.ini",
+  "identidad": "Los tres archivos declarados en186 coinciden sin diferencias.",
+  "sha256": {
+    "backend/app/services/administration_lock.py": "80d05855946fc6938e654d115e4fda3ab6d8d3e2eef0a4210da7622a04b58731",
+    "backend/app/services/incidents.py": "5ed64195113a8f976685f13c90315b2d80e6f30e8e45c96246b42e3e68162b00",
+    "backend/tests/test_creation_department_reuse.py": "388cc88166f73b95dc7a62373e0c5c0c199d2d7f0b4eb99451cf90a77368846e",
+    "backend/tests/test_administration_role_join.py": "3b9a21af2e2fe7eb3b56245c25d64703335e53221c5be51d361777a7a752023e",
+    "backend/tests/test_administration_lock_queries.py": "b5cb1af60d68f61aa9527ef78df999a40bcf134eaa99888c820707ca4d66c4a7",
+    "backend/tests/test_lifecycle_role_queries.py": "800741e94b8c7ef8b01dd6213c089de1985b3d90f1bce6a0d3095694eebba9df",
+    "backend/tests/test_incidents.py": "a58f4eb9b9b8748668c394514fa8b1c9755cccb048d849afef559717c5d8fb16",
+    "backend/tests/test_departments.py": "e56b713bc682e98f5fac87f4c52fd0249c6fa13556f9a090990578737a508a99",
+    "backend/tests/test_user_administration.py": "0b0df988ea34573164750d1b3e3938a90a0e7279bb7e96637190e16390d4cd5c",
+    "backend/tests/test_write_responses.py": "8aea6b3e970c8531aa46064862c46dddebd1f93940251feb11a836488a12df0b"
+  },
+  "alcance": "Seleccion mixta de unitarias y API: departamento revalidado, rol/lock administrativo, gestion, incidencias, departamentos, usuarios y respuestas de escritura. No afirmar 97 HTTP exclusivamente.",
+  "limites": "RUN_DB_TESTS=0 no valida bloqueo o ejecucion PostgreSQL reales ni p95. Sin cambio de producto ni nueva carga por el agente. RNF-2 pendiente; siete formales fallidas conservadas.",
+  "pendiente": "Un smoke diagnostico PostgreSQL QA para comprobar creacion propia 10->9 consultas, otro departamento y permisos sin alterar contrato, auditoria/outbox y parada. No repetir formal ahora."
+}

@@ -21,3 +21,7 @@ Thumbs.db
 # Local data
 *.log
 .pgdata/
+
+# Capturas originales de Power BI con nombre de cuenta: solo locales.
+docs/evidencias/96-powerbi-tabla-privacidad-corte.png
+docs/evidencias/97-powerbi-medidas-privacidad.png

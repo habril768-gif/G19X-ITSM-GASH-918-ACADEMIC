@@ -1,0 +1,36 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "REGRESION_SELECCIONADA_APROBADA",
+  "fuente": "Salida PowerShell compartida por el usuario; pytest ejecutado por el usuario, no por el agente.",
+  "pruebas_aprobadas": 85,
+  "duracion_s": 17.9,
+  "seleccion": [
+    "backend/tests/test_outbox_cached_insert.py",
+    "backend/tests/test_mail_multivalues.py",
+    "backend/tests/test_mail_batching.py",
+    "backend/tests/test_mail.py",
+    "backend/tests/test_incidents.py",
+    "backend/tests/test_write_responses.py"
+  ],
+  "entorno": {
+    "SSLKEYLOGFILE": "",
+    "RUN_DB_TESTS": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "opciones": "-B -m pytest -q -p no:cacheprovider -c backend/pytest.ini",
+  "alcance": "Seleccion mixta de unitarias de outbox y regresiones por API, correo, incidencias y respuestas transaccionales. No afirmar 85 pruebas exclusivamente HTTP.",
+  "identidad": {
+    "hashes_183_coincidentes": true,
+    "sha256": {
+      "backend/app/services/mail.py": "3604fd8307afc1501858df39fc55c5544e088c03ecc18036e5e06ad3cf9405a0",
+      "backend/tests/test_outbox_cached_insert.py": "6c64343f8b80793a36316f5db96aa02e316651c12b5cafddd6391d9b03a87910",
+      "backend/tests/test_mail_multivalues.py": "ba4b5624f7acba7ae9e5539b2bfee2bc78e7ed279bd23119839fdfcb4619b431",
+      "backend/tests/test_mail_batching.py": "c5598d5f947e0034865e86d147a5b70c78d67c191e8cb39c5d8ce8fca10b5435",
+      "backend/tests/test_mail.py": "f3a7d21b77dcb14ef38335829a1464413ce03ececdfb09b42bb163636bd0c778",
+      "backend/tests/test_incidents.py": "a58f4eb9b9b8748668c394514fa8b1c9755cccb048d849afef559717c5d8fb16",
+      "backend/tests/test_write_responses.py": "8aea6b3e970c8531aa46064862c46dddebd1f93940251feb11a836488a12df0b"
+    }
+  },
+  "limites": "RUN_DB_TESTS=0: no valida PostgreSQL real ni mide rendimiento. No nueva carga formal/smoke ejecutada por el agente. Siete formales FALLIDA_UMBRAL conservadas; RNF-2 pendiente.",
+  "pendiente": "Un diagnostico QA smoke instrumentado, PostgreSQL real aislado, precedido de limpieza existente de hasta dos redes QA vacias. Verificar auditoria, outbox, cero SMTP/IA, errores HTTP, SQL/hilos y parada; no inferir acreditacion RNF-2 del smoke."
+}

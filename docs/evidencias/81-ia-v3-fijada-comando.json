@@ -1,0 +1,36 @@
+{
+  "recorded_on": "2026-10-18",
+  "dataset": "docs/evaluacion_ia/aceptacion-v3",
+  "author_review": {
+    "reported": true,
+    "scope": "Pares Media/Baja, casos Alta y abstenciones; acuerdo con etiquetas y justificaciones",
+    "independent_third_party": false
+  },
+  "labels_frozen": true,
+  "reference_changes": false,
+  "checks": {
+    "normalized_hashes": 3,
+    "json_equivalence_with_candidate": true,
+    "powershell_parser": true,
+    "preview_no_docker": true,
+    "mocked_v3_arguments_correct": true,
+    "build_failure_stops": true
+  },
+  "external_calls": 0,
+  "predictions_generated": false,
+  "complementary_target": {
+    "medium_min_correct": 16,
+    "medium_cases": 20,
+    "low_min_correct": 16,
+    "low_cases": 20,
+    "contrast_pairs": 20
+  },
+  "global_targets_unchanged": true,
+  "backend_tests": "154 previas; sin cambios y no repetidas",
+  "limitations": [
+    "Pruebas con Docker simulado, sin proveedor externo",
+    "Sin medir precisión v3 ni mejora real",
+    "Conformidad no equivale a aprobación de calidad",
+    "Sin verificar saldo/coste de cuenta"
+  ]
+}

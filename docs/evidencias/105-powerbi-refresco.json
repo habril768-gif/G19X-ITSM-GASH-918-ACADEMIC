@@ -1,0 +1,23 @@
+{
+  "fecha": "2026-10-20",
+  "estado": "REFRESCO_CONFIRMADO_Y_GUARDADO",
+  "archivo": {
+    "archivo": "powerbi/plurione_bi.pbix",
+    "bytes": 64678,
+    "sha256": "2eba3a958b14efc29e3ebf38991c55e9dbc92c82263d09efa5e151eb46b6b636",
+    "zip_crc_correcto": true
+  },
+  "ejecucion": "La autora confirmó ejecutar compose con capa BI y actualizar Desktop; el agente observó después el informe sin aviso de error y guardó con Ctrl+S.",
+  "corte_antes": "18/10/2026 09:02:54 p.m.",
+  "corte_despues": "20/10/2026 10:06:02 a.m.",
+  "celdas_observadas": 3,
+  "privacidad": "Suprimido por privacidad; números vacíos",
+  "origen": "Se conserva el origen PostgreSQL agregado auditado en 104. Hash principal estable durante toda la prueba QA.",
+  "limites": [
+    "No se capturó salida de la orden Docker de la autora ni se certificaron sus parámetros desde la CLI.",
+    "No se disminuyó el umbral, no se crearon incidencias y no se cambió el origen del informe principal.",
+    "La supresión de las tres celdas no es un error ni tres incidencias.",
+    "Evidencia 104 del refresco fallido se conserva."
+  ],
+  "reabierto_despues_de_qa": "Informe principal reabierto desde recientes en segunda ventana; corte 20/10/2026 10:06:02 a.m. y ausencia de aviso observados. Copia QA guardada por separado."
+}

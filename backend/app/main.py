@@ -11,15 +11,16 @@ from app.api.health import router as health_router
 from app.api.users import router as users_router
 from app.api.departments import router as departments_router
 from app.api.ai import router as ai_router
+from app.api.mail import router as mail_router
 
 
 def create_app() -> FastAPI:
     app = FastAPI(
         title="PluriOne API",
-        version="0.10.0",
+        version="0.12.0",
         description=(
-            "API de GestiÃƒÂ³n de Incidencias Laborales. "
-            "Disponibilidad del proceso y conexiÃƒÂ³n PostgreSQL con esquema versionado."
+            "API de Gestión de Incidencias Laborales con autenticación local, "
+            "gestión de expedientes, auditoría y seguimiento de asistencia IA y correo."
         ),
     )
     @app.exception_handler(SQLAlchemyError)
@@ -37,6 +38,7 @@ def create_app() -> FastAPI:
     app.include_router(users_router)
     app.include_router(departments_router)
     app.include_router(ai_router)
+    app.include_router(mail_router)
     return app
 
 

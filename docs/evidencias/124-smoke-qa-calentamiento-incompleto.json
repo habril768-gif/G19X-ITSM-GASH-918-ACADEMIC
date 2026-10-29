@@ -1,0 +1,137 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "SMOKE_REAL_INCOMPLETO_CONEXIONES_AJUSTADAS",
+  "run_id": "d1c2d490b7df42b4",
+  "captura": "codex-clipboard-62bc07f9-1516-4c73-a031-8976c947c445.png",
+  "fuente": {
+    "reporte_local": ".pgdata/performance-d1c2d490b7df42b4/report.json",
+    "sha256": "560b720c08ef7f9f15c2644d42c38400beaf9d9b0272d5481e8c629cfc243dde",
+    "lectura": "Reporte real leído por el agente; original preservado."
+  },
+  "observado": {
+    "salud_host_previa": {
+      "intentos": 1,
+      "errores": {},
+      "resultado": "OK"
+    },
+    "http_estado": "INCOMPLETA",
+    "http_error": "CALENTAMIENTO_INCOMPLETO",
+    "calentamiento": {
+      "inicio_utc": "2026-10-22T15:24:32.213095+00:00",
+      "fin_utc": "2026-10-22T15:24:32.344293+00:00",
+      "duracion_objetivo_s": 2,
+      "duracion_hasta_ultima_respuesta_s": 0.13007959999958985,
+      "clientes": 10,
+      "completa": false,
+      "metricas": {
+        "listado": {
+          "intentos": 10,
+          "exitos": 6,
+          "errores": 4,
+          "estados": {
+            "EXCEPTION": 4,
+            "200": 6
+          },
+          "tasa_error": 0.4,
+          "solicitudes_por_segundo": 5.0,
+          "min_ms": 52.39670000446495,
+          "mediana_ms": 112.52595000041765,
+          "p95_exitos_ms": 128.62419999873964,
+          "p99_exitos_ms": 128.62419999873964,
+          "max_ms": 128.62419999873964,
+          "p95_todos_ms": 128.62419999873964,
+          "finalizadas_fuera_ventana": 0
+        },
+        "detalle": {
+          "intentos": 0,
+          "exitos": 0,
+          "errores": 0,
+          "estados": {},
+          "tasa_error": null,
+          "solicitudes_por_segundo": 0.0,
+          "min_ms": null,
+          "mediana_ms": null,
+          "p95_exitos_ms": null,
+          "p99_exitos_ms": null,
+          "max_ms": null,
+          "p95_todos_ms": null,
+          "finalizadas_fuera_ventana": 0
+        },
+        "creacion": {
+          "intentos": 0,
+          "exitos": 0,
+          "errores": 0,
+          "estados": {},
+          "tasa_error": null,
+          "solicitudes_por_segundo": 0.0,
+          "min_ms": null,
+          "mediana_ms": null,
+          "p95_exitos_ms": null,
+          "p99_exitos_ms": null,
+          "max_ms": null,
+          "p95_todos_ms": null,
+          "finalizadas_fuera_ventana": 0
+        },
+        "actualizacion": {
+          "intentos": 0,
+          "exitos": 0,
+          "errores": 0,
+          "estados": {},
+          "tasa_error": null,
+          "solicitudes_por_segundo": 0.0,
+          "min_ms": null,
+          "mediana_ms": null,
+          "p95_exitos_ms": null,
+          "p99_exitos_ms": null,
+          "max_ms": null,
+          "p95_todos_ms": null,
+          "finalizadas_fuera_ventana": 0
+        }
+      },
+      "creados": 0,
+      "inicio_clientes_offset_ms": [
+        1.0619000022416003,
+        1.2151000046287663,
+        1.2858000045525841,
+        1.3432999985525385,
+        1.3974000030430034,
+        1.450800002203323,
+        1.4961999986553565,
+        1.5368000022135675,
+        1.5882000006968156,
+        1.6327000048477203
+      ]
+    },
+    "revocacion_sesiones": {
+      "204": 10
+    },
+    "sql": {
+      "incidencias": 100,
+      "eventos_creado": 100,
+      "eventos_editado": 0,
+      "entregas_encoladas": 1000,
+      "intentos_smtp": 0,
+      "trabajos_ia": 0
+    },
+    "contenedores_detenidos": true,
+    "medicion_formal": false
+  },
+  "interpretacion": "Acceso HTTP inicial y preflight exitosos. Calentamiento se detuvo a unos 0.13 s tras diez listados, seis exitosos y cuatro EXCEPTION. No hubo detalle, creación o edición de carga ni fase medida. El p95 parcial no acredita RNF-2.",
+  "hipotesis": "Sockets keep-alive abiertos durante preparación secuencial pueden caducar antes de su reutilización concurrente. Tipos de excepción no conservados en el reporte original; causa específica aún no demostrada.",
+  "correccion": [
+    "Cerrar conexiones antes de la barrera de cada fase conservando tokens; mantener conexiones persistentes dentro de la fase y contabilizar conexión inicial",
+    "Renovar sockets antes de comprobaciones posteriores y logout",
+    "Registrar EXCEPTION:<tipo> sin mensaje, cuerpo o token; sin reintentar solicitudes de carga"
+  ],
+  "validacion": "Quince pruebas locales del ejecutor instalado aprobadas en 0.135 s, incluidas regresiones de conexión caducada y excepción sin mensaje sensible; AST válido.",
+  "artefactos_sha256": {
+    "backend/scripts/performance_runner.py": "62626f3dfb5c322e12f437c6f4206ce2dd2c4afdc9bc5a1219fd9d56a2add755",
+    "backend/tests/test_performance_runner.py": "7eebbde3b85944d2d0e7925b4cec4431fe903558bc3ffc008adbe7444f839d50"
+  },
+  "limites": [
+    "Corrección pendiente de smoke real; no se cambiaron parámetros de Uvicorn ni producto",
+    "Sin medir rendimiento formal, suite completa, Docker operado por agente o commit",
+    "No se ocultaron errores originales; reporte fallido preservado",
+    "No se atribuye a keep-alive una causa raíz comprobada a partir de EXCEPTION genérico"
+  ]
+}

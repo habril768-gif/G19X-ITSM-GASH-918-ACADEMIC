@@ -89,11 +89,17 @@ def login(db: Session, email: str, password: str) -> str:
 def current_user(credentials: HTTPAuthorizationCredentials | None = Depends(bearer), db: Session = Depends(get_session)) -> User:
     if credentials is None or credentials.scheme.lower() != "bearer" or len(credentials.credentials) > 256:
         raise HTTPException(401, "Sesión requerida", headers={"WWW-Authenticate": "Bearer"})
-    session = db.get(AuthSession, token_digest(credentials.credentials))
+    # Una lectura por petición; sin caché de revocación, actividad o departamento.
+    row = db.execute(
+        select(AuthSession, User, Department).select_from(AuthSession)
+        .outerjoin(User, User.id == AuthSession.user_id)
+        .outerjoin(Department, Department.id == User.departamento_id)
+        .where(AuthSession.token_hash == token_digest(credentials.credentials))
+        .execution_options(populate_existing=True)
+    ).one_or_none()
+    session, user, department = row if row is not None else (None, None, None)
     if session is None or session.revoked_at is not None or aware(session.expires_at) <= utcnow():
         raise HTTPException(401, "Sesión inválida o expirada", headers={"WWW-Authenticate": "Bearer"})
-    user = db.get(User, session.user_id)
-    department = db.get(Department, user.departamento_id) if user else None
     if not user or not user.is_active or not department or not department.is_active:
         raise HTTPException(403, "Cuenta no habilitada")
     return user

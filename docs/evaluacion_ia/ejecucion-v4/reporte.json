@@ -1,0 +1,144 @@
+{
+  "reference_cases": 50,
+  "category_correct": 47,
+  "priority_correct": 50,
+  "category_accuracy": 0.94,
+  "priority_accuracy": 1.0,
+  "abstention_cases": 5,
+  "abstention_correct": 5,
+  "high_as_low_ids": [],
+  "high_false_negative_ids": [],
+  "category_confusion_matrix": {
+    "1": {
+      "1": 7,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 3,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    },
+    "2": {
+      "1": 0,
+      "2": 10,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    },
+    "3": {
+      "1": 0,
+      "2": 0,
+      "3": 10,
+      "4": 0,
+      "5": 0,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    },
+    "4": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 10,
+      "5": 0,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    },
+    "5": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 10,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    }
+  },
+  "priority_confusion_matrix": {
+    "1": {
+      "1": 20,
+      "2": 0,
+      "3": 0,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    },
+    "2": {
+      "1": 0,
+      "2": 15,
+      "3": 0,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    },
+    "3": {
+      "1": 0,
+      "2": 0,
+      "3": 15,
+      "ABSTENCION": 0,
+      "FALLO": 0
+    }
+  },
+  "mismatches": [
+    {
+      "id": "V4-C1-T1-1",
+      "expected_category": 1,
+      "expected_priority": 1,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 5,
+      "predicted_priority": 1
+    },
+    {
+      "id": "V4-C1-T1-2",
+      "expected_category": 1,
+      "expected_priority": 2,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 5,
+      "predicted_priority": 2
+    },
+    {
+      "id": "V4-C1-T1-3",
+      "expected_category": 1,
+      "expected_priority": 3,
+      "outcome": "CLASIFICADA",
+      "predicted_category": 5,
+      "predicted_priority": 3
+    }
+  ],
+  "priority_class_metrics": {
+    "1": {
+      "reference_cases": 20,
+      "correct": 20,
+      "recall": 1.0
+    },
+    "2": {
+      "reference_cases": 15,
+      "correct": 15,
+      "recall": 1.0
+    },
+    "3": {
+      "reference_cases": 15,
+      "correct": 15,
+      "recall": 1.0
+    }
+  },
+  "medium_as_low_ids": [],
+  "low_as_medium_ids": [],
+  "media_baja_targets_met": true,
+  "priority_contrast_pairs": {
+    "pairs": 15,
+    "both_priorities_correct": 15,
+    "accuracy": 1.0,
+    "failed_pair_ids": []
+  },
+  "automated_targets_met": true,
+  "all_high_priority_identified": true,
+  "priority_checks_met": true,
+  "independent_labels_and_all_high_priority_false_negatives_require_review": true,
+  "attempted_cases": 55,
+  "execution_complete": true,
+  "source": "external_provider",
+  "requested_model": "gpt-4.1-mini",
+  "prompt_version": "plurione-classify-v4",
+  "human_acceptance": false,
+  "generated_at": "2026-10-18T23:05:25.552875+00:00"
+}

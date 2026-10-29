@@ -1,0 +1,225 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "SMOKE_SIN_ACREDITAR_RNF2",
+  "run_id": "42486b8ff1264162",
+  "captura": "codex-clipboard-e40bf653-b71d-4b4c-9d87-95f6373e5d89.png",
+  "procedencia": "Ejecución de la autora; agente lee reporte real y revisa captura.",
+  "reporte_fuente": {
+    "ruta_local_ignorada": ".pgdata/performance-42486b8ff1264162/report.json",
+    "sha256": "b478478fef39d55fe371185eeb91b17f2899d68426e827d9a08f56dbd991a639"
+  },
+  "salud_previa": {
+    "intentos": 1,
+    "errores": {},
+    "resultado": "OK"
+  },
+  "calentamiento": {
+    "inicio_utc": "2026-10-22T16:16:43.726569+00:00",
+    "fin_utc": "2026-10-22T16:16:46.277987+00:00",
+    "duracion_objetivo_s": 2,
+    "duracion_hasta_ultima_respuesta_s": 2.548005999997258,
+    "clientes": 10,
+    "completa": true,
+    "metricas": {
+      "listado": {
+        "intentos": 20,
+        "exitos": 20,
+        "errores": 0,
+        "estados": {
+          "200": 20
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 10.0,
+        "min_ms": 117.66630000056466,
+        "mediana_ms": 198.34255000387202,
+        "p95_exitos_ms": 290.18119999818737,
+        "p99_exitos_ms": 302.4285999999847,
+        "max_ms": 302.4285999999847,
+        "p95_todos_ms": 290.18119999818737,
+        "finalizadas_fuera_ventana": 0
+      },
+      "detalle": {
+        "intentos": 20,
+        "exitos": 20,
+        "errores": 0,
+        "estados": {
+          "200": 20
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 10.0,
+        "min_ms": 94.24640000361251,
+        "mediana_ms": 118.75880000297911,
+        "p95_exitos_ms": 170.29009999532718,
+        "p99_exitos_ms": 182.87649999547284,
+        "max_ms": 182.87649999547284,
+        "p95_todos_ms": 170.29009999532718,
+        "finalizadas_fuera_ventana": 0
+      },
+      "creacion": {
+        "intentos": 20,
+        "exitos": 20,
+        "errores": 0,
+        "estados": {
+          "201": 20
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 10.0,
+        "min_ms": 738.696100001107,
+        "mediana_ms": 810.7291000014811,
+        "p95_exitos_ms": 850.6688999987091,
+        "p99_exitos_ms": 857.3969000062789,
+        "max_ms": 857.3969000062789,
+        "p95_todos_ms": 850.6688999987091,
+        "finalizadas_fuera_ventana": 10
+      },
+      "actualizacion": {
+        "intentos": 10,
+        "exitos": 10,
+        "errores": 0,
+        "estados": {
+          "200": 10
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 5.0,
+        "min_ms": 202.79860000300687,
+        "mediana_ms": 245.4066500031331,
+        "p95_exitos_ms": 308.81029999727616,
+        "p99_exitos_ms": 308.81029999727616,
+        "max_ms": 308.81029999727616,
+        "p95_todos_ms": 308.81029999727616,
+        "finalizadas_fuera_ventana": 0
+      }
+    },
+    "creados": 20,
+    "inicio_clientes_offset_ms": [
+      0.8484999998472631,
+      1.0793999972520396,
+      1.148099996498786,
+      1.0103999957209453,
+      1.211800001328811,
+      1.2704999971901998,
+      1.4096999948378652,
+      1.3476999956765212,
+      1.5419999981531873,
+      1.4786999963689595
+    ]
+  },
+  "medicion_corta": {
+    "inicio_utc": "2026-10-22T16:16:46.308933+00:00",
+    "fin_utc": "2026-10-22T16:16:51.768893+00:00",
+    "duracion_objetivo_s": 5,
+    "duracion_hasta_ultima_respuesta_s": 5.459458799996355,
+    "clientes": 10,
+    "completa": true,
+    "metricas": {
+      "listado": {
+        "intentos": 40,
+        "exitos": 40,
+        "errores": 0,
+        "estados": {
+          "200": 40
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 8.0,
+        "min_ms": 104.06720000173664,
+        "mediana_ms": 140.57529999990948,
+        "p95_exitos_ms": 199.28090000030352,
+        "p99_exitos_ms": 234.7068999952171,
+        "max_ms": 234.7068999952171,
+        "p95_todos_ms": 199.28090000030352,
+        "finalizadas_fuera_ventana": 0
+      },
+      "detalle": {
+        "intentos": 40,
+        "exitos": 40,
+        "errores": 0,
+        "estados": {
+          "200": 40
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 8.0,
+        "min_ms": 81.1433000053512,
+        "mediana_ms": 122.25374999979977,
+        "p95_exitos_ms": 190.49619999714196,
+        "p99_exitos_ms": 195.09850000031292,
+        "max_ms": 195.09850000031292,
+        "p95_todos_ms": 190.49619999714196,
+        "finalizadas_fuera_ventana": 0
+      },
+      "creacion": {
+        "intentos": 40,
+        "exitos": 40,
+        "errores": 0,
+        "estados": {
+          "201": 40
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 8.0,
+        "min_ms": 730.1545000009355,
+        "mediana_ms": 837.3553499986883,
+        "p95_exitos_ms": 931.8937999996706,
+        "p99_exitos_ms": 1029.7166000018478,
+        "max_ms": 1029.7166000018478,
+        "p95_todos_ms": 931.8937999996706,
+        "finalizadas_fuera_ventana": 10
+      },
+      "actualizacion": {
+        "intentos": 30,
+        "exitos": 30,
+        "errores": 0,
+        "estados": {
+          "200": 30
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 6.0,
+        "min_ms": 189.16229999740608,
+        "mediana_ms": 296.7575000002398,
+        "p95_exitos_ms": 433.98960000195075,
+        "p99_exitos_ms": 473.2646999982535,
+        "max_ms": 473.2646999982535,
+        "p95_todos_ms": 433.98960000195075,
+        "finalizadas_fuera_ventana": 0
+      }
+    },
+    "creados": 40,
+    "inicio_clientes_offset_ms": [
+      0.6412000002455898,
+      0.1663999937591143,
+      0.06909999501658604,
+      0.228899996727705,
+      0.2905000001192093,
+      0.34809999488061294,
+      0.4047999973408878,
+      0.46949999523349106,
+      0.5238999947323464,
+      0.581299995246809
+    ]
+  },
+  "conteos": {
+    "inicial": 100,
+    "tras_calentamiento": 120,
+    "final": 160
+  },
+  "sql": {
+    "incidencias": 160,
+    "eventos_creado": 160,
+    "eventos_editado": 40,
+    "entregas_encoladas": 1600,
+    "intentos_smtp": 0,
+    "trabajos_ia": 0
+  },
+  "revocacion_sesiones": {
+    "204": 10
+  },
+  "contenedores_detenidos": true,
+  "muestras_recursos": 3,
+  "interpretacion": "Calentamiento de 2 s y medición de 5 s completados con diez clientes y cero errores. Ciento cincuenta solicitudes medidas, setenta de calentamiento. Conteos y auditoría/colas coinciden; diez logout 204. Smoke acredita funcionamiento del recorrido, no RNF-2.",
+  "advertencia_resultado": "p95 de creación aproximadamente 931.9 ms y edición 434.0 ms en muestra corta; no cumplen umbral de 200 ms en esta muestra. No extrapolar a medición formal ni ocultar las cifras.",
+  "limites": [
+    "No hay cinco minutos de medición ni treinta segundos de calentamiento",
+    "No se identifica por estos datos el cuello de botella",
+    "Cero intentos SMTP/trabajos IA según SQL; no acredita todos los modos de proveedores",
+    "Recursos QA retenidos, sin borrado. Plataforma de uso no modificada por este ensayo",
+    "RNF-2 sigue pendiente; próxima corrida formal con fixture nuevo"
+  ]
+}

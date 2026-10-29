@@ -1,0 +1,35 @@
+{
+  "fecha_registro": "2026-10-23",
+  "estado": "REGRESION_SELECCIONADA_117_APROBADAS_DIAGNOSTICO_PENDIENTE",
+  "fuente": "Captura aportada por la autora: codex-clipboard-dad76080-61f1-4708-a99c-9c202a28848f.png. Ejecución por ella, no por el agente.",
+  "preparacion": "175-detalle-plantilla-sql-parametrizada-preparada.json",
+  "variables_observadas": {
+    "SSLKEYLOGFILE": "",
+    "RUN_DB_TESTS": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "comando": ".\\backend\\.venv\\Scripts\\python.exe -B -m pytest -q -p no:cacheprovider -c backend/pytest.ini backend/tests/test_detail_sql_template.py backend/tests/test_read_query_grouping.py backend/tests/test_incidents.py backend/tests/test_mail.py backend/tests/test_write_responses.py backend/tests/test_worker_response.py backend/tests/test_auth.py backend/tests/test_auth_queries.py backend/tests/test_user_administration.py",
+  "resultado": {
+    "aprobadas": 117,
+    "subpruebas_aprobadas": 63,
+    "duracion_s": 22.73,
+    "progreso": "100%",
+    "errores_mostrados": 0
+  },
+  "alcance": [
+    "Nueve archivos: plantilla de detalle, lecturas agrupadas, incidencias, correo, respuestas de escritura, DTO worker, autenticación/consultas y administración de usuarios.",
+    "Incluye seis pruebas nuevas de plantilla sin datos, parámetros por llamada, permisos cambiantes y sesiones concurrentes SQLite; matriz anterior de permisos/listado y regresión seleccionada API conservadas.",
+    "Hashes actuales de los dos archivos coinciden con preparación 175; no acreditan retrospectivamente identidad exacta del proceso capturado."
+  ],
+  "limites": [
+    "117 pruebas y 63 subpruebas son conteos separados; no convertir en 180 pruebas únicas ni sumar selecciones anteriores.",
+    "RUN_DB_TESTS=0: SQLite/dobles, no concurrencia/latencia PostgreSQL o suite completa.",
+    "Sin nueva latencia o aprobación RNF-2; formal 150 conserva FALLIDA_UMBRAL.",
+    "Próximo paso: un smoke diagnóstico de 175 para contrastar endpoint/latencia de detalle, manteniendo conteos SQL 3/2/10/7 y tres pasos por hilo esperados. Antes, liberar/verificar dos redes QA vacías; no full automático.",
+    "No se ejecutaron tests adicionales, Docker o limpieza desde herramientas del agente."
+  ],
+  "sha256": {
+    "backend/app/services/incidents.py": "fc5c4a9ef4b209af95167a29240279d9986cee6f406c812628156cec11536d74",
+    "backend/tests/test_detail_sql_template.py": "81ecb7f2839ecb03d8a41cd83374bc01dabd9b62116ea63ccd2c3730ae275148"
+  }
+}

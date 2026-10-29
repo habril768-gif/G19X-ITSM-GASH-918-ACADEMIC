@@ -2,7 +2,7 @@ import re
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-PROMPT_VERSION = 'plurione-classify-v1'
+PROMPT_VERSION = 'plurione-classify-v4'
 
 
 class AIInput(BaseModel):

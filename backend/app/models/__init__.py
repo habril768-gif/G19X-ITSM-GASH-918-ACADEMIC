@@ -1,4 +1,4 @@
-"""Esquema inicial PostgreSQL; reglas de autorizaciÃ³n se implementan en servicios."""
+"""Modelos PostgreSQL; reglas de autorización se implementan en servicios."""
 from datetime import date, datetime
 from uuid import UUID, uuid4
 
@@ -196,3 +196,29 @@ class IncidentParticipant(Base):
     reviewed_by: Mapped[UUID | None] = mapped_column(ForeignKey("users.id"))
     reviewed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     review_reason: Mapped[str | None] = mapped_column(Text)
+
+
+class MailDelivery(Base):
+    """Outbox sin contenido sensible ni direcciones copiadas del usuario."""
+    __tablename__ = 'mail_deliveries'
+    __table_args__ = (
+        UniqueConstraint('event_id', 'recipient_id', name='uq_mail_event_recipient'),
+        CheckConstraint("kind IN ('CREACION','ASIGNACION','RESOLUCION','REAPERTURA','CIERRE')", name='ck_mail_kind'),
+        CheckConstraint("status IN ('PENDIENTE','EN_PROCESO','ENVIADA','FALLIDA','OMITIDA')", name='ck_mail_status'),
+        CheckConstraint('attempts BETWEEN 0 AND 4', name='ck_mail_attempts'),
+        Index('ix_mail_due', 'status', 'available_at'),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid, primary_key=True)
+    event_id: Mapped[UUID] = mapped_column(ForeignKey('historial_incidencias.id'))
+    case_id: Mapped[UUID] = mapped_column(ForeignKey('incidencias.id'), index=True)
+    recipient_id: Mapped[UUID | None] = mapped_column(ForeignKey('users.id'))
+    kind: Mapped[str] = mapped_column(String(20))
+    context: Mapped[dict] = mapped_column(JSONB().with_variant(JSON(), 'sqlite'))
+    status: Mapped[str] = mapped_column(String(20), server_default='PENDIENTE')
+    attempts: Mapped[int] = mapped_column(Integer, server_default='0')
+    available_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    lease_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    lease_token: Mapped[UUID | None] = mapped_column(Uuid)
+    error: Mapped[str | None] = mapped_column(String(200))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

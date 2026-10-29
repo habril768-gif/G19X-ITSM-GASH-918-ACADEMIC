@@ -1,0 +1,26 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "77_APROBADAS_SEGUN_CAPTURA_AUTORA",
+  "fuente": "codex-clipboard-fdd8d77a-857a-480e-8591-4d0cf234f41d.png",
+  "procedencia": "Ejecución de la autora; el agente revisa captura y no se atribuye la ejecución.",
+  "resultado_visible": "77 passed in 23.15s",
+  "archivos": [
+    "backend/tests/test_mail_multivalues.py",
+    "backend/tests/test_mail.py",
+    "backend/tests/test_mail_batching.py",
+    "backend/tests/test_incidents.py",
+    "backend/tests/test_write_responses.py"
+  ],
+  "configuracion_visible": {
+    "SSLKEYLOGFILE": "",
+    "RUN_DB_TESTS": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "pytest": "-q -p no:cacheprovider -c backend/pytest.ini"
+  },
+  "alcance": "Regresión de cinco archivos tras 144; incluye seis casos nuevos de INSERT multirregistro, idempotencia/reintento parcial y fallo entre bloques, más pruebas existentes de correo, destinatarios, incidencias y respuestas.",
+  "limites": [
+    "Fixtures SQLite/TestClient y dependencias sustituidas; no prueba de concurrencia ni ejecución real del driver PostgreSQL.",
+    "No es suite completa ni nueva medición de rendimiento. RNF-2 sigue pendiente; 141 conserva FALLIDA_UMBRAL."
+  ],
+  "siguiente_paso": "Una corrida smoke --diagnostic para comparar INSERT/mail_deliveries con los 66,05 ms medios de 143; revisar conteos, CPU y límites antes de decidir full."
+}

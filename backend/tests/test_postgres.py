@@ -1,4 +1,4 @@
-"""IntegraciÃ³n optativa: usar solo una base de pruebas previamente migrada."""
+"""Integración optativa: usar solo una base de pruebas previamente migrada."""
 import os
 import pytest
 from sqlalchemy import inspect, text
@@ -18,15 +18,15 @@ def dedicated_database():
 
 def test_migrated_database_and_catalogs():
     engine = get_engine()
-    assert {"users", "incidencias", "historial_incidencias", "departamentos", "department_audit_events", "ai_jobs"} <= set(inspect(engine).get_table_names())
+    assert {"users", "incidencias", "historial_incidencias", "departamentos", "department_audit_events", "ai_jobs", "mail_deliveries"} <= set(inspect(engine).get_table_names())
     with engine.connect() as c:
-        assert c.execute(text("SELECT version_num FROM alembic_version")).scalar_one() == "0005"
+        assert c.execute(text("SELECT version_num FROM alembic_version")).scalar_one() == "0008"
         assert c.execute(text("SELECT count(*) FROM roles")).scalar_one() == 3
         assert c.execute(text("SELECT count(*) FROM categorias_incidencia")).scalar_one() == 5
 
 
 def test_entra_identity_is_unique():
-    # TransacciÃ³n revertida siempre; identificadores ficticios, sin datos personales.
+    # Transacción revertida siempre; identificadores ficticios, sin datos personales.
     engine = get_engine()
     with engine.connect() as c:
         tx = c.begin()
@@ -185,3 +185,61 @@ def test_migration_0003_preserves_legacy_cases_in_isolated_schema():
             assert c.execute(text('SELECT count(*) FROM incidencias WHERE content_revision=0')).scalar_one() == 3
         finally:
             tx.rollback()
+
+
+def test_mail_outbox_and_smtp_permission_lock_on_postgres(monkeypatch):
+    from datetime import date
+    from threading import Event
+    from concurrent.futures import ThreadPoolExecutor
+    from types import SimpleNamespace
+    from uuid import uuid4
+    from sqlalchemy import delete,select
+    from sqlalchemy.orm import Session
+    from sqlalchemy.exc import DBAPIError
+    from app.models import Department,User,Incident,AuditEvent,MailDelivery
+    from app.services.administration_lock import administration_lock
+    from app.services.mail import queue_event,process_one
+    monkeypatch.setenv('MAIL_ENABLED','true')
+    engine=get_engine(); entered=Event(); release=Event()
+    depid,adminid,empid,caseid,eventid=[uuid4() for _ in range(5)]
+    def factory(): return Session(engine,expire_on_commit=False)
+    try:
+        with factory() as db:
+            db.add(Department(id=depid,nombre='Correo-QA-'+str(depid),is_active=True)); db.flush()
+            admin=User(id=adminid,email=str(adminid)+'@example.invalid',nombre_completo='RH simulado',departamento_id=depid,rol_id=1,is_active=True)
+            employee=User(id=empid,email=str(empid)+'@example.invalid',nombre_completo='Persona ficticia',departamento_id=depid,rol_id=3,is_active=True)
+            db.add_all([admin,employee]); db.flush()
+            case=Incident(id=caseid,titulo='Correo QA',descripcion='Solo simulación',incident_date=date(2026,10,18),created_by=empid,affected_employee_id=empid,scope='PERSONA',reported_department_id=depid,department_id_at_creation=depid)
+            db.add(case); db.flush()
+            audit=AuditEvent(id=eventid,incidencia_id=caseid,usuario_id=empid,accion='CREADO',detalle={})
+            db.add(audit); queue_event(db,case,audit); db.commit()
+        def send(*_):
+            entered.set()
+            assert release.wait(10),'No se liberó transporte de prueba'
+        with ThreadPoolExecutor(max_workers=1) as pool:
+            future=pool.submit(process_one,factory,SimpleNamespace(send=send))
+            try:
+                assert entered.wait(10)
+                # El proceso SMTP conserva bloqueo compartido administrativo y de expediente.
+                with factory() as other:
+                    other.execute(text("SET LOCAL lock_timeout = '300ms'"))
+                    with pytest.raises(DBAPIError) as exc: administration_lock(other,exclusive=True)
+                    assert exc.value.orig.sqlstate=='55P03'; other.rollback()
+                    other.execute(text("SET LOCAL lock_timeout = '300ms'"))
+                    with pytest.raises(DBAPIError) as exc:
+                        other.execute(text('UPDATE incidencias SET is_confidential=true WHERE id=:id'),{'id':caseid})
+                    assert exc.value.orig.sqlstate=='55P03'; other.rollback()
+            finally: release.set()
+            assert future.result(timeout=10)
+        with factory() as db:
+            row=db.scalar(select(MailDelivery).where(MailDelivery.case_id==caseid))
+            assert row.status=='ENVIADA' and row.attempts==1
+        assert not process_one(factory,SimpleNamespace(send=lambda *_:pytest.fail('Envío duplicado')))
+    finally:
+        release.set()
+        with factory() as db:
+            db.execute(delete(MailDelivery).where(MailDelivery.case_id==caseid))
+            db.execute(delete(AuditEvent).where(AuditEvent.incidencia_id==caseid))
+            db.execute(delete(Incident).where(Incident.id==caseid))
+            db.execute(delete(User).where(User.id.in_([adminid,empid])))
+            db.execute(delete(Department).where(Department.id==depid)); db.commit()

@@ -1,0 +1,41 @@
+{
+  "fecha_registro": "2026-10-21",
+  "estado": "CUATRO_TESTS_APROBADOS_SEGUN_CAPTURAS_AUTORA",
+  "procedencia": "Ejecución por la autora en su terminal del backend; agente revisa capturas, no ejecutó estos resultados satisfactorios.",
+  "archivo": "backend/tests/test_incidents.py",
+  "ejecuciones": [
+    {
+      "captura": "codex-clipboard-fae755ab-205e-43a8-9427-bfd3b75e75b2.png",
+      "resultado": "1 passed in 5.85s",
+      "tests": [
+        "test_management_access_and_assignment_eligibility"
+      ],
+      "configuracion_visible": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1; Python .venv; --full-trace -q -p no:cacheprovider"
+    },
+    {
+      "captura": "codex-clipboard-3fdb19db-15db-48b0-9f54-424f308406b2.png",
+      "resultado": "3 passed, 22 deselected in 5.13s",
+      "tests": [
+        "test_only_admin_independent_can_change_relations_and_confidentiality",
+        "test_edit_requires_revalidation_without_erasing_validator",
+        "test_employee_cannot_report_for_peer_or_spoof_author"
+      ],
+      "configuracion": "Python .venv; -q -p no:cacheprovider; selección -k visible. Misma terminal según instrucciones; variable de plugins no reimpresa en esta captura."
+    }
+  ],
+  "cobertura_segun_codigo_revisado": [
+    "Empleado no puede confirmar clasificación; supervisor ajeno no ve el caso; asignaciones inválidas rechazadas; RH independiente puede recibir caso confidencial y RH involucrado no puede validar.",
+    "Empleado no puede cambiar confidencialidad ni agregar relaciones; supervisor no puede agregar relaciones; RH involucrado pierde acceso y RH independiente puede revisar relación y cambiar protección.",
+    "Cambio de contenido exige revalidación sin borrar validador previo; supervisor no puede cerrar ni reabrir.",
+    "Empleado no puede registrar PERSONA para un par ni adulterar created_by; las solicitudes rechazadas no crean incidencias."
+  ],
+  "aislamiento": "Fixtures con SQLite en memoria, usuarios ficticios y current_user/get_session sustituidos según código revisado. No prueban autenticación real ni PostgreSQL operativo.",
+  "antecedentes": "116 y 117 conservan intentos sin resultados. Este resultado resuelve la ejecución pendiente de estos cuatro tests, sin reescribirlos como aprobados retrospectivamente.",
+  "diagnostico": "Ejecución satisfactoria después de deshabilitar autoload de plugins; no se aisló un plugin culpable ni se demostró causalidad exclusiva.",
+  "limites": [
+    "No es una suite completa ni cuatro escenarios manuales nuevos",
+    "No acredita todas las escrituras/roles, sesiones reales, concurrencia o instalación limpia",
+    "No se modificó código ni se instalaron dependencias",
+    "Capturas originales permanecen fuera del repositorio"
+  ]
+}

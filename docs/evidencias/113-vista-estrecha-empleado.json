@@ -1,0 +1,33 @@
+{
+  "fecha_registro": "2026-10-21",
+  "estado": "REVISION_VISUAL_MANUAL_PARCIAL",
+  "entorno": "Emulación Responsive 390 x 844 en navegador de escritorio; sin teléfono real.",
+  "fuente": "Capturas y confirmaciones de la autora; sin automatización del agente.",
+  "capturas": [
+    "codex-clipboard-d36db2be-7c31-4d01-9b88-d6235d465baa.png",
+    "codex-clipboard-8f20d816-dbdf-4b76-a564-87f674ebdbb7.png",
+    "codex-clipboard-4eb980c3-317b-4a89-ba28-0bd65388ae8c.png",
+    "codex-clipboard-5b1a324e-0f63-44fc-b3ec-39e143ad1b63.png"
+  ],
+  "observado": [
+    "Filtros del listado distribuidos en una columna",
+    "Detalle del caso simulado con descripción y seguimiento apilados",
+    "Sesión Empleado activa ante aviso de caso no disponible; consola muestra 404 de detalle e historial del expediente 02f03993-8923-42f7-8b47-00f64dcaa711"
+  ],
+  "confirmado_por_autora": [
+    "Detalle legible sin desplazamiento horizontal",
+    "Al volver al panel de incidencias no hay problemas"
+  ],
+  "interpretacion": "Los 404 observados corresponden a la consulta de un expediente conservado en el enlace y a su historial; no son la respuesta del inicio de sesión.",
+  "limites": [
+    "No se comprobó si el expediente anterior existe o está restringido; no se acredita prueba negativa de autorización",
+    "Sin auditoría integral de accesibilidad, teclado, formularios o rendimiento",
+    "Sin teléfono físico ni prueba exhaustiva de todos los tamaños",
+    "No se modificó código y no se repitieron suites"
+  ],
+  "pendientes": [
+    "Acceso negativo a un caso con permisos y existencia conocidos",
+    "Accesibilidad y móvil real",
+    "Mejora posible: aclarar aviso de expediente no disponible tras iniciar sesión"
+  ]
+}

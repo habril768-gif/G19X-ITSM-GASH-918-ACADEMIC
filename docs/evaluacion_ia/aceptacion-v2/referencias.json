@@ -1,0 +1,497 @@
+[
+  {
+    "id": "NUEVO-C1-01",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se revisa una ausencia de hace dos meses cuyo descuento ya fue aclarado. Solo falta registrar el seguimiento y no hay fecha límite.",
+    "category_id": 1,
+    "priority": 3,
+    "justification": "Ausencia pasada sin consecuencia pendiente urgente."
+  },
+  {
+    "id": "NUEVO-C1-02",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Faltó sin aviso la persona que prepara el resumen diario y el resto del equipo necesita redistribuir hoy ese trabajo. No existe riesgo de daño ni pérdida grave.",
+    "category_id": 1,
+    "priority": 2,
+    "justification": "Falta actual con impacto operativo pronto."
+  },
+  {
+    "id": "NUEVO-C1-03",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "La persona asignada para vigilar una excavación no llegó a su turno. El acceso sigue abierto junto a la zona de caída y se requiere cubrirlo ahora.",
+    "category_id": 1,
+    "priority": 1,
+    "justification": "Ausencia principal con exposición inmediata de seguridad."
+  },
+  {
+    "id": "NUEVO-C1-04",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "La persona que debía abrir el módulo de recepción se presentó tarde sin autorización. Hay expedientes pendientes y pueden atenderse hoy con apoyo, sin peligro.",
+    "category_id": 1,
+    "priority": 2,
+    "justification": "Retardo con atención operativa próxima."
+  },
+  {
+    "id": "NUEVO-C1-05",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se solicita aclarar una falta registrada por error durante una capacitación pasada. La participación ya está acreditada y no hay pagos o trámites bloqueados.",
+    "category_id": 1,
+    "priority": 3,
+    "justification": "Registro de falta pasado, sin urgencia."
+  },
+  {
+    "id": "NUEVO-C1-06",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "La persona que debe presentar una documentación obligatoria se ausentó sin avisar. El plazo termina en treinta minutos y no sustituirla implica clausurar la operación por falta de autorización.",
+    "category_id": 1,
+    "priority": 1,
+    "justification": "Ausencia con plazo inmediato y consecuencia grave explícita."
+  },
+  {
+    "id": "NUEVO-C1-07",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Una salida anticipada no autorizada dejó incompleta la preparación del espacio de atención. Hace falta reorganizar el trabajo antes del siguiente turno, sin amenaza de seguridad.",
+    "category_id": 1,
+    "priority": 2,
+    "justification": "Salida no autorizada e impacto operativo próximo."
+  },
+  {
+    "id": "NUEVO-C1-08",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se informa una salida breve sin permiso del trimestre anterior. No quedaron tareas pendientes y se desea tratarla en la reunión ordinaria, sin plazo.",
+    "category_id": 1,
+    "priority": 3,
+    "justification": "Salida no autorizada pasada sin urgencia vigente."
+  },
+  {
+    "id": "NUEVO-C1-09",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "La persona que debe relevar al único operador del puesto crítico no se presentó. El operador actual no puede continuar con seguridad por fatiga y detener la función de control expone a daño inmediato.",
+    "category_id": 1,
+    "priority": 1,
+    "justification": "Ausencia de relevo con amenaza inmediata descrita."
+  },
+  {
+    "id": "NUEVO-C1-10",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se acumularon retrasos de llegada que dejaron sin preparar las reuniones internas de esta semana. Se pide revisar la cobertura antes de mañana, sin consecuencias graves.",
+    "category_id": 1,
+    "priority": 2,
+    "justification": "Retardos con efecto operativo de atención pronta."
+  },
+  {
+    "id": "NUEVO-C2-01",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Dos integrantes discreparon sobre la decoración del área de descanso. Mantienen su colaboración y solicitan conversar cuando haya tiempo, sin plazo ni amenazas.",
+    "category_id": 2,
+    "priority": 3,
+    "justification": "Desacuerdo interpersonal sin urgencia."
+  },
+  {
+    "id": "NUEVO-C2-02",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Un desacuerdo sobre quién responde solicitudes hizo que dos integrantes dejaran de intercambiar información. Hay que organizar las respuestas antes del cierre de hoy y no existen amenazas.",
+    "category_id": 2,
+    "priority": 2,
+    "justification": "Conflicto que afecta una actividad próxima."
+  },
+  {
+    "id": "NUEVO-C2-03",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Durante una disputa personal en el estacionamiento, una persona amenaza con agredir a otra y se aproxima para hacerlo. La situación está ocurriendo ahora.",
+    "category_id": 2,
+    "priority": 1,
+    "justification": "Conflicto activo con riesgo inmediato de daño."
+  },
+  {
+    "id": "NUEVO-C2-04",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Dos compañeros discuten sobre la distribución del espacio de archivo y no consiguen preparar juntos la entrega de esta tarde. No hay insultos amenazantes ni contacto físico.",
+    "category_id": 2,
+    "priority": 2,
+    "justification": "Disputa interpersonal con impacto operativo."
+  },
+  {
+    "id": "NUEVO-C2-05",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Una persona pide una conversación de mediación por desacuerdos sobre cómo redactar mensajes internos. Las tareas se completan y no hay tensión activa ni plazo.",
+    "category_id": 2,
+    "priority": 3,
+    "justification": "Diferencia interpersonal sin urgencia identificada."
+  },
+  {
+    "id": "NUEVO-C2-06",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Una discusión por objetos personales escaló y una persona está arrojando objetos hacia otra. Se necesita detener la confrontación para evitar lesiones.",
+    "category_id": 2,
+    "priority": 1,
+    "justification": "Agresión activa interpersonal."
+  },
+  {
+    "id": "NUEVO-C2-07",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Tras un desacuerdo, dos integrantes dejaron de coordinar el uso de una agenda compartida y eso retrasa el plan de mañana. Se solicita mediación sin amenazas de daño.",
+    "category_id": 2,
+    "priority": 2,
+    "justification": "Conflicto con afectación operativa cercana."
+  },
+  {
+    "id": "NUEVO-C2-08",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se solicita seguimiento de un malentendido entre dos integrantes que ya aclararon su diferencia. El trabajo marcha normalmente y no hay compromiso de fecha.",
+    "category_id": 2,
+    "priority": 3,
+    "justification": "Conflicto pasado con seguimiento sin urgencia."
+  },
+  {
+    "id": "NUEVO-C2-09",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Dos personas están forcejeando para quitarse un objeto tras una discusión. Quienes están cerca observan peligro inmediato de que alguna resulte lesionada.",
+    "category_id": 2,
+    "priority": 1,
+    "justification": "Confrontación física en curso."
+  },
+  {
+    "id": "NUEVO-C2-10",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Un desacuerdo entre integrantes sobre responsabilidades detuvo la preparación de una actividad para esta semana. Se requiere acordar tareas pronto y nadie ha amenazado a otra persona.",
+    "category_id": 2,
+    "priority": 2,
+    "justification": "Conflicto operativo de atención pronta sin daño inmediato."
+  },
+  {
+    "id": "NUEVO-C3-01",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se detectó que un reporte histórico omitió el encabezado obligatorio de la norma interna. La información es correcta y no hay fecha límite para corregir la presentación.",
+    "category_id": 3,
+    "priority": 3,
+    "justification": "Desviación formal sin urgencia."
+  },
+  {
+    "id": "NUEVO-C3-02",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se omitió el control interno obligatorio de recepción de documentos. Ahora hace falta revisarlos antes de continuar las actividades de mañana, sin consecuencias graves.",
+    "category_id": 3,
+    "priority": 2,
+    "justification": "Incumplimiento explícito con impacto operativo próximo."
+  },
+  {
+    "id": "NUEVO-C3-03",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se está liberando un pago sin la doble autorización que exige el procedimiento interno. La transferencia sale en minutos y no detenerla causará una pérdida económica grave e irreversible.",
+    "category_id": 3,
+    "priority": 1,
+    "justification": "Incumplimiento de control obligatorio con consecuencia grave inmediata."
+  },
+  {
+    "id": "NUEVO-C3-04",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se usó una impresora reservada para trabajo en una actividad particular prohibida. Quedaron pendientes materiales necesarios para esta tarde; no se describe daño ni peligro.",
+    "category_id": 3,
+    "priority": 2,
+    "justification": "Uso contrario a política con impacto operativo pronto."
+  },
+  {
+    "id": "NUEVO-C3-05",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Un expediente cerrado tiene sus anexos ordenados de forma distinta a la política obligatoria. Todos están localizados y solo falta reordenarlos, sin urgencia.",
+    "category_id": 3,
+    "priority": 3,
+    "justification": "Incumplimiento de organización sin urgencia."
+  },
+  {
+    "id": "NUEVO-C3-06",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se incumple una instrucción interna que exige conservar una copia antes de borrar los únicos registros operativos. El borrado se realizará ahora y perderlos impediría continuar el servicio.",
+    "category_id": 3,
+    "priority": 1,
+    "justification": "Violación explícita de procedimiento con daño operativo grave inminente."
+  },
+  {
+    "id": "NUEVO-C3-07",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "La política interna exige registrar el préstamo de proyectores y no se completó el registro. Hay que conciliar su disponibilidad antes de las reuniones de esta semana.",
+    "category_id": 3,
+    "priority": 2,
+    "justification": "Incumplimiento de registro con impacto operativo cercano."
+  },
+  {
+    "id": "NUEVO-C3-08",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Una revisión encontró que se utilizó el código interno anterior en una lista archivada, pese a la política vigente. La lista no se usa en operaciones y no tiene plazo de corrección.",
+    "category_id": 3,
+    "priority": 3,
+    "justification": "Desviación de política en material histórico sin urgencia."
+  },
+  {
+    "id": "NUEVO-C3-09",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se está autorizando una salida de recursos sin verificar el límite obligatorio establecido por política. La operación termina en diez minutos y excederlo cancelará de forma definitiva una autorización esencial.",
+    "category_id": 3,
+    "priority": 1,
+    "justification": "Incumplimiento específico con plazo y consecuencia grave."
+  },
+  {
+    "id": "NUEVO-C3-10",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se incumplió la obligación de entregar el acta de entrega de herramientas. Hay trabajo del próximo turno detenido hasta conciliar la entrega; no existe riesgo físico.",
+    "category_id": 3,
+    "priority": 2,
+    "justification": "Omisión de procedimiento con efecto operativo próximo."
+  },
+  {
+    "id": "NUEVO-C4-01",
+    "kind": "reference",
+    "scope": "ENTORNO",
+    "text": "Se registra el seguimiento preventivo de una superficie rugosa en una sala que permanecerá cerrada sin uso programado. No hay exposición de personas ni plazo para habilitarla.",
+    "category_id": 4,
+    "priority": 3,
+    "justification": "Condición preventiva sin exposición actual."
+  },
+  {
+    "id": "NUEVO-C4-02",
+    "kind": "reference",
+    "scope": "ENTORNO",
+    "text": "Se detectó que una alfombra se levanta en una entrada. Esa entrada ya fue cerrada, hay otro acceso seguro y debe repararse antes de reabrir la próxima semana.",
+    "category_id": 4,
+    "priority": 2,
+    "justification": "Condición insegura controlada con reparación próxima."
+  },
+  {
+    "id": "NUEVO-C4-03",
+    "kind": "reference",
+    "scope": "ENTORNO",
+    "text": "Se percibe un olor intenso a gas en una habitación ocupada. La condición continúa y existe peligro inmediato para las personas presentes.",
+    "category_id": 4,
+    "priority": 1,
+    "justification": "Condición insegura con amenaza inmediata."
+  },
+  {
+    "id": "NUEVO-C4-04",
+    "kind": "reference",
+    "scope": "ENTORNO",
+    "text": "Una ventana tiene un cristal agrietado en un salón. El salón quedó aislado y sin acceso; se necesita sustituirlo antes de una actividad programada para esta semana.",
+    "category_id": 4,
+    "priority": 2,
+    "justification": "Riesgo contenido que requiere corrección pronta."
+  },
+  {
+    "id": "NUEVO-C4-05",
+    "kind": "reference",
+    "scope": "ENTORNO",
+    "text": "Se documenta un golpe menor contra un mueble durante un ensayo anterior, sin lesión. El mueble fue recolocado y verificado; no quedan riesgos ni tareas urgentes.",
+    "category_id": 4,
+    "priority": 3,
+    "justification": "Incidente menor pasado con causa corregida."
+  },
+  {
+    "id": "NUEVO-C4-06",
+    "kind": "reference",
+    "scope": "ENTORNO",
+    "text": "Una tapa de registro está abierta en un paso con personas circulando. No hay barrera y alguien puede caer en este momento.",
+    "category_id": 4,
+    "priority": 1,
+    "justification": "Peligro físico con exposición inmediata."
+  },
+  {
+    "id": "NUEVO-C4-07",
+    "kind": "reference",
+    "scope": "ENTORNO",
+    "text": "Una revisión detectó ruido anormal en un ventilador suspendido. Se cerró la zona y se utiliza un espacio alternativo seguro; el mantenimiento se necesita antes de mañana.",
+    "category_id": 4,
+    "priority": 2,
+    "justification": "Condición insegura contenida con atención operativa próxima."
+  },
+  {
+    "id": "NUEVO-C4-08",
+    "kind": "reference",
+    "scope": "ENTORNO",
+    "text": "Se solicita seguimiento de una condición de iluminación deficiente detectada y corregida durante una práctica. Ya se verificó el espacio y no hay exposición pendiente.",
+    "category_id": 4,
+    "priority": 3,
+    "justification": "Riesgo pasado corregido sin urgencia residual."
+  },
+  {
+    "id": "NUEVO-C4-09",
+    "kind": "reference",
+    "scope": "ENTORNO",
+    "text": "Una lámina de vidrio está a punto de desprenderse sobre la entrada que se está utilizando. No se ha restringido el paso y puede caer de inmediato.",
+    "category_id": 4,
+    "priority": 1,
+    "justification": "Caída inminente de material sobre zona ocupada."
+  },
+  {
+    "id": "NUEVO-C4-10",
+    "kind": "reference",
+    "scope": "ENTORNO",
+    "text": "Se encontró un pasamanos flojo en una escalera. La escalera fue cerrada y hay otra ruta segura, pero debe repararse antes del uso previsto en dos días.",
+    "category_id": 4,
+    "priority": 2,
+    "justification": "Riesgo contenido con necesidad de reparación pronta."
+  },
+  {
+    "id": "NUEVO-C5-01",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se solicita orientación sobre cómo obtener una copia del expediente laboral para consulta personal. No hay plazo ni otra gestión detenida.",
+    "category_id": 5,
+    "priority": 3,
+    "justification": "Consulta administrativa sin urgencia."
+  },
+  {
+    "id": "NUEVO-C5-02",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se solicita corregir el área indicada en un oficio interno para continuar una gestión de esta semana. El trámite espera esa corrección y no se describe pérdida grave.",
+    "category_id": 5,
+    "priority": 2,
+    "justification": "Corrección documental con actividad próxima detenida."
+  },
+  {
+    "id": "NUEVO-C5-03",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se solicita un comprobante de horario requerido por un procedimiento cuyo plazo vence en cuarenta minutos. No entregarlo cancela definitivamente una prestación esencial.",
+    "category_id": 5,
+    "priority": 1,
+    "justification": "Trámite con plazo explícito inmediato y consecuencia grave."
+  },
+  {
+    "id": "NUEVO-C5-04",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se solicita una relación de periodos trabajados para completar una revisión interna de mañana. Su falta retrasa la revisión, pero no cancela derechos ni representa peligro.",
+    "category_id": 5,
+    "priority": 2,
+    "justification": "Solicitud documental necesaria para actividad próxima."
+  },
+  {
+    "id": "NUEVO-C5-05",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se solicita una explicación del procedimiento para actualizar datos de un expediente en el futuro. No se proporciona ningún dato personal y no hay plazo.",
+    "category_id": 5,
+    "priority": 3,
+    "justification": "Información administrativa sin urgencia."
+  },
+  {
+    "id": "NUEVO-C5-06",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se necesita corregir un error documental para conservar una autorización de trabajo. La recepción cierra hoy en una hora y sin el documento se pierde definitivamente esa autorización.",
+    "category_id": 5,
+    "priority": 1,
+    "justification": "Corrección administrativa urgente con consecuencia grave."
+  },
+  {
+    "id": "NUEVO-C5-07",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se solicita confirmar la recepción de unos formularios para terminar una conciliación de esta semana. La gestión está detenida, sin amenaza inmediata ni vencimiento grave.",
+    "category_id": 5,
+    "priority": 2,
+    "justification": "Seguimiento administrativo con impacto próximo."
+  },
+  {
+    "id": "NUEVO-C5-08",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se solicita una copia adicional de un oficio ya emitido para archivo. No hay fecha de entrega requerida ni trámite pendiente.",
+    "category_id": 5,
+    "priority": 3,
+    "justification": "Solicitud de copia sin urgencia."
+  },
+  {
+    "id": "NUEVO-C5-09",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se requiere una certificación documental para evitar la cancelación irreversible de una cobertura esencial. El plazo vence en veinte minutos y el resto del expediente ya está completo.",
+    "category_id": 5,
+    "priority": 1,
+    "justification": "Trámite con consecuencia grave y vencimiento inmediato."
+  },
+  {
+    "id": "NUEVO-C5-10",
+    "kind": "reference",
+    "scope": "PERSONA",
+    "text": "Se solicita corregir un dato no personal del formato de una comisión interna para que pueda aprobarse mañana. Sin la corrección el proceso se retrasa y no existe pérdida grave.",
+    "category_id": 5,
+    "priority": 2,
+    "justification": "Corrección administrativa con atención próxima."
+  },
+  {
+    "id": "NUEVO-A-1",
+    "kind": "abstention",
+    "scope": "PERSONA",
+    "text": "Se reporta una situación pendiente, pero el mensaje no incluye qué ocurrió ni qué se solicita.",
+    "category_id": null,
+    "priority": null,
+    "justification": "Sin hechos ni objeto suficiente."
+  },
+  {
+    "id": "NUEVO-A-2",
+    "kind": "abstention",
+    "scope": "PERSONA",
+    "text": "El texto solo indica «revisar este asunto» y no proporciona otro contexto.",
+    "category_id": null,
+    "priority": null,
+    "justification": "Información insuficiente para categoría y prioridad."
+  },
+  {
+    "id": "NUEVO-A-3",
+    "kind": "abstention",
+    "scope": "PERSONA",
+    "text": "Se pide sugerir nombres para un personaje de una novela de fantasía, sin relación con un trámite o hecho laboral.",
+    "category_id": null,
+    "priority": null,
+    "justification": "Fuera del catálogo laboral."
+  },
+  {
+    "id": "NUEVO-A-4",
+    "kind": "abstention",
+    "scope": "PERSONA",
+    "text": "Se pregunta por las reglas de un juego de mesa para una reunión familiar.",
+    "category_id": null,
+    "priority": null,
+    "justification": "Consulta ajena al catálogo."
+  },
+  {
+    "id": "NUEVO-A-5",
+    "kind": "abstention",
+    "scope": "PERSONA",
+    "text": "Hay un problema, pero se desconoce si es una falta, un desacuerdo, una condición insegura o un trámite. No se aportan hechos.",
+    "category_id": null,
+    "priority": null,
+    "justification": "Ambigüedad explícita sin base para clasificar."
+  }
+]

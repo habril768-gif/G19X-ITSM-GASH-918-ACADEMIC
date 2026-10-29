@@ -1,0 +1,14 @@
+{
+  "dataset_sha256": {
+    "referencias-congeladas-v1.json": "3cdc7700a640f365992dc24c370bd4656b30510fd748ad85ef364df90c6e8a66",
+    "entradas-congeladas-v1.json": "7360f347ac1563be37a192ec5122d1d54e67a265f7596b790158940e2b099ee5",
+    "catalogo-v1.json": "68145613a454948697d23852129f10950bf20e73788fca08c006ebe7b6966f5f"
+  },
+  "provider_sha256": "0d000a82ab0e6a4d73f615e34d57462be80a3689c2755654e5df865423563545",
+  "requested_model": "gpt-4.1-mini",
+  "prompt_version": "plurione-classify-v1",
+  "max_calls": 55,
+  "created_at": "2026-10-18T20:40:09.569620+00:00",
+  "source": "external_provider",
+  "review_scope": "Conformidad general de la autora; no revisión independiente de terceros"
+}

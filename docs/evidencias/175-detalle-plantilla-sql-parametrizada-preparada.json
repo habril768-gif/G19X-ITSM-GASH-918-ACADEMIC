@@ -1,0 +1,81 @@
+{
+  "fecha_registro": "2026-10-23",
+  "estado": "PLANTILLA_SQL_SIN_DATOS_PREPARADA_REGRESION_PENDIENTE",
+  "motivo": "174 redujo SQL medio de detalle, pero subió endpoint/ASGI. El perfil local confirmó coste repetido al reconstruir los tres predicados de rol en cada llamada.",
+  "cambio": [
+    "Nueva _visible_case_statement sin argumentos, lru_cache(maxsize=1): retiene únicamente la estructura Select/aliases/predicados y bindparams tipados.",
+    "No recibe ni almacena actor, Session, UUID real, rol vigente, filas/resultados o decisiones de autorización. Los cuatro bindparams dinámicos tienen valores predeterminados None y son requeridos.",
+    "visible_case crea un diccionario nuevo por llamada con actor_id, departamento_id, rol_id y case_id. Ejecuta el mismo LEFT JOIN de rol/caso autorizado y vuelve a leer Role.nombre y datos de caso en cada consulta.",
+    "Conserva 403 de rol desconocido/ausente, 404 de caso oculto/ausente, una consulta local de detalle (dos con autenticación en QA), misma visibilidad y retorno ORM.",
+    "SQLAlchemy mantiene compilación por dialecto/engine; compartir la estructura no comparte Session o parámetros. Primera construcción puede repetirse si hay primeras llamadas simultáneas; son estructuras equivalentes sin datos y no altera autorizaciones.",
+    "No cambia autenticación, DTO/worker, listado, escrituras, locks, transacciones, auditoría, outbox o durabilidad."
+  ],
+  "perfil_local": {
+    "antes": {
+      "metodo": "Servicios/esquema/modelos reales, SQLite propio, un hilo; 1 llamada fría y 30 calientes sin red/HTTP/PostgreSQL. Mismo actor/caso ficticio; tiempos no equivalen a QA/RNF-2. execute incluye ORM/compilación/cursor; materialización y DTO separados.",
+      "fria": {
+        "construccion_y_parametros_ms": 7.5302999903215095,
+        "execute_compilacion_cursor_ms": 10.310800003935583,
+        "materializar_fila_ms": 0.15829999756533653,
+        "captura_dto_ms": 0.16930000856518745,
+        "total_ms": 18.168700000387616,
+        "cpu_hilo_ms": 15.625
+      },
+      "muestras_calientes": 30,
+      "medias_calientes": {
+        "construccion_y_parametros_ms": 7.532286667264998,
+        "execute_compilacion_cursor_ms": 1.272456666144232,
+        "materializar_fila_ms": 0.1466666673271296,
+        "captura_dto_ms": 0.05418999984006708,
+        "total_ms": 9.005600000576427,
+        "cpu_hilo_ms": 8.333333333333334
+      }
+    },
+    "despues": {
+      "metodo": "Servicios/esquema/modelos reales, SQLite propio, un hilo; 1 llamada fría y 30 calientes sin red/HTTP/PostgreSQL. Mismo actor/caso ficticio; tiempos no equivalen a QA/RNF-2. execute incluye ORM/compilación/cursor; materialización y DTO separados.",
+      "fria": {
+        "construccion_y_parametros_ms": 9.91430001158733,
+        "execute_compilacion_cursor_ms": 9.900599994580261,
+        "materializar_fila_ms": 0.1564999984111637,
+        "captura_dto_ms": 0.1720000000204891,
+        "total_ms": 20.143400004599243,
+        "cpu_hilo_ms": 15.625
+      },
+      "muestras_calientes": 30,
+      "medias_calientes": {
+        "construccion_y_parametros_ms": 0.00546999848059689,
+        "execute_compilacion_cursor_ms": 0.37581333502506215,
+        "materializar_fila_ms": 0.09491999856739615,
+        "captura_dto_ms": 0.04009333594391743,
+        "total_ms": 0.5162966680169726,
+        "cpu_hilo_ms": 0.5208333333333334
+      }
+    },
+    "lectura": "Tras una llamada fría, 30 llamadas calientes locales: construcción/parámetros media 7,5323 a 0,00547 ms; total 9,0056 a 0,5163 ms. Elimina construcción/aliases repetidos y reduce preparación de execute. No es latencia HTTP/PostgreSQL ni comparación RNF-2.",
+    "fria": "Una muestra fría por proceso; 18,17 ms antes y 20,14 después. No demuestra mejora de primera llamada. Tiempos de hilo Windows son gruesos; no usarlos para inferir esperas individuales."
+  },
+  "validacion": {
+    "local": "17 unitarias locales aprobadas en 1,371 s: once de lecturas y seis nuevas de plantilla, con modelos/SQLAlchemy/Pydantic/SQLite reales, sin event loop o HTTP.",
+    "nuevas": [
+      "Reutiliza estructura sin valores de identidad/caso ligados a la plantilla.",
+      "Cada execute recibe diccionario nuevo de parámetros actuales.",
+      "Confidencialidad entre llamadas cambia la autorización, sin cachear resultado.",
+      "Cambio de rol del usuario se respeta tras refrescar actor como hace autenticación.",
+      "Cambio de nombre de Role se relee aun con estructura caliente.",
+      "Dos sesiones/hilos concurrentes SQLite no mezclan actores/casos: cada una accede a propio y recibe 404 en ajeno."
+    ],
+    "anterior_preservada": "Matriz de 56 actor/caso y listado para siete actores, total/paginación/filtros/403/404, conteo SQL y compilación PostgreSQL aprobados.",
+    "estatica": "AST válido en dos archivos."
+  },
+  "limites": [
+    "La caché es solo de estructura SQL, no de permisos/datos/roles/resultados. No se añade una capa de caché de autorización.",
+    "SQLite concurrente no demuestra aislamiento/locks o latencia PostgreSQL. La compilación PostgreSQL sigue sin equivaler a ejecución o plan.",
+    "Regresión seleccionada de API pendiente; las 111 pruebas/63 subpruebas de 173 preceden este cambio.",
+    "Sin nueva carga, limpieza, Docker o p95 formal. RNF-2 pendiente; formal 150 FALLIDA_UMBRAL se conserva.",
+    "No repetir mediciones antes de regresión; si pasa, diagnóstico acotado con redes verificadas, sin full automático."
+  ],
+  "sha256": {
+    "backend/app/services/incidents.py": "fc5c4a9ef4b209af95167a29240279d9986cee6f406c812628156cec11536d74",
+    "backend/tests/test_detail_sql_template.py": "81ecb7f2839ecb03d8a41cd83374bc01dabd9b62116ea63ccd2c3730ae275148"
+  }
+}

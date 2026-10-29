@@ -1,0 +1,5 @@
+# Capa local opcional para Power BI Desktop; conservar el volumen de PostgreSQL.
+services:
+  postgres:
+    ports:
+      - "127.0.0.1:${BI_POSTGRES_PORT:-5433}:5432"

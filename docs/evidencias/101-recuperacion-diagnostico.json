@@ -1,0 +1,100 @@
+{
+  "status": "FAILED",
+  "date_utc": "2026-10-20T14:55:11.141522+00:00",
+  "test": "logical_backup_restore_two_isolated_clusters",
+  "stages": [
+    {
+      "stage": "source_init",
+      "seconds": 9.483
+    },
+    {
+      "stage": "source_start",
+      "seconds": 1.194
+    },
+    {
+      "stage": "source_database",
+      "seconds": 2.1
+    },
+    {
+      "stage": "target_init",
+      "seconds": 7.508
+    },
+    {
+      "stage": "target_start",
+      "seconds": 1.625
+    },
+    {
+      "stage": "target_database",
+      "seconds": 1.65
+    },
+    {
+      "stage": "source_migrate",
+      "seconds": 4.12
+    },
+    {
+      "stage": "source_schema_check",
+      "seconds": 2.406
+    },
+    {
+      "stage": "logical_backup",
+      "seconds": 0.499
+    },
+    {
+      "stage": "archive_catalog",
+      "seconds": 0.095
+    },
+    {
+      "stage": "restore_isolated",
+      "seconds": 0.626
+    },
+    {
+      "stage": "target_stop",
+      "seconds": 0.657
+    },
+    {
+      "stage": "source_stop",
+      "seconds": 0.889
+    }
+  ],
+  "development_database_accessed": false,
+  "workers_started": false,
+  "external_calls": false,
+  "docker_sequence_executed": false,
+  "fixture": "Simulated SQL/ORM fixtures, not a business/API acceptance test",
+  "postgres": "postgres (PostgreSQL) 18.6",
+  "source_bi": {
+    "views_readable": true,
+    "public_data_and_writes_denied": 3
+  },
+  "archive": {
+    "bytes": 59835,
+    "sha256": "1f53e3910aa9b01340ae23f6079a6368b88dc6a83408a14a51c59b1336438f5f"
+  },
+  "invalid_archive_rejected": true,
+  "comparison_differences": {
+    "sections": [
+      "views",
+      "constraints"
+    ],
+    "tables": [],
+    "views": [
+      "incident_metrics"
+    ]
+  },
+  "failure": {
+    "stage": "compare_data_schema",
+    "type": "AssertionError"
+  },
+  "servers_stopped": {
+    "target": true,
+    "source": true
+  },
+  "retained_local_folder": "recovery-jymy6ltm",
+  "limits": [
+    "PostgreSQL nativo; secuencia Docker no ejecutada",
+    "Datos ficticios insertados para recuperacion, no recorrido de negocio",
+    "Propietarios/ACL originales no restaurados; BI reconstruido y probado aparte",
+    "Sin instalacion limpia, carga, capacitacion o aceptacion integral",
+    "Archivo y clusters detenidos conservados en .pgdata ignorado por Git"
+  ]
+}

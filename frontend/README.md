@@ -1,9 +1,23 @@
-# Frontend PluriOne
+# Panel web de PluriOne
 
-React 0.7.0: asistencia IA revisada, departamentos con historial, acceso, cambio de contraseña personal, listado/filtros, registro y gestión de expediente, protección/participantes y administración de cuentas. Guía [FRONTEND.md](../docs/FRONTEND.md).
+React ofrece acceso, cambio de contraseña, registro, consulta y gestión de expedientes, clasificación humana, participantes, confidencialidad, usuarios, departamentos, asistencia IA y seguimiento de correo según permisos.
 
-Desde frontend: npm.cmd ci para instalación; npm.cmd run dev para http://127.0.0.1:5173/. Mantener API/Docker activos y terminal abierta. Verificar npm.cmd test y npm.cmd run build. Sin token persistente ni .env frontend. Esta ampliación no requiere dependencias ni migración nuevas. Departamentos requieren API 0.9.0 y migración 0004; comprobación UI real pendiente. Ver ../docs/DEPARTAMENTOS.md.
+## Ejecutar
 
-React 0.5.0, 17 de octubre de 2026: pantalla de cambio de contraseña para todos los roles, reutilizando /auth/change-password. Confirma nueva credencial, limpia campos y vuelve al login al guardar; resultado incierto retira sesión local sin reenvío. Sin migración ni backend nuevo. RF-1/RF-8 parciales; comprobación real/evidencia 67 y departamentos pendientes. Uso y límites en FRONTEND.md.
+Inicia primero la API y aplica las migraciones siguiendo la [guía principal](../README.md). Desde `frontend/`:
 
-IA requiere API 0.10.0/0005 y está desactivada por defecto. Sugerencias no confirman categoría/prioridad; guía ../docs/IA.md.
+```powershell
+npm.cmd ci
+npm.cmd run dev
+```
+
+Abre http://127.0.0.1:5173/. Mantén la terminal abierta. El proxy `/api` de `vite.config.js` apunta a http://127.0.0.1:8000; ajústalo si cambias el puerto API. No se necesita `.env` frontend. La sesión se conserva en memoria; recargar exige volver a iniciar sesión.
+
+## Verificar
+
+```powershell
+npm.cmd test
+npm.cmd run build
+```
+
+Las pruebas de componentes usan servicios simulados y no acreditan por sí solas permisos reales o aceptación integral. Consulta [la guía funcional](../docs/FRONTEND.md), [el alcance](../docs/MVP.md) y [QA](../docs/REPORTE_QA.md). El build genera los archivos web; la configuración productiva de su servidor y HTTPS está fuera del arranque local.

@@ -1,0 +1,33 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "AGOTAMIENTO_RED_CONFIRMADO_LIMPIEZA_REAL_PENDIENTE",
+  "fuente": "Captura aportada por la autora: codex-clipboard-f680680e-13e7-4a23-a4fc-5a985499f948.png",
+  "observado": "docker network create --internal devolvió: Error response from daemon: all predefined address pools have been fully subnetted",
+  "interpretacion": "Confirma agotamiento actual de los pools predeterminados al crear una red. Es consistente con los dos fallos Compose previos al arranque; no se recuperó su stderr histórico.",
+  "cambio": [
+    "Nueva herramienta release_performance_networks.py: modo revisión por defecto; --apply --limit 2 retira hasta dos redes elegibles, comenzando por las más antiguas según Created.",
+    "Solo Docker local con contexto fijado; redes bridge/local vacías de nombre exacto plurione-qa-perf-<16hex>_(net|entry), etiquetas Compose concordantes y configuración/reporte originales locales.",
+    "Revalida nombre, ID completo, uso y propiedad inmediatamente antes de network rm. El daemon debe rechazar redes que ganen endpoints posteriormente.",
+    "No ejecuta prune, no modifica contenedores, imágenes, volúmenes, reportes, secretos o redes ajenas. Una red todavía vinculada se omite.",
+    "No cambia el provisionador ni elimina automáticamente recursos al terminar; el mantenimiento es explícito y documentado."
+  ],
+  "validacion": {
+    "suite": "63 unitarias locales aprobadas en 1,401 s; siete nuevas de limpieza; unittest discover patrón test_performance*.py.",
+    "casos_nuevos": [
+      "Propiedad y configuración registrada de net/entry.",
+      "Rechazo de uso/metadatos incompletos/red ajena o no local.",
+      "Rechazo de proyecto sin reporte o configuración discordante.",
+      "Modo revisión sin borrados.",
+      "Aplicación limitada por cantidad e ID completo.",
+      "Revalidación omite red que ganó contenedor.",
+      "Fallo del daemon no se registra como eliminación."
+    ],
+    "limite": "Docker simulado; no ejecución real de limpieza desde herramientas del agente. No se demuestra aún liberación efectiva de rangos."
+  },
+  "pendiente": "La autora ejecutará limpieza acotada y compartirá eliminadas/omitidas/fallidas. Solo después verificar disponibilidad y retomar diagnóstico breve; no full automático.",
+  "rnf2": "Pendiente. Sin nueva latencia. La selección API 157 de 93 aprobadas y formal 150 FALLIDA_UMBRAL conservan su alcance.",
+  "sha256": {
+    "backend/scripts/release_performance_networks.py": "383431e1604ffde1f2da1e682d4f19973a373dc7667701818c68f0457dd76f2d",
+    "backend/tests/test_performance_network_release.py": "be043c8513a05450d8de38ca8ac44ca57e20bb1475d97d5b0ff46adab8c14a16"
+  }
+}

@@ -1,0 +1,17 @@
+// Medidas por celda única; BLANK en totales o selecciones de varias celdas.
+// Crear una medida por bloque y desactivar sumas automáticas de columnas.
+Volumen visible =
+IF(COUNTROWS(Indicadores) = 1, SELECTEDVALUE(Indicadores[volumen]), BLANK())
+
+Resolución horas =
+IF(COUNTROWS(Indicadores) = 1, SELECTEDVALUE(Indicadores[resolucion_horas]), BLANK())
+
+Reapertura porcentaje =
+IF(COUNTROWS(Indicadores) = 1, DIVIDE(SELECTEDVALUE(Indicadores[reapertura_porcentaje]), 100), BLANK())
+
+Concordancia porcentaje =
+IF(COUNTROWS(Indicadores) = 1, DIVIDE(SELECTEDVALUE(Indicadores[concordancia_porcentaje]), 100), BLANK())
+
+Fecha de corte = CALCULATE(SELECTEDVALUE(Indicadores[corte_consulta]), REMOVEFILTERS(Indicadores))
+
+Población del informe = CALCULATE(SELECTEDVALUE(Indicadores[poblacion]), REMOVEFILTERS(Indicadores))

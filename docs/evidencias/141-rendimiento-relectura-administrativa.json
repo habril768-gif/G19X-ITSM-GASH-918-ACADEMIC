@@ -1,0 +1,207 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "FALLIDA_UMBRAL_SIN_MEJORA_P95",
+  "captura": "codex-clipboard-70b0099a-1800-4916-b731-6872d507e53c.png",
+  "procedencia": "Autora ejecutó; agente leyó reportes originales y captura.",
+  "fuentes": [
+    {
+      "run_id": "3dabef717c5549c6",
+      "ruta_local": ".pgdata/performance-3dabef717c5549c6/report.json",
+      "sha256": "73d1bfe40f50ed646422d81d541364c165cfbaf6b4937a110b9524ce29e1d3ef"
+    },
+    {
+      "run_id": "e0b63b390b764550",
+      "ruta_local": ".pgdata/performance-e0b63b390b764550/report.json",
+      "sha256": "fdc9f95b181a25c129029a0e43bdbc3f0769a5b101cdb4771a9eb8e95706436b"
+    }
+  ],
+  "comparacion": {
+    "listado": {
+      "p95_antes_ms": 249.8286999980337,
+      "p95_ahora_ms": 286.9096000067657,
+      "cambio_p95_porcentaje": 14.842530105237639,
+      "mediana_antes_ms": 137.507249997725,
+      "mediana_ahora_ms": 144.98040000034962
+    },
+    "detalle": {
+      "p95_antes_ms": 217.48590000061085,
+      "p95_ahora_ms": 258.4329999954207,
+      "cambio_p95_porcentaje": 18.82747341077966,
+      "mediana_antes_ms": 121.37109999821405,
+      "mediana_ahora_ms": 130.0483000013628
+    },
+    "creacion": {
+      "p95_antes_ms": 449.40159999532625,
+      "p95_ahora_ms": 505.9766999911517,
+      "cambio_p95_porcentaje": 12.588984996140162,
+      "mediana_antes_ms": 305.2702999993926,
+      "mediana_ahora_ms": 297.11159999715164
+    },
+    "actualizacion": {
+      "p95_antes_ms": 358.2172000024002,
+      "p95_ahora_ms": 393.48790000076406,
+      "cambio_p95_porcentaje": 9.846177123300471,
+      "mediana_antes_ms": 222.58380000130273,
+      "mediana_ahora_ms": 214.58079999138135
+    }
+  },
+  "solicitudes_antes_ahora": [
+    14346,
+    13873
+  ],
+  "cambio_solicitudes_porcentaje": -3.297086295831586,
+  "medicion": {
+    "inicio_utc": "2026-10-22T18:29:03.227748+00:00",
+    "fin_utc": "2026-10-22T18:34:03.362244+00:00",
+    "duracion_objetivo_s": 300,
+    "duracion_hasta_ultima_respuesta_s": 300.1105031000043,
+    "clientes": 10,
+    "completa": true,
+    "metricas": {
+      "listado": {
+        "intentos": 3471,
+        "exitos": 3471,
+        "errores": 0,
+        "estados": {
+          "200": 3471
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 11.57,
+        "min_ms": 39.05999999551568,
+        "mediana_ms": 144.98040000034962,
+        "p95_exitos_ms": 286.9096000067657,
+        "p99_exitos_ms": 400.73550000670366,
+        "max_ms": 615.9506999974838,
+        "p95_todos_ms": 286.9096000067657,
+        "finalizadas_fuera_ventana": 1
+      },
+      "detalle": {
+        "intentos": 3470,
+        "exitos": 3470,
+        "errores": 0,
+        "estados": {
+          "200": 3470
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 11.566666666666666,
+        "min_ms": 17.75949999864679,
+        "mediana_ms": 130.0483000013628,
+        "p95_exitos_ms": 258.4329999954207,
+        "p99_exitos_ms": 371.458800000255,
+        "max_ms": 637.7397000032943,
+        "p95_todos_ms": 258.4329999954207,
+        "finalizadas_fuera_ventana": 1
+      },
+      "creacion": {
+        "intentos": 3469,
+        "exitos": 3469,
+        "errores": 0,
+        "estados": {
+          "201": 3469
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 11.563333333333333,
+        "min_ms": 113.30620000080671,
+        "mediana_ms": 297.11159999715164,
+        "p95_exitos_ms": 505.9766999911517,
+        "p99_exitos_ms": 697.4363999906927,
+        "max_ms": 1132.42330000503,
+        "p95_todos_ms": 505.9766999911517,
+        "finalizadas_fuera_ventana": 6
+      },
+      "actualizacion": {
+        "intentos": 3463,
+        "exitos": 3463,
+        "errores": 0,
+        "estados": {
+          "200": 3463
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 11.543333333333333,
+        "min_ms": 105.5247999902349,
+        "mediana_ms": 214.58079999138135,
+        "p95_exitos_ms": 393.48790000076406,
+        "p99_exitos_ms": 553.1842999916989,
+        "max_ms": 1025.428599998122,
+        "p95_todos_ms": 393.48790000076406,
+        "finalizadas_fuera_ventana": 2
+      }
+    },
+    "creados": 3469,
+    "inicio_clientes_offset_ms": [
+      0.08150000940077007,
+      0.22700001136399806,
+      0.2891000040108338,
+      0.3456000122241676,
+      0.40020000596996397,
+      0.4597000079229474,
+      0.5186000053072348,
+      0.5747000104747713,
+      0.6362999993143603,
+      0.6930000090505928
+    ]
+  },
+  "conteos_inicial_calentamiento_final": [
+    100,
+    368,
+    3837
+  ],
+  "comprobacion_sql": {
+    "incidencias": 3837,
+    "eventos_creado": 3837,
+    "eventos_editado": 3730,
+    "entregas_encoladas": 38370,
+    "intentos_smtp": 0,
+    "trabajos_ia": 0
+  },
+  "contenedores_detenidos": true,
+  "sesiones_revocadas_204": 10,
+  "hash_del_helper_coincide_con_reporte": true,
+  "cpu_contenedores_durante_medicion": {
+    "3dabef717c5549c6": {
+      "api": {
+        "muestras": 43,
+        "cpu_media_porcentaje": 118.82558139534883,
+        "cpu_max_porcentaje": 163.08
+      },
+      "postgres": {
+        "muestras": 43,
+        "cpu_media_porcentaje": 42.072790697674414,
+        "cpu_max_porcentaje": 64.1
+      },
+      "redis": {
+        "muestras": 43,
+        "cpu_media_porcentaje": 0.9986046511627906,
+        "cpu_max_porcentaje": 6.49
+      }
+    },
+    "e0b63b390b764550": {
+      "api": {
+        "muestras": 44,
+        "cpu_media_porcentaje": 122.88477272727273,
+        "cpu_max_porcentaje": 170.8
+      },
+      "postgres": {
+        "muestras": 44,
+        "cpu_media_porcentaje": 43.527727272727276,
+        "cpu_max_porcentaje": 64.92
+      },
+      "redis": {
+        "muestras": 44,
+        "cpu_media_porcentaje": 0.9936363636363637,
+        "cpu_max_porcentaje": 5.24
+      }
+    }
+  },
+  "interpretacion": [
+    "Las cuatro operaciones empeoran en p95. Creación y actualización mejoran ligeramente su mediana; no equivale a cumplir el criterio p95.",
+    "Menos consultas en perfil local y regresión 128 aprobada no demostraron mejor rendimiento en esta corrida.",
+    "CPU de contenedores es muestreo parcial; no mide CPU del generador ni toda la carga del host y no demuestra saturación o causa única."
+  ],
+  "limites": [
+    "Entorno compartido con generador, cargas externas sin control exclusivo y población creciente distinta entre corridas.",
+    "No atribuir causalidad exclusiva ni revertir o debilitar controles por una comparación observacional.",
+    "RNF-2 sigue pendiente. No repetir full sin cambio/diagnóstico que lo justifique."
+  ],
+  "siguiente_paso": "Investigar variación de latencias y coste residual del diagnóstico, con medición del generador/host y consultas por familias antes de otro cambio o corrida formal."
+}

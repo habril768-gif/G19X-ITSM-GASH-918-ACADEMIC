@@ -1,0 +1,46 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "RESPUESTA_DTO_EN_WORKER_PREPARADA_REGRESION_PENDIENTE",
+  "motivo": "164 confirmó validación de respuesta en hilo con ejecución media 0,029 ms y espera+retorno 15,45 ms en edición. 165 no identificó commit/flush redundante para eliminar.",
+  "cambio": [
+    "Decorador worker_response en register/list_cases/detail/edit_content. Conserva firma por wraps y todos los response_model de FastAPI; la ruta es async y envía un único trabajo síncrono al pool.",
+    "Ese trabajo ejecuta el endpoint original y convierte el resultado a Receipt/CasePage/CaseDetail mediante model_validate antes de retornar al event loop. No se retornan objetos ORM a la validación final del framework.",
+    "La validación final FastAPI se ejecuta en el loop sobre DTOs ya preparados (Pydantic con revalidate_instances predeterminado), sin consulta ORM pendiente; se conserva serialización y esquema de respuesta.",
+    "Los errores al validar salida se convierten en ResponseValidationError con prefijo loc=response. Excepciones del servicio y commit se propagan; no se reintenta ni responde éxito tras fallo.",
+    "El diagnóstico QA envuelve el trabajo del endpoint, conservando la ruta async. La etapa endpoint ahora incluye preparación/validación de DTO en worker además del cuerpo de negocio, sin incluir espera/retorno. Esta pequeña diferencia de alcance debe declararse al comparar.",
+    "thread_stage reconoce únicamente el worker conocido del módulo app.core.worker_response como endpoint. Se mantiene versión 3, categorías y validadores; se espera pasar de cuatro a tres pasos en las cuatro operaciones, por verificar en ejecución real.",
+    "No cambian autenticación/autorización, SQL, bloqueos, transacciones, expiración, auditoría, outbox, durabilidad ni cierre de Session. Otras rutas mantienen su ejecución anterior."
+  ],
+  "validacion": {
+    "ajuste_local": "7/7 unitarias de WorkerResponseTests aprobadas en 0,054 s con Pydantic/FastAPI y ejecutor/contexto de hilo reales, offload asíncrono simulado sin event loop.",
+    "casos": [
+      "Atributos tipo ORM solo se leen dentro del worker y DTO se serializa fuera sin nuevas lecturas.",
+      "Respuesta inválida conserva error FastAPI y loc de response.",
+      "HTTPException original conservada.",
+      "Fallo simulado de commit no produce DTO de éxito.",
+      "Firma/anotaciones y ruta async preservadas.",
+      "QA mide trabajo en worker sin cambiarlo a ruta sync ni duplicar offload.",
+      "DTOs independientes entre llamadas."
+    ],
+    "herramientas": "64 unitarias locales de test_performance*.py aprobadas en 1,661 s; una nueva de clasificación del worker, Docker/ASGI simulados.",
+    "integraciones_preparadas_no_ejecutadas": [
+      "TestClient real: respuesta 200, un offload de endpoint y ninguno para validar la salida.",
+      "TestClient real: salida inválida sigue devolviendo HTTP 500."
+    ],
+    "estatica": "AST válido en seis archivos y exactamente cuatro rutas decoradas. Sin pytest/FastAPI servidor real o Docker en esta validación."
+  },
+  "limites": [
+    "Regresión seleccionada de API e integraciones nuevas pendientes; las 93 de 157 corresponden al cambio anterior.",
+    "Sin nuevo smoke/full ni reducción real de hilos o latencia acreditada. No repetir carga antes de regresión.",
+    "La ubicación de captura de DTO cambia para lecturas: permanece en worker y misma Session antes de cierre. Necesita regresión de visibilidad/filtros y errores.",
+    "RNF-2 pendiente; formal 150 FALLIDA_UMBRAL y todos los reportes anteriores se conservan."
+  ],
+  "sha256": {
+    "backend/app/core/worker_response.py": "98c579faa3f3540e01ff3190aaf465d6bc56f1285d9a354fd0f2a0183c2d8b82",
+    "backend/app/api/incidents.py": "d5fbc39a74365ac9ada3fba973cd4f4a6a98426a702e586a48b74d2747880519",
+    "backend/app/core/performance_diagnostics.py": "1a02d04022f54ac0353eb6e0e868b4fea172ccf93d91c5980e0ba730157ab9d6",
+    "backend/app/core/performance_timing.py": "20bd1ba31b6c3f8cdc51aa6ea942ff2f5f0d2bb2ef2ac2065d113ffd51c2524c",
+    "backend/tests/test_worker_response.py": "76cc26d553404bf3a51e22ad4c768f0c93416b60b78809500ada425538897064",
+    "backend/tests/test_performance_diagnostics.py": "5c5545bc4a1462defa331ad8672687054bec512b22f4ddd4c2efa1794911c33e"
+  }
+}

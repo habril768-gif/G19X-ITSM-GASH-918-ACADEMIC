@@ -1,4 +1,4 @@
-"""ConfiguraciÃ³n sin secretos y disponibilidad degradada."""
+"""Configuración sin secretos y disponibilidad degradada."""
 from fastapi.testclient import TestClient
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.schema import CreateTable
@@ -58,3 +58,5 @@ def test_initial_migration_compiles_offline():
     assert "CREATE TABLE department_audit_events" in sql
     assert "ix_department_audit_events_department_id" in sql
     assert "CREATE TABLE ai_jobs" in sql
+    assert "CREATE VIEW analytics.incident_metrics" in sql
+    assert "security_barrier=true" in sql

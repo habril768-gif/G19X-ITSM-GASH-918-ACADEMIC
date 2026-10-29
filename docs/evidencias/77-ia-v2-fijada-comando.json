@@ -1,0 +1,32 @@
+{
+  "recorded_on": "2026-10-18",
+  "dataset": "docs/evaluacion_ia/aceptacion-v2",
+  "author_review": {
+    "reported": true,
+    "scope": "55 casos revisados y conformidad con categorias, prioridades y justificaciones",
+    "independent_third_party": false
+  },
+  "labels_frozen": true,
+  "reference_changes": false,
+  "checks": {
+    "normalized_hashes": 3,
+    "json_equivalence_with_candidate": true,
+    "powershell_parser": true,
+    "preview_no_docker": true,
+    "mocked_invocation_correct": true,
+    "build_failure_stops": true
+  },
+  "initial_byte_comparison": "AssertionError por CRLF/LF; verificación normalizada/JSON posterior correcta",
+  "script": "scripts/EVALUAR_IA_V2.ps1",
+  "max_cumulative_attempts": 55,
+  "output": "docs/evaluacion_ia/ejecucion-v2",
+  "external_calls": 0,
+  "predictions_generated": false,
+  "backend_tests": "147 previas; no repetidas, backend sin cambios",
+  "limitations": [
+    "Docker simulado en pruebas de comando",
+    "Ejecución externa y calidad v2 pendientes",
+    "Conformidad de referencias no equivale a aceptación de calidad",
+    "Sin verificación de saldo ni coste"
+  ]
+}

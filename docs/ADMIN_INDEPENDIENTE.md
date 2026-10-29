@@ -1,7 +1,5 @@
 # Operador: administrador RH independiente adicional
 
-Actualización del 16 de octubre de 2026. Amplía CLI, conserva API 0.7.0 y esquema 0003.
-
 Solo el operador con acceso a la terminal del servidor ejecuta esta operación. No hay endpoint público ni enlace de autoservicio. El operador autoriza una nueva cuenta administrativa; no revisa el contenido de casos ni descarta relaciones. En producción debe verificar por un canal administrativo la identidad y autorización de la persona, fuera del formulario de incidencias. Una persona involucrada no puede usar una segunda cuenta para eludir su exclusión: el MVP no verifica identidad humana entre cuentas; la asignación a otra persona es responsabilidad del operador y constituye limitación conocida.
 
 Desde la raíz del proyecto, tras aplicar la actualización:
@@ -21,7 +19,7 @@ Auditoría: USUARIO_ACTUALIZADO dirigido a affected_user_id, actor nulo por oper
 
 Crear al nuevo RH no cambia participantes, confidencialidad, estado ni responsable de ningún caso. La cuenta nueva debe iniciar sesión con su propia contraseña y gestionar solo expedientes permitidos por las reglas actuales. El gestor involucrado sigue excluido. No hay autoasignación ni retirada automática de protección. La independencia real depende de que el operador designe otra persona; un UUID nuevo no la demuestra.
 
-Prueba manual prevista: ejecutar comando, iniciar sesión con cuenta nueva y GET /auth/me (ADMIN_RH); comprobar caso de prueba con administrador original declarado, acceso original rechazado y nuevo RH permitido. Capturar solo resultados sin token/Curl/contraseña. No crear ni declarar al administrador original sobre el único caso de trabajo sin disponer antes de otra cuenta independiente. Esta prueba todavía no se ejecutó aquí.
+Prueba manual prevista: ejecutar comando, iniciar sesión con cuenta nueva y GET /auth/me (ADMIN_RH); comprobar caso de prueba con administrador original declarado, acceso original rechazado y nuevo RH permitido. Capturar solo resultados sin token/Curl/contraseña. No crear ni declarar al administrador original sobre el único caso de trabajo sin disponer antes de otra cuenta independiente. El recorrido básico tiene evidencia parcial; consultar la sección de resultados y QA antes de repetirlo.
 
 ## Resultado manual posterior
 

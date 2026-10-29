@@ -1,0 +1,22 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "11_APROBADAS_SEGUN_CAPTURA_AUTORA",
+  "fuente": "codex-clipboard-ff436124-518d-464a-a508-5b20ae65a227.png",
+  "procedencia": "Ejecución en terminal de la autora; el agente revisa la captura, no atribuye la ejecución a sus herramientas.",
+  "archivo": "backend/tests/test_write_responses.py",
+  "comando_visible": ".\\backend\\.venv\\Scripts\\python.exe -m pytest -q -p no:cacheprovider -c backend/pytest.ini backend/tests/test_write_responses.py",
+  "resultado_visible": "11 passed in 5.52s",
+  "cobertura_segun_codigo": [
+    "Tres recibos de creación con Session expire_on_commit=True y ausencia de SQL después de commit.",
+    "Cuatro respuestas de clasificación, asignación, contenido y transición con esquema CaseDetail y sin SQL posterior al commit.",
+    "Dos fallos de commit con respuesta 503 y rollback de caso, auditoría y cola.",
+    "Fallo del presentador con rollback y retorno ORM por defecto compatible."
+  ],
+  "antecedentes": "133 contiene perfil local; 134 conserva el resultado inicial 79 aprobadas/3 fallidas y sus correcciones de preparación. No se reescribe ese resultado como satisfactorio.",
+  "limites": [
+    "Fixtures SQLite, TestClient y dependencias de usuario/sesión sustituidas; no autenticación real o bloqueos PostgreSQL.",
+    "No es una ejecución conjunta nueva de los cinco archivos ni la suite completa.",
+    "RNF-2 sigue pendiente: la evidencia 132 conserva FALLA_UMBRAL; todavía no hay medición formal del ajuste de 133."
+  ],
+  "siguiente_paso": "Una nueva ejecución full del provisionador aislado y comparación del reporte con 132, manteniendo p95 menor de 200 ms como criterio sin relajarlo."
+}

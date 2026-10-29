@@ -1,0 +1,31 @@
+{
+  "version": "candidato-v2",
+  "prepared_on": "2026-10-18",
+  "labels_frozen": false,
+  "author_conformity": {
+    "reported": false
+  },
+  "provenance": "Textos y etiquetas nuevos propuestos por asistente después de fijar prompt v2, sin predicciones; revisión humana pendiente. No revisión independiente de terceros ni garantía estadística.",
+  "independent_acceptance": false,
+  "prompt_version": "plurione-classify-v2",
+  "provider_sha256": "5a499d4e808cb5c545189e798dd971107c4cc60e757ba96b3c5240fdd78604b2",
+  "prompt_sha256": "819cd23e5b361b95f5a822350b429ac15daaa2dde87caf2cc76247fa6f136cff",
+  "files": {
+    "references": "referencias.json",
+    "inputs": "entradas.json",
+    "catalog": "catalogo.json"
+  },
+  "hash_normalization": "UTF-8 y saltos LF",
+  "sha256": {
+    "referencias.json": "1be86eb601cd377558f3354743c7f35e8279336ee27175c83c4eff56d0e307d1",
+    "entradas.json": "f46367447c38256c08315a1b0cd10e9e938720cccc354ca705e3f53e5a890da1",
+    "catalogo.json": "68145613a454948697d23852129f10950bf20e73788fca08c006ebe7b6966f5f"
+  },
+  "prior_set_use": "v1 reservado como desarrollo; no se modificaron sus etiquetas ni resultados",
+  "validation": {
+    "rows": 55,
+    "exact_text_overlap_with_v1": 0,
+    "predictions_generated": false,
+    "external_calls": 0
+  }
+}

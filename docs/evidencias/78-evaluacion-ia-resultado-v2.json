@@ -1,0 +1,41 @@
+{
+  "recorded_on": "2026-10-18",
+  "source": "Archivos de ejecucion-v2 generados por autora; metricas recalculadas offline",
+  "dataset": "docs/evaluacion_ia/aceptacion-v2",
+  "attempted": 55,
+  "responses": 55,
+  "category_correct": 49,
+  "priority_correct": 40,
+  "category_accuracy": 0.98,
+  "priority_accuracy": 0.8,
+  "abstention_correct": 5,
+  "high_false_negative_ids": [],
+  "high_as_low_ids": [],
+  "automated_targets_met": true,
+  "human_acceptance": false,
+  "transport_or_schema_errors": 0,
+  "regular_abstentions": 0,
+  "effective_models": {
+    "gpt-4.1-mini-2025-04-14": 55
+  },
+  "usage_reported": {
+    "input_tokens": 49321,
+    "output_tokens": 4191,
+    "total_tokens": 53512
+  },
+  "billed_cost_verified": false,
+  "additional_external_calls": 0,
+  "files_sha256": {
+    "journal.jsonl": "871a50621dc558e769fe1d79cbdfcef00d4ad4f9f194f373e2f89555b084700c",
+    "predicciones.json": "77cd88e71763eac8dfeca8f6f7b930b69d18916bfafdb976e71d5ac317da4337",
+    "reporte.json": "39447cddb132b83d67db6d276fcde140c6b002d5f8932c4b88ddfd2b9ca25273",
+    "run.json": "9735025ea2f47a454ec80806e9206c8a21ef7229927c86c07637ef6712a3ed11"
+  },
+  "limitations": [
+    "Prioridad en el umbral 40/50; diez Media clasificadas Baja",
+    "Una diferencia de categoria; mantener referencias fijadas",
+    "Textos/etiquetas sinteticos con revision declarada de autora; sin revision independiente de terceros",
+    "Conjuntos v1/v2 distintos: no prueba causal aislada del efecto del prompt",
+    "Cumplimiento numerico no equivale a aceptacion humana o calidad general"
+  ]
+}

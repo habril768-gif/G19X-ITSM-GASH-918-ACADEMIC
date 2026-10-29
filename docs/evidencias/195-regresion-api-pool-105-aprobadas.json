@@ -1,0 +1,38 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "REGRESION_SELECCIONADA_APROBADA",
+  "fuente": "Salida PowerShell compartida por el usuario; pruebas ejecutadas por el usuario, no por el agente.",
+  "pruebas_aprobadas": 105,
+  "duracion_s": 16.15,
+  "seleccion": [
+    "backend/tests/test_database_pool.py",
+    "backend/tests/test_database_session.py",
+    "backend/tests/test_database.py",
+    "backend/tests/test_auth.py",
+    "backend/tests/test_incidents.py",
+    "backend/tests/test_mail.py",
+    "backend/tests/test_write_responses.py",
+    "backend/tests/test_worker_response.py"
+  ],
+  "entorno": {
+    "SSLKEYLOGFILE": "",
+    "RUN_DB_TESTS": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "opciones": "-B -m pytest -q -p no:cacheprovider -c backend/pytest.ini",
+  "identidad": "Dos hashes194 coinciden con archivos actuales.",
+  "sha256": {
+    "backend/app/core/database.py": "4407da230d53fb6e1dad4e37b4f229876e555698c1b40dbd37134b4fe104a550",
+    "backend/tests/test_database_pool.py": "87bca7f785ebe20e5f74569a7ddcd4eae83fb61a944962a6abdcf1194a84f4f3",
+    "backend/tests/test_database_session.py": "51475d84168ded04fe2deba343497f44c5feaedb87dba02becf04012d3c932ae",
+    "backend/tests/test_database.py": "39ef3c88632aa51cf7909a7fe179064d9116a92d3d13a3de73662cb7e3b7b51d",
+    "backend/tests/test_auth.py": "7f81b8826767a93b9f78d9ea48845a38649cb29700b9ab1128752f2d60c8aeb8",
+    "backend/tests/test_incidents.py": "a58f4eb9b9b8748668c394514fa8b1c9755cccb048d849afef559717c5d8fb16",
+    "backend/tests/test_mail.py": "f3a7d21b77dcb14ef38335829a1464413ce03ececdfb09b42bb163636bd0c778",
+    "backend/tests/test_write_responses.py": "8aea6b3e970c8531aa46064862c46dddebd1f93940251feb11a836488a12df0b",
+    "backend/tests/test_worker_response.py": "76cc26d553404bf3a51e22ad4c768f0c93416b60b78809500ada425538897064"
+  },
+  "alcance": "Seleccion mixta de unitarias/API: retencion y limite de pool, Session/AnyIO/TestClient, base de datos, autenticacion, incidencias, correo, atomicidad y worker response. No105solicitudesHTTP.",
+  "limites": "RUN_DB_TESTS=0 no valida comportamiento/p95 PostgreSQL reales. Sin nueva carga del agente. RNF-2 pendiente; siete formales fallidas conservadas.",
+  "pendiente": "Unico smoke diagnostico v4 con pool10+5 para observar ping/auth, conteos SQL/workers, errores/auditoria/outbox/recursos/parada. Pings mas frecuentes pueden indicar reuso, no son por si solos ganancia. No repetir full ahora."
+}

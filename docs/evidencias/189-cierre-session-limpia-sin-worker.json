@@ -1,0 +1,70 @@
+{
+  "fecha_registro": "2026-10-27",
+  "estado": "CIERRE_LIMPIO_LOCAL_VALIDADO_API_Y_QA_PENDIENTES",
+  "hipotesis": "Diagnostico188: tercer worker de cierre en creacion ejecuta0,03379ms de media con espera13,02674ms y retorno10,30514ms; actualizacion ejecuta0,04781ms con espera13,33394ms y retorno8,92247ms. Existe planificacion para cierre sin transaccion despues de commit. Como sucede despues del envio, no se puede restar esa espera al p95 HTTP ni garantizar mejora.",
+  "perfil_previo_cierre": {
+    "creacion": {
+      "calls": 79,
+      "incomplete": 0,
+      "wait_ms": 1029.1124590039544,
+      "run_ms": 2.66947699492448,
+      "resume_ms": 814.1058599994722,
+      "calls_per_request": 1.0,
+      "wait_ms_per_request": 13.026739987391828,
+      "run_ms_per_request": 0.033790848037018734,
+      "resume_ms_per_request": 10.305137468347748
+    },
+    "actualizacion": {
+      "calls": 73,
+      "incomplete": 0,
+      "wait_ms": 973.3779810030683,
+      "run_ms": 3.4898109988716897,
+      "resume_ms": 651.3399789873802,
+      "calls_per_request": 1.0,
+      "wait_ms_per_request": 13.333944945247511,
+      "run_ms_per_request": 0.047805630121529996,
+      "resume_ms_per_request": 8.92246546558055
+    }
+  },
+  "revision_sqlalchemy_instalado": {
+    "version": "2.1.4",
+    "Session._close_impl": "    def _close_impl(self, invalidate: bool, is_reset: bool = False) -> None:\n        if not is_reset and self._close_state is _SessionCloseState.ACTIVE:\n            self._close_state = _SessionCloseState.CLOSED\n        self.expunge_all()\n        if self._transaction is not None:\n            for transaction in self._transaction._iterate_self_and_parents():\n                transaction.close(invalidate)\n",
+    "Session.in_transaction": "    def in_transaction(self) -> bool:\n        \"\"\"Return True if this :class:`_orm.Session` has begun a transaction.\n\n        .. versionadded:: 1.4\n\n        .. seealso::\n\n            :attr:`_orm.Session.is_active`\n\n\n        \"\"\"\n        return self._transaction is not None\n",
+    "lectura": "Sin _transaction, _close_impl solo expunge_all. Tras commit la conexion ya fue devuelta. No hay listeners de detach en core del producto; callbacks de SQL/commit diagnosticos no alteran esa rama."
+  },
+  "cambio": "get_session conserva CancelScope(shield=True). Solo si type(session) es exactamente la clase SQLAlchemy Session original y not session.in_transaction(), hace session.close local sin salto. Referencia de clase original _BASE_SESSION_TYPE impide fastpath en sesiones custom/subclases/dobles. Toda sesion activa o custom mantiene anyio.to_thread.run_sync con CapacityLimiter(1) independiente.",
+  "preservado": [
+    "Consultas, autenticacion, autorizacion y commit permanecen en workers",
+    "Rollback/cierre que puede hacer IO permanece en worker independiente y protegido",
+    "Sin cambios de SQL, pools, aislamiento, umbrales, correo o auditoria",
+    "Si un SELECT reabre transaccion tras commit, cierre vuelve a worker",
+    "Fallo de flush conserva transaccion aunque is_active=False; se usa in_transaction",
+    "Excepciones y cancelacion propagadas, cierre una vez sin reintento"
+  ],
+  "validacion": {
+    "local": "14 SessionLifecycleTests aprobadas en0,116s: siete previas adaptadas y siete nuevas. Dobles async sin suspension y workers reales con SQLite; no event loop/socket ni HTTP.",
+    "casos": [
+      "Session sin uso/commit:sin salto y close una vez",
+      "Tras commit ORM expirado se separa sin SQL/rollback/checkout/checkin",
+      "Lectura pendiente/uncommitted write cierran y revierten en worker protegido",
+      "SELECT tras commit reabre transaccion y requiere worker",
+      "Subclase sin transaccion mantieneworker",
+      "Flush fallido no se confunde con sesion limpia",
+      "Cancelacion con escritura pendiente revierte enworker",
+      "Errores de cierre limpios/activos se propagan una vez"
+    ],
+    "integracion_preparada": "Nueva SessionFastAPITests.test_committed_standard_session_closes_on_loop_without_io, mas tres pruebas AnyIO/TestClient anteriores. No ejecutadas por agente por limitacion conocida de event loop en su entorno; pendientes en entorno del usuario.",
+    "estatica": "AST correcto en dos archivos; read_diagnostics existente admite dos o tres workers si sumas/grupos concuerdan, sin modificar instrumentacion."
+  },
+  "esperado_qa": "Creacion/edicion comprometidas con Session estandar pasan de tres llamadas a worker a dos; lecturas con transaccion conservan tres. Conteos SQL3/2/9/7 sin cambios. Todavia no observado en PostgreSQL real.",
+  "limites": "No nueva carga ni formal. Limpieza ORM local agrega trabajo CPU pequeno al loop; no contiene IO para Session estandar observada. Si se introducen callbacks de detach con IO habria que revisar la condicion o mantener cierre enworker. No se estima ganancia p95 ni se acredita RNF-2; siete formales fallidas vigentes. Regresion187 corresponde a revision anterior.",
+  "fuentes": [
+    "https://docs.sqlalchemy.org/en/21/orm/session_api.html",
+    "https://docs.sqlalchemy.org/en/20/orm/session_basics.html"
+  ],
+  "sha256": {
+    "backend/app/core/database.py": "6f3a01538dab819df76e78a58d34aa8fefe3ef85312da9fec7048705b63fa442",
+    "backend/tests/test_database_session.py": "51475d84168ded04fe2deba343497f44c5feaedb87dba02becf04012d3c932ae"
+  },
+  "pendiente": "Ejecutar regresion seleccionada incluyendo AnyIO/TestClient real; solo despues considerar diagnostico de workers/colas. No repetir full ahora."
+}

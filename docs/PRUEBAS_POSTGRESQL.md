@@ -40,3 +40,11 @@ No se certifican todas las carreras posibles de asignación, cambio de rol, sesi
 Evidencia estructurada, sin nueva captura manual: [69-postgresql-integracion.json](evidencias/69-postgresql-integracion.json). CI observado: https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/39090144556.
 
 Hubo un primer bloqueo por captura de pipes heredados al iniciar PostgreSQL en Windows. Se corrigió usando salida descartada para procesos de control y salida explícita para las verificaciones. La repetición completa pasó y retiró su servidor/carpeta. El intento inicial dejó .pgdata/run-gykzcxje: pg_ctl status indicó servidor detenido y el puerto propio ya no aceptaba conexión. La revisión automática rechazó su borrado manual por exigir una aprobación de sandbox deshabilitada; se conserva ignorado, sin reintentar ese borrado por otra vía.
+
+## Correo por eventos — esquema 0006
+
+API 0.11.0/React 0.8.0, esquema 0006: correo por eventos con permisos vigentes, outbox transaccional y panel de seguimiento RH. Captura local Mailpit preparada, sin correo real ni llamadas IA. Guía [CORREO.md](CORREO.md) en docs: script `scripts/ACTUALIZAR_CORREO.ps1` desde raíz construye, migra y actualiza API/worker con perfil mail. Validación local documentada en evidencia 85; recorrido Docker/buzón/navegador y aceptación integral pendientes. Se conservan usuarios, incidencias y evaluaciones anteriores.
+
+## Analítica agregada — esquema 0007
+
+API 0.12.0/esquema 0007: vistas agregadas con supresión en PostgreSQL, cuenta de lectura exclusiva y plantillas de importación Power BI. 201 pruebas backend aprobadas en PostgreSQL aislado; sin .pbix ni conexión Desktop acreditados. Seguir ANALITICA.md en docs y powerbi/README.md. Desde raíz: scripts/ACTUALIZAR_ANALITICA.ps1; después docker compose exec api python -m app.manage_reporting_user. Puerto opcional solo 127.0.0.1:5433 y contraseña interactiva. No usar cuenta administradora en Power BI ni reducir mínimos si todo queda suprimido. Evidencia 93. Recorrido de correo ya registrado en 86–92.

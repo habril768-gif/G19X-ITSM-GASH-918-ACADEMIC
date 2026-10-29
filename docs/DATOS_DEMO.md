@@ -30,7 +30,13 @@ Guardar la salida como docs/evidencias/07-usuarios-demo.png. La ejecución Postg
 
 ## Diferencia respecto a autenticación
 
-Estos registros sirven para pruebas de reglas de negocio; no son usuarios con los que iniciar sesión. La autenticación real requerirá registro de aplicación y configuración del tenant Microsoft Entra ID. No se incorpora una ruta para evadir SSO.
+La autenticación vigente es local; no requiere Microsoft Entra ID. La carga DEMO crea registros sin contraseña. Para habilitar una cuenta ficticia ya cargada, el operador asigna una contraseña privada desde una terminal interactiva:
+
+```powershell
+docker compose exec api python -m app.manage_users set-password --email empleado-operaciones-1@example.invalid
+```
+
+Repite el comando para las cuentas de la tabla que necesites probar. Introduce una contraseña de 12 a 128 caracteres y confírmala cuando se solicite; no se publica una contraseña compartida. El primer administrador de una instalación nueva se crea con `bootstrap-admin`, como explica el README. No uses correos o datos de personas reales.
 
 ## Validación
 

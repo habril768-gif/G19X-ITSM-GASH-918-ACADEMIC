@@ -1,0 +1,30 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "128_APROBADAS_SEGUN_CAPTURA_AUTORA",
+  "fuente": "codex-clipboard-9a9b2ce8-3b7e-4fc9-926d-a3ba2f767071.png",
+  "procedencia": "Autora ejecutó; agente revisó captura de terminal y resumen. No se atribuye ejecución a herramientas del agente.",
+  "resultado_visible": "128 passed in 27.84s",
+  "archivos": [
+    "backend/tests/test_administration_lock_queries.py",
+    "backend/tests/test_incidents.py",
+    "backend/tests/test_user_administration.py",
+    "backend/tests/test_departments.py",
+    "backend/tests/test_ai.py",
+    "backend/tests/test_mail.py",
+    "backend/tests/test_write_responses.py",
+    "backend/tests/test_auth.py"
+  ],
+  "configuracion_visible": {
+    "SSLKEYLOGFILE": "",
+    "RUN_DB_TESTS": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "pytest": "-q -p no:cacheprovider -c backend/pytest.ini"
+  },
+  "alcance": "Regresión seleccionada de ocho archivos tras agrupar relectura administrativa en 139; incluye los 14 casos nuevos de identidad fresca/orden de lock simulado y servicios consumidores.",
+  "limites": [
+    "No es suite completa ni prueba de concurrencia o advisory locks reales en PostgreSQL.",
+    "RUN_DB_TESTS=0; los fixtures y dobles no sustituyen la instalación operativa.",
+    "No hay medición formal nueva del ajuste: RNF-2 sigue pendiente y 136 conserva FALLIDA_UMBRAL."
+  ],
+  "siguiente_paso": "Una corrida full aislada sin --diagnostic y comparación del reporte con 136. No repetir la regresión sin cambios nuevos."
+}

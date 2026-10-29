@@ -1,0 +1,39 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "REGRESION_SELECCIONADA_98_APROBADAS_DIAGNOSTICO_PENDIENTE",
+  "fuente": "Captura aportada por la autora: codex-clipboard-dc781bd9-aa21-4716-b70b-70bc4e4b91e5.png; ejecución por ella, no por el agente.",
+  "preparacion": "169-rol-agrupado-tras-bloqueo-preparado.json",
+  "variables_observadas": {
+    "SSLKEYLOGFILE": "",
+    "RUN_DB_TESTS": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "comando": ".\\backend\\.venv\\Scripts\\python.exe -B -m pytest -q -p no:cacheprovider -c backend/pytest.ini backend/tests/test_administration_role_join.py backend/tests/test_administration_lock_queries.py backend/tests/test_lifecycle_role_queries.py backend/tests/test_incidents.py backend/tests/test_user_administration.py backend/tests/test_mail.py backend/tests/test_write_responses.py",
+  "resultado": {
+    "aprobadas": 98,
+    "subpruebas_aprobadas": 4,
+    "duracion_s": 11.72,
+    "progreso": "100%",
+    "errores_mostrados": 0
+  },
+  "alcance": [
+    "Siete archivos: rol conjunto, lock administrativo, lecturas de rol en gestión, incidencias, administración de usuarios, correo y respuestas de escritura.",
+    "Incluye las nueve nuevas pruebas, los escenarios de rol/estado obsoleto y compatibilidad, orden simulado de locks, visibilidad, fallos de commit y rollback de auditoría/cola de las suites seleccionadas.",
+    "La prueba de gestión sigue exigiendo una lectura de rol y ahora verifica JOIN roles, en lugar de aceptar una consulta individual posterior.",
+    "Hashes actuales de los cinco archivos coinciden con preparación 169; no prueban retrospectivamente identidad exacta del proceso capturado."
+  ],
+  "limites": [
+    "Las cuatro subpruebas se registran por separado, no como 102 pruebas únicas; no sumar selecciones anteriores.",
+    "RUN_DB_TESTS=0: no demuestra concurrencia/locks PostgreSQL ni latencia. No es suite completa.",
+    "Sin nuevo p95 o acreditación RNF-2; formal 150 conserva FALLIDA_UMBRAL.",
+    "Siguiente paso: diagnóstico smoke del ajuste 169, tras liberar dos redes QA vacías y comprobar dos eliminaciones sin fallos. Esperado en QA: creación 11 a 10 y edición 8 a 7 consultas; aún no observado.",
+    "Sin full automático, cambios funcionales o Docker ejecutado por el agente."
+  ],
+  "sha256": {
+    "backend/app/services/administration_lock.py": "5bdd6d779a1c3e8ffddbaa7378572ee7c6e50a13a6d511e6e6a000ec328e989d",
+    "backend/app/services/incidents.py": "cedaf1b0fa2bdbaae916989a8ce7a04dbb5978921d13efb78554532a5f638e7d",
+    "backend/app/services/lifecycle.py": "83fda9b85761513287a03e00b152d01f46c30679090026abd32d03dbc2a03c6e",
+    "backend/tests/test_administration_role_join.py": "3b9a21af2e2fe7eb3b56245c25d64703335e53221c5be51d361777a7a752023e",
+    "backend/tests/test_lifecycle_role_queries.py": "800741e94b8c7ef8b01dd6213c089de1985b3d90f1bce6a0d3095694eebba9df"
+  }
+}

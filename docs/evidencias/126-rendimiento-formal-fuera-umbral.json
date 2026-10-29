@@ -1,0 +1,145 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "FALLIDA_UMBRAL",
+  "run_id": "d1c50f8001464425",
+  "captura": "codex-clipboard-aae8ebd3-b370-46c6-a8a3-75f3df942ef9.png",
+  "fuente": {
+    "reporte_local": ".pgdata/performance-d1c50f8001464425/report.json",
+    "sha256": "93127e4ca426588beaf051afe71800837d4642b4eaae948a8e4dd2cfc25c84aa",
+    "procedencia": "Autora ejecuta; agente lee reporte real y captura."
+  },
+  "hardware": {
+    "os": "Windows-10-10.0.26200-SP0",
+    "cpu": "AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD",
+    "cpu_logicas_host": 4,
+    "docker_cpus": 4,
+    "docker_mem_bytes": 3771293696,
+    "docker_server": "29.6.1",
+    "docker_os": "linux",
+    "generador": "mismo host que Docker; sin limite de recursos por contenedor"
+  },
+  "calentamiento": {
+    "duracion_objetivo_s": 30,
+    "completo": true
+  },
+  "medicion": {
+    "inicio_utc": "2026-10-22T16:21:01.983589+00:00",
+    "fin_utc": "2026-10-22T16:26:02.348628+00:00",
+    "duracion_objetivo_s": 300,
+    "duracion_hasta_ultima_respuesta_s": 300.3542271999977,
+    "clientes": 10,
+    "completa": true,
+    "metricas": {
+      "listado": {
+        "intentos": 1956,
+        "exitos": 1956,
+        "errores": 0,
+        "estados": {
+          "200": 1956
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 6.52,
+        "min_ms": 88.82649999577552,
+        "mediana_ms": 155.58415000123205,
+        "p95_exitos_ms": 283.0841999966651,
+        "p99_exitos_ms": 363.623600002029,
+        "max_ms": 548.5814000057871,
+        "p95_todos_ms": 283.0841999966651,
+        "finalizadas_fuera_ventana": 1
+      },
+      "detalle": {
+        "intentos": 1955,
+        "exitos": 1955,
+        "errores": 0,
+        "estados": {
+          "200": 1955
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 6.516666666666667,
+        "min_ms": 73.59639999776846,
+        "mediana_ms": 139.40709999587853,
+        "p95_exitos_ms": 253.94129999767756,
+        "p99_exitos_ms": 342.472699994687,
+        "max_ms": 500.53050000133226,
+        "p95_todos_ms": 253.94129999767756,
+        "finalizadas_fuera_ventana": 1
+      },
+      "creacion": {
+        "intentos": 1954,
+        "exitos": 1954,
+        "errores": 0,
+        "estados": {
+          "201": 1954
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 6.513333333333334,
+        "min_ms": 510.46800000040093,
+        "mediana_ms": 855.6895500041719,
+        "p95_exitos_ms": 1245.8860999977333,
+        "p99_exitos_ms": 1529.204700003902,
+        "max_ms": 1914.7642999960226,
+        "p95_todos_ms": 1245.8860999977333,
+        "finalizadas_fuera_ventana": 6
+      },
+      "actualizacion": {
+        "intentos": 1948,
+        "exitos": 1948,
+        "errores": 0,
+        "estados": {
+          "200": 1948
+        },
+        "tasa_error": 0.0,
+        "solicitudes_por_segundo": 6.493333333333333,
+        "min_ms": 171.2074000024586,
+        "mediana_ms": 289.4547500036424,
+        "p95_exitos_ms": 476.01420000137296,
+        "p99_exitos_ms": 597.2822999974596,
+        "max_ms": 878.2566000008956,
+        "p95_todos_ms": 476.01420000137296,
+        "finalizadas_fuera_ventana": 2
+      }
+    },
+    "creados": 1954,
+    "inicio_clientes_offset_ms": [
+      0.0897999998414889,
+      0.26529999740887433,
+      0.3254000039305538,
+      0.20110000332351774,
+      0.3862000012304634,
+      0.443600001744926,
+      0.5611000015051104,
+      0.5040000032749958,
+      0.6178000039653853,
+      0.6781999982194975
+    ]
+  },
+  "solicitudes_medidas": 7813,
+  "conteos": {
+    "inicial": 100,
+    "tras_calentamiento": 295,
+    "final": 2249
+  },
+  "sql": {
+    "incidencias": 2249,
+    "eventos_creado": 2249,
+    "eventos_editado": 2139,
+    "entregas_encoladas": 22490,
+    "intentos_smtp": 0,
+    "trabajos_ia": 0
+  },
+  "logout": {
+    "204": 10
+  },
+  "contenedores_detenidos": true,
+  "muestras_recursos": 49,
+  "conclusion": "Corrida formal completa sin errores de petición; las cuatro operaciones superan p95 < 200 ms. RNF-2 medido y no cumplido en este entorno/carga. Integridad de conteos/auditoría/colas comprobada dentro del alcance del ejecutor.",
+  "limites": [
+    "Generador y Docker en el mismo equipo; no hay medición del CPU del generador ni aislamiento de otras cargas del host",
+    "Cien casos iniciales; 295 al iniciar medición y 2249 al terminar por escrituras reales, según protocolo",
+    "Diez usuarios RH y diez destinatarios por creación; 22490 entregas encoladas, sin procesamiento SMTP",
+    "Las estadísticas no identifican por sí solas causa raíz ni coste SQL por operación",
+    "No extrapolar a otros equipos, producción o todos los roles; no alterar umbral para aprobar",
+    "Sin cambios de código o nueva corrida en este avance; recursos retenidos detenidos"
+  ],
+  "siguiente_paso": "Perfilar consultas/transacciones de creación y edición en QA, revisando coste de autorización/selección y encolado por destinatario; conservar reglas de permisos, auditoría y cola. Repetir solo tras un cambio probado y justificado."
+}

@@ -151,3 +151,37 @@ Evidencia prevista 68-react-departamentos-historial.png: una captura final del h
 - [73-react-ia-caso-cerrado.png](73-react-ia-caso-cerrado.png): mismo expediente que 72, CERRADA, prioridad Alta, validación vigente, responsable y resolución simulada.
 
 Archivos inspeccionados sin credenciales visibles y conservados sin edición. Primera prueba funcional externa/UI, sin aceptación estadística de calidad. Límites y procedencia del recorrido en REPORTE_QA.md.
+- [74-evaluacion-ia-ejecutor.json](74-evaluacion-ia-ejecutor.json): ejecución de infraestructura del 18 de octubre de 2026; 17 pruebas específicas/141 backend finales sin omisiones en PostgreSQL aislado, versión fijada y vista previa. Proveedor simulado; no contiene predicciones ni certifica calidad real.
+- [75-evaluacion-ia-resultado-v1.json](75-evaluacion-ia-resultado-v1.json): ejecución externa 55/55 verificada offline; categoría 32/50, prioridad 30/50, abstención 5/5, un Alta inconcluso y cero Alta→Baja. Modelo efectivo y uso reportados, coste no cotejado. No alcanza metas ni acredita aceptación humana/independencia. Originales y análisis en ../evaluacion_ia.
+- [76-ia-prompt-v2-pruebas.json](76-ia-prompt-v2-pruebas.json): API 0.10.1/prompt v2, 43 específicas y 147 pruebas backend finales sin omisiones en PostgreSQL aislado. Candidato nuevo 50+5 sin revisar/congelar ni enviar; cero llamadas externas. No mide precisión ni acepta RF-3.
+- [77-ia-v2-fijada-comando.json](77-ia-v2-fijada-comando.json): revisión/conformidad declaradas de la autora, versión aceptacion-v2 fijada con etiquetas intactas y cuatro controles de script correctos con Docker simulado. Sin nuevas llamadas ni resultados externos. No acepta calidad RF-3.
+- [78-evaluacion-ia-resultado-v2.json](78-evaluacion-ia-resultado-v2.json): 55/55 respuestas externas verificadas; categoría 49/50, prioridad 40/50, abstención 5/5, Alta 15/15. Cumple metas numéricas, con diez Media→Baja y un error de categoría conservados; human_acceptance=false. Originales y análisis en ../evaluacion_ia. Sin coste cotejado ni llamadas adicionales.
+- [79-ia-media-baja-v3-pruebas.json](79-ia-media-baja-v3-pruebas.json): prompt v3/API 0.10.2, 50 específicas/154 backend finales sin omisiones en PostgreSQL aislado. Diagnóstico por clase y nuevo candidato con pares, sin revisar/fijar ni enviar. Cero llamadas; no demuestra mejora de precisión real.
+- [80-ia-v3-comando-vista-previa.json](80-ia-v3-comando-vista-previa.json): tres controles de script (sintaxis, vista previa sin Docker y envío bloqueado antes de Docker). Referencias v3 aún sin revisión registrada/fijación, cero llamadas, sin medir precisión.
+- [81-ia-v3-fijada-comando.json](81-ia-v3-fijada-comando.json): conformidad/revisión declaradas, versión fijada v3 con tres hashes y equivalencia JSON, cuatro controles de script con Docker simulado. Cero llamadas/predicciones reales; no certifica precisión ni mejora Media/Baja.
+- [82-evaluacion-ia-resultado-v3.json](82-evaluacion-ia-resultado-v3.json): 55/55 respuestas externas verificadas, Media/Baja 20/20 cada una y pares 20/20; Alta 6/10 con cuatro Alta→Media. Categoría 98%, prioridad 92%, abstención 5/5; indicadores originales true no implican aceptar/desplegar v3. Revisión técnica y originales en ../evaluacion_ia; cero llamadas adicionales.
+
+- [83-ia-alta-v4-pruebas.json](83-ia-alta-v4-pruebas.json): API 0.10.3/prompt v4; 56 específicas y 160 backend aprobadas, referencias fijadas tras revisión declarada. Sin llamadas nuevas ni precisión real v4 medida; diagnóstico separado detecta cuatro Alta omitidas v3.
+
+- [84-evaluacion-ia-resultado-v4.json](84-evaluacion-ia-resultado-v4.json): 55 respuestas verificadas, prioridad 50/50, Alta 20/20, Media/Baja 15/15, pares 15/15, abstención 5/5; categoría 47/50. Cumple metas numéricas, tres discrepancias de categoría conservadas; aceptación integral pendiente. Sin llamadas nuevas.
+
+- [85-correo-eventos-pruebas.json](85-correo-eventos-pruebas.json): RF-5, migración 0006, pruebas de eventos/permisos/reintentos/rollback, SMTP TCP local y bloqueo PostgreSQL. Captura Mailpit y seguimiento React preparados; recorrido Docker/UI real pendiente. Sin correo real ni gasto IA.
+
+## Recorrido correo local 86–92
+
+- [86-correo-creacion-mailpit.png](86-correo-creacion-mailpit.png): captura del recorrido de correo, datos simulados.
+- [87-correo-enlace-expediente.png](87-correo-enlace-expediente.png): captura del recorrido de correo, datos simulados.
+- [88-correo-asignacion-mailpit.png](88-correo-asignacion-mailpit.png): captura del recorrido de correo, datos simulados.
+- [89-correo-resolucion-mailpit.png](89-correo-resolucion-mailpit.png): captura del recorrido de correo, datos simulados.
+- [90-correo-reapertura-mailpit.png](90-correo-reapertura-mailpit.png): captura del recorrido de correo, datos simulados.
+- [91-correo-seguimiento-react.png](91-correo-seguimiento-react.png): captura del recorrido de correo, datos simulados.
+- [92-correo-recorrido-verificado.json](92-correo-recorrido-verificado.json): observaciones, límites y hashes de las seis capturas. No acredita entrega a buzones reales ni todos los escenarios de exclusión.
+
+- [93-analitica-agregada-pruebas.json](93-analitica-agregada-pruebas.json): 201 pruebas backend, supresión/fórmulas/ciclos/ACL y extracción SQL comprobadas en PostgreSQL aislado; plantillas Power BI listas. Sin .pbix, conexión Desktop o despliegue operativo acreditados.
+
+## Power BI real 94–98
+
+- [94-powerbi-valores-suprimidos.png](94-powerbi-valores-suprimidos.png): tres celdas agregadas, valores NULL.
+- [95-powerbi-etiqueta-privacidad.png](95-powerbi-etiqueta-privacidad.png): «Suprimido por privacidad» en las tres filas.
+- 96-powerbi-tabla-privacidad-corte.png y 97-powerbi-medidas-privacidad.png: originales locales, no versionados por nombre de cuenta visible. No eliminados ni editados.
+- [98-powerbi-informe-revisado.json](98-powerbi-informe-revisado.json): hashes, guardado de cambios abiertos y revisión PBIR del archivo. No certifica DataModel binario ni renderizado positivo.

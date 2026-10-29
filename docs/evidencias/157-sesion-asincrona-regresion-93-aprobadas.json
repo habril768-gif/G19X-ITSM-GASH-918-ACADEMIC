@@ -1,0 +1,34 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "REGRESION_SELECCIONADA_93_APROBADAS_RENDIMIENTO_PENDIENTE",
+  "fuente": "Captura de PowerShell aportada por la autora: codex-clipboard-2c6238e3-ef81-4338-aeb6-16460c4fb993.png. No ejecutado por el agente.",
+  "preparacion": "156-sesion-apertura-sin-salto-hilo.json",
+  "entorno_observado": {
+    "SSLKEYLOGFILE": "",
+    "RUN_DB_TESTS": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "comando": ".\\backend\\.venv\\Scripts\\python.exe -B -m pytest -q -p no:cacheprovider -c backend/pytest.ini backend/tests/test_database_session.py backend/tests/test_database.py backend/tests/test_auth.py backend/tests/test_incidents.py backend/tests/test_user_administration.py backend/tests/test_mail.py backend/tests/test_write_responses.py",
+  "resultado": {
+    "aprobadas": 93,
+    "duracion_s": 17.43,
+    "progreso": "100%",
+    "errores_mostrados": 0
+  },
+  "alcance": [
+    "Selección de siete archivos: dependencia de base de datos, disponibilidad/configuración, autenticación, incidencias, administración, correo y respuestas de escritura.",
+    "Incluye diez casos de test_database_session.py: siete locales con dobles y tres integraciones reales AnyIO/FastAPI.",
+    "Cierre con limiter general ocupado; cancelación de ámbito espera a cierre; dependencia original FastAPI revierte escrituras no confirmadas tras éxito y error HTTP.",
+    "Hashes actuales de implementación/pruebas coinciden con los de preparación 156; no prueba retrospectivamente identidad exacta del proceso de pytest de la captura."
+  ],
+  "limites": [
+    "Selección con SQLite/dobles; RUN_DB_TESTS=0. No prueba PostgreSQL/Docker real ni todas las rutas y carreras.",
+    "Sin nueva medición de latencia ni acreditación RNF-2. La última formal 150 conserva FALLIDA_UMBRAL.",
+    "93 es el total de esta selección; no sumar los siete locales anteriores como casos adicionales.",
+    "Siguiente paso justificado: un smoke diagnóstico con el ajuste 156 para comprobar cuatro pasos por hilos en lugar de cinco, integridad SQL/auditoría/colas, errores y cierre QA. No ejecutar full automáticamente."
+  ],
+  "sha256": {
+    "backend/app/core/database.py": "9e9157538076f6222a9715eb27a00b04d63f632b8c92e737b581b159aacee894",
+    "backend/tests/test_database_session.py": "3fba3f8c2bd72af378bed66ebf59e0f30bf38549605425cbaa849c3680c393d6"
+  }
+}

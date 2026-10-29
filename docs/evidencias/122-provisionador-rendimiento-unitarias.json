@@ -1,0 +1,32 @@
+{
+  "fecha_registro": "2026-10-21",
+  "estado": "PROVISIONADOR_PREPARADO_SIN_DOCKER_REAL",
+  "artefactos_sha256": {
+    "backend/scripts/provision_performance_qa.py": "e6d2825bc504a8479296ddbf5aa49745b378dd89e5ef6b1680d06f9c094886be",
+    "backend/scripts/performance_seed.py": "3f51a7f226b9d9b5ed917b235ad34e177c4e76835d3337da5fac6deb3159e2ef",
+    "backend/tests/test_performance_provisioner.py": "da2e27d0bb2125bf849e546d6e1badebc817ae569f77a77f6524b82ab3d061fd",
+    "backend/scripts/performance_runner.py": "dea5d70d144492943cbc793e1fba898c5fcbe4bd2c108d506bb1beed224a9881"
+  },
+  "verificaciones": {
+    "provisionador": "9 tests en 1.236 s; OK, Docker y resultado HTTP simulados.",
+    "regresion_generador": "13 tests en 0.079 s; OK, operaciones simuladas.",
+    "plan_cli": "Salida 0, tres servicios/diez usuarios/cien casos; no Docker ni recursos creados.",
+    "fallo_previo": "La primera corrida de tests encontró permisos denegados en el temporal del sandbox. Se cambió el temporal de tests al cwd permitido, sin relajar aislamiento de recursos del provisionador."
+  },
+  "alcance_preparado": [
+    "Proyecto/volúmenes/red interna/puerto loopback propios, imágenes app construidas para la corrida",
+    "Rechazo de contexto remoto, colisiones y configuración Compose ajena antes de up",
+    "Migración de base nueva, diez cuentas RH y cien casos creados por servicios del producto; claves por stdin/env, sin archivo de contraseñas",
+    "Modo smoke o full con fixture nuevo por ejecución, muestreo docker stats y comprobación SQL de auditoría/colas",
+    "Parada de recursos propios sin down/rm ni borrado de volúmenes; reporte de fallo preservado"
+  ],
+  "limites": [
+    "No se ejecutó Docker real, fixture real, HTTP smoke o carga formal en este avance",
+    "Tests usan Docker simulado y no prueban compatibilidad efectiva de config Compose o red interna; debe comprobarlo smoke real",
+    "El fixture seed solo se comprobó estáticamente y mediante guardas, sin ejecutarlo contra PostgreSQL",
+    "RNF-2 sigue pendiente, requiere revisar recursos/generador y resultados de medición real",
+    "La captura SQL y metadatos de configuración no garantizan por sí solos ausencia de toda integración externa",
+    "Sin base operativa modificada, dependencias instaladas o commit"
+  ],
+  "cambio_generador": "Marcas UTC de inicio/fin por fase para relacionar muestras de recursos. Hash nuevo; evidencia 121 conserva el hash de su artefacto previo."
+}

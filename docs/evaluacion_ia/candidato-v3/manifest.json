@@ -1,0 +1,39 @@
+{
+  "version": "candidato-v3",
+  "prepared_on": "2026-10-18",
+  "labels_frozen": false,
+  "author_conformity": {
+    "reported": false
+  },
+  "provenance": "Casos sinteticos nuevos propuestos por asistente despues de fijar prompt v3, sin predicciones. Revision humana pendiente, sin revision independiente de terceros ni garantia estadistica.",
+  "independent_acceptance": false,
+  "prompt_version": "plurione-classify-v3",
+  "provider_sha256": "5a499d4e808cb5c545189e798dd971107c4cc60e757ba96b3c5240fdd78604b2",
+  "prompt_sha256": "7c169f4b1f8ce08e524b3fa9dcfebb14e4122a7e52dfca844a77a1e7c7434465",
+  "files": {
+    "references": "referencias.json",
+    "inputs": "entradas.json",
+    "catalog": "catalogo.json"
+  },
+  "hash_normalization": "UTF-8 y saltos LF",
+  "sha256": {
+    "referencias.json": "86130cfd56dc34d48367cc0739cd51ea8943ed884ff7730bd7cf7639a030f05a",
+    "entradas.json": "1464a7297abe44c3c0049af0667c02ad452fe3791917b1f2fdfaf6e915f4bce0",
+    "catalogo.json": "68145613a454948697d23852129f10950bf20e73788fca08c006ebe7b6966f5f"
+  },
+  "design": {
+    "regular": 50,
+    "abstention": 5,
+    "priority_counts": {
+      "1": 10,
+      "2": 20,
+      "3": 20
+    },
+    "media_baja_pairs": 20,
+    "exact_text_overlap_v1_v2": 0
+  },
+  "validation": {
+    "predictions_generated": false,
+    "external_calls": 0
+  }
+}

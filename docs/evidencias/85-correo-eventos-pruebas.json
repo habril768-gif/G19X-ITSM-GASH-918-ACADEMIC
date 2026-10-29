@@ -1,0 +1,45 @@
+{
+  "recorded_on": "2026-10-18",
+  "api_version": "0.11.0",
+  "frontend_version": "0.8.0",
+  "schema": "0006",
+  "backend_tests": {
+    "passed": 183,
+    "seconds": 41.71,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "database": "PostgreSQL 18.6 aislado",
+    "schema_upgrade_twice": true,
+    "schema_check_no_changes": true,
+    "temporary_cluster_stopped_removed": true
+  },
+  "initial_specific_tests": {
+    "passed": 19,
+    "seconds": 13.63
+  },
+  "frontend_tests": {
+    "suite_passed": 67,
+    "suite_seconds": 157.95,
+    "additional_authenticated_link_test_passed": 1,
+    "build_passed": true,
+    "final_pool": "threads / 1 worker / timeout 30s",
+    "additional_test_unselected_by_filter": 13
+  },
+  "smtp_local_tcp_capture_verified": true,
+  "smtp_external_service_tested": false,
+  "docker_deployment_tested": false,
+  "script_mock_controls_passed": 6,
+  "compose_structure_verified": true,
+  "external_ai_calls": 0,
+  "real_mailboxes_contacted": 0,
+  "human_acceptance": false,
+  "limitations": [
+    "Recorrido Docker/Mailpit/navegador pendiente",
+    "Message-ID estable no garantiza exactly-once ni entrega final",
+    "Timeout por socket no es SLA; bloqueos durante envío pueden demorar mutaciones",
+    "Dos runs frontend forks fallaron por timeouts/arranque de worker; último pool diferente documentado",
+    "Primer arranque PostgreSQL falló al abrir puerto; apagado confirmado, carpeta ignorada conservada"
+  ],
+  "assignment_then_review_same_manager_verified": true
+}

@@ -1,0 +1,37 @@
+{
+  "fecha_registro": "2026-10-22",
+  "estado": "REGRESION_SELECCIONADA_111_APROBADAS_DIAGNOSTICO_PENDIENTE",
+  "fuente": "Captura aportada por la autora: codex-clipboard-4a144015-6a1e-4449-a2cf-06b89157f239.png. Ejecución por ella, no por el agente.",
+  "preparacion": "172-lecturas-listado-detalle-agrupadas-preparadas.json",
+  "variables_observadas": {
+    "SSLKEYLOGFILE": "",
+    "RUN_DB_TESTS": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "comando": ".\\backend\\.venv\\Scripts\\python.exe -B -m pytest -q -p no:cacheprovider -c backend/pytest.ini backend/tests/test_read_query_grouping.py backend/tests/test_incidents.py backend/tests/test_mail.py backend/tests/test_write_responses.py backend/tests/test_worker_response.py backend/tests/test_auth.py backend/tests/test_auth_queries.py backend/tests/test_user_administration.py",
+  "resultado": {
+    "aprobadas": 111,
+    "subpruebas_aprobadas": 63,
+    "duracion_s": 22.41,
+    "progreso": "100%",
+    "errores_mostrados": 0
+  },
+  "alcance": [
+    "Ocho archivos: lecturas agrupadas, incidencias, correo, respuestas de escritura, DTO worker, autenticación, consultas de autenticación y administración de usuarios.",
+    "Incluye once nuevos casos de agrupación, matriz de 56 actor/caso y listado para siete actores; subpruebas reportadas separadamente.",
+    "Comprueba paginación, total vacío/fuera de rango, orden, filtros, visibilidad por rol y denegaciones; mantiene cobertura seleccionada de API, captura de DTO, autenticación y respuestas transaccionales.",
+    "Hashes actuales de los tres archivos coinciden con preparación 172; no acreditan retrospectivamente identidad exacta del proceso capturado."
+  ],
+  "limites": [
+    "111 pruebas y 63 subpruebas son los conteos reportados; no convertirlos en 174 pruebas únicas ni sumar selecciones anteriores.",
+    "RUN_DB_TESTS=0: SQLite/dobles, no concurrencia o plan/latencia de PostgreSQL ni suite completa.",
+    "Sin nuevo p95 o aprobación RNF-2; formal 150 conserva FALLIDA_UMBRAL.",
+    "Próximo paso: un smoke diagnóstico para comprobar listado 4 a 3 y detalle 3 a 2 consultas en QA y comparar latencias. Antes, liberar/verificar dos redes QA vacías con la herramienta acotada; no full automático.",
+    "No se ejecutaron Docker, limpieza o tests adicionales desde herramientas del agente."
+  ],
+  "sha256": {
+    "backend/app/services/incidents.py": "db276f39418d41aade680708853a9b19b392b7dae1868ecadd46a93b57b72fc1",
+    "backend/app/api/incidents.py": "14ad6e8ad22ecec3f994027f6b07ce94cbb6f7bc7009e46342555550b5058b4c",
+    "backend/tests/test_read_query_grouping.py": "644bb656316f263091926d84b68e28b91b07a2c345539d9e3363b9918e7443ca"
+  }
+}

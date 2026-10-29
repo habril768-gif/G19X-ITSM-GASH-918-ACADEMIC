@@ -1,0 +1,30 @@
+{
+  "recorded_on": "2026-10-18",
+  "source": "Capturas aportadas por responsable e inspeccionadas; no consulta directa de la base operativa",
+  "case_id": "02f03993-8923-42f7-8b47-00f64dcaa711",
+  "observed": {
+    "creation_messages": 3,
+    "assignment_messages": 1,
+    "resolution_messages": 1,
+    "reopening_messages": 1,
+    "react_smtp_accepted": 6,
+    "attempts_per_delivery": 1,
+    "authenticated_link_correct_case": true,
+    "sensitive_case_text_in_mail_body": false
+  },
+  "mailpit_capture_only": true,
+  "real_inbox_delivery_verified": false,
+  "remaining": [
+    "Recorridos negativos de confidencialidad y pérdida de permisos en UI real",
+    "Fallos/reintentos reales de SMTP; cobertura automatizada previa en evidencia 85",
+    "Aceptación integral y CI remoto"
+  ],
+  "sha256": {
+    "86-correo-creacion-mailpit.png": "aafbe23fefd680383e886f46d809232a9dc507fb7d3852e5803229b4b0980453",
+    "87-correo-enlace-expediente.png": "635d5c8ad7beda43943197cf4d832412201ac170e2785d1e4b706ed68a28a7e4",
+    "88-correo-asignacion-mailpit.png": "7658aa7a6d6963e82097ef71bda16a1295eac72125e1e49e7dfbc0cf54495afc",
+    "89-correo-resolucion-mailpit.png": "8862d838224f4d824606a051bbcbb2332cf9073c3af46654b8117291a0c64efd",
+    "90-correo-reapertura-mailpit.png": "b5b27b001d5b829ce0ee718ccd8f576209587e2c7044ca34685ec99d3361cd1f",
+    "91-correo-seguimiento-react.png": "e16f0bdda4de0101d04bcc02bf8c0011fec5af0ba303639d3d8b74e3e5cf7cb2"
+  }
+}
