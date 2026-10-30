@@ -1,0 +1,41 @@
+{
+  "fecha_local": "2026-10-29",
+  "estado": "PREPARADO_UNITARIAS_APROBADAS_PG_REAL_PENDIENTE",
+  "opcion": "--server-stats --mode smoke --diagnostic",
+  "producto_modificado": false,
+  "compose_operativo_modificado": false,
+  "postgres_operativo_modificado": false,
+  "alcance": [
+    "Solo proyecto/volúmenes/redes nuevos con guards de identidad DB/user/runid y proveedores inactivos",
+    "Preload pg_stat_statements y compute_query_id en PostgreSQL QA nuevo; planning tracking off; resto de configuración sin cambios",
+    "Crear extensión dentro de ese QA; snapshots antes del login y después de verificación SQL, antes del control SELECT1 opcional",
+    "Deltas por consulta de calls/exec_ms/rows en memoria; reporte solo familias y sumas/medias ponderadas",
+    "Sin SQL, parámetros o query IDs en reporte; la extensión conserva textos dentro del PostgreSQL QA privado",
+    "Rechazar reset global, cambio de stats_since individual, desalojos, contadores disminuidos, IDs duplicados o datos no finitos",
+    "Sin resets de contadores, consultas arbitrarias, instrumentación del sitio o cambios de durabilidad",
+    "Errores posteriores conservan HTTP/SQL y detienen únicamente recursos del QA"
+  ],
+  "validacion": {
+    "unitarias_stdlib": 113,
+    "duracion_s": 2.441,
+    "casos_nuevos": 11,
+    "ast_archivos": 4,
+    "cli_plan_sin_docker": "OK",
+    "reporte207_validado_con_lectores_actuales": true,
+    "postgres_real": "NO_EJECUTADO"
+  },
+  "limites": [
+    "No es una optimización de producto ni certificación RNF-2",
+    "Ventana incluye login/logout, calentamiento, carga y verificación SQL; no se equipara solo a los5s medidos",
+    "La extensión añade coste y puede alterar tiempos",
+    "Medias de ejecución, sin p95 servidor ni tiempo de planificación/red/HTTP total",
+    "Normal/full y --db-probe sin esta opción no activan extensión ni comandos PostgreSQL nuevos"
+  ],
+  "fuente": "https://www.postgresql.org/docs/17/pgstatstatements.html",
+  "sha256": {
+    "backend/scripts/performance_sql_stats.py": "97928e1a9544da13bdf56a132161602030cfa101bfc52c0c5a26ca1d43848d07",
+    "backend/scripts/provision_performance_qa.py": "944ab16f13e2df80bd0416239a721183b3a29d5dd8fb19c91e07b03a404df561",
+    "backend/tests/test_performance_sql_stats.py": "3ee8865dbec3625e397a2432a6bf6386a6a50eb6fa9e2e4e0dfe086efa37f10d",
+    "backend/tests/test_performance_provisioner.py": "15915256d650a272296e857da15461a10af3bb916d67f5db517f66ccd101e499"
+  }
+}

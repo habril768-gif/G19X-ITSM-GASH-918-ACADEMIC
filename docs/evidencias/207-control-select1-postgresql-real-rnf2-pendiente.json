@@ -1,0 +1,154 @@
+{
+  "fecha_local": "2026-10-29",
+  "run_id": "ee6fcc5a7e8c411e",
+  "estado_original": "DIAGNOSTICO_QA_SIN_ACREDITAR_RNF2",
+  "reporte_original": ".pgdata\\performance-ee6fcc5a7e8c411e\\report.json",
+  "sha256_reporte_original": "822bd05e65f0708c4ff7c2d5acb66cc570db57464ab19e94e1f8f7d2c6b5b5e7",
+  "arranque_qa": {
+    "inicio_utc": "2026-10-30T01:59:48.538283+00:00",
+    "limite_s": 900,
+    "resultado": "OK",
+    "duracion_s": 18.510811900006956,
+    "fin_utc": "2026-10-30T02:00:07.049000+00:00"
+  },
+  "validacion": {
+    "diagnostico_v5": "OK",
+    "sondeo_db": "OK",
+    "hashes_codigo_producto_coincidentes": 54,
+    "conteos": [
+      100,
+      130,
+      201
+    ],
+    "solicitudes_medidas": 286,
+    "errores_http": 0,
+    "post_http": "OK",
+    "logout": {
+      "204": 10
+    },
+    "sql": {
+      "incidencias": 201,
+      "eventos_creado": 201,
+      "eventos_editado": 96,
+      "entregas_encoladas": 2010,
+      "intentos_smtp": 0,
+      "trabajos_ia": 0
+    },
+    "qa_detenido": true
+  },
+  "metricas_medicion": {
+    "listado": {
+      "intentos": 75,
+      "errores": 0,
+      "p95_ms": 231.81519999343436,
+      "consultas_media": 3.0,
+      "workers_media": 3.0,
+      "worker_cpu_media_ms": 12.763670000000001,
+      "worker_wall_media_ms": 92.28464629297378
+    },
+    "detalle": {
+      "intentos": 71,
+      "errores": 0,
+      "p95_ms": 207.12219999404624,
+      "consultas_media": 2.0,
+      "workers_media": 3.0,
+      "worker_cpu_media_ms": 7.925985788732405,
+      "worker_wall_media_ms": 78.75271780255683
+    },
+    "creacion": {
+      "intentos": 71,
+      "errores": 0,
+      "p95_ms": 363.91960000037216,
+      "consultas_media": 9.0,
+      "workers_media": 2.0,
+      "worker_cpu_media_ms": 23.51355977464791,
+      "worker_wall_media_ms": 184.32694374711554
+    },
+    "actualizacion": {
+      "intentos": 69,
+      "errores": 0,
+      "p95_ms": 289.9619999952847,
+      "consultas_media": 7.0,
+      "workers_media": 2.0,
+      "worker_cpu_media_ms": 14.949330463768108,
+      "worker_wall_media_ms": 137.02507021662313
+    }
+  },
+  "cpu_host_media_porcentaje": 74.54268292682927,
+  "cpu_generador_equipo_porcentaje": 0.8404273962646156,
+  "control_db": {
+    "version": 1,
+    "estado": "OK",
+    "grupos": {
+      "solo": {
+        "clientes": 1,
+        "muestras": 5,
+        "metricas": {
+          "driver_ms": {
+            "media": 4.369918399606831,
+            "p95": 18.73414400324691,
+            "min": 0.7433479986502789,
+            "max": 18.73414400324691
+          },
+          "worker_cpu_ms": {
+            "media": 0.5806359999999999,
+            "p95": 0.7365570000000001,
+            "min": 0.5027110000000004,
+            "max": 0.7365570000000001
+          },
+          "plan_ms": {
+            "media": 0.0306,
+            "p95": 0.049,
+            "min": 0.022,
+            "max": 0.049
+          },
+          "execution_ms": {
+            "media": 0.5066,
+            "p95": 2.474,
+            "min": 0.014,
+            "max": 2.474
+          }
+        }
+      },
+      "concurrente": {
+        "clientes": 10,
+        "muestras": 50,
+        "metricas": {
+          "driver_ms": {
+            "media": 4.951730539905839,
+            "p95": 8.685676999448333,
+            "min": 1.856683004007209,
+            "max": 13.141014998836908
+          },
+          "worker_cpu_ms": {
+            "media": 0.6646373,
+            "p95": 1.0862750000000003,
+            "min": 0.3996529999999998,
+            "max": 1.5499880000000004
+          },
+          "plan_ms": {
+            "media": 0.02052000000000001,
+            "p95": 0.048,
+            "min": 0.006,
+            "max": 0.148
+          },
+          "execution_ms": {
+            "media": 0.019440000000000006,
+            "p95": 0.025,
+            "min": 0.004,
+            "max": 0.276
+          }
+        }
+      }
+    },
+    "limites": "Control SELECT1 despues de carga HTTP, 5 muestras con1conexion y50con10conexiones; no reproduce consultas de negocio ni acredita RNF-2. driver incluye espera, transporte y JSON; plan/exec no incluyen todo el trabajo del servidor. No restar p95. Checkout,conexion,ping ySET LOCAL fuera del intervalo de cada muestra."
+  },
+  "interpretacion": [
+    "Los cuatro p95 HTTP del smoke exceden200ms; no acredita RNF-2 ni añade una octava formal",
+    "El control SELECT1 posterior muestra ejecución servidor breve, pero no mide consultas de negocio durante la carga",
+    "Cliente incluye esperas/transporte/decodificación; el tiempo servidor de EXPLAIN no cubre todo su trabajo",
+    "No restar p95 ni atribuir diferencia a red pura, PostgreSQL, antivirus o una causa única",
+    "La CPU host sigue alta; la comparación con199 no es un experimento causal controlado"
+  ],
+  "siguiente": "Medir contadores de ejecución de consultas reales durante un diagnóstico QA opcional; sin cambiar producto, durabilidad ni umbral"
+}

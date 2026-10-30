@@ -104,7 +104,7 @@ class ProvisionTests(unittest.TestCase):
             with patch.dict(os.environ, dict(env, **change)), self.assertRaises(ValueError):
                 seed.guard({'run_id': 'qa123456'})
 
-    def simulate(self, fail_stage=None, endpoint='npipe:////./pipe/dockerDesktopLinuxEngine', diagnostic=False, preflight=None, db_probe=False):
+    def simulate(self, fail_stage=None, endpoint='npipe:////./pipe/dockerDesktopLinuxEngine', diagnostic=False, preflight=None, db_probe=False, server_stats=False):
         temp = tempfile.TemporaryDirectory(prefix='qa-perf-unit-', dir=Path.cwd())
         self.addCleanup(temp.cleanup)
         repo = Path(temp.name)
@@ -147,6 +147,10 @@ class ProvisionTests(unittest.TestCase):
             if stage == 'STATS': return json.dumps({'Name': state['project'] + '-api-1', 'CPUPerc': '1%'})
             if stage == 'VERIFICACION_SQL': return json.dumps({'incidencias': 100, 'eventos_creado': 100,
                 'eventos_editado': 2 if diagnostic else 0, 'entregas_encoladas': 1000, 'intentos_smtp': 0, 'trabajos_ia': 0})
+            if stage in {'SQL_STATS_ANTES', 'SQL_STATS_DESPUES'}:
+                data = json.loads(payload)
+                return json.dumps(dict(version=1, run_id=data['run_id'], dealloc=0, reset='2026-10-29T12:00:00+00:00',
+                    rows=[dict(key='1', family='SELECT/users', calls=10 if stage == 'SQL_STATS_ANTES' else 12, exec_ms=5 if stage == 'SQL_STATS_ANTES' else 6, rows=10 if stage == 'SQL_STATS_ANTES' else 12, since='2026-10-29T12:00:00+00:00')]))
             if stage == 'SONDEO_DB':
                 return json.dumps({'version':1,'estado':'OK','limites':'Control ficticio',
                     'grupos':{name:{'clientes':clients,'muestras':clients*5,
@@ -173,10 +177,15 @@ class ProvisionTests(unittest.TestCase):
                 measured[phase]['metricas'] = {op: {'intentos': 1, 'exitos': 1} for op in provision.runner.OPS}
         def probe(port, diagnostics):
             diagnostics.update(resultado='OK', intentos=1, errores={})
-        with patch.object(provision, 'command', side_effect=command), patch.object(provision, 'wait_http', side_effect=probe), patch.object(provision.runner, 'execute', return_value=measured), contextlib.redirect_stdout(io.StringIO()):
+        def execute(*args, **kwargs):
+            if server_stats: calls.append(([], 'HTTP_EJECUTADO'))
+            return measured
+        with patch.object(provision, 'command', side_effect=command), patch.object(provision, 'wait_http', side_effect=probe), patch.object(provision.runner, 'execute', side_effect=execute), contextlib.redirect_stdout(io.StringIO()):
             options = {'diagnostic': diagnostic}
             if db_probe:
                 options['db_probe'] = True
+            if server_stats:
+                options['server_stats'] = True
             if preflight is not None:
                 options['preflight'] = preflight
             result = provision.run(repo, 'smoke', 'docker', **options)
@@ -204,6 +213,29 @@ class ProvisionTests(unittest.TestCase):
         self.assertIn('http', report)
         self.assertIn('comprobacion_sql', report)
         self.assertTrue(report['contenedores_detenidos'])
+
+    def test_server_statistics_are_between_seed_and_probe_with_numeric_report_only(self):
+        result, report, calls = self.simulate(diagnostic=True, db_probe=True, server_stats=True)
+        self.assertEqual(result, 0)
+        self.assertEqual(report['servidor_sql']['totales']['calls'], 2)
+        stages = [stage for _, stage in calls]
+        for before, after in [('FIXTURE','SQL_STATS_ANTES'), ('SQL_STATS_ANTES','HTTP_EJECUTADO'),
+                ('VERIFICACION_SQL','SQL_STATS_DESPUES'), ('SQL_STATS_DESPUES','SONDEO_DB'), ('SONDEO_DB','PARADA_QA')]:
+            self.assertLess(stages.index(before), stages.index(after))
+        self.assertTrue(report['contenedores_detenidos'])
+        self.assertNotIn('key', report['servidor_sql'])
+
+    def test_server_statistics_failure_preserves_http_sql_and_stops_owned_resources(self):
+        for stage in ('SQL_STATS_ANTES', 'SQL_STATS_DESPUES'):
+            with self.subTest(stage=stage):
+                result, report, calls = self.simulate(fail_stage=stage, diagnostic=True, server_stats=True)
+                self.assertEqual(result, 1)
+                self.assertTrue(report['contenedores_detenidos'])
+                self.assertEqual(report['error_codigo'], stage + '_SALIDA_1')
+                if stage == 'SQL_STATS_DESPUES':
+                    self.assertIn('http', report); self.assertIn('comprobacion_sql', report)
+                else:
+                    self.assertNotIn('http', report)
 
     def test_report_retains_supplied_preflight_without_changing_verdict(self):
         preflight = {'cpu_previa': {'media_cpu_global_porcentaje': 15},

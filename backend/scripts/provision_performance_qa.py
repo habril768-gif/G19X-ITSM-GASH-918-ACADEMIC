@@ -17,6 +17,7 @@ from uuid import uuid4
 
 import performance_runner as runner
 import performance_db_probe as db_probe_helper
+import performance_sql_stats as sql_stats_helper
 
 
 class ProvisionError(Exception):
@@ -39,8 +40,9 @@ def local_endpoint(endpoint):
         endpoint.startswith('unix:///') and '..' not in endpoint)
 
 
-def specification(repo, run_id, port, diagnostic=False, db_probe=False):
+def specification(repo, run_id, port, diagnostic=False, db_probe=False, server_stats=False):
     ensure(not db_probe or diagnostic, 'SONDEO_SOLO_DIAGNOSTICO_SMOKE')
+    ensure(not server_stats or diagnostic, 'SQL_STATS_SOLO_DIAGNOSTICO_SMOKE')
     project = 'plurione-qa-perf-' + run_id
     db_name, db_user = 'plurione_test_perf_' + run_id, 'qa_perf_' + run_id
     labels = {'plurione.qa.scope': 'performance', 'plurione.qa.run_id': run_id}
@@ -72,6 +74,9 @@ def specification(repo, run_id, port, diagnostic=False, db_probe=False):
             'app.core.performance_diagnostics:app', '--host', '0.0.0.0', '--port', '8000']
     if db_probe:
         config['services']['api']['environment']['QA_PERF_DB_PROBE'] = 'true'
+    if server_stats:
+        config['services']['api']['environment']['QA_PERF_SQL_STATS'] = 'true'
+        config['services']['postgres']['command'] = list(sql_stats_helper.PG_COMMAND)
     return config
 
 
@@ -103,6 +108,10 @@ def validate_resolved(config, project, port, repo):
         ensure(not api.get('command'), 'COMANDO_API_INESPERADO')
     ensure(api['environment'].get('QA_PERF_DB_PROBE') in (None, 'true') and
            (not api['environment'].get('QA_PERF_DB_PROBE') or diagnostic_id is not None), 'SONDEO_DB_CONFIG_INVALIDA')
+    stats_enabled = api['environment'].get('QA_PERF_SQL_STATS')
+    ensure(stats_enabled in (None, 'true') and (not stats_enabled or diagnostic_id is not None), 'SQL_STATS_CONFIG_INVALIDA')
+    pg_command = config['services']['postgres'].get('command')
+    ensure(pg_command == sql_stats_helper.PG_COMMAND if stats_enabled else not pg_command, 'SQL_STATS_COMANDO_PG_INVALIDO')
     ensure(not api.get('volumes'), 'MONTAJE_API')
     ensure(all(not config['services'][name].get('ports') for name in ('postgres', 'redis')), 'PUERTO_DB_PUBLICADO')
     ensure(all(set(config['services'][name].get('networks', {'default': None})) == {'default'}
@@ -166,9 +175,10 @@ def wait_http(port, diagnostics, timeout=30):
     raise ProvisionError('API_QA_NO_ACCESIBLE_DESDE_HOST')
 
 
-def run(repo, mode, docker_exe, diagnostic=False, *, preflight=None, db_probe=False):
+def run(repo, mode, docker_exe, diagnostic=False, *, preflight=None, db_probe=False, server_stats=False):
     ensure(not diagnostic or mode == 'smoke', 'DIAGNOSTICO_SOLO_SMOKE')
     ensure(not db_probe or (diagnostic and mode == 'smoke'), 'SONDEO_SOLO_DIAGNOSTICO_SMOKE')
+    ensure(not server_stats or (diagnostic and mode == 'smoke'), 'SQL_STATS_SOLO_DIAGNOSTICO_SMOKE')
     run_id = uuid4().hex[:16]
     project = 'plurione-qa-perf-' + run_id
     port = free_port()
@@ -182,7 +192,7 @@ def run(repo, mode, docker_exe, diagnostic=False, *, preflight=None, db_probe=Fa
     folder = repo / '.pgdata' / ('performance-' + run_id)
     folder.mkdir(parents=True, exist_ok=False)
     config_path = folder / 'compose.json'
-    config_path.write_text(json.dumps(specification(repo, run_id, port, diagnostic, db_probe), indent=2), encoding='utf-8')
+    config_path.write_text(json.dumps(specification(repo, run_id, port, diagnostic, db_probe, server_stats), indent=2), encoding='utf-8')
     env_path = folder / 'empty.env'
     env_path.write_text('', encoding='utf-8')
     env = {key: value for key, value in os.environ.items() if not key.startswith('COMPOSE_')}
@@ -257,6 +267,12 @@ def run(repo, mode, docker_exe, diagnostic=False, *, preflight=None, db_probe=Fa
         (folder / 'manifest.json').write_text(json.dumps(manifest, indent=2), encoding='utf-8')
         for index, password in enumerate(passwords):
             os.environ[f'PLURIONE_PERF_PASSWORD_{index}'] = password
+        if server_stats:
+            print('Activando estadisticas SQL solo en PostgreSQL QA nuevo...', flush=True)
+            stats_code = Path(__file__).with_name('performance_sql_stats.py').read_text(encoding='utf-8-sig')
+            stats_before = json.loads(command(base + ['exec', '-T', 'api', 'python', '-c', stats_code], env,
+                'SQL_STATS_ANTES', payload=json.dumps({'action': 'before', 'run_id': run_id}), timeout=60))
+            sql_stats_helper.validate_snapshot(stats_before, run_id)
         def sample_resources():
             origin = time.perf_counter()
             while not stop_sampling.is_set():
@@ -291,6 +307,10 @@ def run(repo, mode, docker_exe, diagnostic=False, *, preflight=None, db_probe=Fa
         if mode == 'full' and report['estado'] == 'APROBADA_ALCANCE_HTTP_QA':
             # Aún requiere revisión del equipo/generador y de las muestras, no aprobación automática integral.
             report['revision_recursos_pendiente'] = True
+        if server_stats:
+            stats_after = json.loads(command(base + ['exec', '-T', 'api', 'python', '-c', stats_code], env,
+                'SQL_STATS_DESPUES', payload=json.dumps({'action': 'after', 'run_id': run_id}), timeout=60))
+            report['servidor_sql'] = sql_stats_helper.difference(stats_before, stats_after, run_id)
         if db_probe:
             print('Control breve SELECT1: tiempos de driver y servidor, sin carga HTTP...', flush=True)
             probe_code = Path(__file__).with_name('performance_db_probe.py').read_text(encoding='utf-8-sig')
@@ -412,20 +432,24 @@ def main():
     parser.add_argument('--mode', choices=['smoke', 'full'], default='smoke')
     parser.add_argument('--diagnostic', action='store_true', help='Solo smoke: tiempos por etapas en API QA; no acredita RNF-2.')
     parser.add_argument('--db-probe', action='store_true', help='Solo smoke diagnostico: control SELECT1 despues de la carga, sin extensiones.')
+    parser.add_argument('--server-stats', action='store_true', help='Solo smoke diagnostico: pg_stat_statements en PostgreSQL QA nuevo; no modifica el sitio.')
     parser.add_argument('--confirm-isolated-qa', action='store_true')
     parser.add_argument('--plan', action='store_true', help='Muestra plan sin Docker, archivos o contraseñas.')
     args = parser.parse_args()
     ensure(not args.diagnostic or args.mode == 'smoke', 'DIAGNOSTICO_SOLO_SMOKE')
     ensure(not args.db_probe or (args.diagnostic and args.mode == 'smoke'), 'SONDEO_SOLO_DIAGNOSTICO_SMOKE')
+    ensure(not args.server_stats or (args.diagnostic and args.mode == 'smoke'), 'SQL_STATS_SOLO_DIAGNOSTICO_SMOKE')
     repo = Path(__file__).resolve().parents[2]
     if args.plan:
         print(json.dumps({'services': ['api', 'postgres', 'redis'], 'users': 10, 'initial_cases': 100,
-                          'mode': args.mode, 'diagnostic': args.diagnostic, 'db_probe': args.db_probe, 'resources': 'project/volumes/network/port nuevos',
+                          'mode': args.mode, 'diagnostic': args.diagnostic, 'db_probe': args.db_probe, 'server_stats': args.server_stats, 'resources': 'project/volumes/network/port nuevos',
                           'external_workers': False, 'cleanup': 'stop sin eliminar volúmenes'}, indent=2))
         return 0
     ensure(args.confirm_isolated_qa, 'CONFIRMACION_QA_REQUERIDA')
     docker = shutil.which('docker')
     ensure(bool(docker), 'DOCKER_CLI_NO_ENCONTRADO')
+    if args.server_stats:
+        return run(repo, args.mode, docker, diagnostic=True, db_probe=args.db_probe, server_stats=True)
     if args.db_probe:
         return run(repo, args.mode, docker, diagnostic=True, db_probe=True)
     return run(repo, args.mode, docker, diagnostic=True) if args.diagnostic else run(repo, args.mode, docker)
