@@ -1,0 +1,111 @@
+{
+  "fecha_local": "2026-10-29",
+  "estado": "RECORRIDO_LOCAL_BASICO_RF5_CIERRE_VERIFICADO",
+  "fuente": "Agente operó el panel integrado con sesión Admin RH iniciada por la usuaria; observación directa del árbol accesible y lectura de captura Mailpit. No consulta SQL directa.",
+  "caso": {
+    "id": "1bfef476-ac6e-459a-bc07-9e7a8b4a158e",
+    "titulo": "Auditoría RF-5 — cierre ficticio 29-oct-2026",
+    "datos": "EXCLUSIVAMENTE_FICTICIOS",
+    "ambito": "ENTORNO",
+    "departamento": "Recursos Humanos",
+    "prioridad": "Media",
+    "categoria": "Riesgos",
+    "estado_final_observado": "CERRADA",
+    "creacion_local": "29 oct 2026, 5:09 p.m.",
+    "cierre_local": "29 oct 2026, 5:10 p.m."
+  },
+  "acciones_agente": [
+    "Crear nuevo caso de QA sin afectado, participantes ni confidencialidad",
+    "Confirmar clasificación manual Riesgos/Media; sin solicitar IA",
+    "Iniciar revisión asignando al Administrador RH elegible",
+    "Registrar resolución explícitamente ficticia",
+    "Confirmar cierre reservado a RH",
+    "Actualizar seguimiento y observar Cierre: Aceptada por SMTP; Intentos:1/4"
+  ],
+  "panel_observado": {
+    "creacion": {
+      "aceptadas_smtp": 3,
+      "intentos_por_entrega": 1
+    },
+    "asignacion": {
+      "aceptadas_smtp": 1,
+      "intentos_por_entrega": 1
+    },
+    "resolucion": {
+      "aceptadas_smtp": 1,
+      "intentos_por_entrega": 1
+    },
+    "cierre": {
+      "aceptadas_smtp": 1,
+      "intentos_por_entrega": 1
+    },
+    "eventos_historial": 5,
+    "sin_solicitud_ia_revisada": true
+  },
+  "mailpit": {
+    "total_buzon": 7,
+    "mensajes_del_caso": 6,
+    "mensajes": [
+      {
+        "mailpit_id": "dq7LMGanoHiS8gxpCeU6LQ",
+        "capturado_utc": "2026-10-29T23:10:21.119Z",
+        "destinatarios": [
+          "admin@plurione.local"
+        ]
+      },
+      {
+        "mailpit_id": "htr7GwcENNotcRgJASJ5LD",
+        "capturado_utc": "2026-10-29T23:10:12.834Z",
+        "destinatarios": [
+          "admin@plurione.local"
+        ]
+      },
+      {
+        "mailpit_id": "Wvp9h2TNda7VJFFZdfwdum",
+        "capturado_utc": "2026-10-29T23:10:02.666Z",
+        "destinatarios": [
+          "admin@plurione.local"
+        ]
+      },
+      {
+        "mailpit_id": "dwXsPwAbVW9dB7D2NQiaSL",
+        "capturado_utc": "2026-10-29T23:09:30.464Z",
+        "destinatarios": [
+          "rh.independiente@example.invalid"
+        ]
+      },
+      {
+        "mailpit_id": "UhUn2ndQJ8vAbBBJ5Unf9q",
+        "capturado_utc": "2026-10-29T23:09:30.391Z",
+        "destinatarios": [
+          "admin@example.invalid"
+        ]
+      },
+      {
+        "mailpit_id": "nHPgTLSyCKNb5xEHqvX3Y4",
+        "capturado_utc": "2026-10-29T23:09:30.292Z",
+        "destinatarios": [
+          "admin@plurione.local"
+        ]
+      }
+    ],
+    "ultimo_mensaje": "dq7LMGanoHiS8gxpCeU6LQ",
+    "cuerpo_observado": "Aviso genérico y enlace autenticado al ID, sin título, descripción o resolución",
+    "correlacion": "El panel identifica tipo CIERRE; Mailpit confirma seis capturas del mismo caso en la secuencia realizada. El asunto genérico por sí solo no identifica el tipo de evento."
+  },
+  "evidencia_visual": {
+    "archivo": "206-correo-cierre-mailpit.jpg",
+    "sha256": "c08f47832922efa3f8bf56e59f148caf7960fa3cc0c276b68935cf508da481ae",
+    "captura_integra_mailpit": true,
+    "captura_panel_conservada": false
+  },
+  "limites": [
+    "La captura original del panel no se guardó: EPERM y posteriores interrupciones; no se recreó ni se inventó una imagen",
+    "El estado del panel y sus seis aceptaciones se observaron directamente durante el recorrido antes de perderse la pestaña autenticada",
+    "Aceptada por SMTP/Mailpit no demuestra entrega externa ni lectura",
+    "No se modificaron expedientes previos, usuarios o permisos; no se borraron datos del buzón",
+    "No nueva prueba negativa de permisos, reapertura o reintentos SMTP en este recorrido; conservan cobertura automatizada y límites previos",
+    "No lectura directa de revisión Alembic o SQL operativo por el agente",
+    "RNF-2 sigue pendiente; no otra carga formal o diagnóstico de rendimiento"
+  ]
+}

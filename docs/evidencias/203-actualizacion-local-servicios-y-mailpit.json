@@ -1,0 +1,33 @@
+{
+  "fecha_local": "2026-10-29",
+  "estado": "SERVICIOS_DISPONIBLES_CIERRE_PENDIENTE_DE_SESION_RH",
+  "observaciones": {
+    "health_http": 200,
+    "health_db_http": 200,
+    "mailpit_livez_http": 200,
+    "openapi": {
+      "api": "PluriOne API",
+      "version": "0.12.0",
+      "descripcion_utf8": "OK",
+      "ruta_mail": true
+    },
+    "frontend": {
+      "estado_inicial": "CONEXION_RECHAZADA",
+      "accion": "npm run dev -- --host 127.0.0.1",
+      "resultado": "PANEL_LOGIN_OBSERVADO_EN_NAVEGADOR_INTEGRADO"
+    },
+    "mailpit": {
+      "mensajes_capturados": 1,
+      "asunto_solo_referencia": true,
+      "tipo_evento_no_confirmado": true
+    }
+  },
+  "limites": [
+    "Docker API npipe deniega acceso al agente; sin inspección directa de contenedores o alembic current",
+    "Health DB confirma disposición del esquema según API; no se presenta como lectura directa de revisión Alembic",
+    "Mensaje mínimo no permite atribuir tipo CIERRE por sí solo",
+    "Se requiere sesión Admin RH para seguimiento de correo; usuario avisado, contraseña solo en panel",
+    "No se crearon ni modificaron expedientes; no se enviaron correos por el agente",
+    "RNF-2 sigue pendiente; no nueva carga"
+  ]
+}
