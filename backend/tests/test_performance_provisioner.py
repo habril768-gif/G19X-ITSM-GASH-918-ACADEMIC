@@ -104,7 +104,7 @@ class ProvisionTests(unittest.TestCase):
             with patch.dict(os.environ, dict(env, **change)), self.assertRaises(ValueError):
                 seed.guard({'run_id': 'qa123456'})
 
-    def simulate(self, fail_stage=None, endpoint='npipe:////./pipe/dockerDesktopLinuxEngine', diagnostic=False, preflight=None, db_probe=False, server_stats=False):
+    def simulate(self, fail_stage=None, endpoint='npipe:////./pipe/dockerDesktopLinuxEngine', diagnostic=False, preflight=None, db_probe=False, server_stats=False, api_workers=1):
         temp = tempfile.TemporaryDirectory(prefix='qa-perf-unit-', dir=Path.cwd())
         self.addCleanup(temp.cleanup)
         repo = Path(temp.name)
@@ -125,6 +125,8 @@ class ProvisionTests(unittest.TestCase):
                 state['config'] = source
                 state['project'] = source['name']
                 return json.dumps(normalized(source))
+            if stage == 'ID_API_WORKERS': return 'one'
+            if stage == 'COMANDO_API_WORKERS': return json.dumps(state['config']['services']['api']['command'])
             if stage in {'ARRANQUE_QA', 'MIGRACIONES', 'PARADA_QA'}: return ''
             if stage in {'IDS_QA', 'IDS_PARADA'}: return 'one two three'
             if stage == 'INSPECT':
@@ -184,6 +186,8 @@ class ProvisionTests(unittest.TestCase):
             options = {'diagnostic': diagnostic}
             if db_probe:
                 options['db_probe'] = True
+            if api_workers == 2:
+                options['api_workers'] = 2
             if server_stats:
                 options['server_stats'] = True
             if preflight is not None:
@@ -236,6 +240,25 @@ class ProvisionTests(unittest.TestCase):
                     self.assertIn('http', report); self.assertIn('comprobacion_sql', report)
                 else:
                     self.assertNotIn('http', report)
+
+    def test_two_workers_smoke_checks_real_container_command_and_stops(self):
+        result, report, calls = self.simulate(api_workers=2)
+        self.assertEqual(result, 0)
+        self.assertEqual(report['api_workers_declarados'], 2)
+        self.assertTrue(report['comando_api_workers_verificado'])
+        self.assertFalse(report['instrumentacion_diagnostica'])
+        self.assertTrue(report['contenedores_detenidos'])
+        stages = [stage for _, stage in calls]
+        self.assertLess(stages.index('COMANDO_API_WORKERS'), stages.index('MIGRACIONES'))
+        self.assertNotIn('SQL_STATS_ANTES', stages)
+        self.assertNotIn('DIAGNOSTICO_LOG', stages)
+
+    def test_two_workers_command_failure_stops_before_migration(self):
+        result, report, calls = self.simulate(api_workers=2, fail_stage='COMANDO_API_WORKERS')
+        self.assertEqual(result, 1)
+        self.assertTrue(report['contenedores_detenidos'])
+        self.assertNotIn('http', report)
+        self.assertFalse(any(stage == 'MIGRACIONES' for _, stage in calls))
 
     def test_report_retains_supplied_preflight_without_changing_verdict(self):
         preflight = {'cpu_previa': {'media_cpu_global_porcentaje': 15},

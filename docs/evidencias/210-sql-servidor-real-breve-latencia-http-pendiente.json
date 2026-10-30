@@ -1,0 +1,258 @@
+{
+  "fecha_registro_local": "2026-10-30",
+  "fecha_corrida_local": "2026-10-29",
+  "run_id": "3ea817bdffc847fc",
+  "estado_original": "DIAGNOSTICO_QA_SIN_ACREDITAR_RNF2",
+  "reporte_original": ".pgdata\\performance-3ea817bdffc847fc\\report.json",
+  "sha256_reporte_original": "2dcbeb9a556bf41edcb40f201a0c739ab0631bb7842ac502c5c3f738021f2cd1",
+  "validacion": {
+    "diagnostico5": "OK",
+    "sumas_servidor_y_medias": "OK",
+    "hashes_producto_coincidentes": 54,
+    "solicitudes_medidas": 269,
+    "errores_http": 0,
+    "conteos": [
+      100,
+      130,
+      198
+    ],
+    "sql": {
+      "incidencias": 198,
+      "eventos_creado": 198,
+      "eventos_editado": 88,
+      "entregas_encoladas": 1980,
+      "intentos_smtp": 0,
+      "trabajos_ia": 0
+    },
+    "post_http": "OK",
+    "logout": {
+      "204": 10
+    },
+    "qa_detenido": true
+  },
+  "http_medicion": {
+    "listado": {
+      "intentos": 70,
+      "errores": 0,
+      "p95_ms": 286.23620000144,
+      "sql_cursor_media_ms": 60.21913430085988,
+      "workers_media": 3.0,
+      "consultas_media": 3.0
+    },
+    "detalle": {
+      "intentos": 68,
+      "errores": 0,
+      "p95_ms": 233.76650000864174,
+      "sql_cursor_media_ms": 42.77164302851923,
+      "workers_media": 3.0,
+      "consultas_media": 2.0
+    },
+    "creacion": {
+      "intentos": 68,
+      "errores": 0,
+      "p95_ms": 340.59659999911673,
+      "sql_cursor_media_ms": 142.43385180998303,
+      "workers_media": 2.0,
+      "consultas_media": 9.0
+    },
+    "actualizacion": {
+      "intentos": 63,
+      "errores": 0,
+      "p95_ms": 303.6260999942897,
+      "sql_cursor_media_ms": 113.7601258722873,
+      "workers_media": 2.0,
+      "consultas_media": 7.0
+    }
+  },
+  "servidor_sql": {
+    "version": 1,
+    "estado": "OK",
+    "familias": {
+      "SELECT/incidencias+incident_involved_users": {
+        "calls": 298,
+        "exec_ms": 93.492617,
+        "rows": 3226,
+        "exec_ms_per_call": 0.3137336140939597
+      },
+      "OTHER/other": {
+        "calls": 8,
+        "exec_ms": 0.034697,
+        "rows": 0,
+        "exec_ms_per_call": 0.004337125
+      },
+      "BEGIN/other": {
+        "calls": 662,
+        "exec_ms": 1.7462109999999997,
+        "rows": 0,
+        "exec_ms_per_call": 0.002637780966767371
+      },
+      "SELECT/other": {
+        "calls": 21,
+        "exec_ms": 0.548576,
+        "rows": 19,
+        "exec_ms_per_call": 0.026122666666666666
+      },
+      "INSERT/other": {
+        "calls": 10,
+        "exec_ms": 0.778267,
+        "rows": 10,
+        "exec_ms_per_call": 0.0778267
+      },
+      "UPDATE/incidencias": {
+        "calls": 88,
+        "exec_ms": 32.983928,
+        "rows": 88,
+        "exec_ms_per_call": 0.37481736363636364
+      },
+      "INSERT/mail_deliveries": {
+        "calls": 98,
+        "exec_ms": 94.37958499999995,
+        "rows": 980,
+        "exec_ms_per_call": 0.9630569897959178
+      },
+      "SELECT/mail_deliveries": {
+        "calls": 100,
+        "exec_ms": 6.963843999999967,
+        "rows": 2,
+        "exec_ms_per_call": 0.06963843999999968
+      },
+      "INSERT/auth_sessions": {
+        "calls": 10,
+        "exec_ms": 2.676453,
+        "rows": 10,
+        "exec_ms_per_call": 0.2676453
+      },
+      "SELECT/incidencias": {
+        "calls": 89,
+        "exec_ms": 7.240594000000002,
+        "rows": 89,
+        "exec_ms_per_call": 0.08135498876404497
+      },
+      "SELECT/departamentos": {
+        "calls": 10,
+        "exec_ms": 0.244716,
+        "rows": 10,
+        "exec_ms_per_call": 0.0244716
+      },
+      "INSERT/historial_incidencias": {
+        "calls": 186,
+        "exec_ms": 89.602573,
+        "rows": 186,
+        "exec_ms_per_call": 0.48173426344086023
+      },
+      "SELECT/incidencias+incident_involved_users+roles+users": {
+        "calls": 328,
+        "exec_ms": 25.452209999999994,
+        "rows": 328,
+        "exec_ms_per_call": 0.07759820121951218
+      },
+      "SELECT/historial_incidencias": {
+        "calls": 2,
+        "exec_ms": 0.25420499999999996,
+        "rows": 2,
+        "exec_ms_per_call": 0.12710249999999998
+      },
+      "SELECT/users": {
+        "calls": 11,
+        "exec_ms": 0.26526700000000003,
+        "rows": 20,
+        "exec_ms_per_call": 0.02411518181818182
+      },
+      "COMMIT/other": {
+        "calls": 207,
+        "exec_ms": 0.41993299999999995,
+        "rows": 0,
+        "exec_ms_per_call": 0.002028661835748792
+      },
+      "SELECT/incident_involved_users": {
+        "calls": 100,
+        "exec_ms": 1.6953140000000009,
+        "rows": 0,
+        "exec_ms_per_call": 0.01695314000000001
+      },
+      "SELECT/auth_sessions+departamentos+users": {
+        "calls": 646,
+        "exec_ms": 42.67390099999992,
+        "rows": 646,
+        "exec_ms_per_call": 0.06605867027863765
+      },
+      "SELECT/departamentos+incidencias+incident_involved_users+roles+users": {
+        "calls": 98,
+        "exec_ms": 12.037412,
+        "rows": 980,
+        "exec_ms_per_call": 0.12283073469387755
+      },
+      "ROLLBACK/other": {
+        "calls": 455,
+        "exec_ms": 1.05971,
+        "rows": 0,
+        "exec_ms_per_call": 0.0023290329670329667
+      },
+      "SELECT/departamentos+roles+users": {
+        "calls": 186,
+        "exec_ms": 9.98869599999999,
+        "rows": 186,
+        "exec_ms_per_call": 0.053702666666666614
+      },
+      "SELECT/ai_jobs": {
+        "calls": 1,
+        "exec_ms": 0.011633000000000001,
+        "rows": 1,
+        "exec_ms_per_call": 0.011633000000000001
+      },
+      "UPDATE/auth_sessions": {
+        "calls": 10,
+        "exec_ms": 0.6858140000000001,
+        "rows": 10,
+        "exec_ms_per_call": 0.06858140000000001
+      },
+      "SELECT/local_credentials": {
+        "calls": 10,
+        "exec_ms": 0.24261,
+        "rows": 10,
+        "exec_ms_per_call": 0.024260999999999998
+      },
+      "SELECT/advisory_lock": {
+        "calls": 186,
+        "exec_ms": 1.8155220000000012,
+        "rows": 186,
+        "exec_ms_per_call": 0.009760870967741942
+      },
+      "INSERT/incidencias": {
+        "calls": 98,
+        "exec_ms": 88.45690299999998,
+        "rows": 98,
+        "exec_ms_per_call": 0.9026214591836733
+      },
+      "SELECT/auth_sessions": {
+        "calls": 10,
+        "exec_ms": 0.724423,
+        "rows": 10,
+        "exec_ms_per_call": 0.0724423
+      },
+      "SELECT/roles": {
+        "calls": 232,
+        "exec_ms": 5.488834999999999,
+        "rows": 232,
+        "exec_ms_per_call": 0.023658771551724134
+      }
+    },
+    "totales": {
+      "calls": 4160,
+      "exec_ms": 521.964449,
+      "rows": 7329
+    },
+    "limites": "Solo QA nuevo e instrumentado. Ventana desde antes del login hasta despues de verificacion SQL: incluye login/logout, calentamiento, carga y lecturas finales; excluye seed y control SELECT1 posterior. Medias agregadas de ejecucion servidor, sin p95 ni planificacion (track_planning=off), red o tiempo total HTTP. La extension agrega coste; no acredita RNF-2. Sin SQL, parametros o IDs de consulta en el reporte. Sin reset de estadisticas."
+  },
+  "cpu_host_media_porcentaje": 76.06382978723404,
+  "cpu_generador_equipo_porcentaje": 0.8352533347300194,
+  "interpretacion": [
+    "Las28familias tienen media de ejecución servidor menor de1ms en esta ventana agregada; máximo0.963057ms INSERT/mail_deliveries",
+    "El cursor de la API observa aproximadamente12-29ms por familia SQL en la fase de medición; las ventanas y agrupaciones difieren, no restar sus medias/p95",
+    "El servidor_sql incluye login/logout, calentamiento y verificación final; no se equipara a solo5s HTTP",
+    "No cubre planificación ni todo el trabajo fuera de ejecución de sentencias, confirmación/durabilidad, transporte o planificación de CPU",
+    "No demuestra causa única de GIL/red/VM/SO ni justifica quitar locks, pre_ping o durabilidad",
+    "SQL breve medido orienta el siguiente experimento hacia capacidad de procesos API; no es prueba de que dos procesos mejoren",
+    "No octava formal; RNF-2 pendiente"
+  ]
+}

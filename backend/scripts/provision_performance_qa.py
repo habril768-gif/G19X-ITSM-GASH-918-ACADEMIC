@@ -40,7 +40,17 @@ def local_endpoint(endpoint):
         endpoint.startswith('unix:///') and '..' not in endpoint)
 
 
-def specification(repo, run_id, port, diagnostic=False, db_probe=False, server_stats=False):
+def validate_workers(workers, diagnostic=False, mode='smoke'):
+    ensure(isinstance(workers, int) and not isinstance(workers, bool) and workers in (1, 2), 'API_WORKERS_INVALIDOS')
+    ensure(workers == 1 or (not diagnostic and mode == 'smoke'), 'API_WORKERS_SOLO_SMOKE_SIN_DIAGNOSTICO')
+
+
+def workers_command():
+    return ['python', '-m', 'uvicorn', 'app.main:app', '--host', '0.0.0.0', '--port', '8000', '--workers', '2']
+
+
+def specification(repo, run_id, port, diagnostic=False, db_probe=False, server_stats=False, api_workers=1):
+    validate_workers(api_workers, diagnostic)
     ensure(not db_probe or diagnostic, 'SONDEO_SOLO_DIAGNOSTICO_SMOKE')
     ensure(not server_stats or diagnostic, 'SQL_STATS_SOLO_DIAGNOSTICO_SMOKE')
     project = 'plurione-qa-perf-' + run_id
@@ -68,6 +78,9 @@ def specification(repo, run_id, port, diagnostic=False, db_probe=False, server_s
         'networks': {'default': {'name': project + '_net', 'internal': True},
                      'entry': {'name': project + '_entry', 'internal': False}}}
 
+    if api_workers == 2:
+        config['services']['api']['environment']['QA_PERF_API_WORKERS'] = '2'
+        config['services']['api']['command'] = workers_command()
     if diagnostic:
         config['services']['api']['environment']['QA_PERF_DIAGNOSTIC_RUN_ID'] = run_id
         config['services']['api']['command'] = ['python', '-m', 'uvicorn',
@@ -102,10 +115,12 @@ def validate_resolved(config, project, port, repo):
                    for mount in service.get('volumes', [])), 'MONTAJE_AJENO')
     diagnostic_id = api['environment'].get('QA_PERF_DIAGNOSTIC_RUN_ID')
     expected_command = ['python', '-m', 'uvicorn', 'app.core.performance_diagnostics:app', '--host', '0.0.0.0', '--port', '8000']
+    worker_marker = api['environment'].get('QA_PERF_API_WORKERS')
+    ensure(worker_marker in (None, '2') and not (worker_marker and diagnostic_id is not None), 'API_WORKERS_CONFIG_INVALIDA')
     if diagnostic_id is not None:
         ensure(diagnostic_id == project.removeprefix('plurione-qa-perf-') and api.get('command') == expected_command, 'ENTRADA_DIAGNOSTICO_INVALIDA')
     else:
-        ensure(not api.get('command'), 'COMANDO_API_INESPERADO')
+        ensure(api.get('command') == workers_command() if worker_marker else not api.get('command'), 'COMANDO_API_INESPERADO')
     ensure(api['environment'].get('QA_PERF_DB_PROBE') in (None, 'true') and
            (not api['environment'].get('QA_PERF_DB_PROBE') or diagnostic_id is not None), 'SONDEO_DB_CONFIG_INVALIDA')
     stats_enabled = api['environment'].get('QA_PERF_SQL_STATS')
@@ -175,7 +190,8 @@ def wait_http(port, diagnostics, timeout=30):
     raise ProvisionError('API_QA_NO_ACCESIBLE_DESDE_HOST')
 
 
-def run(repo, mode, docker_exe, diagnostic=False, *, preflight=None, db_probe=False, server_stats=False):
+def run(repo, mode, docker_exe, diagnostic=False, *, preflight=None, db_probe=False, server_stats=False, api_workers=1):
+    validate_workers(api_workers, diagnostic, mode)
     ensure(not diagnostic or mode == 'smoke', 'DIAGNOSTICO_SOLO_SMOKE')
     ensure(not db_probe or (diagnostic and mode == 'smoke'), 'SONDEO_SOLO_DIAGNOSTICO_SMOKE')
     ensure(not server_stats or (diagnostic and mode == 'smoke'), 'SQL_STATS_SOLO_DIAGNOSTICO_SMOKE')
@@ -183,7 +199,7 @@ def run(repo, mode, docker_exe, diagnostic=False, *, preflight=None, db_probe=Fa
     project = 'plurione-qa-perf-' + run_id
     port = free_port()
     report = {'fecha_utc': datetime.now(timezone.utc).isoformat(), 'run_id': run_id, 'modo': mode,
-              'estado': 'INCOMPLETA', 'limites': ['No es una instalación de producción ni recuperación de datos operativos.',
+              'estado': 'INCOMPLETA', 'api_workers_declarados': api_workers, 'limites': ['No es una instalación de producción ni recuperación de datos operativos.',
                 'Recursos QA retenidos y detenidos cuando es posible; sin borrar volúmenes.',
                 'Contraseñas aleatorias no guardadas en manifiesto/reporte; metadatos de contenedores contienen configuración privada.',
                 'Muestreo docker stats añade carga al mismo equipo.']}
@@ -192,7 +208,7 @@ def run(repo, mode, docker_exe, diagnostic=False, *, preflight=None, db_probe=Fa
     folder = repo / '.pgdata' / ('performance-' + run_id)
     folder.mkdir(parents=True, exist_ok=False)
     config_path = folder / 'compose.json'
-    config_path.write_text(json.dumps(specification(repo, run_id, port, diagnostic, db_probe, server_stats), indent=2), encoding='utf-8')
+    config_path.write_text(json.dumps(specification(repo, run_id, port, diagnostic, db_probe, server_stats, api_workers), indent=2), encoding='utf-8')
     env_path = folder / 'empty.env'
     env_path.write_text('', encoding='utf-8')
     env = {key: value for key, value in os.environ.items() if not key.startswith('COMPOSE_')}
@@ -239,6 +255,12 @@ def run(repo, mode, docker_exe, diagnostic=False, *, preflight=None, db_probe=Fa
             report['arranque_qa']['fin_utc'] = datetime.now(timezone.utc).isoformat()
         ids = command(base + ['ps', '-aq'], env, 'IDS_QA').split()
         report['contenedores'] = inspect_owned(docker, ids, env, project)
+        if api_workers == 2:
+            api_id = command(base + ['ps', '-q', 'api'], env, 'ID_API_WORKERS').strip()
+            ensure(api_id in ids, 'ID_API_WORKERS_AJENO')
+            actual_command = json.loads(command(docker + ['inspect', '--format', '{{json .Config.Cmd}}', api_id], env, 'COMANDO_API_WORKERS'))
+            ensure(actual_command == workers_command(), 'COMANDO_API_WORKERS_DISTINTO')
+            report['comando_api_workers_verificado'] = True
         print('Aplicando migraciones y comprobando acceso HTTP desde el host...', flush=True)
         command(base + ['exec', '-T', 'api', 'python', '-m', 'alembic', 'upgrade', 'head'], env, 'MIGRACIONES', timeout=120)
         report['comprobacion_http_previa'] = {}
@@ -433,21 +455,25 @@ def main():
     parser.add_argument('--diagnostic', action='store_true', help='Solo smoke: tiempos por etapas en API QA; no acredita RNF-2.')
     parser.add_argument('--db-probe', action='store_true', help='Solo smoke diagnostico: control SELECT1 despues de la carga, sin extensiones.')
     parser.add_argument('--server-stats', action='store_true', help='Solo smoke diagnostico: pg_stat_statements en PostgreSQL QA nuevo; no modifica el sitio.')
+    parser.add_argument('--api-workers', type=int, choices=[1, 2], default=1, help='Dos procesos solo para smoke sin diagnostico; no cambia el sitio.')
     parser.add_argument('--confirm-isolated-qa', action='store_true')
     parser.add_argument('--plan', action='store_true', help='Muestra plan sin Docker, archivos o contraseñas.')
     args = parser.parse_args()
+    validate_workers(args.api_workers, args.diagnostic, args.mode)
     ensure(not args.diagnostic or args.mode == 'smoke', 'DIAGNOSTICO_SOLO_SMOKE')
     ensure(not args.db_probe or (args.diagnostic and args.mode == 'smoke'), 'SONDEO_SOLO_DIAGNOSTICO_SMOKE')
     ensure(not args.server_stats or (args.diagnostic and args.mode == 'smoke'), 'SQL_STATS_SOLO_DIAGNOSTICO_SMOKE')
     repo = Path(__file__).resolve().parents[2]
     if args.plan:
         print(json.dumps({'services': ['api', 'postgres', 'redis'], 'users': 10, 'initial_cases': 100,
-                          'mode': args.mode, 'diagnostic': args.diagnostic, 'db_probe': args.db_probe, 'server_stats': args.server_stats, 'resources': 'project/volumes/network/port nuevos',
+                          'mode': args.mode, 'diagnostic': args.diagnostic, 'db_probe': args.db_probe, 'server_stats': args.server_stats, 'api_workers': args.api_workers, 'resources': 'project/volumes/network/port nuevos',
                           'external_workers': False, 'cleanup': 'stop sin eliminar volúmenes'}, indent=2))
         return 0
     ensure(args.confirm_isolated_qa, 'CONFIRMACION_QA_REQUERIDA')
     docker = shutil.which('docker')
     ensure(bool(docker), 'DOCKER_CLI_NO_ENCONTRADO')
+    if args.api_workers == 2:
+        return run(repo, args.mode, docker, api_workers=2)
     if args.server_stats:
         return run(repo, args.mode, docker, diagnostic=True, db_probe=args.db_probe, server_stats=True)
     if args.db_probe:

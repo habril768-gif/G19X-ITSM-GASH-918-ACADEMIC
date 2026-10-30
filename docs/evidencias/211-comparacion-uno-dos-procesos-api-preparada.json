@@ -1,0 +1,47 @@
+{
+  "fecha_registro_local": "2026-10-30",
+  "estado": "PREPARADO_PRUEBAS_LOCALES_APROBADAS_SIN_COMPARACION_DOCKER_REAL",
+  "hipotesis": "Distribuir las diez conexiones HTTP entre dos procesos Uvicorn podría reducir esperas compartidas; aún no probado.",
+  "producto_modificado": false,
+  "sitio_modificado": false,
+  "formal_modificada": false,
+  "opcion": "--mode smoke --api-workers 2, sin --diagnostic",
+  "guardas": [
+    "Solo enteros1/2; rechazar dos en full o diagnóstico antes de archivos/Docker",
+    "Por defecto1 mantiene la entrada e infraestructura anteriores; dos solo cambia comando y marcador API del QA nuevo",
+    "Config resuelta valida app.main:app y número2 exactos; antes de migrar se verifica Config.Cmd del contenedor API contra ese comando y su ID contra los recursos propios",
+    "Reportar número declarado y verificación del comando, sin afirmar distribución real de solicitudes por PID",
+    "No agregación de diagnósticos multiproceso; quedan desactivados en ambas corridas comparadas",
+    "Controlador PowerShell exige -ConfirmIsolatedQA; secuencia fija1/2, sin reintentos",
+    "Cada prueba libera exactamente dos redes QA vacías registradas, hasta cuatro en total; se detiene si hay error/omisión o prueba incompleta",
+    "Dos QA nuevos, cada uno10clientes/100casos iniciales y smoke2+5s, mismo código y operaciones; no reutiliza el conjunto de datos que creció en la primera",
+    "Conserva originales y detiene únicamente QA; no inicia/detiene servicios normales ni borra datos"
+  ],
+  "validacion": {
+    "unitarias_stdlib": 120,
+    "nuevas": 7,
+    "duracion_ultima_ejecucion_local_s": 3.309,
+    "origen_resultado": "Salida local observada durante preparación del cambio",
+    "ast_python_archivos": 3,
+    "powershell_parse": "OK sin ejecutar controlador",
+    "dos_workers_docker": "PENDIENTE"
+  },
+  "riesgos_y_limites": [
+    "Una pareja secuencial no elimina variaciones del host o sesgo de orden; no demuestra causalidad o acreditación RNF-2",
+    "Los dos procesos duplican el techo teórico de pool API de15a30; memoria y conexiones por proceso separadas, pendiente medir",
+    "Mismo tiempo/clientes iniciales; al ser carga de ciclo cerrado los totales procesados y tamaños finales pueden diferir",
+    "La comparación sin instrumentos no se atribuye causalmente frente al diagnóstico anterior instrumentado",
+    "Uvicorn administra los procesos; el comando verificado no demuestra reparto exacto de peticiones ni que ambos estén sanos durante toda la ventana",
+    "No aplicar dos procesos al sitio ni a formal sin revisar resultados y preparar configuración reproducible"
+  ],
+  "fuentes": [
+    "https://www.uvicorn.org/deployment/",
+    "https://fastapi.tiangolo.com/deployment/server-workers/"
+  ],
+  "sha256": {
+    "backend/scripts/provision_performance_qa.py": "60a8f9b74ebba3b6ef7add2e2c95738874e70bfaaabbb7bd771e4900113cc4c4",
+    "backend/scripts/compare_performance_workers.ps1": "6497562fb19a5394381ab2de46091fd3f88b2e8881b93e33116901f6d74d73d8",
+    "backend/tests/test_performance_api_workers.py": "1fea6a0b2fa7bba0c023cd2a4ee65598e878e0ecd745cc840beb3eb0e98036d3",
+    "backend/tests/test_performance_provisioner.py": "0f969628b7fe1375763465c7f7952b7edf81f5ba07eda25e8c77d7ba520023c3"
+  }
+}
