@@ -11,8 +11,8 @@ import test_performance_provisioner as fixtures
 
 
 class APIWorkersTests(unittest.TestCase):
-    def test_only_integer_one_or_two_is_accepted(self):
-        for value in (0, -1, 3, True, False, 1.0, '2', None):
+    def test_only_integer_one_two_or_three_is_accepted(self):
+        for value in (0, -1, 4, True, False, 1.0, '2', None):
             with self.subTest(value=value), self.assertRaises(provision.ProvisionError):
                 provision.validate_workers(value)
         provision.validate_workers(1, True, 'smoke')
@@ -44,10 +44,10 @@ class APIWorkersTests(unittest.TestCase):
     def test_marker_and_command_cannot_select_other_entrypoint_or_count(self):
         repo = Path.cwd()
         source = fixtures.normalized(provision.specification(repo, 'qa123456', 18080, api_workers=2))
-        for mutate in (lambda c:c['services']['api']['command'].__setitem__(-1,'3'),
+        for mutate in (lambda c:c['services']['api']['command'].__setitem__(-1,'4'),
                 lambda c:c['services']['api']['command'].__setitem__(3,'app.core.performance_diagnostics:app'),
                 lambda c:c['services']['api']['environment'].pop('QA_PERF_API_WORKERS'),
-                lambda c:c['services']['api']['environment'].update(QA_PERF_API_WORKERS='3'),
+                lambda c:c['services']['api']['environment'].update(QA_PERF_API_WORKERS='4'),
                 lambda c:c['services']['api']['environment'].update(QA_PERF_DIAGNOSTIC_RUN_ID='qa123456')):
             value=copy.deepcopy(source);mutate(value)
             with self.assertRaises(provision.ProvisionError):
@@ -77,3 +77,23 @@ class APIWorkersTests(unittest.TestCase):
         result=subprocess.run([sys.executable,'-B',str(Path(provision.__file__)),'--mode','full','--api-workers','2','--diagnostic','--plan'],capture_output=True,text=True,timeout=20)
         self.assertNotEqual(result.returncode,0)
         self.assertIn('API_WORKERS_SIN_DIAGNOSTICO',result.stdout)
+
+    def test_three_uses_own_exact_command_and_rejects_mismatched_marker(self):
+        repo=Path.cwd()
+        source=fixtures.normalized(provision.specification(repo,'qa123456',18080,api_workers=3))
+        self.assertEqual(source['services']['api']['command'][-2:],['--workers','3'])
+        self.assertEqual(source['services']['api']['environment']['QA_PERF_API_WORKERS'],'3')
+        provision.validate_resolved(source,'plurione-qa-perf-qa123456',18080,repo)
+        source['services']['api']['environment']['QA_PERF_API_WORKERS']='2'
+        with self.assertRaises(provision.ProvisionError):
+            provision.validate_resolved(source,'plurione-qa-perf-qa123456',18080,repo)
+        with self.assertRaises(provision.ProvisionError):
+            provision.validate_workers(3,True,'full')
+
+    def test_three_cli_full_plan(self):
+        result=subprocess.run([sys.executable,'-B',str(Path(provision.__file__)),'--mode','full','--api-workers','3','--plan'],capture_output=True,text=True,timeout=20)
+        self.assertEqual(result.returncode,0,result.stderr)
+        value=json.loads(result.stdout)
+        self.assertEqual(value['api_workers'],3)
+        self.assertEqual(value['mode'],'full')
+        self.assertFalse(value['diagnostic'])

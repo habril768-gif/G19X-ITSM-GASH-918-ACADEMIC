@@ -62,7 +62,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--confirm-isolated-qa', action='store_true', required=True,
         help='Autoriza liberar hasta dos redes QA vacías registradas y crear el proyecto formal aislado.')
-    parser.add_argument('--api-workers', type=int, choices=[1, 2], default=1,
+    parser.add_argument('--api-workers', type=int, choices=[1, 2, 3], default=1,
         help='Procesos API del QA formal nuevo; conserva diez clientes y protocolo30+300s.')
     args = parser.parse_args(argv)
     executable = shutil.which('docker')

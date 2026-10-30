@@ -1,0 +1,30 @@
+{
+  "fecha_local": "2026-10-30",
+  "estado": "CANDIDATO_TRES_PROCESOS_QA_NO_MEDIDO",
+  "base": "La octava formal con dos procesos cumple lecturas, falla escrituras; se prueba capacidad adicional API sin bajar criterio.",
+  "opcion": "--api-workers 3",
+  "protocolo": "Diez clientes,100casos,30+300s, p95<200ms por operacion, cero errores y verificacion HTTP/SQL/logout/parada.",
+  "validacion": {
+    "tests_finales": 130,
+    "duracion_s": 4.471,
+    "ast": 5,
+    "primera_ejecucion": "130 ejecutadas:5fallos y5errores por referencia api_workers fuera de alcance en validate_resolved; corregida usando marcador validado; segunda ejecucion130OK"
+  },
+  "sin_cambios": [
+    "Sitio, Dockerfile, runner/verdict, umbral, duracion/clientes, pool, locks y durabilidad.",
+    "Default1 y soporte2 conservados. Diagnostico multiproceso rechazado.",
+    "Guardas CPU/redes e ID/comando propios verificados antes de migrar."
+  ],
+  "riesgos": [
+    "Candidato experimental: tres no garantiza mejora en equipo de cuatro CPU logicas; PostgreSQL y host tambien compiten.",
+    "Techo de pool por proceso15, total API45 con tres; mas memoria que dos. No elevar trabajadores por encima de tres.",
+    "No validar por unitarias ni declarar RNF-2 listo antes del reporte real. Si empeora, conservar fallo y revisar perfiles/capacidad; no rebajar umbral."
+  ],
+  "sha256": {
+    "backend/scripts/provision_performance_qa.py": "15570421f740ac0449ab146eb7b36dcd60a6a56f2ebc10bf2426aec3adbf9ec8",
+    "backend/scripts/run_performance_full_guarded.py": "a9e79bafe15d4fbd5741f8720084f2014a6c536248b526ace73a67703a598c64",
+    "backend/tests/test_performance_api_workers.py": "e644ef8a858980050912bc27de6c2ae32fab2f9da1077b72b87f190c2c9ab13a",
+    "backend/tests/test_performance_full_guard.py": "db8323f3bf0c7894342dc1b229fdccf45d4364ed3b8daebbee174d9b1286ffdc",
+    "backend/tests/test_performance_provisioner.py": "e9ffcc0baaf6c6953fda32d73598ff3b5ea86033c5a9f8fd41abec902d833ef3"
+  }
+}

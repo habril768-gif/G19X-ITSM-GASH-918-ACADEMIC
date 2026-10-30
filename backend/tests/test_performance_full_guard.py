@@ -117,9 +117,21 @@ class GuardedFormalTests(unittest.TestCase):
     def test_invalid_workers_rejected_before_cpu_and_docker(self):
         with patch.object(guarded.host,'baseline') as sample, patch.object(guarded.networks,'command') as docker:
             with self.assertRaises(guarded.provision.ProvisionError):
-                guarded.guarded_run(Path.cwd(),'docker',api_workers=3)
+                guarded.guarded_run(Path.cwd(),'docker',api_workers=4)
             sample.assert_not_called()
             docker.assert_not_called()
+
+    def test_three_full_uses_same_guard_and_preserves_failure(self):
+        result, _, _, release, run, output=self.run_guard(api_workers=3)
+        self.assertEqual(result,0)
+        self.assertEqual(run.call_args.args,(Path.cwd(),'full','docker'))
+        self.assertEqual(run.call_args.kwargs['api_workers'],3)
+        self.assertEqual(json.loads(output)['api_workers_declarados'],3)
+        result, _, docker, release, run, _=self.run_guard(value=baseline((60,70,80)),api_workers=3)
+        self.assertEqual(result,2)
+        docker.assert_not_called()
+        release.assert_not_called()
+        run.assert_not_called()
 
     def test_confirmation_is_required_before_any_measurement(self):
         with patch.object(guarded.host, 'baseline') as sample, \
