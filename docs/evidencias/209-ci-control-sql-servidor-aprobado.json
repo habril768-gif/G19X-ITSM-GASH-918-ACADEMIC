@@ -1,0 +1,24 @@
+{
+  "fecha_local": "2026-10-29",
+  "commit": "3f076288e5ffe8ad4d61723eb1e9b626cab64525",
+  "workflow": "Backend",
+  "run_id": 40990308380,
+  "url": "https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/40990308380",
+  "jobs": [
+    {
+      "name": "tests",
+      "id": 123850824022,
+      "conclusion": "success"
+    },
+    {
+      "name": "postgres-integration",
+      "id": 123850824367,
+      "conclusion": "success"
+    }
+  ],
+  "limites": [
+    "La integración PostgreSQL usa configuración normal del workflow, sin --server-stats",
+    "La extensión y snapshot del nuevo modo siguen sin ejecución real",
+    "No es otra carga de rendimiento ni aprobación RNF-2"
+  ]
+}
