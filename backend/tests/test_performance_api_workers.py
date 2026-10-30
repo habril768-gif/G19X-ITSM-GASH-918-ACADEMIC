@@ -18,6 +18,7 @@ class APIWorkersTests(unittest.TestCase):
         provision.validate_workers(1, True, 'smoke')
         provision.validate_workers(1, False, 'full')
         provision.validate_workers(2, False, 'smoke')
+        provision.validate_workers(2, False, 'full')
 
     def test_two_only_changes_api_in_new_smoke_config(self):
         repo = Path.cwd()
@@ -33,9 +34,9 @@ class APIWorkersTests(unittest.TestCase):
         self.assertNotIn('QA_PERF_DIAGNOSTIC_RUN_ID', candidate['services']['api']['environment'])
         provision.validate_resolved(fixtures.normalized(candidate), 'plurione-qa-perf-qa123456', 18080, repo)
 
-    def test_diagnostic_full_and_invalid_modes_reject_before_creation(self):
-        for mode, diagnostic in (('full',False), ('full',True), ('smoke',True)):
-            with self.subTest(mode=mode,diagnostic=diagnostic), self.assertRaisesRegex(provision.ProvisionError,'SOLO_SMOKE'):
+    def test_diagnostic_and_invalid_modes_reject_before_creation(self):
+        for mode, diagnostic in (('invalid',False), ('full',True), ('smoke',True)):
+            with self.subTest(mode=mode,diagnostic=diagnostic), self.assertRaises(provision.ProvisionError):
                 provision.run(Path.cwd(), mode, 'docker', diagnostic=diagnostic, api_workers=2)
         with self.assertRaises(provision.ProvisionError):
             provision.specification(Path.cwd(), 'qa123456', 18080, diagnostic=True, api_workers=2)
@@ -62,3 +63,17 @@ class APIWorkersTests(unittest.TestCase):
         self.assertFalse(value['server_stats'])
         self.assertEqual(value['users'],10)
         self.assertEqual(value['initial_cases'],100)
+
+    def test_full_plan_accepts_two_without_docker_or_diagnostic(self):
+        result=subprocess.run([sys.executable,'-B',str(Path(provision.__file__)),'--mode','full','--api-workers','2','--plan'],capture_output=True,text=True,timeout=20)
+        self.assertEqual(result.returncode,0,result.stderr)
+        value=json.loads(result.stdout)
+        self.assertEqual(value['mode'],'full')
+        self.assertEqual(value['api_workers'],2)
+        self.assertEqual(value['users'],10)
+        self.assertFalse(value['diagnostic'])
+
+    def test_full_two_rejects_diagnostic_cli(self):
+        result=subprocess.run([sys.executable,'-B',str(Path(provision.__file__)),'--mode','full','--api-workers','2','--diagnostic','--plan'],capture_output=True,text=True,timeout=20)
+        self.assertNotEqual(result.returncode,0)
+        self.assertIn('API_WORKERS_SIN_DIAGNOSTICO',result.stdout)

@@ -1633,3 +1633,31 @@ El nuevo control funcionó realmente:28 familias, 4.160 llamadas y 521,964 ms de
 compare_performance_workers.ps1 exige confirmación QA, ejecuta secuencia 1/2 sin reintentos, cada vez libera dos redes QA elegibles vacías (máximo 4 en total) y crea QA independiente con 10 clientes/100 casos iniciales, smoke de 2 + 5 s sin instrumentos. Si limpieza falla/omite o una prueba queda incompleta, detiene la secuencia. No detiene el sitio ni borra volúmenes/reportes. El pool sigue en 15 por proceso: dos duplican techo teórico API a 30, con más memoria; pendiente medir. Carga de ciclo cerrado puede producir distintos totales/dataset final; una pareja y diferente CPU no prueban causalidad.
 
 **120 unitarias locales aprobadas en 3,309 s**, siete nuevas:5 de configuración/CLI/guardas y 2 del provisionador simulado, incluyendo comando real y parada ante fallo. AST de 3 archivos Python correcto y parser PowerShell sin errores; controlador no ejecutado. Estas pruebas se observaron durante la preparación; no son dos corridas Docker. Pendiente ejecución real y comparación de ambos reportes; no promoción a formal o cambio operativo anticipado.
+
+
+## 2026-10-30 — Comparación real de uno y dos procesos API
+
+[Evidencia212](evidencias/212-comparacion-real-uno-dos-procesos-api.json): el usuario ejecutó el controlador preparado. Dos QA independientes con diez clientes, cien casos iniciales, calentamiento2s y medición5s, sin diagnóstico. Los54 hashes de producto coinciden entre corridas y con los archivos actuales. Ambos completos, cero errores HTTP en calentamiento/medición, conteos SQL coherentes, diez logout204, post HTTP correcto y QA detenido. El comando de dos procesos está verificado; no acredita reparto por PID.
+
+P95 en ms (uno → dos): listado252,57→90,79; detalle202,21→114,17; creación290,63→163,91; actualización249,18→153,28. Solicitudes medidas339→583. Conteos100→121→204 y100→145→290; SQL204/290 creaciones,100/182 ediciones y2.040/2.900 entregas, sin SMTP/IA. Los cuatro p95 de dos procesos están por debajo de200ms únicamente en este smoke. Resultado favorable para investigar capacidad multiproceso; RNF-2 continúa pendiente y no hay nueva prueba formal.
+
+No hay CPU global registrada en este modo. Muestras Docker escasas y en ventanas diferentes, incluida una posterior a medición con dos procesos: no atribuir la mejora a una causa única ni comparar sus porcentajes como medias. La memoria API muestreada aumenta aproximadamente de78–85MiB a170–192MiB; no son máximos continuos. Pareja secuencial y conjunto final distinto no eliminan variación del host/sesgo de orden. Mantener configuración del sitio y formal actual; preparar validación sostenida reproducible antes de adoptar dos procesos, conservando diez clientes, p95<200ms y controles de integridad.
+
+Archivos cambiados: evidencia212 y documentación de seguimiento. Validación: lectura de ambos originales, SHA256,54 hashes, fases completas, errores, sumas HTTP/SQL, logout y parada. No se ejecutó carga adicional ni se modificó código productivo.
+
+
+## 2026-10-30 — Validación formal QA con dos procesos preparada
+
+[Evidencia213](evidencias/213-formal-qa-dos-procesos-preparada.json). A partir de la comparación real212 favorable y a petición de cerrar RNF-2 para entrega, se habilita `--api-workers 2` en QA formal sin diagnóstico. Sustituye la restricción histórica de211 que permitía dos solo en smoke. El guard conserva un proceso por defecto, valida el número antes de CPU/Docker y registra la selección en precondiciones. Verifica CPU previa, libera hasta dos redes QA elegibles, y provisiona un proyecto nuevo; el provisionador mantiene validación de ID propio y comando Uvicorn real. Dos procesos con diagnóstico siguen rechazados. Sitio/Dockerfile/Compose operativo, pool15 por proceso, locks, transacciones y runner/verdict intactos.
+
+**Protocolo sin rebajar:** diez clientes, cien casos iniciales,30s calentamiento y300s medición; cada p95 de listado/detalle/creación/actualización estrictamente menor de200ms, sin errores y con verificaciones HTTP/SQL/logout/parada. CPU previa: media≤30% y cada intervalo≤50%; si no cumple, no inicia carga. No detener automáticamente servicios ajenos ni desactivar protecciones.
+
+Comando desde raíz, con Docker abierto:
+
+```powershell
+.\backend\.venv\Scripts\python.exe -B backend/scripts/run_performance_full_guarded.py --api-workers 2 --confirm-isolated-qa
+```
+
+Validación realizada:126 pruebas de herramientas aprobadas en4,827s, AST de cinco archivos correcto; se comprobó que runner y configuración productiva no cambiaron frente a la versión publicada. Nuevas pruebas cubren selección full2 en CLI, rechazo de diagnóstico, guardas CPU/redes no eludibles, validación anticipada y despacho full sin convertirlo en smoke; resultado FALLIDA_UMBRAL simulado conserva fallo y parada. No se ejecutó carga Docker desde el agente. Pendiente corrida real del usuario, lectura íntegra del original y acreditación únicamente si cumple. Siete fallos formales anteriores siguen documentados; aún no hay octava formal. Dos procesos aumentan memoria y techo API a30 conexiones. Un éxito futuro solo acredita el alcance y hardware declarados, no rendimiento universal ni proveedores externos.
+
+Archivos: provision_performance_qa.py, run_performance_full_guarded.py y tres pruebas relacionadas; evidencia213 y documentación de seguimiento. No se afirma RNF-2 listo antes de observar la ejecución real.

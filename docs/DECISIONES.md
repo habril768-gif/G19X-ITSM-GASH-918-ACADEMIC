@@ -480,3 +480,25 @@ Planning tracking permanece apagado para limitar coste adicional; esa métrica n
 Las medias de ejecución de 210 son breves, con ventanas/agrupación distintas del cursor API y sin planificación/durabilidad completas. Se elige probar 1/2 procesos sobre entrada normal de app, sin nuevos cambios de permisos/SQL/índices/pool. Dos procesos solo en smoke QA nuevo y sin instrumentación; el agregador diagnóstico actual exige un emisor y se conserva. Full con 2 se rechaza: falta elegir/configurar despliegue reproducible y adaptar prueba formal tras evidencia, no se elude su control previo.
 
 El controlador produce dos reportes originales en QA independientes con 100 casos iniciales, mismo modo sin instrumentos y 10 clientes. No reutilizar dataset crecido ni comparar como causal con ventanas instrumentadas. Secuencia fija sin reintentos, hasta 4 redes QA vacías retiradas en dos pasos acotados. Dos workers tienen memoria/pool separados y techo teórico API 30; no promesa de ganancia. Comando real del contenedor verificado, no distribución por PID. Documentación primaria: [Uvicorn](https://www.uvicorn.org/deployment/) y [FastAPI workers](https://fastapi.tiangolo.com/deployment/server-workers/).
+
+
+### 2026-10-30 — Comparación API real, RNF-2 pendiente
+
+[Evidencia212](evidencias/212-comparacion-real-uno-dos-procesos-api.json): smoke1/2 completado y coherente; p95 de dos procesos90,79/114,17/163,91/153,28ms frente252,57/202,21/290,63/249,18ms. Cero errores,339→583 solicitudes. Resultado breve favorable, sin nueva formal ni cambio operativo. Pendiente validar de forma sostenida y reproducible; conservar diez clientes, p95<200ms, locks y auditoría.
+
+
+## 2026-10-30 — Validación formal QA con dos procesos preparada
+
+[Evidencia213](evidencias/213-formal-qa-dos-procesos-preparada.json). A partir de la comparación real212 favorable y a petición de cerrar RNF-2 para entrega, se habilita `--api-workers 2` en QA formal sin diagnóstico. Sustituye la restricción histórica de211 que permitía dos solo en smoke. El guard conserva un proceso por defecto, valida el número antes de CPU/Docker y registra la selección en precondiciones. Verifica CPU previa, libera hasta dos redes QA elegibles, y provisiona un proyecto nuevo; el provisionador mantiene validación de ID propio y comando Uvicorn real. Dos procesos con diagnóstico siguen rechazados. Sitio/Dockerfile/Compose operativo, pool15 por proceso, locks, transacciones y runner/verdict intactos.
+
+**Protocolo sin rebajar:** diez clientes, cien casos iniciales,30s calentamiento y300s medición; cada p95 de listado/detalle/creación/actualización estrictamente menor de200ms, sin errores y con verificaciones HTTP/SQL/logout/parada. CPU previa: media≤30% y cada intervalo≤50%; si no cumple, no inicia carga. No detener automáticamente servicios ajenos ni desactivar protecciones.
+
+Comando desde raíz, con Docker abierto:
+
+```powershell
+.\backend\.venv\Scripts\python.exe -B backend/scripts/run_performance_full_guarded.py --api-workers 2 --confirm-isolated-qa
+```
+
+Validación realizada:126 pruebas de herramientas aprobadas en4,827s, AST de cinco archivos correcto; se comprobó que runner y configuración productiva no cambiaron frente a la versión publicada. Nuevas pruebas cubren selección full2 en CLI, rechazo de diagnóstico, guardas CPU/redes no eludibles, validación anticipada y despacho full sin convertirlo en smoke; resultado FALLIDA_UMBRAL simulado conserva fallo y parada. No se ejecutó carga Docker desde el agente. Pendiente corrida real del usuario, lectura íntegra del original y acreditación únicamente si cumple. Siete fallos formales anteriores siguen documentados; aún no hay octava formal. Dos procesos aumentan memoria y techo API a30 conexiones. Un éxito futuro solo acredita el alcance y hardware declarados, no rendimiento universal ni proveedores externos.
+
+Archivos: provision_performance_qa.py, run_performance_full_guarded.py y tres pruebas relacionadas; evidencia213 y documentación de seguimiento. No se afirma RNF-2 listo antes de observar la ejecución real.

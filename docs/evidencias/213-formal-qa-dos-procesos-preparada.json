@@ -1,0 +1,49 @@
+{
+  "fecha_local": "2026-10-30",
+  "estado": "FORMAL_QA_DOS_PROCESOS_PREPARADA_NO_EJECUTADA",
+  "base": "Comparacion real212: todos los p95 de dos procesos por debajo de200ms en smoke, sin acreditar RNF-2.",
+  "comando": ".\\backend\\.venv\\Scripts\\python.exe -B backend/scripts/run_performance_full_guarded.py --api-workers 2 --confirm-isolated-qa",
+  "protocolo": {
+    "clientes": 10,
+    "casos_iniciales": 100,
+    "calentamiento_s": 30,
+    "medicion_s": 300,
+    "p95_exitos_ms_estrictamente_menor": 200,
+    "operaciones": [
+      "listado",
+      "detalle",
+      "creacion",
+      "actualizacion"
+    ],
+    "diagnostico": false,
+    "cpu_media_previa_max_porcentaje": 30,
+    "cpu_intervalo_previo_max_porcentaje": 50,
+    "procesos_api_explicitos": 2
+  },
+  "validacion": {
+    "unitarias_herramientas": 126,
+    "duracion_s": 4.827,
+    "ast_archivos": 5,
+    "ejecucion_real": "PENDIENTE, requiere Docker en PowerShell del usuario"
+  },
+  "comportamiento": [
+    "Opcion explicita1/2 en guard; por defecto sigue1. Valida antes de CPU y Docker.",
+    "Dos procesos habilitados en full sin diagnostico; no cambia verdict, runner, locks, pool ni configuracion del sitio.",
+    "Conserva limpieza acotada2 redes elegibles y configuracion/ID/comando verificados antes de migrar.",
+    "Pruebas nuevas de CLI full2, rechazo diagnostico, CPU/redes no eludibles, despacho full sin smoke y resultado fallido preservado.",
+    "Tras corrida real revisar reporte completo, imagenes/codigo/configuracion, fases y muestras, errores HTTP, auditoria/colas/logout y parada. No marcar acreditado desde unitarias."
+  ],
+  "limites": [
+    "No ejecutada octava formal ni carga adicional por agente. Acceso a Docker real desde agente no disponible en esta sesion.",
+    "Dos procesos duplican techo de conexiones API15 a30 y aumentan memoria.",
+    "Aprobacion se limita al alcance HTTP QA del protocolo y hardware declarados; no demuestra proveedores SMTP/IA ni rendimiento universal.",
+    "Aun aprobando, conservar configuracion exacta reproducible y preparar aplicacion operativa antes de afirmar que sitio usa dos procesos."
+  ],
+  "sha256": {
+    "backend/scripts/provision_performance_qa.py": "be2859217c6642e8294b1bae62a59a3ff679935af82fa30b48e884f09b045c8e",
+    "backend/scripts/run_performance_full_guarded.py": "d9600036511b4aba8c3093c9d23e52309352cf67f5540babe158de46944ebb37",
+    "backend/tests/test_performance_api_workers.py": "29363ae204280adf7513cb2fe0df3a1b8c51dcf72c39989b678d2d258f949b10",
+    "backend/tests/test_performance_full_guard.py": "fe29a0cfd4c38ba8c4714e00474b33be80a0424eddd4ca71827292ebd4e35e65",
+    "backend/tests/test_performance_provisioner.py": "0eeaf375a2f20c0f37a90497eb557ddb4b99417c5d65e836265d7571934ccdf8"
+  }
+}

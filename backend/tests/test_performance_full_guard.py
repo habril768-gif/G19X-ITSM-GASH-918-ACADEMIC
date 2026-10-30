@@ -17,7 +17,7 @@ def baseline(cpus=(10, 20, 30)):
 
 
 class GuardedFormalTests(unittest.TestCase):
-    def run_guard(self, value=None, cleanup=None, remote=False):
+    def run_guard(self, value=None, cleanup=None, remote=False, api_workers=1):
         if value is None:
             value = baseline()
         if cleanup is None:
@@ -33,10 +33,10 @@ class GuardedFormalTests(unittest.TestCase):
              contextlib.redirect_stdout(io.StringIO()) as output:
             if remote:
                 with self.assertRaisesRegex(guarded.networks.ReleaseError, '^DOCKER_NO_LOCAL$'):
-                    guarded.guarded_run(Path.cwd(), 'docker')
+                    guarded.guarded_run(Path.cwd(), 'docker', api_workers=api_workers)
                 result = None
             else:
-                result = guarded.guarded_run(Path.cwd(), 'docker')
+                result = guarded.guarded_run(Path.cwd(), 'docker', api_workers=api_workers)
         return result, sample, docker, release, run, output.getvalue()
 
     def test_valid_quiet_baseline_is_ready(self):
@@ -96,6 +96,30 @@ class GuardedFormalTests(unittest.TestCase):
         self.assertEqual(preflight['cpu_previa'], baseline())
         self.assertEqual(preflight['redes_qa_liberadas'], ['qa_net', 'qa_entry'])
         self.assertEqual(json.loads(output)['estado'], 'PRECONDICIONES_OK')
+
+    def test_two_workers_keeps_full_protocol_and_preflight(self):
+        result, _, _, release, run, output = self.run_guard(api_workers=2)
+        self.assertEqual(result, 0)
+        self.assertEqual(run.call_args.args, (Path.cwd(), 'full', 'docker'))
+        self.assertEqual(run.call_args.kwargs['api_workers'], 2)
+        self.assertNotIn('diagnostic', run.call_args.kwargs)
+        self.assertEqual(json.loads(output)['api_workers_declarados'], 2)
+        self.assertEqual(run.call_args.kwargs['preflight']['cpu_previa'], baseline())
+        release.assert_called_once()
+
+    def test_two_workers_does_not_bypass_high_cpu_or_failed_cleanup(self):
+        for options in ({'value':baseline((60,70,80))}, {'cleanup':{'eliminadas':[], 'fallidas':[], 'omitidas_al_revalidar':[]}}):
+            with self.subTest(options=options):
+                result, _, _, _, run, _ = self.run_guard(api_workers=2, **options)
+                self.assertEqual(result,2)
+                run.assert_not_called()
+
+    def test_invalid_workers_rejected_before_cpu_and_docker(self):
+        with patch.object(guarded.host,'baseline') as sample, patch.object(guarded.networks,'command') as docker:
+            with self.assertRaises(guarded.provision.ProvisionError):
+                guarded.guarded_run(Path.cwd(),'docker',api_workers=3)
+            sample.assert_not_called()
+            docker.assert_not_called()
 
     def test_confirmation_is_required_before_any_measurement(self):
         with patch.object(guarded.host, 'baseline') as sample, \

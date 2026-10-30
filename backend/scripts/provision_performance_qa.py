@@ -42,7 +42,8 @@ def local_endpoint(endpoint):
 
 def validate_workers(workers, diagnostic=False, mode='smoke'):
     ensure(isinstance(workers, int) and not isinstance(workers, bool) and workers in (1, 2), 'API_WORKERS_INVALIDOS')
-    ensure(workers == 1 or (not diagnostic and mode == 'smoke'), 'API_WORKERS_SOLO_SMOKE_SIN_DIAGNOSTICO')
+    ensure(mode in ('smoke', 'full'), 'MODO_API_WORKERS_INVALIDO')
+    ensure(workers == 1 or not diagnostic, 'API_WORKERS_SIN_DIAGNOSTICO')
 
 
 def workers_command():
@@ -455,7 +456,7 @@ def main():
     parser.add_argument('--diagnostic', action='store_true', help='Solo smoke: tiempos por etapas en API QA; no acredita RNF-2.')
     parser.add_argument('--db-probe', action='store_true', help='Solo smoke diagnostico: control SELECT1 despues de la carga, sin extensiones.')
     parser.add_argument('--server-stats', action='store_true', help='Solo smoke diagnostico: pg_stat_statements en PostgreSQL QA nuevo; no modifica el sitio.')
-    parser.add_argument('--api-workers', type=int, choices=[1, 2], default=1, help='Dos procesos solo para smoke sin diagnostico; no cambia el sitio.')
+    parser.add_argument('--api-workers', type=int, choices=[1, 2], default=1, help='Uno o dos procesos API en QA sin diagnostico multiproceso; no cambia el sitio.')
     parser.add_argument('--confirm-isolated-qa', action='store_true')
     parser.add_argument('--plan', action='store_true', help='Muestra plan sin Docker, archivos o contraseñas.')
     args = parser.parse_args()

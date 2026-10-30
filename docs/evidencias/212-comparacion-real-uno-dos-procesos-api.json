@@ -1,0 +1,326 @@
+{
+  "fecha_registro_local": "2026-10-30",
+  "estado": "COMPARACION_SMOKE_REAL_FAVORABLE_DOS_PROCESOS_SIN_ACREDITAR_RNF2",
+  "validacion": {
+    "hashes_producto_iguales_y_actuales": 54,
+    "clientes": 10,
+    "casos_iniciales": 100,
+    "calentamiento_s": 2,
+    "medicion_s": 5,
+    "instrumentacion_diagnostica": false
+  },
+  "corridas": [
+    {
+      "run_id": "d456ca236e994322",
+      "workers": 1,
+      "report_sha256": "72f64cd0d6a22833bb323a94b584cc60838a7ce93f97c5ff39b55d804a509608",
+      "fecha": "2026-10-30T19:13:21.160535+00:00",
+      "p95_ms": {
+        "listado": 252.57240000064485,
+        "detalle": 202.21430002129637,
+        "creacion": 290.63080000923946,
+        "actualizacion": 249.17700001969934
+      },
+      "solicitudes": 339,
+      "errores": 0,
+      "conteos": [
+        100,
+        121,
+        204
+      ],
+      "sql": {
+        "incidencias": 204,
+        "eventos_creado": 204,
+        "eventos_editado": 100,
+        "entregas_encoladas": 2040,
+        "intentos_smtp": 0,
+        "trabajos_ia": 0
+      },
+      "logout_204": 10,
+      "qa_detenido": true,
+      "comando_dos_verificado": null,
+      "recursos_muestras": [
+        {
+          "fecha_utc": "2026-10-30T19:13:15.889681+00:00",
+          "elapsed_s": 2.152938599989284,
+          "containers": [
+            {
+              "BlockIO": "0B / 0B",
+              "CPUPerc": "77.10%",
+              "Container": "98f3b25b75149ada369cfd384094cd68168fc50584aa21261ae26c0723096fe9",
+              "ID": "98f3b25b7514",
+              "MemPerc": "2.36%",
+              "MemUsage": "84.88MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-d456ca236e994322-api-1",
+              "NetIO": "844kB / 1.21MB",
+              "PIDs": "7"
+            },
+            {
+              "BlockIO": "0B / 54.5MB",
+              "CPUPerc": "18.68%",
+              "Container": "83fb418025879d1c6578ebc6846710c346c49dbd912823713dae6e8f9545197c",
+              "ID": "83fb41802587",
+              "MemPerc": "1.17%",
+              "MemUsage": "42.25MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-d456ca236e994322-postgres-1",
+              "NetIO": "1.03MB / 806kB",
+              "PIDs": "8"
+            },
+            {
+              "BlockIO": "0B / 0B",
+              "CPUPerc": "0.54%",
+              "Container": "917bc01f1cc5fb283af6270e5c3acb2076a5706631cd40b62ca90ac7cde9ef86",
+              "ID": "917bc01f1cc5",
+              "MemPerc": "0.11%",
+              "MemUsage": "3.984MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-d456ca236e994322-redis-1",
+              "NetIO": "1.99kB / 126B",
+              "PIDs": "6"
+            }
+          ]
+        },
+        {
+          "fecha_utc": "2026-10-30T19:13:23.022462+00:00",
+          "elapsed_s": 9.285293499997351,
+          "containers": [
+            {
+              "BlockIO": "0B / 0B",
+              "CPUPerc": "108.90%",
+              "Container": "98f3b25b75149ada369cfd384094cd68168fc50584aa21261ae26c0723096fe9",
+              "ID": "98f3b25b7514",
+              "MemPerc": "2.17%",
+              "MemUsage": "77.91MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-d456ca236e994322-api-1",
+              "NetIO": "2.76MB / 3.6MB",
+              "PIDs": "16"
+            },
+            {
+              "BlockIO": "0B / 55.9MB",
+              "CPUPerc": "53.34%",
+              "Container": "83fb418025879d1c6578ebc6846710c346c49dbd912823713dae6e8f9545197c",
+              "ID": "83fb41802587",
+              "MemPerc": "1.94%",
+              "MemUsage": "69.92MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-d456ca236e994322-postgres-1",
+              "NetIO": "3.27MB / 3.05MB",
+              "PIDs": "18"
+            },
+            {
+              "BlockIO": "0B / 0B",
+              "CPUPerc": "0.31%",
+              "Container": "917bc01f1cc5fb283af6270e5c3acb2076a5706631cd40b62ca90ac7cde9ef86",
+              "ID": "917bc01f1cc5",
+              "MemPerc": "0.11%",
+              "MemUsage": "3.984MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-d456ca236e994322-redis-1",
+              "NetIO": "1.99kB / 126B",
+              "PIDs": "6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": "ecdc03d0d94e4e8e",
+      "workers": 2,
+      "report_sha256": "7e88b226f4ff5dbfd44c99fa3d6594d8188b003be1a84b44f3beb6c7bac62523",
+      "fecha": "2026-10-30T19:14:18.644972+00:00",
+      "p95_ms": {
+        "listado": 90.79489999567159,
+        "detalle": 114.17459999211133,
+        "creacion": 163.90909999608994,
+        "actualizacion": 153.28410000074655
+      },
+      "solicitudes": 583,
+      "errores": 0,
+      "conteos": [
+        100,
+        145,
+        290
+      ],
+      "sql": {
+        "incidencias": 290,
+        "eventos_creado": 290,
+        "eventos_editado": 182,
+        "entregas_encoladas": 2900,
+        "intentos_smtp": 0,
+        "trabajos_ia": 0
+      },
+      "logout_204": 10,
+      "qa_detenido": true,
+      "comando_dos_verificado": true,
+      "recursos_muestras": [
+        {
+          "fecha_utc": "2026-10-30T19:14:04.364828+00:00",
+          "elapsed_s": 2.1025662000174634,
+          "containers": [
+            {
+              "BlockIO": "49.2kB / 0B",
+              "CPUPerc": "63.00%",
+              "Container": "590aa511c4b406bdb169d4d351ce9eb4f5157b21efe3af3cf9d5626ae86c3782",
+              "ID": "590aa511c4b4",
+              "MemPerc": "4.72%",
+              "MemUsage": "169.6MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-ecdc03d0d94e4e8e-api-1",
+              "NetIO": "537kB / 787kB",
+              "PIDs": "8"
+            },
+            {
+              "BlockIO": "0B / 54.5MB",
+              "CPUPerc": "5.22%",
+              "Container": "a8b709275f8e8d4e3d6ba1e024ce24c451d5b3d15d1a67961a23cd4550e3fde2",
+              "ID": "a8b709275f8e",
+              "MemPerc": "1.13%",
+              "MemUsage": "40.81MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-ecdc03d0d94e4e8e-postgres-1",
+              "NetIO": "711kB / 520kB",
+              "PIDs": "8"
+            },
+            {
+              "BlockIO": "0B / 0B",
+              "CPUPerc": "0.40%",
+              "Container": "ce2af5ddafa7ea4c5b4e127951879ef6164f9b6b7ec2e2ba832b8f22e14908d5",
+              "ID": "ce2af5ddafa7",
+              "MemPerc": "0.09%",
+              "MemUsage": "3.348MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-ecdc03d0d94e4e8e-redis-1",
+              "NetIO": "1.99kB / 126B",
+              "PIDs": "6"
+            }
+          ]
+        },
+        {
+          "fecha_utc": "2026-10-30T19:14:11.466023+00:00",
+          "elapsed_s": 9.203814000007696,
+          "containers": [
+            {
+              "BlockIO": "49.2kB / 0B",
+              "CPUPerc": "43.15%",
+              "Container": "590aa511c4b406bdb169d4d351ce9eb4f5157b21efe3af3cf9d5626ae86c3782",
+              "ID": "590aa511c4b4",
+              "MemPerc": "4.77%",
+              "MemUsage": "171.4MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-ecdc03d0d94e4e8e-api-1",
+              "NetIO": "1.18MB / 1.62MB",
+              "PIDs": "8"
+            },
+            {
+              "BlockIO": "0B / 54.6MB",
+              "CPUPerc": "5.27%",
+              "Container": "a8b709275f8e8d4e3d6ba1e024ce24c451d5b3d15d1a67961a23cd4550e3fde2",
+              "ID": "a8b709275f8e",
+              "MemPerc": "1.21%",
+              "MemUsage": "43.53MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-ecdc03d0d94e4e8e-postgres-1",
+              "NetIO": "1.33MB / 1.12MB",
+              "PIDs": "8"
+            },
+            {
+              "BlockIO": "0B / 0B",
+              "CPUPerc": "0.36%",
+              "Container": "ce2af5ddafa7ea4c5b4e127951879ef6164f9b6b7ec2e2ba832b8f22e14908d5",
+              "ID": "ce2af5ddafa7",
+              "MemPerc": "0.11%",
+              "MemUsage": "3.98MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-ecdc03d0d94e4e8e-redis-1",
+              "NetIO": "1.99kB / 126B",
+              "PIDs": "6"
+            }
+          ]
+        },
+        {
+          "fecha_utc": "2026-10-30T19:14:18.177651+00:00",
+          "elapsed_s": 15.9150290999969,
+          "containers": [
+            {
+              "BlockIO": "49.2kB / 0B",
+              "CPUPerc": "169.26%",
+              "Container": "590aa511c4b406bdb169d4d351ce9eb4f5157b21efe3af3cf9d5626ae86c3782",
+              "ID": "590aa511c4b4",
+              "MemPerc": "4.92%",
+              "MemUsage": "177MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-ecdc03d0d94e4e8e-api-1",
+              "NetIO": "2.62MB / 3.51MB",
+              "PIDs": "18"
+            },
+            {
+              "BlockIO": "0B / 56.8MB",
+              "CPUPerc": "72.28%",
+              "Container": "a8b709275f8e8d4e3d6ba1e024ce24c451d5b3d15d1a67961a23cd4550e3fde2",
+              "ID": "a8b709275f8e",
+              "MemPerc": "2.24%",
+              "MemUsage": "80.69MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-ecdc03d0d94e4e8e-postgres-1",
+              "NetIO": "2.75MB / 2.43MB",
+              "PIDs": "17"
+            },
+            {
+              "BlockIO": "0B / 0B",
+              "CPUPerc": "3.49%",
+              "Container": "ce2af5ddafa7ea4c5b4e127951879ef6164f9b6b7ec2e2ba832b8f22e14908d5",
+              "ID": "ce2af5ddafa7",
+              "MemPerc": "0.11%",
+              "MemUsage": "3.957MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-ecdc03d0d94e4e8e-redis-1",
+              "NetIO": "1.99kB / 126B",
+              "PIDs": "6"
+            }
+          ]
+        },
+        {
+          "fecha_utc": "2026-10-30T19:14:25.310105+00:00",
+          "elapsed_s": 23.048080700013088,
+          "containers": [
+            {
+              "BlockIO": "49.2kB / 0B",
+              "CPUPerc": "57.55%",
+              "Container": "590aa511c4b406bdb169d4d351ce9eb4f5157b21efe3af3cf9d5626ae86c3782",
+              "ID": "590aa511c4b4",
+              "MemPerc": "5.33%",
+              "MemUsage": "191.7MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-ecdc03d0d94e4e8e-api-1",
+              "NetIO": "6.91MB / 9.25MB",
+              "PIDs": "23"
+            },
+            {
+              "BlockIO": "0B / 60.8MB",
+              "CPUPerc": "28.80%",
+              "Container": "a8b709275f8e8d4e3d6ba1e024ce24c451d5b3d15d1a67961a23cd4550e3fde2",
+              "ID": "a8b709275f8e",
+              "MemPerc": "2.08%",
+              "MemUsage": "74.81MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-ecdc03d0d94e4e8e-postgres-1",
+              "NetIO": "6.95MB / 6.3MB",
+              "PIDs": "16"
+            },
+            {
+              "BlockIO": "0B / 0B",
+              "CPUPerc": "0.36%",
+              "Container": "ce2af5ddafa7ea4c5b4e127951879ef6164f9b6b7ec2e2ba832b8f22e14908d5",
+              "ID": "ce2af5ddafa7",
+              "MemPerc": "0.10%",
+              "MemUsage": "3.73MiB / 3.512GiB",
+              "Name": "plurione-qa-perf-ecdc03d0d94e4e8e-redis-1",
+              "NetIO": "1.99kB / 126B",
+              "PIDs": "6"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reduccion_p95_porcentaje": {
+    "listado": 64.05193125003375,
+    "detalle": 43.53782102448396,
+    "creacion": 43.602295423995294,
+    "actualizacion": 38.483848834913225
+  },
+  "limites": [
+    "Una pareja secuencial 1/2 no controla variaciones del host ni sesgo de orden. No demuestra causalidad o reparto exacto por PID.",
+    "Sin CPU global del host en estas corridas no instrumentadas. Las muestras Docker no son continuas: en dos procesos la ultima es posterior a la medicion; no comparar como medias de carga.",
+    "Imagen API distinta por corrida; 54 hashes declarados de producto iguales, PostgreSQL y Redis con mismas imagenes declaradas.",
+    "Memoria API muestreada: un proceso 77,91-84,88 MiB; dos 169,6-191,7 MiB, en momentos distintos. No representa maximos continuos.",
+    "El cierre de ciclo produce mayor conjunto final con dos procesos (290 frente a 204 casos).",
+    "Smoke no certifica RNF-2. No se cambio sitio, configuracion formal, pool, locks ni umbral. Preparar validacion sostenida reproducible antes de adoptar dos procesos."
+  ]
+}

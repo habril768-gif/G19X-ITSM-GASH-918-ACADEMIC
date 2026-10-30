@@ -104,7 +104,7 @@ class ProvisionTests(unittest.TestCase):
             with patch.dict(os.environ, dict(env, **change)), self.assertRaises(ValueError):
                 seed.guard({'run_id': 'qa123456'})
 
-    def simulate(self, fail_stage=None, endpoint='npipe:////./pipe/dockerDesktopLinuxEngine', diagnostic=False, preflight=None, db_probe=False, server_stats=False, api_workers=1):
+    def simulate(self, fail_stage=None, endpoint='npipe:////./pipe/dockerDesktopLinuxEngine', diagnostic=False, preflight=None, db_probe=False, server_stats=False, api_workers=1, mode='smoke', http_state=None):
         temp = tempfile.TemporaryDirectory(prefix='qa-perf-unit-', dir=Path.cwd())
         self.addCleanup(temp.cleanup)
         repo = Path(temp.name)
@@ -180,6 +180,9 @@ class ProvisionTests(unittest.TestCase):
         def probe(port, diagnostics):
             diagnostics.update(resultado='OK', intentos=1, errores={})
         def execute(*args, **kwargs):
+            self.assertEqual(args[1], mode == 'smoke')
+            if http_state is not None:
+                measured['estado'] = http_state
             if server_stats: calls.append(([], 'HTTP_EJECUTADO'))
             return measured
         with patch.object(provision, 'command', side_effect=command), patch.object(provision, 'wait_http', side_effect=probe), patch.object(provision.runner, 'execute', side_effect=execute), contextlib.redirect_stdout(io.StringIO()):
@@ -192,7 +195,7 @@ class ProvisionTests(unittest.TestCase):
                 options['server_stats'] = True
             if preflight is not None:
                 options['preflight'] = preflight
-            result = provision.run(repo, 'smoke', 'docker', **options)
+            result = provision.run(repo, mode, 'docker', **options)
         folder = next((repo / '.pgdata').iterdir())
         report = json.loads((folder / 'report.json').read_text(encoding='utf-8'))
         for path in folder.iterdir():
@@ -252,6 +255,17 @@ class ProvisionTests(unittest.TestCase):
         self.assertLess(stages.index('COMANDO_API_WORKERS'), stages.index('MIGRACIONES'))
         self.assertNotIn('SQL_STATS_ANTES', stages)
         self.assertNotIn('DIAGNOSTICO_LOG', stages)
+
+    def test_two_workers_full_preserves_success_or_threshold_failure(self):
+        for verdict, expected in [('APROBADA_ALCANCE_HTTP_QA',0), ('FALLIDA_UMBRAL',1)]:
+            with self.subTest(verdict=verdict):
+                result, report, calls = self.simulate(api_workers=2, mode='full', http_state=verdict)
+                self.assertEqual(result,expected)
+                self.assertEqual(report['estado'],verdict)
+                self.assertTrue(report['comando_api_workers_verificado'])
+                self.assertTrue(report['contenedores_detenidos'])
+                self.assertFalse(report['instrumentacion_diagnostica'])
+                self.assertFalse(any(stage=='DIAGNOSTICO_LOG' for _,stage in calls))
 
     def test_two_workers_command_failure_stops_before_migration(self):
         result, report, calls = self.simulate(api_workers=2, fail_stage='COMANDO_API_WORKERS')

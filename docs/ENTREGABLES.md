@@ -762,3 +762,13 @@ El nuevo control funcionó realmente:28 familias, 4.160 llamadas y 521,964 ms de
 compare_performance_workers.ps1 exige confirmación QA, ejecuta secuencia 1/2 sin reintentos, cada vez libera dos redes QA elegibles vacías (máximo 4 en total) y crea QA independiente con 10 clientes/100 casos iniciales, smoke de 2 + 5 s sin instrumentos. Si limpieza falla/omite o una prueba queda incompleta, detiene la secuencia. No detiene el sitio ni borra volúmenes/reportes. El pool sigue en 15 por proceso: dos duplican techo teórico API a 30, con más memoria; pendiente medir. Carga de ciclo cerrado puede producir distintos totales/dataset final; una pareja y diferente CPU no prueban causalidad.
 
 **120 unitarias locales aprobadas en 3,309 s**, siete nuevas:5 de configuración/CLI/guardas y 2 del provisionador simulado, incluyendo comando real y parada ante fallo. AST de 3 archivos Python correcto y parser PowerShell sin errores; controlador no ejecutado. Estas pruebas se observaron durante la preparación; no son dos corridas Docker. Pendiente ejecución real y comparación de ambos reportes; no promoción a formal o cambio operativo anticipado.
+
+
+### 2026-10-30 — Comparación API real, RNF-2 pendiente
+
+[Evidencia212](evidencias/212-comparacion-real-uno-dos-procesos-api.json): smoke1/2 completado y coherente; p95 de dos procesos90,79/114,17/163,91/153,28ms frente252,57/202,21/290,63/249,18ms. Cero errores,339→583 solicitudes. Resultado breve favorable, sin nueva formal ni cambio operativo. Pendiente validar de forma sostenida y reproducible; conservar diez clientes, p95<200ms, locks y auditoría.
+
+
+### 2026-10-30 — RNF-2: formal QA de dos procesos preparada
+
+[Evidencia213](evidencias/213-formal-qa-dos-procesos-preparada.json): opcion explicita `--api-workers 2` en run_performance_full_guarded.py; conserva protocolo10clientes/30+300s/p95<200ms, guardas CPU/redes e integridad.126 unitarias aprobadas; ejecución formal real pendiente. Ver comando y límites en [prueba de rendimiento](PRUEBA_RENDIMIENTO.md). La restricción histórica de dos procesos solo smoke se amplía a full sin diagnóstico; sitio sin cambios.

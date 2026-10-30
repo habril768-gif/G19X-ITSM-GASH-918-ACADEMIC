@@ -31,10 +31,11 @@ def baseline_ready(value):
         return False
 
 
-def guarded_run(repo, executable):
+def guarded_run(repo, executable, api_workers=1):
+    provision.validate_workers(api_workers, False, 'full')
     # No tocar Docker o redes antes de aprobar la lectura de CPU sin carga.
     baseline = host.baseline()
-    preflight = {'cpu_previa': baseline,
+    preflight = {'cpu_previa': baseline, 'api_workers_declarados': api_workers,
         'umbrales_operativos': {'media_cpu_max_porcentaje': MAX_AVERAGE_CPU,
                                'intervalo_cpu_max_porcentaje': MAX_INTERVAL_CPU},
         'limites': 'Condición operativa previa, no criterio RNF-2. No garantiza carga constante durante construcción o medición. Mantiene diez clientes y p95 menor de 200 ms.'}
@@ -54,18 +55,20 @@ def guarded_run(repo, executable):
         return 2
     preflight['redes_qa_liberadas'] = cleanup['eliminadas']
     # Sin diagnóstico de API: protocolo formal original 30 + 300 s.
-    return provision.run(repo, 'full', executable, preflight=preflight)
+    return provision.run(repo, 'full', executable, preflight=preflight, api_workers=api_workers)
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--confirm-isolated-qa', action='store_true', required=True,
         help='Autoriza liberar hasta dos redes QA vacías registradas y crear el proyecto formal aislado.')
-    parser.parse_args(argv)
+    parser.add_argument('--api-workers', type=int, choices=[1, 2], default=1,
+        help='Procesos API del QA formal nuevo; conserva diez clientes y protocolo30+300s.')
+    args = parser.parse_args(argv)
     executable = shutil.which('docker')
     if not executable:
         raise networks.ReleaseError('DOCKER_CLI_NO_ENCONTRADO')
-    return guarded_run(Path(__file__).resolve().parents[2], executable)
+    return guarded_run(Path(__file__).resolve().parents[2], executable, args.api_workers)
 
 
 if __name__ == '__main__':
