@@ -1,5 +1,10 @@
 # Trazabilidad de requisitos
 
+## RNF-2: cumplido en QA local — 30 de octubre de 2026
+
+[Primera formal aprobada220](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json):10 clientes,100 casos iniciales,30+300s,API de 3 procesos,35.216 solicitudes sin errores. P95 listado123,81/detalle113,27/creación194,04/actualización167,77ms, todos<200 ms; auditoría/colas/logout/parada correctos. Acredita este alcance HTTP Docker local y hardware declarado, no rendimiento universal ni proveedores externos. Diez fallos históricos se conservan. [Perfil opcional 221](evidencias/221-perfil-compose-rnf2-reproducible.json) y [protocolo](PRUEBA_RENDIMIENTO.md) permiten reproducir configuración/medición. Los demás pendientes de entrega siguen vigentes.
+
+
 La matriz relaciona el PRD con código, evidencia y trabajo de aceptación. «Implementado» no equivale a «aceptado integralmente». Resultados detallados en [QA](REPORTE_QA.md); alcance en [MVP](MVP.md).
 
 | Requisito | Implementación y evidencia | Pendiente de cierre |
@@ -13,7 +18,7 @@ La matriz relaciona el PRD con código, evidencia y trabajo de aceptación. «Im
 | RF-7 Administración | API/React, evidencias 64/68/69 y pruebas; consulta de Usuarios/Departamentos confirmada por autora en 110 | Recorridos completos de modificación y permisos por otros roles; consulta básica confirmada |
 | RF-8 Panel | Pantallas operativas y componentes probados; recorridos y enlace de correo registrados | Matriz de permisos, móvil y accesibilidad |
 | RNF-1 Seguridad | Sesiones, permisos por objeto, exclusión de participantes y pruebas negativas | Aceptación transversal; HTTPS y controles globales antes de exposición externa |
-| RNF-2 Rendimiento | Meta definida en PRD | Medición p95 bajo carga y reporte; no se ha acreditado |
+| RNF-2 Rendimiento | Operaciones HTTP medidas; configuración API de tres procesos reproducible | Cumplido en QA local: [220](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json), diez clientes, 30 + 300 s, cuatro p95 < 200 ms y 35.216 solicitudes sin errores; hardware y límites declarados |
 | RNF-3 Reproducibilidad | Compose, dependencias fijadas, migraciones y runner aislado | Instalación limpia actual y CI remoto del cambio publicado |
 | RNF-4 Auditoría | Historial transaccional de casos, cuentas y departamentos; pruebas | Validación integral y política operativa de conservación/inmutabilidad |
 | RNF-5 Operación | Manual técnico, guías y QA | Recuperación, soporte, capacitación real y cierre |

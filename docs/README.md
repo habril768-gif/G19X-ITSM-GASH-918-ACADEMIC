@@ -61,3 +61,8 @@ La [comparación de uno y dos procesos API](PRUEBA_RENDIMIENTO.md#comparación-b
 ### 2026-10-30 — RNF-2 pendiente tras décima formal
 
 [Evidencia218](evidencias/218-decima-formal-fallida-cuatro-operaciones.json):24.450 solicitudes sin errores, QA3; p95 listado209,73/detalle200,83/creación328,30/edición289,47ms incumplen. Integridad y parada correctas, outbox217 presente; sin causalidad aislada. [219](evidencias/219-cpu-pasiva-por-fase-formal.json) añade CPU Windows/generador al inicio/fin de cada fase normal/formal, sin perfil API ni cambiar protocolo/veredicto;132 pruebas aprobadas. Pendiente CI y nueva medición; no más procesos ni cambios de negocio a ciegas.
+
+
+## RNF-2 acreditado en QA local
+
+[220: formal aprobada](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json), [221: perfilCompose](evidencias/221-perfil-compose-rnf2-reproducible.json) y [protocolo/alcance](PRUEBA_RENDIMIENTO.md).Tres procesosAPI,10 clientes/30+300s; cuatro p95 <200 ms,sin errores e integridad correcta. El historial de fallos no se elimina; otros pendientes de entrega continúan.

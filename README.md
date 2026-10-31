@@ -92,6 +92,19 @@ Abre [PluriOne](http://127.0.0.1:5173/) e inicia sesión con tu cuenta. Mantén 
 | `scripts/` | Actualización de módulos y ejecución controlada de evaluaciones |
 | `docs/` | Requisitos, manuales, alcance, QA y evidencias |
 
+## Rendimiento local validado
+
+RNF-2 cumplió con **tres procesos API**,10 clientes,30 s de calentamiento y300 s medidos:35.216 solicitudes sin errores,p95 listado123,81/detalle113,27/creación194,04/actualización167,77ms. [Evidencia y límites de hardware/protocolo](docs/evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json). Esto no cierra los demás pendientes del MVP ni acredita cualquier equipo o proveedor externo.
+
+El arranque de cinco pasos usa el Compose base de un proceso. Para operar con la cantidad de procesos validada, usa en el paso2:
+
+```powershell
+docker compose -f compose.yaml -f compose.rnf2.yaml config --quiet
+docker compose -f compose.yaml -f compose.rnf2.yaml up -d --build --wait
+```
+
+Conserva ambos `-f` en futuros `up`; perfiles opcionales de correo/IA siguen sus guías. El override solo cambia el comando API, sin borrar datos ni activar proveedores. [Reproducir la formal y conocer alcance/consumo](docs/PRUEBA_RENDIMIENTO.md#configuración-de-tres-procesos-validada-para-rnf-2).
+
 ## Validación y documentación
 
 Para pruebas del backend sigue [la guía de desarrollo](backend/README.md) y [PostgreSQL aislado](docs/PRUEBAS_POSTGRESQL.md). Para frontend, desde su carpeta ejecuta `npm.cmd test` y `npm.cmd run build`. Las pruebas de componentes no sustituyen un recorrido real por roles.

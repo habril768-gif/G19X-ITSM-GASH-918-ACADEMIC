@@ -1,5 +1,10 @@
 # Plan de trabajo y cierre
 
+## RNF-2: cumplido en QA local — 30 de octubre de 2026
+
+[Primera formal aprobada220](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json):10 clientes,100 casos iniciales,30+300s,API de 3 procesos,35.216 solicitudes sin errores. P95 listado123,81/detalle113,27/creación194,04/actualización167,77ms, todos<200 ms; auditoría/colas/logout/parada correctos. Acredita este alcance HTTP Docker local y hardware declarado, no rendimiento universal ni proveedores externos. Diez fallos históricos se conservan. [Perfil opcional 221](evidencias/221-perfil-compose-rnf2-reproducible.json) y [protocolo](PRUEBA_RENDIMIENTO.md) permiten reproducir configuración/medición. Los demás pendientes de entrega siguen vigentes.
+
+
 El [PRD](PRD.md) define las reglas y el [MVP](MVP.md), el alcance actual. Este archivo presenta prioridades vigentes; el historial está en [BITACORA.md](BITACORA.md) y Git.
 
 ## Estado por hito
@@ -7,7 +12,7 @@ El [PRD](PRD.md) define las reglas y el [MVP](MVP.md), el alcance actual. Este a
 | Hito | Estado verificable | Trabajo para cerrar |
 | --- | --- | --- |
 | H1 Requisitos y propuesta | PRD, propuesta técnica, decisiones y alcance documentados | Evidencia de necesidades reales si se requiere y aceptación final del alcance |
-| H2 Arquitectura y entorno | Componentes implementados y arquitectura documentada con flujos y límites | Instalación limpia y controles operativos pendientes; RNF-2 medido fuera de umbral (126) |
+| H2 Arquitectura y entorno | Componentes implementados y arquitectura documentada con flujos y límites | Instalación limpia y controles operativos pendientes; RNF-2 acreditado en QA local3procesos (220), con límites de hardware/protocolo |
 | H3 Datos | Migraciones, analítica y recuperación lógica nativa verificadas en aislamiento (103) | Check del entorno de uso, secuencia Docker, recuperación completa y carreras adicionales |
 | H4 Identidad y administración | Cuentas, sesiones, usuarios y departamentos implementados con pruebas | Matriz completa y recorrido real adicional de departamentos |
 | H5 Registro y panel | Registro, filtros, detalle e historial disponibles | Matriz completa de roles, accesibilidad y móvil |

@@ -1,5 +1,10 @@
 # Alcance y aceptación del MVP
 
+## RNF-2: cumplido en QA local — 30 de octubre de 2026
+
+[Primera formal aprobada220](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json):10 clientes,100 casos iniciales,30+300s,API de 3 procesos,35.216 solicitudes sin errores. P95 listado123,81/detalle113,27/creación194,04/actualización167,77ms, todos<200 ms; auditoría/colas/logout/parada correctos. Acredita este alcance HTTP Docker local y hardware declarado, no rendimiento universal ni proveedores externos. Diez fallos históricos se conservan. [Perfil opcional 221](evidencias/221-perfil-compose-rnf2-reproducible.json) y [protocolo](PRUEBA_RENDIMIENTO.md) permiten reproducir configuración/medición. Los demás pendientes de entrega siguen vigentes.
+
+
 ## Objetivo
 
 Gestionar incidencias laborales simuladas desde su registro hasta su seguimiento y cierre, con permisos por rol, revisión humana, auditoría y protección de información. Este documento describe la entrega actual; las reglas detalladas están en el [PRD](PRD.md).

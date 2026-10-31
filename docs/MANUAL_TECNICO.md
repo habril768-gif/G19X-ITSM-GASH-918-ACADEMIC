@@ -57,3 +57,25 @@ Consulta [MVP](MVP.md), [backlog](BACKLOG.md) y [entregables](ENTREGABLES.md) an
 ## Actualización de correo y esquema vigente
 
 La versión que añade correo de cierre requiere Alembic0008. Usa `scripts/ACTUALIZAR_CORREO.ps1`: construye, migra con `upgrade head` y actualiza API/worker sin borrar datos. `/health/db` exige la nueva revisión. La migración amplía un CHECK; no genera avisos retrospectivos. Pool base: cinco conexiones retenidas y diez temporales por proceso, máximo quince, pre_ping activo, espera30s y conexión3s. No hay ajuste nuevo de rendimiento en esta revisión. Ver [respuesta de auditoría](AUDITORIA_2026-10-23.md).
+
+
+## Configuración de tres procesos validada para RNF-2
+
+RNF-2 cumplió en el QA Docker local:10 clientes/100 casos iniciales,30 s de calentamiento y300 s medidos,35.216 solicitudes sin errores. P95 listado123,81/detalle113,27/creación194,04/actualización167,77ms. Consulta la [evidencia 220](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json) y el [protocolo](PRUEBA_RENDIMIENTO.md) para hardware,identidad y límites. No acredita otros equipos/datasets/proveedores ni aceptación integral.
+
+La cantidad de procesos API puede reproducirse en el entorno de uso con el override opcional, conservando el proyecto y sus volúmenes:
+
+```powershell
+docker compose -f compose.yaml -f compose.rnf2.yaml config --quiet
+docker compose -f compose.yaml -f compose.rnf2.yaml up -d --build --wait
+```
+
+Mantén ambos `-f` en futuros `up` para conservar tres procesos. Para captura de correo agrega `--profile mail` antes de `up` conforme a CORREO.md; no confundir esa operación con el QA sin proveedores. El archivo base conserva un proceso por defecto; ese valor no es el de la aprobación220. El override cambia solo command API y su composición fue validada, sin arrancar el entorno operativo. Replica cantidad de procesos, no fixtureQA ni garantiza el mismo p95 con datos/proveedores diferentes. Tres procesos aumentan memoria y techo de conexionesAPI a45.
+
+Para reproducir la prueba formal crea QA independiente con el entorno normal detenido:
+
+```powershell
+.\backend\.venv\Scripts\python.exe -B backend/scripts/run_performance_full_guarded.py --api-workers 3 --confirm-isolated-qa
+```
+
+No es necesario repetir la aprobación existente para sumar evidencias; revalida si cambia producto,hardware o configuración relevante. El guard conservaCPUprevia,limpieza acotada y criterio estricto; el p95 no promete máximos menores de 200 ms. No borres volúmenes para arrancar el perfil.

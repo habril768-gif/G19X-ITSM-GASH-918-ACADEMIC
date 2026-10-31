@@ -1,0 +1,15 @@
+{
+  "fecha_local": "2026-10-30",
+  "estado": "CONFIGURACION_COMPUESTA_VALIDADA_SIN_ARRANQUE_OPERATIVO",
+  "archivo": "compose.rnf2.yaml",
+  "sha256": "f0964e384466975e496f0745c6af950559f5cdcc8beff3b89340fcd0b09c2dd8",
+  "cambio_unico": "command API Uvicorn app.main:app con3procesos; coincide con comando de220",
+  "validacion": "docker compose config --format json del base y base+override; comparados en memoria tras normalizar commandnull base. Diferencia unica command API. Sin daemon, arranque, captura de contrasenas o datos.",
+  "limites": [
+    "Perfil opcional de operacion;220 se midio en QA separado con fixture/proveedores deshabilitados. No acredita rendimiento del sitio con datos/proveedores distintos.",
+    "Mantiene por proceso el poolbase15:techo API45 y mayor memoria. No altera workers auxiliares, puertos,volumenes,credenciales o perfiles.",
+    "No iniciar ni mezclar entorno normal durante una medicion formal; el guard crea sus propiosrecursos."
+  ],
+  "CI_herramientas_previa": "https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/41165580804",
+  "CI_herramientas_previa_resultado": "Backend y PostgreSQL SUCCESS; complementa132unitarias, no sustituye prueba real220"
+}
