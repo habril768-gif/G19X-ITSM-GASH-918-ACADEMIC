@@ -1899,3 +1899,23 @@ La autora aporta GET /health/db con status ok/database postgresql después de ha
 ### 2026-10-31 — Borrador de informe académico basado en evidencias
 
 Creado INFORME_ENTREGA_BORRADOR.md con objetivo, alcance, arquitectura, resultados, operación, limitaciones y conclusiones. Actualizada matriz de entregables: RNF-2 ya cuenta con carga aprobada, recuperación lógica Docker y custodia tienen evidencia; recuperación integral y aceptación siguen pendientes. Enlazado desde índice. Propósito: preparar entrega pronta sin inventar trabajo de campo, capacitación, fechas, firmas o impacto. Archivos: informe, índice, entregables, bitácora, backlog y trazabilidad. Validación: enlaces locales comprobados, cifras contrastadas con220/RESULTADOS_V4 y resultados conservados; sin nuevos tests o llamadas externas por redacción. Borrador local, no publicado ni presentado como informe institucional aprobado.
+
+
+### 2026-10-31 — Paquete del código publicado para revisión
+
+Se genera fuera del repositorio ZIP del commit públicobbaad73eea873739a456b0b21e8438610cb392d8, SHA256 `11e96e4d838293d3ca76d76dd3f9e1b68124698f108937983fe2b35bbbed2e96`, 5323995 bytes. Propósito: facilitar entrega revisable con código, informe en borrador y guías publicadas. Comprobación: CRC ZIP, presencia de README/informe y exclusión de .env, .git, dependencias, .pgdata y dumps; sin instalación limpia nueva. Se adjuntan guía y manifiesto fuera de Git. PBIX del ZIP corresponde únicamente a versiones ya publicadas; el principal refrescado localmente y captura con nombre personal no se incorporan. La usuaria decide no implementar correo externo por ahora; Mailpit mantiene el alcance local, sin alterar requisitos institucionales. No acta de entrega o aceptación ni publicación nueva.
+
+
+### 2026-10-31 — Instalación nueva del núcleo y persistencia tras reinicio
+
+[254](evidencias/254-instalacion-nueva-bloqueada-redes.json) conserva primer intento incompleto por rangos de redes agotados, con imágenes construidas; se liberan dos redes QA antiguas elegibles según salida de autora. [255](evidencias/255-instalacion-nueva-nucleo-reinicio.json): segundo proyecto nuevo, base inicialmente0usuarios/0casos, migración0008/check, backend y frontend npm ci/build, HTTP/proxy ok; bootstrap realCLI,1Admin y creación UI de caso ficticio. Autora confirma conservación tras relogin y después de stop/start. Reporte conserva mismos cuatro contenedores, hash de fila,1evento CREADO,1usuario/1caso y salud API/proxy antes/después; puertos efímeros cambian. Código fuente contrastado con instalación de trabajo sin diferencias en alcance registrado. Propósito: acreditar instalación nueva acotada, no restauración integral o instalación literal NodeWindows del README. Sin IA/correo/BI, pruebas de carga o aceptación institucional. Archivos: evidencias254/255 y seguimiento documental. Validación: JSON, reporte local, comparación de fuentes y coincidencia antes/después; sin acceso independiente del agente al daemon. Cierre de recursos aún pendiente, sin borrado de volúmenes; publicación pendiente.
+
+
+### 2026-10-31 — Cierre del ensayo de instalación nueva
+
+La autora aporta ENSAYO_DETENIDO_DATOS_CONSERVADOS para plurione-install-da463a2d815a; reporte local registra cuatro IDs detenidos y volumes_deleted=false, después de validación de pertenencia y Running=false por auxiliar. Evidencia255 completada con cierre y hash final de reporte. El panel aislado32771 queda apagado; no se elimina base de prueba. Propósito: finalizar uso de recursos del ensayo tras persistencia comprobada. Archivos: evidencia255 y seguimiento de bitácora, QA, backlog, entregables, trazabilidad, aceptación, mantenimiento y resumen. Validación: JSON y reporte contrastados. No acredita perfiles externos o recuperación integral de instalación previa; no publicación remota en este avance.
+
+
+### 2026-10-31 — Consolidación publicable de instalación nueva
+
+Informe en borrador, MVP y resumen incorporan255 como ensayo nuevo de núcleo y persistencia en configuración QA propia, sin afirmar recuperación integral anterior. Se agrupan254 (fallo de redes),255 (recorrido satisfactorio y cierre) y notas de paquete revisable/correo externo diferido. Archivos: informe, MVP, resumen y seguimiento; evidencias sin contraseña ni datos del respaldo. Validación documental: JSON, enlaces y diff; versión fuente permanece bbaad73 y comparación de88 archivos registrada en255. No nuevas pruebas del producto por esta consolidación; publicación se verifica contra main remoto.

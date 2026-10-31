@@ -22,7 +22,7 @@ Este resumen reúne resultados y pendientes; no es un acta de aceptación instit
 
 1. Revisar con quien evalúa los criterios de aceptación académica y registrar el resultado real. No hay aprobación institucional ni capacitación acreditadas por este resumen.
 2. Completar los supuestos de la matriz que requiera esa aceptación: negativas API adicionales con cuerpos válidos/recursos existentes no cubiertas por240/241, combinaciones de confidencialidad/conflictos, cambios de rol/departamento y concurrencia. Las pruebas automatizadas existentes y los recorridos manuales tienen alcances distintos.
-3. Si se exige recuperación de instalación completa, comprobar por separado configuración privada, roles/ACL, secuencias y arranque sobre la copia. La prueba lógica aprobada no cubre todos esos elementos.
+3. La instalación nueva del núcleo y persistencia QA se verificó en [255](evidencias/255-instalacion-nueva-nucleo-reinicio.json). Si se exige recuperación integral de una instalación anterior, comprobar por separado configuración privada, roles/ACL, secuencias y arranque sobre la copia. La prueba lógica aprobada no cubre todos esos elementos.
 4. Definir disposición posterior del respaldo y decisiones de custodia de exportaciones analíticas. No se comprobó copia adicional o acceso restringido de la carpeta.
 5. Si se requiere correo externo, comprobar configuración y entrega en ese entorno. Mailpit solo acredita captura local.
 
@@ -63,3 +63,6 @@ Enlace del aviso local: [251](evidencias/251-enlace-mailpit-expediente-confirmad
 
 
 Analítica del ensayo: [253](evidencias/253-powerbi-refresco-guardado-20261031.json), principal refrescado y guardado con corte31/10/2026 02:47:05p.m., cuatro filas suprimidas y leyenda visible según captura. Cuenta SQL efectiva no comprobada en captura; original con nombre personal y nuevo PBIX no publicados.
+
+
+Instalación nueva local QA: [255](evidencias/255-instalacion-nueva-nucleo-reinicio.json) documenta núcleo/base/frontend nuevos, primer Admin, caso UI, relogin y persistencia stop/start; fallo inicial de redes conservado en254. No equivale a restauración integral de instalación previa o perfiles externos. Cierre confirmado: cuatro contenedores propios detenidos, volúmenes conservados, según reporte y salida de usuaria. Registro local sin publicación.

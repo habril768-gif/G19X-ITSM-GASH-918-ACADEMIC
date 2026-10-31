@@ -550,3 +550,8 @@ Conteos100→1.021→9.825; SQL 9.825 casos/CREADO,9.719 EDITADO y98.250 entrega
 [Evidencia 221](evidencias/221-perfil-compose-rnf2-reproducible.json): compose.rnf2.yaml opcional fija comando API3 idéntico al validado. Compose config del base y base+override comparados en memoria: diferencia única comando API; commandnull del base normalizado en comparación. Sin daemon/arranque operativo ni secretos impresos. No cambia base,puertos,credenciales,volúmenes,workers/perfiles IA/correo. TechoAPI de 45 conexiones por tres pools de 15 conexiones y mayor memoria; el perfil replica cantidad de procesos, no fixture/configuración exactaQA. No arrancado por el agente. Documentación actualizada en guía principal,manual técnico,MVP,backlog,entregables,trazabilidad,QA y protocolo. No ejecutar otro full para aumentar evidencias. Revalidar ante cambios de producto/configuración/hardware relevantes.
 
 Validación de esta entrega: lectura completa de reporte real,54 hashes,comando3,fases completas/10 clientes/30+300s,cuatro p95,errores/sumas HTTP/SQL,logout/parada yconfigCompose local. CI previo de 219: Backend/PostgreSQL 41165580804 SUCCESS,132 unitarias previas; no sustituyen aprobación real220. Sin cambio de código productivo/harness en esta entrega. Otros pendientes de aceptación integral,capacitación,recuperación o privacidad no se cierran por este resultado.
+
+
+### 2026-10-31 — SMTP externo diferido por decisión de la autora
+
+La autora indicó que no es necesario implementarlo por ahora y pidió continuar con la entrega. Se mantiene Mailpit para captura local; no se configura proveedor ni se envían correos a buzones externos. No implica modificar el PRD o una exigencia institucional no confirmada. Integración SMTP existente conservada, sin cambio de código.

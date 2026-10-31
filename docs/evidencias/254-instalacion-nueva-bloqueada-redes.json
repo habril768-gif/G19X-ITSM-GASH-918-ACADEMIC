@@ -1,0 +1,19 @@
+{
+  "fecha_registro": "2026-10-31",
+  "project": "plurione-install-683ea0acd5d4",
+  "source_commit": "bbaad73eea873739a456b0b21e8438610cb392d8",
+  "state": "INCOMPLETA",
+  "fuente": "Reporte local del ejecutor leído por agente y salida Docker aportada por usuaria.",
+  "resultado": "Imagen API y web construidas; creación de red entry rechazada por all predefined address pools have been fully subnetted; sin instalación aprobada.",
+  "tratamiento_reportado": "Ejecutor informó servicios propios detenidos. Usuaria ejecutó release_performance_networks.py --apply --limit 2.",
+  "redes_antiguas_eliminadas_segun_salida": [
+    "plurione-qa-perf-746faa7071714c1e_entry",
+    "plurione-qa-perf-746faa7071714c1e_net"
+  ],
+  "fallidas_limpieza": [],
+  "omitidas_limpieza": [],
+  "limites": [
+    "No se reescribe este intento como aprobado.",
+    "La herramienta de liberación exige redes QA vacías y metadatos concordantes; no elimina contenedores o volúmenes."
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "fecha_registro": "2026-10-31",
+  "state": "INSTALACION_NUEVA_NUCLEO_Y_PERSISTENCIA_VERIFICADAS_EN_ALCANCE_QA",
+  "fuente": "Reporte local del ejecutor inspeccionado por agente, salida de terminal y confirmaciones textuales de usuaria. No operación independiente del daemon por agente.",
+  "project": "plurione-install-da463a2d815a",
+  "source_commit": "bbaad73eea873739a456b0b21e8438610cb392d8",
+  "source_zip_sha256": "ce0d77628f496b5f88380dca6a6d5cd4a03fe4a95db9fe50ee18f0e41a941e4e",
+  "raw_report_sha256": "10171d80c1ad188ba142be516e02ac6c3ed6813b442759d5a3d0dc0b4db2e141",
+  "codigo_producto": {
+    "archivos_comparados": 88,
+    "diferencias_normalizando_CRLF": [],
+    "alcance": "backend app/migrations, frontend src y archivos de dependencias/configuración; artefactos exclusivos QA no considerados código operativo."
+  },
+  "instalacion": {
+    "servicios": [
+      "api",
+      "web",
+      "postgres",
+      "redis"
+    ],
+    "revision": "0008",
+    "usuarios_iniciales": 0,
+    "incidencias_iniciales": 0,
+    "build": "Docker backend original y frontend Node22 npm ci/build; Vite con configuración de proxy propia QA.",
+    "http_antes": {
+      "api_db": "ok",
+      "web_proxy_db": "ok",
+      "web_index": 200,
+      "web_module": 200
+    },
+    "bootstrap": {
+      "email": "clean-admin@example.invalid",
+      "role": "ADMIN_RH",
+      "users_after": 1,
+      "source": "Product CLI bootstrap-admin in own API; credentials private, not recorded."
+    }
+  },
+  "recorrido_ui": {
+    "fuente": "Confirmaciones textuales de la usuaria, sin capturas nuevas del ensayo.",
+    "pasos": [
+      "Inicio de sesión como primer Admin RH.",
+      "Creación de incidencia ficticia; ID y estado Pendiente reportados.",
+      "Cierre y nuevo inicio: título, descripción, estado e historial conservados según confirmación global.",
+      "Después de reiniciar: usuaria confirma globalmente que todo sigue igual."
+    ],
+    "case_id": "3ecaecfb-2398-49c0-afc7-425d1cad6387"
+  },
+  "reinicio": {
+    "before": {
+      "case_hash": "a4da1ba8ac094bdf64786443597571eb",
+      "status": "PENDIENTE",
+      "created_events": "1",
+      "users": "1",
+      "incidents": "1"
+    },
+    "state": "COINCIDEN",
+    "after": {
+      "case_hash": "a4da1ba8ac094bdf64786443597571eb",
+      "status": "PENDIENTE",
+      "created_events": "1",
+      "users": "1",
+      "incidents": "1"
+    },
+    "containers_preserved": true,
+    "health_db": "ok",
+    "web_proxy_health_db": "ok"
+  },
+  "url_panel_posterior": "http://127.0.0.1:32771",
+  "cierre_recursos": {
+    "fuente": "Salida de terminal de usuaria y reporte local actualizado; auxiliar valida etiquetas/montajes, detiene por ID y comprueba Running=false.",
+    "resultado": "ENSAYO_DETENIDO_DATOS_CONSERVADOS",
+    "stopped": true,
+    "containers_count": 4,
+    "volumes_deleted": false
+  },
+  "limites": [
+    "Configuración QA generada y copia del código publicado; no demuestra ejecución literal del README en una instalación Node nativa Windows.",
+    "No es restauración de la base operativa ni reconstrucción de roles globales/ACL de una copia existente.",
+    "No se activaron IA, SMTP, Mailpit o Power BI en este proyecto.",
+    "No se midió capacidad, RNF-2, RTO/RPO, concurrencia o aceptación institucional.",
+    "MD5 de fila usado para concordancia antes/después, no garantía criptográfica adversarial.",
+    "Reporte inicial conserva texto histórico de bootstrap pendiente, superado por su bloque bootstrap y confirmaciones posteriores.",
+    "Puertos efímeros cambiaron al iniciar; la URL previa32769 no se presenta como estable."
+  ],
+  "publicacion": "Registro local pendiente de publicación.",
+  "raw_report_final_sha256": "3717b142e80893ecc3169842e719b05aa71e0ed1bf381f32f268f9ae8026a9d2"
+}
