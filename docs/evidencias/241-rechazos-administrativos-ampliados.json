@@ -1,0 +1,123 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Salidas de terminal aportadas por la usuaria; no ejecución independiente del agente.",
+  "herramienta": {
+    "nombre": "check_role_access_local.py --extended",
+    "sha256": "c95bd8634f6b2472bddb7cd7d527dc8143870a5473232cb13fd9ba8331084d3f",
+    "ubicacion": "Auxiliar del espacio de trabajo; no incluido en el código de producto.",
+    "validacion_previa": "Sintaxis y cuatro escenarios simulados comprobados: ambos roles con403, rol incorrecto y escritura422 inesperada; sin servidor real."
+  },
+  "sesiones": [
+    {
+      "cuenta": "supervisor-rh@example.invalid",
+      "rol_auth_me": "SUPERVISOR",
+      "checks": [
+        {
+          "method": "GET",
+          "path": "/users",
+          "status": 403
+        },
+        {
+          "method": "GET",
+          "path": "/users/options",
+          "status": 403
+        },
+        {
+          "method": "GET",
+          "path": "/departments",
+          "status": 403
+        },
+        {
+          "method": "GET",
+          "path": "/departments/5fe02975-d3df-58ce-8131-707633e07e8a/history",
+          "status": 403
+        },
+        {
+          "method": "POST",
+          "path": "/users",
+          "body": {},
+          "status": 403
+        },
+        {
+          "method": "POST",
+          "path": "/departments",
+          "body": {},
+          "status": 403
+        },
+        {
+          "method": "PUT",
+          "path": "/users/00000000-0000-0000-0000-000000000000",
+          "body": {},
+          "status": 403
+        },
+        {
+          "method": "PUT",
+          "path": "/departments/00000000-0000-0000-0000-000000000000",
+          "body": {},
+          "status": 403
+        }
+      ],
+      "logout": 204
+    },
+    {
+      "cuenta": "empleado-operaciones-2@example.invalid",
+      "rol_auth_me": "EMPLEADO",
+      "checks": [
+        {
+          "method": "GET",
+          "path": "/users",
+          "status": 403
+        },
+        {
+          "method": "GET",
+          "path": "/users/options",
+          "status": 403
+        },
+        {
+          "method": "GET",
+          "path": "/departments",
+          "status": 403
+        },
+        {
+          "method": "GET",
+          "path": "/departments/5fe02975-d3df-58ce-8131-707633e07e8a/history",
+          "status": 403
+        },
+        {
+          "method": "POST",
+          "path": "/users",
+          "body": {},
+          "status": 403
+        },
+        {
+          "method": "POST",
+          "path": "/departments",
+          "body": {},
+          "status": 403
+        },
+        {
+          "method": "PUT",
+          "path": "/users/00000000-0000-0000-0000-000000000000",
+          "body": {},
+          "status": 403
+        },
+        {
+          "method": "PUT",
+          "path": "/departments/00000000-0000-0000-0000-000000000000",
+          "body": {},
+          "status": 403
+        }
+      ],
+      "logout": 204
+    }
+  ],
+  "resultado": "Dieciseis denegaciones403 en dos sesiones reales; dos cierres204.",
+  "limites": [
+    "POST/PUT usan cuerpos vacíos no válidos; PUT apunta a UUID nulo. Demuestran rechazo de estos intentos antes de obtener422; no cubren todos los payloads válidos o recursos existentes.",
+    "GET historial solo se prueba para el departamento reportado de esas cuentas.",
+    "No hubo consultas de base de datos para comprobar ausencia de cambios; el script no envió campos obligatorios de escritura.",
+    "No cubre confidencialidad de incidencias, otras cuentas, concurrencia o aceptación institucional.",
+    "No se guardaron tokens ni contraseñas."
+  ],
+  "publicacion": "Registro local sin publicación remota en este avance."
+}

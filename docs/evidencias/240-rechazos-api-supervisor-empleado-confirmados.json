@@ -1,0 +1,36 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Salidas de terminal aportadas por la usuaria tras ejecutar check_role_access_local.py; sin ejecución HTTP independiente del agente.",
+  "herramienta": "Script auxiliar local Python stdlib; correo y contraseña introducidos por usuaria; token solo en memoria. Sintaxis y tres escenarios simulados comprobados por agente antes de uso; no son pruebas adicionales del servidor.",
+  "sesiones": [
+    {
+      "cuenta_ficticia": "supervisor-rh@example.invalid",
+      "rol_comprobado_por_auth_me": "SUPERVISOR",
+      "resultados_get": {
+        "/users": 403,
+        "/users/options": 403,
+        "/departments": 403
+      },
+      "resultado": "RECHAZOS_403_ESPERADOS",
+      "logout_http": 204
+    },
+    {
+      "cuenta_ficticia": "empleado-operaciones-2@example.invalid",
+      "rol_comprobado_por_auth_me": "EMPLEADO",
+      "resultados_get": {
+        "/users": 403,
+        "/users/options": 403,
+        "/departments": 403
+      },
+      "resultado": "RECHAZOS_403_ESPERADOS",
+      "logout_http": 204
+    }
+  ],
+  "alcance": "Seis denegaciones administrativas de lectura con dos sesiones reales y roles verificados; complementa visibilidad de controles226.",
+  "limites": [
+    "No se probaron escrituras POST/PUT, historial de departamentos, otras rutas o todas las cuentas de esos roles.",
+    "No prueba por sí sola confidencialidad de incidencias, concurrencia o aceptación institucional.",
+    "Las salidas no incluyen credenciales ni tokens; no se guardaron en esta evidencia."
+  ],
+  "publicacion": "Registro local; pendiente de publicación remota en este avance."
+}
