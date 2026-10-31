@@ -1,18 +1,18 @@
 # Aceptación de entrega por roles
 
-Fecha de preparación: 30 de octubre de 2026. Esta matriz reúne evidencia existente y recorridos pendientes; no registra nuevas ejecuciones funcionales ni aceptación institucional. El cumplimiento de un requisito no cierra automáticamente toda la plataforma.
+Fecha de preparación: 30 de octubre de 2026. Esta matriz reúne evidencia existente y recorridos pendientes. La ejecución real de departamentos D01–D08 está registrada en223; no acredita aceptación institucional. El cumplimiento de un requisito no cierra automáticamente toda la plataforma.
 
 ## Estado y orden de trabajo
 
-RNF-2 está cumplido en su [alcance QA local de tres procesos](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json). No repetirlo para aumentar evidencias. El siguiente recorrido será **departamentos con Admin RH**; después, restricciones de Supervisor y Empleado y controles pendientes del MVP. No repetir la clasificación de IA ya confirmada ni modificar expedientes conservados de pruebas anteriores.
+RNF-2 está cumplido en su [alcance QA local de tres procesos](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json). No repetirlo para aumentar evidencias. **Departamentos con Admin RH (D01–D08) ya fue observado conforme en223.** Siguen restricciones de Supervisor y Empleado y controles pendientes del MVP. No repetir la clasificación de IA ya confirmada ni modificar expedientes conservados de pruebas anteriores.
 
 Las pruebas automáticas de backend y PostgreSQL del [CI 41165580804](https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/41165580804) corresponden al código actual de la aplicación. No sustituyen interacción real en el panel ni aprobación de una persona. Los escenarios API usan sus fixtures/aislamiento; no atribuirles una sesión real de los usuarios de la instalación.
 
 | ID | Escenario | Evidencia disponible | Pendiente de aceptación |
 | --- | --- | --- | --- |
 | A01 | Rendimiento de lectura, detalle, creación y actualización | Formal local aprobada [220](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json) | Cerrado en el alcance declarado; revalidar solo ante cambios relevantes |
-| A02 | Crear, renombrar, desactivar y reactivar departamento; auditoría | [Pruebas de departamentos](../backend/tests/test_departments.py), ejecutadas por CI; fuente del [panel](../frontend/src/pages/Departments.jsx) | Recorrido real agrupado descrito abajo |
-| A03 | Nombre duplicado, motivo obligatorio y rechazo de baja con usuarios/casos | Pruebas de departamentos: validación, duplicados y bloqueos | UI real: duplicado sobre registro ficticio; los bloqueos con dependencias se probarán en aislamiento, sin poner en riesgo cuentas/casos existentes |
+| A02 | Crear, renombrar, desactivar y reactivar departamento; auditoría | [Pruebas de departamentos](../backend/tests/test_departments.py), ejecutadas por CI; fuente del [panel](../frontend/src/pages/Departments.jsx) | D01–D08 observado conforme en [223](evidencias/223-departamentos-admin-rh-recorrido-ui.json); baja final conservada |
+| A03 | Nombre duplicado, motivo obligatorio y rechazo de baja con usuarios/casos | Pruebas de departamentos: validación, duplicados y bloqueos | Duplicado observado rechazado en223; motivo vacío y bloqueos con dependencias siguen pendientes de recorrido real aislado |
 | A04 | Supervisor y Empleado no administran departamentos | Prueba API `test_non_admin_cannot_list_write_or_read_history` | Sesiones reales: verificar acceso y rechazo sin inferir seguridad solo por botón oculto |
 | A05 | Administrar usuarios y revocar acceso sin perder historial | [Pruebas de usuarios](../backend/tests/test_user_administration.py) | Recorrido real pendiente; usar cuentas ficticias nuevas, nunca el último Admin RH ni cuentas requeridas para otros recorridos |
 | A06 | Empleado registra y consulta su expediente | [111](evidencias/111-supervisor-empleado-ui.json): capturas/confirmación de la autora | Evidencia parcial existente; completar solo diferencias de la matriz, no repetir el mismo caso |
@@ -62,4 +62,11 @@ Antes de cada escritura, comprobar el nombre/identificador del objeto; detenerse
 
 En una evidencia nueva, indicar fecha real, origen (agente/UI, autora o CI), rol, entorno, datos ficticios, pasos ejecutados y resultado por ID. Estados posibles: observado conforme, observado con fallo, no ejecutado o resultado incierto. Guardar capturas sanitizadas solo de los objetos ficticios y nunca credenciales, cookies o tokens. Un plan o resultado esperado no cuenta como aprobado.
 
-Para A02/A03, registrar UUID/nombre ficticio, estado final inactivo, cinco eventos exitosos esperados y resultado del duplicado; si el panel no permite comprobar un dato, conservarlo como no verificado. La aprobación institucional y la capacitación siguen siendo actividades humanas separadas. Esta preparación no crea departamentos ni usuarios y no modifica la aplicación.
+Para A02/A03, registrar UUID/nombre ficticio, estado final inactivo, cinco eventos exitosos esperados y resultado del duplicado; si el panel no permite comprobar un dato, conservarlo como no verificado. La aprobación institucional y la capacitación siguen siendo actividades humanas separadas. La preparación222 no creó datos; la ejecución223 creó y modificó únicamente el departamento ficticio descrito, con estado final inactivo. No se modificó la aplicación.
+
+
+## Ejecución real de D01–D08 — 30 de octubre de2026
+
+[Evidencia223](evidencias/223-departamentos-admin-rh-recorrido-ui.json): sesión Admin RH introducida por la usuaria en la pestaña integrada y verificada visualmente. El agente ejecutó los ocho pasos y observó resultados conformes. Catálogo pasó de cuatro a cinco filas; intento de nombre repetido rechazado sin segunda fila. Nombre final `QA entrega - departamentos - 20261030-01 - revisado`, estado **Inactivo**. No se expone UUID enUI ni se consultó SQL; no presentarlos como comprobados.
+
+Se observaron cinco cambios en Historial, con motivos y estados, entre23:51:53 y23:52:50 local: creación, renombrado, baja, reactivación y baja final. El duplicado no añadió cambio exitoso. Al pulsar Actualizar departamentos y reabrir Historial persistieron registro inactivo y cinco entradas. [Captura final224](evidencias/224-departamentos-admin-rh-historial-final.jpg) y [rechazo225](evidencias/225-departamento-duplicado-rechazado.jpg). A02 queda verificado enUI; A03 sigue parcial yA04 pendiente, con sus pruebas API independientes. Esta ejecución no cierra usuarios, concurrencia, custodia o aceptación humana.

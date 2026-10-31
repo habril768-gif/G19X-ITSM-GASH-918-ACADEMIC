@@ -16,7 +16,7 @@ Gestionar incidencias laborales simuladas desde su registro hasta su seguimiento
 | Identidad | Acceso local, sesiones revocables, cambio de contraseña y bloqueo de intentos | Pruebas y recorridos registrados; matriz completa pendiente |
 | Expedientes | Registro PERSONA/ENTORNO, consulta con filtros, edición y clasificación humana | Panel y servicios implementados; no basta para aceptar todos los roles |
 | Gestión y protección | Responsable, revisión, resolución, cierre, reapertura, participantes y confidencialidad | Auditoría y pruebas de permisos/transacciones; faltan escenarios integrales |
-| Administración | Usuarios, roles, departamentos, baja lógica y revisión independiente | API y React; recorrido completo adicional pendiente |
+| Administración | Usuarios, roles, departamentos, baja lógica y revisión independiente | API y React; departamentos Admin RH verificados en223, matriz restante pendiente |
 | IA | Texto simulado revisado, trabajo durable y sugerencia separada de decisión oficial | Último conjunto: prioridad 50/50, categoría 47/50 y abstenciones 5/5; tres diferencias de categoría conservadas. No garantiza casos nuevos |
 | Correo | Avisos de creación, asignación, resolución y reapertura; seguimiento de intentos | Mailpit y panel verificados en evidencias 85–92; fallos/exclusiones reales adicionales pendientes |
 | Analítica | Agregados con exclusiones, supresión y cuenta de lectura; informe Power BI guardado | SQL/conexión y visuales 93–95/98; modelo 104, refresco principal 105 y QA visual/retirada Desktop 106. SQL→JSON→Desktop aislado verificado en 108–109; quedan conector directo aislado si se exige, custodia y aceptación integral |
@@ -43,3 +43,8 @@ La [trazabilidad](TRAZABILIDAD.md) relaciona requisitos con implementación y va
 ## Continuación de la entrega: matriz por roles
 
 La [matriz de aceptación](ACEPTACION_ENTREGA.md) reúne14escenarios con origen/alcance de evidencia y pendientes. [Preparación222](evidencias/222-matriz-aceptacion-entrega-preparada.json): siguiente recorrido de departamentos conAdminRH,8pasos previstos y ninguna escritura ejecutada. RNF-2 aprobado220 se conserva; un plan no es aceptación real. Ver comandos de arranque con3procesos/Mailpit y registro de resultados en la matriz.
+
+
+## Departamentos: aceptación Admin RH observada
+
+[223](evidencias/223-departamentos-admin-rh-recorrido-ui.json): D01–D08 conforme en panel integrado; alta ficticia, duplicado rechazado, renombrado, baja/reactivación y baja final; cinco eventos con motivos y persistencia tras actualizar. Estado final inactivo, sin borrar datos ni tocar departamentos usados. [224: historial](evidencias/224-departamentos-admin-rh-historial-final.jpg),[225: duplicado](evidencias/225-departamento-duplicado-rechazado.jpg). A02 verificado; A03 parcial y A04 pendiente según [matriz](ACEPTACION_ENTREGA.md). No implica aceptación integral ni institucional.

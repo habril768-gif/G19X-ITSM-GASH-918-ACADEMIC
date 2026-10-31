@@ -14,7 +14,7 @@ El [PRD](PRD.md) define las reglas y el [MVP](MVP.md), el alcance actual. Este a
 | H1 Requisitos y propuesta | PRD, propuesta técnica, decisiones y alcance documentados | Evidencia de necesidades reales si se requiere y aceptación final del alcance |
 | H2 Arquitectura y entorno | Componentes implementados y arquitectura documentada con flujos y límites | Instalación limpia y controles operativos pendientes; RNF-2 acreditado en QA local3procesos (220), con límites de hardware/protocolo |
 | H3 Datos | Migraciones, analítica y recuperación lógica nativa verificadas en aislamiento (103) | Check del entorno de uso, secuencia Docker, recuperación completa y carreras adicionales |
-| H4 Identidad y administración | Cuentas, sesiones, usuarios y departamentos implementados con pruebas | Matriz completa y recorrido real adicional de departamentos |
+| H4 Identidad y administración | Cuentas, sesiones, usuarios y departamentos implementados con pruebas | Matriz completa y recorrido de usuarios; departamentos Admin RH verificados en223, restricciones reales por otros roles pendientes |
 | H5 Registro y panel | Registro, filtros, detalle e historial disponibles | Matriz completa de roles, accesibilidad y móvil |
 | H6 Ciclo y protección | Gestión, participantes, confidencialidad y auditoría implementados | Casos negativos integrales y concurrencia adicional |
 | H7 IA | Evaluación simulada: prioridad 50/50, categoría 47/50, abstenciones 5/5 | Aceptación integral y verificación operativa; conservar diferencias y revisión humana |
@@ -808,3 +808,8 @@ compare_performance_workers.ps1 exige confirmación QA, ejecuta secuencia 1/2 si
 ## Continuación de la entrega: matriz por roles
 
 La [matriz de aceptación](ACEPTACION_ENTREGA.md) reúne14escenarios con origen/alcance de evidencia y pendientes. [Preparación222](evidencias/222-matriz-aceptacion-entrega-preparada.json): siguiente recorrido de departamentos conAdminRH,8pasos previstos y ninguna escritura ejecutada. RNF-2 aprobado220 se conserva; un plan no es aceptación real. Ver comandos de arranque con3procesos/Mailpit y registro de resultados en la matriz.
+
+
+## Departamentos: aceptación Admin RH observada
+
+[223](evidencias/223-departamentos-admin-rh-recorrido-ui.json): D01–D08 conforme en panel integrado; alta ficticia, duplicado rechazado, renombrado, baja/reactivación y baja final; cinco eventos con motivos y persistencia tras actualizar. Estado final inactivo, sin borrar datos ni tocar departamentos usados. [224: historial](evidencias/224-departamentos-admin-rh-historial-final.jpg),[225: duplicado](evidencias/225-departamento-duplicado-rechazado.jpg). A02 verificado; A03 parcial y A04 pendiente según [matriz](ACEPTACION_ENTREGA.md). No implica aceptación integral ni institucional.

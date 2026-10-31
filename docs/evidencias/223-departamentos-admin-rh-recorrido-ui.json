@@ -1,0 +1,130 @@
+{
+  "fecha_local": "2026-10-30",
+  "zona_horaria_de_registro": "America/Mexico_City",
+  "estado": "RECORRIDO_UI_ADMIN_RH_DEPARTAMENTOS_D01_D08_VERIFICADO",
+  "fuente": "Agente operó controles visibles del panel integrado con sesión Admin RH introducida por usuaria; lectura de árbol accesible y capturas. Sin SQL directo ni acceso a credenciales/tokens.",
+  "entorno": {
+    "arranque_y_alembic": "Usuaria aportó salida deCompose rnf2/perfilmail con servicios saludables, upgradehead sin errores ycheck sin nuevas operaciones; no ejecución de daemon por agente.",
+    "comprobacion_agente": {
+      "api_health_http": 200,
+      "api_health_db_http": 200,
+      "frontend": "Se encontró5173sinlistener; agente inició npm run dev -- --host127.0.0.1, Vite listo. Pestaña nueva requirió autenticación privada por usuaria."
+    },
+    "API_tres_procesos_en_runtime": "Declarado por comando Compose aportado yconfig221; no inspección de procesos del daemon en este recorrido."
+  },
+  "objeto": {
+    "nombre_inicial": "QA entrega - departamentos - 20261030-01",
+    "nombre_final": "QA entrega - departamentos - 20261030-01 - revisado",
+    "uuid": "NO_EXPUESTO_EN_UI_NO_VERIFICADO",
+    "estado_final": "Inactivo",
+    "datos": "EXCLUSIVAMENTE_FICTICIOS",
+    "dependencias": "No se asignaron usuarios o incidencias en este recorrido."
+  },
+  "pasos": [
+    {
+      "id": "D01",
+      "resultado": "OBSERVADO_CONFORME",
+      "observacion": "Panel con Administrador RH/Administración RH, catálogo inicial de cuatro departamentos activos en una página."
+    },
+    {
+      "id": "D02",
+      "resultado": "OBSERVADO_CONFORME",
+      "observacion": "Creado nombre nuevo con motivo ficticio; aparece una fila activa y mensaje de guardado."
+    },
+    {
+      "id": "D03",
+      "resultado": "OBSERVADO_CONFORME",
+      "observacion": "Mismo nombre y motivo ficticio enviados; aviso de cambio no guardado por duplicado/dependencias. Una sola fila del nombre. No se capturó código HTTP; no afirmar409 observado."
+    },
+    {
+      "id": "D04",
+      "resultado": "OBSERVADO_CONFORME",
+      "observacion": "Nombre cambia al sufijo - revisado; mensaje de guardado y fila activa."
+    },
+    {
+      "id": "D05",
+      "resultado": "OBSERVADO_CONFORME",
+      "observacion": "Desmarcado activo únicamente en nuevo departamento; fila Inactivo."
+    },
+    {
+      "id": "D06",
+      "resultado": "OBSERVADO_CONFORME",
+      "observacion": "Reactivado el mismo registro de nombre único; fila Activo."
+    },
+    {
+      "id": "D07",
+      "resultado": "OBSERVADO_CONFORME",
+      "observacion": "Baja final de prueba, fila Inactivo conservada."
+    },
+    {
+      "id": "D08",
+      "resultado": "OBSERVADO_CONFORME",
+      "observacion": "Historial con cinco cambios y motivos; después de Actualizar departamentos y volver a Historial persisten estado/entradas. Paginación de historial siguiente deshabilitada."
+    }
+  ],
+  "historial_observado": [
+    {
+      "operation": "CREADO",
+      "hora_ui": "30/10/2026, 11:51:53 p.m.",
+      "reason": "Prueba ficticia de aceptación de entrega",
+      "estado": "Activo",
+      "nombre": "QA entrega - departamentos - 20261030-01"
+    },
+    {
+      "operation": "ACTUALIZADO",
+      "hora_ui": "30/10/2026, 11:52:26 p.m.",
+      "reason": "Renombrado ficticio de aceptación",
+      "estado": "Activo",
+      "nombre": "QA entrega - departamentos - 20261030-01 - revisado"
+    },
+    {
+      "operation": "ACTUALIZADO",
+      "hora_ui": "30/10/2026, 11:52:36 p.m.",
+      "reason": "Baja ficticia sin dependencias",
+      "estado": "Inactivo"
+    },
+    {
+      "operation": "ACTUALIZADO",
+      "hora_ui": "30/10/2026, 11:52:43 p.m.",
+      "reason": "Reactivación ficticia de aceptación",
+      "estado": "Activo"
+    },
+    {
+      "operation": "ACTUALIZADO",
+      "hora_ui": "30/10/2026, 11:52:50 p.m.",
+      "reason": "Fin de prueba ficticia de aceptación",
+      "estado": "Inactivo"
+    }
+  ],
+  "comprobaciones": {
+    "filas_catalogo_inicial": 4,
+    "filas_catalogo_final": 5,
+    "nombre_ficticio_unico": true,
+    "duplicado_rechazado_visualmente": true,
+    "eventos_exitosos_observados": 5,
+    "persistencia_tras_actualizar_y_reabrir_historial": true,
+    "otros_departamentos_observados": "DEMO - Operaciones, DEMO - PRUEBA 1, DEMO - Recursos Humanos y Recursos Humanos permanecen activos; no se editaron.",
+    "incidencias_usuarios_credenciales": "No se modificaron durante este recorrido.",
+    "eliminacion_fisica": false
+  },
+  "capturas": [
+    {
+      "archivo": "docs/evidencias/224-departamentos-admin-rh-historial-final.jpg",
+      "bytes": 145924,
+      "sha256": "42b61b2a4a9c8c0c19fa2f1895ec27bf00d36983720af4e69456028e3d02f301"
+    },
+    {
+      "archivo": "docs/evidencias/225-departamento-duplicado-rechazado.jpg",
+      "bytes": 35345,
+      "sha256": "d2991a6582699c800a9899c254961ffa0966567637dbe3e35690836c3e0f8193"
+    }
+  ],
+  "limites": [
+    "A02 verificado enUI; A03 solo duplicado real, aún faltan motivo vacío/dependencias en recorrido real.",
+    "No se observaron aquí restricciones reales deSupervisor/Empleado, concurrencia, SQL directo, autenticidad criptográfica del historial o aceptación institucional.",
+    "Mensaje de duplicado es compartido con otros conflictos; el intento usó nombre exacto del único objeto ficticio, pero no se capturó respuestaHTTP para afirmar409.",
+    "UUID no visible; identidad seguida mediante fila de nombre único y sus controles/estados.",
+    "No se afirma auditoría global sin otros cambios; solo cinco entradas observadas para este objeto.",
+    "RNF-2 aprobado220 no se repitió ni se amplió; otros pendientes deMVP conservados."
+  ]
+}
