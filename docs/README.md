@@ -24,6 +24,8 @@
 
 ## Evaluación del avance
 
+[Resumen de entrega](RESUMEN_ENTREGA.md): resultados comprobados, límites, pendientes y preparación de la demostración.
+
 [Respuesta al corte del 23 de octubre](AUDITORIA_2026-10-23.md): guía, UTF-8, publicación y aviso de cierre RF-5.
 
 [Análisis de la evaluación recibida](REVISION_EVALUACION.md): hallazgos confirmados, observaciones desactualizadas y prioridades.
@@ -38,9 +40,9 @@
 
 Las guías principales describen el estado actual. Los números de dependencias, migraciones y evaluaciones identifican artefactos técnicos reproducibles; no son capítulos del manual. La copia Word del PRD y los registros cronológicos se conservan como referencias históricas, sin sustituir el PRD Markdown ni las matrices vigentes.
 
-El [control opcional de estadísticas SQL QA](PRUEBA_RENDIMIENTO.md#consultas-reales-estadísticas-de-ejecución-del-servidor-qa) mide ejecución de consultas reales sin modificar el sitio. Su estado y límites se registran en las evidencias207/208; RNF-2 sigue pendiente.
+El [control opcional de estadísticas SQL QA](PRUEBA_RENDIMIENTO.md#consultas-reales-estadísticas-de-ejecución-del-servidor-qa) mide ejecución de consultas reales sin modificar el sitio. Su estado y límites se registran en las evidencias207/208; RNF-2 cuenta con aprobación formal posterior en la [evidencia220](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json).
 
-La [comparación de uno y dos procesos API](PRUEBA_RENDIMIENTO.md#comparación-breve-de-uno-y-dos-procesos-api) usa dos QA nuevos y no cambia el despliegue operativo. Preparación y límites en211; resultados reales todavía pendientes.
+La [comparación de uno y dos procesos API](PRUEBA_RENDIMIENTO.md#comparación-breve-de-uno-y-dos-procesos-api) usa dos QA nuevos y no cambia el despliegue operativo. Preparación y límites en211; la aprobación formal posterior con tres procesos está documentada en220. Los ensayos breves no acreditan por sí solos RNF-2.
 
 
 ### 2026-10-30 — RNF-2: formal QA de dos procesos preparada

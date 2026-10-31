@@ -1,0 +1,18 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Confirmación textual de la usuaria: todo sigue bien, en respuesta al procedimiento de consulta como Admin RH. Sin observación directa del agente.",
+  "incidencia": "710482ca-a652-4679-9abf-13c3b3553e10",
+  "cuenta_ficticia_inactiva_indicada": "qa-entrega-20261031-01@example.invalid",
+  "comprobacion_solicitada": [
+    "Consultar título QA bloqueo de departamento por incidencia abierta y descripción conservados.",
+    "Estado Pendiente.",
+    "Evento CREADO presente en historial."
+  ],
+  "resultado": "Confirmación global de conformidad con las comprobaciones solicitadas, según reporte de usuaria.",
+  "limites": [
+    "Sin captura, inspección HTTP o SQL ni confirmación separada de cada campo.",
+    "No demuestra auditoría administrativa de cambios del usuario ni conservación de todos los expedientes bajo otros cambios de permisos.",
+    "No se indicó modificar o cerrar el caso ni reactivar la cuenta."
+  ],
+  "publicacion": "Registro local sin publicación remota en este avance."
+}

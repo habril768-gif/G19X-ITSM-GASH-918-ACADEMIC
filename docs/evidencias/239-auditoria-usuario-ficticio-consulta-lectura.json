@@ -1,0 +1,51 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Salida PostgreSQL aportada por la usuaria, mediante psql en transacción BEGIN READ ONLY / COMMIT. Sin ejecución independiente del agente.",
+  "cuenta_ficticia": "qa-entrega-20261031-01@example.invalid",
+  "consulta": {
+    "tabla": "historial_incidencias",
+    "filtro": "affected_user_id unido a users por correo ficticio; incidencia_id IS NULL; accion USUARIO_ACTUALIZADO",
+    "orden": "fecha DESC, id DESC",
+    "limite": 20,
+    "columnas": [
+      "fecha",
+      "accion",
+      "before.is_active",
+      "after.is_active",
+      "sessions_revoked",
+      "reason"
+    ]
+  },
+  "resultado": {
+    "filas": 11,
+    "cambios_activacion": 9,
+    "todos_cambios_activacion_con_revocacion_true": true,
+    "renombrado": {
+      "fecha_utc": "2026-10-31 06:11:41.933617+00",
+      "antes_activa": true,
+      "despues_activa": true,
+      "sesiones_revocadas": false,
+      "motivo": "Renombrado ficticio de aceptación"
+    },
+    "ultimo_cambio": {
+      "fecha_utc": "2026-10-31 16:50:19.359181+00",
+      "antes_activa": true,
+      "despues_activa": false,
+      "sesiones_revocadas": true,
+      "motivo": "Aislar prueba de bloqueo por incidencia abierta"
+    },
+    "evento_mas_antiguo": {
+      "fecha_utc": "2026-10-31 06:09:03.328304+00",
+      "campos_proyectados": "before/after is_active, sessions_revoked y reason vacíos; operacion no consultada"
+    }
+  },
+  "contraste_codigo": "api/auth.py registra ALTA_LOCAL con rol_id sin before/after, motivo o sessions_revoked. services/users.py registra ACTUALIZACION_ADMIN con before/after, motivo y bandera. Es compatible con el evento antiguo, pero su operación no fue seleccionada; no identificarlo como alta comprobada.",
+  "limites": [
+    "La bandera sessions_revoked indica cambio de acceso; no es cantidad de sesiones ni prueba individual de revocación efectiva. La prueba funcional independiente del recorrido está en228.",
+    "No se seleccionaron identidad del actor, nombres antes/después ni departamento/rol antes/después.",
+    "No se auditaron todos los usuarios, concurrencia, integridad total o modificaciones fuera de este recorrido.",
+    "No hay nueva vista de auditoría de usuarios en el panel."
+  ],
+  "estado": "CONSULTA_DE_AUDITORIA_ADMINISTRATIVA_FICTICIA_CON_RESULTADO_ESPERADO",
+  "publicacion": "Registro local; sin publicación remota."
+}
