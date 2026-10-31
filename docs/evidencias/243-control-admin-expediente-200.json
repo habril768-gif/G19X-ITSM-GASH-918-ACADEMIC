@@ -1,0 +1,39 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Salida de terminal aportada por la usuaria; sin ejecución HTTP independiente del agente.",
+  "cuenta_operativa": "Correo omitido en evidencia pública; cuenta Admin RH de la instalación.",
+  "rol_auth_me": "ADMIN_RH",
+  "incidencia_ficticia": "710482ca-a652-4679-9abf-13c3b3553e10",
+  "comprobaciones": [
+    {
+      "method": "GET",
+      "path": "/incidents/710482ca-a652-4679-9abf-13c3b3553e10",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/incidents/710482ca-a652-4679-9abf-13c3b3553e10/history",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/incidents/710482ca-a652-4679-9abf-13c3b3553e10/participants",
+      "status": 200
+    }
+  ],
+  "resultado": "CONTROL_ADMIN_200_ESPERADO",
+  "logout_http": 204,
+  "contraste": "En242, Empleado Operaciones2 obtuvo404 en las mismas tres rutas; este control posterior obtiene200. Sesiones sucesivas, no simultáneas.",
+  "herramienta": {
+    "nombre": "check_case_privacy_local.py --admin-control",
+    "sha256": "709d68ecd96b238f687c67500aa4f1ea35ca26190619abc5d66ef4ddf0e8895e",
+    "validacion_previa": "Sintaxis y tres escenarios simulados: Admin200, Admin404 inesperado y rol incorrecto; cierre y ausencia de contenido/credenciales comprobados."
+  },
+  "limites": [
+    "No se mostraron cuerpos del expediente ni se inspeccionaron permisos internos por SQL.",
+    "Control posterior a242; no prueba ausencia de cambios entre ambas sesiones.",
+    "Un caso y dos cuentas no acreditan matriz integral de confidencialidad, conflictos, participantes o concurrencia.",
+    "No se guardaron contraseñas o tokens; sin mutaciones de negocio solicitadas."
+  ],
+  "publicacion": "Registro local sin publicación remota en este avance."
+}

@@ -1,0 +1,40 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Salida de terminal aportada por la usuaria; sin ejecución HTTP independiente del agente.",
+  "cuenta_ficticia": "empleado-operaciones-2@example.invalid",
+  "rol_auth_me": "EMPLEADO",
+  "incidencia_ficticia": "710482ca-a652-4679-9abf-13c3b3553e10",
+  "comprobaciones": [
+    {
+      "method": "GET",
+      "path": "/incidents/710482ca-a652-4679-9abf-13c3b3553e10",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/incidents/710482ca-a652-4679-9abf-13c3b3553e10/history",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/incidents/710482ca-a652-4679-9abf-13c3b3553e10/participants",
+      "status": 404
+    }
+  ],
+  "resultado": "EXPEDIENTE_NO_DISPONIBLE_ESPERADO",
+  "logout_http": 204,
+  "contexto": "Creación del caso reportada en233; consulta y conservación como Admin RH confirmadas en238. La cuenta usada en esta prueba es distinta de la cuenta QA que creó el caso.",
+  "herramienta": {
+    "nombre": "check_case_privacy_local.py",
+    "sha256": "75362b4310ca196d92730969508105d5501f51ed3c4f9bdf590ba55a68a40a05",
+    "validacion_previa": "Sintaxis y tres escenarios simulados:404 esperado,200 inesperado y rol incorrecto; cierre y ausencia de contenido/credenciales en salida comprobados."
+  },
+  "limites": [
+    "No se volvió a verificar simultáneamente el caso como Admin RH; existencia accesible respaldada por recorrido anterior238.",
+    "404 no permite distinguir por sí solo entre inexistencia y denegación.",
+    "No se inspeccionaron respuesta completa ni relaciones de participación/ámbito en SQL.",
+    "No prueba todos los expedientes, otras cuentas, listados, escrituras, conflictos de interés o concurrencia.",
+    "Sin contraseñas, tokens o contenido del expediente en esta evidencia."
+  ],
+  "publicacion": "Registro local sin publicación remota en este avance."
+}

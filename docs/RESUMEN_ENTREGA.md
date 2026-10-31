@@ -13,6 +13,7 @@ Este resumen reúne resultados y pendientes; no es un acta de aceptación instit
 | Usuarios | Alta/edición/baja reportadas; revocación funcional de sesión confirmada por autora; rechazo de correo repetido y motivo vacío | [227](evidencias/227-usuario-ficticio-alta-edicion-baja-confirmadas.json), [228](evidencias/228-revocacion-sesion-usuario-confirmada.json), [229](evidencias/229-usuarios-duplicado-motivo-confirmados.json) |
 | Conservación y auditoría de usuario | Autora confirma conservación de un expediente tras la baja. Consulta READ ONLY aportada muestra11 eventos administrativos y cambios de activación con motivos. Bandera de revocación no es un recuento de sesiones | [238](evidencias/238-expediente-conservado-tras-baja-usuario.json), [239](evidencias/239-auditoria-usuario-ficticio-consulta-lectura.json) |
 | Departamentos | Recorrido Admin RH observado: alta, edición, baja/reactivación e historial. Motivo obligatorio y bloqueos con dependencias reportados por autora; aviso genérico no prueba causa exclusiva | [223](evidencias/223-departamentos-admin-rh-recorrido-ui.json), [231](evidencias/231-departamento-motivo-obligatorio-confirmado.json), [232](evidencias/232-departamento-bloqueo-usuario-activo-confirmado.json), [233](evidencias/233-departamento-incidencia-pendiente-confirmado.json) |
+| Privacidad de expediente ajeno | Empleado Operaciones2 obtiene404 en detalle, historial y participantes del caso ficticio previamente consultado por RH; logout204. Control Admin RH posterior obtiene200 en esas tres rutas ([243](evidencias/243-control-admin-expediente-200.json)); sesiones sucesivas, alcance de un caso sin matriz integral | [242](evidencias/242-empleado-expediente-ajeno-404.json) |
 | Correo RF-5 | Recorrido básico local con Mailpit por creación, asignación, resolución y cierre. No acredita buzones externos ni todos los fallos/reintentos | [204](evidencias/204-correo-cierre-recorrido-local-verificado.json) |
 | Respaldo y reanudación | Restauración lógica Docker reportada sin errores, revisión0008, filas/huellas de tablas public coincidentes; ensayo detenido, origen reanudado, acceso Admin RH y health/db ok. No es recuperación integral de infraestructura | [230](evidencias/230-restauracion-docker-confirmada.json), [234](evidencias/234-salud-posterior-reanudacion-docker.json) |
 | Custodia del respaldo | Autora responsable; carpeta RespaldosPluriOne de su computadora; conservación hasta concluir evaluación y atender observaciones finales. Sin eliminación automática acordada | [235](evidencias/235-custodia-respaldo-confirmada.json), [236](evidencias/236-conservacion-respaldo-acordada.json) |
@@ -44,3 +45,9 @@ Actualización local: evidencia240 incorpora los rechazos de lectura de Supervis
 
 
 Actualización local241: historial y solicitudes administrativas POST/PUT vacías rechazadas403 en ambos roles; no cubre todos los cuerpos válidos de escritura. Pendiente de publicación.
+
+
+Actualización local242: tres404 reportados para otro Empleado sobre expediente ficticio, historial y participantes. Pendiente de publicación.
+
+
+Actualización local243: control positivo Admin RH con tres200 y cierre204, posterior a los tres404 de Empleado242; pendiente de publicación conjunta.
