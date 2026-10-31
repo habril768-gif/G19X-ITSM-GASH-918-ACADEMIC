@@ -24,6 +24,8 @@
 
 ## Evaluación del avance
 
+[Informe académico en borrador](INFORME_ENTREGA_BORRADOR.md): objetivo, desarrollo, resultados, limitaciones y conclusiones para revisión.
+
 [Resumen de entrega](RESUMEN_ENTREGA.md): resultados comprobados, límites, pendientes y preparación de la demostración.
 
 [Respuesta al corte del 23 de octubre](AUDITORIA_2026-10-23.md): guía, UTF-8, publicación y aviso de cierre RF-5.

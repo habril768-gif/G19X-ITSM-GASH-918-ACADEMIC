@@ -14,11 +14,11 @@ La matriz organiza las actividades del descriptivo del proyecto y su estado veri
 | Arquitectura | Arquitectura del sistema | [Arquitectura](ARQUITECTURA.md) y [manual técnico](MANUAL_TECNICO.md) | Componentes, diagramas, flujos, datos y límites documentados contra código; operación productiva y aceptación pendientes |
 | Planificación | Plan y seguimiento | [Backlog](BACKLOG.md) | Prioridades y dependencias definidas; fecha límite/capacidad sin confirmar |
 | Desarrollo | Sistema funcional local | Backend, frontend, Compose e [informe Power BI](../powerbi/README.md) | Núcleo, IA, correo y SQL implementados; aceptación integral pendiente según MVP |
-| Pruebas | Reporte QA y evidencias | [QA](REPORTE_QA.md), [trazabilidad](TRAZABILIDAD.md), evidencias | Pruebas automáticas y recorridos reales registrados; faltan escenarios completos y carga |
+| Pruebas | Reporte QA y evidencias | [QA](REPORTE_QA.md), [trazabilidad](TRAZABILIDAD.md), evidencias | Pruebas automáticas y recorridos registrados; RNF-2 aprobado en220. Matriz integral de escenarios y aceptación pendientes |
 | Documentación | Manuales técnico y de usuario | [Manual técnico](MANUAL_TECNICO.md), [manual de usuario](MANUAL_USUARIO.md) y guías | Manuales documentados; revisión mediante matriz completa de roles y capacitación pendientes |
-| Mantenimiento | Plan de soporte y recuperación | [Plan de mantenimiento](PLAN_MANTENIMIENTO.md) | Plan y ejecutor disponibles; recuperación lógica nativa y cuenta BI verificados en 103. Secuencia Docker, instalación completa, custodia/retención y operación pendientes |
+| Mantenimiento | Plan de soporte y recuperación | [Plan de mantenimiento](PLAN_MANTENIMIENTO.md) | Recuperación lógica nativa103 y Docker230, salud234 y custodia/condición de conservación235–236 documentadas. Instalación integral, disposición posterior y custodia de analítica pendientes |
 | Capacitación | Sesión y acta | Por realizar | Sin sesión real ni aprobación registradas; no generar acta retrospectiva |
-| Cierre | Informe final y lecciones | Por elaborar | Depende de resultados y aceptación reales |
+| Cierre | Informe final y lecciones | [Borrador](INFORME_ENTREGA_BORRADOR.md) | Borrador basado en evidencias; adaptar a formato institucional y completar aceptación real. No acta de cierre |
 
 ## Integraciones y evidencia
 

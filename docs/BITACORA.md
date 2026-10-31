@@ -1894,3 +1894,8 @@ Propósito: dejar guías de uso actuales y agrupar capturas del ensayo para publ
 ### 2026-10-31 — Salud API posterior al refresco Power BI
 
 La autora aporta GET /health/db con status ok/database postgresql después de habilitar puerto BI, reiniciar PostgreSQL y refrescar el principal. Incorporado a evidencia253; solo confirma esta comprobación de conexión/esquema, no todos los workers u operaciones. Archivos: manifiesto253 y bitácora. Validación: JSON releído con respuesta esperada. No hay cambio de alcance de entrega, pruebas nuevas del agente o publicación remota.
+
+
+### 2026-10-31 — Borrador de informe académico basado en evidencias
+
+Creado INFORME_ENTREGA_BORRADOR.md con objetivo, alcance, arquitectura, resultados, operación, limitaciones y conclusiones. Actualizada matriz de entregables: RNF-2 ya cuenta con carga aprobada, recuperación lógica Docker y custodia tienen evidencia; recuperación integral y aceptación siguen pendientes. Enlazado desde índice. Propósito: preparar entrega pronta sin inventar trabajo de campo, capacitación, fechas, firmas o impacto. Archivos: informe, índice, entregables, bitácora, backlog y trazabilidad. Validación: enlaces locales comprobados, cifras contrastadas con220/RESULTADOS_V4 y resultados conservados; sin nuevos tests o llamadas externas por redacción. Borrador local, no publicado ni presentado como informe institucional aprobado.
