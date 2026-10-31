@@ -38,3 +38,8 @@ Entra ID, nómina, SLA y alertas por tiempo, aplicación móvil nativa, registro
 ## Cómo leer las evidencias
 
 La [trazabilidad](TRAZABILIDAD.md) relaciona requisitos con implementación y validación. El [reporte QA](REPORTE_QA.md) distingue ejecución automática, recorrido manual y revisión estática. Una captura, una evaluación de código o una calificación orientativa no sustituyen la aceptación integral.
+
+
+## Continuación de la entrega: matriz por roles
+
+La [matriz de aceptación](ACEPTACION_ENTREGA.md) reúne14escenarios con origen/alcance de evidencia y pendientes. [Preparación222](evidencias/222-matriz-aceptacion-entrega-preparada.json): siguiente recorrido de departamentos conAdminRH,8pasos previstos y ninguna escritura ejecutada. RNF-2 aprobado220 se conserva; un plan no es aceptación real. Ver comandos de arranque con3procesos/Mailpit y registro de resultados en la matriz.

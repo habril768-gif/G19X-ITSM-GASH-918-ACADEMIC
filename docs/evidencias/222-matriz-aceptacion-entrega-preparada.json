@@ -1,0 +1,25 @@
+{
+  "fecha_local": "2026-10-30",
+  "estado": "MATRIZ_ACEPTACION_PREPARADA_SIN_EJECUCION_FUNCIONAL_NUEVA",
+  "documento": "docs/ACEPTACION_ENTREGA.md",
+  "sha256": "2220714626f191cee9915b27fa89fdf34d533ec0c13b8712b78079d3e95e9bb6",
+  "filas_matriz": 14,
+  "pasos_departamentos": 8,
+  "validacion": {
+    "enlaces_locales_existentes": 19,
+    "nombres_de_pruebas_correspondientes_verificados": 5,
+    "fuente_panel_departamentos_leida": true,
+    "comprobacion_previa_panel_http": 200,
+    "comprobacion_previa_API": "NO_ACCESIBLE_EN_ESTA_MUESTRA",
+    "arranque_Docker_desde_agente": "NO_EJECUTADO",
+    "recorrido_UI_departamentos": "PENDIENTE",
+    "nuevos_departamentos_usuarios_casos": 0
+  },
+  "alcance": [
+    "RNF-2 acreditado220 se conserva, no requiere repetir carga.",
+    "Separar CI/fixtures API, captura/reportes de autora y observacion real del agente; pendientes no se marcan aprobados.",
+    "Plan8pasos sobre nuevo departamento ficticio vacio, con baja final y sin eliminacion. Ninguna escritura real ejecutada.",
+    "Conservar casos protegidos y evitar baja de departamentos con dependencias.",
+    "Custodia,capacitacion y aceptacion institucional requieren hechos/datos reales; no inferirlos del plan."
+  ]
+}

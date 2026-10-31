@@ -66,3 +66,8 @@ La [comparación de uno y dos procesos API](PRUEBA_RENDIMIENTO.md#comparación-b
 ## RNF-2 acreditado en QA local
 
 [220: formal aprobada](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json), [221: perfilCompose](evidencias/221-perfil-compose-rnf2-reproducible.json) y [protocolo/alcance](PRUEBA_RENDIMIENTO.md).Tres procesosAPI,10 clientes/30+300s; cuatro p95 <200 ms,sin errores e integridad correcta. El historial de fallos no se elimina; otros pendientes de entrega continúan.
+
+
+## Continuación de la entrega: matriz por roles
+
+La [matriz de aceptación](ACEPTACION_ENTREGA.md) reúne14escenarios con origen/alcance de evidencia y pendientes. [Preparación222](evidencias/222-matriz-aceptacion-entrega-preparada.json): siguiente recorrido de departamentos conAdminRH,8pasos previstos y ninguna escritura ejecutada. RNF-2 aprobado220 se conserva; un plan no es aceptación real. Ver comandos de arranque con3procesos/Mailpit y registro de resultados en la matriz.
