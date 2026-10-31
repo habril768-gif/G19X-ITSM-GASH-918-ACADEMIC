@@ -1,0 +1,53 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Salida Docker y confirmación de refresco de la usuaria; captura aportada e inspeccionada visualmente.",
+  "conexion_reportada": {
+    "compose": [
+      "compose.yaml",
+      "compose.rnf2.yaml",
+      "compose.bi.yaml"
+    ],
+    "perfil": "mail",
+    "servicio": "postgres",
+    "estado": "healthy",
+    "puerto": "127.0.0.1:5433->5432/tcp"
+  },
+  "captura_visible": {
+    "archivo_abierto": "plurione_bi",
+    "corte": "31/10/2026 02:47:05 p.m.",
+    "guardado": "Hoy a las 2:49 p.m.; fecha contextual31/10/2026, zona no indicada en recorte",
+    "filas_visibles": 4,
+    "privacidad": "Las cuatro filas muestran Suprimido por privacidad y medidas numéricas visibles vacías.",
+    "fila_nueva_visible": "Sin clasificación oficial / QA entrega - departamentos - 20261030-01 - revisado",
+    "leyenda": "Población exportable - Datos simulados. No representa el total de la empresa. Los valores suprimidos por privacidad permanecen vacíos."
+  },
+  "archivo_local": {
+    "nombre": "powerbi/plurione_bi.pbix",
+    "sha256_al_registrar": "98b311393fc09270982a16c1ab643a0d4b24d9fde20eefc28e58ecf826fca998",
+    "bytes": 65563,
+    "publicacion": "Binario modificado por guardado de usuaria; no publicado automáticamente en este avance."
+  },
+  "captura_privada": {
+    "sha256": "9441052a18a9776794210bdbf63afa6644a95604ef4d3d438a7fae3b8c116242",
+    "bytes": 147048,
+    "custodia": "Conservada en espacio auxiliar local, fuera del repositorio; cabecera contiene nombre personal. No se publica original."
+  },
+  "resultado": "Refresco y guardado del principal confirmados por pantalla, corte actualizado y supresión visible.",
+  "limites": [
+    "No se inspeccionaron credenciales almacenadas, permisos SQL, consulta interna o medidas DAX de esta ejecución.",
+    "Se indicó usar cuenta BI de lectura, pero su identidad efectiva no está visible en captura y no se verificó independientemente.",
+    "No prueba valores numéricos positivos, totales, todas las celdas o informe con datos reales.",
+    "No se publicó a Power BI Service ni se distribuyó el archivo a terceros.",
+    "La tarjeta de corte no se interpreta como dato de aceptación institucional."
+  ],
+  "publicacion": "Manifiesto y documentación locales, pendientes de publicación; imagen original y nuevo PBIX no publicados.",
+  "salud_posterior": {
+    "fuente": "Salida Invoke-RestMethod aportada por la usuaria después del refresco Power BI.",
+    "ruta": "http://127.0.0.1:8000/health/db",
+    "respuesta": {
+      "status": "ok",
+      "database": "postgresql"
+    },
+    "alcance": "Comprobación API→PostgreSQL posterior al reinicio para publicar puerto BI; no prueba todas las operaciones o workers."
+  }
+}

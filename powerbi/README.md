@@ -8,6 +8,8 @@ Seguir [ANALITICA.md](../docs/ANALITICA.md). Fuente principal: `Indicadores.pq`,
 
 Refresco confirmado y guardado en [105](../docs/evidencias/105-powerbi-refresco.json): tarjeta 20/10/2026 10:06:02 a.m.; tres celdas suprimidas y números vacíos. El intento fallido previo se conserva en 104. La definición de visuales mantiene tabla con cuatro medidas, sin totales y con filas vacías visibles, tarjeta y leyenda.
 
+Último refresco confirmado: [253](../docs/evidencias/253-powerbi-refresco-guardado-20261031.json), corte31/10/2026 02:47:05p.m. y guardado visible2:49p.m.; cuatro filas suprimidas y leyenda conservada. El registro105 anterior se mantiene histórico. Captura con identidad personal conservada fuera de Git; nuevo PBIX local no publicado automáticamente.
+
 ## Comprobación con valores visibles
 
 [Guía QA](QA/README.md) y [evidencia 106](../docs/evidencias/106-powerbi-qa.json): copia independiente con dos agregados ficticios manuales, visual 20/6.00/55.0%/50.0%, indicadores sin denominador vacíos, totales BLANK y retirada de números al sustituir la entrada y refrescar. Cinco controles DAX pasan en cada una de las dos instantáneas. La prueba no modifica el principal ni evalúa el SQL con esos datos.

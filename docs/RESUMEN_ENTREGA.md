@@ -60,3 +60,6 @@ Ensayo de correo: [248](evidencias/248-ensayo-mailpit-aviso-generico.json), capt
 
 
 Enlace del aviso local: [251](evidencias/251-enlace-mailpit-expediente-confirmado.json), captura252 muestra URL y expediente coincidentes con sesión Admin RH. Completa destino de navegación del ensayo248; sin clic/login observado ni comprobador automático de Mailpit. Pendiente de publicación.
+
+
+Analítica del ensayo: [253](evidencias/253-powerbi-refresco-guardado-20261031.json), principal refrescado y guardado con corte31/10/2026 02:47:05p.m., cuatro filas suprimidas y leyenda visible según captura. Cuenta SQL efectiva no comprobada en captura; original con nombre personal y nuevo PBIX no publicados.

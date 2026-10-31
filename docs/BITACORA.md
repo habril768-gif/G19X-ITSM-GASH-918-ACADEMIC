@@ -1884,3 +1884,13 @@ La [matriz de aceptación](ACEPTACION_ENTREGA.md) reúne14escenarios con origen/
 ### 2026-10-31 — Revisión de manuales y preparación de evidencias del ensayo
 
 Propósito: dejar guías de uso actuales y agrupar capturas del ensayo para publicación. Se aclara historial de departamentos frente a auditoría interna de usuarios en ambos manuales. Notas cronológicas de preparación/fallos RNF-2 retiradas del índice y conservadas arriba en bitácora; índice enlaza estado vigente. Evidencias244–252 conservan capturas y límites de estados, correo local y destino de enlace; no capacitación ni aceptación formal. Archivos: manuales, índice, bitácora, evidencia gráfica y seguimiento. Validación: JSON de manifiestos, integridad SHA256 de seis PNG, enlaces de manuales/índice y diff comprobados. No se repiten pruebas funcionales por cambio documental ni se publican secretos o respaldos. Publicación por comprobar en rama remota; no se declara ocurrida por prepararla.
+
+
+### 2026-10-31 — Power BI principal refrescado y guardado
+
+[Evidencia253](evidencias/253-powerbi-refresco-guardado-20261031.json): tras habilitar PostgreSQL local5433 (healthy según salida), autora confirma nuevo corte31/10/2026 02:47:05p.m.; captura muestra ese corte, guardado Hoy2:49p.m., cuatro filas suprimidas, medidas visibles vacías y leyenda de población parcial/datos simulados. Propósito: actualizar sección analítica del ensayo. Original con nombre personal en cabecera conservado en espacio auxiliar fuera de Git; hash de imagen y PBIX local registrados, binario no publicado automáticamente. No se verificaron credenciales efectivas, DAX/SQL de esta ejecución, números positivos o permisos SQL; las pruebas previas conservan alcance independiente. Archivos: evidencia253, guía Power BI, analítica, resumen, aceptación, bitácora, QA, backlog, entregables y trazabilidad. Validación documental: JSON, hashes y referencias comprobados; sin pruebas funcionales adicionales del agente ni publicación remota en este avance.
+
+
+### 2026-10-31 — Salud API posterior al refresco Power BI
+
+La autora aporta GET /health/db con status ok/database postgresql después de habilitar puerto BI, reiniciar PostgreSQL y refrescar el principal. Incorporado a evidencia253; solo confirma esta comprobación de conexión/esquema, no todos los workers u operaciones. Archivos: manifiesto253 y bitácora. Validación: JSON releído con respuesta esperada. No hay cambio de alcance de entrega, pruebas nuevas del agente o publicación remota.
