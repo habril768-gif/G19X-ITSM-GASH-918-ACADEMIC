@@ -2,7 +2,7 @@
 import os
 from datetime import timedelta, datetime
 from uuid import NAMESPACE_URL, uuid4, uuid5
-from sqlalchemy import select, and_, or_
+from sqlalchemy import select, and_, or_, inspect
 from app.core.security import utcnow, aware
 from app.models import MailDelivery, Incident, User, Department, Role
 from app.services.incidents import independent_rh_visibility, role_name, visibility
@@ -42,6 +42,10 @@ def queue_event(db, case, event, before=None):
     elif before.get('assigned_to') != (str(case.assigned_to) if case.assigned_to else None) and case.assigned_to:
         kind = 'ASIGNACION'
     if not kind: return
+    # Sin identidad asignada y pendiente en esta sesión: el evento aún no existe.
+    # Capturar antes del flush; los reenvíos de eventos persistentes sí deduplican.
+    event_state = inspect(event)
+    fresh_event = event_state.pending and event_state.session is db and event.id is None
     db.flush()
     if kind == 'CREACION':
         recipients = creation_recipient_ids(db, case)
@@ -59,7 +63,8 @@ def queue_event(db, case, event, before=None):
         context['closed_at'] = case.closed_at.isoformat() if case.closed_at else None
     keys = {ident: uuid5(NAMESPACE_URL, f'plurione-mail:{event.id}:{ident}')
             for ident in list(recipients) or [None]}
-    existing = set(db.scalars(select(MailDelivery.id).where(MailDelivery.id.in_(list(keys.values())))))
+    existing = set() if fresh_event else set(db.scalars(
+        select(MailDelivery.id).where(MailDelivery.id.in_(list(keys.values())))))
     pending = [dict(id=key, event_id=event.id, case_id=case.id, recipient_id=ident,
                 kind=kind, context=context, status='PENDIENTE' if ident else 'OMITIDA', attempts=0,
                 error=None if ident else 'Sin destinatario autorizado', available_at=now, created_at=now,

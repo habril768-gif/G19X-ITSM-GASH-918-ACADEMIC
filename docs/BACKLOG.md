@@ -788,3 +788,8 @@ compare_performance_workers.ps1 exige confirmación QA, ejecuta secuencia 1/2 si
 ### 2026-10-30 — RNF-2 pendiente tras octava formal
 
 [Evidencia214](evidencias/214-formal-dos-procesos-fallo-escrituras.json):27.722 solicitudes sin errores con2procesos; listado/detalle160,12/156,67ms cumplen, creación/actualización264,38/227,96ms incumplen. Integridad y parada correctas. [Candidato215](evidencias/215-formal-tres-procesos-candidato.json): `--api-workers 3` en QA formal con mismo protocolo,130 pruebas aprobadas, todavía sin medición real. Más memoria/conexiones y posible competencia CPU; no cambia sitio ni umbral. Ver [prueba de rendimiento](PRUEBA_RENDIMIENTO.md).
+
+
+### 2026-10-30 — RNF-2: solo creación pendiente en novena formal
+
+[Evidencia216](evidencias/216-formal-tres-procesos-fallo-creacion.json):QA3,34.027 solicitudes sin errores; p95lecturas125,63/119,11 yactualización173,60ms cumplen; creación202,6812ms incumple. Integridad y parada correctas; RNF-2 pendiente. [Cambio217](evidencias/217-outbox-evento-nuevo-sin-lectura-redundante.json): evita una búsqueda outbox solo para evento pendiente sin identidad, preserva deduplicación de replay y atomicidad;30unitarias aprobadas. Pendiente CI y formal con mismo protocolo3procesos/10clientes/30+300s/p95<200ms.

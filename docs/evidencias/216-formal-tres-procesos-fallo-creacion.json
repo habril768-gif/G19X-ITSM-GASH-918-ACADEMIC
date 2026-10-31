@@ -1,0 +1,2058 @@
+{
+  "fecha_local": "2026-10-30",
+  "estado": "NOVENA_FORMAL_FALLIDA_UMBRAL_SOLO_CREACION",
+  "run_id": "85395e3b50fc4f8d",
+  "report_sha256": "10fd8f8861dd0d1c5392eaf5423b0cc28456462213c02060010bd75ef1adbbf4",
+  "protocolo": {
+    "clientes": 10,
+    "calentamiento_s": 30,
+    "medicion_s": 300,
+    "api_workers": 3,
+    "comando_verificado": true,
+    "hashes_producto_iguales_a_version_publicada_previa": 54
+  },
+  "metricas": {
+    "listado": {
+      "intentos": 8510,
+      "exitos": 8510,
+      "errores": 0,
+      "estados": {
+        "200": 8510
+      },
+      "tasa_error": 0.0,
+      "solicitudes_por_segundo": 28.366666666666667,
+      "min_ms": 14.978000021073967,
+      "mediana_ms": 47.82874998636544,
+      "p95_exitos_ms": 125.63070000032894,
+      "p99_exitos_ms": 190.92980001005344,
+      "max_ms": 534.1213000065181,
+      "p95_todos_ms": 125.63070000032894,
+      "finalizadas_fuera_ventana": 1
+    },
+    "detalle": {
+      "intentos": 8509,
+      "exitos": 8509,
+      "errores": 0,
+      "estados": {
+        "200": 8509
+      },
+      "tasa_error": 0.0,
+      "solicitudes_por_segundo": 28.363333333333333,
+      "min_ms": 49.00869997800328,
+      "mediana_ms": 71.55110000167042,
+      "p95_exitos_ms": 119.110899977386,
+      "p99_exitos_ms": 161.96590001345612,
+      "max_ms": 438.5726999898907,
+      "p95_todos_ms": 119.110899977386,
+      "finalizadas_fuera_ventana": 4
+    },
+    "creacion": {
+      "intentos": 8505,
+      "exitos": 8505,
+      "errores": 0,
+      "estados": {
+        "201": 8505
+      },
+      "tasa_error": 0.0,
+      "solicitudes_por_segundo": 28.35,
+      "min_ms": 63.74889999278821,
+      "mediana_ms": 104.05150000588037,
+      "p95_exitos_ms": 202.68119999673218,
+      "p99_exitos_ms": 281.9576000038069,
+      "max_ms": 596.6179000097327,
+      "p95_todos_ms": 202.68119999673218,
+      "finalizadas_fuera_ventana": 2
+    },
+    "actualizacion": {
+      "intentos": 8503,
+      "exitos": 8503,
+      "errores": 0,
+      "estados": {
+        "200": 8503
+      },
+      "tasa_error": 0.0,
+      "solicitudes_por_segundo": 28.343333333333334,
+      "min_ms": 55.943099985597655,
+      "mediana_ms": 91.67019999586046,
+      "p95_exitos_ms": 173.60049998387694,
+      "p99_exitos_ms": 237.37839999375865,
+      "max_ms": 490.9994999761693,
+      "p95_todos_ms": 173.60049998387694,
+      "finalizadas_fuera_ventana": 3
+    }
+  },
+  "solicitudes_medidas": 34027,
+  "conteos": [
+    100,
+    944,
+    9449
+  ],
+  "sql": {
+    "incidencias": 9449,
+    "eventos_creado": 9449,
+    "eventos_editado": 9342,
+    "entregas_encoladas": 94490,
+    "intentos_smtp": 0,
+    "trabajos_ia": 0
+  },
+  "post_http": "OK",
+  "logout_204": 10,
+  "qa_detenido": true,
+  "recursos_muestreados": [
+    {
+      "fecha_utc": "2026-10-31T00:53:54.698586+00:00",
+      "elapsed_s": 2.318692699976964,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "80.05%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "7.40%",
+          "MemUsage": "266.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "421kB / 646kB",
+          "PIDs": "9"
+        },
+        {
+          "BlockIO": "86.2MB / 54.5MB",
+          "CPUPerc": "7.64%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "1.94%",
+          "MemUsage": "69.84MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "676kB / 451kB",
+          "PIDs": "8"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.48%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.703MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:54:01.873408+00:00",
+      "elapsed_s": 9.493487100000493,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "60.63%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "7.71%",
+          "MemUsage": "277.4MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "1.07MB / 1.49MB",
+          "PIDs": "10"
+        },
+        {
+          "BlockIO": "86.2MB / 54.5MB",
+          "CPUPerc": "16.05%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "2.02%",
+          "MemUsage": "72.76MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "1.23MB / 1.01MB",
+          "PIDs": "8"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.46%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.719MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:54:08.466250+00:00",
+      "elapsed_s": 16.08646989997942,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "47.73%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "7.72%",
+          "MemUsage": "277.7MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "1.56MB / 2.1MB",
+          "PIDs": "10"
+        },
+        {
+          "BlockIO": "86.2MB / 54.9MB",
+          "CPUPerc": "7.11%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "2.03%",
+          "MemUsage": "72.91MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "1.68MB / 1.46MB",
+          "PIDs": "8"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.55%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.734MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:54:15.849571+00:00",
+      "elapsed_s": 23.46946989998105,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "207.90%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.20%",
+          "MemUsage": "294.8MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "5.23MB / 7MB",
+          "PIDs": "23"
+        },
+        {
+          "BlockIO": "86.2MB / 58.7MB",
+          "CPUPerc": "67.60%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.07%",
+          "MemUsage": "110.5MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "5.36MB / 4.8MB",
+          "PIDs": "18"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.39%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.26%",
+          "MemUsage": "9.488MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:54:22.994454+00:00",
+      "elapsed_s": 30.614538599998923,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "173.61%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.26%",
+          "MemUsage": "296.9MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "11.4MB / 15.2MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 64.8MB",
+          "CPUPerc": "58.91%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.20%",
+          "MemUsage": "115MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "11.5MB / 10.5MB",
+          "PIDs": "18"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "2.84%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.711MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:54:30.130568+00:00",
+      "elapsed_s": 37.75068599998485,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "185.36%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.28%",
+          "MemUsage": "297.8MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "16.8MB / 22.3MB",
+          "PIDs": "23"
+        },
+        {
+          "BlockIO": "86.2MB / 86.5MB",
+          "CPUPerc": "68.71%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.34%",
+          "MemUsage": "120.3MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "15.9MB / 14.6MB",
+          "PIDs": "18"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.34%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.75MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:54:37.094423+00:00",
+      "elapsed_s": 44.715564299986,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "173.87%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.32%",
+          "MemUsage": "299.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "22.3MB / 29.6MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 97.5MB",
+          "CPUPerc": "62.41%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.35%",
+          "MemUsage": "120.3MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "22.3MB / 20.5MB",
+          "PIDs": "18"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "3.18%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.26%",
+          "MemUsage": "9.504MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:54:44.265958+00:00",
+      "elapsed_s": 51.886941699980525,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "179.36%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.63%",
+          "MemUsage": "310.4MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "27.5MB / 36.5MB",
+          "PIDs": "26"
+        },
+        {
+          "BlockIO": "86.2MB / 103MB",
+          "CPUPerc": "44.11%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.57%",
+          "MemUsage": "128.5MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "28MB / 25.7MB",
+          "PIDs": "19"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.32%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.26%",
+          "MemUsage": "9.52MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:54:51.393155+00:00",
+      "elapsed_s": 59.01304639998125,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "187.37%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.41%",
+          "MemUsage": "302.5MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "33.5MB / 44.5MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 109MB",
+          "CPUPerc": "66.98%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.62%",
+          "MemUsage": "130.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "33.5MB / 30.8MB",
+          "PIDs": "19"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.32%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.26%",
+          "MemUsage": "9.527MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:54:58.088999+00:00",
+      "elapsed_s": 65.70989009999903,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "182.87%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.42%",
+          "MemUsage": "302.8MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "40MB / 53.1MB",
+          "PIDs": "23"
+        },
+        {
+          "BlockIO": "86.2MB / 115MB",
+          "CPUPerc": "76.32%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.64%",
+          "MemUsage": "131MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "40MB / 36.8MB",
+          "PIDs": "19"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "3.54%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.75MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:55:05.330925+00:00",
+      "elapsed_s": 72.95105859998148,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "186.10%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.43%",
+          "MemUsage": "303.2MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "45.9MB / 61.1MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 124MB",
+          "CPUPerc": "73.55%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.66%",
+          "MemUsage": "131.8MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "45.1MB / 41.4MB",
+          "PIDs": "19"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.39%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.754MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:55:12.476164+00:00",
+      "elapsed_s": 80.09618059999775,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "214.92%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.44%",
+          "MemUsage": "303.5MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "52MB / 69.2MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 131MB",
+          "CPUPerc": "69.62%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.70%",
+          "MemUsage": "132.9MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "52.1MB / 47.8MB",
+          "PIDs": "19"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.38%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.762MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:55:18.950253+00:00",
+      "elapsed_s": 86.57010779998382,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "186.01%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.44%",
+          "MemUsage": "303.6MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "56.4MB / 75MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 137MB",
+          "CPUPerc": "80.41%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.76%",
+          "MemUsage": "135.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "56.5MB / 51.8MB",
+          "PIDs": "19"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.31%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.598MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:55:26.120071+00:00",
+      "elapsed_s": 93.74032839998836,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "187.56%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.44%",
+          "MemUsage": "303.7MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "62.3MB / 82.8MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 160MB",
+          "CPUPerc": "74.05%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.80%",
+          "MemUsage": "136.5MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "62.3MB / 57.2MB",
+          "PIDs": "19"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.38%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.773MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:55:33.270025+00:00",
+      "elapsed_s": 100.89019889998599,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "169.09%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.50%",
+          "MemUsage": "305.6MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "68.6MB / 91.3MB",
+          "PIDs": "31"
+        },
+        {
+          "BlockIO": "86.2MB / 168MB",
+          "CPUPerc": "71.08%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.81%",
+          "MemUsage": "136.9MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "67.9MB / 62.3MB",
+          "PIDs": "19"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "3.93%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.75MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:55:40.515110+00:00",
+      "elapsed_s": 108.13628649999737,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "192.04%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.70%",
+          "MemUsage": "313MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "73.5MB / 97.7MB",
+          "PIDs": "24"
+        },
+        {
+          "BlockIO": "86.2MB / 174MB",
+          "CPUPerc": "86.11%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.94%",
+          "MemUsage": "141.8MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "74.1MB / 68MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.50%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.734MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:55:47.288717+00:00",
+      "elapsed_s": 114.90859629999613,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "185.43%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.47%",
+          "MemUsage": "304.6MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "78.9MB / 105MB",
+          "PIDs": "23"
+        },
+        {
+          "BlockIO": "86.2MB / 179MB",
+          "CPUPerc": "73.48%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "3.97%",
+          "MemUsage": "142.6MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "79MB / 72.5MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.30%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.734MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:55:54.437499+00:00",
+      "elapsed_s": 122.05771529997583,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "161.39%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.48%",
+          "MemUsage": "304.9MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "84.2MB / 112MB",
+          "PIDs": "24"
+        },
+        {
+          "BlockIO": "86.2MB / 184MB",
+          "CPUPerc": "66.27%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.03%",
+          "MemUsage": "144.8MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "84.4MB / 77.3MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.95%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.723MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:56:01.587785+00:00",
+      "elapsed_s": 129.20776619997923,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "185.83%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.49%",
+          "MemUsage": "305.2MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "91.1MB / 121MB",
+          "PIDs": "23"
+        },
+        {
+          "BlockIO": "86.2MB / 194MB",
+          "CPUPerc": "77.60%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.03%",
+          "MemUsage": "145MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "91.3MB / 83.7MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.28%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.26%",
+          "MemUsage": "9.465MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:56:08.273353+00:00",
+      "elapsed_s": 135.89337429997977,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "216.39%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.48%",
+          "MemUsage": "305.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "96.3MB / 128MB",
+          "PIDs": "23"
+        },
+        {
+          "BlockIO": "86.2MB / 199MB",
+          "CPUPerc": "78.45%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.04%",
+          "MemUsage": "145.3MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "96.5MB / 88.5MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.71%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.715MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:56:15.443075+00:00",
+      "elapsed_s": 143.06334470000002,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "195.27%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.48%",
+          "MemUsage": "305.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "101MB / 135MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 207MB",
+          "CPUPerc": "54.77%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.04%",
+          "MemUsage": "145.3MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "101MB / 92.5MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.30%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.695MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:56:22.611786+00:00",
+      "elapsed_s": 150.23256709999987,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "183.22%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.49%",
+          "MemUsage": "305.2MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "105MB / 140MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 228MB",
+          "CPUPerc": "86.42%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.07%",
+          "MemUsage": "146.5MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "106MB / 97MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.67%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.695MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:56:29.027166+00:00",
+      "elapsed_s": 156.64710099998047,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "206.67%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.49%",
+          "MemUsage": "305.2MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "109MB / 145MB",
+          "PIDs": "21"
+        },
+        {
+          "BlockIO": "86.2MB / 233MB",
+          "CPUPerc": "90.81%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.09%",
+          "MemUsage": "147.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "109MB / 100MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.57%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.699MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:56:36.239250+00:00",
+      "elapsed_s": 163.85940509999637,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "185.97%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.49%",
+          "MemUsage": "305.3MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "113MB / 151MB",
+          "PIDs": "21"
+        },
+        {
+          "BlockIO": "86.2MB / 237MB",
+          "CPUPerc": "84.08%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.14%",
+          "MemUsage": "149MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "113MB / 104MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "5.74%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.676MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:56:43.418847+00:00",
+      "elapsed_s": 171.03871679998701,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "229.18%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.86%",
+          "MemUsage": "318.7MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "118MB / 156MB",
+          "PIDs": "23"
+        },
+        {
+          "BlockIO": "86.2MB / 244MB",
+          "CPUPerc": "82.78%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.17%",
+          "MemUsage": "150MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "118MB / 108MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.36%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.28%",
+          "MemUsage": "9.934MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:56:50.565904+00:00",
+      "elapsed_s": 178.1861566999869,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "191.06%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.50%",
+          "MemUsage": "305.5MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "122MB / 162MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 249MB",
+          "CPUPerc": "84.43%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.18%",
+          "MemUsage": "150.2MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "122MB / 112MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.37%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.668MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:56:57.461334+00:00",
+      "elapsed_s": 185.08153209998272,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "169.57%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.49%",
+          "MemUsage": "305.5MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "127MB / 169MB",
+          "PIDs": "21"
+        },
+        {
+          "BlockIO": "86.2MB / 255MB",
+          "CPUPerc": "83.97%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.23%",
+          "MemUsage": "152.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "127MB / 116MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.70%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.672MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:57:04.608744+00:00",
+      "elapsed_s": 192.2288327999995,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "161.83%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.50%",
+          "MemUsage": "305.7MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "132MB / 176MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 261MB",
+          "CPUPerc": "114.47%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.24%",
+          "MemUsage": "152.4MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "132MB / 122MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.27%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.652MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:57:11.752323+00:00",
+      "elapsed_s": 199.37260129998322,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "193.28%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.76%",
+          "MemUsage": "315.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "138MB / 184MB",
+          "PIDs": "23"
+        },
+        {
+          "BlockIO": "86.2MB / 269MB",
+          "CPUPerc": "81.93%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.28%",
+          "MemUsage": "154.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "138MB / 127MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.48%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.887MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:57:18.650450+00:00",
+      "elapsed_s": 206.2703676999954,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "187.56%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.49%",
+          "MemUsage": "305.4MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "143MB / 191MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 274MB",
+          "CPUPerc": "93.81%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.32%",
+          "MemUsage": "155.3MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "144MB / 132MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.32%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.28%",
+          "MemUsage": "9.891MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:57:25.803136+00:00",
+      "elapsed_s": 213.42292679997627,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "187.89%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "306MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "149MB / 199MB",
+          "PIDs": "24"
+        },
+        {
+          "BlockIO": "86.2MB / 299MB",
+          "CPUPerc": "83.35%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.36%",
+          "MemUsage": "156.9MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "149MB / 137MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.34%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.28%",
+          "MemUsage": "9.91MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:57:32.926621+00:00",
+      "elapsed_s": 220.5467520999955,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "181.05%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "305.9MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "155MB / 207MB",
+          "PIDs": "23"
+        },
+        {
+          "BlockIO": "86.2MB / 305MB",
+          "CPUPerc": "86.42%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.40%",
+          "MemUsage": "158.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "156MB / 143MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "4.42%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.645MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:57:40.053281+00:00",
+      "elapsed_s": 227.67336220000288,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "183.46%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "306MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "161MB / 214MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 313MB",
+          "CPUPerc": "86.18%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.43%",
+          "MemUsage": "159.4MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "161MB / 148MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.46%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.789MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:57:46.535155+00:00",
+      "elapsed_s": 234.15590650000377,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "214.39%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.50%",
+          "MemUsage": "305.8MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "166MB / 221MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 318MB",
+          "CPUPerc": "86.37%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.45%",
+          "MemUsage": "160.2MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "166MB / 152MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.32%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.539MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:57:53.669777+00:00",
+      "elapsed_s": 241.29037249999237,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "151.92%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "305.9MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "172MB / 229MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 324MB",
+          "CPUPerc": "80.38%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.53%",
+          "MemUsage": "162.8MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "172MB / 158MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "2.99%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.785MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:58:00.812932+00:00",
+      "elapsed_s": 248.43308369998704,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "181.92%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "306.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "177MB / 236MB",
+          "PIDs": "21"
+        },
+        {
+          "BlockIO": "86.2MB / 331MB",
+          "CPUPerc": "94.81%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.51%",
+          "MemUsage": "162.2MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "178MB / 163MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.29%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.26%",
+          "MemUsage": "9.523MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:58:07.926821+00:00",
+      "elapsed_s": 255.54683739997563,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "179.86%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "306.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "182MB / 242MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 336MB",
+          "CPUPerc": "94.25%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.59%",
+          "MemUsage": "165MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "182MB / 167MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "3.43%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.73MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:58:15.090818+00:00",
+      "elapsed_s": 262.71088800000143,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "139.70%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.74%",
+          "MemUsage": "314.5MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "187MB / 249MB",
+          "PIDs": "24"
+        },
+        {
+          "BlockIO": "86.2MB / 344MB",
+          "CPUPerc": "78.58%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.59%",
+          "MemUsage": "165MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "188MB / 172MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.32%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.723MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:58:22.225727+00:00",
+      "elapsed_s": 269.8457925999828,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "197.10%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.52%",
+          "MemUsage": "306.6MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "193MB / 256MB",
+          "PIDs": "23"
+        },
+        {
+          "BlockIO": "86.2MB / 367MB",
+          "CPUPerc": "93.03%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.63%",
+          "MemUsage": "166.5MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "194MB / 178MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.31%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.28%",
+          "MemUsage": "9.957MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:58:28.361467+00:00",
+      "elapsed_s": 275.9817489999987,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "187.72%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.52%",
+          "MemUsage": "306.3MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "198MB / 264MB",
+          "PIDs": "21"
+        },
+        {
+          "BlockIO": "86.2MB / 373MB",
+          "CPUPerc": "91.73%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.65%",
+          "MemUsage": "167.2MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "198MB / 182MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "2.89%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.711MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:58:35.509517+00:00",
+      "elapsed_s": 283.12947580000036,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "138.73%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "306MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "203MB / 270MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 382MB",
+          "CPUPerc": "105.33%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.69%",
+          "MemUsage": "168.7MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "204MB / 187MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.37%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.625MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:58:42.645718+00:00",
+      "elapsed_s": 290.26596459999564,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "179.19%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "306MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "209MB / 278MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 394MB",
+          "CPUPerc": "96.18%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.70%",
+          "MemUsage": "169MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "209MB / 192MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.29%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.602MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:58:49.778855+00:00",
+      "elapsed_s": 297.39917659998173,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "179.88%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "306.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "215MB / 286MB",
+          "PIDs": "23"
+        },
+        {
+          "BlockIO": "86.2MB / 402MB",
+          "CPUPerc": "101.26%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.77%",
+          "MemUsage": "171.6MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "215MB / 198MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "3.64%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.598MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:58:56.406748+00:00",
+      "elapsed_s": 304.0265268999792,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "174.69%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.52%",
+          "MemUsage": "306.3MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "220MB / 293MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 427MB",
+          "CPUPerc": "104.41%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.80%",
+          "MemUsage": "172.8MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "220MB / 202MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.29%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.602MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:59:03.616959+00:00",
+      "elapsed_s": 311.23715569998603,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "175.81%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "306.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "225MB / 299MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 433MB",
+          "CPUPerc": "100.18%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.92%",
+          "MemUsage": "176.8MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "225MB / 206MB",
+          "PIDs": "21"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "1.02%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.836MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:59:10.728694+00:00",
+      "elapsed_s": 318.3489280999929,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "173.08%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "306MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "230MB / 306MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 439MB",
+          "CPUPerc": "101.18%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.82%",
+          "MemUsage": "173.5MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "230MB / 211MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.38%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.57MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:59:17.481505+00:00",
+      "elapsed_s": 325.10165529997903,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "199.72%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "306.2MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "235MB / 313MB",
+          "PIDs": "21"
+        },
+        {
+          "BlockIO": "86.2MB / 450MB",
+          "CPUPerc": "99.84%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.86%",
+          "MemUsage": "174.6MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "235MB / 216MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.34%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.559MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:59:24.663267+00:00",
+      "elapsed_s": 332.2834240999946,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "149.31%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "306.2MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "241MB / 320MB",
+          "PIDs": "22"
+        },
+        {
+          "BlockIO": "86.2MB / 457MB",
+          "CPUPerc": "75.26%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.89%",
+          "MemUsage": "175.9MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "241MB / 221MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.45%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.535MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:59:31.795975+00:00",
+      "elapsed_s": 339.4160064999887,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "173.40%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.51%",
+          "MemUsage": "306.1MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "247MB / 329MB",
+          "PIDs": "23"
+        },
+        {
+          "BlockIO": "86.2MB / 464MB",
+          "CPUPerc": "104.99%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.93%",
+          "MemUsage": "177.4MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "247MB / 227MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.29%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.27%",
+          "MemUsage": "9.785MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    },
+    {
+      "fecha_utc": "2026-10-31T00:59:38.588511+00:00",
+      "elapsed_s": 346.20844580000266,
+      "containers": [
+        {
+          "BlockIO": "73.8MB / 0B",
+          "CPUPerc": "169.33%",
+          "Container": "9212eaa84eb126be4e2c71f297536bea54b68b94db9f20b517c600ae71d1eaf8",
+          "ID": "9212eaa84eb1",
+          "MemPerc": "8.52%",
+          "MemUsage": "306.4MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-api-1",
+          "NetIO": "252MB / 335MB",
+          "PIDs": "24"
+        },
+        {
+          "BlockIO": "86.2MB / 470MB",
+          "CPUPerc": "101.72%",
+          "Container": "6a2d006aca690989864c197c0e57f678038740ecbac70defcfe25c4115efae69",
+          "ID": "6a2d006aca69",
+          "MemPerc": "4.96%",
+          "MemUsage": "178.3MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-postgres-1",
+          "NetIO": "252MB / 231MB",
+          "PIDs": "20"
+        },
+        {
+          "BlockIO": "34.1MB / 0B",
+          "CPUPerc": "0.36%",
+          "Container": "e44a738e3987cb020280f9a56738e6ab4c345afdfd3d57049862544e1f6959b4",
+          "ID": "e44a738e3987",
+          "MemPerc": "0.28%",
+          "MemUsage": "10.02MiB / 3.512GiB",
+          "Name": "plurione-qa-perf-85395e3b50fc4f8d-redis-1",
+          "NetIO": "1.99kB / 126B",
+          "PIDs": "6"
+        }
+      ]
+    }
+  ],
+  "limites": [
+    "Listado125,63,detalle119,11 yactualizacion173,60ms cumplen;creacion202,6812ms no. No redondear a200 ni subir umbral.",
+    "RNF-2 pendiente; el ahorro del cambio217 no esta incluido en esta corrida.",
+    "Corrida con diferente host/orden y dataset final; mejora observada respecto a2procesos no demuestra causalidad exclusiva."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "fecha_local": "2026-10-30",
+  "estado": "AHORRO_CONSULTA_OUTBOX_NUEVO_EVENTO_VALIDADO_LOCAL_SIN_MEDICION_REAL",
+  "motivo": "Novena formal solo creacion202,6812ms incumple el limite estricto200ms.",
+  "cambio": "queue_event captura inspect(event) antes de flush; omite SELECT MailDelivery solo si pending, en esta misma Session, y event.id es None. El flush genera identidad nueva e inserta evento; eventos persistentes o ID explicito siguen consultando duplicados.",
+  "garantias": [
+    "Sin parametro controlable por cliente, cache de destinatarios ni cambio de permisos.",
+    "Conserva destinatarios vigentes y contexto por evento, IDs deterministas y constraints.",
+    "Flush, INSERT multivalores cacheable, transaccion, rollback, locks y confirmacion sin cambios.",
+    "Repetir el mismo evento tras primer encolado usa ruta persistente y deduplica; ID explicito usa ruta conservadora.",
+    "No toca umbral, protocolo, procesos por defecto, pool, SMTP, IA ni configuracion operativa."
+  ],
+  "validacion": {
+    "pruebas_unitarias_sin_HTTP": 30,
+    "duracion_s": 2.522,
+    "nuevas": 3,
+    "ast_archivos": 3,
+    "consultas_create_case_sqlite_mismo_departamento_antes_despues": [
+      7,
+      6
+    ],
+    "consultas_create_case_sqlite_otro_departamento_antes_despues": [
+      8,
+      7
+    ],
+    "rollback_despues_segundo_lote": "Aprobado: no quedan caso/auditoria/entregas parciales",
+    "postgreSQL_CI": "PENDIENTE_PUBLICACION",
+    "latencia_real": "PENDIENTE: no extrapolar milisegundos de una consulta ahorrada"
+  },
+  "fuente_estado_ORM": "https://docs.sqlalchemy.org/en/20/orm/session_state_management.html",
+  "sha256": {
+    "backend/app/services/mail.py": "55d9db1679a49fdf2c6433e1b66b18483ace65125a3628e57aa7a0c5f04eb437",
+    "backend/tests/test_outbox_cached_insert.py": "8a3479ca196fd55dd74e00a8ab0df3fd6d5b6b340b7bed92bee14f8c114fee7e",
+    "backend/tests/test_creation_department_reuse.py": "58db5b7ca0afab148ebfe4081f37089885990ef473cbfcb098820c9a67a42f5f"
+  },
+  "CI_previa_candidato_tres": "https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/41133946635",
+  "CI_previa_resultado": "success, anterior a este cambio"
+}

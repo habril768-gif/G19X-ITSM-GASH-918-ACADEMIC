@@ -1674,3 +1674,18 @@ Archivos: provision_performance_qa.py, run_performance_full_guarded.py y tres pr
 ```powershell
 .\backend\.venv\Scripts\python.exe -B backend/scripts/run_performance_full_guarded.py --api-workers 3 --confirm-isolated-qa
 ```
+
+
+## 2026-10-30 — Novena formal: solo creación incumple; una consulta menos en outbox nuevo
+
+[Evidencia216](evidencias/216-formal-tres-procesos-fallo-creacion.json),run85395e3b50fc4f8d: QA3 verificado, diez clientes/30+300s,54 hashes coincidentes con versión publicada previa.34.027 solicitudes medidas sin errores en ambas fases. P95 listado125,63/detalle119,11/actualización173,60ms cumplen; **creación202,6812ms incumple p95<200ms**. No redondear ni elevar umbral. Conteos100→944→9.449; SQL9.449CREADO,9.342EDITADO,94.490entregas, ceroSMTP/IA. Post HTTP correcto,diez logout204 y QA detenido. Noveno fallo formal conservado; RNF-2 sigue pendiente. Comparación con2procesos es favorable en los cuatro p95 y throughput, pero host/orden/dataset difieren; no prueba causalidad única. La preparación previa de3procesos pasó CIBackend41133946635; no es esta optimización.
+
+[Evidencia217](evidencias/217-outbox-evento-nuevo-sin-lectura-redundante.json): queue_event inspecciona estado ORM antes de flush. Solo un evento pendiente en la misma Session y con ID todavía None evita SELECT mail_deliveries: no puede tener entregas previas antes de existir; el flush debe generar su ID e insertarlo correctamente. Eventos ya persistentes, reencolados o con ID explícito conservan consulta y deduplicación. No se añade indicador público ni cache de datos/permisos. Mantiene destinatarios autorizados, contexto, IDs deterministas, constraint, INSERT multivalores cacheable, flush/transacción/commit/rollback, locks y durabilidad. El código consumidor no cambia su contrato ni ejecuta SMTP durante petición. Fuente de estados ORM: [SQLAlchemy](https://docs.sqlalchemy.org/en/20/orm/session_state_management.html).
+
+**Validación local real:**30 pruebas sin HTTP aprobadas en2,522s y AST3 archivos correcto. Tres nuevas cubren evento pendiente sin ID sin búsqueda, replay con búsqueda/IDs únicos y rollback; evento con ID explícito en ruta conservadora; omisión por cero destinatarios y repetición sin duplicados. Las anteriores cubren123destinatarios en3lotes, caché sin mezclar eventos y rollback completo al fallar segundo lote durante create_case. Consultas directas SQLite con mismo departamento7→6 y otro8→7; mantienen permisos y ceroSQL postcommit. No es medición PostgreSQL ni latencia HTTP; ahorro equivalente de una consulta en QA pendiente de observar, no afirmar p95 alcanzado. Runner, guard, protocolo, número3 del candidato, Dockerfile, pool y sitio intactos; no cuarto proceso ni relajación de200ms. Pendiente CIbackend/PostgreSQL y una única formal con código nuevo. Archivos: mail.py y dos pruebas; evidencias216/217 y documentación.
+
+Comando después de las validaciones, con Docker abierto y entorno normal detenido:
+
+```powershell
+.\backend\.venv\Scripts\python.exe -B backend/scripts/run_performance_full_guarded.py --api-workers 3 --confirm-isolated-qa
+```

@@ -161,3 +161,46 @@ class OutboxCachedInsertTests(unittest.TestCase):
         self.assertEqual(caught.exception.status_code,503)
         self.assertEqual(len(calls),2)
         self.assertEqual(tuple(self.db.scalar(select(func.count()).select_from(model)) for model in models),before)
+
+    def test_pending_unidentified_event_skips_lookup_but_replay_stays_idempotent(self):
+        self.configure_recipients(10)
+        case=self.world.cases[0]
+        audit=AuditEvent(incidencia_id=case.id,usuario_id=self.world.actors['employee'].id,accion='CREADO',detalle={})
+        self.db.add(audit);self.assertIsNone(audit.id)
+        lookups=[]
+        def observe(conn,cursor,sql,parameters,context,executemany):
+            if sql.lstrip().upper().startswith('SELECT') and 'FROM mail_deliveries' in sql:lookups.append(sql)
+        event.listen(self.db.bind,'before_cursor_execute',observe)
+        try:
+            queue_event(self.db,case,audit)
+            self.assertEqual(lookups,[])
+            queue_event(self.db,case,audit)
+            self.assertEqual(len(lookups),1)
+        finally:event.remove(self.db.bind,'before_cursor_execute',observe)
+        rows=self.deliveries(audit)
+        self.assertEqual(len(rows),10)
+        self.assertEqual(len({row.id for row in rows}),10)
+        self.assertTrue(all(row.status=='PENDIENTE' and row.attempts==0 for row in rows))
+        ident=audit.id;self.db.rollback()
+        self.assertIsNone(self.db.get(AuditEvent,ident))
+        self.assertEqual(list(self.db.scalars(select(MailDelivery))),[])
+
+    def test_pending_explicit_id_keeps_conservative_lookup(self):
+        from uuid import uuid4
+        self.configure_recipients(1);case=self.world.cases[0]
+        audit=AuditEvent(id=uuid4(),incidencia_id=case.id,usuario_id=self.world.actors['employee'].id,accion='CREADO',detalle={})
+        self.db.add(audit);lookups=[]
+        def observe(conn,cursor,sql,parameters,context,executemany):
+            if sql.lstrip().upper().startswith('SELECT') and 'FROM mail_deliveries' in sql:lookups.append(sql)
+        event.listen(self.db.bind,'before_cursor_execute',observe)
+        try:queue_event(self.db,case,audit)
+        finally:event.remove(self.db.bind,'before_cursor_execute',observe)
+        self.assertEqual(len(lookups),1)
+        self.assertEqual(len(self.deliveries(audit)),1)
+
+    def test_pending_without_recipients_preserves_omission_and_replay(self):
+        self.configure_recipients(0);case=self.world.cases[0]
+        audit=AuditEvent(incidencia_id=case.id,usuario_id=self.world.actors['employee'].id,accion='CREADO',detalle={})
+        self.db.add(audit);queue_event(self.db,case,audit);queue_event(self.db,case,audit)
+        rows=self.deliveries(audit);self.assertEqual(len(rows),1)
+        self.assertEqual((rows[0].recipient_id,rows[0].status,rows[0].attempts),(None,'OMITIDA',0))
