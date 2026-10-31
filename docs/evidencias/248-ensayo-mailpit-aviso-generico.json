@@ -1,0 +1,36 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Capturas aportadas por usuaria e inspeccionadas visualmente en chat.",
+  "mailpit_message_id_contextual": "XKME9frQL85PVriwbYq7Z6",
+  "incidencia": "710482ca-a652-4679-9abf-13c3b3553e10",
+  "captura_correo": {
+    "from": "no-reply@plurione.invalid",
+    "to": "admin@example.invalid",
+    "subject": "PluriOne - Caso 710482ca-a652-4679-9abf-13c3b3553e10",
+    "fecha_visible": "Sat, 31 Oct 2026, 10:01 am; zona no indicada en recorte",
+    "body_visible": "Hay una actualización disponible. Consulta el expediente con tu cuenta autorizada: http://127.0.0.1:5173/?incident=710482ca-a652-4679-9abf-13c3b3553e10"
+  },
+  "capturas": [
+    {
+      "archivo": "249-mailpit-aviso-generico-caso-ficticio.png",
+      "sha256": "1a9b89e86e0dfa1607f1d4275bfe8c0be9acb1146a40905bf745f5afdb5d847a",
+      "bytes": 30185,
+      "observacion": "Cuerpo Text y cabeceras visibles de aviso ficticio."
+    },
+    {
+      "archivo": "250-mailpit-comprobador-sin-ejecutar.png",
+      "sha256": "2530abcff0dc9d0257bbabd07e944cda486a0498d0e83d724cde6ce53174d9d7",
+      "bytes": 33736,
+      "observacion": "Pantalla Link check con botón Check message links; sin resultado mostrado."
+    }
+  ],
+  "resultado": "Aviso capturado localmente, cuerpo genérico con ID/enlace; sin título, descripción o nombres de personas en cuerpo visible.",
+  "limites": [
+    "No acredita buzón externo, todos los destinatarios, exclusiones, reintentos o tipo de evento del aviso por inspección SQL.",
+    "La captura de Link check no muestra ejecución ni respuesta; no declarar enlace verificado.",
+    "No se inspeccionó Raw/Headers completo ni otras partes MIME.",
+    "El enlace contiene UUID del caso y dirección local; no es un enlace con token de sesión.",
+    "La pantalla de bandeja anterior mostraba tres avisos del mismo caso; estas capturas corresponden a un mensaje."
+  ],
+  "publicacion": "Registro local; pendiente de publicación conjunta."
+}

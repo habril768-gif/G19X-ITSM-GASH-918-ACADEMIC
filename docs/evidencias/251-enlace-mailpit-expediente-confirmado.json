@@ -1,0 +1,28 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Captura aportada por usuaria e inspeccionada en chat; contexto de URL del navegador.",
+  "procedimiento_previo": "Se indicó abrir el enlace del mensaje Mailpit248 e iniciar sesión Admin RH si se solicitaba.",
+  "url_contextual": "http://127.0.0.1:5173/?incident=710482ca-a652-4679-9abf-13c3b3553e10",
+  "visible": {
+    "cuenta": "Administrador RH",
+    "rol": "Administración RH",
+    "id": "710482ca-a652-4679-9abf-13c3b3553e10",
+    "titulo": "QA bloqueo de departamento por incidencia abierta",
+    "estado": "Pendiente",
+    "descripcion": "Caso ficticio para comprobar que un departamento con incidencias abiertas no puede desactivarse.",
+    "seguimiento": "Asistencia IA pendiente; no se infiere funcionamiento del proveedor."
+  },
+  "captura": {
+    "archivo": "252-enlace-correo-expediente-admin-rh.png",
+    "sha256": "e817d457a2fd81e06c570b1d632913592e751feaea8b825a7261789c72a2f970",
+    "bytes": 51798
+  },
+  "resultado": "URL con parametro incident coincide con el expediente visible en sesion Admin RH, tras instruccion de abrir enlace del correo.",
+  "limites": [
+    "No se observó directamente el clic ni si se requirió login intermedio; captura muestra destino y sesión.",
+    "No se ejecutó el comprobador automático de enlaces de Mailpit.",
+    "No prueba destinatarios externos, correo externo, todas las sesiones o todos los enlaces.",
+    "La exposición del contenido del caso corresponde a sesión Admin RH; contraste de acceso Empleado está en242/243."
+  ],
+  "publicacion": "Registro local pendiente de publicación conjunta."
+}

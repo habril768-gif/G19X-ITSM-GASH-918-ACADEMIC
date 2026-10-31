@@ -895,3 +895,18 @@ Propósito: facilitar revisión académica sin repetir pruebas o presentar acept
 ### 2026-10-31 — Control positivo Admin RH del expediente ficticio
 
 [Evidencia243](evidencias/243-control-admin-expediente-200.json): rol ADMIN_RH comprobado, detalle/historial/participantes del caso710482ca-a652-4679-9abf-13c3b3553e10 responden200; cierre204, según salida aportada por usuaria. Contrasta con los tres404 de Empleado en242 mediante sesiones sucesivas, sin mostrar contenido. Propósito: confirmar disponibilidad autorizada posterior y reforzar el recorrido A07. No prueba simultaneidad, ausencia de cambios entre sesiones o matriz integral de conflictos/participantes. Correo operativo omitido en nueva evidencia; credenciales/tokens no recogidos. Auxiliar con sintaxis y tres escenarios simulados comprobados. Archivos: evidencia243, aceptación, resumen, bitácora, QA, backlog, entregables y trazabilidad. Validación documental: JSON y enlaces comprobados. Sin código de producto nuevo, mutaciones de negocio solicitadas ni publicación remota en este avance.
+
+
+### 2026-10-31 — Ensayo de demostración con capturas de estados
+
+[Evidencia244](evidencias/244-ensayo-estados-capturas-autora.json) y capturas245–247 aportadas por la usuaria: evento CREADO visible, cuenta ficticia EMPLEADO Inactiva vinculada al departamento ficticio, departamento Activo. Propósito: conservar prueba visual del ensayo de demostración. ID/estado Pendiente del caso y sesión Admin RH corresponden al contexto reportado, no visibles en los recortes. Capturas no demuestran por sí solas causa de bloqueo, integridad completa ni aceptación institucional. Archivos: JSON244, tres PNG245–247 y seguimiento documental. Validación: firmas PNG, hashes SHA256 y referencias comprobados. Sin modificar datos, nuevas pruebas de aplicación o publicación remota en este avance. Ensayo no equivale a capacitación acreditada.
+
+
+### 2026-10-31 — Ensayo: aviso genérico capturado en Mailpit
+
+[Evidencia248](evidencias/248-ensayo-mailpit-aviso-generico.json), capturas249/250 de la autora: mensaje del caso ficticio710482ca-a652-4679-9abf-13c3b3553e10 para destinatario ficticio, cuerpo genérico con enlace local y UUID, sin título/descripción/nombres en texto visible. Comprobador de enlaces mostrado sin resultado; no se declara verificado. Propósito: documentar sección de correo de la demostración. Alcance Mailpit local, sin comprobar buzón externo, Raw/MIME completo, todos los destinatarios o reintentos. Archivos: JSON248, PNG249/250 y seguimiento. Validación: firmas PNG, hashes y referencias comprobados. Sin modificar aplicación, generar avisos nuevos o publicación remota en este avance.
+
+
+### 2026-10-31 — Apertura del expediente desde enlace de correo
+
+[Evidencia251](evidencias/251-enlace-mailpit-expediente-confirmado.json) y captura252: tras indicación de abrir enlace Mailpit, la autora aporta destino con parametro incident y expediente del mismo UUID, título ficticio y estado Pendiente, sesión Administrador RH visible. Propósito: completar ensayo de navegación correo→expediente. No se observó el clic/login intermedio; no se declara ejecutado el comprobador automático de Mailpit ni entrega externa. La leyenda IA pendiente no demuestra llamada o fallo del proveedor. Archivos: JSON251, PNG252 y seguimiento documental. Validación: firma PNG, hash SHA256 y referencia comprobados. Sin cambios de aplicación, nuevos avisos o publicación remota en este avance.

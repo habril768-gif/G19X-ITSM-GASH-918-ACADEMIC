@@ -51,3 +51,12 @@ Actualización local242: tres404 reportados para otro Empleado sobre expediente 
 
 
 Actualización local243: control positivo Admin RH con tres200 y cierre204, posterior a los tres404 de Empleado242; pendiente de publicación conjunta.
+
+
+Ensayo visual local: [244](evidencias/244-ensayo-estados-capturas-autora.json), capturas del evento CREADO, cuenta Inactiva y departamento Activo aportadas por autora. Recortes con contexto reportado; no aceptación institucional. Pendiente de publicación.
+
+
+Ensayo de correo: [248](evidencias/248-ensayo-mailpit-aviso-generico.json), captura de aviso genérico249 y comprobador sin ejecución acreditada250. Captura local, no entrega externa ni enlace probado; pendiente de publicación.
+
+
+Enlace del aviso local: [251](evidencias/251-enlace-mailpit-expediente-confirmado.json), captura252 muestra URL y expediente coincidentes con sesión Admin RH. Completa destino de navegación del ensayo248; sin clic/login observado ni comprobador automático de Mailpit. Pendiente de publicación.

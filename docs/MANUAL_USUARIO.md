@@ -102,6 +102,8 @@ Admin RH dispone de **Usuarios** para alta y actualización de cuentas permitida
 
 En **Departamentos**, registra o edita el nombre, activación y motivo. La baja es lógica y puede rechazarse si existen usuarios activos o casos abiertos vinculados. Atiende esas dependencias mediante sus procedimientos; no borres datos para forzar la baja. Consulta el historial para revisar cambios confirmados.
 
+El botón **Historial** de Departamentos consulta sus cambios. Usuarios registra auditoría internamente, pero no ofrece una vista de historial administrativo en el panel; solicita su comprobación al operador autorizado. El historial de un expediente es una consulta distinta.
+
 Guías administrativas: [usuarios](ADMIN_USUARIOS.md), [departamentos](DEPARTAMENTOS.md) y [provisión independiente](ADMIN_INDEPENDIENTE.md).
 
 ## Leer el informe Power BI

@@ -1825,3 +1825,62 @@ Propósito: agrupar conservación de expediente238, consulta de auditoría239 y 
 ### 2026-10-31 — Control positivo Admin RH del expediente ficticio
 
 [Evidencia243](evidencias/243-control-admin-expediente-200.json): rol ADMIN_RH comprobado, detalle/historial/participantes del caso710482ca-a652-4679-9abf-13c3b3553e10 responden200; cierre204, según salida aportada por usuaria. Contrasta con los tres404 de Empleado en242 mediante sesiones sucesivas, sin mostrar contenido. Propósito: confirmar disponibilidad autorizada posterior y reforzar el recorrido A07. No prueba simultaneidad, ausencia de cambios entre sesiones o matriz integral de conflictos/participantes. Correo operativo omitido en nueva evidencia; credenciales/tokens no recogidos. Auxiliar con sintaxis y tres escenarios simulados comprobados. Archivos: evidencia243, aceptación, resumen, bitácora, QA, backlog, entregables y trazabilidad. Validación documental: JSON y enlaces comprobados. Sin código de producto nuevo, mutaciones de negocio solicitadas ni publicación remota en este avance.
+
+
+### 2026-10-31 — Ensayo de demostración con capturas de estados
+
+[Evidencia244](evidencias/244-ensayo-estados-capturas-autora.json) y capturas245–247 aportadas por la usuaria: evento CREADO visible, cuenta ficticia EMPLEADO Inactiva vinculada al departamento ficticio, departamento Activo. Propósito: conservar prueba visual del ensayo de demostración. ID/estado Pendiente del caso y sesión Admin RH corresponden al contexto reportado, no visibles en los recortes. Capturas no demuestran por sí solas causa de bloqueo, integridad completa ni aceptación institucional. Archivos: JSON244, tres PNG245–247 y seguimiento documental. Validación: firmas PNG, hashes SHA256 y referencias comprobados. Sin modificar datos, nuevas pruebas de aplicación o publicación remota en este avance. Ensayo no equivale a capacitación acreditada.
+
+
+### 2026-10-31 — Ensayo: aviso genérico capturado en Mailpit
+
+[Evidencia248](evidencias/248-ensayo-mailpit-aviso-generico.json), capturas249/250 de la autora: mensaje del caso ficticio710482ca-a652-4679-9abf-13c3b3553e10 para destinatario ficticio, cuerpo genérico con enlace local y UUID, sin título/descripción/nombres en texto visible. Comprobador de enlaces mostrado sin resultado; no se declara verificado. Propósito: documentar sección de correo de la demostración. Alcance Mailpit local, sin comprobar buzón externo, Raw/MIME completo, todos los destinatarios o reintentos. Archivos: JSON248, PNG249/250 y seguimiento. Validación: firmas PNG, hashes y referencias comprobados. Sin modificar aplicación, generar avisos nuevos o publicación remota en este avance.
+
+
+### 2026-10-31 — Apertura del expediente desde enlace de correo
+
+[Evidencia251](evidencias/251-enlace-mailpit-expediente-confirmado.json) y captura252: tras indicación de abrir enlace Mailpit, la autora aporta destino con parametro incident y expediente del mismo UUID, título ficticio y estado Pendiente, sesión Administrador RH visible. Propósito: completar ensayo de navegación correo→expediente. No se observó el clic/login intermedio; no se declara ejecutado el comprobador automático de Mailpit ni entrega externa. La leyenda IA pendiente no demuestra llamada o fallo del proveedor. Archivos: JSON251, PNG252 y seguimiento documental. Validación: firma PNG, hash SHA256 y referencia comprobados. Sin cambios de aplicación, nuevos avisos o publicación remota en este avance.
+
+
+## 2026-10-31 — Archivo de notas históricas retiradas del índice
+
+Texto histórico conservado del índice documental. Sus pendientes corresponden a cada etapa anterior y no sustituyen el estado vigente de la matriz de aceptación.
+
+### 2026-10-30 — RNF-2: formal QA de dos procesos preparada
+
+[Evidencia213](evidencias/213-formal-qa-dos-procesos-preparada.json): opcion explicita `--api-workers 2` en run_performance_full_guarded.py; conserva protocolo10clientes/30+300s/p95<200ms, guardas CPU/redes e integridad.126 unitarias aprobadas; ejecución formal real pendiente. Ver comando y límites en [prueba de rendimiento](PRUEBA_RENDIMIENTO.md). La restricción histórica de dos procesos solo smoke se amplía a full sin diagnóstico; sitio sin cambios.
+
+
+### 2026-10-30 — RNF-2 pendiente tras octava formal
+
+[Evidencia214](evidencias/214-formal-dos-procesos-fallo-escrituras.json):27.722 solicitudes sin errores con2procesos; listado/detalle160,12/156,67ms cumplen, creación/actualización264,38/227,96ms incumplen. Integridad y parada correctas. [Candidato215](evidencias/215-formal-tres-procesos-candidato.json): `--api-workers 3` en QA formal con mismo protocolo,130 pruebas aprobadas, todavía sin medición real. Más memoria/conexiones y posible competencia CPU; no cambia sitio ni umbral. Ver [prueba de rendimiento](PRUEBA_RENDIMIENTO.md).
+
+
+### 2026-10-30 — RNF-2: solo creación pendiente en novena formal
+
+[Evidencia216](evidencias/216-formal-tres-procesos-fallo-creacion.json):QA3,34.027 solicitudes sin errores; p95lecturas125,63/119,11 yactualización173,60ms cumplen; creación202,6812ms incumple. Integridad y parada correctas; RNF-2 pendiente. [Cambio217](evidencias/217-outbox-evento-nuevo-sin-lectura-redundante.json): evita una búsqueda outbox solo para evento pendiente sin identidad, preserva deduplicación de replay y atomicidad;30unitarias aprobadas. Pendiente CI y formal con mismo protocolo3procesos/10clientes/30+300s/p95<200ms.
+
+
+### 2026-10-30 — RNF-2 pendiente tras décima formal
+
+[Evidencia218](evidencias/218-decima-formal-fallida-cuatro-operaciones.json):24.450 solicitudes sin errores, QA3; p95 listado209,73/detalle200,83/creación328,30/edición289,47ms incumplen. Integridad y parada correctas, outbox217 presente; sin causalidad aislada. [219](evidencias/219-cpu-pasiva-por-fase-formal.json) añade CPU Windows/generador al inicio/fin de cada fase normal/formal, sin perfil API ni cambiar protocolo/veredicto;132 pruebas aprobadas. Pendiente CI y nueva medición; no más procesos ni cambios de negocio a ciegas.
+
+
+## RNF-2 acreditado en QA local
+
+[220: formal aprobada](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json), [221: perfilCompose](evidencias/221-perfil-compose-rnf2-reproducible.json) y [protocolo/alcance](PRUEBA_RENDIMIENTO.md).Tres procesosAPI,10 clientes/30+300s; cuatro p95 <200 ms,sin errores e integridad correcta. El historial de fallos no se elimina; otros pendientes de entrega continúan.
+
+
+## Continuación de la entrega: matriz por roles
+
+La [matriz de aceptación](ACEPTACION_ENTREGA.md) reúne14escenarios con origen/alcance de evidencia y pendientes. [Preparación222](evidencias/222-matriz-aceptacion-entrega-preparada.json): siguiente recorrido de departamentos conAdminRH,8pasos previstos y ninguna escritura ejecutada. RNF-2 aprobado220 se conserva; un plan no es aceptación real. Ver comandos de arranque con3procesos/Mailpit y registro de resultados en la matriz.
+
+
+## Departamentos: aceptación Admin RH observada
+
+[223](evidencias/223-departamentos-admin-rh-recorrido-ui.json): D01–D08 conforme en panel integrado; alta ficticia, duplicado rechazado, renombrado, baja/reactivación y baja final; cinco eventos con motivos y persistencia tras actualizar. Estado final inactivo, sin borrar datos ni tocar departamentos usados. [224: historial](evidencias/224-departamentos-admin-rh-historial-final.jpg),[225: duplicado](evidencias/225-departamento-duplicado-rechazado.jpg). A02 verificado; A03 parcial y A04 pendiente según [matriz](ACEPTACION_ENTREGA.md). No implica aceptación integral ni institucional.
+
+
+### 2026-10-31 — Revisión de manuales y preparación de evidencias del ensayo
+
+Propósito: dejar guías de uso actuales y agrupar capturas del ensayo para publicación. Se aclara historial de departamentos frente a auditoría interna de usuarios en ambos manuales. Notas cronológicas de preparación/fallos RNF-2 retiradas del índice y conservadas arriba en bitácora; índice enlaza estado vigente. Evidencias244–252 conservan capturas y límites de estados, correo local y destino de enlace; no capacitación ni aceptación formal. Archivos: manuales, índice, bitácora, evidencia gráfica y seguimiento. Validación: JSON de manifiestos, integridad SHA256 de seis PNG, enlaces de manuales/índice y diff comprobados. No se repiten pruebas funcionales por cambio documental ni se publican secretos o respaldos. Publicación por comprobar en rama remota; no se declara ocurrida por prepararla.

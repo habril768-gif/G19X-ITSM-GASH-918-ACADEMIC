@@ -1,0 +1,38 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Tres capturas aportadas por la usuaria e inspeccionadas visualmente en el chat; sin control directo del navegador por el agente.",
+  "contexto_reportado": {
+    "incidencia": "710482ca-a652-4679-9abf-13c3b3553e10",
+    "estado": "Pendiente reportado por usuaria al abrir caso; no visible en estos tres recortes.",
+    "cuenta": "qa-entrega-20261031-01@example.invalid",
+    "departamento": "QA entrega - departamentos - 20261030-01 - revisado"
+  },
+  "capturas": [
+    {
+      "archivo": "245-ensayo-historial-creado.png",
+      "sha256": "3eb33a3a955094842a7059d4500e4daf044a49e3346f8aa4d3900004022a332b",
+      "bytes": 10065,
+      "observacion": "Recorte de Historial del caso con evento CREADO; el recorte no muestra ID de incidencia."
+    },
+    {
+      "archivo": "246-ensayo-cuenta-inactiva.png",
+      "sha256": "81f36806f46d19f7ec00107b743159423a92c2bef0ac57575eab4bb986ddf442",
+      "bytes": 8699,
+      "observacion": "Fila de cuenta ficticia: rol EMPLEADO, Inactiva y departamento ficticio."
+    },
+    {
+      "archivo": "247-ensayo-departamento-activo.png",
+      "sha256": "bb5a7c5eb5febf73a5836b1adf2d9cbada1ba5dc6efc77c0fe78a9938763e832",
+      "bytes": 4683,
+      "observacion": "Fila del departamento ficticio Activo con controles Editar/Historial."
+    }
+  ],
+  "resultado": "Capturas corroboran evento CREADO, cuenta ficticia Inactiva vinculada al departamento ficticio y departamento Activo.",
+  "limites": [
+    "Los recortes no muestran sesión/rol autenticado ni vínculo simultáneo a ID del caso; se conserva contexto de usuaria.",
+    "El evento CREADO visible no prueba integridad completa de auditoría.",
+    "Departamento Activo por sí solo no demuestra motivo del bloqueo; recorrido233 conserva la prueba con sus límites.",
+    "Es ensayo de demostración, no capacitación o aceptación institucional."
+  ],
+  "publicacion": "Registro local; pendiente de publicación conjunta."
+}

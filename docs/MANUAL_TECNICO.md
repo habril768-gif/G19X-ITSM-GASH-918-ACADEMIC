@@ -79,3 +79,8 @@ Para reproducir la prueba formal crea QA independiente con el entorno normal det
 ```
 
 No es necesario repetir la aprobación existente para sumar evidencias; revalida si cambia producto,hardware o configuración relevante. El guard conservaCPUprevia,limpieza acotada y criterio estricto; el p95 no promete máximos menores de 200 ms. No borres volúmenes para arrancar el perfil.
+
+
+## Consulta de auditoría administrativa de usuarios
+
+El panel no incorpora una vista de historial de usuarios. El operador autorizado puede consultar eventos `USUARIO_ACTUALIZADO` de `historial_incidencias`, filtrando `affected_user_id` y `incidencia_id IS NULL`, mediante una transacción de solo lectura. El recorrido ficticio de [239](evidencias/239-auditoria-usuario-ficticio-consulta-lectura.json) ilustra el alcance comprobado; no publicar consultas sin filtrar ni credenciales. `sessions_revoked` es una bandera, no un recuento de sesiones. El evento de alta utiliza `operacion=ALTA_LOCAL` y no tiene necesariamente los campos before/after de una actualización administrativa.

@@ -153,3 +153,12 @@ Propósito: completar el supuesto manual pendiente de A03. Archivos: evidencia 2
 ### 2026-10-31 — Control positivo Admin RH del expediente ficticio
 
 [Evidencia243](evidencias/243-control-admin-expediente-200.json): rol ADMIN_RH comprobado, detalle/historial/participantes del caso710482ca-a652-4679-9abf-13c3b3553e10 responden200; cierre204, según salida aportada por usuaria. Contrasta con los tres404 de Empleado en242 mediante sesiones sucesivas, sin mostrar contenido. Propósito: confirmar disponibilidad autorizada posterior y reforzar el recorrido A07. No prueba simultaneidad, ausencia de cambios entre sesiones o matriz integral de conflictos/participantes. Correo operativo omitido en nueva evidencia; credenciales/tokens no recogidos. Auxiliar con sintaxis y tres escenarios simulados comprobados. Archivos: evidencia243, aceptación, resumen, bitácora, QA, backlog, entregables y trazabilidad. Validación documental: JSON y enlaces comprobados. Sin código de producto nuevo, mutaciones de negocio solicitadas ni publicación remota en este avance.
+
+
+Ensayo visual local: [244](evidencias/244-ensayo-estados-capturas-autora.json), capturas del evento CREADO, cuenta Inactiva y departamento Activo aportadas por autora. Recortes con contexto reportado; no aceptación institucional. Pendiente de publicación.
+
+
+Ensayo de correo: [248](evidencias/248-ensayo-mailpit-aviso-generico.json), captura de aviso genérico249 y comprobador sin ejecución acreditada250. Captura local, no entrega externa ni enlace probado; pendiente de publicación.
+
+
+Enlace del aviso local: [251](evidencias/251-enlace-mailpit-expediente-confirmado.json), captura252 muestra URL y expediente coincidentes con sesión Admin RH. Completa destino de navegación del ensayo248; sin clic/login observado ni comprobador automático de Mailpit. Pendiente de publicación.
