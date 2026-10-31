@@ -10,7 +10,7 @@ La interfaz React permite gestionar cuentas y departamentos, solicitar una suger
 
 ## Estado y límites
 
-El núcleo, correo y analítica tienen implementación y evidencia. El correo cuenta con un recorrido básico real; Power BI tiene conexión e informe guardado. **La entrega integral continúa pendiente**: RNF-2 aún no alcanza el p95 requerido; faltan instalación/recuperación operativa completa, aceptación integral y actividades reales de capacitación. Existen recorridos acotados por rol y pruebas de Power BI, con sus límites registrados. Consulta el [alcance del MVP](docs/MVP.md), el [plan de cierre](docs/BACKLOG.md) y la [evidencia de QA](docs/REPORTE_QA.md).
+El núcleo, correo y analítica tienen implementación y evidencia. El correo cuenta con un recorrido básico real; Power BI tiene conexión e informe guardado. **RNF-2 está aprobado en el alcance HTTP QA local documentado**, con tres procesos API y los límites de hardware y protocolo de la [evidencia 220](docs/evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json). La restauración lógica Docker, comparación de filas/huellas y reanudación tienen confirmación de la autora en las evidencias [230](docs/evidencias/230-restauracion-docker-confirmada.json) y [234](docs/evidencias/234-salud-posterior-reanudacion-docker.json). **La entrega integral continúa pendiente** por recuperación completa de instalación, aceptación integral y actividades reales de capacitación. Existen recorridos acotados por rol y pruebas de Power BI, con sus límites registrados. Consulta el [alcance del MVP](docs/MVP.md), el [plan de cierre](docs/BACKLOG.md) y la [evidencia de QA](docs/REPORTE_QA.md).
 
 El entorno está destinado a pruebas locales con datos ficticios. La IA propone; una persona autorizada confirma categoría y prioridad. La evaluación del modelo mide un conjunto simulado, no garantiza su desempeño en casos nuevos. La supresión por privacidad puede dejar todos los indicadores vacíos; un valor suprimido nunca equivale a cero.
 
@@ -21,7 +21,7 @@ El entorno está destinado a pruebas locales con datos ficticios. La IA propone;
 - Power BI Desktop para consultar el informe; es opcional para usar el panel web.
 - Python solo para desarrollo sin contenedores o pruebas aisladas; la imagen backend incluye su entorno.
 
-No se necesita una clave OpenAI para el núcleo. La asistencia IA requiere activación y credenciales propias; puede consumir saldo. Las versiones técnicas necesarias para reproducibilidad se conservan en Dockerfiles, dependencias y migraciones.
+El arranque requiere configurar `POSTGRES_PASSWORD` en `.env` y asignar una contraseña privada al primer Admin RH. Para asistencia IA, configura `OPENAI_API_KEY` y activa el perfil `ai`; su uso puede consumir saldo. El núcleo funciona con la IA desactivada. El perfil de correo local utiliza Mailpit; un SMTP externo requiere su configuración y, cuando corresponda, credenciales propias. Las versiones técnicas necesarias para reproducibilidad se conservan en Dockerfiles, dependencias y migraciones.
 
 ## Arranque local en cinco pasos
 
