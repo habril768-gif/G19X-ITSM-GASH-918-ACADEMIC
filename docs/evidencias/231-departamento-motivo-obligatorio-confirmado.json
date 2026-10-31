@@ -1,0 +1,14 @@
+{
+  "fuente": "Confirmación textual de la usuaria durante prueba manual guiada; sin observación directa del agente.",
+  "departamento_ficticio_indicado": "QA entrega - departamentos - 20261030-01 - revisado",
+  "procedimiento_indicado": "Editar ligeramente el nombre y tratar de guardar sin motivo del cambio de departamento.",
+  "resultado_reportado": "Bloquea el guardado solicitando completar el campo de motivo del cambio de departamento.",
+  "estado": "VALIDACION_DE_FORMULARIO_CONFIRMADA_POR_USUARIA",
+  "limites": [
+    "No se inspeccionó una llamada directa a la API ni la base de datos.",
+    "Cancelación de la edición indicada después de la prueba; no confirmada todavía.",
+    "A03 sigue parcial: rechazo de baja con dependencias no probado en este recorrido."
+  ],
+  "documentacion": "Integrado en docs/evidencias con actualización de matriz y seguimiento local; sin publicación remota.",
+  "publicacion": "Sin publicación remota."
+}

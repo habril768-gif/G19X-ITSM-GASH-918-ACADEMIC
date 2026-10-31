@@ -802,3 +802,56 @@ La [matriz de aceptación](ACEPTACION_ENTREGA.md) reúne14escenarios con origen/
 ## Departamentos: aceptación Admin RH observada
 
 [223](evidencias/223-departamentos-admin-rh-recorrido-ui.json): D01–D08 conforme en panel integrado; alta ficticia, duplicado rechazado, renombrado, baja/reactivación y baja final; cinco eventos con motivos y persistencia tras actualizar. Estado final inactivo, sin borrar datos ni tocar departamentos usados. [224: historial](evidencias/224-departamentos-admin-rh-historial-final.jpg),[225: duplicado](evidencias/225-departamento-duplicado-rechazado.jpg). A02 verificado; A03 parcial y A04 pendiente según [matriz](ACEPTACION_ENTREGA.md). No implica aceptación integral ni institucional.
+
+
+## 2026-10-31 — Visibilidad de administración por rol confirmada por la autora
+
+[Evidencia226](evidencias/226-visibilidad-administracion-supervisor-empleado-confirmada.json): la usuaria informa que RH Independiente Demo ve Usuarios y Departamentos, Supervisor RH no muestra esas opciones y Empleado tampoco. Confirmación textual de visibilidad, sin observación directa/capturas nuevas del agente ni comprobación API en este recorrido. A04 avanza solo en su parte visual; rechazo de rutas API con sesiones reales sigue sin verificarse aquí. No repetir pruebas ya aprobadas ni crear cuentas para este registro. RNF-2 y recorrido223 se conservan. Registro local, sin publicación remota en este avance para reducir llamadas y consumo.
+
+
+### 2026-10-31 — Usuarios: confirmación de recorrido ficticio
+
+[227](evidencias/227-usuario-ficticio-alta-edicion-baja-confirmadas.json): autora confirma alta/listado, nombre revisado, estado Inactiva y acceso rechazado con aviso genérico. A05 parcial: sin comprobación independiente, auditoría o revocación de sesión previa; no atribuir el rechazo solo a la baja sin verificar credenciales previamente. Registro local, sin repetir pruebas ni publicación remota.
+
+
+### 2026-10-31 — Revocación de sesión al desactivar usuario ficticio
+
+[Evidencia 228](evidencias/228-revocacion-sesion-usuario-confirmada.json): la usuaria confirma inicio de sesión exitoso con `qa-entrega-20261031-01@example.invalid` y, tras el procedimiento guiado de desactivación desde Admin RH y nueva solicitud desde la sesión abierta, pérdida de acceso con el mensaje «Tu sesión terminó o cambió el acceso de tu cuenta. Inicia sesión nuevamente.» Resultado esperado confirmado por la usuaria; sin observación directa del agente ni inspección HTTP/SQL. Esta comprobación amplía la evidencia 227, cuyos límites originales se conservan.
+
+Propósito: verificar invalidación de sesión existente al desactivar una cuenta. Archivos: evidencia 228 y seguimiento documental de aceptación, QA, bitácora, backlog, entregables y trazabilidad. Validación: registro JSON leído de nuevo y referencia de matriz comprobada. A05 continúa parcial para auditoría y conservación del historial; no se declaran esos puntos probados. Sin cambios de código, repetición de RNF-2 ni publicación remota; registro local agrupado.
+
+
+### 2026-10-31 — Usuarios: conflicto por correo y motivo obligatorio
+
+[Evidencia 229](evidencias/229-usuarios-duplicado-motivo-confirmados.json): la usuaria confirma rechazo al intentar repetir el correo ficticio existente y bloqueo del formulario al omitir el motivo administrativo. Propósito: ampliar aceptación A05. Validación manual guiada y reportada por la usuaria; JSON y enlaces locales comprobados. Sin inspección HTTP/SQL: el aviso genérico no acredita por sí solo atomicidad y la validación del formulario no sustituye pruebas directas de API. A05 sigue parcial para auditoría y conservación de historial. Evidencia 228 conserva la revocación confirmada. Sin cambios de código ni publicación remota; RNF-2 aprobado se mantiene.
+
+
+### 2026-10-31 — Consolidación de recuperación Docker y controles de departamentos
+
+Propósito: integrar los resultados manuales aportados por la usuaria, sin repetir pruebas ni modificar código. [230](evidencias/230-restauracion-docker-confirmada.json): respaldo `plurione-20261031-092101.dump`, 75624 bytes, SHA256 `A21826DB6F16EBEA761D83B0DB1BD27D89A801E54CAAB5568AC1A0BB0F0F13B0`; pg_restore sin errores reportados, revisión 0008, cantidades y huellas de contenido de todas las tablas public coincidentes. Destino `plurione-restore-c368a6c78bd8` sin red/puertos según comando, luego detenido; origen reanudado y acceso Admin RH confirmado. La salida ps aún mostraba API health: starting; no declarar healthy posterior del API/worker. No se compararon independientemente secuencias, restricciones, índices, vistas, ACL ni roles globales; no es recuperación completa de instalación ni medición de RTO/RPO.
+
+[231](evidencias/231-departamento-motivo-obligatorio-confirmado.json): la usuaria confirma bloqueo del formulario al omitir motivo. [232](evidencias/232-departamento-bloqueo-usuario-activo-confirmado.json): tras reactivar el departamento ficticio y vincular la cuenta ficticia activa, la baja se rechaza con aviso genérico; después confirma que se guardan las bajas de cuenta y departamento. Ambos quedan inactivos según reporte. Bloqueo por incidencias abiertas sigue pendiente por separado. No inferir respuesta HTTP, auditoría, atomicidad SQL ni validación API a partir del formulario o aviso genérico.
+
+Archivos: evidencias 230–232, matriz de aceptación, mantenimiento, QA, bitácora, backlog, entregables, trazabilidad y MVP. Validación documental: JSON reabiertos, enlaces locales comprobados y matriz contrastada con las confirmaciones. Registros 228/229 conservan revocación, correo duplicado y motivo de usuarios; A05 sigue parcial por auditoría/historial. Sin nuevas pruebas de código, publicación remota ni cambios al cumplimiento de RNF-2. Pendientes: A03 incidencias abiertas, negativos por roles, auditoría de usuarios, recuperación integral, custodia y aceptación humana conforme a la matriz.
+
+
+### 2026-10-31 — Baja de departamento con incidencia pendiente
+
+[Evidencia 233](evidencias/233-departamento-incidencia-pendiente-confirmado.json): tras la preparación guiada, la usuaria reporta incidencia ficticia `710482ca-a652-4679-9abf-13c3b3553e10` Pendiente y rechazo de baja del departamento con aviso genérico; confirma expresamente que la cuenta ficticia está inactiva. Resultado esperado del recorrido confirmado por reporte, coherente con bloqueo por incidencia abierta. No se inspeccionaron otras cuentas vinculadas, departamento histórico, HTTP/SQL ni causa exclusiva. Conservar incidencia Pendiente y departamento operativo; no borrar ni cerrar para completar evidencias.
+
+Propósito: completar el supuesto manual pendiente de A03. Archivos: evidencia 233, aceptación, bitácora, QA, backlog, entregables y trazabilidad. Validación documental: lectura JSON y referencia en matriz comprobadas. A03 reúne ahora duplicado observado en223 y motivo/bloqueos reportados en231–233, con sus límites; no equivale a comprobación independiente de todas las precondiciones o aceptación institucional. No hay cambios de código, pruebas automáticas nuevas ni publicación remota. Persisten pendientes de otros escenarios de la matriz.
+
+
+### 2026-10-31 — Salud confirmada tras reanudar Docker
+
+[Evidencia 234](evidencias/234-salud-posterior-reanudacion-docker.json): salida aportada por la usuaria confirma API, PostgreSQL, Redis y Mailpit healthy; worker de correo Up sin estado de salud reportado. GET /health/db devuelve status ok y database postgresql. Completa la comprobación de salud posterior que seguía pendiente en230; acceso Admin RH ya confirmado. No prueba entrega de correo ni recuperación integral de instalación, roles/ACL o secuencias. Archivos: evidencia234 y seguimiento de aceptación, mantenimiento, QA, bitácora, backlog, entregables y trazabilidad. Validación documental: JSON y enlaces locales comprobados. Sin cambios de código, pruebas automáticas nuevas o publicación remota.
+
+
+### 2026-10-31 — Responsabilidad y ubicación del respaldo declaradas
+
+[Evidencia 235](evidencias/235-custodia-respaldo-confirmada.json): la autora declara que será responsable del respaldo y que lo conservará en RespaldosPluriOne de su computadora. Se referencia el archivo y hash registrados en230, sin publicar ruta privada ni identidad personal. Propósito: registrar una decisión real de custodia, no una asignación inferida. Archivos: evidencia235, mantenimiento, aceptación, bitácora, QA, backlog, entregables y trazabilidad. Validación documental: JSON y enlace comprobados. Pendientes: plazo o condición de conservación, acceso restringido no inspeccionado y disposición posterior; no se declara copia adicional o entrega a terceros. A13 continúa parcial y no se extiende esta declaración a exportaciones analíticas. Sin cambios de código, pruebas nuevas ni publicación remota.
+
+
+### 2026-10-31 — Condición de conservación del respaldo acordada
+
+[Evidencia 236](evidencias/236-conservacion-respaldo-acordada.json): la usuaria acepta conservar el respaldo hasta concluir la evaluación y atender las observaciones finales. Se mantienen responsable y ubicación declarados en235. Propósito: completar condición real de retención del respaldo académico. Archivos: evidencia236, mantenimiento, aceptación, bitácora, QA, backlog, entregables y trazabilidad. Validación: JSON y referencia comprobados. Sin fecha de vencimiento inventada, eliminación automática, publicación remota o nuevas pruebas. Pendientes: disposición posterior y controles de custodia no inspeccionados; analítica conserva sus decisiones independientes.

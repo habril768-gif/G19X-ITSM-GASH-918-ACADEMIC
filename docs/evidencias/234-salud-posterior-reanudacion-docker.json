@@ -1,0 +1,33 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Salida de PowerShell aportada por la usuaria; sin ejecución independiente del agente.",
+  "contexto": "Comprobación posterior a la restauración lógica y reanudación registradas en230.",
+  "compose": {
+    "archivos": [
+      "compose.yaml",
+      "compose.rnf2.yaml"
+    ],
+    "perfil": "mail",
+    "estado_reportado": {
+      "api": "Up 2 hours (healthy)",
+      "mail-worker": "Up 2 hours; sin health reportado",
+      "mailpit": "Up 2 hours (healthy)",
+      "postgres": "Up 2 hours (healthy)",
+      "redis": "Up 2 hours (healthy)"
+    }
+  },
+  "health_db": {
+    "url": "http://127.0.0.1:8000/health/db",
+    "respuesta": {
+      "status": "ok",
+      "database": "postgresql"
+    }
+  },
+  "resultado": "Salud posterior de API y conexión PostgreSQL confirmadas por salida de la usuaria.",
+  "limites": [
+    "Worker en ejecución no acredita entrega SMTP ni salud funcional del worker.",
+    "Se comprobó el origen reanudado, no una instalación de la aplicación sobre la base restaurada.",
+    "Se mantienen los límites de230 sobre secuencias, roles, ACL, recuperación integral y ausencia de RTO/RPO acordados."
+  ],
+  "publicacion": "Registro local; sin publicación remota."
+}

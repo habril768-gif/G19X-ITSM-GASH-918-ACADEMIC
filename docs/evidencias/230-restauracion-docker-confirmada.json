@@ -1,0 +1,41 @@
+{
+  "fecha_del_respaldo": "2026-10-31",
+  "fuente": "Transcripción de comandos y salidas aportada por la usuaria; sin ejecución Docker independiente del agente.",
+  "estado": "RESTAURACION_LOGICA_DOCKER_CONTENIDO_PUBLIC_Y_REANUDACION_CONFIRMADOS_POR_USUARIA",
+  "respaldo": {
+    "archivo": "plurione-20261031-092101.dump",
+    "bytes": 75624,
+    "sha256": "A21826DB6F16EBEA761D83B0DB1BD27D89A801E54CAAB5568AC1A0BB0F0F13B0"
+  },
+  "origen": {
+    "api": "plurione-api-1 detenida según salida",
+    "mail_worker": "plurione-mail-worker-1 detenido según salida"
+  },
+  "destino": {
+    "nombre": "plurione-restore-c368a6c78bd8",
+    "id": "915d33f95e517e480b316bd60dfb0e0ac6f302f64669809970244c7cabc7532e",
+    "imagen_declarada": "postgres:17-bookworm",
+    "aislamiento_declarado": "--network none; sin puertos publicados ni API/workers",
+    "revision_restaurada": "0008"
+  },
+  "validacion": {
+    "pg_restore": "--exit-on-error --no-owner --no-privileges; sin error reportado",
+    "comparacion": "Por cada tabla public: count(*) y MD5 de multiconjunto ordenado de hashes MD5 de row_to_json; sesiones UTC; comparación textual sensible a mayúsculas entre origen y destino.",
+    "salida": "TABLAS_Y_CONTENIDO_COINCIDEN"
+  },
+  "limites": [
+    "Comprobación de filas y huellas, no comparación independiente de restricciones, índices, secuencias, funciones, vistas, propietarios o privilegios.",
+    "No se ejecutó la aplicación sobre la copia ni se restauraron roles globales o configuración de infraestructura.",
+    "MD5 utilizado como comprobación de concordancia, no prueba criptográfica adversarial.",
+    "No se midió RTO ni se acordó RPO, custodia o retención."
+  ],
+  "documentacion": "Integrado en docs/evidencias con actualización de matriz y seguimiento local; sin publicación remota.",
+  "publicacion": "Sin publicación remota; sin datos, credenciales ni contenido del respaldo.",
+  "cierre_ensayo": {
+    "contenedor_aislado": "La salida de docker stop confirma detención de plurione-restore-c368a6c78bd8. No se eliminó.",
+    "reanudacion": "docker compose con compose.yaml, compose.rnf2.yaml y perfil mail: api y mail-worker iniciados; postgres y redis healthy.",
+    "estado_ps": "API Up 7 seconds (health: starting); mail-worker Up; Mailpit, PostgreSQL y Redis healthy.",
+    "acceso": "La usuaria confirma que pudo acceder como Admin RH.",
+    "limite": "No se aportó salida posterior que confirme healthy de API/worker ni consulta health/db tras reanudar; acceso funcional confirmado por usuaria."
+  }
+}

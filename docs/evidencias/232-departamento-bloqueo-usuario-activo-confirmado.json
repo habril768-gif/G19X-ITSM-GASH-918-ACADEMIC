@@ -1,0 +1,35 @@
+{
+  "fuente": "Confirmaciones textuales de la usuaria durante procedimiento guiado; sin observación directa del agente ni inspección HTTP/SQL.",
+  "cuenta_ficticia": "qa-entrega-20261031-01@example.invalid",
+  "departamento_ficticio": "QA entrega - departamentos - 20261030-01 - revisado",
+  "secuencia": [
+    {
+      "paso": "preparacion",
+      "procedimiento_indicado": "Reactivar departamento ficticio, trasladar cuenta ficticia desde DEMO - Operaciones y activarla conservando su rol.",
+      "confirmacion": "Ya guarde los cambios"
+    },
+    {
+      "paso": "intento_baja_departamento",
+      "procedimiento_indicado": "Desmarcar Departamento activo con motivo Prueba de bloqueo por usuario activo.",
+      "mensaje_reportado": "No se guardó el cambio: revisa nombre duplicado, usuarios activos o incidencias abiertas vinculadas."
+    },
+    {
+      "paso": "cierre",
+      "procedimiento_indicado": "Cancelar edición, desactivar cuenta ficticia con motivo Fin de prueba de dependencia y después desactivar departamento con motivo Fin de prueba de bloqueo de baja.",
+      "confirmacion": "Si ambos se guardaron correctamente"
+    }
+  ],
+  "resultado": "Rechazo esperado con usuario activo vinculado y baja posterior guardada tras desactivarlo, según reporte de la usuaria.",
+  "estado_final_reportado": {
+    "cuenta": "Inactiva",
+    "departamento": "Inactivo",
+    "departamento_cuenta": "Departamento ficticio indicado; no se indicó traslado posterior a DEMO - Operaciones."
+  },
+  "limites": [
+    "El mensaje de rechazo es genérico y agrupa varias causas.",
+    "No se comprobaron por consulta independiente el estado persistido, códigos HTTP, auditoría o transacción.",
+    "No se probó bloqueo por incidencias abiertas; A03 conserva pendiente ese supuesto."
+  ],
+  "documentacion": "Integrado en docs/evidencias con actualización de matriz y seguimiento local; sin publicación remota.",
+  "publicacion": "Sin publicación remota."
+}

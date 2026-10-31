@@ -1,0 +1,19 @@
+{
+  "fecha_local": "2026-10-31",
+  "estado": "REVOCACION_DE_SESION_CONFIRMADA_POR_USUARIA",
+  "fuente": "Confirmaciones textuales de la usuaria durante procedimiento guiado; sin observación directa del agente ni captura HTTP/SQL.",
+  "cuenta_ficticia": "qa-entrega-20261031-01@example.invalid",
+  "secuencia_reportada": [
+    "Tras la indicación de reactivar la cuenta, la usuaria confirma inicio de sesión exitoso con ella.",
+    "Se indica mantener esa sesión abierta y desactivar la cuenta desde la pestaña Admin RH.",
+    "Tras la indicación de solicitar Actualizar en incidencias sin recargar el navegador, la usuaria confirma pérdida de acceso y solicitud de inicio de sesión."
+  ],
+  "mensaje_reportado": "Tu sesión terminó o cambió el acceso de tu cuenta. Inicia sesión nuevamente.",
+  "resultado": "Prueba guiada de invalidación de sesión existente al desactivar la cuenta con resultado esperado, según confirmación de la usuaria.",
+  "limites": [
+    "No se inspeccionaron tokens, códigos HTTP, base de datos ni auditoría de usuarios.",
+    "La evidencia 227 conserva sus límites históricos; este recorrido aporta un inicio de sesión exitoso previo y pérdida de acceso posterior.",
+    "A05 continúa parcial para auditoría, conservación de historial y otros casos administrativos no comprobados en este recorrido.",
+    "Sin cambios de código, repetición de RNF-2 ni publicación remota. No se recogió contraseña."
+  ]
+}

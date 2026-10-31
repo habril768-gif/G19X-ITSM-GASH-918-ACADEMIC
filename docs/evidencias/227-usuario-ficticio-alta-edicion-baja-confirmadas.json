@@ -1,0 +1,38 @@
+{
+  "fecha_local": "2026-10-31",
+  "estado": "RECORRIDO_USUARIOS_CONFIRMADO_POR_AUTORA_CON_LIMITES",
+  "fuente": "Confirmaciones textuales de la usuaria; sin observación directa del agente, captura nueva, inspección HTTP ni SQL.",
+  "cuenta_ficticia_indicada": {
+    "email": "qa-entrega-20261031-01@example.invalid",
+    "nombre_inicial": "QA Entrega Usuario 20261031",
+    "nombre_final": "QA Entrega Usuario 20261031 revisado",
+    "rol_indicado": "EMPLEADO",
+    "departamento_indicado": "DEMO - Operaciones",
+    "estado_final_reportado": "Inactiva",
+    "alcance_datos": "Valores indicados en el procedimiento; rol/departamento no comprobados independientemente. Contraseña introducida por usuaria, no recogida."
+  },
+  "confirmaciones": [
+    {
+      "paso": "alta",
+      "observacion": "La usuaria indica que creó la cuenta y aparece en el listado."
+    },
+    {
+      "paso": "renombrado_y_baja",
+      "observacion": "La usuaria confirma que conserva el nombre nuevo y aparece Inactiva."
+    },
+    {
+      "paso": "intento_login_posterior",
+      "observacion": "La usuaria informa que el acceso es rechazado.",
+      "mensaje_reportado": "Correo o contraseña incorrectos, o acceso temporalmente bloqueado."
+    }
+  ],
+  "limites": [
+    "El aviso genérico no permite atribuir por sí solo el rechazo a la baja: también puede corresponder a contraseña incorrecta o bloqueo temporal.",
+    "No se verificó un login exitoso anterior con la misma contraseña ni rechazo HTTP específico; no declarar causalidad de baja completamente probada.",
+    "No había sesión previa de esa cuenta verificada; no se probó revocación de una sesión existente.",
+    "Auditoría de usuario, duplicados, cambios de rol/departamento y concurrencia siguen fuera de este recorrido.",
+    "A05 avanza en alta/edición/baja reportadas y rechazo observado por autora; no equivale a aceptación integral ni prueba independiente del agente.",
+    "No repetir RNF-2 ni tocar cuentas existentes; conservar cuenta ficticia inactiva."
+  ],
+  "publicacion": "REGISTRO_LOCAL_SIN_PUBLICACION_REMOTA_EN_ESTE_AVANCE"
+}

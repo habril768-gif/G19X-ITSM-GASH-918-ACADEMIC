@@ -2,7 +2,7 @@
 
 ## Alcance y estado
 
-Plan operativo para el entorno local con datos simulados. Define responsables por función, tareas, un procedimiento de copia y una prueba de restauración aislada. **La copia y restauración lógica entre dos clústeres PostgreSQL nativos ya se verificó con datos ficticios (evidencia 103). La secuencia Docker descrita abajo sigue preparada, sin ejecución acreditada desde herramientas.** No se asignan RPO, RTO, disponibilidad ni SLA sin una medición y acuerdo específicos.
+Plan operativo para el entorno local con datos simulados. Define responsables por función, tareas, un procedimiento de copia y una prueba de restauración aislada. **La copia y restauración lógica entre dos clústeres PostgreSQL nativos ya se verificó con datos ficticios (evidencia 103). La usuaria ejecutó también una restauración lógica Docker: revisión 0008, filas y huellas de tablas public coincidentes, destino detenido y acceso Admin RH tras reanudar el origen ([evidencia 230](evidencias/230-restauracion-docker-confirmada.json)). Esta prueba no acredita recuperación integral, secuencias, roles globales o ACL y no fue ejecutada independientemente desde herramientas.** No se asignan RPO, RTO, disponibilidad ni SLA sin una medición y acuerdo específicos.
 
 El operador realiza acciones técnicas; Admin RH verifica el funcionamiento de negocio que le corresponde. La persona responsable del proyecto conserva evidencias y decide si el resultado cumple el [MVP](MVP.md). Estos papeles no asignan personas nuevas ni acreditan capacitación.
 
@@ -66,7 +66,7 @@ Procedimiento preparado; no acredita una entrega, autorización o retirada real.
 
 El registro privado debe contener: identificador de entrega, corte, hash, responsable/autorización, destinatarios, canal y ubicación, fecha real de entrega, plazo o condición de conservación y estado/evidencia de retirada. Es una estructura por completar, no un registro de hechos ocurridos. No se fija una retención arbitraria ni se elimina la última copia comprobada sin una decisión autorizada.
 
-Pendiente operativo: designar responsables, ubicación, destinatarios y conservación; practicar una entrega/sustitución autorizada y registrar su resultado. La aceptación por roles permanece separada.
+Para el respaldo lógico local, la autora declaró responsabilidad y conservación en RespaldosPluriOne de su computadora ([235](evidencias/235-custodia-respaldo-confirmada.json)); la conservación se acordó hasta concluir la evaluación y atender las observaciones finales ([236](evidencias/236-conservacion-respaldo-acordada.json)); la disposición posterior sigue pendiente y no se programa eliminación automática. Esta declaración no cubre exportaciones analíticas: para ellas siguen pendientes responsables, ubicación, destinatarios, conservación y una entrega/sustitución autorizada efectivamente realizada. La aceptación por roles permanece separada.
 
 ## Copia lógica preparada para el entorno local
 
@@ -167,7 +167,7 @@ Si falla, registra el punto de fallo y limita el uso afectado. No mezcles códig
 
 ## Condiciones de cierre del plan
 
-La recuperación lógica nativa y los permisos de la cuenta BI reconstruida tienen evidencia satisfactoria. Para cerrar operación y soporte faltan: probar la secuencia Docker, recuperar una instalación completa con configuración privada y roles aplicables, definir custodia/retención y responsables efectivos, revisar capacidad y practicar escalamiento. El ensayo pequeño no fija RPO/RTO ni acredita capacitación o recuperación productiva.
+La recuperación lógica nativa y los permisos de la cuenta BI reconstruida tienen evidencia satisfactoria. La restauración lógica Docker y reanudación tienen confirmaciones en230/234. Para cerrar operación y soporte faltan: recuperar una instalación completa con configuración privada y roles aplicables, definir disposición posterior del respaldo cuya responsabilidad/ubicación se declararon en235 y conservación se acordó en236, definir custodia de analítica, revisar capacidad y practicar escalamiento. El ensayo pequeño no fija RPO/RTO ni acredita capacitación o recuperación productiva.
 
 Semántica de las herramientas consultada en documentación oficial: [pg_dump](https://www.postgresql.org/docs/17/app-pgdump.html) describe la copia lógica y su alcance por base; [pg_restore](https://www.postgresql.org/docs/17/app-pgrestore.html) describe archivos, restauración y tratamiento de errores/propietarios. La secuencia Docker/PowerShell es una adaptación preparada para el Compose del repositorio y requiere la prueba indicada.
 
@@ -195,3 +195,27 @@ Si no detecta los binarios, se puede indicar `--pg-bin` con su carpeta real. Un 
 ## Consulta después del reinicio de API reportado
 
 [Evidencia 120](evidencias/120-api-reinicio-consulta-rh.json): tras la instrucción de reiniciar solo API, la autora confirma finalización; capturas muestran consulta del listado/detalle desde RH, mismo caso En revisión con prioridad Baja, validación vigente y confidencialidad restringida a RH independiente. Confirma /health/db con status ok/database postgresql. No hay captura del comando ni medición del reinicio; prueba manual acotada, sin instalación limpia, reinicio de base/Redis o recuperación completa.
+
+
+### 2026-10-31 — Consolidación de recuperación Docker y controles de departamentos
+
+Propósito: integrar los resultados manuales aportados por la usuaria, sin repetir pruebas ni modificar código. [230](evidencias/230-restauracion-docker-confirmada.json): respaldo `plurione-20261031-092101.dump`, 75624 bytes, SHA256 `A21826DB6F16EBEA761D83B0DB1BD27D89A801E54CAAB5568AC1A0BB0F0F13B0`; pg_restore sin errores reportados, revisión 0008, cantidades y huellas de contenido de todas las tablas public coincidentes. Destino `plurione-restore-c368a6c78bd8` sin red/puertos según comando, luego detenido; origen reanudado y acceso Admin RH confirmado. La salida ps aún mostraba API health: starting; no declarar healthy posterior del API/worker. No se compararon independientemente secuencias, restricciones, índices, vistas, ACL ni roles globales; no es recuperación completa de instalación ni medición de RTO/RPO.
+
+[231](evidencias/231-departamento-motivo-obligatorio-confirmado.json): la usuaria confirma bloqueo del formulario al omitir motivo. [232](evidencias/232-departamento-bloqueo-usuario-activo-confirmado.json): tras reactivar el departamento ficticio y vincular la cuenta ficticia activa, la baja se rechaza con aviso genérico; después confirma que se guardan las bajas de cuenta y departamento. Ambos quedan inactivos según reporte. Bloqueo por incidencias abiertas sigue pendiente por separado. No inferir respuesta HTTP, auditoría, atomicidad SQL ni validación API a partir del formulario o aviso genérico.
+
+Archivos: evidencias 230–232, matriz de aceptación, mantenimiento, QA, bitácora, backlog, entregables, trazabilidad y MVP. Validación documental: JSON reabiertos, enlaces locales comprobados y matriz contrastada con las confirmaciones. Registros 228/229 conservan revocación, correo duplicado y motivo de usuarios; A05 sigue parcial por auditoría/historial. Sin nuevas pruebas de código, publicación remota ni cambios al cumplimiento de RNF-2. Pendientes: A03 incidencias abiertas, negativos por roles, auditoría de usuarios, recuperación integral, custodia y aceptación humana conforme a la matriz.
+
+
+### 2026-10-31 — Salud confirmada tras reanudar Docker
+
+[Evidencia 234](evidencias/234-salud-posterior-reanudacion-docker.json): salida aportada por la usuaria confirma API, PostgreSQL, Redis y Mailpit healthy; worker de correo Up sin estado de salud reportado. GET /health/db devuelve status ok y database postgresql. Completa la comprobación de salud posterior que seguía pendiente en230; acceso Admin RH ya confirmado. No prueba entrega de correo ni recuperación integral de instalación, roles/ACL o secuencias. Archivos: evidencia234 y seguimiento de aceptación, mantenimiento, QA, bitácora, backlog, entregables y trazabilidad. Validación documental: JSON y enlaces locales comprobados. Sin cambios de código, pruebas automáticas nuevas o publicación remota.
+
+
+### 2026-10-31 — Responsabilidad y ubicación del respaldo declaradas
+
+[Evidencia 235](evidencias/235-custodia-respaldo-confirmada.json): la autora declara que será responsable del respaldo y que lo conservará en RespaldosPluriOne de su computadora. Se referencia el archivo y hash registrados en230, sin publicar ruta privada ni identidad personal. Propósito: registrar una decisión real de custodia, no una asignación inferida. Archivos: evidencia235, mantenimiento, aceptación, bitácora, QA, backlog, entregables y trazabilidad. Validación documental: JSON y enlace comprobados. Pendientes: plazo o condición de conservación, acceso restringido no inspeccionado y disposición posterior; no se declara copia adicional o entrega a terceros. A13 continúa parcial y no se extiende esta declaración a exportaciones analíticas. Sin cambios de código, pruebas nuevas ni publicación remota.
+
+
+### 2026-10-31 — Condición de conservación del respaldo acordada
+
+[Evidencia 236](evidencias/236-conservacion-respaldo-acordada.json): la usuaria acepta conservar el respaldo hasta concluir la evaluación y atender las observaciones finales. Se mantienen responsable y ubicación declarados en235. Propósito: completar condición real de retención del respaldo académico. Archivos: evidencia236, mantenimiento, aceptación, bitácora, QA, backlog, entregables y trazabilidad. Validación: JSON y referencia comprobados. Sin fecha de vencimiento inventada, eliminación automática, publicación remota o nuevas pruebas. Pendientes: disposición posterior y controles de custodia no inspeccionados; analítica conserva sus decisiones independientes.

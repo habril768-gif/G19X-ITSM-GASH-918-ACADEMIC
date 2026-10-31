@@ -1,0 +1,24 @@
+{
+  "fecha_local": "2026-10-31",
+  "fuente": "Confirmaciones textuales de la usuaria; procedimiento manual guiado, sin observación directa ni inspección HTTP/SQL.",
+  "cuenta_ficticia": "qa-entrega-20261031-01@example.invalid",
+  "comprobaciones": [
+    {
+      "caso": "Intentar crear una cuenta con el correo de la cuenta ficticia inactiva",
+      "resultado_reportado": "Rechazo con aviso de conflicto",
+      "mensaje": "Existe un conflicto. Verifica correo duplicado, que quede un RH local activo o que los casos afectados permitan el cambio. No se guardaron cambios parciales.",
+      "limite": "El aviso es genérico; no se inspeccionó el código HTTP ni la atomicidad en base de datos."
+    },
+    {
+      "caso": "Intentar editar el nombre sin motivo administrativo",
+      "resultado_reportado": "Impide el cambio y solicita completar el campo de motivo administrativo.",
+      "limite": "Se confirma validación de formulario; no se intentó omitirla mediante llamada directa a la API."
+    }
+  ],
+  "estado": "RESULTADOS_ESPERADOS_CONFIRMADOS_POR_USUARIA",
+  "pendientes": [
+    "Auditoría de usuarios y conservación de historial en este recorrido.",
+    "La instrucción de cancelar la edición y conservar la cuenta inactiva no tiene confirmación posterior independiente."
+  ],
+  "publicacion": "REGISTRO_LOCAL_SIN_PUBLICACION_REMOTA"
+}

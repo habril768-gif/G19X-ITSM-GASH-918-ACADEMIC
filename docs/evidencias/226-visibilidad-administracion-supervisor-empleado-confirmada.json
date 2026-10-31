@@ -1,0 +1,27 @@
+{
+  "fecha_local": "2026-10-31",
+  "estado": "VISIBILIDAD_UI_CONFIRMADA_POR_AUTORA_API_NO_PROBADA_EN_ESTE_RECORRIDO",
+  "fuente": "Confirmaciones textuales de la usuaria; sin observación directa del agente ni capturas nuevas.",
+  "confirmaciones": [
+    {
+      "cuenta_reportada": "RH Independiente Demo",
+      "observacion": "Aparecen Usuarios y Departamentos.",
+      "rol_API": "NO_VERIFICADO_EN_ESTA_CONFIRMACION"
+    },
+    {
+      "cuenta_reportada": "Supervisor RH",
+      "observacion": "La usuaria indica que solo aparece Nueva incidencia y no las opciones Usuarios/Departamentos."
+    },
+    {
+      "rol_reportado": "Empleado",
+      "observacion": "La usuaria confirma que Usuarios y Departamentos están ausentes."
+    }
+  ],
+  "limites": [
+    "Acredita únicamente visibilidad de controles reportada por la autora.",
+    "No demuestra rechazo de rutas API, autenticación del rol ni acceso directo a recursos. No convertir A04 completo en aprobado.",
+    "No se repitieron pruebas, no se modificó código ni usuarios y no se crearon credenciales.",
+    "RNF-2 y evidencia223 de departamentos Admin RH permanecen vigentes."
+  ],
+  "publicacion": "REGISTRO_LOCAL_SIN_PUBLICACION_REMOTA_EN_ESTE_AVANCE"
+}

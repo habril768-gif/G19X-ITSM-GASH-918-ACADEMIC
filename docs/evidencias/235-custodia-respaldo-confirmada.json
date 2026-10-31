@@ -1,0 +1,20 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Declaración explícita de la usuaria en el chat.",
+  "declaracion": "Yo seré responsable del respaldo y lo conservaré en la carpeta RespaldosPluriOne de mi computadora.",
+  "responsable_por_funcion": "Autora del proyecto, según su declaración; sin publicar nombre o identificadores personales.",
+  "ubicacion_declarada": "Carpeta RespaldosPluriOne de la computadora de la autora; se omite ruta absoluta privada.",
+  "respaldo_referenciado": {
+    "archivo": "plurione-20261031-092101.dump",
+    "sha256": "A21826DB6F16EBEA761D83B0DB1BD27D89A801E54CAAB5568AC1A0BB0F0F13B0",
+    "evidencia_restauracion": "230-restauracion-docker-confirmada.json"
+  },
+  "estado": "RESPONSABILIDAD_Y_UBICACION_DECLARADAS",
+  "pendientes": [
+    "Plazo o condición de conservación y disposición posterior.",
+    "Acceso restringido a la carpeta no inspeccionado.",
+    "No se declaró copia adicional, entrega a terceros o almacenamiento externo.",
+    "La custodia de respaldo no acredita distribución, retención o retirada de exportaciones analíticas."
+  ],
+  "publicacion": "Registro local; sin publicación remota."
+}

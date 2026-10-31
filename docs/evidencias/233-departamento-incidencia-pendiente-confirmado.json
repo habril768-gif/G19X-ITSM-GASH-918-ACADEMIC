@@ -1,0 +1,30 @@
+{
+  "fuente": "Confirmaciones textuales de la usuaria durante recorrido manual guiado; sin observación directa del agente ni inspección HTTP/SQL.",
+  "cuenta_ficticia": "qa-entrega-20261031-01@example.invalid",
+  "departamento_indicado": "QA entrega - departamentos - 20261030-01 - revisado",
+  "incidencia": {
+    "id_reportado": "710482ca-a652-4679-9abf-13c3b3553e10",
+    "titulo_indicado": "QA bloqueo de departamento por incidencia abierta",
+    "estado_reportado": "Pendiente"
+  },
+  "secuencia_reportada": [
+    "Usuaria confirma departamento y cuenta activos tras indicación de reactivación.",
+    "Se indica crear incidencia desde la cuenta ficticia; usuaria informa ID y estado Pendiente.",
+    "Tras indicación de desactivar cuenta y después intentar baja de departamento, usuaria informa rechazo de la baja.",
+    "Se solicita confirmar expresamente inactividad de la cuenta antes del intento; usuaria confirma que está inactiva."
+  ],
+  "mensaje_reportado": "No se guardó el cambio: revisa nombre duplicado, usuarios activos o incidencias abiertas vinculadas.",
+  "resultado": "Recorrido manual con rechazo esperado y cuenta de prueba inactiva, coherente con bloqueo por incidencia pendiente.",
+  "limites": [
+    "Aviso genérico: no acredita por sí solo causa exclusiva. No se verificaron otros usuarios vinculados, estado persistido o departamento histórico de la incidencia mediante consulta independiente.",
+    "No se capturó código HTTP, auditoría o transacción.",
+    "No se verificó baja posterior tras resolver/cerrar la incidencia.",
+    "No declarar aceptación institucional ni cierre integral."
+  ],
+  "estado_final_reportado": {
+    "cuenta": "Inactiva",
+    "incidencia": "Pendiente; no se indicó resolver ni cerrar",
+    "departamento": "Baja rechazada; cancelación de edición indicada, sin confirmación posterior explícita."
+  },
+  "publicacion": "Registro local; sin publicación remota."
+}
