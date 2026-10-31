@@ -1,0 +1,36 @@
+{
+  "fecha_local": "2026-10-30",
+  "estado": "CPU_PASIVA_POR_FASE_PREPARADA_SIN_NUEVA_FORMAL",
+  "motivo": "Decima formal empeora las cuatro operaciones; falta CPU del host/generador durante fases. Registrar antes de mas cambios de negocio.",
+  "cambio": "phase_run toma host_stamp en barrera inicial y al completar workers; host_summary informa CPU media Windows y proceso generador tambien en fases normales/formales. Dos lecturas por fase, cuatro para calentamiento+medicion.",
+  "sin_cambios": [
+    "No activa client.diagnostic, cabeceras X-QA, logs o perfil API.",
+    "Sin llamadas por peticion, procesos escaneados, memoria de terceros o secretos. No sustituye medicion por operacion.",
+    "Sin cambios en producto, Dockerfile, infraestructura, trabajadores1/2/3, pools, locks, outbox217, protocolo10clientes/30+300s o verdict.",
+    "La CPU durante carga es observacion, no nuevo criterio ni motivo automatico de invalidacion o excusa para incumplir p95.",
+    "No permitir datos ausentes como cero: host_no_disponible conserva null."
+  ],
+  "limites": [
+    "Host incluye la propia carga, VM y otras aplicaciones. No identificar culpable ni restar medias Windows/Docker de ventanas distintas.",
+    "Dos contadores globales por fase no son serie temporal de picos; coste adicional pequeno pero no medido, declarar instrumentacion del generador.",
+    "El intervalo termina tras reunir workers; incluye drenaje de ultimas respuestas, cercano a duracion_hasta_ultima_respuesta_s. No incluye login/preflight/logout.",
+    "Proxima formal aun no ejecutada. RNF-2 pendiente; no prometer que cambiar medicion mejorara latencia."
+  ],
+  "validacion": {
+    "tests_herramientas": 132,
+    "duracion_s": 4.612,
+    "nuevas": 2,
+    "ast_archivos": 2,
+    "escenarios": [
+      "fase sin diagnostico emite CPU y solo dos stamps",
+      "host no disponible conserva null sin fallar fase",
+      "suite previa mantiene guardas,veredictos,despacho full y configuraciones1/2/3"
+    ]
+  },
+  "CI_cambio217": "https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/41153543326",
+  "CI_cambio217_resultado": "backend y PostgreSQL success; no acredita rendimiento",
+  "sha256": {
+    "backend/scripts/performance_runner.py": "cbaaca28d4c42f5d63d71147ac89ac9976f37d1e886e6be707f924a3827b6bf8",
+    "backend/tests/test_performance_runner.py": "5e3738f764e37e9aec914dc9fa9f9d05a744afb1b0a4c31d0a4477583a74e646"
+  }
+}

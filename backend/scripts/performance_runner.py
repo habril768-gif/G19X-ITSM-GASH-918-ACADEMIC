@@ -205,10 +205,10 @@ def phase_run(clients, manifest, duration, phase):
         client.phase = phase
     stop = threading.Event()
     window = {}
-    diagnostic = any(getattr(client, "diagnostic", False) for client in clients)
     def start_window():
-        if diagnostic:
-            window['cpu_start'] = host_stamp()
+        # Dos lecturas por fase también en formal; ninguna lectura por petición.
+        # Observa host/generador sin activar cabeceras ni diagnóstico de API.
+        window['cpu_start'] = host_stamp()
         window['start'] = time.perf_counter()
         window['deadline'] = window['start'] + duration
         window['inicio_utc'] = datetime.now(timezone.utc).isoformat()
@@ -250,7 +250,7 @@ def phase_run(clients, manifest, duration, phase):
         except BaseException:
             stop.set()
             raise
-    cpu_end = host_stamp() if diagnostic else None
+    cpu_end = host_stamp()
     for client in clients:
         client.phase = None
     samples = [sample for row in rows for sample in row['samples']]
@@ -262,8 +262,7 @@ def phase_run(clients, manifest, duration, phase):
         row['fin_offset_s'] for row in rows), 'clientes': len(rows), 'completa': complete,
         'metricas': summary, 'creados': sum(row['creados'] for row in rows),
         'inicio_clientes_offset_ms': [row['inicio_offset_ms'] for row in rows]}
-    if diagnostic:
-        result['cpu_generador_host'] = host_summary(window['cpu_start'], cpu_end)
+    result['cpu_generador_host'] = host_summary(window['cpu_start'], cpu_end)
     return result, rows
 
 

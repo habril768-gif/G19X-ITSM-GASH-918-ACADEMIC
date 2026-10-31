@@ -1,6 +1,6 @@
 # Prueba de rendimiento local
 
-Estado vigente al 27/10/2026: **RNF-2 pendiente; siete formales completas FALLIDA_UMBRAL**. Ultima: 0769b0ce07b943e5, [evidencia 182](evidencias/182-septima-formal-completa-fallida-umbral.json); 9.603 solicitudes sin errores, p95 438,45/361,19/687,49/554,30 ms. Las referencias anteriores a seis formales describen el estado historico.
+Estado vigente al 30/10/2026: **RNF-2 pendiente; diez formales completas FALLIDA_UMBRAL**. Última: f756ceeff8384365, [evidencia218](evidencias/218-decima-formal-fallida-cuatro-operaciones.json),24.450 solicitudes sin errores y p95 209,73/200,83/328,30/289,47ms. [219](evidencias/219-cpu-pasiva-por-fase-formal.json) prepara CPU por fase sin nueva formal. Los resultados anteriores que siguen describen el historial; no sustituyen este estado.
 
 Actualizado: 27 de octubre de 2026.
 
@@ -571,3 +571,12 @@ Comando después de las validaciones, con Docker abierto y entorno normal deteni
 ```powershell
 .\backend\.venv\Scripts\python.exe -B backend/scripts/run_performance_full_guarded.py --api-workers 3 --confirm-isolated-qa
 ```
+
+
+## 2026-10-30 — Décima formal falla en las cuatro operaciones; CPU pasiva por fase
+
+[Evidencia218](evidencias/218-decima-formal-fallida-cuatro-operaciones.json),runf756ceeff8384365: QA3 verificado, diez clientes/30+300s,54 hashes de producto coincidentes con fuente actual/publicada, incluyendo outbox217.24.450 solicitudes medidas sin errores. P95 listado209,73/detalle200,83/creación328,30/actualización289,47ms: **las cuatro incumplen p95<200ms; décima formal FALLIDA_UMBRAL y RNF-2 pendiente**. Conteos100→527→6.639; SQL6.639CREADO,6.528EDITADO,66.390entregas, ceroSMTP/IA. Post HTTP correcto,diez logout204 y QA detenido. El ahorro de consulta no bastó para aprobar; sin A/B controlado no demuestra que cause el empeoramiento ni que solo sea culpa del equipo. CPU previa25,48% no describe los cinco minutos; este reporte aún no tiene CPU Windows/generador por fase. Original intacto por hash. CI del cambio217 pasó backend/PostgreSQL41153543326, no acredita RNF-2.
+
+[Evidencia219](evidencias/219-cpu-pasiva-por-fase-formal.json): detener ajustes de negocio sin más evidencia; phase_run captura dos host_stamp por fase, en la barrera inicial y al terminar workers, y host_summary añade cpu_generador_host también sin diagnóstico. Cuatro lecturas en calentamiento+medición; ninguna por petición. Antes solo se emitía con diagnóstico. Conserva null/NO_DISPONIBLE si falta lectura; no habilita cabeceras/perfil API ni diagnóstico multiproceso. No cambia API, outbox217, locks/pools/durabilidad, guardas CPU previa/redes, configuración normal, tres procesos del candidato ni veredicto. CPU de carga se observa sin ser nuevo criterio de aprobación ni excusa automática para descartar un fallo. Host incluye propia carga y otras apps/VM; no atribuir causa única ni restar porcentajes de intervalos distintos. Incluye drenaje final, no preflight/login/logout; son medias, no serie de picos. Pequeño coste adicional de cuatro lecturas del generador no medido, declarado.
+
+**Validación:**132 pruebas de herramientas aprobadas en4,612s, dos nuevas para emisión sin diagnóstico/API y host ausente como null; AST2archivos correcto. Suite anterior conserva veredictos, protocolo, guardas y configuraciones1/2/3. Código producto idéntico a217; no se incrementa a4procesos ni se promete mejora por añadir medición. Pendiente CI y nueva medición real con CPU durante fases antes de decidir otra optimización. Archivos: performance_runner.py/test_performance_runner.py,evidencias218/219 y seguimiento. La nueva observación no está incluida retrospectivamente en218.

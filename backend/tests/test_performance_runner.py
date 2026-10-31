@@ -192,6 +192,41 @@ class PerformanceTests(unittest.TestCase):
         self.assertFalse(result['completa'])
         self.assertNotIn('PRIVATE-TOKEN', json.dumps(result))
 
+    def test_non_diagnostic_phase_records_cpu_without_enabling_api_diagnostics(self):
+        class Client:
+            diagnostic=False
+            phase=None
+            def close(self):pass
+        clients=[Client() for _ in range(10)]
+        def operation(client,*args):
+            self.assertFalse(client.diagnostic)
+            time.sleep(.001)
+            return 'listado',200,True,None
+        before={'wall':100.,'process':1.,'host':(100,1000)}
+        after={'wall':100.05,'process':1.01,'host':(105,1020)}
+        with patch.object(runner,'operation',side_effect=operation), patch.object(runner,'host_stamp',side_effect=[before,after]) as stamps:
+            report,_=runner.phase_run(clients,fixture(),.04,'unit')
+        self.assertTrue(report['completa'])
+        self.assertEqual(stamps.call_count,2)
+        self.assertEqual(report['cpu_generador_host']['host_cpu_porcentaje'],75.)
+        self.assertEqual(report['cpu_generador_host']['host_estado'],'OK')
+        self.assertTrue(all(not c.diagnostic and c.phase is None for c in clients))
+
+    def test_non_diagnostic_phase_preserves_unavailable_host_as_null(self):
+        class Client:
+            diagnostic=False
+            def close(self):pass
+        def operation(*args):
+            time.sleep(.001)
+            return 'listado',200,True,None
+        before={'wall':10.,'process':1.,'host':None}
+        after={'wall':10.05,'process':1.01,'host':None}
+        with patch.object(runner,'operation',side_effect=operation),patch.object(runner,'host_stamp',side_effect=[before,after]):
+            report,_=runner.phase_run([Client() for _ in range(10)],fixture(),.04,'unit')
+        self.assertTrue(report['completa'])
+        self.assertIsNone(report['cpu_generador_host']['host_cpu_porcentaje'])
+        self.assertEqual(report['cpu_generador_host']['host_estado'],'NO_DISPONIBLE')
+
 
 if __name__ == '__main__':
     unittest.main()

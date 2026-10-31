@@ -56,3 +56,8 @@ La [comparación de uno y dos procesos API](PRUEBA_RENDIMIENTO.md#comparación-b
 ### 2026-10-30 — RNF-2: solo creación pendiente en novena formal
 
 [Evidencia216](evidencias/216-formal-tres-procesos-fallo-creacion.json):QA3,34.027 solicitudes sin errores; p95lecturas125,63/119,11 yactualización173,60ms cumplen; creación202,6812ms incumple. Integridad y parada correctas; RNF-2 pendiente. [Cambio217](evidencias/217-outbox-evento-nuevo-sin-lectura-redundante.json): evita una búsqueda outbox solo para evento pendiente sin identidad, preserva deduplicación de replay y atomicidad;30unitarias aprobadas. Pendiente CI y formal con mismo protocolo3procesos/10clientes/30+300s/p95<200ms.
+
+
+### 2026-10-30 — RNF-2 pendiente tras décima formal
+
+[Evidencia218](evidencias/218-decima-formal-fallida-cuatro-operaciones.json):24.450 solicitudes sin errores, QA3; p95 listado209,73/detalle200,83/creación328,30/edición289,47ms incumplen. Integridad y parada correctas, outbox217 presente; sin causalidad aislada. [219](evidencias/219-cpu-pasiva-por-fase-formal.json) añade CPU Windows/generador al inicio/fin de cada fase normal/formal, sin perfil API ni cambiar protocolo/veredicto;132 pruebas aprobadas. Pendiente CI y nueva medición; no más procesos ni cambios de negocio a ciegas.
