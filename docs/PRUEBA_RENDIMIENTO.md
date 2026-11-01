@@ -613,3 +613,8 @@ Para reproducir la prueba formal crea QA independiente con el entorno normal det
 ```
 
 No es necesario repetir la aprobación existente para sumar evidencias; revalida si cambia producto,hardware o configuración relevante. El guard conservaCPUprevia,limpieza acotada y criterio estricto; el p95 no promete máximos menores de 200 ms. No borres volúmenes para arrancar el perfil.
+
+
+## Versión con filtro sin responsable
+
+257 conserva consulta predeterminada y añade predicado solo con unassigned=true. Cambian hashes:220 es aprobación histórica, no se extiende automáticamente. Revalidar nueva versión con formal guardada3procesos/10clientes/100casos/30+300s/p95<200ms, sin rebajar umbrales u omitir operaciones.

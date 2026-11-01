@@ -129,3 +129,8 @@ Reconstruir con docker compose up -d --build --wait; comprobar el contrato en /d
 ```
 
 Esperar 200 con received=true y can_view=true para RH independiente. Luego GET /incidents/{case_id} debe mostrar is_confidential=true, ai_status=OMITIDA y responsable RH. Evidencia prevista 24-confidencialidad-200.png: solo Server response del detalle, sin Curl ni token. Esta guía no afirma ejecución manual. No añadir al único Admin RH como participante en esta primera prueba: perdería acceso y requeriría otro RH independiente. El CLI auditado para provisionar otro administrador se documenta en ADMIN_INDEPENDIENTE.md.
+
+
+## Casos sin responsable
+
+GET /incidents?unassigned=true añade assigned_to IS NULL sin sustituir la visibilidad. Se combina con estado, búsqueda, fechas y paginación; filas y total comparten predicado. Combinarlo con assigned_to UUID devuelve422. Ausente o false conserva comportamiento anterior. Panel: Más filtros → Responsable → Sin responsable. Sin migración.

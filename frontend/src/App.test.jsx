@@ -240,3 +240,30 @@ it('enlace de correo espera login y consulta el UUID con la cuenta autenticada',
     expect(fetch.mock.calls.some(([url, options]) => url.endsWith(`/incidents/${id}`) && options.headers.Authorization === 'Bearer memory-test-token')).toBe(true);
   } finally { window.history.replaceState(null, '', '/'); }
 }, 30000);
+
+it('bandeja sin responsable vuelve a primera página y muestra el total filtrado', async () => {
+  const original = fetch.getMockImplementation();
+  fetch.mockImplementation((url, opts) => {
+    if (url.includes('/incidents?')) {
+      const filtered = new URL(url, 'http://test').searchParams.get('unassigned') === 'true';
+      return Promise.resolve(ok({ items: [incident], total: filtered ? 2 : 21 }));
+    }
+    return original(url, opts);
+  });
+  render(<App />); const ui = await login();
+  await ui.click(screen.getByRole('button', { name: 'Siguiente →' }));
+  await screen.findByText('Página 2 de 2');
+  await ui.click(screen.getByText('Más filtros'));
+  await ui.selectOptions(screen.getByLabelText('Responsable'), 'unassigned');
+  await ui.click(screen.getByRole('button', { name: 'Aplicar filtros' }));
+  await screen.findByText('Página 1 de 1');
+  const query = new URL(fetch.mock.calls.filter(([url]) => url.includes('/incidents?')).at(-1)[0], 'http://test');
+  expect(query.searchParams.get('unassigned')).toBe('true');
+  expect(query.searchParams.get('page')).toBe('1');
+  expect(query.searchParams.has('assigned_to')).toBe(false);
+  expect(screen.getByText('2', { selector: '.total strong' })).toBeTruthy();
+  await ui.click(screen.getByRole('button', { name: 'Limpiar filtros' }));
+  await screen.findByText('Página 1 de 2');
+  const cleared = fetch.mock.calls.filter(([url]) => url.includes('/incidents?')).at(-1)[0];
+  expect(new URL(cleared, 'http://test').searchParams.has('unassigned')).toBe(false);
+});

@@ -212,9 +212,9 @@ Actualización manual y fecha de corte visible. Antes de compartir una nueva ver
 
 Admin RH crea cuentas y asigna roles/departamentos mediante API protegida y pantalla de administración React; se requieren ambas para aceptar RF-7. Los comandos de bootstrap/restablecimiento siguen reservados al operador y no sustituyen esa pantalla. No hay registro público ni contraseña común de seed. Registrar altas, cambios, bajas y restablecimientos sin guardar contraseñas en auditoría. Cambiar rol/departamento o desactivar exige revisar casos asignados y reasignar si se pierde acceso. Revocar sesiones al cambiar privilegios o credencial. Impedir dejar el sistema sin Admin RH activo con acceso local.
 
-Bootstrap y recuperación por operador quedan separados de las operaciones de RH. Debe existir además un procedimiento auditado para provisionar un administrador independiente adicional cuando no haya gestor elegible; es una operación del operador que no concede acceso al caso al involucrado. Esta operación todavía no existe en el CLI actual y debe implementarse antes de aceptar la regla de escalamiento. Las cuentas DEMO no pueden iniciar sesión hasta asignarles contraseña explícitamente. Usuarios externos futuros solo por vinculación verificada, sin unificación automática por email.
+Bootstrap y recuperación por operador quedan separados de las operaciones de RH. Debe existir además un procedimiento auditado para provisionar un administrador independiente adicional cuando no haya gestor elegible; es una operación del operador que no concede acceso al caso al involucrado. El CLI implementa provision-independent-admin; procedimiento y límites en ADMIN_INDEPENDIENTE.md. No sustituye la verificación de independencia. Las cuentas DEMO no pueden iniciar sesión hasta asignarles contraseña explícitamente. Usuarios externos futuros solo por vinculación verificada, sin unificación automática por email.
 
-**Aceptación:** empleado/supervisor reciben 403 en administración; duplicado de correo recibe conflicto; baja impide acceso; cambio no deja casos sin responsable indebidamente y queda auditado. La gestión completa aún debe implementarse.
+**Aceptación:** empleado/supervisor reciben 403 en administración; duplicado de correo recibe conflicto; baja impide acceso; cambio no deja casos sin responsable indebidamente y queda auditado. Implementación y límites de aceptación en TRAZABILIDAD.md y ACEPTACION_ENTREGA.md.
 
 ### RF-8 Panel operativo React
 
@@ -261,7 +261,7 @@ Acciones de auditoría: CREADO, ESTADO_CAMBIADO, ASIGNADO, REAPERTURA, VALIDACIO
 
 La historia de ciclos se conserva completa en eventos de transición con inicio y fechas finales. Historial inmutable mediante servicios y privilegios de aplicación separados de migración antes de entrega externa.
 
-**Estado de implementación del modelo:** las revisiones 0001 y 0002 no se reescriben. La 0003 implementa estructura de ámbito, afectado condicional, departamento reportado, participantes/revisión, classification_valid y control IA. Su aplicación real en PostgreSQL y los servicios de autorización, recusa, validación e IA siguen pendientes. La estructura no certifica RF-2/RF-3/RF-4 completos. Detalle de conservación y validación en DATOS.md.
+**Estado de implementación del modelo:** las revisiones 0001 y 0002 no se reescriben. La 0003 implementa estructura de ámbito, afectado condicional, departamento reportado, participantes/revisión, classification_valid y control IA. La aplicación hasta0008 se verificó en PostgreSQL255/256 y los servicios están implementados; la matriz conserva límites de aceptación. La estructura no certifica RF-2/RF-3/RF-4 completos. Detalle de conservación y validación en DATOS.md.
 
 ## 7. Seguridad y datos
 

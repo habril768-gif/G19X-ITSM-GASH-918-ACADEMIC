@@ -41,3 +41,13 @@ describe('sesiones y consultas', () => {
     expect(params.get('priority')).toBe('2'); expect(params.has('category_id')).toBe(false);
   });
 });
+
+it('sin responsable se consulta como predicado nulo, sin enviar un UUID ficticio', () => {
+  const path = caseQuery({ assigned_to: 'unassigned', status: 'PENDIENTE' }, 2);
+  const params = new URL(path, 'http://test').searchParams;
+  expect(params.get('unassigned')).toBe('true');
+  expect(params.has('assigned_to')).toBe(false);
+  expect(params.get('status')).toBe('PENDIENTE');
+  expect(params.get('page')).toBe('2');
+  expect(caseQuery({ assigned_to: '' })).not.toContain('unassigned');
+});

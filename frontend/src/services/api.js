@@ -53,6 +53,11 @@ export function createApi(onExpired = () => {}) {
 
 export function caseQuery(filters, page = 1) {
   const params = new URLSearchParams({ page: String(page), page_size: '20' });
-  for (const [key, value] of Object.entries(filters)) if (String(value).trim()) params.set(key, String(value).trim());
+  for (const [key, value] of Object.entries(filters)) {
+    const text = String(value).trim();
+    if (!text) continue;
+    if (key === 'assigned_to' && text === 'unassigned') params.set('unassigned', 'true');
+    else params.set(key, text);
+  }
   return `/incidents?${params}`;
 }

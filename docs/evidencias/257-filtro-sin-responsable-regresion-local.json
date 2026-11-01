@@ -1,0 +1,48 @@
+{
+  "fecha_registro": "2026-10-31",
+  "requisito": "RF-8 bandeja sin responsable",
+  "cambio": "GET /incidents?unassigned=true combina IS NULL con visibilidad y filtros compartidos de filas/total. Conflicto con assigned_to422. Selector de gestores, página1 y contador del conjunto autorizado. Sin migración/DTO nuevo.",
+  "codigo_sha256": {
+    "backend/app/api/incidents.py": "dfc2f4f16edd21546457120d08facc0c0a2a0fbd7e4e07e377f1f677b6d66ff3",
+    "backend/tests/test_unassigned_cases.py": "e73550badc0fe40a76514a41d02f61b8b1952f3a59a0fa0d3547f3e3147b67fb",
+    "frontend/src/App.jsx": "68a8f8cdab4d8d75df048cf89fdddebe4b7e2a98ea991c68f161da0c55fedb51",
+    "frontend/src/App.test.jsx": "e0a26516bb8e06f94a5b3d469e43837f4ac047f9ef46d88fb3afc469486d24ea",
+    "frontend/src/services/api.js": "3a3328e23cf94bfc60be3ee0bf528bc471e6791975d1781ae814bd39fd696c0d",
+    "frontend/src/services/api.test.js": "c80bdeb6c8e13c4027aef0b5b193314095569c423949eceab9e4e7f6ba8301b0"
+  },
+  "resultados_locales": {
+    "backend_seleccion": {
+      "passed": 44,
+      "subtests": 63,
+      "seconds": 12.74
+    },
+    "backend_completo_copia_escribible": {
+      "passed": 476,
+      "skipped": 22,
+      "subtests": 147,
+      "seconds": 47.65,
+      "alcance": "RUN_DB_TESTS=0;22 integraciones PostgreSQL/analítica omitidas, no aprobadas localmente."
+    },
+    "frontend": {
+      "files": 10,
+      "tests_passed": 71,
+      "seconds": 68.04,
+      "scope": "Vitest/jsdom/fetch simulado"
+    },
+    "build": {
+      "passed": true,
+      "modules": 25,
+      "seconds": 0.407
+    }
+  },
+  "intentos_incompletos": [
+    "Primer pase general en instalación original mostró fallos y fue interrumpido, sin traza final conservada; no aprobado.",
+    "Segundo pase general se bloqueó y fue interrumpido. Suite utiliza temporales junto al cwd; repetición completa en copia escribible correcta, sin atribuir causa exclusiva a fallos sin traza."
+  ],
+  "pendientes": [
+    "CI remoto de versión y PostgreSQL real.",
+    "Aplicación coordinada de API/React y prueba UI real; frontend operativo sigue anterior.",
+    "RNF-2 por revalidar para nuevos hashes;220 conserva aprobación histórica de su código anterior."
+  ],
+  "limites": "Pruebas no usan datos operativos ni proveedor IA. Ocho nuevos casos backend y dos frontend; no aceptación institucional."
+}

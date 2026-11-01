@@ -1,6 +1,6 @@
 # Trazabilidad de requisitos
 
-## RNF-2: cumplido en QA local — 30 de octubre de 2026
+## RNF-2: referencia aprobada del 30 de octubre; versión RF-8 por revalidar
 
 [Primera formal aprobada220](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json):10 clientes,100 casos iniciales,30+300s,API de 3 procesos,35.216 solicitudes sin errores. P95 listado123,81/detalle113,27/creación194,04/actualización167,77ms, todos<200 ms; auditoría/colas/logout/parada correctos. Acredita este alcance HTTP Docker local y hardware declarado, no rendimiento universal ni proveedores externos. Diez fallos históricos se conservan. [Perfil opcional 221](evidencias/221-perfil-compose-rnf2-reproducible.json) y [protocolo](PRUEBA_RENDIMIENTO.md) permiten reproducir configuración/medición. Los demás pendientes de entrega siguen vigentes.
 
@@ -980,3 +980,12 @@ La autora aporta ENSAYO_DETENIDO_DATOS_CONSERVADOS para plurione-install-da463a2
 Cuenta BI nueva creada por CLI después de un intento rechazado por longitud; siete comprobaciones reales de permisos: dos vistas permitidas, cinco42501 (lectura/UPDATE/DELETE users y CREATE public/analytics), sin atributos privilegiados. default_transaction_read_only desactivado solo en sesión de prueba para verificar ACL; ROLLBACK por prueba. Fuente: salidas/reporte local y confirmaciones de autora, sin daemon independiente del agente. Cuatro contenedores detenidos y volúmenes conservados al cierre.
 
 Propósito: ampliar recuperación lógica230 e instalación nueva255 hacia uso de copia y reconstrucción acotada de permisos BI. No equivalencia literal de todos los propietarios/ACL/globales, definiciones o filas del origen actual; no proveedores externos/BI Desktop, RTO/RPO o aceptación institucional. Archivos: evidencia256, matriz, resumen, informe, mantenimiento, MVP, bitácora, QA, backlog, entregables, trazabilidad y decisiones. Validación: JSON/reporte, hash del respaldo, resultados de siete ACL y cierre contrastados; auxiliares probados offline/simulados según manifiesto. Credenciales, dump y datos individuales no publicados; registro local pendiente de publicación.
+
+
+### 2026-10-31 — RF-8: bandeja sin responsable
+
+[257](evidencias/257-filtro-sin-responsable-regresion-local.json): faltaba filtro exigido enRF-8. API unassigned=true y selector React de gestores implementados; mismo predicado de visibilidad/filtros en filas y total, conflicto de filtros422, vuelve a página1 y limpiar retira selección. Sin migración o cambio de datos. Ocho nuevos escenarios backend y dos frontend.
+
+Validación local: selección44passed/63subtests/12.74s; suite completa en copia escribible476passed/22skipped/147subtests/47.65s; frontend71tests/10archivos/68.04s; build25módulos correcto. Dos pases generales originales interrumpidos, primero con fallos y sin traza final; no aprobados. No se atribuye causa exclusiva sin traza; repetición completa en copia escribible correcta.22 integraciones PG/analítica omitidas no aprobadas aquí; CI pendiente.
+
+Archivos: API incidents y tests nuevos, App/cliente/pruebas frontend, manual/guía, PRD informativo y seguimiento. Tres notas obsoletas de implementación del PRD actualizadas, sin cambiar reglas. Backend fuente actualizado; frontend operativo anterior hasta coordinar imagen API. Prueba UI real y formal RNF-2 para nuevos hashes pendientes:220 es resultado histórico, no aprobación automática del nuevo código. Sin proveedor externo ni aceptación institucional.

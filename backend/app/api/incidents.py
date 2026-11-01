@@ -153,10 +153,12 @@ def register(body:IncidentInput,response:Response,user:User=Depends(current_user
 def list_cases(response:Response,page:int=Query(1,ge=1),page_size:int=Query(20,ge=1,le=100),
                status:Literal["PENDIENTE","EN_REVISION","RESUELTA","CERRADA"]|None=None,
                priority:int|None=Query(None,ge=1,le=3),category_id:int|None=Query(None,ge=1),assigned_to:UUID|None=None,
-               created_from:date|None=None,created_to:date|None=None,q:str|None=Query(None,max_length=200),
+               created_from:date|None=None,created_to:date|None=None,q:str|None=Query(None,max_length=200),unassigned:bool=False,
                user:User=Depends(current_user),db:Session=Depends(get_session)):
     response.headers["Cache-Control"]="no-store"
+    if unassigned and assigned_to is not None:raise HTTPException(422,"Elige un responsable o casos sin responsable, no ambos")
     conditions=[visibility(db,user)]
+    if unassigned:conditions.append(Incident.assigned_to.is_(None))
     for field,value in [(Incident.status,status),(Incident.priority,priority),(Incident.category_id,category_id),(Incident.assigned_to,assigned_to)]:
         if value is not None: conditions.append(field==value)
     if created_from and created_to and created_from>created_to:raise HTTPException(422,"Rango de fechas inválido")

@@ -31,6 +31,8 @@ En **Cambiar contraseña**, introduce la actual, una nueva de 12 a 128 caractere
 
 Abre **Incidencias**. Usa los filtros disponibles por identificador/título, estado, prioridad, categoría, responsable y fecha. El total corresponde solo a los resultados autorizados que cumplen los filtros. Revisa la paginación si esperas más resultados.
 
+Admin RH y Supervisor pueden abrir **Más filtros**, elegir **Responsable → Sin responsable** y pulsar **Aplicar filtros** para consultar la bandeja pendiente de asignación. El total cuenta solo casos autorizados que cumplen los filtros. **Limpiar filtros** retira la selección.
+
 Abre el título para consultar el expediente. En **Descripción del caso** verás los datos disponibles; **Seguimiento** muestra responsable, resolución y fechas cuando existen. La ausencia de responsable puede mostrarse como Sin asignar. No deduzcas que un caso está resuelto por tener una sugerencia IA.
 
 El historial muestra acciones permitidas y sus motivos cuando corresponda. Su contenido depende del perfil. Si no encuentras un caso, revisa filtros y sesión; también puede haber cambiado tu permiso. No pruebes identificadores de otros expedientes para superar una restricción.

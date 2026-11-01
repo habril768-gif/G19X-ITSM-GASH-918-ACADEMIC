@@ -24,6 +24,8 @@
 
 ## Evaluación del avance
 
+[Cierre técnico](CIERRE_TECNICO.md): tareas de código, CI y validación separadas del cierre institucional.
+
 [Informe académico en borrador](INFORME_ENTREGA_BORRADOR.md): objetivo, desarrollo, resultados, limitaciones y conclusiones para revisión.
 
 [Resumen de entrega](RESUMEN_ENTREGA.md): resultados comprobados, límites, pendientes y preparación de la demostración.
