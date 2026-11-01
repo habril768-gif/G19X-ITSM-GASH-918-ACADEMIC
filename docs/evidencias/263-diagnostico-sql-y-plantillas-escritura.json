@@ -1,0 +1,585 @@
+{
+  "fecha_local": "2026-10-31",
+  "run_id": "232a6419420e4b6c",
+  "reporte_sha256": "376cc637529816d8238d91578211994c84832382d925e0be341f36f1c1ba6eaf",
+  "estado": "DIAGNOSTICO_QA_SIN_ACREDITAR_RNF2",
+  "api_workers": 1,
+  "diagnostico_escrituras": {
+    "creacion": {
+      "solicitudes": 72,
+      "errores": 0,
+      "metricas": {
+        "total": {
+          "media": 210.74648794446045,
+          "p95": 333.0411280003318,
+          "max": 412.0274030010478
+        },
+        "auth": {
+          "media": 46.12804454159737,
+          "p95": 112.4925889998849,
+          "max": 216.72397799920873
+        },
+        "endpoint": {
+          "media": 118.09723226408803,
+          "p95": 166.49759400024777,
+          "max": 173.27914199995575
+        },
+        "sql": {
+          "media": 119.24806568074726,
+          "p95": 165.4416029996355,
+          "max": 206.36839999860968
+        },
+        "commit": {
+          "media": 11.426849930608618,
+          "p95": 27.36222000021371,
+          "max": 31.737393999719643
+        },
+        "fuera_auth_endpoint": {
+          "media": 46.521211138775065,
+          "p95": 101.61458799848333,
+          "max": 173.04749699906097
+        },
+        "consultas": {
+          "media": 8.0,
+          "p95": 8.0,
+          "max": 8.0
+        },
+        "hasta_envio": {
+          "media": 210.57685765281855,
+          "p95": 332.86244199916837,
+          "max": 411.91797200008295
+        },
+        "cierre": {
+          "media": 0.16963029164192753,
+          "p95": 0.4009399999631569,
+          "max": 0.777142000515596
+        },
+        "thread_calls": {
+          "media": 2.0,
+          "p95": 2.0,
+          "max": 2.0
+        },
+        "thread_wait": {
+          "media": 21.482405375005936,
+          "p95": 54.32076799843344,
+          "max": 137.90100199912558
+        },
+        "thread_run": {
+          "media": 164.26825713892867,
+          "p95": 217.99281799940218,
+          "max": 367.50757899972086
+        },
+        "thread_resume": {
+          "media": 16.626083555567877,
+          "p95": 33.240696000575554,
+          "max": 42.81590199934726
+        },
+        "thread_incomplete": {
+          "media": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "thread_cpu": {
+          "media": 18.839646930555553,
+          "p95": 26.395791999999975,
+          "max": 29.562250000000123
+        },
+        "pool_ping": {
+          "media": 14.531119875073273,
+          "p95": 29.945306001536665,
+          "max": 101.84357100115449
+        },
+        "pool_ping_calls": {
+          "media": 0.9305555555555556,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "pool_ping_errors": {
+          "media": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        }
+      },
+      "familias_sql": {
+        "SELECT/departamentos+users+auth_sessions": {
+          "consultas": 72,
+          "ms": 1745.3003479931795,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 24.240282611016383,
+          "ms_por_consulta": 24.240282611016383
+        },
+        "SELECT/advisory_lock": {
+          "consultas": 72,
+          "ms": 851.8973440059199,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 11.831907555637777,
+          "ms_por_consulta": 11.831907555637777
+        },
+        "SELECT/roles+departamentos+users": {
+          "consultas": 72,
+          "ms": 987.586088000171,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 13.71647344444682,
+          "ms_por_consulta": 13.71647344444682
+        },
+        "INSERT/incidencias": {
+          "consultas": 72,
+          "ms": 858.331282999643,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 11.921267819439485,
+          "ms_por_consulta": 11.921267819439485
+        },
+        "INSERT/historial_incidencias": {
+          "consultas": 72,
+          "ms": 985.4411040014384,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 13.686682000019978,
+          "ms_por_consulta": 13.686682000019978
+        },
+        "SELECT/roles+departamentos+users+incidencias+incident_involved_users": {
+          "consultas": 72,
+          "ms": 1121.9253390027006,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 15.582296375037508,
+          "ms_por_consulta": 15.582296375037508
+        },
+        "INSERT/mail_deliveries": {
+          "consultas": 72,
+          "ms": 1222.9636780102737,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 16.98560663903158,
+          "ms_por_consulta": 16.98560663903158
+        },
+        "SELECT/incidencias+incident_involved_users": {
+          "consultas": 72,
+          "ms": 812.4155450004764,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 11.283549236117729,
+          "ms_por_consulta": 11.283549236117729
+        }
+      },
+      "thread_stages": {
+        "auth": {
+          "calls": 72,
+          "incomplete": 0,
+          "wait_ms": 751.6785630032246,
+          "run_ms": 3322.4131659935665,
+          "cpu_ms": 269.0632199999998,
+          "resume_ms": 660.9283400011918,
+          "calls_per_request": 1.0,
+          "wait_ms_per_request": 10.439980041711452,
+          "run_ms_per_request": 46.1446273054662,
+          "resume_ms_per_request": 9.17956027779433,
+          "cpu_ms_per_request": 3.7369891666666635
+        },
+        "endpoint": {
+          "calls": 72,
+          "incomplete": 0,
+          "wait_ms": 795.0546239972027,
+          "run_ms": 8504.901348009298,
+          "cpu_ms": 1087.3913589999997,
+          "resume_ms": 536.1496759996953,
+          "calls_per_request": 1.0,
+          "wait_ms_per_request": 11.042425333294482,
+          "run_ms_per_request": 118.12362983346247,
+          "resume_ms_per_request": 7.446523277773546,
+          "cpu_ms_per_request": 15.102657763888885
+        }
+      }
+    },
+    "actualizacion": {
+      "solicitudes": 70,
+      "errores": 0,
+      "metricas": {
+        "total": {
+          "media": 177.44550601429572,
+          "p95": 272.4569719994179,
+          "max": 287.1637230000488
+        },
+        "auth": {
+          "media": 40.520364242781525,
+          "p95": 99.43835200101603,
+          "max": 136.83777599908353
+        },
+        "endpoint": {
+          "media": 88.60099365709695,
+          "p95": 121.963900000992,
+          "max": 149.01900499899057
+        },
+        "sql": {
+          "media": 92.58919784278987,
+          "p95": 132.938278002257,
+          "max": 167.38227900532365
+        },
+        "commit": {
+          "media": 12.28762902854734,
+          "p95": 31.305769000027794,
+          "max": 42.616831000486854
+        },
+        "fuera_auth_endpoint": {
+          "media": 48.32414811441725,
+          "p95": 90.32670000124199,
+          "max": 103.78679399946122
+        },
+        "consultas": {
+          "media": 7.0,
+          "p95": 7.0,
+          "max": 7.0
+        },
+        "hasta_envio": {
+          "media": 177.280913542953,
+          "p95": 272.2032779984147,
+          "max": 287.0213740006875
+        },
+        "cierre": {
+          "media": 0.1645924713427251,
+          "p95": 0.2629290011100238,
+          "max": 0.7430419991578674
+        },
+        "thread_calls": {
+          "media": 2.0,
+          "p95": 2.0,
+          "max": 2.0
+        },
+        "thread_wait": {
+          "media": 22.96895271416101,
+          "p95": 50.463117000617785,
+          "max": 59.370080000007874
+        },
+        "thread_run": {
+          "media": 129.17799160004506,
+          "p95": 194.48341200040886,
+          "max": 212.90051100004348
+        },
+        "thread_resume": {
+          "media": 19.381954728617398,
+          "p95": 36.9874770003662,
+          "max": 48.37679999945976
+        },
+        "thread_incomplete": {
+          "media": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "thread_cpu": {
+          "media": 14.848035328571436,
+          "p95": 21.863112000000015,
+          "max": 25.692327999999875
+        },
+        "pool_ping": {
+          "media": 10.110863414359171,
+          "p95": 22.64945799834095,
+          "max": 47.34928500147362
+        },
+        "pool_ping_calls": {
+          "media": 0.9142857142857143,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "pool_ping_errors": {
+          "media": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        }
+      },
+      "familias_sql": {
+        "SELECT/departamentos+users+auth_sessions": {
+          "consultas": 70,
+          "ms": 1654.9652200064884,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 23.642360285806976,
+          "ms_por_consulta": 23.642360285806976
+        },
+        "SELECT/advisory_lock": {
+          "consultas": 70,
+          "ms": 799.6389949857985,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 11.423414214082836,
+          "ms_por_consulta": 11.423414214082836
+        },
+        "SELECT/roles+departamentos+users": {
+          "consultas": 70,
+          "ms": 871.7909029965085,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 12.454155757092979,
+          "ms_por_consulta": 12.454155757092979
+        },
+        "SELECT/incidencias": {
+          "consultas": 70,
+          "ms": 759.9316030045884,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 10.856165757208405,
+          "ms_por_consulta": 10.856165757208405
+        },
+        "SELECT/incidencias+incident_involved_users": {
+          "consultas": 70,
+          "ms": 763.4392730087711,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 10.906275328696731,
+          "ms_por_consulta": 10.906275328696731
+        },
+        "INSERT/historial_incidencias": {
+          "consultas": 70,
+          "ms": 880.4348159956135,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 12.577640228508765,
+          "ms_por_consulta": 12.577640228508765
+        },
+        "UPDATE/incidencias": {
+          "consultas": 70,
+          "ms": 751.0430389975227,
+          "consultas_por_peticion": 1.0,
+          "ms_por_peticion": 10.72918627139318,
+          "ms_por_consulta": 10.72918627139318
+        }
+      },
+      "thread_stages": {
+        "auth": {
+          "calls": 70,
+          "incomplete": 0,
+          "wait_ms": 826.6164049946383,
+          "run_ms": 2838.9053409973712,
+          "cpu_ms": 272.8214699999997,
+          "resume_ms": 697.6705119996041,
+          "calls_per_request": 1.0,
+          "wait_ms_per_request": 11.80880578563769,
+          "run_ms_per_request": 40.55579058567673,
+          "resume_ms_per_request": 9.966721599994344,
+          "cpu_ms_per_request": 3.897449571428567
+        },
+        "endpoint": {
+          "calls": 70,
+          "incomplete": 0,
+          "wait_ms": 781.2102849966323,
+          "run_ms": 6203.554071005783,
+          "cpu_ms": 766.5410030000012,
+          "resume_ms": 659.0663190036139,
+          "calls_per_request": 1.0,
+          "wait_ms_per_request": 11.160146928523318,
+          "run_ms_per_request": 88.62220101436833,
+          "resume_ms_per_request": 9.415233128623056,
+          "cpu_ms_per_request": 10.950585757142875
+        }
+      }
+    }
+  },
+  "servidor_sql": {
+    "version": 1,
+    "estado": "OK",
+    "familias": {
+      "SELECT/incidencias+incident_involved_users": {
+        "calls": 319,
+        "exec_ms": 79.61388500000001,
+        "rows": 3418,
+        "exec_ms_per_call": 0.24957330721003138
+      },
+      "OTHER/other": {
+        "calls": 9,
+        "exec_ms": 0.046284000000000006,
+        "rows": 0,
+        "exec_ms_per_call": 0.005142666666666667
+      },
+      "BEGIN/other": {
+        "calls": 691,
+        "exec_ms": 1.6107370000000005,
+        "rows": 0,
+        "exec_ms_per_call": 0.002331023154848047
+      },
+      "SELECT/other": {
+        "calls": 21,
+        "exec_ms": 0.486838,
+        "rows": 19,
+        "exec_ms_per_call": 0.023182761904761904
+      },
+      "INSERT/other": {
+        "calls": 10,
+        "exec_ms": 0.7452670000000001,
+        "rows": 10,
+        "exec_ms_per_call": 0.07452670000000002
+      },
+      "UPDATE/incidencias": {
+        "calls": 96,
+        "exec_ms": 36.08863,
+        "rows": 96,
+        "exec_ms_per_call": 0.3759232291666667
+      },
+      "INSERT/mail_deliveries": {
+        "calls": 102,
+        "exec_ms": 121.22997200000006,
+        "rows": 1020,
+        "exec_ms_per_call": 1.1885291372549025
+      },
+      "SELECT/mail_deliveries": {
+        "calls": 2,
+        "exec_ms": 0.48114499999999993,
+        "rows": 2,
+        "exec_ms_per_call": 0.24057249999999997
+      },
+      "INSERT/auth_sessions": {
+        "calls": 10,
+        "exec_ms": 2.1109899999999997,
+        "rows": 10,
+        "exec_ms_per_call": 0.21109899999999998
+      },
+      "SELECT/incidencias": {
+        "calls": 97,
+        "exec_ms": 8.204813,
+        "rows": 97,
+        "exec_ms_per_call": 0.08458570103092783
+      },
+      "SELECT/departamentos": {
+        "calls": 10,
+        "exec_ms": 0.214326,
+        "rows": 10,
+        "exec_ms_per_call": 0.0214326
+      },
+      "INSERT/historial_incidencias": {
+        "calls": 198,
+        "exec_ms": 89.65470999999998,
+        "rows": 198,
+        "exec_ms_per_call": 0.45280156565656554
+      },
+      "SELECT/incidencias+incident_involved_users+roles+users": {
+        "calls": 336,
+        "exec_ms": 24.809871,
+        "rows": 336,
+        "exec_ms_per_call": 0.07383890178571428
+      },
+      "SELECT/historial_incidencias": {
+        "calls": 2,
+        "exec_ms": 0.278679,
+        "rows": 2,
+        "exec_ms_per_call": 0.1393395
+      },
+      "SELECT/users": {
+        "calls": 11,
+        "exec_ms": 0.291966,
+        "rows": 20,
+        "exec_ms_per_call": 0.026542363636363638
+      },
+      "COMMIT/other": {
+        "calls": 219,
+        "exec_ms": 3.8365250000000004,
+        "rows": 0,
+        "exec_ms_per_call": 0.017518378995433792
+      },
+      "SELECT/incident_involved_users": {
+        "calls": 100,
+        "exec_ms": 1.6577400000000004,
+        "rows": 0,
+        "exec_ms_per_call": 0.016577400000000006
+      },
+      "SELECT/auth_sessions+departamentos+users": {
+        "calls": 675,
+        "exec_ms": 46.504216,
+        "rows": 675,
+        "exec_ms_per_call": 0.06889513481481481
+      },
+      "SELECT/departamentos+incidencias+incident_involved_users+roles+users": {
+        "calls": 102,
+        "exec_ms": 11.27346300000001,
+        "rows": 1020,
+        "exec_ms_per_call": 0.11052414705882363
+      },
+      "ROLLBACK/other": {
+        "calls": 472,
+        "exec_ms": 0.8476720000000003,
+        "rows": 0,
+        "exec_ms_per_call": 0.0017959152542372887
+      },
+      "SELECT/departamentos+roles+users": {
+        "calls": 198,
+        "exec_ms": 7.071247000000007,
+        "rows": 198,
+        "exec_ms_per_call": 0.035713368686868724
+      },
+      "SELECT/ai_jobs": {
+        "calls": 1,
+        "exec_ms": 0.009684000000000002,
+        "rows": 1,
+        "exec_ms_per_call": 0.009684000000000002
+      },
+      "UPDATE/auth_sessions": {
+        "calls": 10,
+        "exec_ms": 0.553427,
+        "rows": 10,
+        "exec_ms_per_call": 0.0553427
+      },
+      "SELECT/local_credentials": {
+        "calls": 10,
+        "exec_ms": 0.294803,
+        "rows": 10,
+        "exec_ms_per_call": 0.029480299999999997
+      },
+      "SELECT/advisory_lock": {
+        "calls": 198,
+        "exec_ms": 1.3644520000000024,
+        "rows": 198,
+        "exec_ms_per_call": 0.00689117171717173
+      },
+      "INSERT/incidencias": {
+        "calls": 102,
+        "exec_ms": 88.341044,
+        "rows": 102,
+        "exec_ms_per_call": 0.8660886666666666
+      },
+      "SELECT/auth_sessions": {
+        "calls": 10,
+        "exec_ms": 0.239612,
+        "rows": 10,
+        "exec_ms_per_call": 0.0239612
+      },
+      "SELECT/roles": {
+        "calls": 241,
+        "exec_ms": 4.885542000000003,
+        "rows": 241,
+        "exec_ms_per_call": 0.020271958506224076
+      }
+    },
+    "totales": {
+      "calls": 4252,
+      "exec_ms": 532.74754,
+      "rows": 7703
+    },
+    "limites": "Solo QA nuevo e instrumentado. Ventana desde antes del login hasta despues de verificacion SQL: incluye login/logout, calentamiento, carga y lecturas finales; excluye seed y control SELECT1 posterior. Medias agregadas de ejecucion servidor, sin p95 ni planificacion (track_planning=off), red o tiempo total HTTP. La extension agrega coste; no acredita RNF-2. Sin SQL, parametros o IDs de consulta en el reporte. Sin reset de estadisticas."
+  },
+  "cambio_local": {
+    "sha256_normalizado_lf": {
+      "backend/app/services/incidents.py": "2073fa515e6ef0342cd392726100560f90bed612b5978c3977830babecfd2baa",
+      "backend/app/services/lifecycle.py": "abd7032d3c323b1a3dc6987a6fe93ae16a8c0caa293c300a57b3e1b05ece9399",
+      "backend/app/services/mail.py": "201acbeb6d37740e62d18a58b7d006857a357c9d4e50c30677f8c9f2409d8b6d",
+      "backend/tests/test_write_sql_templates.py": "c1f53d8420abc4cd6e58b62a3d1f7c9f1c65d688d39153ced756a57a568093b5"
+    },
+    "proposito": "Reutilizar exclusivamente estructuras SQL parametrizadas de acceso por rol y destinatarios de creación.",
+    "frescura": "Permisos, identidades y destinatarios se consultan en cada ejecución; no se guarda el resultado. Se conservan consultas, bloqueos y transacciones.",
+    "aplicacion": "Código copiado tras comparar la base del repositorio. Servicios principales continúan detenidos; no se operó Docker.",
+    "publicacion": "Pendiente; no es el commit 4d8e48e publicado."
+  },
+  "validacion": {
+    "dirigidas": {
+      "passed": 65,
+      "duracion_s": 11.88
+    },
+    "suite": {
+      "passed": 473,
+      "failed": 7,
+      "skipped": 22,
+      "subtests_passed": 147,
+      "duracion_s": 45.47
+    },
+    "fallos_suite": "Siete PermissionError WinError5 en os.replace de archivos del temporal sandbox, todos en test_ai_run_evaluation.py.",
+    "repeticion_archivo_con_temporal_autorizado": {
+      "passed": 16,
+      "duracion_s": 5.73
+    },
+    "interrupciones_previas": "Dos intentos y una ejecución de diagnóstico de pruebas detenidos esperando socketpair de asyncio/TestClient. Tras conceder red local, la dirigida terminó correctamente.",
+    "integraciones_omitidas": "22 pruebas opt-in PostgreSQL/analytics; no se cuentan como aprobadas.",
+    "diff_check": "Sin errores en el clon de publicación."
+  },
+  "limites": [
+    "Un proceso API y cinco segundos de medición instrumentada; no reproduce la formal de tres procesos ni acredita RNF-2.",
+    "Ventanas de driver y servidor distintas, con métricas solapadas. No sumar sus p95 ni atribuir la diferencia exclusivamente a red, CPU o a una consulta.",
+    "Estadísticas servidor agregadas incluyen login/logout, calentamiento, carga y verificación final; no son p95 HTTP.",
+    "Mejora candidata: no se ha medido su ganancia de latencia ni ejecutado otra formal. No cambia umbral, duración ni clientes."
+  ]
+}

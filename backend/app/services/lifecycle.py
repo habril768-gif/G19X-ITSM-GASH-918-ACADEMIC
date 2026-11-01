@@ -6,7 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.models import AuditEvent, Category, Department, Incident, User
-from app.services.incidents import MANAGERS, _visibility_for_role, role_name
+from app.services.incidents import MANAGERS, case_access_for_current_role, role_name
 
 
 def eligible_manager(db, case, user_id):
@@ -19,7 +19,7 @@ def eligible_manager(db, case, user_id):
     department = db.get(Department, person.departamento_id)
     if department is None or not department.is_active:
         raise HTTPException(422, "Responsable no habilitado para gestionar")
-    if db.scalar(select(Incident.id).where(Incident.id == case.id, _visibility_for_role(person, role))) is None:
+    if not case_access_for_current_role(db, person, case.id, role):
         raise HTTPException(422, "Responsable sin acceso independiente al caso")
     return person
 
@@ -46,7 +46,7 @@ def manage_case(db, actor, case_id, operation, body, *, presenter=None):
         # serializes competing transitions; SQLite tests cannot prove that lock.
         case = db.scalar(select(Incident).where(Incident.id == case_id)
                          .with_for_update().execution_options(populate_existing=True))
-        if case is None or db.scalar(select(Incident.id).where(Incident.id == case_id, _visibility_for_role(actor, role))) is None:
+        if case is None or not case_access_for_current_role(db, actor, case_id, role):
             raise HTTPException(404, "Incidencia no encontrada")
         before = snapshot(case)
         now = datetime.now(timezone.utc)

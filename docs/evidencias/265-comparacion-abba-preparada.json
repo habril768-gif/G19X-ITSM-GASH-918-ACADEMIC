@@ -1,0 +1,23 @@
+{
+  "fecha_registro": "2026-10-31",
+  "estado": "COMPARACION_PREPARADA_SIN_EJECUTAR",
+  "principal": "Usuaria reporta cinco servicios healthy tras up --no-build --wait; no verificado mediante Docker por agente.",
+  "orden": [
+    "A",
+    "B",
+    "B",
+    "A"
+  ],
+  "protocolo": "Smoke existente sin modificar: tres procesos API, diez clientes, cien casos iniciales nuevos, 2 s de calentamiento y 5 s de medición por corrida.",
+  "diferencias": [
+    "app/services/incidents.py",
+    "app/services/lifecycle.py",
+    "app/services/mail.py"
+  ],
+  "script_sha256": "aa6584ccd4b0c1a1179dd2f7eacc13205fcf6919184ff93bf2311d31f116f0e9",
+  "validacion": [
+    "prepare-only: verifica copias contra reportes y solo tres servicios diferentes; no ejecuta Docker.",
+    "Tres simulaciones aprobadas: cuatro corridas ABBA con reanudación, CPU rechazada sin QA y reanudación, QA incompleta aborta y reanuda. 0,147 s."
+  ],
+  "limites": "Comparación real pendiente. Smoke no acredita RNF-2; dos repeticiones no prueban significancia ni eliminan carga externa o efectos térmicos. No se modificó producto, no se ejecutó carga ni operó Docker por agente."
+}

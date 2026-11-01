@@ -1,0 +1,25 @@
+{
+  "fecha_registro": "2026-10-31",
+  "estado": "CANDIDATO_LOCAL_PENDIENTE_QA_REAL",
+  "proposito": "Una consulta SQL para destinatarios y permiso del recibo de creación, usando el predicado existente de acceso.",
+  "comportamiento": "LEFT JOIN desde una fila preserva el recibo sin destinatarios; EXISTS conserva la visibilidad vigente. Bloqueo administrativo, auditoría, atomicidad, deduplicación y lotes de outbox se conservan.",
+  "sha256_archivos": {
+    "backend/app/services/incidents.py": "9c95f9b76a679b116cb3414038a945802fd172e8647606b51e9ab175c1ffb3ef",
+    "backend/app/services/mail.py": "00e97db2f76a56701b372a478a6dcc240e5a92e1e7c527cf86e236e81d6d6129",
+    "backend/tests/test_creation_department_reuse.py": "0bafae6eaa98f8e90ea9c69761940075e7b3cb6c2e879e74c0c43ebeabe9a221",
+    "backend/tests/test_creation_receipt_grouping.py": "bc1ffc97867bf02abc52d29c0c162d37425e3195e6c59e4255acc298d56596a1"
+  },
+  "dirigidas": {
+    "passed": 81,
+    "subtests_passed": 4,
+    "duracion_s": 11.87
+  },
+  "general": {
+    "passed": 494,
+    "skipped": 22,
+    "subtests_passed": 147,
+    "duracion_s": 52.66
+  },
+  "fallo_inicial_dirigidas": "78 passed/3 failed: dos conteos históricos de consultas y una expectativa que ignoraba que un gestor implicado restringe al empleado. Se corrigieron conteos por la lectura agrupada y se añadió afirmación explícita de la restricción; dirigida final81/4 aprobada.",
+  "limites": "SQLite y HTTP locales; 22 integraciones PostgreSQL/analytics omitidas. No hay ganancia de latencia medida, CI publicado o ejecución Docker por este registro. Fuente aplicada y copia anterior conservada; imágenes principales siguen siendo las anteriores."
+}

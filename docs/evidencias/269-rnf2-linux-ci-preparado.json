@@ -1,0 +1,16 @@
+{
+  "fecha_registro": "2026-10-31",
+  "estado": "WORKFLOW_PREPARADO_PENDIENTE_PUBLICACION_Y_EJECUCION",
+  "workflow": ".github/workflows/performance.yml",
+  "workflow_sha256": "13ed96a6d9d1834d57c208923aefe0138570ec01f8ac848a6d65c1216236c37e",
+  "protocolo": "Provisión existente --mode full --api-workers3: diez clientes, cien casos iniciales,30 s calentamiento,300 s medición y p95<200 ms por operación.",
+  "entorno": "Job independiente ubuntu-24.04 de GitHub Actions; hardware y Docker se identifican durante la corrida. Sin servicios CI adicionales en el mismo job.",
+  "datos": "Solo casos sintéticos y claves aleatorias efímeras del provisionador; IA/SMTP desactivados. Solo report.json se conserva como artefacto, no manifest/config/env.",
+  "limites": [
+    "No existe todavía resultado Linux; no garantiza aprobación.",
+    "Si aprueba, el alcance será ese commit/hardware/entorno Linux y no rendimiento de laptop o producción.",
+    "No modifica el guard Windows: su contador CPU global no está disponible en Linux y se conserva null. Docker stats y hardware continúan registrados.",
+    "No cambia umbral, duración, concurrencia ni lógica del veredicto. Artefacto CI con retención14 días requiere copia si se usa como evidencia de entrega."
+  ],
+  "fuente_workflow_dispatch": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#workflow_dispatch"
+}

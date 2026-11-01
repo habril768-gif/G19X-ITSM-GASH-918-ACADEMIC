@@ -1,0 +1,243 @@
+{
+  "fecha_local_registro": "2026-10-31",
+  "fuente": "Salida de usuaria y lectura directa de ambos reportes locales.",
+  "corridas": [
+    {
+      "run_id": "c7a2582aa61c4e33",
+      "fecha_utc": "2026-11-01T01:25:15.904377+00:00",
+      "estado": "FALLIDA_UMBRAL",
+      "reporte_sha256": "86525db0dc690c12f271e249eaee201a35df57d3fa556917731fcc9fcc0e5f0b",
+      "api_workers": 3,
+      "codigo_sha256": {
+        "backend/app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "backend/app/ai/__init__.py": "61f179b46461e40a59ac512261bba16965f8c2f05e52f761a02e0c6a411b1aac",
+        "backend/app/ai/contracts.py": "59627c8f8e61e025d6567c6d0cf0d8f175b68c197452c9e08b9e934c5735dd83",
+        "backend/app/ai/evaluate.py": "a985e047197c5f09979747855b5a0d1b621fdf8a1b759a2922969ba2f6668b4b",
+        "backend/app/ai/prompts.py": "7ae7c618c98fbf43935c6a70e3a78f8fc33ff14f49e5dc2f87ee7f18e6fd04e1",
+        "backend/app/ai/provider.py": "5a499d4e808cb5c545189e798dd971107c4cc60e757ba96b3c5240fdd78604b2",
+        "backend/app/ai/queue.py": "1d3c01bf3f0dbeaa094e09b71a31ba94c032a5e4c7551d2f7557ea0b042d3df4",
+        "backend/app/ai/run_evaluation.py": "3ca8e0f5d8d4e96e44edb3c77fac8a5b8709f65200b87226de84ba634ce4acfd",
+        "backend/app/ai/worker.py": "103f514bad0be1af8b46e33cb6207da28d97ce49715c7dac347e2c77670f3e79",
+        "backend/app/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "backend/app/api/ai.py": "8663a8cc5c3b5f6604a25b383463e31c3392cedf4044e9d4a40f2aac063a5d7a",
+        "backend/app/api/auth.py": "c3c3ca8dd54627503564683f22453d81ab5e1b44c3a6bdb766c071af56961654",
+        "backend/app/api/departments.py": "6f714547b026c19c90b512888bd27204d5e790ddb1ede6defd62fe7e5ff4dd91",
+        "backend/app/api/health.py": "1165ab78aacae842806e8125b0236f45ba3788cfdf82e323ef6da940495d49d1",
+        "backend/app/api/incidents.py": "0138ef0712771d1e4165502f79acc68ce2fb0ae7d8c138ffe080ed74dd4fe1a7",
+        "backend/app/api/mail.py": "8d7716ab87742a632657c68bc36bc209dad50b4fd3b557fd1d01dcd0b9c594ef",
+        "backend/app/api/users.py": "73bf83c2c17cfaf17c412bb7b9d5b29f16b6f16f3790bbbb026cb8589cf95792",
+        "backend/app/core/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "backend/app/core/database.py": "9086ba55dbad20e3004bde7ba983bf77e15953141eea4b2b6983f8d2ece065d1",
+        "backend/app/core/performance_diagnostics.py": "c322f233adf9ffeddcb8830ae634345b33f975e00f47bf0fab58ab035a196610",
+        "backend/app/core/performance_timing.py": "727421f8617e33c5780660ebeac39eeeeeb76d4992a136dee201a8a5d02eef65",
+        "backend/app/core/security.py": "8dab79e41f497b3bf603fb1f2356dcbde5d6a04d06746215190f6e76e4e49488",
+        "backend/app/core/worker_response.py": "98c579faa3f3540e01ff3190aaf465d6bc56f1285d9a354fd0f2a0183c2d8b82",
+        "backend/app/mail/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "backend/app/mail/smtp.py": "85cffafcbb49d2bb8f24d29b4c8112be3d5a105a8ec1390289dc8c630aba86c8",
+        "backend/app/mail/worker.py": "6bd3f6a9668aacd314c2306d8c8fbc3a65e1e058bd9c005f1f52ec40fd1fe138",
+        "backend/app/main.py": "6bae5451661228b34bb2b8b3e961218e07f92ff334f226440c94a3cdbb62a3a4",
+        "backend/app/manage_reporting_user.py": "9fe6001ab3a4c8f7f0d81ab2bce802f7066271425b170df002b083f1f6ed822c",
+        "backend/app/manage_users.py": "5cf7c65fd6c5841e9efbe1b50d481caae3816a668d5203994120a2023a6d7390",
+        "backend/app/models/__init__.py": "7db6639778fcbea61458b258ebe7623e4d66bde02aaabe2c3bd30eefa9d360d4",
+        "backend/app/reporting/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "backend/app/reporting/access.py": "9c95a41784f05a53fa10145d33a6d7ce6800dc7219b874b22d7dd8efcf22df7b",
+        "backend/app/seed_demo.py": "02a2a5b0064ce4d84d1d7c6b5c9bbe35ebe0c7cba0fb05e32b9e2d453e8facde",
+        "backend/app/services/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "backend/app/services/administration_lock.py": "80d05855946fc6938e654d115e4fda3ab6d8d3e2eef0a4210da7622a04b58731",
+        "backend/app/services/ai.py": "b031b2aa0185815c73acfe041955e54b6bfeab7616369508344f4db03e8edb67",
+        "backend/app/services/departments.py": "f72d0796bd47ad2fb6b0269967914e979b3838dcf277fc1bb79d27af2c2d1a2b",
+        "backend/app/services/incidents.py": "5ed64195113a8f976685f13c90315b2d80e6f30e8e45c96246b42e3e68162b00",
+        "backend/app/services/lifecycle.py": "83fda9b85761513287a03e00b152d01f46c30679090026abd32d03dbc2a03c6e",
+        "backend/app/services/mail.py": "55d9db1679a49fdf2c6433e1b66b18483ace65125a3628e57aa7a0c5f04eb437",
+        "backend/app/services/protection.py": "1c6b9fc23b0a9e186cec8eaa10300e9dea4f266c4575eeb9434272745d0d2e24",
+        "backend/app/services/users.py": "7a0e7009a357042b02db8f7623a48c494b2f9d1aae2c90a6b346f47c466e8e5e",
+        "backend/Dockerfile": "32b4c2cca70354c2a5117d6b5382fb2387e29f6fa4e62906ff62de6b699fc058",
+        "backend/migrations/env.py": "f785a1d03989b4dd5b082631d87e626d04dea9208f7ccf5d137f787b53a94544",
+        "backend/migrations/versions/0001_initial.py": "7ba0b7a025219b90d2e7fd43ed8b9aeca6ee2b11a62e275f11bfea0b29ea8d5b",
+        "backend/migrations/versions/0002_local_auth.py": "ed22da5a07b76f1759d5c18a467872cb9d077a4994a376386be5494c2c2effb0",
+        "backend/migrations/versions/0003_incident_scope.py": "2fd1baa39ea2e5e0a2f62d47e463d35e78070620485c3280e9e4b5addb1f2121",
+        "backend/migrations/versions/0004_department_audit.py": "3059804d47653891761bccf6c8303845a6d5add2571ce0b01fb9c4ec9c829099",
+        "backend/migrations/versions/0005_ai_jobs.py": "36c2f5dd222cee849a9d0a579a1dbed94b73c38ce90ee3383b95344f63a69820",
+        "backend/migrations/versions/0006_mail_deliveries.py": "026bff111cf68de9662bb5158294b62d94728c8abdb96218c5b31399ae48c04f",
+        "backend/migrations/versions/0007_analytics_views.py": "8c86b370301b89048b0ddf01cbc676e6281e35fe10da2f8992794b45aa92ffdd",
+        "backend/migrations/versions/0007_analytics_views.sql": "8e1c09cecebda065776b336b5541adfea370ee32d7bbe2350844699cec4f73fe",
+        "backend/migrations/versions/0008_mail_closure.py": "01c0a98f14f781de9d4af239bd7ea537968b33c901939f00542b5b6329a263ad",
+        "backend/requirements.txt": "4d65132ccadbd298e43233845a06c0327267433a5fde7ead1653c9231a637f59"
+      },
+      "metricas": {
+        "listado": {
+          "intentos": 6914,
+          "exitos": 6914,
+          "errores": 0,
+          "p95_exitos_ms": 169.96100000051229
+        },
+        "detalle": {
+          "intentos": 6913,
+          "exitos": 6913,
+          "errores": 0,
+          "p95_exitos_ms": 157.90220000053523
+        },
+        "creacion": {
+          "intentos": 6911,
+          "exitos": 6911,
+          "errores": 0,
+          "p95_exitos_ms": 265.0117000002865
+        },
+        "actualizacion": {
+          "intentos": 6908,
+          "exitos": 6908,
+          "errores": 0,
+          "p95_exitos_ms": 230.7650000002468
+        }
+      },
+      "solicitudes": 27646,
+      "errores": 0,
+      "cpu_medicion": {
+        "duracion_s": 300.0760707999998,
+        "cpu_logicas": 4,
+        "generador_cpu_s": 17.859375,
+        "generador_cpu_porcentaje_un_nucleo": 5.951615852735969,
+        "generador_cpu_porcentaje_equipo": 1.4879039631839923,
+        "host_cpu_porcentaje": 93.69922932722349,
+        "host_estado": "OK",
+        "limites": "CPU proceso incluye todos sus hilos; no Docker. Host incluye otras aplicaciones/VM. Medias de fase, no picos ni causa única; GetSystemTimes Windows."
+      },
+      "sql": {
+        "incidencias": 7714,
+        "eventos_creado": 7714,
+        "eventos_editado": 7609,
+        "entregas_encoladas": 77140,
+        "intentos_smtp": 0,
+        "trabajos_ia": 0
+      },
+      "http_posterior": "OK",
+      "cierres_sesion": {
+        "204": 10
+      },
+      "qa_detenida": true
+    },
+    {
+      "run_id": "0e2e0230b104444d",
+      "fecha_utc": "2026-11-01T03:15:18.815220+00:00",
+      "estado": "FALLIDA_UMBRAL",
+      "reporte_sha256": "07ae1bd73e82fbd3d2b7bc7ce1637e19facf3eaaab2a09d683eccdb04a772404",
+      "api_workers": 3,
+      "codigo_sha256": {
+        "backend/app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "backend/app/ai/__init__.py": "61f179b46461e40a59ac512261bba16965f8c2f05e52f761a02e0c6a411b1aac",
+        "backend/app/ai/contracts.py": "59627c8f8e61e025d6567c6d0cf0d8f175b68c197452c9e08b9e934c5735dd83",
+        "backend/app/ai/evaluate.py": "a985e047197c5f09979747855b5a0d1b621fdf8a1b759a2922969ba2f6668b4b",
+        "backend/app/ai/prompts.py": "7ae7c618c98fbf43935c6a70e3a78f8fc33ff14f49e5dc2f87ee7f18e6fd04e1",
+        "backend/app/ai/provider.py": "5a499d4e808cb5c545189e798dd971107c4cc60e757ba96b3c5240fdd78604b2",
+        "backend/app/ai/queue.py": "1d3c01bf3f0dbeaa094e09b71a31ba94c032a5e4c7551d2f7557ea0b042d3df4",
+        "backend/app/ai/run_evaluation.py": "3ca8e0f5d8d4e96e44edb3c77fac8a5b8709f65200b87226de84ba634ce4acfd",
+        "backend/app/ai/worker.py": "103f514bad0be1af8b46e33cb6207da28d97ce49715c7dac347e2c77670f3e79",
+        "backend/app/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "backend/app/api/ai.py": "8663a8cc5c3b5f6604a25b383463e31c3392cedf4044e9d4a40f2aac063a5d7a",
+        "backend/app/api/auth.py": "c3c3ca8dd54627503564683f22453d81ab5e1b44c3a6bdb766c071af56961654",
+        "backend/app/api/departments.py": "6f714547b026c19c90b512888bd27204d5e790ddb1ede6defd62fe7e5ff4dd91",
+        "backend/app/api/health.py": "1165ab78aacae842806e8125b0236f45ba3788cfdf82e323ef6da940495d49d1",
+        "backend/app/api/incidents.py": "0138ef0712771d1e4165502f79acc68ce2fb0ae7d8c138ffe080ed74dd4fe1a7",
+        "backend/app/api/mail.py": "8d7716ab87742a632657c68bc36bc209dad50b4fd3b557fd1d01dcd0b9c594ef",
+        "backend/app/api/users.py": "73bf83c2c17cfaf17c412bb7b9d5b29f16b6f16f3790bbbb026cb8589cf95792",
+        "backend/app/core/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "backend/app/core/database.py": "9086ba55dbad20e3004bde7ba983bf77e15953141eea4b2b6983f8d2ece065d1",
+        "backend/app/core/performance_diagnostics.py": "c322f233adf9ffeddcb8830ae634345b33f975e00f47bf0fab58ab035a196610",
+        "backend/app/core/performance_timing.py": "727421f8617e33c5780660ebeac39eeeeeb76d4992a136dee201a8a5d02eef65",
+        "backend/app/core/security.py": "8dab79e41f497b3bf603fb1f2356dcbde5d6a04d06746215190f6e76e4e49488",
+        "backend/app/core/worker_response.py": "98c579faa3f3540e01ff3190aaf465d6bc56f1285d9a354fd0f2a0183c2d8b82",
+        "backend/app/mail/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "backend/app/mail/smtp.py": "85cffafcbb49d2bb8f24d29b4c8112be3d5a105a8ec1390289dc8c630aba86c8",
+        "backend/app/mail/worker.py": "6bd3f6a9668aacd314c2306d8c8fbc3a65e1e058bd9c005f1f52ec40fd1fe138",
+        "backend/app/main.py": "6bae5451661228b34bb2b8b3e961218e07f92ff334f226440c94a3cdbb62a3a4",
+        "backend/app/manage_reporting_user.py": "9fe6001ab3a4c8f7f0d81ab2bce802f7066271425b170df002b083f1f6ed822c",
+        "backend/app/manage_users.py": "5cf7c65fd6c5841e9efbe1b50d481caae3816a668d5203994120a2023a6d7390",
+        "backend/app/models/__init__.py": "7db6639778fcbea61458b258ebe7623e4d66bde02aaabe2c3bd30eefa9d360d4",
+        "backend/app/reporting/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "backend/app/reporting/access.py": "9c95a41784f05a53fa10145d33a6d7ce6800dc7219b874b22d7dd8efcf22df7b",
+        "backend/app/seed_demo.py": "02a2a5b0064ce4d84d1d7c6b5c9bbe35ebe0c7cba0fb05e32b9e2d453e8facde",
+        "backend/app/services/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "backend/app/services/administration_lock.py": "80d05855946fc6938e654d115e4fda3ab6d8d3e2eef0a4210da7622a04b58731",
+        "backend/app/services/ai.py": "b031b2aa0185815c73acfe041955e54b6bfeab7616369508344f4db03e8edb67",
+        "backend/app/services/departments.py": "f72d0796bd47ad2fb6b0269967914e979b3838dcf277fc1bb79d27af2c2d1a2b",
+        "backend/app/services/incidents.py": "5729a093499aa9f98e62e3344d6cb72021acb3072dc69f9fe0ad62922f0c1bcc",
+        "backend/app/services/lifecycle.py": "5bc3dd816d51ba84be71257c202c76113f1723aac5c7c8349b6a4b975e0c748b",
+        "backend/app/services/mail.py": "e04648cf7970b774ae66f67d664016ea4e4e0b2554cba488f82a2cdcaa89fd86",
+        "backend/app/services/protection.py": "1c6b9fc23b0a9e186cec8eaa10300e9dea4f266c4575eeb9434272745d0d2e24",
+        "backend/app/services/users.py": "7a0e7009a357042b02db8f7623a48c494b2f9d1aae2c90a6b346f47c466e8e5e",
+        "backend/Dockerfile": "32b4c2cca70354c2a5117d6b5382fb2387e29f6fa4e62906ff62de6b699fc058",
+        "backend/migrations/env.py": "f785a1d03989b4dd5b082631d87e626d04dea9208f7ccf5d137f787b53a94544",
+        "backend/migrations/versions/0001_initial.py": "7ba0b7a025219b90d2e7fd43ed8b9aeca6ee2b11a62e275f11bfea0b29ea8d5b",
+        "backend/migrations/versions/0002_local_auth.py": "ed22da5a07b76f1759d5c18a467872cb9d077a4994a376386be5494c2c2effb0",
+        "backend/migrations/versions/0003_incident_scope.py": "2fd1baa39ea2e5e0a2f62d47e463d35e78070620485c3280e9e4b5addb1f2121",
+        "backend/migrations/versions/0004_department_audit.py": "3059804d47653891761bccf6c8303845a6d5add2571ce0b01fb9c4ec9c829099",
+        "backend/migrations/versions/0005_ai_jobs.py": "36c2f5dd222cee849a9d0a579a1dbed94b73c38ce90ee3383b95344f63a69820",
+        "backend/migrations/versions/0006_mail_deliveries.py": "026bff111cf68de9662bb5158294b62d94728c8abdb96218c5b31399ae48c04f",
+        "backend/migrations/versions/0007_analytics_views.py": "8c86b370301b89048b0ddf01cbc676e6281e35fe10da2f8992794b45aa92ffdd",
+        "backend/migrations/versions/0007_analytics_views.sql": "8e1c09cecebda065776b336b5541adfea370ee32d7bbe2350844699cec4f73fe",
+        "backend/migrations/versions/0008_mail_closure.py": "01c0a98f14f781de9d4af239bd7ea537968b33c901939f00542b5b6329a263ad",
+        "backend/requirements.txt": "4d65132ccadbd298e43233845a06c0327267433a5fde7ead1653c9231a637f59"
+      },
+      "metricas": {
+        "listado": {
+          "intentos": 5983,
+          "exitos": 5983,
+          "errores": 0,
+          "p95_exitos_ms": 209.7871000005398
+        },
+        "detalle": {
+          "intentos": 5982,
+          "exitos": 5982,
+          "errores": 0,
+          "p95_exitos_ms": 192.6220999994257
+        },
+        "creacion": {
+          "intentos": 5978,
+          "exitos": 5978,
+          "errores": 0,
+          "p95_exitos_ms": 312.02200000006997
+        },
+        "actualizacion": {
+          "intentos": 5975,
+          "exitos": 5975,
+          "errores": 0,
+          "p95_exitos_ms": 285.4349999997794
+        }
+      },
+      "solicitudes": 23918,
+      "errores": 0,
+      "cpu_medicion": {
+        "duracion_s": 300.07577449999917,
+        "cpu_logicas": 4,
+        "generador_cpu_s": 15.28125,
+        "generador_cpu_porcentaje_un_nucleo": 5.092463737021878,
+        "generador_cpu_porcentaje_equipo": 1.2731159342554694,
+        "host_cpu_porcentaje": 88.60843530330644,
+        "host_estado": "OK",
+        "limites": "CPU proceso incluye todos sus hilos; no Docker. Host incluye otras aplicaciones/VM. Medias de fase, no picos ni causa única; GetSystemTimes Windows."
+      },
+      "sql": {
+        "incidencias": 6775,
+        "eventos_creado": 6775,
+        "eventos_editado": 6669,
+        "entregas_encoladas": 67750,
+        "intentos_smtp": 0,
+        "trabajos_ia": 0
+      },
+      "http_posterior": "OK",
+      "cierres_sesion": {
+        "204": 10
+      },
+      "qa_detenida": true
+    }
+  ],
+  "comprobacion_codigo": "SHA crudo del reporte coincide con fuente actual; SHA normalizado LF de esa fuente coincide con candidato263. No confundir hashes por CRLF.",
+  "conclusion": "El candidato 263 no demostró una mejora en esta comparación. La última formal falla en listado, creación y actualización; detalle cumple.",
+  "limites": [
+    "Dos corridas sucesivas, sin control idéntico de carga externa, frecuencia/temperatura o planificación del host; no prueban causalidad del cambio.",
+    "No se declara que CPU menor garantice latencia menor ni que CPU sea la única causa.",
+    "La evidencia 220 conserva únicamente la aprobación histórica de sus hashes/entorno. Este candidato sigue sin acreditar RNF-2.",
+    "Código candidato local sin publicación ni despliegue en servicios principales por este registro. QA detenida y recursos conservados."
+  ],
+  "siguiente_paso": "Comparación controlada de versión/configuración antes de modificar nuevamente o repetir una formal. Reanudar principal con sus imágenes previas para conservar disponible el panel."
+}

@@ -187,3 +187,8 @@ Propósito: ampliar recuperación lógica230 e instalación nueva255 hacia uso d
 
 
 Versión RF-8: [257](evidencias/257-filtro-sin-responsable-regresion-local.json), filtro sin responsable y regresión local completos; CI, aplicación coordinada API/panel, recorrido real y formal de nuevos hashes pendientes.220 sigue como resultado histórico aprobado de su versión.
+
+
+### 2026-10-31 — RF-8 actualizado y filtro/limpieza comprobados en panel
+
+[259](evidencias/259-filtro-sin-responsable-ui-verificado.json), capturas260/261: actualización coordinada confirma API/health/db y proxy ok, OpenAPI con unassigned y frontend aplicado después; usuaria muestra filtro Sin responsable con1resultado y, tras limpiar, Responsable Todos/8resultados. Menús RH visibles, identidad no incluida en recortes; contexto según procedimiento de autora. No se infiere total global ni detalle de asignación no capturado. Propósito: completar recorrido real del filtro de RF-8. Archivos: manifiesto259, dosPNG y seguimiento. Validación: firmas/hashes PNG, reporte de actualización y JSON contrastados; sin repetir tests o alterar casos. CI257/258 conserva alcance; formal RNF-2 de nuevos hashes pendiente. Registro local para publicación agrupada.

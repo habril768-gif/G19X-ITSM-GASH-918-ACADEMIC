@@ -1,11 +1,12 @@
 """Eventos atómicos, destinatarios mínimos y despacho con permisos vigentes."""
 import os
+from functools import lru_cache
 from datetime import timedelta, datetime
 from uuid import NAMESPACE_URL, uuid4, uuid5
-from sqlalchemy import select, and_, or_, inspect
+from sqlalchemy import select, and_, or_, inspect, bindparam, literal, true
 from app.core.security import utcnow, aware
 from app.models import MailDelivery, Incident, User, Department, Role
-from app.services.incidents import independent_rh_visibility, role_name, visibility
+from app.services.incidents import independent_rh_visibility, role_name, visibility, _case_access_statement
 from app.services.administration_lock import administration_lock
 
 def enabled():
@@ -18,20 +19,45 @@ def allowed(db, case, person):
     return bool(department and department.is_active and db.scalar(
         select(Incident.id).where(Incident.id == case.id, visibility(db, person))))
 
+@lru_cache(maxsize=1)
+def _creation_recipients_statement():
+    # La estructura no contiene UUID reales ni decisiones de autorización.
+    return (
+        select(User.id).select_from(User)
+        .join(Role, User.rol_id == Role.id)
+        .join(Department, User.departamento_id == Department.id)
+        .join(Incident, Incident.id == bindparam('recipient_case_id', type_=Incident.id.type))
+        .where(Incident.assigned_to.is_(None), Role.nombre == 'ADMIN_RH', User.is_active.is_(True), Department.is_active.is_(True),
+               independent_rh_visibility(User.id)))
+
+
 def creation_recipient_ids(db, case):
     """Selecciona RH activos e independientes en una consulta, sin carga por persona."""
     if case.assigned_to is not None:
         return set()
-    return set(db.scalars(
-        select(User.id).select_from(User)
-        .join(Role, User.rol_id == Role.id)
-        .join(Department, User.departamento_id == Department.id)
-        .join(Incident, Incident.id == case.id)
-        .where(Role.nombre == 'ADMIN_RH', User.is_active.is_(True), Department.is_active.is_(True),
-               independent_rh_visibility(User.id))))
+    return set(db.scalars(_creation_recipients_statement(), {'recipient_case_id': case.id}))
 
 
-def queue_event(db, case, event, before=None):
+@lru_cache(maxsize=3)
+def _creation_receipt_statement(role):
+    recipients = _creation_recipients_statement().subquery()
+    one_row = select(literal(1).label('one')).subquery()
+    # LEFT JOIN conserva el recibo incluso cuando no hay ningún destinatario.
+    # EXISTS usa exactamente el predicado de acceso vigente, sin duplicarlo.
+    access = _case_access_statement(role).exists().correlate(None)
+    return (select(recipients.c.id, access.label('can_view'))
+            .select_from(one_row.outerjoin(recipients, true())))
+
+
+def creation_recipients_and_access(db, case, actor, role):
+    rows = db.execute(_creation_receipt_statement(role), {
+        'recipient_case_id': case.id, 'access_case_id': case.id,
+        'access_actor_id': actor.id, 'access_department_id': actor.departamento_id,
+    }).all()
+    return {row.id for row in rows if row.id is not None}, bool(rows[0].can_view)
+
+
+def queue_event(db, case, event, before=None, *, receipt_actor=None, receipt_role=None):
     """Misma transacción del evento. Nunca conecta a SMTP/Redis ni hace commit."""
     before = before or {}
     kind = None
@@ -47,8 +73,12 @@ def queue_event(db, case, event, before=None):
     event_state = inspect(event)
     fresh_event = event_state.pending and event_state.session is db and event.id is None
     db.flush()
+    receipt_access = None
     if kind == 'CREACION':
-        recipients = creation_recipient_ids(db, case)
+        if receipt_actor is not None:
+            recipients, receipt_access = creation_recipients_and_access(db, case, receipt_actor, receipt_role)
+        else:
+            recipients = creation_recipient_ids(db, case)
     else:
         if kind in {'ASIGNACION', 'REAPERTURA'}:
             people = [db.get(User, case.assigned_to)] if case.assigned_to else []
@@ -77,6 +107,7 @@ def queue_event(db, case, event, before=None):
     statement = table.insert().returning(table.c.id).execution_options(insertmanyvalues_page_size=50)
     for start in range(0, len(pending), 50):
         db.execute(statement, pending[start:start + 50]).close()
+    return receipt_access
 
 def _same_date(value, expected):
     return (value is None and expected is None) or bool(value and expected and aware(value) == aware(datetime.fromisoformat(expected)))

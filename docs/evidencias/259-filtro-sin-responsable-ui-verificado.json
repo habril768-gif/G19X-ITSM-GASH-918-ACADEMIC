@@ -1,0 +1,42 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "Salida de actualización aportada por usuaria, reporte local leído por agente y dos capturas aportadas e inspeccionadas en chat.",
+  "codigo": "4d8e48eed260377a3f0ca03ab312f3b4cb4f8fff",
+  "actualizacion": {
+    "source": "apply_rf8_queue_local.py",
+    "api_health_db": "ok",
+    "openapi_unassigned": true,
+    "frontend_applied": true,
+    "proxy_health_db": "ok",
+    "previous_files_copy": "Conservada localmente por el ejecutor",
+    "deployment_report_sha256": "3e14f728af244f487ef925ea1af778a101f2277ab46dc2b2b25716e3d01da1df",
+    "docker_reportado": "API/worker construidos y servicios indicados healthy según salida de usuaria; no operación independiente del daemon por agente."
+  },
+  "confirmacion_textual": "Los filtros funcionan y limpiar filtros tambien",
+  "capturas": [
+    {
+      "archivo": "260-panel-sin-responsable-un-caso.png",
+      "sha256": "816098a796b521159e532c78a22f42ce15a1b1d3336a060ff26dcb82d4abfdcb",
+      "bytes": 45517,
+      "observacion": "Responsable Sin responsable; total1 y una fila del caso ficticio710482ca-a652-4679-9abf-13c3b3553e10."
+    },
+    {
+      "archivo": "261-panel-filtros-limpiados-ocho-casos.png",
+      "sha256": "3c5631b969ef0c6e346c67448019c07c2f9f1efb4c35418a829e0b7cabfecaa9",
+      "bytes": 55249,
+      "observacion": "Responsable Todos; contador8 y filas de casos conservados; lista parcial en recorte."
+    }
+  ],
+  "resultado": {
+    "con_sin_responsable": 1,
+    "tras_limpiar_filtros": 8,
+    "rol_contextual": "Procedimiento indicado como Admin RH; menús administrativos visibles, cabecera de identidad no incluida en recortes."
+  },
+  "limites": [
+    "No se capturó detalle con assigned_to ni tráfico HTTP; se comprueba filtro/contador visible y retorno a Todos, con autorización y predicado probados en257/258.",
+    "Totales pertenecen a la consulta de esa sesión; no se declaran totales globales de la base.",
+    "No se modificaron casos durante este recorrido.",
+    "RNF-2 de nuevos hashes sigue pendiente;220 conserva resultado histórico de su versión."
+  ],
+  "publicacion": "Registro local pendiente de publicación agrupada con cierre."
+}

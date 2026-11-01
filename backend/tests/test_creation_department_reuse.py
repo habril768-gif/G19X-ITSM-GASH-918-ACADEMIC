@@ -45,7 +45,7 @@ class CreationDepartmentReuseTests(unittest.TestCase):
             actor=db.get(User,self.actor_id)
             with self.calls(db) as (queries,state):receipt=create_case(db,actor,self.body(self.one_id))
             self.assertTrue(receipt['received'] and receipt['can_view'])
-            self.assertEqual(len(queries),6)
+            self.assertEqual(len(queries),5)  # Destinatarios y recibo comparten lectura.
             self.assertFalse(any(sql.startswith('SELECT departamentos.') for sql in queries))
             self.assertEqual(state['after_commit'],0)
             self.assertEqual(db.get(Incident,receipt['id']).department_id_at_creation,self.one_id)
@@ -54,7 +54,7 @@ class CreationDepartmentReuseTests(unittest.TestCase):
         with Session(self.engine) as db:
             actor=db.get(User,self.actor_id)
             with self.calls(db) as (queries,state):receipt=create_case(db,actor,self.body(self.two_id))
-            self.assertEqual(len(queries),7)
+            self.assertEqual(len(queries),6)  # Se conserva la lectura de otro departamento.
             self.assertEqual(sum(sql.startswith('SELECT departamentos.') for sql in queries),1)
             self.assertEqual(state['after_commit'],0)
             case=db.get(Incident,receipt['id'])

@@ -1,0 +1,36 @@
+{
+  "fecha_registro": "2026-10-31",
+  "fuente": "API publica GitHub Actions consultada por agente; ambos workflow_runs completed/success y head_sha concordante. Jobs backend tests y postgres-integration completed/success.",
+  "commit": "4d8e48eed260377a3f0ca03ab312f3b4cb4f8fff",
+  "publicacion": "main actualizado y fetch remoto comprobado; tree620c12d10ebff9a00f0b9d3cc24abb979b6f90b8",
+  "workflows": [
+    {
+      "name": "Frontend",
+      "run_id": 41260063541,
+      "conclusion": "success",
+      "url": "https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/41260063541"
+    },
+    {
+      "name": "Backend",
+      "run_id": 41260063582,
+      "conclusion": "success",
+      "jobs": [
+        "tests:success",
+        "postgres-integration:success"
+      ],
+      "url": "https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/41260063582"
+    }
+  ],
+  "alcance": "Codigo nuevo de RF-8 verificado por CI backend/PostgreSQL/frontend; numeros detallados de cada job no descargados, no se inventan recuentos remotos.",
+  "preparacion_actualizacion": {
+    "auxiliar": "apply_rf8_queue_local.py",
+    "sha256": "e8ab41bf199ca84c4a5bd82a855840b0b42f8266c4a375a5ac21ced66a2d9b35",
+    "simulaciones": "API sin parametro bloquea copia de frontend; API con parametro permite copia/backup y proxy. No se ejecuto Docker contra la plataforma por agente."
+  },
+  "pendientes": [
+    "Ejecutar actualizacion coordinada en terminal autorizada.",
+    "Comprobar UI real y total autorizado de bandeja.",
+    "Formal RNF-2 de nuevos hashes, conservando protocolo previo."
+  ],
+  "publicacion_del_registro": "Este registro y seguimiento guardados localmente, pendientes de publicacion agrupada con recorrido real."
+}

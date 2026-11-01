@@ -618,3 +618,10 @@ No es necesario repetir la aprobación existente para sumar evidencias; revalida
 ## Versión con filtro sin responsable
 
 257 conserva consulta predeterminada y añade predicado solo con unassigned=true. Cambian hashes:220 es aprobación histórica, no se extiende automáticamente. Revalidar nueva versión con formal guardada3procesos/10clientes/100casos/30+300s/p95<200ms, sin rebajar umbrales u omitir operaciones.
+
+
+### 2026-10-31 — Smoke C no acredita RNF-2; validación Linux preparada
+
+Propósito: evaluar candidato267 y obtener evidencia separada del host Windows. [268](evidencias/268-smoke-consulta-conjunta-sin-acreditar-rnf2.json): smoke1eb4c64715574171, tres procesos/diez clientes, cero errores; p95 listado114,376 ms, detalle134,766 ms, creación275,641 ms y actualización241,840 ms. SQL265 incidencias/CREADO,162 EDITADO,2650 notificaciones, cero SMTP/IA. QA detenida y principal reanudado healthy según salida y reporte; una muestra breve no demuestra ganancia ni acredita RNF-2.
+
+[269](evidencias/269-rnf2-linux-ci-preparado.json): workflow .github/workflows/performance.yml preparado con protocolo formal existente30+300 s, diez clientes/cien casos y tres procesos, umbral estricto200 ms. Runner ubuntu-24.04 separado del equipo de autora, commit/hardware identificados; sin proveedores ni datos reales. Solo report.json como artefacto14 días, no manifiestos/configuración/claves. El contador Windows de CPU global no aplica a Linux y conserva null; no se modifica guard ni veredicto. La eventual aprobación se limitará al entorno y hashes Linux, sin extenderse a laptop/producción. Archivos: workflow, evidencias268/269 y seguimiento. Validación local: sintaxis YAML/plan del provisionador; ejecución remota y resultado todavía pendientes al registrar. Mantener pruebas funcionales494/22omitidas/147subpruebas y fallos formales262/264 históricos. No se declara cierre integral ni aprobación Linux antes de leer el reporte.

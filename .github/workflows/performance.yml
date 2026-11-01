@@ -1,0 +1,68 @@
+name: RNF-2 HTTP QA Linux
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/performance.yml']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rnf2-http-qa-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  performance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      SSLKEYLOGFILE: ''
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Identificar commit y entorno
+        run: |
+          git rev-parse HEAD
+          python --version
+          docker version --format 'Docker server={{.Server.Version}}'
+          docker compose version
+          nproc
+          free -m
+      - name: Protocolo formal en recursos QA nuevos
+        run: python -B backend/scripts/provision_performance_qa.py --mode full --api-workers 3 --confirm-isolated-qa
+      - name: Resumen de medición
+        if: always()
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          reports = sorted(Path('.pgdata').glob('performance-*/report.json'))
+          with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a') as out:
+              out.write('RNF-2: HTTP QA en runner Linux, sin IA/SMTP externos.\n\n')
+              out.write('Commit: ' + os.environ['GITHUB_SHA'] + '\n\n')
+              for path in reports:
+                  raw = path.read_bytes()
+                  data = json.loads(raw)
+                  out.write('Estado: ' + data['estado'] + '\n\n')
+                  out.write('SHA256 reporte: ' + hashlib.sha256(raw).hexdigest() + '\n\n')
+                  http = data.get('http', {})
+                  out.write('Hardware: `' + json.dumps(http.get('hardware_declarado', {})) + '`\n\n')
+                  for name, metric in http.get('medicion', {}).get('metricas', {}).items():
+                      out.write(f"{name}: p95={metric['p95_exitos_ms']:.3f} ms; errores={metric['errores']}\n\n")
+              if not reports:
+                  out.write('No se generó reporte: ejecución incompleta.\n')
+          PY
+      - name: Conservar únicamente reportes sin manifiestos ni credenciales
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rnf2-http-qa-${{ github.sha }}
+          path: .pgdata/performance-*/report.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14

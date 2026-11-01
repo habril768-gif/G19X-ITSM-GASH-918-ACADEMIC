@@ -100,6 +100,30 @@ def visible_case(db: Session, actor: User, case_id: UUID) -> Incident:
     return case
 
 
+@lru_cache(maxsize=3)
+def _case_access_statement(role):
+    # Solo tres estructuras por rol, sin identidades, sesiones ni resultados.
+    actor = SimpleNamespace(
+        id=bindparam("access_actor_id", type_=User.id.type),
+        departamento_id=bindparam("access_department_id", type_=User.departamento_id.type),
+    )
+    return select(Incident.id).where(
+        Incident.id == bindparam("access_case_id", type_=Incident.id.type),
+        _visibility_for_role(actor, role),
+    )
+
+
+def case_access_for_current_role(db, actor, case_id, role):
+    """Ejecuta permisos vigentes; el llamador ya refrescó actor/rol bajo bloqueo."""
+    if role not in {"ADMIN_RH", "SUPERVISOR", "EMPLEADO"}:
+        raise HTTPException(403, "Rol no habilitado")
+    return db.scalar(_case_access_statement(role), {
+        "access_actor_id": actor.id,
+        "access_department_id": actor.departamento_id,
+        "access_case_id": case_id,
+    }) is not None
+
+
 def create_case(db: Session, actor: User, body):
     from app.services.administration_lock import administration_lock
     role, actor_department = administration_lock(db, actor, include_role=True, include_department=True)
@@ -174,10 +198,9 @@ def create_case(db: Session, actor: User, body):
         })
         db.add(event)
         from app.services.mail import queue_event
-        queue_event(db, case, event)
-        # Actor y permisos se comprobaron bajo el bloqueo administrativo compartido.
-        predicate = _visibility_for_role(actor, role)
-        can_view = db.scalar(select(Incident.id).where(Incident.id == case.id, predicate)) is not None
+        # Actor/rol ya refrescados bajo bloqueo. La misma lectura obtiene
+        # destinatarios y permiso del recibo, sin guardar decisiones entre llamadas.
+        can_view = queue_event(db, case, event, receipt_actor=actor, receipt_role=role)
         receipt = {"id": case.id, "received": True, "can_view": can_view}
         db.commit()
     except SQLAlchemyError:
