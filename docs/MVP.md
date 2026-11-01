@@ -1,6 +1,11 @@
 # Alcance y aceptación del MVP
 
-## RNF-2: referencia aprobada del 30 de octubre; versión RF-8 por revalidar
+## RNF-2: aprobado en HTTP QA Linux CI del31/10/2026
+
+[Validación270](evidencias/270-rnf2-linux-ci-aprobado.json) y [reporte íntegro271](evidencias/271-rnf2-linux-ci-reporte-completo.json): commit2bbf4a5, tres procesos API, diez clientes, cien casos iniciales,30+300 s completos y71079 solicitudes sin errores. P95 listado31,85/detalle52,60/creación62,17/actualización60,15 ms, todos<200 ms. Auditoría, outbox, HTTP posterior, diez logout204 y detención QA comprobados. Runner Linux con4CPU y15,61 GiB Docker, servidor28.0.4; hardware y hashes exactos en270. Acredita ese alcance HTTP QA, sin IA/SMTP externos ni rendimiento universal. Los fallos Windows de la versión actual se conservan separados; no se afirma corregida la laptop. Despliegue actualizado del principal pendiente.
+
+### Referencia histórica Windows
+
 
 [Primera formal aprobada220](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json):10 clientes,100 casos iniciales,30+300s,API de 3 procesos,35.216 solicitudes sin errores. P95 listado123,81/detalle113,27/creación194,04/actualización167,77ms, todos<200 ms; auditoría/colas/logout/parada correctos. Acredita este alcance HTTP Docker local y hardware declarado, no rendimiento universal ni proveedores externos. Diez fallos históricos se conservan. [Perfil opcional 221](evidencias/221-perfil-compose-rnf2-reproducible.json) y [protocolo](PRUEBA_RENDIMIENTO.md) permiten reproducir configuración/medición. Los demás pendientes de entrega siguen vigentes.
 
@@ -76,3 +81,8 @@ Archivos: evidencias 230–232, matriz de aceptación, mantenimiento, QA, bitác
 Cuenta BI nueva creada por CLI después de un intento rechazado por longitud; siete comprobaciones reales de permisos: dos vistas permitidas, cinco42501 (lectura/UPDATE/DELETE users y CREATE public/analytics), sin atributos privilegiados. default_transaction_read_only desactivado solo en sesión de prueba para verificar ACL; ROLLBACK por prueba. Fuente: salidas/reporte local y confirmaciones de autora, sin daemon independiente del agente. Cuatro contenedores detenidos y volúmenes conservados al cierre.
 
 Propósito: ampliar recuperación lógica230 e instalación nueva255 hacia uso de copia y reconstrucción acotada de permisos BI. No equivalencia literal de todos los propietarios/ACL/globales, definiciones o filas del origen actual; no proveedores externos/BI Desktop, RTO/RPO o aceptación institucional. Archivos: evidencia256, matriz, resumen, informe, mantenimiento, MVP, bitácora, QA, backlog, entregables, trazabilidad y decisiones. Validación: JSON/reporte, hash del respaldo, resultados de siete ACL y cierre contrastados; auxiliares probados offline/simulados según manifiesto. Credenciales, dump y datos individuales no publicados; registro local pendiente de publicación.
+
+
+### 2026-10-31 — RNF-2 aprobado en entorno HTTP QA Linux CI
+
+Propósito: validar versión actual fuera del host Windows. [270](evidencias/270-rnf2-linux-ci-aprobado.json), [reporte íntegro271](evidencias/271-rnf2-linux-ci-reporte-completo.json), workflow41273320902 success, commit2bbf4a525d6734f90dfc6058e67ad4d1a597d02b y corrida15eb2b8088e9455a: tres procesos, diez clientes, cien casos,30 s calentamiento+300 s medición completos;71079 solicitudes/0errores. P95 listado31,850 ms, detalle52,603 ms, creación62,175 ms y actualización60,151 ms. Auditoría SQL19809 incidencias/CREADO,19704 EDITADO,198090 entregas, cero SMTP/IA; HTTP posteriorOK, diez logout204 y QA detenida. HardwareLinux7.0/4CPU/Docker15,61 GiB/28.0.4 identificado en reporte. ZIP descargado con SHA256 contrastado contra metadatos de GitHub; reporte preservado sin editar y todos los hashes de código cotejados contra blobs Git. BackendCI41273320913 también success en tests e integración PostgreSQL, sin inventar conteos remotos. Resultado limitado a ese commit/entorno, una corrida, no a laptop, producción, repetibilidad o proveedores externos. Fallos Windows262/264/268 conservados. Archivos:270/271, matrices, protocolo y cierre. Pendientes: publicar registro documental, paquete actualizado, desplegar imágenes en principal y comprobar salud; informe institucional sigue borrador. No repetir pruebas locales para aparentar cierre ni cambiar umbral.

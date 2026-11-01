@@ -1,0 +1,68 @@
+{
+  "fecha_local_registro": "2026-10-31",
+  "fecha_reporte_utc": "2026-11-01T04:30:07.400419+00:00",
+  "estado": "APROBADA_ALCANCE_HTTP_QA",
+  "commit_codigo_medido": "2bbf4a525d6734f90dfc6058e67ad4d1a597d02b",
+  "run_id": "15eb2b8088e9455a",
+  "workflow_id": 41273320902,
+  "workflow_url": "https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/41273320902",
+  "backend_ci_id": 41273320913,
+  "backend_jobs": {
+    "tests": "success",
+    "postgres-integration": "success"
+  },
+  "artifact_id": 13070312830,
+  "artifact_zip_sha256": "956d855a3c987cafa12864969ac14947c8cc5aea15712b6cebc350d48ce214b7",
+  "reporte_archivo": "271-rnf2-linux-ci-reporte-completo.json",
+  "reporte_sha256": "758891b39f9bc7e940f36d299c36b3d3ae66dd26cf126780bbb0af9bcd7ae299",
+  "verificacion_codigo": "Todos los archivos declarados contrastados por SHA256 con blobs Git del commit medido, sin confundir CRLF de la copia Windows.",
+  "archivos_codigo_verificados": 54,
+  "hardware": {
+    "os": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+    "cpu": "x86_64",
+    "cpu_logicas_host": 4,
+    "docker_cpus": 4,
+    "docker_mem_bytes": 16760344576,
+    "docker_server": "28.0.4",
+    "docker_os": "linux",
+    "generador": "mismo host que Docker; sin limite de recursos por contenedor"
+  },
+  "protocolo": {
+    "clientes": 10,
+    "casos_iniciales": 100,
+    "calentamiento_s": 30,
+    "medicion_s": 300,
+    "api_workers": 3,
+    "umbral_p95_ms_estricto": 200
+  },
+  "solicitudes": 71079,
+  "errores": 0,
+  "p95_ms": {
+    "listado": 31.85031500004243,
+    "detalle": 52.603268000041226,
+    "creacion": 62.17454099999031,
+    "actualizacion": 60.15143600001238
+  },
+  "conteos": [
+    100,
+    2041,
+    19809
+  ],
+  "comprobacion_sql": {
+    "incidencias": 19809,
+    "eventos_creado": 19809,
+    "eventos_editado": 19704,
+    "entregas_encoladas": 198090,
+    "intentos_smtp": 0,
+    "trabajos_ia": 0
+  },
+  "qa_detenida": true,
+  "limites": [
+    "Aprobación en este commit y runner Linux; no demuestra mejora causal de optimizaciones ni corrige los fallos Windows262/264/268.",
+    "Una corrida formal aprobada, no repetibilidad universal, producción, SLA o proveedores externos.",
+    "Umbral es p95 por operación; máximos observados pueden superar200 ms.",
+    "CPU global Windows no disponible en Linux se conserva null; hardware/Docker stats registrados. No se modificó guard Windows ni criterio formal.",
+    "Imágenes principales Windows aún anteriores: despliegue actualizado y comprobación posterior pendientes.",
+    "Artefacto original CI expira15/11/2026; copia íntegra271 preservada en repositorio."
+  ]
+}
