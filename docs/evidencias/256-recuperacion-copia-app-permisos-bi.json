@@ -1,0 +1,151 @@
+{
+  "fecha_registro": "2026-10-31",
+  "estado": "RECUPERACION_LOCAL_COPIA_NUCLEO_APP_Y_ACL_BI_VERIFICADA",
+  "fuente": "Salidas de terminal y confirmaciones UI aportadas por usuaria; reporte local inspeccionado por agente. Sin operación independiente del daemon por agente.",
+  "proyecto": "plurione-install-da463a2d815a",
+  "base_recuperada": "plurione_recovery_f2d97f3bcb",
+  "commit_codigo": "bbaad73eea873739a456b0b21e8438610cb392d8",
+  "respaldo": {
+    "archivo": "plurione-20261031-092101.dump",
+    "bytes": 75624,
+    "sha256": "A21826DB6F16EBEA761D83B0DB1BD27D89A801E54CAAB5568AC1A0BB0F0F13B0",
+    "corte_nombre_archivo": "31/10/2026 09:21:01; no incluye cambios posteriores"
+  },
+  "restauracion": {
+    "comando": "pg_restore --exit-on-error --no-owner --no-privileges",
+    "revision": "0008",
+    "catalogo_coincide_archivo": true,
+    "objetos_por_tipo": {
+      "TABLE": 14,
+      "VIEW": 2,
+      "SEQUENCE": 2,
+      "INDEX": 15,
+      "CONSTRAINT": 20,
+      "FK CONSTRAINT": 25
+    },
+    "restricciones_sin_validar": 0,
+    "valores_secuencias": {
+      "public.categorias_incidencia_id_seq": {
+        "last_value": 1,
+        "is_called": false
+      },
+      "public.roles_id_seq": {
+        "last_value": 1,
+        "is_called": false
+      }
+    },
+    "usuarios": 9,
+    "incidencias": 8
+  },
+  "aplicacion": {
+    "http_y_check_migracion": {
+      "migration_check": "sin operaciones nuevas",
+      "health_db": "ok",
+      "web_proxy_health_db": "ok",
+      "web_index": 200,
+      "users_count_unchanged": true,
+      "incidents_count_unchanged": true
+    },
+    "sesiones_historicas_revocadas_en_copia": 30,
+    "politica": "Credenciales de cuentas del respaldo conservadas; primer login confirmado por autora como Admin RH. Sin tokens históricos habilitados por omisión. IA/correo desactivados y trabajos externos no reanudados.",
+    "consulta_ui": "Autora confirma login y consulta de expediente con todo funciona bien; sin captura nueva ni ID concreto confirmado."
+  },
+  "analitica": {
+    "provision": "Cuenta qa_recovery_bi creada mediante CLI de producto; primer intento rechazado por longitud de contraseña, siguiente satisfactorio. Sin contraseña recogida.",
+    "pruebas": {
+      "state": "BI_LECTURA_Y_DENEGACIONES_ESPERADAS",
+      "user": "qa_recovery_bi",
+      "database": "plurione_recovery_f2d97f3bcb",
+      "role_flags_all_false": true,
+      "session_read_only_disabled_for_acl_test": true,
+      "checks": [
+        {
+          "prueba": "SELECT analytics.incident_metrics",
+          "resultado": "PERMITIDO",
+          "esperado": "PERMITIDO",
+          "coincide": true
+        },
+        {
+          "prueba": "SELECT analytics.export_info",
+          "resultado": "PERMITIDO",
+          "esperado": "PERMITIDO",
+          "coincide": true
+        },
+        {
+          "prueba": "SELECT public.users",
+          "resultado": "42501",
+          "esperado": "42501",
+          "coincide": true
+        },
+        {
+          "prueba": "UPDATE public.users WHERE false",
+          "resultado": "42501",
+          "esperado": "42501",
+          "coincide": true
+        },
+        {
+          "prueba": "DELETE public.users WHERE false",
+          "resultado": "42501",
+          "esperado": "42501",
+          "coincide": true
+        },
+        {
+          "prueba": "CREATE public probe",
+          "resultado": "42501",
+          "esperado": "42501",
+          "coincide": true
+        },
+        {
+          "prueba": "CREATE analytics probe",
+          "resultado": "42501",
+          "esperado": "42501",
+          "coincide": true
+        }
+      ],
+      "transactions": "ROLLBACK en cada prueba; escrituras con WHERE false y tablas de prueba revertidas."
+    },
+    "alcance": "Permisos reales de cuenta SQL; no conexión nueva de Power BI Desktop a esta copia."
+  },
+  "incidente_windows": {
+    "fuente": "Eventos41/6008 y docker ps aportados por usuaria.",
+    "observacion": "Windows reportó apagado inesperado el31/10/2026 y cuatro contenedores propios quedaron exited255. Causa no determinada.",
+    "estado_oom_reportado_por_contenedor": {
+      "api": false,
+      "web": false,
+      "postgres": false,
+      "redis": false
+    },
+    "comprobacion_posterior": {
+      "usuarios": 9,
+      "incidencias": 8,
+      "revision": "0008",
+      "secuencias_coinciden": true,
+      "restricciones_sin_validar": 0
+    },
+    "limite": "No diagnostica RAM, disco, energía o controladores; OOMKilled=false no descarta presión de memoria del host."
+  },
+  "cierre": {
+    "resultado_aportado": "RECUPERACION_ENSAYO_DETENIDO_DATOS_CONSERVADOS",
+    "contenedores_detenidos": 4,
+    "volumenes_eliminados": false
+  },
+  "trazabilidad_auxiliares": {
+    "restore_install_backup_local.py": "d1cb0e747ccea43403a83629db9ca3f9f67ed220a23c0ffd2d43a2c9eba1b133",
+    "start_recovered_app_local.py": "7e710d82cab30e8e130dae2854280c51646766c2281a9941497d2c5bdbb47a51",
+    "check_recovery_after_reboot_local.py": "7e7e3e47633cc705ed1758215ea313b3a7a4a4fec8e6c3f4d65e8274c1f2bf66",
+    "check_recovered_bi_local.py": "2b26f767c6c564e981cc2164b814ed21fb603bd231f7cd3c352686e56f228663",
+    "stop_recovered_install_local.py": "65042c4a46a43ebe72a6d332f79678619b5554e7803bb1fbfc97ea8f42aa5fda"
+  },
+  "reporte_local_sha256": "897a69a60dc89ba53dec88a0390446c353fb68752eea639bf5eaeab443fc08e9",
+  "validacion_auxiliares": "Parsers contrastados offline con catálogo real del dump sin servidor; simulaciones de arranque, recuentos coincidentes/discrepantes y ACL esperadas/lectura indebida detectada. No son nuevas pruebas del servidor operativo.",
+  "limites": [
+    "Catálogo comparado por nombres/tipos y secuencias por last_value/is_called; no igualdad textual de todas las definiciones.",
+    "No nuevo cotejo de todas las filas contra origen vivo, que tiene cambios posteriores. El mismo archivo se comprobó por filas/huellas en230.",
+    "Propietarios/ACL no transferidos literalmente: restauración con --no-owner/--no-privileges bajo operador QA y cuenta BI nueva con permisos comprobados. No igualdad de todos los roles/globales de la instalación anterior.",
+    "SELECT probados de vistas; UPDATE/DELETE operativos con WHERE false; CREATE de tablas de prueba con ROLLBACK. No matriz completa de todas las tablas/comandos.",
+    "No reconstrucción de perfiles IA/SMTP/BI Desktop, infraestructura externa, secretos originales o instalación nativa NodeWindows literal.",
+    "No RTO/RPO/SLA, validación universal, capacitación o aceptación institucional.",
+    "URL dinámica del panel cambió; puerto32769 quedó detenido al cerrar el ensayo."
+  ],
+  "publicacion": "Registro local pendiente de publicación conjunta."
+}

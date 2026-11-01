@@ -555,3 +555,8 @@ Validación de esta entrega: lectura completa de reporte real,54 hashes,comando3
 ### 2026-10-31 — SMTP externo diferido por decisión de la autora
 
 La autora indicó que no es necesario implementarlo por ahora y pidió continuar con la entrega. Se mantiene Mailpit para captura local; no se configura proveedor ni se envían correos a buzones externos. No implica modificar el PRD o una exigencia institucional no confirmada. Integración SMTP existente conservada, sin cambio de código.
+
+
+### 2026-10-31 — Política de copia recuperada en QA
+
+Ensayo256 restaura sin propietarios/ACL originales bajo operador QA propio, revoca sesiones históricas de la copia y mantiene IA/correo desactivados. Reconstruye cuenta BI nueva y comprueba permisos reales en sesión sin read_only por defecto y con ROLLBACK. No se llama equivalencia completa a una reconstrucción acotada de permisos; no se reanudan trabajos externos ni se declara causa del reinicio Windows. Credenciales solo privadas y cierre conserva datos.
