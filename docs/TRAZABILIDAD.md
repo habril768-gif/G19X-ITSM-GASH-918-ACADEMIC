@@ -1068,3 +1068,19 @@ Archivos: tres fuentes Python, evidencia 274 y seguimiento del corte.
 La documentación y fecha se publicaron en 96fe0d3, con 2 417 líneas cambiadas.
 Pendientes: CI remoto de formato, recorridos A09/A10/A14 y segundo día real de commits.
 A01 permanece cerrado en su alcance; no se ejecutaron pruebas nuevas de rendimiento.
+
+
+## 2026-11-02 — Corte 4: negativo de correo observado y CI de formato aprobado
+
+Propósito: atender1668/A09. [275](evidencias/275-corte4-a09-destinatario-inactivo.json)
+y capturas276–277: autora confirma cuenta QA ADMIN_RH inactiva y crea caso ficticio
+f8b47a8e-877f-419e-92e6-9afc4a407f6a. Aviso abierto para admin@plurione.local;
+búsqueda por ID muestra los tres resultados y ningún destinatario QA inactivo.
+El segundo correo aparece truncado y no se completa por inferencia. Se cubre este
+negativo de creación con control positivo en Mailpit, no fallos/reintentos SMTP,
+buzón externo, SQL del agente o toda A09. Casos y mensajes se conservan.
+[278](evidencias/278-corte4-formato-ci-aprobado.json): backend y PostgreSQL del commit
+1291c8f aprobados en CI41574086675; no se ejecutó rendimiento nuevo.
+Archivos: evidencias, dos PNG, matriz, seguimiento, bitácora y trazabilidad.
+Validación: firmas/hashes PNG, ID y paginación1–3 de3 contrastados en capturas y
+jobs de CI comprobados. Pendientes: A10, A14 y segundo día real de commits.

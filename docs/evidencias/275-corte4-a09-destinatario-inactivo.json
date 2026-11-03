@@ -1,0 +1,44 @@
+{
+  "fecha_registro": "2026-11-02",
+  "escenario": "A09",
+  "criterio_corte4": 1668,
+  "estado": "DESTINATARIO_INACTIVO_EXCLUIDO_EN_RECORRIDO_MAILPIT_OBSERVADO",
+  "fuente": "Confirmaciones de la autora y dos capturas aportadas e inspeccionadas en el chat.",
+  "caso_ficticio_id": "f8b47a8e-877f-419e-92e6-9afc4a407f6a",
+  "cuenta_ficticia_inactiva": "qa-corte4-rh-inactivo-20261102@example.invalid",
+  "precondiciones": "Autora confirma crear/desactivar exclusivamente la cuenta QA de rol ADMIN_RH. Estado Inactiva reportado por texto; sin captura de esa fila ni comprobación SQL independiente.",
+  "control_positivo": {
+    "destinatario_visible": "admin@plurione.local",
+    "asunto": "PluriOne · Caso f8b47a8e-877f-419e-92e6-9afc4a407f6a",
+    "cuerpo": "Aviso mínimo y enlace al mismo expediente en 127.0.0.1:5173."
+  },
+  "busqueda": {
+    "consulta": "f8b47a8e-877f-419e-92e6-9afc4a407f6a",
+    "paginacion_visible": "1-3 of 3",
+    "destinatarios_visibles": [
+      "admin@plurione.local",
+      "rh.independiente@exam… (texto truncado)",
+      "admin@example.invalid"
+    ],
+    "cuenta_inactiva_entre_resultados": false
+  },
+  "capturas": [
+    {
+      "archivo": "276-a09-control-positivo-mailpit.png",
+      "sha256": "fcb3d83460614f3a7cac8dd9d0e5b288c0f0e68c25872d3e97d8d960c5b52ae8",
+      "bytes": 21869
+    },
+    {
+      "archivo": "277-a09-tres-resultados-sin-destinatario-inactivo.png",
+      "sha256": "617ab2d21ba3e06cb820dbf2b5409ca289a4ff05d0cd2f89ebd6cb787cae01bf",
+      "bytes": 44196
+    }
+  ],
+  "resultado": "Se cumple el caso negativo solicitado en1668 con control positivo: tres avisos del caso y ninguno al destinatario inactivo.",
+  "limites": [
+    "Ausencia observada en Mailpit en el instante de la captura, no seguimiento ilimitado o buzón externo.",
+    "Segundo destinatario truncado: no se infiere su dirección completa.",
+    "Sin inspección de SMTP/outbox/SQL por el agente; no se atribuye un motivo interno no observado.",
+    "A09 conserva pendientes de otros fallos/reintentos reales; no se declara verificada toda la matriz ni aceptación institucional."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "fecha_registro": "2026-11-02",
+  "commit": "1291c8f09a4cd8c4c96174a87817363420cdf5d9",
+  "run_id": 41574086675,
+  "url": "https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC/actions/runs/41574086675",
+  "estado": "APPROVED_BACKEND_AND_POSTGRES_INTEGRATION",
+  "jobs": [
+    {
+      "nombre": "tests",
+      "id": 125713463815,
+      "conclusion": "success"
+    },
+    {
+      "nombre": "postgres-integration",
+      "id": 125713464207,
+      "conclusion": "success"
+    }
+  ],
+  "fuente": "Consulta API de workflows filtrada por commit y consulta conectada de jobs; ambas observadas en la sesión.",
+  "limites": "Sin conteos remotos inventados; no sustituye recorridos manuales y no es una nueva prueba RNF-2."
+}
