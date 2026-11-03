@@ -7,8 +7,8 @@ El trabajo se concentra en aceptación, legibilidad y documentación del MVP exi
 
 | Prioridad | Trabajo | Fecha prevista | Estado al 2 de noviembre |
 | --- | --- | --- | --- |
-| 1 | Reordenar MVP y corregir redacción del README | 2 de noviembre | Corregido localmente; publicación por comprobar |
-| 2 | Dividir líneas largas de los tres archivos Python señalados | 2 de noviembre | En curso; requiere regresión |
+| 1 | Reordenar MVP y corregir redacción del README | 2 de noviembre | Publicado en 96fe0d3 |
+| 2 | Dividir líneas largas de los tres archivos Python señalados | 2 de noviembre | Formato y regresión local verificados en 274; CI por comprobar |
 | 3 | A09: comprobar un destinatario inactivo y un aviso de control en Mailpit | 3 de noviembre | Recorrido manual pendiente |
 | 4 | A10: consultar un caso confidencial como Empleado y Supervisor, con control RH | 3 de noviembre | Recorrido manual pendiente |
 | 5 | A14: seguir el manual y corregir diferencias con el panel | 4 de noviembre | Recorrido manual pendiente |

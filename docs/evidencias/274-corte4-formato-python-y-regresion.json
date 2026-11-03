@@ -1,0 +1,35 @@
+{
+  "fecha": "2026-11-02",
+  "observacion_corte4": 5,
+  "estado": "FORMATO_Y_REGRESION_LOCAL_VERIFICADOS",
+  "archivos": [
+    {
+      "archivo": "backend/app/api/incidents.py",
+      "ast_equivalente": true,
+      "max_caracteres_linea": 151,
+      "sha256_antes": "dfc2f4f16edd21546457120d08facc0c0a2a0fbd7e4e07e377f1f677b6d66ff3",
+      "sha256_despues": "1d047e5cb0cb863e19314465885d5bd223ec179ec38f4caec100fc1f4aebd391"
+    },
+    {
+      "archivo": "backend/app/models/__init__.py",
+      "ast_equivalente": true,
+      "max_caracteres_linea": 147,
+      "sha256_antes": "7db6639778fcbea61458b258ebe7623e4d66bde02aaabe2c3bd30eefa9d360d4",
+      "sha256_despues": "8bdc965b47a48cd81382558f059d34a6c8fb515015b714b3db7d0120976b60e9"
+    },
+    {
+      "archivo": "backend/app/manage_reporting_user.py",
+      "ast_equivalente": true,
+      "max_caracteres_linea": 101,
+      "sha256_antes": "9fe6001ab3a4c8f7f0d81ab2bce802f7066271425b170df002b083f1f6ed822c",
+      "sha256_despues": "1e223e85f6440668258c02a5f546133f457e84a7106e7acf724e86a905cca481"
+    }
+  ],
+  "suite_local": {
+    "passed": 494,
+    "skipped": 22,
+    "subtests_passed": 147,
+    "duracion_s": 91.97
+  },
+  "limites": "Regresión local SQLite/HTTP; integraciones PostgreSQL/analítica omitidas localmente. CI remoto por verificar. Solo formato, AST y constantes SQL idénticos; no nueva medición RNF-2 ni aprobación de recorridos manuales."
+}

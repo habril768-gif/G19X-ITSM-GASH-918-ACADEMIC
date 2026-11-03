@@ -2,7 +2,24 @@
 from datetime import date, datetime
 from uuid import UUID, uuid4
 
-from sqlalchemy import JSON, Boolean, CheckConstraint, Date, DateTime, ForeignKey, Index, Integer, String, Text, UniqueConstraint, Uuid, func, column, false, true
+from sqlalchemy import (
+    JSON,
+    Boolean,
+    CheckConstraint,
+    Date,
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    String,
+    Text,
+    UniqueConstraint,
+    Uuid,
+    func,
+    column,
+    false,
+    true,
+)
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -64,16 +81,38 @@ class Incident(Base):
         CheckConstraint("status IN ('PENDIENTE','EN_REVISION','RESUELTA','CERRADA')", name="ck_incident_status"),
         CheckConstraint("priority IS NULL OR priority IN (1,2,3)", name="ck_incident_priority"),
         CheckConstraint("ai_status IN ('PENDIENTE','COMPLETADA','FALLIDA','OMITIDA')", name="ck_incident_ai_status"),
-        CheckConstraint("status = 'PENDIENTE' OR (assigned_to IS NOT NULL AND category_id IS NOT NULL AND priority IS NOT NULL AND cycle_start_at IS NOT NULL)", name="ck_incident_assigned"),
-        CheckConstraint("status NOT IN ('RESUELTA','CERRADA') OR (resolved_at IS NOT NULL AND length(trim(resolution_text)) > 0 AND resolution_text IS NOT NULL AND validated_by IS NOT NULL AND validated_at IS NOT NULL)", name="ck_incident_resolution"),
+        CheckConstraint(
+            "status = 'PENDIENTE' OR (assigned_to IS NOT NULL AND category_id IS NOT NULL "
+            "AND priority IS NOT NULL AND cycle_start_at IS NOT NULL)",
+            name="ck_incident_assigned",
+        ),
+        CheckConstraint(
+            "status NOT IN ('RESUELTA','CERRADA') OR (resolved_at IS NOT NULL "
+            "AND length(trim(resolution_text)) > 0 AND resolution_text IS NOT NULL "
+            "AND validated_by IS NOT NULL AND validated_at IS NOT NULL)",
+            name="ck_incident_resolution",
+        ),
         CheckConstraint("status != 'CERRADA' OR closed_at IS NOT NULL", name="ck_incident_closed"),
         CheckConstraint("scope IN ('PERSONA','ENTORNO')", name="ck_incident_scope"),
-        CheckConstraint("(scope = 'PERSONA' AND affected_employee_id IS NOT NULL) OR (scope = 'ENTORNO' AND affected_employee_id IS NULL)", name="ck_incident_affected_scope"),
+        CheckConstraint(
+            "(scope = 'PERSONA' AND affected_employee_id IS NOT NULL) "
+            "OR (scope = 'ENTORNO' AND affected_employee_id IS NULL)",
+            name="ck_incident_affected_scope",
+        ),
         CheckConstraint("scope != 'ENTORNO' OR category_id IS NULL OR category_id = 4", name="ck_incident_environment_category"),
-        CheckConstraint("NOT classification_valid OR (validated_by IS NOT NULL AND validated_at IS NOT NULL AND category_id IS NOT NULL AND priority IS NOT NULL)", name="ck_incident_classification_valid"),
+        CheckConstraint(
+            "NOT classification_valid OR (validated_by IS NOT NULL AND validated_at IS NOT NULL "
+            "AND category_id IS NOT NULL AND priority IS NOT NULL)",
+            name="ck_incident_classification_valid",
+        ),
         CheckConstraint("status NOT IN ('RESUELTA','CERRADA') OR classification_valid", name="ck_incident_resolved_validation"),
         CheckConstraint("ai_status != 'OMITIDA' OR (ai_skip_reason IS NOT NULL AND length(trim(ai_skip_reason)) > 0)", name="ck_incident_ai_skip"),
-        CheckConstraint("(ai_input_reviewed_by IS NULL AND ai_input_reviewed_at IS NULL) OR (ai_input_reviewed_by IS NOT NULL AND ai_input_reviewed_at IS NOT NULL AND ai_input_text IS NOT NULL AND length(trim(ai_input_text)) > 0)", name="ck_incident_ai_review"),
+        CheckConstraint(
+            "(ai_input_reviewed_by IS NULL AND ai_input_reviewed_at IS NULL) "
+            "OR (ai_input_reviewed_by IS NOT NULL AND ai_input_reviewed_at IS NOT NULL "
+            "AND ai_input_text IS NOT NULL AND length(trim(ai_input_text)) > 0)",
+            name="ck_incident_ai_review",
+        ),
         Index("ix_incident_status_priority", "status", "priority"),
     )
     id: Mapped[UUID] = mapped_column(Uuid, primary_key=True, default=uuid4)
@@ -145,7 +184,11 @@ class AIJob(Base):
 class AuditEvent(Base):
     __tablename__ = "historial_incidencias"
     __table_args__ = (
-        CheckConstraint("accion IN ('CREADO','ESTADO_CAMBIADO','ASIGNADO','REAPERTURA','VALIDACION_IA','CAMBIO_CONFIDENCIALIDAD','CONTENIDO_EDITADO','USUARIO_ACTUALIZADO')", name="ck_audit_action"),
+        CheckConstraint(
+            "accion IN ('CREADO','ESTADO_CAMBIADO','ASIGNADO','REAPERTURA','VALIDACION_IA',"
+            "'CAMBIO_CONFIDENCIALIDAD','CONTENIDO_EDITADO','USUARIO_ACTUALIZADO')",
+            name="ck_audit_action",
+        ),
         CheckConstraint("incidencia_id IS NOT NULL OR affected_user_id IS NOT NULL", name="ck_audit_target"),
     )
     id: Mapped[UUID] = mapped_column(Uuid, primary_key=True, default=uuid4)
@@ -186,7 +229,13 @@ class IncidentParticipant(Base):
     __table_args__ = (
         CheckConstraint("review_status IN ('DECLARADO','CONFIRMADO','DESCARTADO')", name="ck_participant_status"),
         CheckConstraint("length(trim(declaration_reason)) > 0", name="ck_participant_declaration"),
-        CheckConstraint("(review_status = 'DECLARADO' AND reviewed_by IS NULL AND reviewed_at IS NULL AND review_reason IS NULL) OR (review_status IN ('CONFIRMADO','DESCARTADO') AND reviewed_by IS NOT NULL AND reviewed_at IS NOT NULL AND review_reason IS NOT NULL AND length(trim(review_reason)) > 0)", name="ck_participant_review"),
+        CheckConstraint(
+            "(review_status = 'DECLARADO' AND reviewed_by IS NULL AND reviewed_at IS NULL "
+            "AND review_reason IS NULL) OR (review_status IN ('CONFIRMADO','DESCARTADO') "
+            "AND reviewed_by IS NOT NULL AND reviewed_at IS NOT NULL "
+            "AND review_reason IS NOT NULL AND length(trim(review_reason)) > 0)",
+            name="ck_participant_review",
+        ),
         CheckConstraint("reviewed_by IS NULL OR reviewed_by != user_id", name="ck_participant_no_self_review"),
     )
     incidencia_id: Mapped[UUID] = mapped_column(ForeignKey("incidencias.id"), primary_key=True)

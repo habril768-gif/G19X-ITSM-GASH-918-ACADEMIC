@@ -6,11 +6,11 @@ Fecha de entrega fijada por la autora: **5 de noviembre de 2026**.
 
 | Observación | Cambio o comprobación | Estado |
 | --- | --- | --- |
-| 1. MVP por alcance y espacios normales | Objetivo y funciones al principio; antecedentes en bitácora; README resumido | Corregido localmente; verificar publicación |
+| 1. MVP por alcance y espacios normales | Objetivo y funciones al principio; antecedentes en bitácora; README resumido | Publicado en 96fe0d3; evidencia 273 |
 | 2. Matriz de aceptación | Prioridad A09, A10 y A14, con registros manuales reales | Pendiente de los recorridos |
 | 3. Fecha en el plan | Fecha de entrega y calendario del 2 al 5 de noviembre en MVP y backlog | Documentado por decisión de la autora |
 | 4. Commits pequeños y seguidos | Un trabajo por commit; menos de 3 000 líneas cambiadas | En seguimiento; segundo día real todavía pendiente |
-| 5. Líneas Python legibles | API de incidencias, modelos y CLI de cuenta BI | En curso; AST, longitud y regresión pendientes |
+| 5. Líneas Python legibles | API de incidencias, modelos y CLI de cuenta BI | Verificado localmente; evidencia 274; CI por comprobar |
 
 ## Comprobaciones del corte
 
@@ -25,9 +25,9 @@ Fecha de entrega fijada por la autora: **5 de noviembre de 2026**.
 | 1671 | Backlog con fecha de entrega | 5 de noviembre de 2026, fijada por la autora |
 | 1672 | MVP con fecha de entrega | 5 de noviembre de 2026, fijada por la autora |
 | 1673 | Commits nuevos en al menos dos días | Pendiente de dos fechas reales |
-| 1674 | Ningún commit nuevo supera 3 000 líneas | Comprobar al publicar cada cambio |
-| 1675 | API sin líneas de más de 160 caracteres | Pendiente de formato y comprobación |
-| 1676 | Modelos sin líneas de más de 160 caracteres | Pendiente de formato y comprobación |
+| 1674 | Ningún commit nuevo supera 3 000 líneas | Commit documental 96fe0d3: 2 417 líneas; comprobar cada publicación |
+| 1675 | API sin líneas de más de 160 caracteres | Verificado: máximo 151; evidencia 274 |
+| 1676 | Modelos sin líneas de más de 160 caracteres | Verificado: máximo 147; evidencia 274 |
 
 ## Orden de los recorridos
 

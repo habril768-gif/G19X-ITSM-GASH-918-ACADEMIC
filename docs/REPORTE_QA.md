@@ -1016,3 +1016,19 @@ Propósito: validar versión actual fuera del host Windows. [270](evidencias/270
 ### 2026-10-31 — Actualización local y comprobación posterior confirmadas
 
 Propósito: cerrar el pendiente de aplicación local del código validado en CI. [272](evidencias/272-actualizacion-local-salud-y-acceso-confirmados.json): usuaria ejecuta up --build --wait con compose.yaml/compose.rnf2.yaml/compose.bi.yaml y perfilmail; API/worker construidos y cinco servicios healthy. Luego aporta health/db con statusok/databasepostgresql y confirma inicio de sesión/apertura de una incidencia existente. No se aportó ID o nueva captura del caso; no se inspeccionaron imágenes por agente ni se declara repetida toda la regresión. Archivos: evidencia272 y seguimiento; sin cambios de producto o datos realizados por agente. Resultado: comprobación local de salud/acceso confirmada; RNF-2 aprobado solo para CI Linux270/271, no para laptop/producción. Informe continúa borrador y aceptación institucional separada. Paquete ec4e6e4 conserva código validado y evidencia270/271; esta confirmación posterior no estaba en ese ZIP. Publicación documental de272 preparada.
+
+
+## 2026-11-02 — Corte 4: formato Python y regresión
+
+Propósito: atender la observación 5 con cambios de formato. La API divide consultas,
+diccionarios y firmas; los modelos dividen importación y restricciones sin cambiar
+los textos SQL; el CLI de lectura separa sentencias unidas por punto y coma.
+Evidencia [274](evidencias/274-corte4-formato-python-y-regresion.json): AST equivalente
+antes y después en los tres archivos; máximos de 151, 147 y 101 caracteres por línea.
+Regresión local: 494 pruebas y 147 subpruebas aprobadas, 22 integraciones omitidas,
+en 91,97 segundos. La primera comparación detectó la distinta agrupación del import;
+se conservó la agrupación original antes de la comparación final aprobada.
+Archivos: tres fuentes Python, evidencia 274 y seguimiento del corte.
+La documentación y fecha se publicaron en 96fe0d3, con 2 417 líneas cambiadas.
+Pendientes: CI remoto de formato, recorridos A09/A10/A14 y segundo día real de commits.
+A01 permanece cerrado en su alcance; no se ejecutaron pruebas nuevas de rendimiento.

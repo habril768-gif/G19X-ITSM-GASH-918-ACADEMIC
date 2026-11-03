@@ -133,10 +133,32 @@ class CasePage(BaseModel):
 def options(response:Response,user:User=Depends(current_user),db:Session=Depends(get_session)):
     response.headers["Cache-Control"]="no-store"
     role=role_name(db,user)
-    base=select(User.id,User.nombre_completo,User.departamento_id,Role.nombre.label("rol")).join(Role,User.rol_id==Role.id).join(Department,User.departamento_id==Department.id).where(User.is_active.is_(True),Department.is_active.is_(True))
-    people=db.execute(base.where(or_(role=="ADMIN_RH",User.departamento_id==user.departamento_id,Role.nombre.in_(["ADMIN_RH","SUPERVISOR"])))).mappings().all()
-    affected=[r for r in people if role=="ADMIN_RH" or (role=="SUPERVISOR" and r["departamento_id"]==user.departamento_id) or (role=="EMPLEADO" and r["id"]==user.id)]
-    deps=db.execute(select(Department.id,Department.nombre).where(Department.is_active.is_(True),or_(role=="ADMIN_RH",Department.id==user.departamento_id))).mappings().all()
+    base = (
+        select(User.id, User.nombre_completo, User.departamento_id, Role.nombre.label("rol"))
+        .join(Role, User.rol_id == Role.id)
+        .join(Department, User.departamento_id == Department.id)
+        .where(User.is_active.is_(True), Department.is_active.is_(True))
+    )
+    people = db.execute(
+        base.where(or_(
+            role == "ADMIN_RH",
+            User.departamento_id == user.departamento_id,
+            Role.nombre.in_(["ADMIN_RH", "SUPERVISOR"]),
+        ))
+    ).mappings().all()
+    affected = [
+        r for r in people
+        if role == "ADMIN_RH"
+        or (role == "SUPERVISOR" and r["departamento_id"] == user.departamento_id)
+        or (role == "EMPLEADO" and r["id"] == user.id)
+    ]
+    deps = db.execute(
+        select(Department.id, Department.nombre)
+        .where(
+            Department.is_active.is_(True),
+            or_(role == "ADMIN_RH", Department.id == user.departamento_id),
+        )
+    ).mappings().all()
     categories=db.execute(select(Category.id,Category.nombre).order_by(Category.id)).mappings().all()
     return {"affected_employees":affected,"participants":people,"departments":deps,"categories":categories}
 
@@ -197,19 +219,62 @@ def participants(case_id:UUID,response:Response,user:User=Depends(current_user),
     # Un empleado no recibe relaciones de terceros ni motivos de revisión.
     if role_name(db,user)=="EMPLEADO":return {"items":[]}
     rows=db.scalars(select(IncidentParticipant).where(IncidentParticipant.incidencia_id==case_id).order_by(IncidentParticipant.user_id)).all()
-    return {"items":[{"user_id":r.user_id,"review_status":r.review_status,"declaration_reason":r.declaration_reason,"reviewed_by":r.reviewed_by,"reviewed_at":r.reviewed_at,"review_reason":r.review_reason} for r in rows]}
+    return {
+        "items": [
+            {
+                "user_id": r.user_id,
+                "review_status": r.review_status,
+                "declaration_reason": r.declaration_reason,
+                "reviewed_by": r.reviewed_by,
+                "reviewed_at": r.reviewed_at,
+                "review_reason": r.review_reason,
+            }
+            for r in rows
+        ],
+    }
 
 
 @router.get("/{case_id}/history")
-def history(case_id:UUID,response:Response,page:int=Query(1,ge=1),page_size:int=Query(20,ge=1,le=100),user:User=Depends(current_user),db:Session=Depends(get_session)):
+def history(
+    case_id: UUID,
+    response: Response,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
+    user: User = Depends(current_user),
+    db: Session = Depends(get_session),
+):
     response.headers["Cache-Control"]="no-store"
     visible_case(db,user,case_id)
     # Las copias anteriores pueden contener participantes o texto ya restringido.
     limited=role_name(db,user)=="EMPLEADO"
     predicate=AuditEvent.incidencia_id==case_id
     total=db.scalar(select(func.count()).select_from(AuditEvent).where(predicate))
-    rows=db.scalars(select(AuditEvent).where(predicate).order_by(AuditEvent.fecha.desc(),AuditEvent.id.desc()).offset((page-1)*page_size).limit(page_size)).all()
-    return {"items":[({"id":r.id,"accion":r.accion,"fecha":r.fecha} if limited else {"id":r.id,"accion":r.accion,"usuario_id":r.usuario_id,"detalle":r.detalle,"fecha":r.fecha}) for r in rows],"total":total,"page":page,"page_size":page_size}
+    rows = db.scalars(
+        select(AuditEvent)
+        .where(predicate)
+        .order_by(AuditEvent.fecha.desc(), AuditEvent.id.desc())
+        .offset((page - 1) * page_size)
+        .limit(page_size)
+    ).all()
+    return {
+        "items": [
+            (
+                {"id": r.id, "accion": r.accion, "fecha": r.fecha}
+                if limited
+                else {
+                    "id": r.id,
+                    "accion": r.accion,
+                    "usuario_id": r.usuario_id,
+                    "detalle": r.detalle,
+                    "fecha": r.fecha,
+                }
+            )
+            for r in rows
+        ],
+        "total": total,
+        "page": page,
+        "page_size": page_size,
+    }
 
 
 @router.put('/{case_id}/classification', response_model=CaseDetail)
@@ -277,14 +342,27 @@ def add_participant(case_id: UUID, body: ParticipantInput, response: Response, u
 
 
 @router.put('/{case_id}/participants/{participant_id}/review', response_model=Receipt)
-def review_participant(case_id: UUID, participant_id: UUID, body: ParticipantReviewInput, response: Response, user: User = Depends(current_user), db: Session = Depends(get_session)):
+def review_participant(
+    case_id: UUID,
+    participant_id: UUID,
+    body: ParticipantReviewInput,
+    response: Response,
+    user: User = Depends(current_user),
+    db: Session = Depends(get_session),
+):
     from app.services.protection import protect_case
     response.headers['Cache-Control'] = 'no-store'
     return protect_case(db, user, case_id, 'participant_review', body, participant_id)
 
 
 @router.put('/{case_id}/confidentiality', response_model=Receipt)
-def change_confidentiality(case_id: UUID, body: ConfidentialityInput, response: Response, user: User = Depends(current_user), db: Session = Depends(get_session)):
+def change_confidentiality(
+    case_id: UUID,
+    body: ConfidentialityInput,
+    response: Response,
+    user: User = Depends(current_user),
+    db: Session = Depends(get_session),
+):
     from app.services.protection import protect_case
     response.headers['Cache-Control'] = 'no-store'
     return protect_case(db, user, case_id, 'confidentiality', body)
