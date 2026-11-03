@@ -7,7 +7,7 @@ Fecha de entrega fijada por la autora: **5 de noviembre de 2026**.
 | Observación | Cambio o comprobación | Estado |
 | --- | --- | --- |
 | 1. MVP por alcance y espacios normales | Objetivo y funciones al principio; antecedentes en bitácora; README resumido | Publicado en 96fe0d3; evidencia 273 |
-| 2. Matriz de aceptación | Prioridad A09, A10 y A14, con registros manuales reales | A09 comprobado en 275; A10 y A14 pendientes |
+| 2. Matriz de aceptación | Prioridad A09, A10 y A14, con registros manuales reales | A09 comprobado en275 y A10 en279; A14 pendiente |
 | 3. Fecha en el plan | Fecha de entrega y calendario del 2 al 5 de noviembre en MVP y backlog | Documentado por decisión de la autora |
 | 4. Commits pequeños y seguidos | Un trabajo por commit; menos de 3 000 líneas cambiadas | En seguimiento; segundo día real todavía pendiente |
 | 5. Líneas Python legibles | API de incidencias, modelos y CLI de cuenta BI | Formato local274 y CI278 aprobados |
@@ -20,7 +20,7 @@ Fecha de entrega fijada por la autora: **5 de noviembre de 2026**.
 | 1666 | Sin secciones fechadas del 31 de octubre en MVP | Corregido localmente; reubicadas en bitácora |
 | 1667 | Sin «API,10 clientes» en README | Corregido localmente |
 | 1668 | A09 con al menos un correo negativo y evidencia | Comprobado en275; capturas276 y277 |
-| 1669 | A10 con caso confidencial y dos roles | Pendiente |
+| 1669 | A10 con caso confidencial y dos roles | Comprobado en279; capturas280–284 |
 | 1670 | A14 con recorrido del manual | Pendiente |
 | 1671 | Backlog con fecha de entrega | 5 de noviembre de 2026, fijada por la autora |
 | 1672 | MVP con fecha de entrega | 5 de noviembre de 2026, fijada por la autora |

@@ -1,0 +1,65 @@
+{
+  "fecha_registro": "2026-11-02",
+  "escenario": "A10",
+  "criterio_corte4": 1669,
+  "estado": "ANTES_Y_DESPUES_CONFIDENCIALIDAD_COMPROBADOS_EN_UI",
+  "fuente": "Recorrido realizado por la autora; cinco capturas aportadas e inspeccionadas en el chat y confirmación textual de los tres resultados.",
+  "caso_ficticio_id": "aaa54e3c-a35b-4419-8c3d-7e8926773095",
+  "titulo": "QA Corte4 A10 — acceso por confidencialidad",
+  "precondiciones_reportadas": {
+    "empleado": "Empleado Operaciones Dos Demo",
+    "supervisor": "Supervisor RH Demo Juan",
+    "departamento_de_ambos": "DEMO - Recursos Humanos",
+    "afectado": "Empleado Operaciones Dos Demo",
+    "participantes": "Sin participantes declarados en el recorrido",
+    "ambito": "Persona"
+  },
+  "antes": "Ambos perfiles ven el título y descripción del mismo expediente; protección: Acceso según rol y departamento.",
+  "despues": {
+    "empleado": "El caso no está disponible o no tienes permiso para consultarlo.",
+    "supervisor": "El caso no está disponible o no tienes permiso para consultarlo.",
+    "admin_rh": "Conserva título, descripción e ID. Confidencialidad: Acceso restringido a RH independiente.",
+    "estado_caso": "Pendiente",
+    "responsable": "Sin asignar",
+    "asistencia_ia_visible_admin": "Asistencia IA omitida. Este caso requiere clasificación manual."
+  },
+  "capturas": [
+    {
+      "archivo": "280-a10-empleado-antes.png",
+      "observacion": "Empleado consulta antes",
+      "sha256": "b4ce9daa63694fd19773b6ccea5462fb44ff09492125634d1384686f02aa35c9",
+      "bytes": 51307
+    },
+    {
+      "archivo": "281-a10-supervisor-antes.png",
+      "observacion": "Supervisor consulta antes",
+      "sha256": "7529b4ae8940b5a849d548f2bb46159f1163c4a73aaaa31e1b19ec9bc5dab803",
+      "bytes": 51168
+    },
+    {
+      "archivo": "282-a10-empleado-denegado.png",
+      "observacion": "Empleado sin acceso después",
+      "sha256": "1c54c395ced059d1e22384b48c1a8d8e887fcda0d271065b322a0c83e87ea927",
+      "bytes": 23902
+    },
+    {
+      "archivo": "283-a10-admin-control-confidencial.png",
+      "observacion": "Admin RH conserva acceso después",
+      "sha256": "6b927abc1b2ec5fdca47516a6b9b848983eca3f0e1955f28e75bde581ed17122",
+      "bytes": 52819
+    },
+    {
+      "archivo": "284-a10-supervisor-denegado.png",
+      "observacion": "Supervisor sin acceso después",
+      "sha256": "dff366bfd2a63dc54573a99afdadfe583629be0e1dec26e4a81baa6c5d3d5aeb",
+      "bytes": 23137
+    }
+  ],
+  "resultado": "Criterio1669 cubierto: dos roles pierden acceso tras la protección y Admin RH conserva el control positivo.",
+  "limites": [
+    "Las denegaciones no muestran título ni descripción; las capturas de denegación no incluyen barra de dirección: la correlación con el ID procede del recorrido y la confirmación de la autora.",
+    "Sin inspección del código HTTP, base de datos, motivo guardado ni auditoría de este cambio por el agente.",
+    "No verifica toda la matriz de participantes, conflictos, concurrencia o administradores involucrados.",
+    "No acredita capacitación ni aceptación institucional. El caso se conserva confidencial."
+  ]
+}

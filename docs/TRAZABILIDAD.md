@@ -1084,3 +1084,21 @@ buzón externo, SQL del agente o toda A09. Casos y mensajes se conservan.
 Archivos: evidencias, dos PNG, matriz, seguimiento, bitácora y trazabilidad.
 Validación: firmas/hashes PNG, ID y paginación1–3 de3 contrastados en capturas y
 jobs de CI comprobados. Pendientes: A10, A14 y segundo día real de commits.
+
+
+## 2026-11-02 — Corte 4: confidencialidad A10 con controles antes y después
+
+Propósito: atender1669 con un recorrido real de dos perfiles y control Admin RH.
+[279](evidencias/279-corte4-a10-confidencialidad-por-roles.json) y capturas280–284:
+caso ficticio aaa54e3c-a35b-4419-8c3d-7e8926773095. Empleado y Supervisor del
+departamento DEMO - Recursos Humanos ven inicialmente el título y descripción.
+Tras activar la protección, ambos reciben el mensaje genérico de caso no
+disponible o sin permiso, sin contenido; Admin RH conserva acceso y ve
+«Acceso restringido a RH independiente». Caso Pendiente y sin asignar conservado.
+Validación: cinco PNG con hashes, cabeceras de rol y contenido visible contrastados
+con la confirmación de la autora. No se atribuye un HTTP o un registro SQL no observado.
+Archivos: evidencia279, cinco capturas, matriz, seguimiento, backlog y documentación
+de entrega/QA/trazabilidad. Resultado: mínimo de1669 comprobado; no se amplía a
+toda la matriz de conflictos/participantes o concurrencia. Pendientes: recorrido
+explícito del manual A14, segundo día real de commits y consolidación del paquete.
+No se ejecutaron nuevas pruebas de rendimiento ni cambió el código de producto.

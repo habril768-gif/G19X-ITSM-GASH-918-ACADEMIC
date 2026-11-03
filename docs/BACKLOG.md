@@ -10,7 +10,7 @@ El trabajo se concentra en aceptación, legibilidad y documentación del MVP exi
 | 1 | Reordenar MVP y corregir redacción del README | 2 de noviembre | Publicado en 96fe0d3 |
 | 2 | Dividir líneas largas de los tres archivos Python señalados | 2 de noviembre | Formato274 y CI278 aprobados |
 | 3 | A09: comprobar un destinatario inactivo y un aviso de control en Mailpit | 3 de noviembre | Comprobado el 2 de noviembre en275 |
-| 4 | A10: consultar un caso confidencial como Empleado y Supervisor, con control RH | 3 de noviembre | Recorrido manual pendiente |
+| 4 | A10: consultar un caso confidencial como Empleado y Supervisor, con control RH | 3 de noviembre | Comprobado el 2 de noviembre en279 |
 | 5 | A14: seguir el manual y corregir diferencias con el panel | 4 de noviembre | Recorrido manual pendiente |
 | 6 | Consolidar matriz, informe en borrador y paquete identificado | 4 de noviembre | Depende de los recorridos |
 | 7 | Revisar el paquete y realizar la demostración de entrega | 5 de noviembre | Previsto; no declarar aceptación antes de realizarla |
