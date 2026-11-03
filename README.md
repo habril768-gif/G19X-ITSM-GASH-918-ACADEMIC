@@ -10,7 +10,14 @@ La interfaz React permite gestionar cuentas y departamentos, solicitar una suger
 
 ## Estado y límites
 
-El núcleo, correo y analítica tienen implementación y evidencia. El correo cuenta con un recorrido básico real; Power BI tiene conexión e informe guardado. **RNF-2 está aprobado en el alcance HTTP QA local documentado**, con tres procesos API y los límites de hardware y protocolo de la [evidencia 220](docs/evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json). La restauración lógica Docker, comparación de filas/huellas y reanudación tienen confirmación de la autora en las evidencias [230](docs/evidencias/230-restauracion-docker-confirmada.json) y [234](docs/evidencias/234-salud-posterior-reanudacion-docker.json). **La entrega integral continúa pendiente** por recuperación completa de instalación, aceptación integral y actividades reales de capacitación. Existen recorridos acotados por rol y pruebas de Power BI, con sus límites registrados. Consulta el [alcance del MVP](docs/MVP.md), el [plan de cierre](docs/BACKLOG.md) y la [evidencia de QA](docs/REPORTE_QA.md).
+El núcleo, el correo local y la analítica están implementados. La entrega se
+completa con los recorridos y documentos de la [matriz de aceptación](docs/ACEPTACION_ENTREGA.md).
+RNF-2 está aprobado en el entorno HTTP QA Linux de la
+[evidencia 270](docs/evidencias/270-rnf2-linux-ci-aprobado.json).
+La instalación y recuperación de copia conservan sus alcances en las evidencias
+[255](docs/evidencias/255-instalacion-nueva-nucleo-reinicio.json) y
+[256](docs/evidencias/256-recuperacion-copia-app-permisos-bi.json).
+Consulta el [MVP](docs/MVP.md) y el [plan de cierre](docs/BACKLOG.md).
 
 El entorno está destinado a pruebas locales con datos ficticios. La IA propone; una persona autorizada confirma categoría y prioridad. La evaluación del modelo mide un conjunto simulado, no garantiza su desempeño en casos nuevos. La supresión por privacidad puede dejar todos los indicadores vacíos; un valor suprimido nunca equivale a cero.
 
@@ -92,11 +99,11 @@ Abre [PluriOne](http://127.0.0.1:5173/) e inicia sesión con tu cuenta. Mantén 
 | `scripts/` | Actualización de módulos y ejecución controlada de evaluaciones |
 | `docs/` | Requisitos, manuales, alcance, QA y evidencias |
 
-## Rendimiento local validado
+## Configuración de tres procesos API
 
-RNF-2 cumplió con **tres procesos API**,10 clientes,30 s de calentamiento y300 s medidos:35.216 solicitudes sin errores,p95 listado123,81/detalle113,27/creación194,04/actualización167,77ms. [Evidencia y límites de hardware/protocolo](docs/evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json). Esto no cierra los demás pendientes del MVP ni acredita cualquier equipo o proveedor externo.
-
-El arranque de cinco pasos usa el Compose base de un proceso. Para operar con la cantidad de procesos validada, usa en el paso2:
+El perfil opcional usa tres procesos API; la validación de rendimiento y sus límites
+se consultan en la [evidencia 270](docs/evidencias/270-rnf2-linux-ci-aprobado.json).
+El arranque de cinco pasos usa el Compose base de un proceso. Para operar con la cantidad de procesos validada, usa en el paso 2:
 
 ```powershell
 docker compose -f compose.yaml -f compose.rnf2.yaml config --quiet
@@ -123,9 +130,8 @@ La plataforma usa OpenAI mediante LangChain para sugerir clasificación sobre te
 Si Docker informa que agotó los pools de direcciones, consultar [el procedimiento de redes QA](docs/PRUEBA_RENDIMIENTO.md#mantenimiento-de-redes-qa). La herramienta revisa por defecto y permite liberar hasta dos redes QA vacías y registradas; conserva contenedores, volúmenes y reportes.
 
 
-### Validación formal de rendimiento con control previo
+### Evidencia de rendimiento
 
-El [comando formal condicionado](docs/PRUEBA_RENDIMIENTO.md#corrida-formal-con-control-previo) comprueba CPU previa y libera hasta dos redes QA vacías antes de iniciar la ventana formal existente. Si no cumple las condiciones de arranque, termina sin generar carga. No cambia el criterio RNF-2 ni acredita rendimiento por sí solo.
-
-
-Para parámetros de conexión y controles diagnósticos opcionales, consulta el [manual técnico](docs/MANUAL_TECNICO.md) y la [guía de rendimiento](docs/PRUEBA_RENDIMIENTO.md). Los diagnósticos breves no acreditan RNF-2.
+La fila A01 de la matriz conserva la validación existente. Los reportes históricos,
+el protocolo y los comandos de diagnóstico están en la [guía de rendimiento](docs/PRUEBA_RENDIMIENTO.md).
+El trabajo de cierre actual se concentra en aceptación por roles y documentación.

@@ -1,5 +1,11 @@
 # Bitácora de desarrollo
 
+## Orientación de lectura
+
+El estado actual se consulta en [MVP](MVP.md), [plan de cierre](BACKLOG.md),
+[aceptación por roles](ACEPTACION_ENTREGA.md) y [atención del corte 4](RETROALIMENTACION_CORTE4.md).
+Esta bitácora conserva los cambios y sus resultados por fecha.
+
 
 
 ## 15 de octubre de 2026 — Base inicial y documentación académica
@@ -1988,3 +1994,84 @@ Propósito: evaluar candidato267 y obtener evidencia separada del host Windows. 
 ### 2026-10-31 — RNF-2 aprobado en entorno HTTP QA Linux CI
 
 Propósito: validar versión actual fuera del host Windows. [270](evidencias/270-rnf2-linux-ci-aprobado.json), [reporte íntegro271](evidencias/271-rnf2-linux-ci-reporte-completo.json), workflow41273320902 success, commit2bbf4a525d6734f90dfc6058e67ad4d1a597d02b y corrida15eb2b8088e9455a: tres procesos, diez clientes, cien casos,30 s calentamiento+300 s medición completos;71079 solicitudes/0errores. P95 listado31,850 ms, detalle52,603 ms, creación62,175 ms y actualización60,151 ms. Auditoría SQL19809 incidencias/CREADO,19704 EDITADO,198090 entregas, cero SMTP/IA; HTTP posteriorOK, diez logout204 y QA detenida. HardwareLinux7.0/4CPU/Docker15,61 GiB/28.0.4 identificado en reporte. ZIP descargado con SHA256 contrastado contra metadatos de GitHub; reporte preservado sin editar y todos los hashes de código cotejados contra blobs Git. BackendCI41273320913 también success en tests e integración PostgreSQL, sin inventar conteos remotos. Resultado limitado a ese commit/entorno, una corrida, no a laptop, producción, repetibilidad o proveedores externos. Fallos Windows262/264/268 conservados. Archivos:270/271, matrices, protocolo y cierre. Pendientes: publicar registro documental, paquete actualizado, desplegar imágenes en principal y comprobar salud; informe institucional sigue borrador. No repetir pruebas locales para aparentar cierre ni cambiar umbral.
+
+
+### 2026-10-31 — Actualización local y comprobación posterior confirmadas
+
+Propósito: cerrar el pendiente de aplicación local del código validado en CI. [272](evidencias/272-actualizacion-local-salud-y-acceso-confirmados.json): usuaria ejecuta up --build --wait con compose.yaml/compose.rnf2.yaml/compose.bi.yaml y perfilmail; API/worker construidos y cinco servicios healthy. Luego aporta health/db con statusok/databasepostgresql y confirma inicio de sesión/apertura de una incidencia existente. No se aportó ID o nueva captura del caso; no se inspeccionaron imágenes por agente ni se declara repetida toda la regresión. Archivos: evidencia272 y seguimiento; sin cambios de producto o datos realizados por agente. Resultado: comprobación local de salud/acceso confirmada; RNF-2 aprobado solo para CI Linux270/271, no para laptop/producción. Informe continúa borrador y aceptación institucional separada. Paquete ec4e6e4 conserva código validado y evidencia270/271; esta confirmación posterior no estaba en ese ZIP. Publicación documental de272 preparada.
+
+
+## 2026-11-02 — Detalle histórico reubicado desde el MVP
+
+Se conserva aquí el detalle que antes interrumpía la lectura del alcance.
+
+## RNF-2: aprobado en HTTP QA Linux CI del31/10/2026
+
+[Validación270](evidencias/270-rnf2-linux-ci-aprobado.json) y [reporte íntegro271](evidencias/271-rnf2-linux-ci-reporte-completo.json): commit2bbf4a5, tres procesos API, diez clientes, cien casos iniciales,30+300 s completos y71079 solicitudes sin errores. P95 listado31,85/detalle52,60/creación62,17/actualización60,15 ms, todos<200 ms. Auditoría, outbox, HTTP posterior, diez logout204 y detención QA comprobados. Runner Linux con4CPU y15,61 GiB Docker, servidor28.0.4; hardware y hashes exactos en270. Acredita ese alcance HTTP QA, sin IA/SMTP externos ni rendimiento universal. Los fallos Windows de la versión actual se conservan separados; no se afirma corregida la laptop. Actualización local, salud PostgreSQL y acceso a un expediente confirmados por usuaria en [272](evidencias/272-actualizacion-local-salud-y-acceso-confirmados.json).
+
+### Referencia histórica Windows
+
+
+[Primera formal aprobada220](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json):10 clientes,100 casos iniciales,30+300s,API de 3 procesos,35.216 solicitudes sin errores. P95 listado123,81/detalle113,27/creación194,04/actualización167,77ms, todos<200 ms; auditoría/colas/logout/parada correctos. Acredita este alcance HTTP Docker local y hardware declarado, no rendimiento universal ni proveedores externos. Diez fallos históricos se conservan. [Perfil opcional 221](evidencias/221-perfil-compose-rnf2-reproducible.json) y [protocolo](PRUEBA_RENDIMIENTO.md) permiten reproducir configuración/medición. Los demás pendientes de entrega siguen vigentes.
+
+## Continuación de la entrega: matriz por roles
+
+La [matriz de aceptación](ACEPTACION_ENTREGA.md) reúne14escenarios con origen/alcance de evidencia y pendientes. [Preparación222](evidencias/222-matriz-aceptacion-entrega-preparada.json): siguiente recorrido de departamentos conAdminRH,8pasos previstos y ninguna escritura ejecutada. RNF-2 aprobado220 se conserva; un plan no es aceptación real. Ver comandos de arranque con3procesos/Mailpit y registro de resultados en la matriz.
+
+
+## Departamentos: aceptación Admin RH observada
+
+[223](evidencias/223-departamentos-admin-rh-recorrido-ui.json): D01–D08 conforme en panel integrado; alta ficticia, duplicado rechazado, renombrado, baja/reactivación y baja final; cinco eventos con motivos y persistencia tras actualizar. Estado final inactivo, sin borrar datos ni tocar departamentos usados. [224: historial](evidencias/224-departamentos-admin-rh-historial-final.jpg),[225: duplicado](evidencias/225-departamento-duplicado-rechazado.jpg). A02 verificado; A03 parcial y A04 pendiente según [matriz](ACEPTACION_ENTREGA.md). No implica aceptación integral ni institucional.
+
+
+### 2026-10-31 — Usuarios: confirmación de recorrido ficticio
+
+[227](evidencias/227-usuario-ficticio-alta-edicion-baja-confirmadas.json): autora confirma alta/listado, nombre revisado, estado Inactiva y acceso rechazado con aviso genérico. A05 parcial: sin comprobación independiente, auditoría o revocación de sesión previa; no atribuir el rechazo solo a la baja sin verificar credenciales previamente. Registro local, sin repetir pruebas ni publicación remota.
+
+
+### 2026-10-31 — Consolidación de recuperación Docker y controles de departamentos
+
+Propósito: integrar los resultados manuales aportados por la usuaria, sin repetir pruebas ni modificar código. [230](evidencias/230-restauracion-docker-confirmada.json): respaldo `plurione-20261031-092101.dump`, 75624 bytes, SHA256 `A21826DB6F16EBEA761D83B0DB1BD27D89A801E54CAAB5568AC1A0BB0F0F13B0`; pg_restore sin errores reportados, revisión 0008, cantidades y huellas de contenido de todas las tablas public coincidentes. Destino `plurione-restore-c368a6c78bd8` sin red/puertos según comando, luego detenido; origen reanudado y acceso Admin RH confirmado. La salida ps aún mostraba API health: starting; no declarar healthy posterior del API/worker. No se compararon independientemente secuencias, restricciones, índices, vistas, ACL ni roles globales; no es recuperación completa de instalación ni medición de RTO/RPO.
+
+[231](evidencias/231-departamento-motivo-obligatorio-confirmado.json): la usuaria confirma bloqueo del formulario al omitir motivo. [232](evidencias/232-departamento-bloqueo-usuario-activo-confirmado.json): tras reactivar el departamento ficticio y vincular la cuenta ficticia activa, la baja se rechaza con aviso genérico; después confirma que se guardan las bajas de cuenta y departamento. Ambos quedan inactivos según reporte. Bloqueo por incidencias abiertas sigue pendiente por separado. No inferir respuesta HTTP, auditoría, atomicidad SQL ni validación API a partir del formulario o aviso genérico.
+
+Archivos: evidencias 230–232, matriz de aceptación, mantenimiento, QA, bitácora, backlog, entregables, trazabilidad y MVP. Validación documental: JSON reabiertos, enlaces locales comprobados y matriz contrastada con las confirmaciones. Registros 228/229 conservan revocación, correo duplicado y motivo de usuarios; A05 sigue parcial por auditoría/historial. Sin nuevas pruebas de código, publicación remota ni cambios al cumplimiento de RNF-2. Pendientes: A03 incidencias abiertas, negativos por roles, auditoría de usuarios, recuperación integral, custodia y aceptación humana conforme a la matriz.
+
+
+### 2026-10-31 — Instalación nueva del núcleo comprobada
+
+[255](evidencias/255-instalacion-nueva-nucleo-reinicio.json): proyecto Docker nuevo con configuración QA propia,0usuarios/0casos iniciales, revisión0008, backend/frontend construidos, HTTP/proxy ok, primer Admin, creación/consulta de caso por autora y persistencia tras reiniciar mismos contenedores. Cierre confirmado con volúmenes conservados. Fallo de redes previo conservado en254. No se acredita recuperación integral de datos/roles de instalación anterior, Node nativoWindows literal, perfiles externos o aceptación institucional.
+
+
+### 2026-10-31 — Recuperación de copia con aplicación y permisos BI
+
+[Evidencia256](evidencias/256-recuperacion-copia-app-permisos-bi.json): respaldo identificado de75624bytes restaurado a otra base del proyecto QA; catálogo14tablas/2vistas/2secuencias/15índices no asociados a restricciones/20restricciones PK-UQ/25FK coincide por nombres/tipos,0restricciones sin validar, secuencias last_value/is_called coincidentes,9usuarios/8casos, revisión0008. API/panel contra copia y check Alembic sin diferencias;30sesiones históricas revocadas solo en copia. Autora confirma login Admin RH y consulta de expediente. Tras reinicio inesperado Windows41/6008, contenedores exited255: comprobación posterior conserva recuentos/revisión/secuencias. Causa del reinicio desconocida; no inferir fallo Docker o memoria a partir de esos registros.
+
+Cuenta BI nueva creada por CLI después de un intento rechazado por longitud; siete comprobaciones reales de permisos: dos vistas permitidas, cinco42501 (lectura/UPDATE/DELETE users y CREATE public/analytics), sin atributos privilegiados. default_transaction_read_only desactivado solo en sesión de prueba para verificar ACL; ROLLBACK por prueba. Fuente: salidas/reporte local y confirmaciones de autora, sin daemon independiente del agente. Cuatro contenedores detenidos y volúmenes conservados al cierre.
+
+Propósito: ampliar recuperación lógica230 e instalación nueva255 hacia uso de copia y reconstrucción acotada de permisos BI. No equivalencia literal de todos los propietarios/ACL/globales, definiciones o filas del origen actual; no proveedores externos/BI Desktop, RTO/RPO o aceptación institucional. Archivos: evidencia256, matriz, resumen, informe, mantenimiento, MVP, bitácora, QA, backlog, entregables, trazabilidad y decisiones. Validación: JSON/reporte, hash del respaldo, resultados de siete ACL y cierre contrastados; auxiliares probados offline/simulados según manifiesto. Credenciales, dump y datos individuales no publicados; registro local pendiente de publicación.
+
+
+### 2026-10-31 — RNF-2 aprobado en entorno HTTP QA Linux CI
+
+Propósito: validar versión actual fuera del host Windows. [270](evidencias/270-rnf2-linux-ci-aprobado.json), [reporte íntegro271](evidencias/271-rnf2-linux-ci-reporte-completo.json), workflow41273320902 success, commit2bbf4a525d6734f90dfc6058e67ad4d1a597d02b y corrida15eb2b8088e9455a: tres procesos, diez clientes, cien casos,30 s calentamiento+300 s medición completos;71079 solicitudes/0errores. P95 listado31,850 ms, detalle52,603 ms, creación62,175 ms y actualización60,151 ms. Auditoría SQL19809 incidencias/CREADO,19704 EDITADO,198090 entregas, cero SMTP/IA; HTTP posteriorOK, diez logout204 y QA detenida. HardwareLinux7.0/4CPU/Docker15,61 GiB/28.0.4 identificado en reporte. ZIP descargado con SHA256 contrastado contra metadatos de GitHub; reporte preservado sin editar y todos los hashes de código cotejados contra blobs Git. BackendCI41273320913 también success en tests e integración PostgreSQL, sin inventar conteos remotos. Resultado limitado a ese commit/entorno, una corrida, no a laptop, producción, repetibilidad o proveedores externos. Fallos Windows262/264/268 conservados. Archivos:270/271, matrices, protocolo y cierre. Pendientes: publicar registro documental, paquete actualizado, desplegar imágenes en principal y comprobar salud; informe institucional sigue borrador. No repetir pruebas locales para aparentar cierre ni cambiar umbral.
+
+
+### 2026-10-31 — Actualización local y comprobación posterior confirmadas
+
+Propósito: cerrar el pendiente de aplicación local del código validado en CI. [272](evidencias/272-actualizacion-local-salud-y-acceso-confirmados.json): usuaria ejecuta up --build --wait con compose.yaml/compose.rnf2.yaml/compose.bi.yaml y perfilmail; API/worker construidos y cinco servicios healthy. Luego aporta health/db con statusok/databasepostgresql y confirma inicio de sesión/apertura de una incidencia existente. No se aportó ID o nueva captura del caso; no se inspeccionaron imágenes por agente ni se declara repetida toda la regresión. Archivos: evidencia272 y seguimiento; sin cambios de producto o datos realizados por agente. Resultado: comprobación local de salud/acceso confirmada; RNF-2 aprobado solo para CI Linux270/271, no para laptop/producción. Informe continúa borrador y aceptación institucional separada. Paquete ec4e6e4 conserva código validado y evidencia270/271; esta confirmación posterior no estaba en ese ZIP. Publicación documental de272 preparada.
+
+
+## 2026-11-02 — Corte 4: alcance, calendario y lectura de documentos
+
+Propósito: atender las observaciones 1 y 3 del corte 4. El MVP comienza con objetivo,
+funciones, condiciones de cierre y exclusiones; el detalle anterior queda en esta
+bitácora. El backlog muestra pendientes actuales y calendario; su versión anterior
+se conserva en BACKLOG_HISTORICO_20261031.md con enlaces relativos intactos.
+La autora fijó el 5 de noviembre de 2026 como fecha de entrega en esta conversación;
+se registra su decisión sin atribuirla a confirmación institucional.
+El README mantiene sus cinco pasos y expresa el rendimiento en una referencia breve.
+No se ejecutaron pruebas de rendimiento ni se modificaron funciones del producto.
+Validación: estructura, enlaces locales y conservación de antecedentes, con resultado
+en evidencia 273. Pendientes: A09, A10 y A14; formato Python, publicación y segundo día
+real de commits. Las casillas de aceptación se cierran al observar sus resultados.

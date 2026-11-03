@@ -1,0 +1,30 @@
+{
+  "fecha_registro": "2026-10-31",
+  "estado": "ACTUALIZACION_LOCAL_Y_COMPROBACION_POSTERIOR_CONFIRMADAS",
+  "fuente": "Salida de Docker/PowerShell y confirmación de interfaz aportadas por usuaria; no inspección independiente de Docker por agente.",
+  "comando": "docker compose -f compose.yaml -f compose.rnf2.yaml -f compose.bi.yaml --profile mail up -d --build --wait api mail-worker",
+  "resultado_reportado": {
+    "imagenes_api_y_mail_worker": "Built",
+    "servicios_healthy": [
+      "api",
+      "mail-worker",
+      "mailpit",
+      "postgres",
+      "redis"
+    ],
+    "health_db": {
+      "status": "ok",
+      "database": "postgresql"
+    },
+    "interfaz": "Usuaria confirma inicio de sesión y apertura de una incidencia existente; no aporta ID o nueva captura."
+  },
+  "imagen_api_manifest_reportado": "sha256:5d400bdf3ad866dc020fb5911a7c648566b1b252953b68872b5413eaff73ded4",
+  "imagen_mail_worker_manifest_reportado": "sha256:2d9c467c0754e9e34d15645e60b238da813a72b8e1f22ce3872fb33167e2dff0",
+  "codigo_fuente_validado_ci": "2bbf4a525d6734f90dfc6058e67ad4d1a597d02b",
+  "limites": [
+    "No se inspeccionó el contenido de las imágenes desplegadas para cotejar sus hashes; el rebuild usa la fuente local previamente aplicada.",
+    "Es una comprobación local de arranque, salud y lectura de un caso, no repetición completa de regresión o RNF-2.",
+    "La aprobación RNF-2 de270/271 se mantiene exclusivamente en el entorno Linux CI documentado.",
+    "Informe académico continúa como borrador hasta plantilla; no aceptación institucional, capacitación o entrega formal a terceros."
+  ]
+}

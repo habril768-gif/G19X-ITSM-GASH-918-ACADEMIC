@@ -1,0 +1,20 @@
+{
+  "fecha": "2026-11-02",
+  "corte": 4,
+  "commit_revisado": "ec4e6e4",
+  "fuente_html_sha256": "a11e53eb80d880899fb774ed1275cbb5d648063465690fbd59f52b9c31f6e59f",
+  "cambios": [
+    "MVP por alcance",
+    "Detalle cronológico reubicado en bitácora",
+    "Backlog corto y archivo histórico intacto",
+    "Espacios y estado del README",
+    "Fecha de entrega 2026-11-05 fijada por autora; sin atribución institucional"
+  ],
+  "validacion": "Estructura, enlaces y conservación comprobados por el ejecutor auxiliar.",
+  "pendientes": [
+    "Recorridos A09/A10/A14",
+    "Formato Python y regresión",
+    "Publicación y dos días reales de commits"
+  ],
+  "datos_privados": "HTML y JSON completos de retroalimentación conservados localmente; no se publican."
+}

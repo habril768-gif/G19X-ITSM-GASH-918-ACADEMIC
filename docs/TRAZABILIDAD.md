@@ -2,7 +2,7 @@
 
 ## RNF-2: aprobado en HTTP QA Linux CI del31/10/2026
 
-[Validación270](evidencias/270-rnf2-linux-ci-aprobado.json) y [reporte íntegro271](evidencias/271-rnf2-linux-ci-reporte-completo.json): commit2bbf4a5, tres procesos API, diez clientes, cien casos iniciales,30+300 s completos y71079 solicitudes sin errores. P95 listado31,85/detalle52,60/creación62,17/actualización60,15 ms, todos<200 ms. Auditoría, outbox, HTTP posterior, diez logout204 y detención QA comprobados. Runner Linux con4CPU y15,61 GiB Docker, servidor28.0.4; hardware y hashes exactos en270. Acredita ese alcance HTTP QA, sin IA/SMTP externos ni rendimiento universal. Los fallos Windows de la versión actual se conservan separados; no se afirma corregida la laptop. Despliegue actualizado del principal pendiente.
+[Validación270](evidencias/270-rnf2-linux-ci-aprobado.json) y [reporte íntegro271](evidencias/271-rnf2-linux-ci-reporte-completo.json): commit2bbf4a5, tres procesos API, diez clientes, cien casos iniciales,30+300 s completos y71079 solicitudes sin errores. P95 listado31,85/detalle52,60/creación62,17/actualización60,15 ms, todos<200 ms. Auditoría, outbox, HTTP posterior, diez logout204 y detención QA comprobados. Runner Linux con4CPU y15,61 GiB Docker, servidor28.0.4; hardware y hashes exactos en270. Acredita ese alcance HTTP QA, sin IA/SMTP externos ni rendimiento universal. Los fallos Windows de la versión actual se conservan separados; no se afirma corregida la laptop. Actualización local, salud PostgreSQL y acceso a un expediente confirmados por usuaria en [272](evidencias/272-actualizacion-local-salud-y-acceso-confirmados.json).
 
 ### Referencia histórica Windows
 
@@ -1038,3 +1038,17 @@ Propósito: evaluar candidato267 y obtener evidencia separada del host Windows. 
 ### 2026-10-31 — RNF-2 aprobado en entorno HTTP QA Linux CI
 
 Propósito: validar versión actual fuera del host Windows. [270](evidencias/270-rnf2-linux-ci-aprobado.json), [reporte íntegro271](evidencias/271-rnf2-linux-ci-reporte-completo.json), workflow41273320902 success, commit2bbf4a525d6734f90dfc6058e67ad4d1a597d02b y corrida15eb2b8088e9455a: tres procesos, diez clientes, cien casos,30 s calentamiento+300 s medición completos;71079 solicitudes/0errores. P95 listado31,850 ms, detalle52,603 ms, creación62,175 ms y actualización60,151 ms. Auditoría SQL19809 incidencias/CREADO,19704 EDITADO,198090 entregas, cero SMTP/IA; HTTP posteriorOK, diez logout204 y QA detenida. HardwareLinux7.0/4CPU/Docker15,61 GiB/28.0.4 identificado en reporte. ZIP descargado con SHA256 contrastado contra metadatos de GitHub; reporte preservado sin editar y todos los hashes de código cotejados contra blobs Git. BackendCI41273320913 también success en tests e integración PostgreSQL, sin inventar conteos remotos. Resultado limitado a ese commit/entorno, una corrida, no a laptop, producción, repetibilidad o proveedores externos. Fallos Windows262/264/268 conservados. Archivos:270/271, matrices, protocolo y cierre. Pendientes: publicar registro documental, paquete actualizado, desplegar imágenes en principal y comprobar salud; informe institucional sigue borrador. No repetir pruebas locales para aparentar cierre ni cambiar umbral.
+
+
+### 2026-10-31 — Actualización local y comprobación posterior confirmadas
+
+Propósito: cerrar el pendiente de aplicación local del código validado en CI. [272](evidencias/272-actualizacion-local-salud-y-acceso-confirmados.json): usuaria ejecuta up --build --wait con compose.yaml/compose.rnf2.yaml/compose.bi.yaml y perfilmail; API/worker construidos y cinco servicios healthy. Luego aporta health/db con statusok/databasepostgresql y confirma inicio de sesión/apertura de una incidencia existente. No se aportó ID o nueva captura del caso; no se inspeccionaron imágenes por agente ni se declara repetida toda la regresión. Archivos: evidencia272 y seguimiento; sin cambios de producto o datos realizados por agente. Resultado: comprobación local de salud/acceso confirmada; RNF-2 aprobado solo para CI Linux270/271, no para laptop/producción. Informe continúa borrador y aceptación institucional separada. Paquete ec4e6e4 conserva código validado y evidencia270/271; esta confirmación posterior no estaba en ese ZIP. Publicación documental de272 preparada.
+
+
+## 2026-11-02 — Atención del corte 4
+
+El trabajo vigente y sus criterios se consultan en [atención del corte 4](RETROALIMENTACION_CORTE4.md).
+MVP, README y backlog se reorganizan por alcance; la fecha de entrega fijada por la
+autora es el 5 de noviembre de 2026. La aceptación manual A09, A10 y A14 sigue pendiente.
+El formato Python y sus comprobaciones se registrarán al terminar. A01 conserva su
+aprobación documentada; no se han ejecutado nuevas mediciones de rendimiento.
