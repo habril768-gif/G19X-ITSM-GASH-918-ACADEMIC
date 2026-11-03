@@ -1102,3 +1102,57 @@ de entrega/QA/trazabilidad. Resultado: mínimo de1669 comprobado; no se amplía 
 toda la matriz de conflictos/participantes o concurrencia. Pendientes: recorrido
 explícito del manual A14, segundo día real de commits y consolidación del paquete.
 No se ejecutaron nuevas pruebas de rendimiento ni cambió el código de producto.
+
+
+## 2026-11-02 — Corte 4: inicio del recorrido explícito del manual A14
+
+Propósito: contrastar instrucciones de uso con el panel. La autora siguió la sección
+«Consultar y buscar incidencias» y confirma que todo coincide al buscar el caso
+aaa54e3c-a35b-4419-8c3d-7e8926773095, abrirlo y consultar su historial. Confidencialidad
+conservada. [285](evidencias/285-corte4-a14-recorrido-manual-confirmado.json) registra
+la fuente textual y sus límites. Archivos: evidencia, matriz, backlog, seguimiento,
+bitácora, QA, entregables y trazabilidad. Validación: confirmación de la autora, sin
+captura nueva ni inspección directa. Resultado parcial; restan las demás secciones
+aplicables, consolidación y publicación. No acredita capacitación o aceptación
+institucional. Sin cambios de producto ni pruebas de rendimiento nuevas.
+
+
+### 2026-11-02 — A14: Administrar usuarios y departamentos
+
+Continuación del recorrido del manual registrado en
+[285](evidencias/285-corte4-a14-recorrido-manual-confirmado.json).
+La autora confirma: «Si todo esta bien». Resultado acotado: Opciones de Usuarios y Departamentos e historial de un departamento de prueba coinciden con el manual en consulta; no se solicitaron nuevas escrituras.
+Validación por confirmación textual, sin captura nueva. No se atribuyen escrituras,
+capacitación o aceptación institucional no realizadas. Archivos: evidencia285 y
+seguimiento documental. Las demás secciones aplicables y publicación siguen pendientes.
+
+
+### 2026-11-02 — A14: Notificaciones por correo
+
+Continuación del recorrido del manual registrado en
+[285](evidencias/285-corte4-a14-recorrido-manual-confirmado.json).
+La autora confirma: «Si el enlace al expediente si corresponde al caso». Resultado acotado: La autora pulsa Actualizar correos y observa que no genera un correo nuevo; se aclara que consulta estados. Abre un aviso existente en Mailpit y confirma que el enlace lleva al caso correspondiente f8b47a8e-877f-419e-92e6-9afc4a407f6a. No se solicitó un envío adicional.
+Validación por confirmación textual, sin captura nueva. No se atribuyen escrituras,
+capacitación o aceptación institucional no realizadas. Archivos: evidencia285 y
+seguimiento documental. Las demás secciones aplicables y publicación siguen pendientes.
+
+
+## 2026-11-03 — Corte 4: consolidación del recorrido manual A14
+
+Propósito: atender1670 sin atribuir una capacitación o aceptación que no ocurrió.
+[285](evidencias/285-corte4-a14-recorrido-manual-confirmado.json) reúne confirmaciones
+de la autora: consulta/búsqueda e historial, opciones administrativas en lectura,
+actualización de estados de correo y enlace al caso, e informe Power BI con fecha
+de corte, población exportable y cifras suprimidas vacías. Las primeras secciones
+fueron confirmadas el 2 de noviembre; BI y consolidación corresponden al 3.
+La duda observada motivó aclarar que Actualizar correos no genera ni reenvía avisos.
+Se incluyó el cierre entre eventos de correo conforme a services/mail.py y se
+reemplazó la afirmación general de refresco BI pendiente por las evidencias253/256
+con sus límites. No se ejecutó un envío nuevo ni otro refresco o prueba de rendimiento.
+Archivos: manual, evidencia285, matriz, seguimiento, backlog y registros de entrega/QA.
+Validación: confirmaciones textuales (sin capturas nuevas), enlaces locales y diff
+documental; sin código de producto modificado. Resultado: recorrido acotado solicitado
+en1670 documentado; no se acredita toda A14, capacitación, aceptación institucional,
+todas las escrituras o ciclo completo. Pendientes: informe en borrador, paquete
+actualizado y demostración de entrega. Avance real del segundo día, sin modificar
+fechas previas ni fabricar actividad retrospectiva.

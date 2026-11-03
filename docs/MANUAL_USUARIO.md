@@ -92,11 +92,11 @@ La IA no resuelve el caso, no sustituye revisión humana y no debe usarse como a
 
 ## Notificaciones por correo
 
-Admin RH autorizado puede consultar **Notificaciones por correo** y pulsar **Actualizar correos**. El panel distingue pendientes, procesamiento, omisiones, fallos e intentos. **Aceptada por SMTP** indica aceptación del transporte, no lectura ni recepción confirmada en un buzón externo.
+Admin RH autorizado puede consultar **Notificaciones por correo** y pulsar **Actualizar correos** para consultar el estado de los avisos existentes. Este botón no genera ni reenvía correos. El panel distingue pendientes, procesamiento, omisiones, fallos e intentos. **Aceptada por SMTP** indica aceptación del transporte, no lectura ni recepción confirmada en un buzón externo.
 
 En las pruebas, el operador facilita el buzón Mailpit local en http://127.0.0.1:8025/. Los mensajes contienen aviso mínimo y enlace al expediente. Al abrirlo, inicia sesión si se solicita; el servidor comprueba tu acceso actual. No reenvíes capturas del buzón con información personal.
 
-No se envía correo por todas las operaciones: creación, asignación, resolución y reapertura tienen reglas específicas. Una omisión por falta de destinatario autorizado puede ser correcta. Consulta al soporte si esperabas un aviso; no repitas la operación de negocio solo para generar otro mensaje.
+No se envía correo por todas las operaciones: creación, asignación, resolución, cierre y reapertura tienen reglas específicas. Una omisión por falta de destinatario autorizado puede ser correcta. Consulta al soporte si esperabas un aviso; no repitas la operación de negocio solo para generar otro mensaje.
 
 ## Administrar usuarios y departamentos
 
@@ -114,7 +114,7 @@ Abre la copia autorizada del informe. Comprueba **Fecha de corte** y la leyenda 
 
 Si una fila indica **Suprimido por privacidad**, sus números deben permanecer vacíos. Vacío no significa cero. No combines otras fuentes ni reduzcas filtros de seguridad para reconstruir esa cifra. Las medidas por celda no deben interpretarse como totales empresariales.
 
-Reapertura y concordancia son indicadores distintos; concordancia compara sugerencia con clasificación humana vigente y no equivale a precisión contra una referencia independiente. La actualización manual requiere conexión autorizada; guardar el archivo no refresca los datos. La revisión de modelo, valores publicables y refresco sigue pendiente según [ANALITICA.md](ANALITICA.md).
+Reapertura y concordancia son indicadores distintos; concordancia compara sugerencia con clasificación humana vigente y no equivale a precisión contra una referencia independiente. La actualización manual requiere conexión autorizada; guardar el archivo no refresca los datos. La comprobación previa de refresco local está documentada en la [evidencia253](evidencias/253-powerbi-refresco-guardado-20261031.json), y los permisos de lectura sobre la copia recuperada en la [evidencia256](evidencias/256-recuperacion-copia-app-permisos-bi.json). Esas comprobaciones tienen alcances distintos y no acreditan todos los valores publicables ni un refresco nuevo de tu copia. Consulta los límites en [ANALITICA.md](ANALITICA.md).
 
 ## Resolver dificultades y pedir soporte
 

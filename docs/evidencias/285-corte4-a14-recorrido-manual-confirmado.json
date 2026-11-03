@@ -1,0 +1,54 @@
+{
+  "fecha_registro": "2026-11-02",
+  "escenario": "A14",
+  "criterio_corte4": 1670,
+  "estado": "RECORRIDO_MANUAL_ACOTADO_CONFIRMADO_Y_GUIA_ACLARADA",
+  "fuente": "Respuesta textual de la autora después de solicitar que siguiera explícitamente la sección del manual.",
+  "confirmacion": "Si todo coincide y conserva el caso de confidencialidad",
+  "manual": "../MANUAL_USUARIO.md",
+  "seccion_comprobada": "Consultar y buscar incidencias",
+  "pasos_solicitados_y_confirmados": [
+    "Iniciar sesión como Admin RH",
+    "Buscar por ID el caso aaa54e3c-a35b-4419-8c3d-7e8926773095",
+    "Abrir el expediente y consultar su historial"
+  ],
+  "resultado": "Criterio1670 atendido mediante recorrido explícito de consulta, administración en lectura, correo y BI; se corrigieron aclaraciones del manual. No se declara aprobada toda A14.",
+  "pendientes": [
+    "Capacitación y aceptación formal solo se documentarán cuando ocurran.",
+    "No se ejecutaron en este recorrido todas las escrituras, ciclo completo o asistencia IA del manual.",
+    "Consolidar el informe en borrador y paquete de entrega."
+  ],
+  "limites": [
+    "Sin captura nueva ni inspección directa del panel por el agente.",
+    "No acredita todas las operaciones del manual, capacitación impartida ni aceptación institucional."
+  ],
+  "secciones_adicionales_confirmadas": [
+    {
+      "fecha_registro": "2026-11-02",
+      "seccion": "Administrar usuarios y departamentos",
+      "confirmacion_textual": "Si todo esta bien",
+      "resultado_acotado": "Opciones de Usuarios y Departamentos e historial de un departamento de prueba coinciden con el manual en consulta; no se solicitaron nuevas escrituras.",
+      "fuente": "Confirmación de la autora tras solicitar recorrido explícito; sin captura nueva."
+    },
+    {
+      "fecha_registro": "2026-11-02",
+      "seccion": "Notificaciones por correo",
+      "confirmacion_textual": "Si el enlace al expediente si corresponde al caso",
+      "resultado_acotado": "La autora pulsa Actualizar correos y observa que no genera un correo nuevo; se aclara que consulta estados. Abre un aviso existente en Mailpit y confirma que el enlace lleva al caso correspondiente f8b47a8e-877f-419e-92e6-9afc4a407f6a. No se solicitó un envío adicional.",
+      "fuente": "Confirmación de la autora tras solicitar recorrido explícito; sin captura nueva."
+    },
+    {
+      "fecha_registro": "2026-11-03",
+      "seccion": "Leer el informe Power BI",
+      "confirmacion_textual": "Si todo esta bien",
+      "resultado_acotado": "Autora compara el informe en Power BI Desktop con el manual y confirma Fecha de corte, leyenda Población exportable · Datos simulados y cifras vacías en filas Suprimido por privacidad.",
+      "fuente": "Confirmación textual de la autora, sin captura nueva ni refresco solicitado."
+    }
+  ],
+  "fecha_consolidacion": "2026-11-03",
+  "correcciones_manual": [
+    "Se aclara que Actualizar correos consulta estados y no genera ni reenvía mensajes, por la duda observada durante el recorrido.",
+    "Se incluye cierre en la enumeración de eventos de correo; contrastado con la rama CIERRE de services/mail.py, sin ejecutar un envío nuevo.",
+    "Se sustituye la frase general de revisión/refresco BI pendiente por las comprobaciones acotadas previas253 y256; esta consulta no es otro refresco."
+  ]
+}
