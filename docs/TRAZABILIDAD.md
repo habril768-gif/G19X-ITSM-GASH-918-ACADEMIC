@@ -1226,3 +1226,14 @@ la suite. Los criterios y alcances se detallan en
 Pendientes. Confirmar PostgreSQL para esta revisión, aplicar la versión al
 entorno de demostración y preparar la evaluación final. La decisión de visibilidad
 conserva «Asignado» para Empleado y muestra el nombre a gestores autorizados.
+
+
+### 2026-11-08 — Verificación PostgreSQL del corte 5
+
+El ejecutor aislado documentado en PRUEBAS_POSTGRESQL.md inició PostgreSQL
+18.6, aplicó upgrade head dos veces y ejecutó alembic check sin diferencias.
+La suite del backend pasó con 518 pruebas y 147 subpruebas. El informe
+JUnit registró 665 resultados, cero fallos, cero errores y cero omisiones.
+El ejecutor confirmó el cierre del servidor temporal. Esta comprobación
+cierra el pendiente de PostgreSQL del registro anterior. Queda aplicar la
+versión al entorno de demostración y preparar la evaluación final.

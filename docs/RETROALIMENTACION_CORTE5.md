@@ -29,5 +29,7 @@ y 22 integraciones PostgreSQL omitidas en esa ejecución. En la primera
 ejecución falló la preparación de la prueba nueva de responsable porque usaba
 un ID de texto donde el ORM esperaba UUID. Se corrigió el fixture y se repitió
 la suite. El resultado del corte anterior con PostgreSQL pertenece al commit
-que probó el equipo evaluador. La comprobación PostgreSQL de esta revisión
-queda pendiente.
+que probó el equipo evaluador. Esta revisión pasó también el ejecutor aislado con PostgreSQL 18.6.
+Se aplicaron las migraciones dos veces y Alembic no detectó cambios
+pendientes. Pasaron 518 pruebas y 147 subpruebas, con cero fallos, errores
+u omisiones. El ejecutor confirmó el cierre del servidor temporal.
