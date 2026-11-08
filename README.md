@@ -24,7 +24,7 @@ El entorno está destinado a pruebas locales con datos ficticios. La IA propone;
 ## Requisitos
 
 - Git y Docker Desktop iniciado con motor Linux y Docker Compose.
-- Node.js compatible con las dependencias fijadas en `frontend/package-lock.json` y npm.
+- Node.js 20.19 o posterior dentro de la rama 20, o Node.js 22.12 o superior, con npm.
 - Power BI Desktop para consultar el informe; es opcional para usar el panel web.
 - Python solo para desarrollo sin contenedores o pruebas aisladas; la imagen backend incluye su entorno.
 
@@ -78,7 +78,7 @@ npm.cmd ci
 npm.cmd run dev
 ```
 
-Abre [PluriOne](http://127.0.0.1:5173/) e inicia sesión con tu cuenta. Mantén la terminal abierta. El proxy de desarrollo apunta a la API local; si cambias su puerto, ajusta `frontend/vite.config.js`.
+Abre [PluriOne](http://127.0.0.1:5173/) e inicia sesión con tu cuenta. Mantén la terminal abierta. El proxy de desarrollo toma `API_PORT` del `.env` de la raíz. El puerto predeterminado es 8000. Reinicia Vite después de cambiarlo.
 
 ## Integraciones opcionales
 

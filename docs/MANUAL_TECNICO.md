@@ -40,7 +40,7 @@ El entorno local no implementa por sí solo HTTPS externo, MFA ni límite global
 
 Si `/health` falla, revisa el estado del contenedor y el puerto. Si responde pero `/health/db` devuelve 503, revisa conexión y migraciones. Un error de contraseña después de editar `.env` puede deberse a un volumen ya inicializado; no borres la base para resolverlo.
 
-Si el panel no conecta, confirma que el proxy de `frontend/vite.config.js` apunta al puerto API vigente. Si una operación es rechazada, revisa sesión, rol, estado del caso y clasificación humana vigente antes de reintentar. No relajes permisos para pasar una prueba.
+Si el panel no conecta, comprueba que `API_PORT` en el `.env` de la raíz coincide con el puerto publicado por Compose. Reinicia Vite tras cambiar esa variable. Si una operación es rechazada, revisa sesión, rol, estado del caso y clasificación humana vigente antes de reintentar. No relajes permisos para pasar una prueba.
 
 IA y correo requieren sus workers; un proceso API sano no acredita que se estén procesando trabajos. En Power BI, números vacíos con «Suprimido por privacidad» son el comportamiento previsto: no conviertas NULL en cero ni reduzcas el mínimo para obtener gráficos.
 

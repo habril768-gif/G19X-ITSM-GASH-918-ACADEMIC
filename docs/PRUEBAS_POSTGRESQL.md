@@ -7,7 +7,7 @@ Verificado el 17 de octubre de 2026. Se distinguen dos entornos: PostgreSQL 18.6
 Desde la raíz del proyecto, con las dependencias de desarrollo ya instaladas en backend/.venv:
 
 ~~~powershell
-.ackend.venvScriptspython.exe backendscripts	est_postgres_isolated.py
+.\backend\.venv\Scripts\python.exe backend\scripts\test_postgres_isolated.py
 ~~~
 
 El ejecutor detecta los binarios bajo Program Files/PostgreSQL en Windows. También acepta --pg-bin con una carpeta bin explícita. No descarga PostgreSQL ni depende del acceso al daemon de Docker. En otros sistemas puede localizar initdb en PATH o recibir --pg-bin. No debe ejecutarse con privilegios de administrador/root.
