@@ -45,7 +45,7 @@ export default function Departments({ api, user }) {
       if (active.current) {
         const unknown = !e.status || e.status >= 500; setUncertain(unknown);
         setError(unknown ? 'No se pudo confirmar el resultado. Actualiza el listado antes de repetir.'
-          : e.status === 409 ? 'No se guardó el cambio: revisa nombre duplicado, usuarios activos o incidencias abiertas vinculadas.'
+          : e.status === 409 ? (e.detail || 'No se guardó el cambio: revisa nombre duplicado, usuarios activos o incidencias abiertas vinculadas.')
           : e.status === 404 ? 'Departamento no disponible. Actualiza el listado.' : e.message);
       }
     } finally { pending.current = false; if (active.current) setBusy(false); }

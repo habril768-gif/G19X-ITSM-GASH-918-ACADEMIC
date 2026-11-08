@@ -39,6 +39,16 @@ it('409 no simula cambio ni éxito', async () => {
   expect(screen.getByRole('alert').textContent).toContain('usuarios activos');
   expect(screen.queryByText(/Departamento guardado/)).toBeNull(); expect(screen.getByText('Activo')).toBeTruthy();
 });
+it('muestra la causa de un 409 devuelto por Departamentos', async () => {
+  const ui = await start();
+  await ui.click(screen.getByRole('button', { name: 'Crear departamento' }));
+  const detail = 'Ya existe un departamento con ese nombre';
+  api.request.mockRejectedValueOnce(new ApiError(409, 'Conflicto', detail));
+  await ui.type(screen.getByLabelText('Nombre del departamento'), row.nombre);
+  await ui.type(screen.getByLabelText('Motivo del cambio de departamento'), 'Prueba de duplicado');
+  await ui.click(screen.getByRole('button', { name: 'Guardar departamento' }));
+  expect((await screen.findByRole('alert')).textContent).toBe(detail);
+});
 it('respuesta incierta bloquea edición hasta actualizar, sin reenvío automático', async () => {
   const ui = await start(); await ui.click(screen.getByRole('button', { name: 'Editar departamento DEMO temporal' }));
   api.request.mockRejectedValueOnce(new ApiError(0, 'Sin conexión'));

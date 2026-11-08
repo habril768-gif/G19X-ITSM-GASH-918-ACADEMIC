@@ -1,5 +1,9 @@
 export class ApiError extends Error {
-  constructor(status, message) { super(message); this.status = status; }
+  constructor(status, message, detail = null) {
+    super(message);
+    this.status = status;
+    this.detail = detail;
+  }
 }
 
 // La sesión vive en memoria. Nunca usar localStorage, sessionStorage ni URLs.
@@ -29,7 +33,10 @@ export function createApi(onExpired = () => {}) {
         : response.status === 409 ? 'El caso cambió o no cumple los requisitos de la operación. Actualiza el expediente antes de repetirla.'
         : response.status === 422 ? 'Revisa los datos ingresados.'
         : 'El servicio no pudo completar la solicitud. Inténtalo nuevamente.';
-      throw new ApiError(response.status, message);
+      // Solo los conflictos exponen un detalle. Los mensajes de acceso son genéricos.
+      const body = response.status === 409 ? await response.json?.().catch(() => null) : null;
+      const detail = typeof body?.detail === 'string' ? body.detail.trim() || null : null;
+      throw new ApiError(response.status, message, detail);
     }
     return response.status === 204 ? null : response.json();
   }
