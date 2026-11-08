@@ -3,7 +3,15 @@
 **Fecha de entrega: 5 de noviembre de 2026.** Fijada por la autora el 2 de noviembre.
 El trabajo se concentra en aceptación, legibilidad y documentación del MVP existente.
 
-## Pendientes y calendario
+## Cierre después del corte 5
+
+El 6 de noviembre el equipo evaluador dio por cumplidas las cinco tareas del
+corte 4. El [seguimiento del corte 5](RETROALIMENTACION_CORTE5.md) reúne las
+cinco correcciones de arranque, expedientes, departamentos, IA y matriz.
+Quedan la demostración y la evaluación final. La fecha del plan anterior
+se conserva como antecedente.
+
+## Calendario del corte 4
 
 | Prioridad | Trabajo | Fecha prevista | Estado al 3 de noviembre |
 | --- | --- | --- | --- |
@@ -11,7 +19,7 @@ El trabajo se concentra en aceptación, legibilidad y documentación del MVP exi
 | 2 | Dividir líneas largas de los tres archivos Python señalados | 2 de noviembre | Formato274 y CI278 aprobados |
 | 3 | A09: comprobar un destinatario inactivo y un aviso de control en Mailpit | 3 de noviembre | Comprobado el 2 de noviembre en275 |
 | 4 | A10: consultar un caso confidencial como Empleado y Supervisor, con control RH | 3 de noviembre | Comprobado el 2 de noviembre en279 |
-| 5 | A14: seguir el manual y corregir diferencias con el panel | 4 de noviembre | Recorrido acotado confirmado en285 el 3 de noviembre; manual aclarado |
+| 5 | A14: seguir el manual y corregir diferencias con el panel | 4 de noviembre | Verificado el 6 de noviembre. Recorrido 285 y capturas complementarias 286 |
 | 6 | Consolidar matriz, informe en borrador y paquete identificado | 4 de noviembre | Siguiente trabajo; conservar informe como borrador |
 | 7 | Revisar el paquete y realizar la demostración de entrega | 5 de noviembre | Previsto; no declarar aceptación antes de realizarla |
 

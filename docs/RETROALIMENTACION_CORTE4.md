@@ -21,7 +21,7 @@ Fecha de entrega fijada por la autora: **5 de noviembre de 2026**.
 | 1667 | Sin «API,10 clientes» en README | Publicado en96fe0d3 |
 | 1668 | A09 con al menos un correo negativo y evidencia | Comprobado en275; capturas276 y277 |
 | 1669 | A10 con caso confidencial y dos roles | Comprobado en279; capturas280–284 |
-| 1670 | A14 con recorrido del manual | Comprobado en285: recorrido de cuatro secciones y aclaraciones del manual; capacitación y aceptación formal no acreditadas |
+| 1670 | A14 con recorrido del manual | Verificado por el equipo evaluador el 6 de noviembre. Recorrido 285 y capturas complementarias 286 |
 | 1671 | Backlog con fecha de entrega | 5 de noviembre de 2026, fijada por la autora |
 | 1672 | MVP con fecha de entrega | 5 de noviembre de 2026, fijada por la autora |
 | 1673 | Commits nuevos en al menos dos días | Actividad real del 2 de noviembre y consolidación del recorrido el 3; comprobar fechas de publicación en Git |

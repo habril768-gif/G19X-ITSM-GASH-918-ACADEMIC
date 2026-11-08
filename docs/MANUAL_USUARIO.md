@@ -33,7 +33,7 @@ Abre **Incidencias**. Usa los filtros disponibles por identificador/título, est
 
 Admin RH y Supervisor pueden abrir **Más filtros**, elegir **Responsable → Sin responsable** y pulsar **Aplicar filtros** para consultar la bandeja pendiente de asignación. El total cuenta solo casos autorizados que cumplen los filtros. **Limpiar filtros** retira la selección.
 
-Abre el título para consultar el expediente. En **Descripción del caso** verás los datos disponibles; **Seguimiento** muestra responsable, resolución y fechas cuando existen. La ausencia de responsable puede mostrarse como Sin asignar. No deduzcas que un caso está resuelto por tener una sugerencia IA.
+Abre el título para consultar el expediente. En **Descripción del caso** verás los datos disponibles; **Seguimiento** muestra responsable, resolución y fechas cuando existen. Admin RH y Supervisor con acceso al expediente ven el nombre del responsable. Empleado ve «Asignado» cuando hay responsable. Un caso sin responsable muestra «Sin asignar». No deduzcas que un caso está resuelto por tener una sugerencia IA.
 
 El historial muestra acciones permitidas y sus motivos cuando corresponda. Su contenido depende del perfil. Si no encuentras un caso, revisa filtros y sesión; también puede haber cambiado tu permiso. No pruebes identificadores de otros expedientes para superar una restricción.
 
@@ -80,7 +80,7 @@ Los cambios pueden retirar un responsable que perdió elegibilidad o devolver un
 
 ## Solicitar y revisar asistencia IA
 
-La asistencia es opcional y solo está disponible para gestores elegibles. Si no está activada, está omitida o falla, continúa con la gestión manual.
+La asistencia es opcional y solo está disponible para gestores elegibles. Si creas una incidencia con la IA desactivada, Seguimiento muestra «Asistencia IA no configurada. Clasificación manual.». Si la asistencia se omite o falla, continúa con la gestión manual.
 
 1. Abre un caso ficticio permitido y revisa los hechos que necesitan clasificación.
 2. Escribe en el formulario IA un resumen mínimo simulado. Empieza vacío: no copies información real ni identificadores. Confirma las casillas exigidas.
@@ -102,7 +102,7 @@ No se envía correo por todas las operaciones: creación, asignación, resoluci�
 
 Admin RH dispone de **Usuarios** para alta y actualización de cuentas permitidas. Revisa nombre, correo, rol, departamento y activación según el formulario. Los cambios administrativos requieren motivo cuando se solicite y pueden revocar sesiones o ajustar casos. No se elimina una cuenta ni se cambia su contraseña mediante la edición administrativa general; la recuperación corresponde al operador.
 
-En **Departamentos**, registra o edita el nombre, activación y motivo. La baja es lógica y puede rechazarse si existen usuarios activos o casos abiertos vinculados. Atiende esas dependencias mediante sus procedimientos; no borres datos para forzar la baja. Consulta el historial para revisar cambios confirmados.
+En **Departamentos**, registra o edita el nombre, activación y motivo. La baja es lógica y puede rechazarse si existen usuarios activos o casos abiertos vinculados. Si el cambio se rechaza por un conflicto, el panel muestra la causa que indica la API cuando está disponible. Atiende esas dependencias mediante sus procedimientos; no borres datos para forzar la baja. Consulta el historial para revisar cambios confirmados.
 
 El botón **Historial** de Departamentos consulta sus cambios. Usuarios registra auditoría internamente, pero no ofrece una vista de historial administrativo en el panel; solicita su comprobación al operador autorizado. El historial de un expediente es una consulta distinta.
 

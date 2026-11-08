@@ -50,5 +50,6 @@
     "Se aclara que Actualizar correos consulta estados y no genera ni reenvía mensajes, por la duda observada durante el recorrido.",
     "Se incluye cierre en la enumeración de eventos de correo; contrastado con la rama CIERRE de services/mail.py, sin ejecutar un envío nuevo.",
     "Se sustituye la frase general de revisión/refresco BI pendiente por las comprobaciones acotadas previas253 y256; esta consulta no es otro refresco."
-  ]
+  ],
+  "refuerzo_visual_posterior": "286-corte4-a14-refuerzo-visual.json"
 }

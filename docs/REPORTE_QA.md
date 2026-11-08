@@ -1120,3 +1120,73 @@ en1670 documentado; no se acredita toda A14, capacitación, aceptación instituc
 todas las escrituras o ciclo completo. Pendientes: informe en borrador, paquete
 actualizado y demostración de entrega. Avance real del segundo día, sin modificar
 fechas previas ni fabricar actividad retrospectiva.
+
+
+### 2026-11-03 — A14: refuerzo visual de búsqueda y consulta confidencial
+
+Propósito: reforzar el recorrido textual285 ante la próxima evaluación.
+[286](evidencias/286-corte4-a14-refuerzo-visual.json) conserva dos capturas nuevas:
+287 muestra rol Admin RH, filtro por ID aaa54e3c-a35b-4419-8c3d-7e8926773095,
+un resultado Pendiente/Restringido; 288 muestra el expediente con el mismo ID,
+Pendiente, Sin asignar y Acceso restringido a RH independiente. No se solicitó
+modificar el caso. Validación: inspección visual y firmas/hashes PNG; no se atribuye
+clic observado, HTTP o SQL. Archivos: manifiesto286, dos capturas, referencia285,
+matriz, backlog, seguimiento y registros QA/entrega/trazabilidad.
+Resultado: dos pasos documentados visualmente, no todo el manual. Pendientes:
+historial y refuerzo de las otras secciones, consolidación/publicación. Capturas
+guardadas localmente en la copia de publicación; sin publicación remota todavía.
+
+
+### 2026-11-03 — A14: historial del caso aportado por la autora
+
+Propósito: completar el refuerzo visual de la sección de consulta del manual.
+[289](evidencias/289-a14-historial-confidencialidad.png), incorporada al manifiesto
+[286](evidencias/286-corte4-a14-refuerzo-visual.json), muestra CREADO y CAMBIO
+CONFIDENCIALIDAD con motivo «Prueba A10: restringir expediente confidencial».
+También muestra Sin participantes adicionales. El recorte no incluye ID o cabecera
+de rol: su atribución al caso anterior depende de la continuidad del recorrido.
+Archivos: captura289, manifiesto286, matriz, backlog y registros QA/entrega/trazabilidad.
+Validación: inspección visual, firma PNG y SHA256; no HTTP/SQL ni auditoría completa.
+Resultado: búsqueda, detalle e historial respaldados con capturas y límites explícitos.
+Pendientes: otras secciones del recorrido285 y publicación agrupada del refuerzo.
+No se modificaron el caso ni código de producto; no se ejecutaron pruebas nuevas.
+
+
+### 2026-11-03 — A14: opciones de Usuarios e historial de departamento
+
+Propósito: reforzar la sección administrativa del manual con consultas de la autora.
+[286](evidencias/286-corte4-a14-refuerzo-visual.json) incorpora
+[290](evidencias/290-a14-usuarios-opciones-admin.png), listado Usuarios en Admin RH
+con Crear usuario, Actualizar listado y Editar, y
+[291](evidencias/291-a14-departamento-demo-historial.png), historial DEMO - PRUEBA 1
+con creación, renombrado, baja y reactivación fechados el 17 de octubre de 2026.
+No atribuir esas escrituras a hoy: el recorrido actual solo las consulta.
+290 también aporta una fila visible Inactiva para la cuenta ficticia A09; no prueba
+por sí sola su estado en el instante del envío anterior. No se muestran credenciales.
+Archivos: dos PNG, manifiesto286, matriz, backlog y registros QA/entrega/trazabilidad.
+Validación: inspección visual, firmas PNG y hashes SHA256. Resultado: opciones e
+historial coinciden con la sección administrativa en lectura; cabecera de rol no
+visible en291, atribuida por continuidad. Pendientes: capturas de correo y BI,
+consolidación/publicación agrupada; sin nuevas escrituras, pruebas de carga o código.
+
+
+### 2026-11-08 — Correcciones del corte 5
+
+Propósito. Resolver las cinco observaciones recibidas el 6 de noviembre.
+Los cambios preparados el día 7 cubren el puerto de Vite, los requisitos de
+Node, el comando de PostgreSQL, el nombre del responsable según rol, la causa
+de conflictos de Departamentos, el mensaje de IA desactivada para casos nuevos
+y la legibilidad de la matriz. Se actualizaron README y los manuales técnico
+y de usuario. El corte 5 verificó A14 mediante la evidencia 285. Se conservaron
+las capturas complementarias 287 a 291, vinculadas al registro 286.
+
+Validación. Pasaron 73 pruebas de frontend y la compilación. El proxy HTTP
+respondió usando un puerto alternativo. Pasaron 496 pruebas de backend y 147
+subpruebas, con 22 integraciones omitidas en la ejecución local sin PostgreSQL.
+Se corrigió un error de tipo UUID en el fixture de responsable antes de repetir
+la suite. Los criterios y alcances se detallan en
+[seguimiento del corte 5](RETROALIMENTACION_CORTE5.md).
+
+Pendientes. Confirmar PostgreSQL para esta revisión, aplicar la versión al
+entorno de demostración y preparar la evaluación final. La decisión de visibilidad
+conserva «Asignado» para Empleado y muestra el nombre a gestores autorizados.

@@ -1,0 +1,56 @@
+{
+  "fecha_registro": "2026-11-03",
+  "escenario": "A14",
+  "criterio_corte4": 1670,
+  "estado": "CAPTURAS_COMPLEMENTARIAS_CONSERVADAS",
+  "fuente": "Cinco capturas aportadas por la autora e inspeccionadas en el chat tras solicitar pasos explícitos del manual.",
+  "caso_ficticio_id": "aaa54e3c-a35b-4419-8c3d-7e8926773095",
+  "seccion_manual": "Consultar y buscar incidencias",
+  "capturas": [
+    {
+      "archivo": "287-a14-busqueda-id-admin.png",
+      "sha256": "fd0ac4632adc07808c7976ac6affef89489e9d5ab2b9589bfe952c9cf0dcb255",
+      "bytes": 50679,
+      "observacion": "Admin RH; filtro por ID completo; un resultado con el caso esperado, Pendiente y Restringido."
+    },
+    {
+      "archivo": "288-a14-expediente-confidencial-admin.png",
+      "sha256": "a2a466970168381996e3c5a215500e3cef36beec6c814dcfa74a7e75ae707506",
+      "bytes": 54794,
+      "observacion": "Admin RH; ID y título coincidentes; Pendiente, Sin asignar y Acceso restringido a RH independiente."
+    },
+    {
+      "archivo": "289-a14-historial-confidencialidad.png",
+      "sha256": "558f4344fd169dc5d9b03bd7e6cbd90211fdfa3b2798b89954beaf7d710cd439",
+      "bytes": 27187,
+      "observacion": "Historial del caso: CAMBIO CONFIDENCIALIDAD, 2 nov 2026 10:58 p.m., motivo Prueba A10: restringir expediente confidencial; CREADO, 2 nov 2026 10:51 p.m. Relaciones declaradas: Sin participantes adicionales.",
+      "limite_correlacion": "El recorte no muestra ID, título o cabecera de rol; se relaciona con el caso y sesión anteriores por la continuidad del recorrido solicitado, no por un identificador visible en esta imagen."
+    },
+    {
+      "archivo": "290-a14-usuarios-opciones-admin.png",
+      "sha256": "a382690bf364b33bc7ddaf06874ae5fe8d8f4d57bc1a1158ecfc5ae3f5baccad",
+      "bytes": 54609,
+      "observacion": "Cabecera Administrador RH; listado Usuarios con Crear usuario, Actualizar listado y Editar. Fila ficticia QA Corte4 RH inactivo visible como Inactiva; Empleado Operaciones Dos Demo aparece en DEMO - Recursos Humanos. No hay contraseñas o tokens visibles."
+    },
+    {
+      "archivo": "291-a14-departamento-demo-historial.png",
+      "sha256": "9136778cddaa3c29248ec0a9b9964cf86456341f064ae8acbc1fddb3a1bb4e17",
+      "bytes": 39979,
+      "observacion": "Historial: DEMO - PRUEBA 1; cuatro eventos del 17/10/2026: CREADO, renombrado DEMO a DEMO - PRUEBA 1, desactivación y activación, con motivos y estados. La captura es consulta actual de eventos históricos, no ejecución de esas escrituras hoy. El recorte no incluye cabecera de identidad."
+    }
+  ],
+  "resultado": "La sección Consultar y buscar incidencias cuenta con capturas de búsqueda por ID, detalle confidencial y consulta de historial; la atribución del último recorte al caso depende de la continuidad del recorrido. Listado y opciones de Usuarios e historial del departamento DEMO - PRUEBA 1 documentados en290–291, sin solicitar cambios.",
+  "limites": [
+    "No se observa directamente el clic en Aplicar filtros, solo filtro y resultado visibles.",
+    "Las imágenes muestran el estado final, no una comparación SQL ni una modificación.",
+    "El historial está visible en289 con los límites de correlación registrados; no acredita todo el manual, capacitación o aceptación institucional."
+  ],
+  "pendientes": [
+    "La evidencia visual complementaria cubre consulta de casos y administración. Correo y BI constan en el recorrido 285."
+  ],
+  "secciones_manuales_con_capturas": [
+    "Consultar y buscar incidencias",
+    "Administrar usuarios y departamentos (consulta)"
+  ],
+  "revision_posterior": "El equipo evaluador verificó el criterio 1670 el 6 de noviembre sobre 84d9ad8, con base en el recorrido 285 ya publicado."
+}
