@@ -1,4 +1,4 @@
-from uuid import uuid4
+from uuid import UUID, uuid4
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, event, func, select
@@ -55,6 +55,30 @@ def test_personal_registration_and_redacted_employee_history(world):
     assert "detalle" not in events["items"][0]
     assert db.scalar(select(func.count()).select_from(AuditEvent))==1
     assert c.get(f"/incidents/{case_id}/participants").json()=={"items":[]}
+
+def test_case_created_with_ai_disabled_is_ready_for_manual_classification(world, monkeypatch):
+    monkeypatch.setenv("AI_ENABLED", "false")
+    client, db, actors, selected, *_ = world
+    case_id = create(client)
+    detail = client.get(f"/incidents/{case_id}").json()
+    assert detail["ai_status"] == "OMITIDA"
+    assert detail["ai_skip_reason"] == "Asistencia IA no configurada. Clasificación manual."
+    assert detail["classification_valid"] is False
+
+
+def test_assignee_name_is_only_returned_to_managers_with_access(world):
+    client, db, actors, selected, *_ = world
+    case_id = create(client)
+    case = db.get(Incident, UUID(case_id))
+    case.assigned_to = actors["super"].id
+    db.commit()
+    assert client.get(f"/incidents/{case_id}").json()["assigned_to_name"] is None
+    for role in ("admin", "super"):
+        selected["user"] = actors[role]
+        assert client.get(f"/incidents/{case_id}").json()["assigned_to_name"] == actors["super"].nombre_completo
+    selected["user"] = actors["outsider"]
+    assert client.get(f"/incidents/{case_id}").status_code == 404
+
 
 def test_employee_cannot_report_for_peer_or_spoof_author(world):
     c,db,a,s,one,two=world

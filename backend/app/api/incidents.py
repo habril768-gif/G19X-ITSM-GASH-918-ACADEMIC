@@ -106,6 +106,7 @@ class CaseSummary(BaseModel):
 
 
 class CaseDetail(CaseSummary):
+    assigned_to_name: str | None = None
     descripcion: str
     incident_date: date
     affected_employee_id: UUID|None
@@ -209,7 +210,11 @@ def list_cases(response:Response,page:int=Query(1,ge=1),page_size:int=Query(20,g
 @worker_response(CaseDetail)
 def detail(case_id:UUID,response:Response,user:User=Depends(current_user),db:Session=Depends(get_session)):
     response.headers["Cache-Control"]="no-store"
-    return visible_case(db,user,case_id)
+    case = visible_case(db, user, case_id)
+    if case.assigned_to is None or role_name(db, user) == "EMPLEADO":
+        return case
+    assignee_name = db.scalar(select(User.nombre_completo).where(User.id == case.assigned_to))
+    return CaseDetail.model_validate(case).model_copy(update={"assigned_to_name": assignee_name})
 
 
 @router.get("/{case_id}/participants")

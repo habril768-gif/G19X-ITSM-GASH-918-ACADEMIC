@@ -38,6 +38,18 @@ it('inicio de sesión, consulta del detalle y logout retiran datos privados', as
   expect(screen.queryByText('Descripción ficticia', { selector: 'p' })).toBeNull();
   expect(localStorage.length).toBe(0); expect(sessionStorage.length).toBe(0);
 });
+it('muestra el nombre del responsable y no el UUID en el expediente', async () => {
+  const original = fetch.getMockImplementation();
+  const assigneeId = '22222222-2222-4222-8222-222222222222';
+  fetch.mockImplementation((url, opts) => url.endsWith('/incidents/test-case')
+    ? Promise.resolve(ok({ ...incident, assigned_to: assigneeId, assigned_to_name: 'Responsable Demo' }))
+    : original(url, opts));
+  render(<App />);
+  const ui = await login();
+  await ui.click(screen.getByRole('button', { name: incident.titulo }));
+  expect(await screen.findByText('Responsable Demo', { selector: 'dd' })).toBeTruthy();
+  expect(screen.queryByText(assigneeId)).toBeNull();
+});
 it('un 401 durante filtrado limpia datos y regresa al login', async () => {
   render(<App />); const ui = await login();
   const original = fetch.getMockImplementation();

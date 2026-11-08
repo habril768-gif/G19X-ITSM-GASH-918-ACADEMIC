@@ -9,15 +9,12 @@ from sqlalchemy import and_, or_, select
 from sqlalchemy.exc import SQLAlchemyError
 from app.ai.contracts import AIResult, PROMPT_VERSION, TransientAIError
 from app.ai.queue import notify
+from app.core.ai_flags import enabled
 from app.core.security import aware, utcnow
 from app.models import AIJob, AuditEvent, Category, Department, Incident, User
 from app.services.administration_lock import administration_lock
 from app.services.incidents import MANAGERS, role_name, visibility
 from app.services.protection import manager_involved
-
-
-def enabled():
-    return os.environ.get('AI_ENABLED', 'false').lower() in {'true', '1'}
 
 
 def _audit(db, case, job, operation, actor_id=None):

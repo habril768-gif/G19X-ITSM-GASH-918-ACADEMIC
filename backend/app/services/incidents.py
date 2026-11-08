@@ -7,6 +7,7 @@ from sqlalchemy import and_, bindparam, exists, or_, select
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session, aliased
 
+from app.core.ai_flags import enabled as ai_enabled
 from app.models import AuditEvent, Department, Incident, IncidentParticipant, Role, User
 
 ACTIVE_RELATIONS = ("DECLARADO", "CONFIRMADO")
@@ -174,6 +175,11 @@ def create_case(db: Session, actor: User, body):
         manager_involved = manager_involved or participant_role in MANAGERS
         participants.append(item)
     confidential = body.is_confidential or manager_involved
+    ai_skip_reason = None
+    if confidential:
+        ai_skip_reason = "Confidencialidad o conflicto de interés; clasificación manual"
+    elif not ai_enabled():
+        ai_skip_reason = "Asistencia IA no configurada. Clasificación manual."
     case = Incident(
         titulo=body.titulo, descripcion=body.descripcion, incident_date=body.incident_date,
         scope=body.scope, affected_employee_id=affected.id if affected else None,
@@ -181,8 +187,8 @@ def create_case(db: Session, actor: User, body):
         created_by=actor.id, status="PENDIENTE", assigned_to=None,
         category_id=4 if body.scope == "ENTORNO" else None,
         is_confidential=confidential, classification_valid=False,
-        ai_status="OMITIDA" if confidential else "PENDIENTE",
-        ai_skip_reason="Confidencialidad o conflicto de interés; clasificación manual" if confidential else None,
+        ai_status="OMITIDA" if ai_skip_reason else "PENDIENTE",
+        ai_skip_reason=ai_skip_reason,
     )
     try:
         db.add(case)
