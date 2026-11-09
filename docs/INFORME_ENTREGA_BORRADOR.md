@@ -1,6 +1,6 @@
 # Informe de desarrollo y resultados de PluriOne
 
-**Borrador para revisión académica — 31 de octubre de 2026**
+**Borrador para revisión académica — 8 de noviembre de 2026**
 
 Proyecto: Desarrollo de una Plataforma Inteligente de Gestión de Incidencias Laborales. Clave: G19X-ITSM-GASH-918-ACADEMIC. Autoría y requisitos de identificación: [PRD](PRD.md). Este documento todavía requiere ajuste al formato institucional y aceptación correspondiente; no acredita trabajo de campo, capacitación ni aprobación que no se hayan registrado.
 
@@ -34,7 +34,7 @@ La [arquitectura](ARQUITECTURA.md), las [decisiones](DECISIONES.md) y el [manual
 
 | Área | Resultado comprobado | Evidencia y límite |
 | --- | --- | --- |
-| Rendimiento RNF-2 | 35216 solicitudes sin errores con10 clientes,100 casos iniciales,30 s de calentamiento y300 s de medición; API3procesos. P95 listado123.81, detalle113.27, creación194.04 y actualización167.77ms, cada uno menor de200ms | [220](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json). Un entorno/hardware/protocolo; no latencia universal, p99 o proveedores externos |
+| Rendimiento RNF-2 | En QA Linux, 71 079 solicitudes sin errores con diez clientes, cien casos iniciales y tres procesos API. P95 de 31,85 ms en listado, 52,60 ms en detalle, 62,17 ms en creación y 60,15 ms en actualización. | [270](evidencias/270-rnf2-linux-ci-aprobado.json) y reporte íntegro [271](evidencias/271-rnf2-linux-ci-reporte-completo.json). Resultado del commit 2bbf4a5 en ese runner. La medición local anterior se conserva en [220](evidencias/220-rnf2-formal-local-aprobada-tres-procesos.json). |
 | Permisos administrativos | Supervisor y Empleado obtuvieron403 en lecturas e historial, e intentos POST/PUT vacíos; logout204 | [240](evidencias/240-rechazos-api-supervisor-empleado-confirmados.json), [241](evidencias/241-rechazos-administrativos-ampliados.json). No todos los cuerpos válidos o recursos existentes |
 | Privacidad del expediente | Otro Empleado obtiene404 en detalle/historial/participantes; Admin RH obtiene200 en control posterior | [242](evidencias/242-empleado-expediente-ajeno-404.json), [243](evidencias/243-control-admin-expediente-200.json). Dos cuentas y un caso, sesiones sucesivas |
 | Usuarios y departamentos | Recorridos de alta/edición/baja, revocación, validaciones y dependencias documentados; consulta de11 eventos administrativos del usuario ficticio | [Resumen](RESUMEN_ENTREGA.md), [239](evidencias/239-auditoria-usuario-ficticio-consulta-lectura.json). Confirmaciones/capturas y consulta aportada, no matriz integral de todas las combinaciones |
@@ -46,6 +46,24 @@ La [arquitectura](ARQUITECTURA.md), las [decisiones](DECISIONES.md) y el [manual
 | Clasificación IA | Evaluación v4 registrada: categoría47/50, prioridad50/50 y cinco abstenciones correctas | [Resultados v4](evaluacion_ia/RESULTADOS_V4.md). Conjunto simulado, tres errores de categoría del mismo patrón; aceptación humana integral pendiente |
 
 Los ensayos fallidos de rendimiento y los límites de cada validación se conservan. Las pruebas simuladas no se presentan como sesiones reales; las confirmaciones de la autora no se convierten en observación directa del agente. No se repitieron cargas o llamadas externas para redactar este informe.
+
+## Revisión de los cortes 4 y 5
+
+El equipo evaluador verificó las cinco observaciones del corte 4 el 6 de
+noviembre, incluido el recorrido A14 del manual. También reportó instalación
+desde un clon limpio y pruebas funcionales sobre el commit ec4e6e4. La
+referencia orientativa de 8.6 corresponde a ese corte. La calificación
+oficial se registra después de la evaluación final.
+[Seguimiento del corte 5](RETROALIMENTACION_CORTE5.md)
+
+El corte 5 añadió un puerto configurable para el proxy, el nombre del
+responsable según permisos, mensajes específicos de conflictos de
+Departamentos, el aviso de clasificación manual cuando la IA está
+desactivada y mejoras de legibilidad en la matriz. Pasaron 73 pruebas de
+frontend, la compilación y 518 pruebas con PostgreSQL 18.6 aislado, más 147
+subpruebas. La autora aportó capturas del recorrido local y la salida de
+PowerShell que confirma la IA desactivada para la prueba.
+[Evidencia 292](evidencias/292-corte5-arranque-y-responsable-ui.json)
 
 ## Operación, respaldo y custodia
 
@@ -61,9 +79,9 @@ La implementación y sus evidencias permiten revisar un flujo local desde regist
 
 ## Material de revisión
 
-- [Resumen y demostración](RESUMEN_ENTREGA.md).
+- [Resumen de entrega](RESUMEN_ENTREGA.md) y [guion de demostración final](GUION_DEMOSTRACION_FINAL.md).
 - [Matriz de aceptación](ACEPTACION_ENTREGA.md) y [trazabilidad](TRAZABILIDAD.md).
 - [Reporte QA](REPORTE_QA.md) y [bitácora](BITACORA.md).
 - [Repositorio](https://github.com/habril768-gif/G19X-ITSM-GASH-918-ACADEMIC).
 
-El borrador no incluye firmas, actas, entrevistas o capacitaciones ficticias. Fecha de entrega, formato final y aprobación institucional permanecen por confirmar.
+El borrador no incluye firmas, actas, entrevistas o capacitaciones ficticias. El plan anterior fijó el 5 de noviembre como fecha de trabajo. El formato institucional y la aprobación final siguen pendientes.

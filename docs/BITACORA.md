@@ -2309,3 +2309,15 @@ como Admin RH, el aviso de departamento duplicado y el recorrido de IA
 desactivada. Se conservaron las capturas 293 a 296 con sus hashes, incluido
 el primer intento con IA pendiente. La demostración local de estos cambios
 quedó completada. La evaluación final institucional sigue pendiente.
+
+
+### 2026-11-08 — Material para la evaluación final
+
+Se actualizó el [informe en borrador](INFORME_ENTREGA_BORRADOR.md) con la
+revisión de los cortes 4 y 5, la regresión con PostgreSQL y la comprobación
+del entorno de demostración. El resultado RNF-2 se atribuye al commit y
+runner de la evidencia 270. El [guion](GUION_DEMOSTRACION_FINAL.md) ordena
+un recorrido de siete minutos con los casos ficticios y las evidencias
+existentes. Se comprobaron los enlaces locales del informe y el guion.
+La demostración ante el equipo evaluador y el formato institucional
+siguen pendientes.
