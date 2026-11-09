@@ -1,0 +1,65 @@
+{
+  "fecha_registro": "2026-11-08",
+  "revision_fuentes_locales": "5381b03804259d0873ce29f12b45c5958327e836",
+  "arranque": {
+    "panel_http": 200,
+    "salud_por_proxy": "ok",
+    "base": "postgresql",
+    "openapi_assigned_to_name": true
+  },
+  "recorrido": {
+    "fuente": "Captura aportada por la autora en la instalación local",
+    "rol_visible": "Administrador RH",
+    "caso_ficticio": "Prueba IA — piso mojado",
+    "estado_visible": "Cerrada",
+    "responsable_visible": "RH Independiente Demo"
+  },
+  "captura": {
+    "archivo": "293-corte5-responsable-en-expediente.png",
+    "bytes": 50156,
+    "sha256": "0136f81a5f4a8d1dd7880e8c908ef133df62723c9a43063ca15f0c15475fbc44"
+  },
+  "pendientes": [],
+  "conflicto_departamento": {
+    "fuente": "Captura aportada por la autora en la instalación local",
+    "rol_visible": "Administrador RH",
+    "operacion": "Alta con nombre duplicado",
+    "nombre_ficticio": "DEMO - PRUEBA 1",
+    "mensaje_visible": "Ya existe un departamento con ese nombre",
+    "captura": {
+      "archivo": "294-corte5-departamento-duplicado.png",
+      "bytes": 40116,
+      "sha256": "faaa6b81cd069494a2098752e5de7809ee1c8d754329ea40726a34480041a181"
+    }
+  },
+  "ia_primer_intento": {
+    "fuente": "Captura aportada por la autora en la instalación local",
+    "caso_ficticio": "QA Corte 5 — IA desactivada",
+    "ambito_visible": "Entorno de trabajo",
+    "mensaje_visible": "Asistencia IA pendiente. Puedes consultar el seguimiento disponible.",
+    "diagnostico": "La configuración efectiva de Compose para api tiene AI_ENABLED activo. El acceso al motor Docker desde la sesión del agente fue denegado, por lo que no se leyó el valor dentro del contenedor.",
+    "resultado": "El intento no acredita el flujo con IA desactivada.",
+    "captura": {
+      "archivo": "295-corte5-ia-pendiente-primer-intento.png",
+      "bytes": 47386,
+      "sha256": "1fe5babd7548381a884b4f14eb45779c0eec76b5f534bb42a7bf5b7aed5431af"
+    }
+  },
+  "ia_segundo_intento": {
+    "fuente_configuracion": "Salida de PowerShell aportada por la autora",
+    "contenedor": "plurione-api-1",
+    "salud": "Healthy",
+    "enabled": false,
+    "fuente_mensaje": "Captura del panel local aportada por la autora",
+    "caso_ficticio": "QA Corte 5 — IA desactivada, segundo intento",
+    "ambito_visible": "Entorno de trabajo",
+    "estado_visible": "Pendiente",
+    "mensaje_visible": "Asistencia IA no configurada. Clasificación manual.",
+    "captura": {
+      "archivo": "296-corte5-ia-desactivada-clasificacion-manual.png",
+      "bytes": 48492,
+      "sha256": "06a1c323346b05147366edce6dec8f5636146852b65e8ba1dea28419d090abb8"
+    }
+  },
+  "resultado": "Recorrido local del corte 5 completado en el alcance registrado"
+}

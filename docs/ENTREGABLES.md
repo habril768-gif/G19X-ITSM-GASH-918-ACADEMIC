@@ -1196,3 +1196,52 @@ JUnit registró 665 resultados, cero fallos, cero errores y cero omisiones.
 El ejecutor confirmó el cierre del servidor temporal. Esta comprobación
 cierra el pendiente de PostgreSQL del registro anterior. Queda aplicar la
 versión al entorno de demostración y preparar la evaluación final.
+
+
+### 2026-11-08 — Arranque local y nombre del responsable
+
+La instalación de demostración recibió los archivos de 5381b03. El panel
+respondió HTTP 200 y la ruta de salud por el proxy confirmó PostgreSQL.
+El esquema de la API incluye assigned_to_name. La captura de la autora
+muestra a Admin RH consultando el caso ficticio cerrado «Prueba IA — piso
+mojado», con «RH Independiente Demo» en el campo Responsable. El
+[registro 292](evidencias/292-corte5-arranque-y-responsable-ui.json) conserva
+el resultado y el hash de la captura 293. Quedan las comprobaciones visuales
+de conflictos de Departamentos y del alta con IA desactivada.
+
+
+### 2026-11-08 — Conflicto de nombre en Departamentos
+
+La captura aportada por la autora muestra que, al intentar guardar
+«DEMO - PRUEBA 1» como departamento nuevo, el panel de Admin RH mantiene
+el formulario y muestra «Ya existe un departamento con ese nombre».
+El [registro 292](evidencias/292-corte5-arranque-y-responsable-ui.json)
+incorpora el resultado visual y el hash de la captura 294. Queda comprobar
+en pantalla el mensaje de un alta ficticia con IA desactivada.
+
+
+### 2026-11-08 — Primer intento del recorrido de IA
+
+La captura 295 del caso ficticio «QA Corte 5 — IA desactivada» muestra
+«Asistencia IA pendiente». Compose resuelve AI_ENABLED como activo en
+api. El agente no pudo consultar el contenedor por falta de acceso al
+motor de Docker. El [registro 292](evidencias/292-corte5-arranque-y-responsable-ui.json)
+conserva la captura y su hash. La demostración del mensaje de IA desactivada
+requiere iniciar la API con AI_ENABLED=false y registrar un caso nuevo.
+
+
+### 2026-11-08 — Cierre del recorrido local del corte 5
+
+La salida de PowerShell aportada por la autora muestra plurione-api-1
+Healthy y enabled() igual a False después de iniciar la API con
+AI_ENABLED=false para la prueba. En el segundo caso ficticio, de Entorno
+de trabajo, Seguimiento muestra «Asistencia IA no configurada.
+Clasificación manual.». La captura 296 documenta el resultado. El estado
+del expediente es Pendiente, como corresponde a un alta sin clasificar.
+
+El [registro 292](evidencias/292-corte5-arranque-y-responsable-ui.json)
+reúne la comprobación de arranque y proxy, el nombre del responsable
+como Admin RH, el aviso de departamento duplicado y el recorrido de IA
+desactivada. Se conservaron las capturas 293 a 296 con sus hashes, incluido
+el primer intento con IA pendiente. La demostración local de estos cambios
+quedó completada. La evaluación final institucional sigue pendiente.

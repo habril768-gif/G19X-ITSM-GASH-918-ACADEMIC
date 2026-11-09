@@ -8,7 +8,7 @@ El trabajo se concentra en aceptación, legibilidad y documentación del MVP exi
 El 6 de noviembre el equipo evaluador dio por cumplidas las cinco tareas del
 corte 4. El [seguimiento del corte 5](RETROALIMENTACION_CORTE5.md) reúne las
 cinco correcciones de arranque, expedientes, departamentos, IA y matriz.
-Quedan la demostración y la evaluación final. La fecha del plan anterior
+El recorrido local de las correcciones quedó registrado el 8 de noviembre en la [evidencia 292](evidencias/292-corte5-arranque-y-responsable-ui.json). Queda la evaluación final. La fecha del plan anterior
 se conserva como antecedente.
 
 ## Calendario del corte 4
