@@ -27,6 +27,14 @@ Si se informa un bloqueo por intentos, evita seguir probando contraseñas. El bl
 
 En **Cambiar contraseña**, introduce la actual, una nueva de 12 a 128 caracteres y su confirmación. Guarda y vuelve a iniciar sesión con la nueva. El cambio revoca las sesiones existentes. Si la respuesta es incierta, no reenvíes el formulario a ciegas: comprueba el acceso o solicita ayuda al operador sin compartir la contraseña.
 
+## Cambiar el tema del panel
+
+En **Fondo del panel**, encima de «Un seguimiento más claro», elige la
+tarjeta Oscuro, Azul, Blanco o Beige. La marca ✓ indica el tema activo.
+La navegación, las tarjetas, las tablas y los controles se adaptan al
+instante. Blanco combina el área principal blanca con la barra lateral
+azul de PluriOne. Al recargar la página, el panel vuelve a Blanco.
+
 ## Consultar y buscar incidencias
 
 Abre **Incidencias**. Usa los filtros disponibles por identificador/título, estado, prioridad, categoría, responsable y fecha. El total corresponde solo a los resultados autorizados que cumplen los filtros. Revisa la paginación si esperas más resultados.

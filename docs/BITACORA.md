@@ -2321,3 +2321,56 @@ un recorrido de siete minutos con los casos ficticios y las evidencias
 existentes. Se comprobaron los enlaces locales del informe y el guion.
 La demostración ante el equipo evaluador y el formato institucional
 siguen pendientes.
+
+
+### 2026-11-10 — Opción de fondo para el panel
+
+La copia de trabajo añade un selector al pie del panel con el fondo original
+y los tonos Azul suave, Verde suave y Arena. La selección se aplica al área
+principal y dura hasta recargar. Se actualizó el manual de usuario.
+La compilación de Vite y las 16 pruebas existentes de App pasaron.
+El cambio queda preparado en la copia de trabajo para revisión.
+
+
+### 2026-11-10 — Selector de fondo en la barra lateral
+
+Se ubicó Fondo del panel encima de «Un seguimiento más claro». Las opciones
+son Oscuro, Azul, Blanco y Beige. Blanco es la opción inicial y se recupera
+al recargar. El tono oscuro ajusta el contraste del texto sobre el fondo.
+Se actualizó el manual de usuario. Pasaron la compilación de Vite y las
+16 pruebas existentes de App.
+
+
+### 2026-11-10 — Muestras de color para el fondo
+
+El selector lateral muestra los cuatro tonos en tarjetas compactas. Una
+marca identifica el color activo y el grupo se puede operar con teclado.
+Las muestras se adaptan al ancho disponible. Se actualizó el manual.
+La compilación pasó. Una prueba de App agotó el límite de cinco segundos
+en el primer intento. Las 16 pasaron al repetir con un límite de 15 segundos.
+
+
+### 2026-11-10 — Temas para todo el panel
+
+El control Tema ocupa un renglón en la barra lateral encima de «Un
+seguimiento más claro». Oscuro, Azul, Blanco y Beige aplican sus colores
+a la navegación, encabezados, superficies, tablas, formularios y avisos.
+Blanco es el tema al recargar. Se actualizó el manual de usuario.
+Se midieron 34 pares de texto y fondo por tema. El menor contraste fue
+4,66:1. Pasaron la compilación y las 16 pruebas existentes de App.
+
+
+### 2026-11-10 — Tema Blanco con navegación azul
+
+Blanco usa fondo blanco en el área principal y recupera la barra lateral
+azul de PluriOne con texto claro. La paleta de navegación se aplica solo
+dentro de la barra lateral del tema Blanco. Se actualizó el manual y la
+compilación de Vite pasó.
+
+
+### 2026-11-10 — Tarjetas para seleccionar el tema
+
+Fondo del panel vuelve a mostrar cuatro tarjetas con muestras de Oscuro,
+Azul, Blanco y Beige y una marca en el tema activo. Las tarjetas aplican
+el tema completo. Blanco conserva la navegación azul. Se actualizó
+el manual. Pasaron la compilación y las 16 pruebas del panel.
