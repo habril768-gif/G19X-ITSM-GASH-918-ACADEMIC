@@ -2374,3 +2374,11 @@ Fondo del panel vuelve a mostrar cuatro tarjetas con muestras de Oscuro,
 Azul, Blanco y Beige y una marca en el tema activo. Las tarjetas aplican
 el tema completo. Blanco conserva la navegación azul. Se actualizó
 el manual. Pasaron la compilación y las 16 pruebas del panel.
+
+
+### 2026-11-10 — Estado de A09, A10 y A14 en el MVP
+
+Se actualizó el MVP para que los recorridos coincidan con la matriz de
+aceptación. Se contrastaron los tres resultados con las evidencias 275,
+279 y 285 y se verificaron sus enlaces. Quedan pendientes la capacitación,
+la aceptación formal y las verificaciones adicionales indicadas en la matriz.
